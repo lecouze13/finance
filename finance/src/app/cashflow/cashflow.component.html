@@ -1,0 +1,32 @@
+<main>
+    <h1>Cashflow locatif : formule de calcul et calculateur</h1>
+ 
+    <br>
+    <div class="separator"></div><br>
+    <h2>
+        Cashflow net
+    </h2>
+
+    La formule de calcul du Cashflow net est la suivante : Loyer mensuel - Mensualité de crédit - Charges - Impôts
+    <br><br><br>
+    <div class="card flex  gap-3 p-fluid align-items-center flex-wrap">
+        <div class="flex-auto" *ngFor="let element of Element">
+            <p-floatLabel>
+                <p-inputNumber [(ngModel)]="values[element]" inputId="{{element}}" required />
+                <label for="{{element}}">{{element}}</label>
+            </p-floatLabel>
+        </div>
+        <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="calculCashflow()" [disabled]="
+          !( values['Loyer']>0) ||
+          !(values['Charges']>0) ||
+          !( values['Impôts']>0 ) || 
+          !(values['Crédit']>0)
+            "></button>
+
+    </div>
+
+    <h4>Cashflow : {{ cashflow !== undefined ? cashflow : 'N/A' }}€ </h4>
+
+    Un cashflow est consideré bon s'il est positif
+
+    <br><br><br><br>

@@ -16,9 +16,17 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 export class RendementComponent {
   loyerMensuel: number | undefined = 0;
   prixAcquisition: number | undefined = 0;
+
   chargeLocatives: number |undefined = 0;
   loyerMensuel2: number | undefined = 0;
   prixAcquisition2: number | undefined = 0;
+
+
+  loyerMensuel3: number | undefined = 0;
+  prixAcquisition3: number | undefined = 0;
+  chargeLocatives2: number |undefined = 0;
+  impot: number | undefined = 0;
+  rendementNetNet: number | undefined;
   rendementBrut: number | undefined;
   rendementNet: number | undefined;
 
@@ -31,6 +39,12 @@ export class RendementComponent {
   calculRendementNet() {
     if (this.prixAcquisition2 && this.loyerMensuel2 && this.chargeLocatives) {
       this.rendementNet = (((this.loyerMensuel2* 12 ) - this.chargeLocatives) / this.prixAcquisition2) * 100
+    }
+  }
+
+  calculRendementNetNet() {
+    if (this.prixAcquisition3 && this.loyerMensuel3 && this.chargeLocatives2 && this.impot) {
+      this.rendementNetNet = (((this.loyerMensuel3* 12 ) - (this.chargeLocatives2 + this.impot)) / this.prixAcquisition3) * 100
     }
   }
   

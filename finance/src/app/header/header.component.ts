@@ -6,55 +6,51 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MenubarModule,CommonModule,MenubarModule],
+  imports: [MenubarModule, CommonModule, MenubarModule],
   templateUrl: './header.component.html',
 })
-export class HeaderComponent  implements OnInit{
+export class HeaderComponent implements OnInit {
   items: MenuItem[] | undefined;
 
-    constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
-    ngOnInit() {
-        this.items = [
-            {
-                label: 'Finance',
-                icon: 'pi pi-palette',
-                
-            },
-           
-            {
-                label: 'Immobilier',
-                icon: 'pi pi-home',
-                items: [
-                    {
-                        label: 'Rendement',
-                        command: () => {
-                          this.router.navigate(['/rendement']);
-                      }                    },
-                      {
-                        label: 'Cash flow',
-                        command: () => {
-                          this.router.navigate(['/rendement']);
-                      }                    },
-                ]
-            }
-            ,
-            {
-                label: 'Finance',
-                icon: 'pi pi-home',
-                items: [
-                    {
-                        label: 'Budget',
-                        command: () => {
-                          this.router.navigate(['/budget']);
-                      }                    },
-                      {
-                        label: 'Investissement',
-                        command: () => {
-                          this.router.navigate(['/investissement']);
-                      }                    },
-                ]
-            }
-        ];
-    }
+  ngOnInit() {
+    this.items = [
+
+      {label: 'Home', route: '/', icon: 'pi pi-calculator'},
+      {
+        label: 'Immobilier',
+        icon: 'pi pi-home',
+        items: [
+          {
+            label: 'Rendement',
+            route: '/rendement'
+          },
+          {
+            label: 'Cash flow',
+            route: '/cashflow'
+          },
+
+        ]
+      }
+      ,
+      {
+        label: 'Finance',
+        icon: 'pi pi-wallet',
+        items: [
+          {
+            label: 'Budget',
+            route: '/budget'
+
+
+          },
+          {
+            label: 'Investissement',
+            route: '/investissement'
+          },
+
+        ]
+      }
+    ];
+  }
 }

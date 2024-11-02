@@ -1,7 +1,13 @@
+<main><h1>Rendement locatif : formule de calcul et calculateur</h1>
+
+<br>
+<div class="separator"></div><br>
 <h2>
     Rendement brut
 </h2>
-<div class="card flex  gap-3 p-fluid align-items-end">
+
+La formule de calcul du rendement brute est la suivante : ((loyer Mensuel * 12) / Prix d'acquisition) * 100
+<br><br><br><div class="card flex  gap-3 p-fluid align-items-end flex-wrap">
     <div class="flex-auto">
         <p-floatLabel>
             <p-inputNumber inputId="loyerMensuel" [(ngModel)]="loyerMensuel" requ />
@@ -21,15 +27,17 @@
     
 </div>
 
-<p>Rendement brut : {{ rendementBrut !== undefined ? rendementBrut : 'N/A' }} %</p>
-<br>
+<h4>Rendement brut : {{ rendementBrut !== undefined ? rendementBrut : 'N/A' }} %</h4>
+
 Un rendement brut est consideré bon s'il est > 6%
 
-<br><br>
+<br><br><br><br>
 <h2>
     Rendement Net
 </h2>
-<div class="card flex  gap-3 p-fluid align-items-end">
+La formule de calcul du rendement net est la suivante : (((loyer Mensuel * 12) - charges locatives) / Prix d'acquisition) * 100
+
+<br><br><br><div class="card flex  gap-3 p-fluid align-items-end flex-wrap">
     <div class="flex-auto">
         <p-floatLabel>
             <p-inputNumber inputId="loyerMensuel" [(ngModel)]="loyerMensuel2" requ />
@@ -57,6 +65,57 @@ Un rendement brut est consideré bon s'il est > 6%
     
 </div>
 
-<p>Rendement Net : {{ rendementNet !== undefined ? rendementNet : 'N/A' }} %</p>
-<br>
+<h4>Rendement Net : {{ rendementNet !== undefined ? rendementNet : 'N/A' }} %</h4>
+
 Un rendement Net est consideré bon s'il est > 4%
+
+
+<br><br><br><br>
+<h2>
+    Rendement Net-net
+</h2>
+
+La formule de calcul du rendement net-net est la suivante : (((loyer Mensuel * 12) - (charges locatives + Impôts et prélèvements sociaux)) / Prix d'acquisition) * 100
+
+<br><br><br><div class="card flex  gap-3 p-fluid align-items-end flex-wrap">
+    <div class="flex-auto">
+        <p-floatLabel>
+            <p-inputNumber inputId="loyerMensuel" [(ngModel)]="loyerMensuel3" requ />
+            <label for="loyerMensuel">Loyer mensuel sans les charges</label>
+
+        </p-floatLabel>
+    </div>
+    <div class="flex-auto">
+        <p-floatLabel>
+            <p-inputNumber inputId="prixAcquisition" [(ngModel)]="prixAcquisition3" />
+            <label for="prixAcquisition">Prix d'acquisition</label>
+
+        </p-floatLabel>
+    </div>
+
+    <div class="flex-auto">
+        <p-floatLabel>
+            <p-inputNumber inputId="chargeLocatives" [(ngModel)]="chargeLocatives2" />
+            <label for="chargeLocatives">Charges locatives (taxe d'habitation comprise)</label>
+
+        </p-floatLabel>
+    </div>
+
+    <div class="flex-auto">
+        <p-floatLabel>
+            <p-inputNumber inputId="impot" [(ngModel)]="impot" />
+            <label for="impot">Impôts et prélèvements sociaux</label>
+
+        </p-floatLabel>
+    </div>
+    <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="calculRendementNetNet()"
+    [disabled]=" !(prixAcquisition3 &&prixAcquisition3>0) || !(loyerMensuel3 && loyerMensuel3 > 0 )
+    || !(chargeLocatives2 && chargeLocatives2>0)|| !(impot && impot>0)"></button>
+    
+</div>
+
+<h4>Rendement net-net : {{ rendementNetNet !== undefined ? rendementNetNet : 'N/A' }} %</h4>
+
+Un rendement Net-net est consideré bon s'il est > 4%
+
+</main>
