@@ -22,13 +22,12 @@ export class HeaderComponent  implements OnInit{
                 
             },
            
-          
             {
                 label: 'Immobilier',
                 icon: 'pi pi-home',
                 items: [
                     {
-                        label: 'Rendement Brute',
+                        label: 'Rendement',
                         command: () => {
                           this.router.navigate(['/rendement']);
                       }                    },

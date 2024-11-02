@@ -1,1 +1,62 @@
-<p>rendement works!</p>
+<h2>
+    Rendement brut
+</h2>
+<div class="card flex  gap-3 p-fluid align-items-end">
+    <div class="flex-auto">
+        <p-floatLabel>
+            <p-inputNumber inputId="loyerMensuel" [(ngModel)]="loyerMensuel" requ />
+            <label for="loyerMensuel">Loyer mensuel</label>
+
+        </p-floatLabel>
+    </div>
+    <div class="flex-auto">
+        <p-floatLabel>
+            <p-inputNumber inputId="prixAcquisition" [(ngModel)]="prixAcquisition" />
+            <label for="prixAcquisition">Prix d'acquisition</label>
+
+        </p-floatLabel>
+    </div>
+    <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="calculRendementBrut()"
+    [disabled]=" !(prixAcquisition &&prixAcquisition>0) || !(loyerMensuel && loyerMensuel>0)"></button>
+    
+</div>
+
+<p>Rendement brut : {{ rendementBrut !== undefined ? rendementBrut : 'N/A' }} %</p>
+<br>
+Un rendement brut est consideré bon s'il est > 6%
+
+<br><br>
+<h2>
+    Rendement Net
+</h2>
+<div class="card flex  gap-3 p-fluid align-items-end">
+    <div class="flex-auto">
+        <p-floatLabel>
+            <p-inputNumber inputId="loyerMensuel" [(ngModel)]="loyerMensuel2" requ />
+            <label for="loyerMensuel">Loyer mensuel sans les charges</label>
+
+        </p-floatLabel>
+    </div>
+    <div class="flex-auto">
+        <p-floatLabel>
+            <p-inputNumber inputId="prixAcquisition" [(ngModel)]="prixAcquisition2" />
+            <label for="prixAcquisition">Prix d'acquisition</label>
+
+        </p-floatLabel>
+    </div>
+
+    <div class="flex-auto">
+        <p-floatLabel>
+            <p-inputNumber inputId="chargeLocatives" [(ngModel)]="chargeLocatives" />
+            <label for="chargeLocatives">Charges locatives (taxe d'habitation comprise)</label>
+
+        </p-floatLabel>
+    </div>
+    <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="calculRendementNet()"
+    [disabled]=" !(prixAcquisition2 &&prixAcquisition2>0) || !(loyerMensuel2 && loyerMensuel2>0)|| !(chargeLocatives && chargeLocatives>0)"></button>
+    
+</div>
+
+<p>Rendement Net : {{ rendementNet !== undefined ? rendementNet : 'N/A' }} %</p>
+<br>
+Un rendement Net est consideré bon s'il est > 4%

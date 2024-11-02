@@ -8,7 +8,7 @@ export const routes: Routes = [
     { path: 'rendement', component: RendementComponent },
     { path: 'budget', component: BudgetComponent },
     { path: 'investissement', component: InvestissementComponent },
-    { path: '', redirectTo: '/rendement', pathMatch: 'full' }, 
+    { path: '', redirectTo: '/', pathMatch: 'full' }, 
     { path: '**', redirectTo: '/rendement' } 
 ];
 
