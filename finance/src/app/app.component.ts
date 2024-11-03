@@ -16,10 +16,13 @@ export class AppComponent implements OnInit {
   isHomeRoute = true;
   ngOnInit(): void {
     const url = window.location.href;
-    let lastSegment = url.substring(url.lastIndexOf('/') + 1); 
-    if(lastSegment===''){
+    if(url.includes('rendement') || url.includes('budget') || url.includes('investissement') || url.includes('cashflow')){
+
+    }
+    else{
       this.isHomeRoute = false;
     }
+    
   }
   title = 'finance';
   

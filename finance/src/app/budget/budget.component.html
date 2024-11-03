@@ -1,1 +1,75 @@
-<p>budget works!</p>
+<main>
+
+    <h1>Gestionnaire de budget mensuel</h1>
+
+    <br>
+    <div class="separator"></div><br>
+    <!-- <h2>
+    Cashflow net
+</h2> -->
+    Cet outil vous permet de gérer votre budget mensuel.
+    Vous pouvez ajouter vos dépenses et vos recettes pour voir si vous êtes en positif ou en négatif.
+    <br><br><br>
+    <div class="mainBudget">
+        <p-tabView>
+            <p-tabPanel header="Ajouter une dépenses">
+                <div class="divFormBudget">
+                    <div class="divMainBudget">
+                        <p-floatLabel>
+                            <input type="text" class="inputNomDepence" pInputText [(ngModel)]="nomDepense"  />
+                            <label for="nomDepense">Nom</label>
+                        </p-floatLabel>
+
+                        <br> <br> <br>
+
+                        <p-floatLabel>
+                            <p-inputNumber inputId="depense"  [(ngModel)]="depense" />
+                            <label for="depense">Sommes €</label>
+                        </p-floatLabel>
+
+                    </div>
+                    <br> <br>
+                    <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="addElement()"
+                        [disabled]=" !(depense &&depense>0) || (nomDepense==='')"></button>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="Ajouter un revenue">
+                <div class="divFormBudget">
+                    <div class="divMainBudget">
+                        <p-floatLabel>
+                            <input type="text" class="nomRevenue" pInputText [(ngModel)]="nomRevenue"  />
+                            <label for="nomRevenue">Nom</label>
+                        </p-floatLabel>
+
+                        <br> <br> <br>
+
+                        <p-floatLabel>
+                            <p-inputNumber inputId="revenue"  [(ngModel)]="revenue" />
+                            <label for="revenue">Sommes</label>
+                        </p-floatLabel>
+
+                    </div>
+                    <br> <br>
+                    <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="addRevenue()"
+                        [disabled]=" !(revenue && revenue>0) || (nomRevenue==='')"></button>
+                </div>
+            </p-tabPanel>
+          
+        </p-tabView>
+
+
+        <!-- <p-floatLabel>
+                <p-inputText inputId="recette" required [(ngModel)]="recette"/>
+                <label for="recette">Salaire / Entrée d'argent</label>
+            </p-floatLabel> -->
+
+        <div #myChart class="chartBudget">
+            <p-chart type="doughnut" [data]="data$" [options]="options" />
+            <div #cashflowElement class="cashflow">
+                <div *ngIf="sommeRevenue >0 || sommeDepense>0">
+                    Budget restant: <br>{{ cashflow }} €</div></div>
+
+        </div>
+
+    </div>
+</main>
