@@ -12,7 +12,8 @@ export const routes: Routes = [
     { path: 'investissement', component: InvestissementComponent },
     { path: 'cashflow', component: CashflowComponent },
 
-    { path: '', component: MainComponent, pathMatch: 'full' }, 
+    { path: '', redirectTo: 'home', pathMatch: 'full' }, 
+    { path: 'home', component:MainComponent } 
 ];
 
 @NgModule({

@@ -1,29 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
-import { Button } from 'primeng/button';
-import { RendementComponent } from './rendement/rendement.component';
 import { FooterComponent } from './footer/footer.component';
-import{CommonModule} from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MainComponent } from "./main/main.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, Button, RendementComponent, FooterComponent, CommonModule],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, RouterModule, MainComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
-  isHomeRoute = true;
-  ngOnInit(): void {
-    const url = window.location.href;
-    if(url.includes('rendement') || url.includes('budget') || url.includes('investissement') || url.includes('cashflow')){
+export class AppComponent  {
 
-    }
-    else{
-      this.isHomeRoute = false;
-    }
-    
-  }
-  title = 'finance';
   
 }

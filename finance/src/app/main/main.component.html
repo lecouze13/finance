@@ -1,17 +1,17 @@
-<div class="container">
-    <h1>Maximisez votre Investissement Immobilier !</h1>
-    <p>
-      Bienvenue sur notre site, votre allié incontournable pour évaluer le rendement de vos investissements immobiliers. Grâce à nos outils de calculs simples et intuitifs, vous pourrez rapidement déterminer la rentabilité de vos projets. Ne laissez pas l'incertitude freiner vos ambitions : prenez des décisions éclairées et assurez la réussite de votre patrimoine immobilier.
-    </p>
-    <h2>Calculateur de Rendement</h2>
-    <p>
-      Utilisez notre calculateur pour savoir si votre investissement est rentable ou non. 
-    </p>
-    
-    <h3>Ressources Supplémentaires</h3>
-    <ul>
-      <li><a href="#">Calculateur de Prêt Immobilier</a></li>
-      <li><a href="#">Guide d'Investissement Immobilier</a></li>
-      <li><a href="#">Conseils pour les Investisseurs</a></li>
-    </ul>
-  </div>
+<div class="container" *ngIf="!isHomeRoute">
+  <h1>Maximisez votre Investissement Immobilier !</h1>
+  <p>
+    Bienvenue sur notre site, votre allié incontournable pour évaluer le rendement de vos investissements immobiliers. Grâce à nos outils de calculs simples et intuitifs, vous pourrez rapidement déterminer la rentabilité de vos projets. Ne laissez pas l'incertitude freiner vos ambitions : prenez des décisions éclairées et assurez la réussite de votre patrimoine immobilier.
+  </p>
+  <h2>Calculateur de Rendement</h2>
+  <p>
+    Utilisez notre <a [routerLink]="'/rendement'">calculateur</a> pour savoir si votre investissement est rentable ou non. 
+  </p>
+  
+  <h3>Ressources Supplémentaires</h3>
+  <ul>
+    <li><a href="#">Calculateur de Prêt Immobilier</a></li>
+    <li><a href="#">Guide d'Investissement Immobilier</a></li>
+    <li><a href="#">Conseils pour les Investisseurs</a></li>
+  </ul>
+</div>
