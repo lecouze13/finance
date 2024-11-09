@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './budget.component.html',
   styleUrls: ['./budget.component.scss']
 })
-export class BudgetComponent implements AfterViewInit, OnInit {
+export class BudgetComponent implements  OnInit {
   private dataSubject = new BehaviorSubject<any>(this.initializeData());
   @ViewChild('myChart', { static: false }) myChart!: ElementRef;
   @ViewChild('cashflowElement', { static: false }) cashflowElement!: ElementRef;
@@ -31,10 +31,6 @@ export class BudgetComponent implements AfterViewInit, OnInit {
   revenue: number = 0;
   nomRevenue: string = '';
   cashflow: number = 0;
-  ngAfterViewInit() {
-    const center = this.getElementCenter(this.myChart.nativeElement);
-    this.positionCashflowElement(center);
-  }
 
   ngOnInit() {
     const documentStyle = getComputedStyle(document.documentElement);
@@ -62,30 +58,49 @@ export class BudgetComponent implements AfterViewInit, OnInit {
     return {
       labels: this.labels,
       datasets: [
-        {
-          data: [],
-          backgroundColor: [
-            '#3F51B5',
-            '#4CAF50',
-            '#FFEB3B',
-            '#FF9800',
-            '#9C27B0'
-          ],
-          hoverBackgroundColor: [
-            '#303F9F',
-            '#388E3C',
-            '#FBC02D',
-            '#F57C00',
-            '#7B1FA2'
-          ]
-        }
+      {
+      data: [],
+      backgroundColor: [
+      '#3F51B5',
+      '#4CAF50',
+      '#FFEB3B',
+      '#FF9800',
+      '#9C27B0',
+      '#E91E63',
+      '#00BCD4',
+      '#8BC34A',
+      '#FFC107',
+      '#FF5722',
+      '#607D8B',
+      '#795548',
+      '#CDDC39',
+      '#FF4081',
+      '#9E9E9E'
+      ],
+      hoverBackgroundColor: [
+      '#303F9F',
+      '#388E3C',
+      '#FBC02D',
+      '#F57C00',
+      '#7B1FA2',
+      '#C2185B',
+      '#0097A7',
+      '#689F38',
+      '#FFA000',
+      '#E64A19',
+      '#455A64',
+      '#5D4037',
+      '#AFB42B',
+      '#F50057',
+      '#616161'
+      ]
+      }
       ]
     };
   }
 
   addElement() {
-    const center = this.getElementCenter(this.myChart.nativeElement);
-    console.log('Centre de l\'élément:', center); 
+
     if (this.nomDepense && this.depense >= 0) {
       this.labels.push(this.nomDepense);
       const updatedData = {
@@ -107,8 +122,7 @@ export class BudgetComponent implements AfterViewInit, OnInit {
   }
 
   addRevenue() {
-    const center = this.getElementCenter(this.myChart.nativeElement);
-    console.log('Centre de l\'élément:', center); 
+
 
     if (this.nomRevenue && this.revenue >= 0) {
       this.sommeRevenue += this.revenue;
@@ -120,16 +134,7 @@ export class BudgetComponent implements AfterViewInit, OnInit {
 
   }
 
-  getElementCenter(element: HTMLElement) {
-    const rect = element.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    return { x: centerX, y: centerY };
-}
 
-positionCashflowElement(center: { x: number; y: number }) {
-  const cashflowEl = this.cashflowElement.nativeElement;
-  cashflowEl.style.left = `${center.x}px`;
-  cashflowEl.style.top = `${center.y}px`;
-}
+
+
 }

@@ -57,8 +57,13 @@ h4, .h4 {
 }
 
 .cashflow {
-    position: absolute;
-    font-size: 20px; // Ajuste selon tes besoins
-    color: var(--text-color); // Ou une couleur de ton choix
-    transform: translate(-50%, -50%); // Centre l'élément
+    position: relative;
+    font-size: 20px;
+    color: var(--text-color);
+    transform: translate(43%, -487%);
+}
+
+.panneltab{
+    display: grid;
+    justify-items: end;
 }

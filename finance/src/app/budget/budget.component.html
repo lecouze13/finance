@@ -12,18 +12,19 @@
     <br><br><br>
     <div class="mainBudget">
         <p-tabView>
-            <p-tabPanel header="Ajouter une dépenses">
+            <p-tabPanel header="Ajouter une dépenses" style="    display: grid;
+  justify-items: end;">
                 <div class="divFormBudget">
                     <div class="divMainBudget">
                         <p-floatLabel>
-                            <input type="text" class="inputNomDepence" pInputText [(ngModel)]="nomDepense"  />
+                            <input type="text" class="inputNomDepence" pInputText [(ngModel)]="nomDepense" />
                             <label for="nomDepense">Nom</label>
                         </p-floatLabel>
 
                         <br> <br> <br>
 
                         <p-floatLabel>
-                            <p-inputNumber inputId="depense"  [(ngModel)]="depense" />
+                            <p-inputNumber inputId="depense" [(ngModel)]="depense" />
                             <label for="depense">Sommes €</label>
                         </p-floatLabel>
 
@@ -33,19 +34,20 @@
                         [disabled]=" !(depense &&depense>0) || (nomDepense==='')"></button>
                 </div>
             </p-tabPanel>
-            <p-tabPanel header="Ajouter un revenue">
+            <p-tabPanel header="Ajouter un revenue" class="panneltab" style="    display: grid;
+  justify-items: end;">
                 <div class="divFormBudget">
                     <div class="divMainBudget">
                         <p-floatLabel>
-                            <input type="text" class="nomRevenue" pInputText [(ngModel)]="nomRevenue"  />
+                            <input type="text" class="nomRevenue" pInputText [(ngModel)]="nomRevenue" />
                             <label for="nomRevenue">Nom</label>
                         </p-floatLabel>
 
                         <br> <br> <br>
 
                         <p-floatLabel>
-                            <p-inputNumber inputId="revenue"  [(ngModel)]="revenue" />
-                            <label for="revenue">Sommes</label>
+                            <p-inputNumber inputId="revenue" [(ngModel)]="revenue" />
+                            <label for="revenue">Sommes €</label>
                         </p-floatLabel>
 
                     </div>
@@ -54,7 +56,7 @@
                         [disabled]=" !(revenue && revenue>0) || (nomRevenue==='')"></button>
                 </div>
             </p-tabPanel>
-          
+
         </p-tabView>
 
 
@@ -65,11 +67,11 @@
 
         <div #myChart class="chartBudget">
             <p-chart type="doughnut" [data]="data$" [options]="options" />
-            <div #cashflowElement class="cashflow">
-                <div *ngIf="sommeRevenue >0 || sommeDepense>0">
-                    Budget restant: <br>{{ cashflow }} €</div></div>
-
+            <div *ngIf="sommeRevenue >0 || sommeDepense>0" class="cashflow" #cashflowElement>
+                {{ cashflow }} €</div>
         </div>
+
+
 
     </div>
 </main>
