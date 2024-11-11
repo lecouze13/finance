@@ -1,18 +1,18 @@
 .mainBudget {
     display: flex;
     flex-direction: row;
-    height: 500px;
+    /* height: 500px; */
     width: 100%;
     padding: 3%;
     justify-content: center;
-
+    flex-wrap: wrap; 
 }
 
 .divMainBudget {
 
     display: flex;
     flex-direction: column;
-    
+    align-items: stretch;
 
 }
 
@@ -44,7 +44,8 @@ h1 {
     display: flex;
     flex-direction: row;
     background-color: white;
-    --mdb-card-box-shadow : none
+    --mdb-card-box-shadow : none;
+    width: 400px;
     
 }
 main{
@@ -60,10 +61,25 @@ h4, .h4 {
     position: relative;
     font-size: 20px;
     color: var(--text-color);
-    transform: translate(43%, -487%);
+    transform: translate(43%, -639%)
 }
 
 .panneltab{
     display: grid;
     justify-items: end;
+}
+
+p-button.p-element.p-button-danger {
+    height: 50px;
+}
+
+
+
+.chartBudget {
+    width: 401px;
+    height: 500px;
+}
+
+.dropdown-categories{
+    width: 100px;
 }

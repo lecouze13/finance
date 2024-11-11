@@ -7,10 +7,15 @@
     <!-- <h2>
     Cashflow net
 </h2> -->
-    Cet outil vous permet de gérer votre budget mensuel.
-    Vous pouvez ajouter vos dépenses et vos recettes pour voir si vous êtes en positif ou en négatif.
+    Cet outil vous permet de gérer facilement votre budget mensuel.
+    Suivez vos dépenses et vos revenus pour savoir si vous êtes en excédent ou en déficit.
+    Vous pouvez également catégoriser vos dépenses et revenus afin de mieux comprendre où va votre argent et observer
+    les variations d’un mois à l’autre.
+    En prime, vous avez la possibilité de comparer vos résultats avec les moyennes des autres utilisateurs pour affiner
+    vos choix financiers.
+
     <br><br><br>
-    <div class="mainBudget">
+    <div class="mainBudget" *ngIf="!isCompare">
         <p-tabView>
             <p-tabPanel header="Ajouter une dépenses" style="    display: grid;
   justify-items: end;">
@@ -28,14 +33,21 @@
                             <label for="depense">Sommes €</label>
                         </p-floatLabel>
 
+                        <br> <br> <br>
+                        <label for="categories">Catégorie</label>
+
+                        <p-dropdown [options]="categoriesList" [(ngModel)]="categories" [checkmark]="true"
+                            optionLabel="label" [showClear]="true" placeholder="Choisissez une catégorie"
+                            class="dropdown-categories" id="categories" />
+
                     </div>
+
                     <br> <br>
                     <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="addElement()"
                         [disabled]=" !(depense &&depense>0) || (nomDepense==='')"></button>
                 </div>
             </p-tabPanel>
-            <p-tabPanel header="Ajouter un revenue" class="panneltab" style="    display: grid;
-  justify-items: end;">
+            <p-tabPanel header="Ajouter un revenu" class="panneltab" style=" display: grid;justify-items: end;">
                 <div class="divFormBudget">
                     <div class="divMainBudget">
                         <p-floatLabel>
@@ -67,11 +79,63 @@
 
         <div #myChart class="chartBudget">
             <p-chart type="doughnut" [data]="data$" [options]="options" />
-            <div *ngIf="sommeRevenue >0 || sommeDepense>0" class="cashflow" #cashflowElement>
+            <div *ngIf="sommeRevenue >0 && sommeDepense>0" class="cashflow" #cashflowElement>
                 {{ cashflow }} €</div>
         </div>
+        <p-button label="Réinitialiser" icon="pi pi-refresh" (click)="reset()" class="p-button-danger"></p-button>
+        <div class="card">
+            <p-toast />
+            <div *ngIf="updatedData!= undefined ">
+                <p-table [value]="updatedData.datasets" [tableStyle]="{ 'min-width': '10rem', 'max-width': '40rem' }">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 5rem;">Nom</th>
+                            <th style="width: 1rem;">Valeur</th>
+                            <th style="width: 1rem;">Catégorie</th>
+                            <th style="width: 1rem;">Type d'entrée</th>
+                            <th style="width: 1rem;">Actions</th>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-datasets>
+                        <tr *ngFor="let dataa of datasets.data; let i = index">
+                            <td>{{ labels[i] }}</td>
+                            <td> -{{ dataa }}€</td>
+                            <td>{{ labelsCategories[i] }}</td>
+                            <td>Dépenses</td>
+                            <td>
+                                <button type="button" pButton pRipple icon="pi pi-minus" (click)="delete(i)">
+                                </button>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let label of revenueData; let i = index">
+                            <td>{{label.nomRevenue}}</td>
+                            <td>+{{ label.revenue }}€</td>
+                            <td></td>
+                            <td>Revenue</td>
+                            <td>
+                                <button type="button" pButton pRipple icon="pi pi-minus" (click)="delete2(i)">
+                                </button>
+                            </td>
 
 
+                        </tr>
 
+
+                    </ng-template>
+                </p-table>
+                <p-button label="Comparer" icon="pi pi-chart-bar" (click)="compare()" class="p-button-info"></p-button>
+            </div>
+
+
+        </div>
     </div>
+
+
+    <div class="mainBudget" *ngIf="isCompare">
+        <div class="card flex justify-content-center">
+            <app-budget-graphes [categoriesList]="categoriesList" (compareEvent)="onCompareChange($event)"></app-budget-graphes>
+        </div>
+    </div>
+
 </main>

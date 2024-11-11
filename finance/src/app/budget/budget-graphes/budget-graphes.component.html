@@ -1,0 +1,14 @@
+<div class="card flex justify-content-center graphsFirst">
+
+        
+        <h4>Comparatif de vos dépenses avec une personne française</h4>
+        <p>Ce graphique vous permet de visualiser la répartition de vos dépenses par rapport à celles d'une personne moyenne en France. En comparant les deux courbes, vous pourrez observer les différences dans la manière dont les ressources sont allouées entre différentes catégories de dépenses, telles que :
+    
+    Dépenses essentielles (logement, nourriture, transport)
+    Loisirs et sorties
+    Epargne et investissements
+
+    </p>
+    <p-chart type="radar" [data]="data" [options]="options" />
+</div>
+<p-button label="Retour" icon="pi pi-arrow-left" (click)="compare()" class="p-button-info"></p-button>
