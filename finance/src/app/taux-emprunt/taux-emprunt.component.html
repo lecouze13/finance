@@ -1,0 +1,83 @@
+<main>
+    <h1>Rendement locatif : formule de calcul et calculateur</h1>
+
+    <br>
+    <div class="separator"></div><br>
+    <h2>
+        Calcul du coût total d'un crédit
+    </h2>
+
+    La formule de calcul du coût total d'un crédit est la suivante : ((sommeEmprunte * interet * dureeDuCredit) / 100) +
+    sommeEmprunte
+    <br><br><br>
+    <div class="card flex  gap-3 p-fluid align-items-end flex-wrap">
+        <div class="flex-auto">
+
+            <p-dropdown [options]="calcul" [(ngModel)]="selectedCalcul" [checkmark]="true" 
+                [showClear]="true" placeholder="Selectioner votre calculateur"(onChange)="changeCalcul()" />
+
+            <p-floatLabel>
+                <p-inputNumber inputId="sommeEmprunte" [(ngModel)]="sommeEmprunte" mode="currency"
+                    [minFractionDigits]="0" currency="EUR" [disabled]="isCalculMensualite==false && isCalculCoutTotal==false" />
+                <label for="sommeEmprunte">Somme Emprunté</label>
+
+            </p-floatLabel>
+        </div>
+        <div class="flex-auto">
+
+            <p-floatLabel>
+                <p-inputNumber inputId="interet" [(ngModel)]="interet" mode="decimal" locale="fr-FR" step="0.01" min="0"
+                    max="5" [showButtons]="true" [disabled]="isCalculMensualite==false && isCalculCoutTotal==false" />
+                <label for="interet">Taux d'intérêt</label>
+            </p-floatLabel>
+        </div>
+        <div class="flex-auto">
+            <p-floatLabel>
+                <p-inputNumber inputId="dureeDuCredit" [(ngModel)]="dureeDuCredit" [minFractionDigits]="0"[disabled]="isCalculMensualite==false && isCalculCoutTotal==false" />
+                <label for="dureeDuCredit">Durée du crédit (en mois)</label>
+
+            </p-floatLabel>
+        </div>
+
+        <div class="flex-auto">
+            <p-floatLabel>
+                <p-inputNumber inputId="mensualite" [(ngModel)]="mensualite" [minFractionDigits]="0" mode="currency"
+                    currency="EUR"[disabled]="isCalculMensualite==true || isCalculCoutTotal==true" />
+                <label for="mensualite">Mensualité</label>
+
+            </p-floatLabel>
+        </div>
+        <div class="flex-auto">
+            <p-floatLabel>
+                <p-inputNumber inputId="coutTotal" [(ngModel)]="coutTotal" [minFractionDigits]="0" mode="currency"
+                    currency="EUR" [disabled]="isCalculMensualite==true || isCalculCoutTotal==true"/>
+                <label for="coutTotal">Coût Total</label>
+
+            </p-floatLabel>
+        </div>
+        <div  *ngIf="isCalculCoutTotal">
+
+        <button type="button"  pButton icon="pi pi-check" class="p-button-success" (click)="calculCoutTotal()"
+            [disabled]=" !(sommeEmprunte &&sommeEmprunte>0) || !(dureeDuCredit && dureeDuCredit>0)
+          || !(interet && interet>0)
+        
+        
+        "></button>
+</div>
+<div *ngIf="isCalculMensualite" >
+        <button type="button"  pButton icon="pi pi-check" class="p-button-success" (click)="calculMensualite()"
+            [disabled]=" !(sommeEmprunte &&sommeEmprunte>0) || !(dureeDuCredit && dureeDuCredit>0)
+              || !(interet && interet>0) 
+            
+            
+            "></button>
+</div>
+    </div>
+
+    <h4>Somme total à rembourser : {{ coutTotal !== undefined ? coutTotal : 'N/A' }} €<br>
+        Coût total du crédit  {{coutCredit !== undefined ? coutCredit : 'N/A'}} €
+    </h4>
+
+    Un rendement brut est consideré bon s'il est > 6%
+
+    <br><br><br><br>

@@ -5,12 +5,14 @@ import { BudgetComponent } from './budget/budget.component'; // Assure-toi d'imp
 import { InvestissementComponent } from './investissement/investissement.component'; // Assure-toi d'importer ton composant
 import { CashflowComponent } from './cashflow/cashflow.component';
 import { MainComponent } from './main/main.component';
+import { TauxEmpruntComponent } from './taux-emprunt/taux-emprunt.component';
 
 export const routes: Routes = [
     { path: 'rendement', component: RendementComponent },
     { path: 'budget', component: BudgetComponent },
     { path: 'investissement', component: InvestissementComponent },
     { path: 'cashflow', component: CashflowComponent },
+    { path: 'emprunt', component: TauxEmpruntComponent },
 
     { path: '', redirectTo: 'home', pathMatch: 'full' }, 
     { path: 'home', component:MainComponent } 

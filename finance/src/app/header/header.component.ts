@@ -30,6 +30,10 @@ export class HeaderComponent implements OnInit {
             label: 'Cash flow',
             route: '/cashflow'
           },
+          {
+            label: 'Calculateur d\'emprunt',
+            route: '/emprunt'
+          },
 
         ]
       }
