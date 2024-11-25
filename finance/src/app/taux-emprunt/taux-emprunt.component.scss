@@ -23,3 +23,9 @@ h4, .h4 {
     font-size: calc(1.275rem + 0.3vw);
     margin-top: 20px;
 }
+.flex-center{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
