@@ -29,4 +29,14 @@
     list-style-type: none;
     padding: 0;
   }
+  @media  (max-width: 600px) {
+    main{
+
+      padding: none;
+    }
+    .container {
+      padding: 10px;
+    }
+    
+  }
   

@@ -83,3 +83,30 @@ p-button.p-element.p-button-danger {
 .dropdown-categories{
     width: 100px;
 }
+
+@media  (max-width: 600px) {
+    main{
+
+        padding: 2% 5%;
+
+    }
+    .container {
+      padding: 10px;
+    }
+
+    .card[_ngcontent-ng-c237587439][_ngcontent-ng-c237587439] {
+        width: 100%;
+        /* width: 200px; */
+        margin: 0px;
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+    }
+    .mainBudget[_ngcontent-ng-c237587439] {
+        width: 300px;
+       
+    }
+    .ng-star-inserted {
+        width: 300px;
+    }
+}
