@@ -31,6 +31,10 @@ export class HeaderComponent implements OnInit {
             route: '/cashflow'
           },
           {
+            label: 'TRI (Taux de Rentabilité Interne)',
+            route: '/tri'
+          },
+          {
             label: 'Calculateur d\'emprunt',
             route: '/emprunt'
           },

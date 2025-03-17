@@ -6,6 +6,7 @@ import { InvestissementComponent } from './investissement/investissement.compone
 import { CashflowComponent } from './cashflow/cashflow.component';
 import { MainComponent } from './main/main.component';
 import { TauxEmpruntComponent } from './taux-emprunt/taux-emprunt.component';
+import { TriImmoComponent } from './tri-immo/tri-immo.component';
 
 export const routes: Routes = [
     { path: 'rendement', component: RendementComponent },
@@ -13,7 +14,7 @@ export const routes: Routes = [
     { path: 'investissement', component: InvestissementComponent },
     { path: 'cashflow', component: CashflowComponent },
     { path: 'emprunt', component: TauxEmpruntComponent },
-
+    {path : 'tri', component : TriImmoComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' }, 
     { path: 'home', component:MainComponent } 
 ];

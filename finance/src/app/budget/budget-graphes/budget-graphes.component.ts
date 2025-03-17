@@ -77,6 +77,12 @@ export class BudgetGraphesComponent {
                 }
             },
             scales: {
+              min: 0, 
+              max: 100, 
+              ticks: {
+                  stepSize: 20, 
+                  color: textColorSecondary, 
+              },
                 r: {
                     grid: {
                         color: textColorSecondary
