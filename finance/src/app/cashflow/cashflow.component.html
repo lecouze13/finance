@@ -1,59 +1,86 @@
 <title>Calculateur de Cashflow Immobilier : Estimez vos Flux de Trésorerie et Rentabilité</title>
 
 <main>
-    <h1>Cashflow locatif : formule de calcul et calculateur</h1>
- 
+    <h1>Calculateur de Cashflow Immobilier : Estimez votre Flux de Trésorerie et Rentabilité</h1>
+
     <br>
     <div class="separator"></div><br>
-    <h2>
-        Cashflow net
-    </h2>
 
-    La formule de calcul du Cashflow net est la suivante : Loyer mensuel - Mensualité de crédit - Charges - Impôts
+    <h2>Qu'est-ce que le Cashflow Immobilier ?</h2>
+    <p>
+        Le <strong>cashflow immobilier</strong> est un indicateur clé pour mesurer la rentabilité d'un investissement immobilier. Il représente la différence entre les revenus générés par la location d'un bien immobilier et les dépenses liées à ce bien, telles que les mensualités de crédit, les charges, et les impôts.
+    </p>
+
+    <h2>Comment calculer le Cashflow net d'un bien immobilier ?</h2>
+    <p>
+        Le calcul du cashflow net se fait en soustrayant les dépenses mensuelles (crédit immobilier, charges et impôts) des revenus locatifs. La formule est la suivante : 
+    </p>
+    <pre>
+        Cashflow net = Loyer mensuel - Mensualité de crédit - Charges - Impôts
+    </pre>
+
+    <h2>Pourquoi est-il important de calculer son Cashflow ?</h2>
+    <p>
+        Le cashflow vous permet de déterminer si votre investissement immobilier génère des excédents de trésorerie mensuels. Un cashflow positif indique que votre bien génère suffisamment de revenus pour couvrir ses dépenses, et potentiellement, dégager un profit. À l'inverse, un cashflow négatif signifie que vous devez compléter vos revenus par d'autres sources pour couvrir les dépenses de votre bien.
+    </p>
+
     <br><br><br>
-    <div class="card flex  gap-3 p-fluid align-items-center flex-wrap">
+
+    <h2>Estimez votre Cashflow Immobilier avec notre Calculateur</h2>
+    <p>
+        Utilisez notre calculateur de cashflow immobilier pour évaluer votre flux de trésorerie. Il vous suffit de remplir les informations suivantes :
+    </p>
+
+    <div class="card flex gap-3 p-fluid align-items-center flex-wrap">
         <div class="flex-auto" *ngFor="let element of Element">
-            <p-floatLabel>
+            <p-floatLabel class="input-label">
                 <p-inputNumber [(ngModel)]="values[element]" inputId="{{element}}" required />
                 <label for="{{element}}">{{element}}</label>
             </p-floatLabel>
         </div>
         <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="calculCashflow()" [disabled]="
-          !( values['Loyer']>0) ||
-          !(values['Charges']>0) ||
-          !( values['Impôts']>0 ) || 
-          !(values['Crédit']>0)
-            "></button>
+        !( values['Loyer']>0) ||
+        !(values['Charges']>0) ||
+        !( values['Impôts']>0 ) || 
+        !(values['Crédit']>0)
+      "></button>
+  </div>
 
-    </div>
-
-    <h4>Cashflow : {{ cashflow !== undefined ? cashflow : 'N/A' }}€ </h4>
+    <h4>Votre Cashflow Immobilier : {{ cashflow !== undefined ? cashflow : 'N/A' }}€ </h4>
 
     <br><br>
     <div class="separator"></div><br><br>
 
+    <h2>Quels sont les facteurs influençant le Cashflow Immobilier ?</h2>
+    <p>
+        Plusieurs facteurs influencent le cashflow immobilier, notamment :
+    </p>
+    <ul>
+        <li><strong>Le montant du crédit immobilier :</strong> Les mensualités de remboursement influencent directement le cashflow. Plus elles sont élevées, plus le cashflow sera faible.</li>
+        <li><strong>Le montant des loyers :</strong> Un loyer plus élevé générera un cashflow positif si les autres dépenses sont maîtrisées.</li>
+        <li><strong>Les charges d'entretien :</strong> Les frais d'entretien et de gestion doivent être pris en compte pour éviter un cashflow négatif.</li>
+        <li><strong>Les impôts et taxes :</strong> L'impact des impôts et des prélèvements sociaux doit être calculé pour déterminer le cashflow net.</li>
+    </ul>
 
-    <h2>Explication du Cashflow Immobilier</h2>
-<p>
-  Le cashflow immobilier est un autre indicateur crucial pour évaluer la rentabilité d'un investissement immobilier. Il représente la différence entre les revenus générés par votre bien immobilier (principalement les loyers) et toutes les dépenses liées à ce bien (crédit immobilier, charges, taxes, entretien, etc.). En d'autres termes, le cashflow vous permet de savoir si votre investissement génère un excédent de liquidités chaque mois ou si vous devez compenser vos coûts par d'autres sources de financement.
-</p>
+    <h2>Quand est-ce qu'un Cashflow positif est rentable ?</h2>
+    <p>
+        Un cashflow positif est généralement perçu comme rentable. Il permet à un investisseur de financer son bien de manière autonome et de dégager des bénéfices. Le cashflow positif peut également être utilisé pour investir dans d'autres projets immobiliers ou pour générer des revenus supplémentaires à long terme.
+    </p>
 
-<p>
-  Un cashflow positif signifie que les revenus de la location dépassent les dépenses et que vous générez un excédent de trésorerie chaque mois. Cela peut être utilisé pour rembourser le crédit, investir dans d'autres projets ou simplement augmenter votre épargne. Un cashflow positif est souvent l'objectif des investisseurs immobiliers, car il indique que le bien génère des profits nets.
-</p>
+    <h2>Quelles sont les conséquences d'un Cashflow négatif ?</h2>
+    <p>
+        Un cashflow négatif signifie que les revenus générés par votre bien immobilier sont inférieurs aux dépenses liées à ce bien. Cela peut être acceptable à court terme, surtout si vous avez une stratégie de valorisation de l'immobilier à long terme. Toutefois, un cashflow négatif prolongé peut signifier que l'investissement est trop coûteux et qu'il faut repenser la stratégie ou le financement.
+    </p>
 
-<p>
-  À l'inverse, un cashflow négatif se produit lorsque les dépenses liées à la gestion du bien (crédit, entretien, impôts, etc.) sont supérieures aux revenus locatifs. Dans ce cas, l'investisseur doit combler la différence avec ses autres ressources financières. Bien qu'un cashflow négatif ne soit pas nécessairement une mauvaise chose à court terme, il peut signaler que l'investissement n'est pas encore rentable ou qu'il est trop lourdment financé.
-</p>
+    
+    <h2>Explication détaillée du Cashflow Immobilier</h2>
+    <p>
+        En résumé, le <strong>cashflow immobilier</strong> est un outil indispensable pour évaluer la viabilité et la rentabilité d'un investissement immobilier. Il vous aide à déterminer si les revenus générés par la location couvrent les dépenses et génèrent un excédent de trésorerie. En utilisant un calculateur de cashflow, vous pourrez prendre des décisions plus éclairées et optimiser vos investissements immobiliers.
+    </p>
 
-<p>
-  Pour calculer le cashflow, il faut soustraire toutes les dépenses mensuelles (y compris le remboursement du crédit, les charges d'entretien, les impôts, et autres frais) des revenus locatifs mensuels. Cette opération permet de savoir exactement combien d'argent vous générez ou perdez chaque mois grâce à votre bien immobilier.
-</p>
+    <p>
+        Un bon cashflow peut garantir la rentabilité d'un projet immobilier, et il est crucial d'optimiser les facteurs comme les charges, les impôts et les mensualités de crédit pour obtenir un cashflow positif.
+    </p>
+</main>
 
-<p>
-  Un bon cashflow dépendra de plusieurs facteurs, tels que le montant de l'emprunt, les loyers perçus, les charges et impôts, ainsi que la gestion du bien. En optimisant ces éléments, un investisseur peut viser à obtenir un cashflow positif, ce qui lui permet de financer son bien de manière autonome et même de générer des profits à long terme.
-</p>
 
-<p>
-  En utilisant notre calculateur de cashflow, vous pourrez estimer le flux de trésorerie généré par votre investissement et évaluer plus précisément sa rentabilité financière sur le long terme. C'est un outil essentiel pour vous aider à décider si un investissement immobilier est viable et rentable.
-</p>

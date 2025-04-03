@@ -5,7 +5,7 @@
 
 <div class="card-tri">
   <div *ngFor="let element of Element">
-    <p-floatLabel>
+    <p-floatLabel class="input-label">
       <p-inputNumber [(ngModel)]="values[element]" inputId="{{element}}" required />
       <label for="{{element}}">{{element}}</label>
     </p-floatLabel>

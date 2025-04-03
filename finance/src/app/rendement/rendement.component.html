@@ -4,113 +4,128 @@
 
 <br>
 <div class="separator"></div><br>
-<h2>
-    Rendement brut
-</h2>
 
-La formule de calcul du rendement brute est la suivante : ((loyer Mensuel * 12) / Prix d'acquisition) * 100
-<br><br><br><div class="card flex  gap-3 p-fluid align-items-end flex-wrap">
+<h2>Pourquoi calculer le rendement locatif ?</h2>
+<p>
+  Le rendement locatif est essentiel car il permet d'évaluer la rentabilité d'un investissement immobilier. En calculant ce rendement, un investisseur peut estimer si un bien immobilier génère suffisamment de revenus pour couvrir les dépenses et offrir un retour sur investissement attractif. Il aide également à comparer plusieurs projets immobiliers pour choisir celui qui est le plus profitable.
+</p>
+
+<h2>Qu'est-ce que le rendement brut ?</h2>
+<p>
+  Le rendement brut est un calcul de rentabilité qui ne prend en compte que les loyers perçus, sans considérer les charges et les impôts. Il est calculé selon la formule suivante :
+</p>
+<pre>
+  Rendement brut = ((Loyer mensuel * 12) / Prix d'acquisition) * 100
+</pre>
+<p>
+  Le rendement brut est un bon indicateur initial pour avoir une idée rapide du potentiel de rentabilité d'un bien immobilier. Cependant, il peut être trompeur car il ne tient pas compte des charges récurrentes (comme les frais d'entretien, les taxes, etc.). Ce calcul est utile pour une estimation de base, mais pour une évaluation plus précise, il est important de prendre en compte d'autres facteurs, comme les charges locatives et les impôts.
+</p>
+
+<br><br><br>
+
+<h2>Calculateur du rendement brut :</h2>
+<br>
+<div class="card flex gap-3 p-fluid align-items-end flex-wrap">
     <div class="flex-auto">
-        <p-floatLabel>
+        <p-floatLabel class="input-label">
             <p-inputNumber inputId="loyerMensuel" [(ngModel)]="loyerMensuel" requ />
             <label for="loyerMensuel">Loyer mensuel</label>
-
         </p-floatLabel>
     </div>
     <div class="flex-auto">
-        <p-floatLabel>
+        <p-floatLabel class="input-label">
             <p-inputNumber inputId="prixAcquisition" [(ngModel)]="prixAcquisition" />
             <label for="prixAcquisition">Prix d'acquisition (frais de notaire + agence compris)</label>
-
         </p-floatLabel>
     </div>
     <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="calculRendementBrut()"
     [disabled]=" !(prixAcquisition &&prixAcquisition>0) || !(loyerMensuel && loyerMensuel>0)"></button>
-    
 </div>
 
 <h4>Rendement brut : {{ rendementBrut !== undefined ? rendementBrut : 'N/A' }} %</h4>
 
-
 <br><br><br><br>
-<h2>
-    Rendement Net
-</h2>
-La formule de calcul du rendement net est la suivante : (((loyer Mensuel * 12) - charges locatives) / Prix d'acquisition) * 100
 
-<br><br><br><div class="card flex  gap-3 p-fluid align-items-end flex-wrap">
+<h2>Pourquoi le rendement net est-il plus précis ?</h2>
+<p>
+  Le rendement net est une version plus réaliste du rendement brut. Il prend en compte non seulement les loyers perçus, mais aussi les charges locatives, telles que les frais d'entretien, les taxes foncières, et les assurances. 
+</p>
+<p>
+  En tenant compte de ces dépenses, le rendement net permet d'obtenir une estimation plus précise des revenus générés par l'investissement. Cela permet à l'investisseur de savoir quel pourcentage du prix d'achat du bien reste réellement en sa possession après avoir payé toutes les charges liées à la propriété.
+</p>
+
+<br><br><br>
+
+<h2>Calculateur du rendement net :</h2>
+<br>
+<div class="card flex gap-3 p-fluid align-items-end flex-wrap">
     <div class="flex-auto">
-        <p-floatLabel>
+        <p-floatLabel class="input-label">
             <p-inputNumber inputId="loyerMensuel" [(ngModel)]="loyerMensuel2" requ />
             <label for="loyerMensuel">Loyer mensuel sans les charges</label>
-
         </p-floatLabel>
     </div>
     <div class="flex-auto">
-        <p-floatLabel>
+        <p-floatLabel class="input-label">
             <p-inputNumber inputId="prixAcquisition" [(ngModel)]="prixAcquisition2" />
             <label for="prixAcquisition">Prix d'acquisition (frais de notaire + agence compris)</label>
-
         </p-floatLabel>
     </div>
 
     <div class="flex-auto">
-        <p-floatLabel>
+        <p-floatLabel class="input-label">
             <p-inputNumber inputId="chargeLocatives" [(ngModel)]="chargeLocatives" />
             <label for="chargeLocatives">Charges locatives (taxe d'habitation comprise)</label>
-
         </p-floatLabel>
     </div>
     <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="calculRendementNet()"
     [disabled]=" !(prixAcquisition2 &&prixAcquisition2>0) || !(loyerMensuel2 && loyerMensuel2>0)|| !(chargeLocatives && chargeLocatives>0)"></button>
-    
 </div>
 
 <h4>Rendement Net : {{ rendementNet !== undefined ? rendementNet : 'N/A' }} %</h4>
 
-
 <br><br><br><br>
-<h2>
-    Rendement Net-net
-</h2>
 
-La formule de calcul du rendement net-net est la suivante : (((loyer Mensuel * 12) - (charges locatives + Impôts et prélèvements sociaux)) / Prix d'acquisition) * 100
+<h2>Qu'est-ce que le rendement net-net ?</h2>
+<p>
+  Le rendement net-net va encore plus loin, car il inclut non seulement les charges locatives, mais aussi les impôts et les prélèvements sociaux (comme les taxes sur les revenus locatifs). Pourquoi est-il crucial pour un investisseur de prendre en compte ces éléments ?
+</p>
+<p>
+  En incluant toutes les dépenses liées à la gestion du bien (charges locatives et impôts), le rendement net-net donne une vision complète de la rentabilité de l'investissement. C'est cette rentabilité nette après toutes les dépenses qui permettra à l'investisseur de savoir si son investissement est réellement rentable à long terme.
+</p>
 
-<br><br><br><div class="card flex  gap-3 p-fluid align-items-end flex-wrap">
+<br><br><br>
+<h2>Calculateur du rendement net-net :</h2>
+<br>
+<div class="card flex gap-3 p-fluid align-items-end flex-wrap">
     <div class="flex-auto">
-        <p-floatLabel>
+        <p-floatLabel class="input-label">
             <p-inputNumber inputId="loyerMensuel" [(ngModel)]="loyerMensuel3" requ />
             <label for="loyerMensuel">Loyer mensuel sans les charges</label>
-
         </p-floatLabel>
     </div>
     <div class="flex-auto">
-        <p-floatLabel>
+        <p-floatLabel class="input-label">
             <p-inputNumber inputId="prixAcquisition" [(ngModel)]="prixAcquisition3" />
             <label for="prixAcquisition">Prix d'acquisition (frais de notaire + agence compris)</label>
-
         </p-floatLabel>
     </div>
 
     <div class="flex-auto">
-        <p-floatLabel>
+        <p-floatLabel class="input-label">
             <p-inputNumber inputId="chargeLocatives" [(ngModel)]="chargeLocatives2" />
             <label for="chargeLocatives">Charges locatives (taxe d'habitation comprise)</label>
-
         </p-floatLabel>
     </div>
 
     <div class="flex-auto">
-        <p-floatLabel>
+        <p-floatLabel class="input-label">
             <p-inputNumber inputId="impot" [(ngModel)]="impot" />
             <label for="impot">Impôts et prélèvements sociaux</label>
-
         </p-floatLabel>
     </div>
     <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="calculRendementNetNet()"
-    [disabled]=" !(prixAcquisition3 &&prixAcquisition3>0) || !(loyerMensuel3 && loyerMensuel3 > 0 )
-    || !(chargeLocatives2 && chargeLocatives2>0)|| !(impot && impot>0)"></button>
-    
+    [disabled]=" !(prixAcquisition3 &&prixAcquisition3>0) || !(loyerMensuel3 && loyerMensuel3 > 0 ) || !(chargeLocatives2 && chargeLocatives2>0)|| !(impot && impot>0)"></button>
 </div>
 
 <h4>Rendement net-net : {{ rendementNetNet !== undefined ? rendementNetNet : 'N/A' }} %</h4>
@@ -118,27 +133,22 @@ La formule de calcul du rendement net-net est la suivante : (((loyer Mensuel * 1
 <br><br>
 <div class="separator"></div><br><br>
 
-<h2>Explication du Rendement Locatif</h2>
+<h2>Quel est un bon rendement locatif ?</h2>
 <p>
-  Le rendement locatif est un indicateur clé pour évaluer la rentabilité d'un investissement immobilier. Il mesure le retour sur investissement en comparant les revenus générés par la location à l'achat du bien immobilier. Il existe différentes façons de calculer ce rendement, selon les critères que l'on prend en compte dans l'estimation des revenus et des charges. Trois principaux types de rendements sont couramment utilisés : 
+  Un bon rendement locatif dépend de l'objectif de l'investisseur, mais en général, un rendement brut supérieur à 6 % est souvent considéré comme attractif. En revanche, un rendement net ou net-net supérieur à 4 % est souvent jugé comme une rentabilité satisfaisante, surtout dans un marché immobilier mature. L'investisseur doit également prendre en compte des facteurs tels que la stabilité du marché locatif, les types de biens et les frais associés à la gestion du bien immobilier.
 </p>
 
-<ul>
-  <li><strong>Rendement Brut :</strong> Il s'agit du rendement de base, calculé en prenant en compte uniquement les loyers perçus, sans tenir compte des charges et des impôts. Ce calcul donne une première idée du potentiel de rentabilité d'un investissement, mais il peut être trompeur, car il ne prend pas en compte les coûts réels liés à la gestion du bien.</li>
-  <li><strong>Rendement Net :</strong> Le rendement net prend en compte les charges locatives, comme les frais d'entretien, les taxes, et les assurances. Il est donc plus réaliste que le rendement brut, car il reflète mieux les revenus réels générés par l'investissement après dépenses.</li>
-  <li><strong>Rendement Net-Net :</strong> Ce calcul va encore plus loin, en prenant en compte non seulement les charges locatives, mais aussi les impôts et les prélèvements sociaux. C'est le rendement qui tient compte de toutes les dépenses et taxes, offrant ainsi une vue d'ensemble précise du rendement réel net pour l'investisseur.</li>
-</ul>
-
+<h2>Pourquoi le rendement net-net est-il crucial pour un investisseur ?</h2>
 <p>
-  Un bon rendement locatif dépend des objectifs et des attentes de l'investisseur, ainsi que de la stratégie immobilière choisie. En général, un rendement brut supérieur à 6 % est considéré comme attractif, tandis qu'un rendement net ou net-net supérieur à 4 % est souvent perçu comme une rentabilité satisfaisante dans un marché immobilier mature.
+  Bien que le rendement brut donne une idée générale du potentiel d'un investissement, les rendements net et net-net sont bien plus pertinents à long terme. Ces derniers prennent en compte l'ensemble des frais liés à la gestion du bien et des taxes, ce qui permet d'obtenir une évaluation plus précise du retour sur investissement réel.
+</p>
+<p>
+  Se concentrer sur le rendement net-net permet à l'investisseur d'éviter les mauvaises surprises liées à des charges ou des impôts non pris en compte dans le calcul du rendement brut.
 </p>
 
+<h2>Comment utiliser le calculateur de rendement locatif ?</h2>
 <p>
-  Il est important de noter que bien que le rendement brut soit utile pour une première estimation, les rendements net et net-net sont beaucoup plus pertinents pour déterminer si un investissement immobilier est réellement rentable à long terme. C'est pourquoi il est essentiel de tenir compte de tous les frais liés à l'achat et à la gestion du bien avant de prendre une décision d'investissement.
-</p>
-
-<p>
-  En utilisant nos outils de calcul de rendement, vous pouvez facilement estimer le rendement brut, net et net-net de votre projet immobilier, vous aidant ainsi à prendre des décisions éclairées pour optimiser vos investissements.
+  Grâce à nos outils de calcul de rendement locatif, il est possible d’estimer facilement le rendement brut, net et net-net de votre projet immobilier. Ces outils sont très utiles pour prendre des décisions éclairées, car ils permettent de simuler différentes situations et de voir comment les charges, les taxes et les loyers impactent la rentabilité de votre investissement. En utilisant ces calculs, vous pourrez évaluer la rentabilité de votre bien immobilier avant de prendre une décision d'achat.
 </p>
 
 </main>

@@ -40,7 +40,7 @@
     <div class="card flex  gap-3 p-fluid align-items-end flex-wrap">
         <div class="flex-auto">
 
-            <p-floatLabel>
+            <p-floatLabel class="input-label">
                 <p-inputNumber inputId="sommeEmprunte" [(ngModel)]="sommeEmprunte" mode="currency"
                     [minFractionDigits]="0" currency="EUR"
                     [disabled]="isCalculMensualite==false && isCalculCoutTotal==false" />
@@ -50,14 +50,14 @@
         </div>
         <div class="flex-auto">
 
-            <p-floatLabel>
+            <p-floatLabel class="input-label">
                 <p-inputNumber inputId="interet" [(ngModel)]="interet" mode="decimal" locale="fr-FR" step="0.01" min="0"
                     max="5" [showButtons]="true" [disabled]="isCalculMensualite==false && isCalculCoutTotal==false && isCapaciteEmprunt == false" />
                 <label for="interet">Taux d'intérêt</label>
             </p-floatLabel>
         </div>
         <div class="flex-auto">
-            <p-floatLabel>
+            <p-floatLabel class="input-label">
                 <p-inputNumber inputId="dureeDuCredit" [(ngModel)]="dureeDuCredit" [minFractionDigits]="0"
                     [disabled]="isCalculMensualite==false && isCalculCoutTotal==false && isCapaciteEmprunt == false" />
                 <label for="dureeDuCredit">Durée du crédit (en mois)</label>
@@ -66,7 +66,7 @@
         </div>
 
         <div class="flex-auto">
-            <p-floatLabel>
+            <p-floatLabel class="input-label">
                 <p-inputNumber inputId="mensualite" [(ngModel)]="mensualite" [minFractionDigits]="0" mode="currency"
                     currency="EUR" [disabled]="isCalculMensualite==true || isCalculCoutTotal==true" />
                 <label for="mensualite">Mensualité</label>
@@ -74,7 +74,7 @@
             </p-floatLabel>
         </div>
         <div class="flex-auto">
-            <p-floatLabel>
+            <p-floatLabel class="input-label">
                 <p-inputNumber inputId="coutTotal" [(ngModel)]="coutTotal" [minFractionDigits]="0" mode="currency"
                     currency="EUR" [disabled]="isCalculMensualite==true || isCalculCoutTotal==true || isCapaciteEmprunt == true" />
                 <label for="coutTotal">Coût Total</label>

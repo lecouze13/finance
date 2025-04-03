@@ -23,14 +23,14 @@
   justify-items: end;">
                 <div class="divFormBudget">
                     <div class="divMainBudget">
-                        <p-floatLabel>
+                        <p-floatLabel class="input-label">
                             <input type="text" class="inputNomDepence" pInputText [(ngModel)]="nomDepense" />
                             <label for="nomDepense">Nom</label>
                         </p-floatLabel>
 
                         <br> <br> <br>
 
-                        <p-floatLabel>
+                        <p-floatLabel class="input-label">
                             <p-inputNumber inputId="depense" [(ngModel)]="depense" />
                             <label for="depense">Sommes €</label>
                         </p-floatLabel>
@@ -52,14 +52,14 @@
             <p-tabPanel header="Ajouter un revenu" class="panneltab" style=" display: grid;justify-items: end;">
                 <div class="divFormBudget">
                     <div class="divMainBudget">
-                        <p-floatLabel>
+                        <p-floatLabel class="input-label">
                             <input type="text" class="nomRevenue" pInputText [(ngModel)]="nomRevenue" />
                             <label for="nomRevenue">Nom</label>
                         </p-floatLabel>
 
                         <br> <br> <br>
 
-                        <p-floatLabel>
+                        <p-floatLabel class="input-label">
                             <p-inputNumber inputId="revenue" [(ngModel)]="revenue" />
                             <label for="revenue">Sommes €</label>
                         </p-floatLabel>
@@ -74,7 +74,7 @@
         </p-tabView>
 
 
-        <!-- <p-floatLabel>
+        <!-- <p-floatLabel class="input-label">
                 <p-inputText inputId="recette" required [(ngModel)]="recette"/>
                 <label for="recette">Salaire / Entrée d'argent</label>
             </p-floatLabel> -->
