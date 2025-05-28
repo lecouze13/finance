@@ -1,16 +1,10 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { ButtonModule } from 'primeng/button';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { CommonModule } from '@angular/common';
+import { ChartsModule } from 'ng2-charts';
 
 @Component({
   selector: 'app-comparateur-achat-location',
-  standalone: true,
-  imports: [CommonModule, FormsModule, InputNumberModule, ButtonModule, FloatLabelModule],
   templateUrl: './comparateur-achat-location.component.html',
-  styleUrl: './comparateur-achat-location.component.scss'
+  styleUrls: ['./comparateur-achat-location.component.scss']
 })
 export class ComparateurAchatLocationComponent {
   champs: string[] = [
@@ -26,15 +20,21 @@ export class ComparateurAchatLocationComponent {
   
   valeurs: { [key: string]: number } = {};
   resultat: string | null = null;
-  
-  // Exemple de validation simple (tu peux adapter)
+
+  public afficherGraph = false;
+
+  public lineChartLabels: string[] = [];
+  public lineChartData: any[] = [
+    { data: [], label: 'Achat (cumulé)', borderColor: 'green', fill: false },
+    { data: [], label: 'Location (cumulé)', borderColor: 'blue', fill: false }
+  ];
+  public lineChartType = 'line';
+
   estValide(): boolean {
-    return this.champs.every(champ => this.valeurs[champ] !== undefined && this.valeurs[champ] !== null);
+    return this.champs.every(champ => this.valeurs[champ] != null);
   }
-  
-  // Exemple de méthode comparer (simplifiée)
+
   comparer() {
-    // Récupère les valeurs
     const prix = this.valeurs['Prix du bien'] || 0;
     const duree = this.valeurs['Durée du prêt (années)'] || 0;
     const taux = this.valeurs['Taux d’intérêt (%)'] || 0;
@@ -43,22 +43,43 @@ export class ComparateurAchatLocationComponent {
     const taxeFonciere = this.valeurs['Taxe foncière annuelle'] || 0;
     const assurance = this.valeurs['Assurance habitation annuelle'] || 0;
     const entretien = this.valeurs['Entretien annuel'] || 0;
-  
-    // Calcul coûts achat (simplifié)
-    const coutCredit = prix * (taux / 100) * duree; // intérêt total approximatif
-    const coutAnnuelAchat = (coutCredit / duree) + chargesCopro + taxeFonciere + assurance + entretien;
-  
-    // Calcul coûts location
-    const coutAnnuelLocation = loyerMensuel * 12 + chargesCopro + assurance;
-  
-    // Résultat simplifié
-    if (coutAnnuelAchat < coutAnnuelLocation) {
-      this.resultat = `Acheter est plus économique d'environ ${ (coutAnnuelLocation - coutAnnuelAchat).toFixed(2) } € par an.`;
-    } else if (coutAnnuelLocation < coutAnnuelAchat) {
-      this.resultat = `Louer est plus économique d'environ ${ (coutAnnuelAchat - coutAnnuelLocation).toFixed(2) } € par an.`;
+
+    const coutCredit = prix * (taux / 100) * duree;
+    const coutTotalAchat = prix + coutCredit;
+
+    let cumulAchat = 0;
+    let cumulLocation = 0;
+
+    const labels: string[] = [];
+    const achatData: number[] = [];
+    const locationData: number[] = [];
+
+    for (let an = 1; an <= duree; an++) {
+      const coutAnnuelAchat = coutTotalAchat / duree + chargesCopro + taxeFonciere + assurance + entretien;
+      const coutAnnuelLocation = loyerMensuel * 12 + chargesCopro + assurance;
+
+      cumulAchat += coutAnnuelAchat;
+      cumulLocation += coutAnnuelLocation;
+
+      labels.push(`Année ${an}`);
+      achatData.push(+cumulAchat.toFixed(2));
+      locationData.push(+cumulLocation.toFixed(2));
+    }
+
+    this.lineChartLabels = labels;
+    this.lineChartData = [
+      { data: achatData, label: 'Achat (cumulé)', borderColor: 'green', fill: false },
+      { data: locationData, label: 'Location (cumulé)', borderColor: 'blue', fill: false }
+    ];
+
+    this.afficherGraph = true;
+
+    if (cumulAchat < cumulLocation) {
+      this.resultat = `Acheter est plus économique d'environ ${(cumulLocation - cumulAchat).toFixed(2)} € après ${duree} ans.`;
+    } else if (cumulLocation < cumulAchat) {
+      this.resultat = `Louer est plus économique d'environ ${(cumulAchat - cumulLocation).toFixed(2)} € après ${duree} ans.`;
     } else {
-      this.resultat = "Les coûts annuels sont équivalents entre achat et location.";
+      this.resultat = "Les coûts totaux sont équivalents après " + duree + " ans.";
     }
   }
 }
-

@@ -62,8 +62,7 @@
       <button
         type="button"
         pButton
-        label="Comparer"
-        icon="pi pi-calculator"
+        
         class="p-button-primary"
         (click)="comparer()"
         [disabled]="!estValide()"
@@ -77,14 +76,26 @@
       <p>{{ resultat }}</p>
     </div>
   </main>
-  
-  <br/><br/>
+  <div *ngIf="resultat">
+  <h4>Résultat :</h4>
+  <p>{{ resultat }}</p>
+</div>
+
+<div *ngIf="afficherGraph" style="margin-top: 2rem;">
+  <h4>Comparaison des coûts cumulés</h4>
+  <canvas baseChart
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [chartType]="lineChartType">
+  </canvas>
+</div>
+
+  <br/>
   <div class="separator"></div><br>
 
   <section class="faq-section" aria-label="Foire aux questions">
  
   
-      <br/><br/>
       <br/><br/>
     <article itemscope itemtype="https://schema.org/Question">
       <h3 itemprop="name">Quand est-il préférable d'acheter plutôt que de louer ?</h3>
