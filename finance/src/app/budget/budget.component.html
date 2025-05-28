@@ -1,22 +1,66 @@
-<title>Outil de Gestion de Budget</title>
-
+<head>
+    <meta name="description" content="Outil de gestion de budget mensuel gratuit : Suivez vos revenus et vos dépenses, catégorisez vos postes de dépenses, et améliorez votre santé financière en comparant avec les moyennes d'autres utilisateurs.">
+    <meta name="keywords" content="gestion budget mensuel, outil de budget gratuit, suivi des dépenses, analyse financière personnelle, budget famille, dépenses mensuelles, revenu, excédent, déficit">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Outil de Gestion de Budget Mensuel : Suivez Vos Dépenses et Revenus Facilement</title>
+  
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Pourquoi utiliser un outil de gestion de budget ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Un outil de gestion de budget vous permet de mieux contrôler vos finances en suivant vos revenus et vos dépenses. Cela aide à éviter les déficits, à identifier les postes de dépenses excessifs et à planifier votre épargne."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment fonctionne un gestionnaire de budget mensuel ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Il vous suffit de renseigner vos revenus et vos dépenses mensuelles. Le gestionnaire calcule automatiquement votre solde net, vous montrant si vous êtes en excédent ou en déficit à la fin du mois."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Puis-je catégoriser mes dépenses avec cet outil ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Oui, vous pouvez classer vos dépenses par catégorie (habitation, transport, alimentation, loisirs, etc.) pour obtenir une vision claire de vos habitudes de consommation et trouver des opportunités d'économie."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Est-il possible de comparer mes résultats avec ceux d'autres utilisateurs ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Oui, l’outil propose une fonctionnalité de comparaison avec les moyennes des autres utilisateurs afin d’évaluer votre situation financière et d’adopter de meilleures pratiques budgétaires."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Cet outil est-il gratuit ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Oui, notre outil de gestion de budget est entièrement gratuit et accessible sans inscription. Vous pouvez l’utiliser aussi souvent que nécessaire."
+        }
+      }
+    ]
+  }
+  </script>
+  
+  </head>
 <main>
-
-    <h1>Gestionnaire de budget mensuel facile et gratuit</h1>
+    <h1>Outil de Gestion de Budget Mensuel : Suivez Vos Dépenses et Revenus Facilement</h1>
 
     <br>
-    <div class="separator"></div><br>
-    <!-- <h2>
-    Cashflow net
-</h2> -->
-    Cet outil gratuit et facile d'utilisation vous permet de gérer facilement votre budget mensuel.
-    Suivez vos dépenses et vos revenus pour savoir si vous êtes en excédent ou en déficit.
-    Vous pouvez également catégoriser vos dépenses et revenus afin de mieux comprendre où va votre argent et observer
-    les variations d’un mois à l’autre.
-    En prime, vous avez la possibilité de comparer vos résultats avec les moyennes des autres utilisateurs pour affiner
-    vos choix financiers.
-
-    <br><br><br>
+   
+    <br><br>
     <div class="mainBudget" *ngIf="!isCompare">
         <p-tabView>
             <p-tabPanel header="Ajouter une dépenses" style="    display: grid;
@@ -139,5 +183,52 @@
             <app-budget-graphes [categoriesList]="categoriesList" (compareEvent)="onCompareChange($event)"></app-budget-graphes>
         </div>
     </div>
+    <div class="separator"></div><br>
+
+    <h2>Pourquoi utiliser un outil de gestion de budget ?</h2>
+    <p>
+        Gérer son <strong>budget mensuel</strong> est essentiel pour assurer sa stabilité financière. Cet outil gratuit et simple d'utilisation vous aide à suivre vos <strong>dépenses</strong> et <strong>revenus</strong>, à identifier les postes de dépenses importants et à savoir si vous êtes en excédent ou en déficit à la fin du mois.
+    </p>
+
+    <h2>Comment fonctionne notre gestionnaire de budget ?</h2>
+    <p>
+        Il vous suffit d’entrer vos revenus mensuels (salaires, aides, pensions, etc.) ainsi que toutes vos dépenses (loyer, alimentation, transport, abonnements, etc.). L’outil calcule automatiquement votre <strong>solde mensuel</strong> et vous permet de visualiser votre situation financière en un coup d'œil.
+    </p>
+    <pre>
+        Solde mensuel = Total des revenus - Total des dépenses
+    </pre>
+
+    <h2>Quels sont les avantages de catégoriser ses dépenses et revenus ?</h2>
+    <p>
+        En <strong>catégorisant vos dépenses</strong> (habitation, transport, loisirs, etc.) et vos sources de revenus, vous comprenez mieux vos habitudes financières. Cela vous aide à :
+        <ul>
+            <li>Identifier les domaines où vous pouvez économiser</li>
+            <li>Suivre l'évolution de vos finances sur plusieurs mois</li>
+            <li>Fixer des objectifs d’épargne réalistes</li>
+        </ul>
+  
+
+    <h2>Comparez vos résultats avec ceux des autres utilisateurs</h2>
+    <p>
+        Une fonctionnalité supplémentaire vous permet de <strong>comparer vos données</strong> avec les moyennes d'autres utilisateurs. Cela peut vous donner une idée des standards de dépenses dans différentes catégories et vous aider à faire des choix financiers plus avisés.
+    </p>
+
+    <br><br><br>
+
+    <h2>Essayez notre outil de gestion de budget gratuit</h2>
+    <p>
+        Remplissez les champs suivants pour obtenir une analyse claire et instantanée de votre budget :
+    </p>
+
+    <ul>
+        <li>Quel est votre revenu mensuel net ?</li>
+        <li>Quelles sont vos dépenses fixes (loyer, crédit, abonnements) ?</li>
+        <li>Quelles sont vos dépenses variables (alimentation, loisirs, transport) ?</li>
+        <li>Souhaitez-vous fixer un objectif d’épargne ?</li>
+    </ul>
+
+    <p>
+        Commencez dès maintenant à reprendre le contrôle de vos finances personnelles avec notre <strong>outil de gestion de budget simple et gratuit</strong> !
+    </p>
 
 </main>
