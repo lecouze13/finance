@@ -50,53 +50,50 @@
     <h1>Comparateur Achat vs Location</h1>
   
     <div class="separator"></div><br>
-  
     <div class="card-comparateur">
-      <div *ngFor="let champ of champs">
-        <p-floatLabel class="input-label">
-          <p-inputNumber [(ngModel)]="valeurs[champ]" inputId="{{ champ }}" required></p-inputNumber>
-          <label for="{{ champ }}">{{ champ }}</label>
-        </p-floatLabel>
+        <div *ngFor="let champ of champs">
+          <p-floatLabel class="input-label">
+            <p-inputNumber [(ngModel)]="valeurs[champ]" inputId="{{ champ }}" required></p-inputNumber>
+            <label for="{{ champ }}">{{ champ }}</label>
+          </p-floatLabel>
+        </div>
+      
+        <button
+          type="button"
+          pButton
+          class="p-button-primary"
+          (click)="comparer()"
+          [disabled]="!estValide()"
+        >
+          Comparer
+        </button>
       </div>
-  
-      <button
-        type="button"
-        pButton
-        
-        class="p-button-primary"
-        (click)="comparer()"
-        [disabled]="!estValide()"
-      >
-        Comparer
-      </button>
-    </div>
-  
-    <div *ngIf="resultat">
-      <h4>Résultat :</h4>
-      <p>{{ resultat }}</p>
-    </div>
+      
+      <div *ngIf="resultat">
+        <h4>Résultat :</h4>
+        <pre>{{ resultat }}</pre>
+      </div>
+      
+      <p-chart
+        *ngIf="afficherGraph"
+        type="line"
+        [data]="{
+          labels: lineChartLabels,
+          datasets: lineChartData
+        }"
+        [options]="chartOptions"
+        style="width: 100%; max-width: 800px; margin-top: 2rem;"
+      ></p-chart>
   </main>
-  <div *ngIf="resultat">
-  <h4>Résultat :</h4>
-  <p>{{ resultat }}</p>
-</div>
 
-<div *ngIf="afficherGraph" style="margin-top: 2rem;">
-  <h4>Comparaison des coûts cumulés</h4>
-  <canvas baseChart
-          [datasets]="lineChartData"
-          [labels]="lineChartLabels"
-          [chartType]="lineChartType">
-  </canvas>
-</div>
+
+
 
   <br/>
   <div class="separator"></div><br>
 
   <section class="faq-section" aria-label="Foire aux questions">
- 
-  
-      <br/><br/>
+
     <article itemscope itemtype="https://schema.org/Question">
       <h3 itemprop="name">Quand est-il préférable d'acheter plutôt que de louer ?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
@@ -124,5 +121,61 @@
         <p itemprop="text">Ce simulateur fournit une estimation basée sur les données saisies. Il est conseillé de consulter un professionnel pour une analyse personnalisée.</p>
       </div>
     </article>
-  </section>
   
+    <!-- Articles supplémentaires SEO -->
+  
+    <article itemscope itemtype="https://schema.org/Question">
+      <h3 itemprop="name">Quels sont les frais à prendre en compte lors de l'achat d'un bien immobilier ?</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Les frais comprennent les frais de notaire, les intérêts du prêt immobilier, les charges de copropriété, la taxe foncière, l'assurance habitation, et les coûts d'entretien.</p>
+      </div>
+    </article>
+  
+    <article itemscope itemtype="https://schema.org/Question">
+      <h3 itemprop="name">Comment calculer la mensualité d'un prêt immobilier ?</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p>
+            La mensualité est calculée en fonction du capital emprunté, du taux d’intérêt annuel, et de la durée du prêt. 
+            Elle inclut les intérêts et l'amortissement du capital. Voir 
+            <a routerLink="/emprunt"class="router-link"  >
+              calculateur d'emprunt.
+            </a>
+          </p>      </div>
+    </article>
+  
+    <article itemscope itemtype="https://schema.org/Question">
+      <h3 itemprop="name">Quels avantages fiscaux offre l’achat immobilier ?</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">L'achat peut permettre de bénéficier de déductions fiscales comme le crédit d'impôt pour certains travaux, la réduction d'impôt Pinel, ou l'amortissement en location meublée.</p>
+      </div>
+    </article>
+  
+    <article itemscope itemtype="https://schema.org/Question">
+      <h3 itemprop="name">Comment la valorisation du bien impacte-t-elle le calcul de rentabilité ?</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">La valorisation annuelle du bien augmente sa valeur patrimoniale, ce qui peut améliorer la rentabilité nette de l'achat comparé à la location.</p>
+      </div>
+    </article>
+  
+    <article itemscope itemtype="https://schema.org/Question">
+      <h3 itemprop="name">Comment prendre en compte les coûts d'entretien dans la comparaison achat vs location ?</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Les coûts d'entretien réguliers doivent être intégrés dans les dépenses annuelles pour refléter le coût réel de la propriété, contrairement à la location où ces coûts sont généralement inclus dans le loyer.</p>
+      </div>
+    </article>
+  
+    <article itemscope itemtype="https://schema.org/Question">
+      <h3 itemprop="name">Quelle est l'importance du taux de rendement de l'investissement en cas de location ?</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Le taux de rendement reflète la performance des économies réalisées en louant et en investissant cet argent, ce qui est essentiel pour comparer la rentabilité nette avec l'achat immobilier.</p>
+      </div>
+    </article>
+  
+    <article itemscope itemtype="https://schema.org/Question">
+      <h3 itemprop="name">Comment anticiper la durée idéale pour rester dans un logement avant d'acheter ?</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Il est conseillé d'envisager l'achat si vous prévoyez de rester au moins 7 à 10 ans, afin d'amortir les frais d'acquisition et bénéficier pleinement de la valorisation du bien.</p>
+      </div>
+    </article>
+  
+  </section>

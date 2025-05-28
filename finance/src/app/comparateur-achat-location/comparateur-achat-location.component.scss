@@ -33,3 +33,18 @@ h4,
 section {
     padding: 0% 15%;
 }
+
+a.router-link {
+    color: #007bff;          /* Bleu classique pour les liens */
+    text-decoration: none;   /* Supprime le soulignement */
+    font-weight: 600;        /* Un peu plus gras */
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  a.router-link:hover,
+  a.router-link:focus {
+    color: #0056b3;          /* Bleu plus foncé au survol et focus */
+    text-decoration: underline;
+    outline: none;
+  }
