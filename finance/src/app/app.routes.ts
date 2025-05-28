@@ -7,6 +7,8 @@ import { CashflowComponent } from './cashflow/cashflow.component';
 import { MainComponent } from './main/main.component';
 import { TauxEmpruntComponent } from './taux-emprunt/taux-emprunt.component';
 import { TriImmoComponent } from './tri-immo/tri-immo.component';
+import { ComparateurAchatLocationComponent } from './comparateur-achat-location/comparateur-achat-location.component';
+import { CalculNotaireComponent } from './calcul-notaire/calcul-notaire.component';
 
 export const routes: Routes = [
     { path: 'rendement', component: RendementComponent },
@@ -16,6 +18,11 @@ export const routes: Routes = [
     { path: 'emprunt', component: TauxEmpruntComponent },
     {path : 'tri', component : TriImmoComponent},
     { path: '', component:MainComponent}, 
+    {path : 'achatvslocation', component : ComparateurAchatLocationComponent},
+
+    {path : 'calculfraisdenotaire', component : CalculNotaireComponent},
+
+   
     // { path: 'home', component:MainComponent } 
 ];
 

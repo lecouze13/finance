@@ -38,6 +38,14 @@ export class HeaderComponent implements OnInit {
             label: 'Calculateur d\'emprunt',
             route: '/emprunt'
           },
+          {
+            label: 'Calculateur de frais de notaire',
+            route: '/calculfraisdenotaire'
+          },
+          {
+            label: 'Comparateur achat vs location ',
+            route: '/achatvslocation'
+          },
 
         ]
       }
