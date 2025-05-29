@@ -5,70 +5,77 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
-        <loc>https://finance.lorenzogeano.com/</loc>
+        <loc>https://calculateurfinance.fr/</loc>
         <lastmod>2025-05-28</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
 
     <url>
-        <loc>https://finance.lorenzogeano.com/home</loc>
+        <loc>https://calculateurfinance.fr/home</loc>
         <lastmod>2025-05-28</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
 
     <url>
-        <loc>https://finance.lorenzogeano.com/rendement</loc>
+        <loc>https://calculateurfinance.fr/rendement</loc>
         <lastmod>2025-05-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://finance.lorenzogeano.com/budget</loc>
+        <loc>https://calculateurfinance.fr/budget</loc>
         <lastmod>2025-05-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://finance.lorenzogeano.com/investissement</loc>
+        <loc>https://calculateurfinance.fr/investissement</loc>
         <lastmod>2025-05-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://finance.lorenzogeano.com/cashflow</loc>
+        <loc>https://calculateurfinance.fr/cashflow</loc>
         <lastmod>2025-05-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://finance.lorenzogeano.com/emprunt</loc>
+        <loc>https://calculateurfinance.fr/emprunt</loc>
         <lastmod>2025-05-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://finance.lorenzogeano.com/tri</loc>
+        <loc>https://calculateurfinance.fr/tri</loc>
         <lastmod>2025-05-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://finance.lorenzogeano.com/achatvslocation</loc>
+        <loc>https://calculateurfinance.fr/achatvslocation</loc>
         <lastmod>2025-05-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://finance.lorenzogeano.com/calculfraisdenotaire</loc>
+        <loc>https://calculateurfinance.fr/calculfraisdenotaire</loc>
+        <lastmod>2025-05-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://calculateurfinance.fr/interetcompose</loc>
         <lastmod>2025-05-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
