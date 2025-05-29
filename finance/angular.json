@@ -33,7 +33,8 @@
               },
               "src/assets",
               "src/robots.txt",
-              "src/sitemap.xml"
+              "src/sitemap.xml",
+               "src/ads.txt"
             ],
             "styles": [
               "src/styles.scss",
