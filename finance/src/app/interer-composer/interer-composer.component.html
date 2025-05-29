@@ -1,0 +1,139 @@
+<main>
+    <h1>Calculateur d’Intérêt Composé avec plusieurs actifs</h1>
+    <div class="separator"></div><br>
+
+    <button pButton type="button" class="p-button-primary" id="addActif" (click)="ajouterActif()">
+        Ajouter un actif
+      </button>
+      <div class="liste-actifs">
+        <div class="actif" *ngFor="let actif of actifs; let i = index">
+          <div class="actif-header">
+            <h3 class="actif-titre">Actif {{ i + 1 }}</h3>
+            <button pButton type="button"
+                    class="p-button-danger p-button-sm p-button-rounded"
+                    (click)="supprimerActif(i)"
+                    pTooltip="Supprimer cet actif"
+                    tooltipPosition="left">
+              <i class="pi pi-times"></i>
+            </button>
+          </div>
+      
+          <br>
+      
+          <p-floatLabel>
+            <input
+              pInputText
+              [(ngModel)]="actif.nom"
+              id="nom{{i}}"
+              name="nom{{i}}"
+              required
+              pTooltip="Donnez un nom descriptif à cet actif (ex. : Livret A, PEA, Immobilier)"
+              tooltipPosition="right"
+            />
+            <label for="nom{{i}}">Nom</label>
+          </p-floatLabel>
+      
+          <p-floatLabel>
+            <p-inputNumber
+              [(ngModel)]="actif.tauxAnnuel"
+              inputId="tauxAnnuel{{i}}"
+              [min]="0"
+              [max]="100"
+              [step]="0.01"
+              pTooltip="Taux de rendement annuel estimé, en pourcentage (ex. : 4,5)"
+              tooltipPosition="right"
+            ></p-inputNumber>
+            <label for="tauxAnnuel{{i}}">Taux d’intérêt annuel (%)</label>
+          </p-floatLabel>
+      
+          <p-floatLabel>
+            <p-inputNumber
+              [(ngModel)]="actif.versementPeriodique"
+              inputId="versement{{i}}"
+              [min]="0"
+              [step]="1"
+              pTooltip="Montant que vous ajoutez régulièrement (chaque mois)"
+              tooltipPosition="right"
+            ></p-inputNumber>
+            <label for="versement{{i}}">Versement périodique (€)</label>
+          </p-floatLabel>
+      
+          <p-floatLabel>
+            <p-inputNumber
+              [(ngModel)]="actif.dureeAnnees"
+              inputId="duree{{i}}"
+              [min]="1"
+              [step]="1"
+              pTooltip="Nombre total d’années pendant lesquelles vous investissez"
+              tooltipPosition="right"
+            ></p-inputNumber>
+            <label for="duree{{i}}">Durée (années)</label>
+          </p-floatLabel>
+      
+          <p-floatLabel>
+            <p-inputNumber
+              [(ngModel)]="actif.capitalInitial"
+              inputId="capital{{i}}"
+              [min]="0"
+              [step]="100"
+              pTooltip="Montant de départ investi dès le début"
+              tooltipPosition="right"
+            ></p-inputNumber>
+            <label for="capital{{i}}">Capital initial (€)</label>
+          </p-floatLabel>
+      
+        </div>
+      </div>
+  
+   
+    <button pButton type="button" class="p-button-success" id="intererComposer" (click)="calculer()">
+      Calculer l'intérêt composé
+    </button>
+  
+    <div *ngIf="resultat">
+      <h2>Résultat</h2>
+      <pre>{{ resultat }}</pre>
+    </div>
+  
+    <p-chart
+      *ngIf="afficherGraph"
+      type="line"
+      [data]="{
+        labels: lineChartLabels,
+        datasets: lineChartData
+      }"
+      [options]="chartOptions"
+      style="width: 100%; max-width: 800px; margin-top: 2rem;">
+    </p-chart>
+    <br>  <br>  <div class="separator"></div><br>
+
+<br>
+  <section class="faq-section" aria-label="Foire aux questions - Calculateur d’intérêt composé">
+  
+    <dl>
+      <h3>Qu’est-ce que l’intérêt composé ?</h3>
+      <dd>
+        L’intérêt composé est le calcul des intérêts non seulement sur le capital initial mais aussi sur les intérêts déjà accumulés. Cela permet à votre capital de croître plus rapidement avec le temps.
+      </dd>
+  
+      <h3>Comment fonctionne ce calculateur ?</h3>
+      <dd>
+        Ce calculateur vous permet d’estimer la croissance de votre capital en fonction d’un capital initial, de versements périodiques, d’un taux d’intérêt annuel, d’une durée et de la fréquence de capitalisation.
+      </dd>
+  
+      <h3>Quelle est la différence entre capitalisation annuelle et mensuelle ?</h3>
+      <dd>
+        La capitalisation annuelle signifie que les intérêts sont ajoutés une fois par an, tandis que la capitalisation mensuelle les ajoute chaque mois, ce qui accélère la croissance du capital.
+      </dd>
+  
+      <h3>Puis-je entrer un versement périodique nul ?</h3>
+      <dd>
+        Oui, si vous ne faites pas de versements réguliers, entrez zéro. Le calcul se fera uniquement sur le capital initial et les intérêts composés.
+      </dd>
+  
+      <h3>Le taux d’intérêt est-il fixe ?</h3>
+      <dd>
+        Ce calculateur utilise un taux fixe pour simplifier les calculs. Dans la réalité, les taux peuvent varier au fil du temps.
+      </dd>
+    </dl>
+  </section>  </main>

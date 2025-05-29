@@ -28,6 +28,7 @@ export class TauxEmpruntComponent {
   calcul: String[] = ['Calculer le coût total', 'Calculer la mensualité', 'Calculer la capacité d\'emprunt'];
   selectedCalcul: String | undefined;
   coutCredit: Number | undefined;    
+  
 
   calculCoutTotal() {
     if (this.sommeEmprunte && this.interet && this.dureeDuCredit) {

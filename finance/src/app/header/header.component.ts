@@ -16,26 +16,29 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.items = [
-
-      {label: 'Home', route: './', icon: 'pi pi-calculator'},
+      {
+        label: 'Home',
+        route: './',
+        icon: 'pi pi-calculator'
+      },
       {
         label: 'Immobilier',
         icon: 'pi pi-home',
         items: [
           {
-            label: 'Rendement',
+            label: 'Calculateur de rendement locatif',
             route: '/rendement'
           },
           {
-            label: 'Cash flow',
+            label: 'Calculateur de cash flow',
             route: '/cashflow'
           },
           {
-            label: 'TRI (Taux de Rentabilité Interne)',
+            label: 'Calculateur TRI (rentabilité interne)',
             route: '/tri'
           },
           {
-            label: 'Calculateur d\'emprunt',
+            label: 'Calculateur d’emprunt immobilier',
             route: '/emprunt'
           },
           {
@@ -43,30 +46,26 @@ export class HeaderComponent implements OnInit {
             route: '/calculfraisdenotaire'
           },
           {
-            label: 'Comparateur achat vs location ',
+            label: 'Comparateur achat vs location',
             route: '/achatvslocation'
-          },
-
+          }
         ]
-      }
-      ,
+      },
       {
         label: 'Finance',
         icon: 'pi pi-wallet',
         items: [
           {
-            label: 'Budget',
+            label: 'Calculateur de budget',
             route: '/budget'
-
-
           },
           {
-            label: 'Investissement',
-            route: '/investissement'
-          },
-
+            label: 'Calculateur d’intérêt composé',
+            route: '/interetcompose'
+          }
         ]
       }
     ];
   }
+  
 }

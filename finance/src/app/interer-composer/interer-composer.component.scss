@@ -1,0 +1,66 @@
+.card-calculateur {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem; /* espace entre les éléments */
+    align-items: center;
+  }
+  
+  .card-calculateur > div, /* chaque champ input */
+  .card-calculateur > button { /* et le bouton */
+    flex: 1 1 200px; /* grow, shrink, base width */
+    min-width: 150px; /* largeur minimum */
+    max-width: 300px; /* largeur max pour limiter trop grand */
+  }
+  .liste-actifs {
+    display: flex;
+    flex-wrap: wrap; /* permet de passer à la ligne */
+    gap: 1rem;       /* espace entre chaque actif */
+    justify-content: flex-start; /* alignement à gauche */
+  }
+  
+  .actif {
+    flex: 1 1 250px;
+    min-width: 200px;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 6px;
+    background: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex
+;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  p-floatLabel {
+    display: block;
+    margin-bottom: 30px;
+  }
+  #addActif{
+    margin: 10px 0px;
+
+  }
+
+  #intererComposer{
+    margin: 25px 0px;
+
+  }
+  
+  .actif-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+  
+  .actif-titre {
+    margin: 0 auto;
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  main {
+    padding: 3% 15%;
+}

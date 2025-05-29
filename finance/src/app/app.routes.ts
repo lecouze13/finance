@@ -9,6 +9,7 @@ import { TauxEmpruntComponent } from './taux-emprunt/taux-emprunt.component';
 import { TriImmoComponent } from './tri-immo/tri-immo.component';
 import { ComparateurAchatLocationComponent } from './comparateur-achat-location/comparateur-achat-location.component';
 import { CalculNotaireComponent } from './calcul-notaire/calcul-notaire.component';
+import { IntererComposerComponent } from './interer-composer/interer-composer.component';
 
 export const routes: Routes = [
     { path: 'rendement', component: RendementComponent },
@@ -21,8 +22,8 @@ export const routes: Routes = [
     {path : 'achatvslocation', component : ComparateurAchatLocationComponent},
 
     {path : 'calculfraisdenotaire', component : CalculNotaireComponent},
+    {path : 'interetcompose', component : IntererComposerComponent},
 
-   
     // { path: 'home', component:MainComponent } 
 ];
 

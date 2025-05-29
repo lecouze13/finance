@@ -14,12 +14,13 @@ import { TableModule } from 'primeng/table';
 import { MessageService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
 import { BudgetGraphesComponent } from './budget-graphes/budget-graphes.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-budget',
   standalone: true,
   imports: [ChartModule, FormsModule, InputTextModule, InputNumberModule, ButtonModule,
-    FloatLabelModule, TabViewModule, CommonModule, RippleModule, ToastModule, TableModule, DropdownModule, BudgetGraphesComponent],
+    FloatLabelModule, TabViewModule, CommonModule, RippleModule, ToastModule, TableModule, DropdownModule, BudgetGraphesComponent,TooltipModule],
   providers: [MessageService],
   templateUrl: './budget.component.html',
   styleUrls: ['./budget.component.scss']
