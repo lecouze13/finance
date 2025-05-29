@@ -12,8 +12,8 @@ h1 {
     display: flex;
     flex-direction: row;
     background-color: white;
-    --mdb-card-box-shadow : none
-    
+    --mdb-card-box-shadow : none;
+    row-gap: 30px;
 }
 main{
 padding: 3% 15%;
