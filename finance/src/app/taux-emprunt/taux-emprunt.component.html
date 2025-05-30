@@ -157,11 +157,8 @@
                   [(ngModel)]="interet"
                   mode="decimal"
                   locale="fr-FR"
-                  step="0.01"
-                  min="0"
-                  max="5"
-                  [showButtons]="true"
-                  [disabled]="isCalculMensualite==false && isCalculCoutTotal==false && isCapaciteEmprunt == false"
+                  minFractionDigits="2"
+                 [disabled]="isCalculMensualite==false && isCalculCoutTotal==false && isCapaciteEmprunt == false"
                   pTooltip="Taux d'intérêt annuel incluant aussi l’assurance du crédit"
                   tooltipPosition="top"
                 />

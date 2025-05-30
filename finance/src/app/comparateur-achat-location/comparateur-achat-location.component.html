@@ -53,11 +53,18 @@
     <div class="card-comparateur">
         <div *ngFor="let champ of champs">
           <p-floatLabel class="input-label">
-            <p-inputNumber [(ngModel)]="valeurs[champ]" inputId="{{ champ }}" required></p-inputNumber>
+            <p-inputNumber
+            [(ngModel)]="valeurs[champ]"
+            inputId="{{ champ }}"
+            [mode]="estTaux(champ) ? 'decimal' : 'decimal'"
+            [locale]="estTaux(champ) ? 'fr-FR' : 'fr-FR'"
+            [minFractionDigits]="estTaux(champ) ? 2 : 0"
+            required>
+          </p-inputNumber>
             <label for="{{ champ }}">{{ champ }}</label>
           </p-floatLabel>
-        </div>
-      
+      </div>
+ 
         <button
           type="button"
           pButton

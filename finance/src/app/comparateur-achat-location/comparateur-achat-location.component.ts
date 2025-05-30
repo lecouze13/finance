@@ -28,7 +28,7 @@ export class ComparateurAchatLocationComponent {
     'Taux d’intérêt (%)',
     'Frais de notaire (%)',
     'Valorisation annuelle du bien (%)',
-    'Loyer mensuel',
+    'Loyer mensuel sans les charges',
     'Charges de copropriété annuelles',
     'Taxe foncière annuelle',
     'Assurance habitation annuelle',
@@ -101,7 +101,9 @@ export class ComparateurAchatLocationComponent {
   estValide(): boolean {
     return this.champs.every(champ => this.valeurs[champ] != null);
   }
-
+  estTaux(champ: string): boolean {
+    return champ === 'Taux d’intérêt (%)'||champ ==='Taux de rendement de l’investissement (%)'||champ ==='Valorisation annuelle du bien (%)';
+  }
   comparer() {
     const prix = this.valeurs['Prix du bien'] || 0;
     const duree = this.valeurs['Durée du prêt (années)'] || 0;
@@ -144,6 +146,7 @@ export class ComparateurAchatLocationComponent {
       }
       capitalRembourse = this.calcCapitalRembourse(prix, taux / 100, duree, an);
       const valeurBien = prix * Math.pow(1 + valorisation / 100, an);
+      console.log(valeurBien)
       const capitalRestantDu = prix - capitalRembourse;
       const valeurNetteAchat = valeurBien - capitalRestantDu - montantNotaire;
 
