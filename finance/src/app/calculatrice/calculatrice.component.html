@@ -1,0 +1,29 @@
+<div class="calculatrice">
+  <input type="text" [value]="ecran" readonly class="ecran" />
+
+  <div class="clavier">
+    <button (click)="appuyerTouche('7')">7</button>
+    <button (click)="appuyerTouche('8')">8</button>
+    <button (click)="appuyerTouche('9')">9</button>
+    <button (click)="appuyerTouche('/')">÷</button>
+
+    <button (click)="appuyerTouche('4')">4</button>
+    <button (click)="appuyerTouche('5')">5</button>
+    <button (click)="appuyerTouche('6')">6</button>
+    <button (click)="appuyerTouche('*')">×</button>
+
+    <button (click)="appuyerTouche('1')">1</button>
+    <button (click)="appuyerTouche('2')">2</button>
+    <button (click)="appuyerTouche('3')">3</button>
+    <button (click)="appuyerTouche('-')">−</button>
+
+    <button (click)="appuyerTouche('0')">0</button>
+    <button (click)="appuyerTouche('.')">.</button>
+    <button (click)="appuyerTouche('%')">%</button>
+    <button (click)="appuyerTouche('+')">+</button>
+
+    <button (click)="appuyerTouche('C')" class="effacer" aria-label="Effacer un élement">C</button>
+    <button (click)="appuyerTouche('⌫')" class="effacer" aria-label="Effacer tout">⌫</button>
+    <button (click)="appuyerTouche('=')" class="egal">=</button>
+  </div>
+</div>

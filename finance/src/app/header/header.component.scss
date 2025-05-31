@@ -6,3 +6,25 @@ ol, ul {
     padding-left: 0; 
 }
 
+  
+  .calculatrice-wrapper {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    width: 320px;
+    max-width: 90vw;
+    position: absolute;
+    right: 5%;
+    background: white;
+    z-index: 1000;
+    border: solid 2px black;
+    padding: 20px;
+    border-radius: 20px;
+  }
+  
+  
+.fermer-btn{
+
+    color: red;
+    background-color: inherit;
+    border: none;
+    transform: scale(1.5);
+}

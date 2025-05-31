@@ -12,6 +12,7 @@ import { CalculNotaireComponent } from './calcul-notaire/calcul-notaire.componen
 import { IntererComposerComponent } from './interer-composer/interer-composer.component';
 import { LmnpLmpComponent } from './lmnp-lmp/lmnp-lmp.component';
 import { AppRoutes } from './pathName.model';
+import { CalculatriceComponent } from './calculatrice/calculatrice.component';
 
 export const routes: Routes = [
     { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -25,6 +26,8 @@ export const routes: Routes = [
     { path: AppRoutes.CALCUL_NOTAIRE, component: CalculNotaireComponent },
     { path: AppRoutes.INTERET_COMPOSE, component: IntererComposerComponent },
     { path: AppRoutes.LMNP_LMP, component: LmnpLmpComponent },
+    { path: AppRoutes.CALCULATRICE, component: CalculatriceComponent },
+
 ];
 
 @NgModule({

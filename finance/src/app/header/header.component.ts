@@ -4,14 +4,18 @@ import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { CommonModule } from '@angular/common';
 import { AppRoutes } from '../pathName.model';
+import { CalculatriceComponent } from "../calculatrice/calculatrice.component";
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MenubarModule, CommonModule, MenubarModule],
+  imports: [MenubarModule, CommonModule, MenubarModule, CalculatriceComponent],
   templateUrl: './header.component.html',
+  styleUrl: './header.component.scss'
+
 })
 export class HeaderComponent implements OnInit {
   items: MenuItem[] | undefined;
+  afficherCalculatrice: boolean = false;
 
   constructor(private router: Router) { }
 
@@ -20,7 +24,7 @@ export class HeaderComponent implements OnInit {
       {
         label: 'Home',
         route: './',
-        icon: 'pi pi-calculator'
+
       },
       {
         label: 'Immobilier',
@@ -70,8 +74,21 @@ export class HeaderComponent implements OnInit {
           {
             label: 'Calculateur d’intérêt composé',
             route:  AppRoutes.INTERET_COMPOSE
+          },
+          {
+            label: 'Calculatrice',
+            route:  AppRoutes.CALCULATRICE
           }
         ]
+      },
+      {
+        label: 'Calculatrice rapide',
+        icon: 'pi pi-calculator',
+        command: () => {
+          this.afficherCalculatrice = !this.afficherCalculatrice;
+        }
+      
+       
       }
     ];
   }

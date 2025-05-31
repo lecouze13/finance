@@ -9,5 +9,6 @@ export const AppRoutes = {
     ACHAT_VS_LOCATION: 'achat-vs-location',
     CALCUL_NOTAIRE: 'calcul-frais-de-notaire',
     INTERET_COMPOSE: 'interet-compose',
-    LMNP_LMP: 'lmnp-lmp-regime-fiscal' // ou 'lmnpvslmp' selon le chemin SEO que tu veux
+    LMNP_LMP: 'lmnp-lmp-regime-fiscal',
+    CALCULATRICE:'calculatrice' 
   };

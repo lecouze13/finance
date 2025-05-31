@@ -18,9 +18,15 @@
                 <div class="p-menuitem-link">
                     <span [class]="item.icon"></span>
                     <span class="ml-2" >{{ item.label }}</span>
-                    <span class="pi pi-fw pi-angle-down ml-2"></span>
+                    <span *ngIf="item.items" class="pi pi-fw pi-angle-down ml-2"></span>
                 </div>
             </ng-template>
         </ng-template>
     </p-menubar>
 </div>
+<div *ngIf="afficherCalculatrice" class="overlay-calculatrice">
+    <div class="calculatrice-wrapper">
+      <button class="fermer-btn" (click)="afficherCalculatrice = false">✕</button>
+      <app-calculatrice></app-calculatrice>
+    </div>
+  </div>
