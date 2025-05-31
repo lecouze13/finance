@@ -10,5 +10,7 @@ export const AppRoutes = {
     CALCUL_NOTAIRE: 'calcul-frais-de-notaire',
     INTERET_COMPOSE: 'interet-compose',
     LMNP_LMP: 'lmnp-lmp-regime-fiscal',
-    CALCULATRICE:'calculatrice' 
+    CALCULATRICE:'calculatrice',
+    IMPOT_REVENUE:'simulateur-impot-revenue' 
+
   };

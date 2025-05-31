@@ -80,8 +80,15 @@
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
-        <url>
+        
         <loc>https://calculateurfinance.fr/lmnp-lmp-regime-fiscal</loc>
+        <lastmod>2025-05-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+     </url>
+        
+        <loc>https://calculateurfinance.fr/simulateur-impot-revenue</loc>
         <lastmod>2025-05-31</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>

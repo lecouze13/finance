@@ -76,9 +76,10 @@ export class HeaderComponent implements OnInit {
             route:  AppRoutes.INTERET_COMPOSE
           },
           {
-            label: 'Calculatrice',
-            route:  AppRoutes.CALCULATRICE
-          }
+            label: 'Calculateur d’impôt sur le revenu',
+            route:  AppRoutes.IMPOT_REVENUE
+          },
+          
         ]
       },
       {
