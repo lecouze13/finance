@@ -19,63 +19,69 @@
     </url>
 
     <url>
-        <loc>https://calculateurfinance.fr/rendement</loc>
+        <loc>https://calculateurfinance.fr/rendement-locatif</loc>
         <lastmod>2025-05-31</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://calculateurfinance.fr/budget</loc>
+        <loc>https://calculateurfinance.fr/budget-immobilier</loc>
         <lastmod>2025-05-31</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://calculateurfinance.fr/investissement</loc>
+        <loc>https://calculateurfinance.fr/investissement-locatif</loc>
         <lastmod>2025-05-31</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://calculateurfinance.fr/cashflow</loc>
+        <loc>https://calculateurfinance.fr/cashflow-immobilier</loc>
         <lastmod>2025-05-31</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://calculateurfinance.fr/emprunt</loc>
+        <loc>https://calculateurfinance.fr/calcul-emprunt</loc>
         <lastmod>2025-05-31</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://calculateurfinance.fr/tri</loc>
+        <loc>https://calculateurfinance.fr/tri-immobilier</loc>
         <lastmod>2025-05-31</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://calculateurfinance.fr/achatvslocation</loc>
+        <loc>https://calculateurfinance.fr/achat-vs-location</loc>
         <lastmod>2025-05-31</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://calculateurfinance.fr/calculfraisdenotaire</loc>
+        <loc>https://calculateurfinance.fr/calcul-frais-de-notaire</loc>
         <lastmod>2025-05-31</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://calculateurfinance.fr/interetcompose</loc>
+        <loc>https://calculateurfinance.fr/interet-compose</loc>
+        <lastmod>2025-05-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+        <url>
+        <loc>https://calculateurfinance.fr/lmnp-lmp-regime-fiscal</loc>
         <lastmod>2025-05-31</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>

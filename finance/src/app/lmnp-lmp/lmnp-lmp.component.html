@@ -1,0 +1,240 @@
+<head>
+    <meta name="description"
+        content="Simulateur LMNP / LMP gratuit : Calculez la rentabilité de votre investissement locatif, vos charges déductibles et le régime fiscal le plus avantageux.">
+    <meta name="keywords"
+        content="simulateur LMNP, simulateur LMP, investissement locatif, fiscalité location meublée, régime réel, micro-BIC, rentabilité locative">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simulateur LMNP / LMP : Comparez Micro-BIC et Réel, estimez votre rentabilité locative</title>
+
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Quelle est la différence entre LMNP et LMP ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Le LMNP (Loueur Meublé Non Professionnel) s'adresse aux particuliers générant moins de 23 000 € de recettes locatives annuelles ou dont l'activité reste secondaire. Le LMP (Loueur Meublé Professionnel) s'applique lorsque les recettes dépassent ce seuil et que l'activité devient principale."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Quel régime fiscal est le plus avantageux entre micro-BIC et réel ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Le régime micro-BIC offre un abattement forfaitaire de 50 %, tandis que le régime réel permet de déduire toutes les charges, intérêts d’emprunt et amortissements. Le régime réel est souvent plus avantageux si vous avez des charges importantes ou un crédit."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Peut-on amortir un bien en LMNP ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oui, dans le régime réel LMNP, vous pouvez amortir le bien immobilier (hors terrain), les meubles et les travaux, ce qui réduit fortement l’imposition sur les loyers perçus."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Est-ce que le simulateur LMNP est gratuit ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oui, notre simulateur LMNP / LMP est 100 % gratuit et sans engagement. Il vous permet de comparer les régimes fiscaux et d’estimer la rentabilité nette de votre investissement locatif."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Quels sont les principaux frais déductibles en régime réel ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Les frais déductibles comprennent les intérêts d’emprunt, les charges de copropriété, les frais de gestion, les assurances, les travaux d'entretien, et les amortissements du bien et du mobilier."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Comment déclarer mes revenus LMNP ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Les revenus LMNP se déclarent dans la déclaration complémentaire de revenus (formulaire 2042 C PRO) en optant pour le régime micro-BIC ou réel selon votre choix fiscal."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Peut-on cumuler LMNP et LMP ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Non, un même contribuable ne peut pas être à la fois LMNP et LMP pour un même bien. Le statut dépend de vos recettes et de la nature de votre activité."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Quels avantages fiscaux offre le statut LMP ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Le statut LMP permet notamment d’imputer les déficits sur le revenu global, de bénéficier d’une exonération d’impôt sur les plus-values après 5 ans, et d’être affilié au régime social des indépendants."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Quelles sont les conditions pour bénéficier du régime micro-BIC ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Le régime micro-BIC s'applique automatiquement si vos recettes annuelles sont inférieures à 72 600 € pour les locations meublées non professionnelles."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Comment calculer la rentabilité nette de mon investissement LMNP ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "La rentabilité nette prend en compte vos revenus locatifs, moins les charges, impôts, intérêts d'emprunt, et amortissements, ainsi que les frais d'acquisition et de gestion, pour estimer le gain réel."
+              }
+            }
+          ]
+        }
+        </script>
+        
+</head>
+
+<main>
+    <h1>Simulateur LMNP / LMP : Comparez la Rentabilité de Votre Location Meublée</h1>
+    <br>
+    <div class="separator"></div><br>
+
+    <div class="flex-center">
+        <p-dropdown [options]="regimes" [(ngModel)]="selectedRegime" [showClear]="true"
+            placeholder="Choisissez votre régime fiscal" (onChange)="onRegimeChange()" />
+    </div>
+
+    <br><br>
+
+    <div *ngIf="isMicroBic">
+        <h3>Régime Micro-BIC</h3>
+        <p>Ce régime applique un abattement forfaitaire de 50 % sur vos revenus locatifs. Il est simple mais moins
+            avantageux si vous avez des charges importantes.</p>
+    </div>
+
+    <div *ngIf="isReel">
+        <h3>Régime Réel (LMNP ou LMP)</h3>
+        <p>Vous pouvez déduire toutes vos charges, intérêts d’emprunt, frais de gestion et amortir le bien et les
+            meubles. Souvent plus rentable mais nécessite une comptabilité plus poussée.</p>
+    </div>
+    <div class="card">
+
+  
+        <div class="flex-auto">
+            <p-floatLabel>
+                <p-inputNumber inputId="revenus"
+                    pTooltip="Revenus locatifs perçus annuellement pour le logement meublé." tooltipPosition="top"
+                    [(ngModel)]="revenus" mode="currency" currency="EUR" />
+                <label for="revenus">Revenus locatifs annuels</label>
+            </p-floatLabel>
+        </div>
+
+        <div class="flex-auto" *ngIf="isReel">
+            <p-floatLabel>
+                <p-inputNumber inputId="charges" pTooltip="Montant annuel des intérêts payés sur le prêt immobilier."
+                    tooltipPosition="top" [(ngModel)]="charges" mode="currency" currency="EUR"
+                    pTooltip="Charges déductibles comme les frais de gestion, assurances, travaux, etc."
+                    tooltipPosition="top" />
+                <label for="charges">Charges annuelles</label>
+            </p-floatLabel>
+        </div>
+
+        <div class="flex-auto" *ngIf="isReel">
+            <p-floatLabel>
+                <p-inputNumber inputId="interets" pTooltip="Montant annuel des intérêts payés sur le prêt immobilier."
+                    [(ngModel)]="interets" tooltipPosition="top" mode="currency" currency="EUR" />
+                <label for="interets">Intérêts d'emprunt</label>
+            </p-floatLabel>
+        </div>
+
+        <div class="flex-auto" *ngIf="isReel">
+            <p-floatLabel>
+                <p-inputNumber inputId="amortissements"
+                    pTooltip="Amortissement comptable annuel du bien et du mobilier." tooltipPosition="top"
+                    [(ngModel)]="amortissements" mode="currency" currency="EUR" />
+                <label for="amortissements">Amortissements annuels</label>
+            </p-floatLabel>
+        </div>
+
+        <div>
+            <button type="button" pButton  class="p-button-success" (click)="calculerFiscalite()"
+                [disabled]="!revenus">
+                Calculer
+            </button>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div *ngIf="resultatMicroBic !== undefined && isMicroBic">
+        <h4>Revenus imposables (Micro-BIC) : {{ resultatMicroBic | number:'1.0-0' }} €</h4>
+    </div>
+
+    <div *ngIf="resultatReel !== undefined && isReel">
+        <h4>Résultat fiscal net (Régime Réel) : {{ resultatReel | number:'1.0-0' }} €</h4>
+    </div>
+
+    <br><br>
+    <div class="separator"></div><br>
+
+    <section class="faq-section" aria-label="Foire aux questions sur le LMNP / LMP">
+
+  <div class="faq-item">
+    <h3>Quelle est la différence entre LMNP et LMP ?</h3>
+    <p>Le LMNP (Loueur Meublé Non Professionnel) s'adresse aux particuliers générant moins de 23 000 € de recettes locatives annuelles ou dont l'activité reste secondaire. Le LMP (Loueur Meublé Professionnel) s'applique lorsque les recettes dépassent ce seuil et que l'activité devient principale.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Que signifie "activité secondaire" dans le cadre du LMNP ?</h3>
+    <p>L'activité de location meublée est dite secondaire lorsque ce n'est pas la principale source de revenus du loueur. Cela signifie que le loueur exerce une autre activité professionnelle principale et que les recettes locatives restent inférieures à 23 000 € par an. Cette distinction permet de bénéficier du régime LMNP, qui est plus simple sur le plan fiscal et administratif.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Quel régime fiscal est le plus avantageux entre micro-BIC et réel ?</h3>
+    <p>Le régime micro-BIC offre un abattement forfaitaire de 50 %, tandis que le régime réel permet de déduire toutes les charges, intérêts d’emprunt et amortissements. Le régime réel est souvent plus avantageux si vous avez des charges importantes ou un crédit.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Peut-on amortir un bien en LMNP ?</h3>
+    <p>Oui, dans le régime réel LMNP, vous pouvez amortir le bien immobilier (hors terrain), les meubles et les travaux, ce qui réduit fortement l’imposition sur les loyers perçus.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Est-ce que le simulateur LMNP est gratuit ?</h3>
+    <p>Oui, notre simulateur LMNP / LMP est 100 % gratuit et sans engagement. Il vous permet de comparer les régimes fiscaux et d’estimer la rentabilité nette de votre investissement locatif.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Quels sont les principaux frais déductibles en régime réel ?</h3>
+    <p>Les frais déductibles comprennent les intérêts d’emprunt, les charges de copropriété, les frais de gestion, les assurances, les travaux d'entretien, et les amortissements du bien et du mobilier.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Comment déclarer mes revenus LMNP ?</h3>
+    <p>Les revenus LMNP se déclarent dans la déclaration complémentaire de revenus (formulaire 2042 C PRO) en optant pour le régime micro-BIC ou réel selon votre choix fiscal.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Peut-on cumuler LMNP et LMP ?</h3>
+    <p>Non, un même contribuable ne peut pas être à la fois LMNP et LMP pour un même bien. Le statut dépend de vos recettes et de la nature de votre activité.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Quels avantages fiscaux offre le statut LMP ?</h3>
+    <p>Le statut LMP permet notamment d’imputer les déficits sur le revenu global, de bénéficier d’une exonération d’impôt sur les plus-values après 5 ans, et d’être affilié au régime social des indépendants.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Quelles sont les conditions pour bénéficier du régime micro-BIC ?</h3>
+    <p>Le régime micro-BIC s'applique automatiquement si vos recettes annuelles sont inférieures à 72 600 € pour les locations meublées non professionnelles.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Comment calculer la rentabilité nette de mon investissement LMNP ?</h3>
+    <p>La rentabilité nette prend en compte vos revenus locatifs, moins les charges, impôts, intérêts d'emprunt, et amortissements, ainsi que les frais d'acquisition et de gestion, pour estimer le gain réel.</p>
+  </div>
+</section>
+</main>

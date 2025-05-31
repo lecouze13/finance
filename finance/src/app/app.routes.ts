@@ -10,21 +10,21 @@ import { TriImmoComponent } from './tri-immo/tri-immo.component';
 import { ComparateurAchatLocationComponent } from './comparateur-achat-location/comparateur-achat-location.component';
 import { CalculNotaireComponent } from './calcul-notaire/calcul-notaire.component';
 import { IntererComposerComponent } from './interer-composer/interer-composer.component';
+import { LmnpLmpComponent } from './lmnp-lmp/lmnp-lmp.component';
+import { AppRoutes } from './pathName.model';
 
 export const routes: Routes = [
-    { path: 'rendement', component: RendementComponent },
-    { path: 'budget', component: BudgetComponent },
-    { path: 'investissement', component: InvestissementComponent },
-    { path: 'cashflow', component: CashflowComponent },
-    { path: 'emprunt', component: TauxEmpruntComponent },
-    {path : 'tri', component : TriImmoComponent},
-    { path: '', component:MainComponent}, 
-    {path : 'achatvslocation', component : ComparateurAchatLocationComponent},
-
-    {path : 'calculfraisdenotaire', component : CalculNotaireComponent},
-    {path : 'interetcompose', component : IntererComposerComponent},
-
-    // { path: 'home', component:MainComponent } 
+    { path: AppRoutes.RENDEMENT, component: RendementComponent },
+    { path: AppRoutes.BUDGET, component: BudgetComponent },
+    { path: AppRoutes.INVESTISSEMENT, component: InvestissementComponent },
+    { path: AppRoutes.CASHFLOW, component: CashflowComponent },
+    { path: AppRoutes.EMPRUNT, component: TauxEmpruntComponent },
+    { path: AppRoutes.TRI, component: TriImmoComponent },
+    { path: AppRoutes.HOME, component: MainComponent },
+    { path: AppRoutes.ACHAT_VS_LOCATION, component: ComparateurAchatLocationComponent },
+    { path: AppRoutes.CALCUL_NOTAIRE, component: CalculNotaireComponent },
+    { path: AppRoutes.INTERET_COMPOSE, component: IntererComposerComponent },
+    { path: AppRoutes.LMNP_LMP, component: LmnpLmpComponent },
 ];
 
 @NgModule({

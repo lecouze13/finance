@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { CommonModule } from '@angular/common';
+import { AppRoutes } from '../pathName.model';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -27,28 +28,35 @@ export class HeaderComponent implements OnInit {
         items: [
           {
             label: 'Calculateur de rendement locatif',
-            route: '/rendement'
+            route:AppRoutes.RENDEMENT
           },
           {
             label: 'Calculateur de cash flow',
-            route: '/cashflow'
+            route: AppRoutes.CASHFLOW
           },
           {
             label: 'Calculateur TRI (rentabilité interne)',
-            route: '/tri'
+            route: AppRoutes.TRI
           },
           {
             label: 'Calculateur d’emprunt immobilier',
-            route: '/emprunt'
+            route: AppRoutes.EMPRUNT
           },
           {
             label: 'Calculateur de frais de notaire',
-            route: '/calculfraisdenotaire'
+            route: AppRoutes.CALCUL_NOTAIRE
           },
           {
             label: 'Comparateur achat vs location',
-            route: '/achatvslocation'
+            route: AppRoutes.ACHAT_VS_LOCATION
+          },
+          {
+            label: 'LMNP / LMP + Micro-BIC ou Réel',
+            route: AppRoutes.LMNP_LMP
           }
+
+
+          
         ]
       },
       {
@@ -57,11 +65,11 @@ export class HeaderComponent implements OnInit {
         items: [
           {
             label: 'Calculateur de budget',
-            route: '/budget'
+            route:  AppRoutes.BUDGET
           },
           {
             label: 'Calculateur d’intérêt composé',
-            route: '/interetcompose'
+            route:  AppRoutes.INTERET_COMPOSE
           }
         ]
       }
