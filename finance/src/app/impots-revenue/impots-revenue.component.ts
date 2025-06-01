@@ -5,10 +5,11 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ButtonModule } from 'primeng/button';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { DropdownModule } from 'primeng/dropdown';
+import { TooltipModule } from 'primeng/tooltip';
 @Component({
   selector: 'app-impots-revenue',
   standalone: true,
-  imports: [CommonModule, FormsModule, InputNumberModule, ButtonModule,FloatLabelModule,DropdownModule],
+  imports: [CommonModule, FormsModule, InputNumberModule, ButtonModule,FloatLabelModule,DropdownModule,TooltipModule],
   templateUrl: './impots-revenue.component.html',
   styleUrls: ['./impots-revenue.component.scss']
 })

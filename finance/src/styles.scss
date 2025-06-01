@@ -6,7 +6,7 @@ body{
 
 span > label {
     /* margin: 5px; */
-    margin-top: -13px;
+    // margin-top: -13px;
 }
     @import '@fortawesome/fontawesome-free/css/all.css';
 @import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
@@ -30,6 +30,8 @@ h1 {
     gap: 15px;
     --mdb-card-box-shadow: none;
     row-gap: 30px;
+    align-items: center;
+
 }
 
 main {
@@ -44,4 +46,89 @@ h4,
 .flex-auto {
     flex: 1 1 auto !important;
     margin-top: 15px;
+}
+
+
+.card {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    --mdb-card-box-shadow : none
+    
+}
+.flex-center{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 1024px) {
+    main {
+        padding: 3% 8%;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h4,
+    .h4 {
+        font-size: calc(1.1rem + 0.3vw);
+    }
+
+    .card-tri {
+        gap: 10px;
+        row-gap: 20px;
+    }
+
+    .flex-auto {
+        margin-top: 10px;
+    }
+}
+
+/* Pour les téléphones (jusqu’à 767px) */
+@media (max-width: 767px) {
+    main {
+        padding: 2% 5%;
+                font-size: 10px;
+
+    }
+
+    section.mb-4 {
+    font-size: 9px;
+    text-align: left;
+} 
+h3, .h3 {
+    font-size: calc(0.8rem + 0.6vw);
+}
+
+    h1 {
+        font-size: 1.2rem;
+    }
+h2, .h2 {
+    font-size: calc(0.8rem + 0.9vw);
+} h4,
+    .h4 {
+        font-size: 1rem;
+        margin-top: 15px;
+    }
+
+    .card-tri {
+        flex-direction: column;
+        gap: 10px;
+        row-gap: 15px;
+    }
+
+    .flex-auto {
+        margin-top: 8px;
+    }
+
+    .separator {
+        height: 1px;
+    }
+
+    h5, .h5 {
+    font-size: 0.7rem;
+}
 }
