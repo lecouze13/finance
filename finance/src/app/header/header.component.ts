@@ -76,7 +76,7 @@ export class HeaderComponent implements OnInit {
             route:  AppRoutes.INTERET_COMPOSE
           },
           {
-            label: 'Calculateur d’impôt sur le revenu',
+            label: "Simulateur d'impôt sur le revenu",
             route:  AppRoutes.IMPOT_REVENUE
           },
           
