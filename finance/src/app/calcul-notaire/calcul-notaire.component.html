@@ -100,11 +100,15 @@
     <div class="separator"></div><br>
   
     <div class="card-tri">
+          <div class="flex-auto">
+
       <p-floatLabel class="input-label">
         <p-inputNumber [(ngModel)]="valeurs['Prix du bien']" inputId="prixBien" required />
         <label for="prixBien">Prix du bien</label>
       </p-floatLabel>
-  
+   </div>
+             <div class="flex-auto">
+
       <p-floatLabel class="input-label">
         <p-dropdown 
           inputId="typeBien"
@@ -115,7 +119,7 @@
         </p-dropdown>
         <label for="typeBien">Type de bien</label>
       </p-floatLabel>
-  
+  </div>
       <button type="button" pButton icon="pi pi-check" class="p-button-success"
         (click)="calculerFrais()" 
         [disabled]="!valeurs['Prix du bien'] || !valeurs['Type de bien']">
@@ -125,8 +129,8 @@
     <div *ngIf="resultat !== null">
       <h4>Frais de notaire estimés : {{ resultat | currency:'EUR' }}</h4>
     </div>
-  </main>
   
+  <br><br>
   <div class="separator"></div><br>
 
 
@@ -211,3 +215,4 @@
         </div>
       </div>
   </section>
+  </main>
