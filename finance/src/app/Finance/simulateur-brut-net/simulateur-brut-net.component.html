@@ -1,1 +1,105 @@
-<p>simulateur-brut-net works!</p>
+<main>
+  <h1>Simulateur de Conversion Salaire Brut / Net – </h1>
+  <br>
+  <div class="separator"></div><br>
+
+  <div class="card p-fluid flex flex-wrap gap-4">
+    <div class="flex-auto">
+      <p-dropdown
+        [options]="typeSalaire"
+        [(ngModel)]="salaireChoisi"
+        placeholder="Type de salaire"
+      ></p-dropdown>
+    </div>
+
+    <div class="flex-auto">
+      <p-floatLabel>
+        <p-inputNumber
+          inputId="salaire"
+          [(ngModel)]="valeurSalaire"
+          mode="currency"
+          currency="EUR"
+          [minFractionDigits]="0"
+        />
+        <label for="salaire">Montant</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="flex-auto">
+      <p-dropdown
+        [options]="typeContrat"
+        [(ngModel)]="contrat"
+        placeholder="Statut (cadre, non-cadre, etc.)"
+      ></p-dropdown>
+    </div>
+
+    <div class="flex-auto">
+      <p-inputNumber
+        [(ngModel)]="tempsTravail"
+        suffix="%"
+        [min]="10"
+        [max]="100"
+      />
+      <label>Temps de travail</label>
+    </div>
+
+
+    <div class="flex-auto">
+      <button pButton  icon="pi pi-check" (click)="calculerConversion()" class="p-button-success"></button>
+    </div>
+  </div>
+
+  <br><br>
+ <div *ngIf="resultat" class="resultats">
+  <h3>Résultats détaillés</h3>
+  <ul>
+    <li><strong>Salaire Brut Mensuel :</strong> {{ salaireBrutMensuel }} €</li>
+    <li><strong>Salaire Net Mensuel :</strong> {{ salaireNetMensuel }} €</li>
+    <li><strong>Salaire Brut Annuel :</strong> {{ salaireBrutAnnuel }} €</li>
+    <li><strong>Salaire Net Annuel :</strong> {{ salaireNetAnnuel }} €</li>
+    <li><strong>Charges Mensuelles :</strong> {{ chargesMensuelles }} €</li>
+    <li><strong>Charges Annuelles :</strong> {{ chargesAnnuelles }} €</li>
+  </ul>
+  <div *ngIf="estSmic" class="info-smic">
+    ⚠️ Attention, le salaire brut est proche du SMIC.
+  </div>
+</div>
+    <br>  <br>  <div class="separator"></div><br>
+
+<br>
+<section class="faq-section">
+  <h2>Questions fréquentes sur la conversion brut-net</h2>
+  <dl>
+    <dt>Comment passer du salaire brut au salaire net ?</dt>
+    <dd>Pour passer du salaire brut au salaire net, on soustrait les charges sociales salariales qui représentent environ 22% à 25% du brut selon le statut. La formule simple est : Salaire Net ≈ Salaire Brut × (1 - taux de charges).</dd>
+
+    <dt>Quelle est la formule de conversion brut-net ?</dt>
+    <dd>La formule dépend du taux de charges sociales qui varie selon le secteur et le statut. En général, on applique un coefficient multiplicateur entre 0,70 et 0,85 au salaire brut pour obtenir le net.</dd>
+
+    <dt>Dans quoi passent les charges sociales ?</dt>
+    <dd>Les charges sociales servent à financer la sécurité sociale, la retraite, l'assurance chômage, les allocations familiales et la santé publique.</dd>
+
+    <dt>Quelles sont les taxes pour les différentes professions ?</dt>
+    <dd>Les taux de charges sociales varient selon le statut : cadre privé (~25%), non-cadre (~23%), fonction publique (~15%), professions libérales (~30%) avec des régimes spécifiques.</dd>
+
+    <dt>Que faire des impôts sur le revenu ?</dt>
+    <dd>Les impôts ne sont pas inclus ici. Utilisez notre <a href="https://calculateurfinance.fr/simulateur-impot-revenue" target="_blank" rel="noopener noreferrer">simulateur d'impôt sur le revenu</a>.</dd>
+
+    <dt>Quelle différence entre brut et net pour un indépendant ?</dt>
+    <dd>Les indépendants (micro-entrepreneurs, professions libérales) doivent eux-mêmes payer leurs cotisations sociales. Le revenu net est donc obtenu après déduction de ces charges (~22% à ~45%).</dd>
+
+    <dt>Le salaire net affiché est-il avant ou après impôt ?</dt>
+    <dd>Le salaire net mentionné ici est avant impôt (net avant prélèvement à la source).</dd>
+
+    <dt>Comment est calculé le SMIC net ?</dt>
+    <dd>Le SMIC brut est fixé par l’État. En 2025, il est d’environ 1794 € brut mensuel, soit environ 1400–1420 € net.</dd>
+
+    <dt>Un temps partiel influence-t-il le net ?</dt>
+    <dd>Oui, un temps partiel réduit le salaire brut et donc le net en proportion. Le simulateur ajuste selon votre pourcentage de temps de travail.</dd>
+
+    <dt>Existe-t-il des charges réduites pour certains statuts ?</dt>
+    <dd>Oui, certains régimes comme les apprentis, stagiaires ou zones franches peuvent bénéficier d’allègements de charges.</dd>
+  </dl>
+</section>
+
+</main>

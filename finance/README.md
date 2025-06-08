@@ -3,35 +3,29 @@
 Corriger les routes sur le page d'acceuil
  pouvori naviquer sur al lignedela calculatrice quand trop de nombre sont écrits
   faire une mise en formecorrecte poru téléphone 
-  
-💰 Finance personnelle
-Simulateur de budget mensuel (revenus, charges fixes, épargne, reste à vivre).
+  Ajouté l'icone au header 
+  corrige les json-od dans le script
 
-Simulateur d’épargne avec intérêts composés (projection sur plusieurs années).
 
-Calculateur de taux d’endettement.
 
-Simulateur de retraite (simplifié) basé sur âge, revenus, trimestres validés.
 
-Convertisseur brut/net/smic (prenant en compte charges sociales, statut cadre, etc.).
 
-🏡 Immobilier
-Simulateur de rentabilité locative (brute, nette, nette-nette, après impôt).
 
-Simulateur de plus-value immobilière (RP vs secondaire, durée détention, abattements).
 
-Simulateur de frais de notaire (ancien vs neuf, estimatif détaillé).
 
-Simulateur LMNP réel vs micro-BIC (choix du meilleur régime).
+
+
+
+
+
+
 
 Comparateur SCI à l’IR vs IS.
 
 📊 Impôts & fiscalité
 Simulateur de déclaration de revenus fonciers (micro-foncier vs régime réel).
 
-Calculateur d’impôt sur les plus-values mobilières (actions, crypto, etc.).
 
-Simulateur de prélèvement à la source (revenu 2025, taux personnalisé vs neutre).
 
 Simulateur IFI (impôt sur la fortune immobilière).
 

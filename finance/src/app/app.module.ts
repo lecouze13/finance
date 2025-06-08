@@ -47,6 +47,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { AppRoutingModule } from './app.routes';
 import { BudgetGraphesComponent } from './Finance/budget-graphes/budget-graphes.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { SimulateurBrutNetComponent } from './Finance/simulateur-brut-net/simulateur-brut-net.component';
 
 @NgModule({
     declarations: [
@@ -68,6 +69,7 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
         SimulateurPrimeActiviteComponent,
         BudgetComponent,
     BudgetGraphesComponent,
+    SimulateurBrutNetComponent
     ],
     imports: [
     BrowserModule,
@@ -87,7 +89,8 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
     TooltipModule,
     ChartModule,
 BrowserAnimationsModule,
-NoopAnimationsModule
+NoopAnimationsModule,
+
 ],
     providers: [],
     bootstrap: [AppComponent]

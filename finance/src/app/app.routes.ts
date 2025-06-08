@@ -15,6 +15,12 @@ import { AppRoutes } from './Model/pathName.model';
 import { CalculatriceComponent } from './Outils/calculatrice/calculatrice.component';
 import { ImpotsRevenueComponent } from './Finance/impots-revenue/impots-revenue.component';
 import { SimulateurPrimeActiviteComponent } from './Finance/simulateur-prime-activite/simulateur-prime-activite.component';
+import { SimulateurBrutNetComponent } from './Finance/simulateur-brut-net/simulateur-brut-net.component';
+import { SimulateurImpotFortuneImmobiliereComponent } from './Finance/simulateur-impot-fortune-immobiliere/simulateur-impot-fortune-immobiliere.component';
+import { SimulateurIndependaceFinanciereComponent } from './Finance/simulateur-independace-financiere/simulateur-independace-financiere.component';
+import { SimulateurRetraiteComponent } from './Finance/simulateur-retraite/simulateur-retraite.component';
+import { SimulateurPlusValueImmobiliereComponent } from './Immobilier/simulateur-plus-value-immobiliere/simulateur-plus-value-immobiliere.component';
+import { ComparateurSciIrIsComponent } from './Immobilier/comparateur-sci-ir-is/comparateur-sci-ir-is.component';
 
 export const routes: Routes = [
     { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -30,7 +36,15 @@ export const routes: Routes = [
     { path: AppRoutes.LMNP_LMP, component: LmnpLmpComponent },
     // { path: AppRoutes.CALCULATRICE, component: CalculatriceComponent },
     { path: AppRoutes.IMPOT_REVENUE, component: ImpotsRevenueComponent },
-    { path: AppRoutes.PRIME_ACTIVITE, component: SimulateurPrimeActiviteComponent },
+    // { path: AppRoutes.PRIME_ACTIVITE, component: SimulateurPrimeActiviteComponent },
+    { path: AppRoutes.CONVERTISSEUR_BRUT_NET, component: SimulateurBrutNetComponent },
+    { path: AppRoutes.IMPOT_FORTUNE_IMMOBILIERE, component: SimulateurImpotFortuneImmobiliereComponent },
+    { path: AppRoutes.INDEPENDANCE_FINANCIERE, component: SimulateurIndependaceFinanciereComponent },
+    { path: AppRoutes.RETRAITE, component: SimulateurRetraiteComponent },
+    { path: AppRoutes.SCI_VS_IR, component: ComparateurSciIrIsComponent },
+    { path: AppRoutes.PLUS_VALUE_IMMOBILIERE, component: SimulateurPlusValueImmobiliereComponent },
+
+   
     { path: '**', redirectTo: '', pathMatch: 'full' }
 
 
