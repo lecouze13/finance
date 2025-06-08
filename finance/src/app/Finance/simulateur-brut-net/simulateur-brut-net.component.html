@@ -22,7 +22,8 @@
           [minFractionDigits]="0"
         />
         <label for="salaire">Montant</label>
-      </p-floatLabel>
+                    </p-floatLabel>
+
     </div>
 
     <div class="flex-auto">
@@ -31,16 +32,22 @@
         [(ngModel)]="contrat"
         placeholder="Statut (cadre, non-cadre, etc.)"
       ></p-dropdown>
+      
     </div>
 
     <div class="flex-auto">
+            <p-floatLabel>
+
       <p-inputNumber
         [(ngModel)]="tempsTravail"
         suffix="%"
         [min]="10"
         [max]="100"
+        inputId="travail"
       />
-      <label>Temps de travail</label>
+      <label for="travail">Temps de travail</label>
+            </p-floatLabel>
+
     </div>
 
 

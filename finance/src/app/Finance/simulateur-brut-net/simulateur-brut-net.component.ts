@@ -95,6 +95,8 @@ export class SimulateurBrutNetComponent implements OnInit {
         }
       ]
     };
+        this.renderer.appendChild(document.head, jsonLd);
+
   }
     
   typeSalaire = [
