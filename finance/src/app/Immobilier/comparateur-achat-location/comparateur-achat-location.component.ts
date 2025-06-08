@@ -195,4 +195,58 @@ export class ComparateurAchatLocationComponent {
 
     return capital - capitalRestant;
   }
+
+
+  ngOnInit() {
+  const isSmallScreen = window.innerWidth <= 400;
+
+  this.chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: isSmallScreen ? 'bottom' : 'top',
+        labels: {
+          font: {
+            size: isSmallScreen ? 10 : 12
+          }
+        }
+      },
+      title: {
+        display: true,
+        text: 'Comparatif Patrimoine Net Achat vs Location + Investissement',
+        font: {
+          size: isSmallScreen ? 12 : 16
+        }
+      },
+      tooltip: {
+        enabled: true,
+        callbacks: {
+          label: (context: any) => {
+            return `${context.dataset.label}: ${context.parsed.y.toLocaleString('fr-FR')} €`;
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          callback: (value: number) => value.toLocaleString('fr-FR') + ' €',
+          font: {
+            size: isSmallScreen ? 10 : 12
+          }
+        }
+      },
+      x: {
+        ticks: {
+          font: {
+            size: isSmallScreen ? 10 : 12
+          }
+        }
+      }
+    }
+  };
+}
+
 }

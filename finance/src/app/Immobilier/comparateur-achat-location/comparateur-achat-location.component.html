@@ -50,8 +50,8 @@
     <h1>Comparateur Achat vs Location</h1>
   
     <div class="separator"></div><br>
-    <div class="card-comparateur">
-        <div *ngFor="let champ of champs">
+    <div class="card-tri">
+        <div *ngFor="let champ of champs" class="flex-auto">
           <p-floatLabel class="input-label">
             <p-inputNumber
             [(ngModel)]="valeurs[champ]"
@@ -91,7 +91,7 @@
         [options]="chartOptions"
         style="width: 100%; max-width: 800px; margin-top: 2rem;"
       ></p-chart>
-  </main>
+
 
 
 
@@ -186,3 +186,4 @@
     </article>
   
   </section>
+    </main>

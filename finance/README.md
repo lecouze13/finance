@@ -1,5 +1,9 @@
 
-
+# To do
+Corriger les routes sur le page d'acceuil
+ pouvori naviquer sur al lignedela calculatrice quand trop de nombre sont écrits
+  faire une mise en formecorrecte poru téléphone 
+  
 💰 Finance personnelle
 Simulateur de budget mensuel (revenus, charges fixes, épargne, reste à vivre).
 
