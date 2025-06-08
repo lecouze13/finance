@@ -1,0 +1,9 @@
+# Autoriser tous les robots à explorer le site
+User-agent: *
+Disallow:
+
+# Si vous souhaitez bloquer une page spécifique, décommentez la ligne ci-dessous
+# Disallow: /private-page
+
+# Pour empêcher l'exploration de tout le dossier /admin
+# Disallow: /admin/
