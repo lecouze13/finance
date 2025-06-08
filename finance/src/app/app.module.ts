@@ -40,6 +40,7 @@ import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
+import { CheckboxModule } from 'primeng/checkbox';
 
 
 
@@ -48,6 +49,9 @@ import { AppRoutingModule } from './app.routes';
 import { BudgetGraphesComponent } from './Finance/budget-graphes/budget-graphes.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SimulateurBrutNetComponent } from './Finance/simulateur-brut-net/simulateur-brut-net.component';
+import { ComparateurSciIrIsComponent } from './Immobilier/comparateur-sci-ir-is/comparateur-sci-ir-is.component';
+import { SimulateurPlusValueImmobiliereComponent } from './Immobilier/simulateur-plus-value-immobiliere/simulateur-plus-value-immobiliere.component';
+import { ReactiveFormsModule } from '@angular/forms'; // Optionnel mais souvent utile
 
 @NgModule({
     declarations: [
@@ -68,30 +72,33 @@ import { SimulateurBrutNetComponent } from './Finance/simulateur-brut-net/simula
         ImpotsRevenueComponent,
         SimulateurPrimeActiviteComponent,
         BudgetComponent,
-    BudgetGraphesComponent,
-    SimulateurBrutNetComponent
+        BudgetGraphesComponent,
+        SimulateurBrutNetComponent,
+        ComparateurSciIrIsComponent,
+        SimulateurPlusValueImmobiliereComponent
     ],
     imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    InputTextModule,
-    InputNumberModule,
-    ButtonModule,
-    FloatLabelModule,
-    DropdownModule,
-    MenubarModule,
-    TableModule,
-    ToastModule,
-    RippleModule,
-    CommonModule,
-    TabViewModule,
-    TooltipModule,
-    ChartModule,
-BrowserAnimationsModule,
-NoopAnimationsModule,
-
-],
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        InputTextModule,
+        InputNumberModule,
+        ButtonModule,
+        FloatLabelModule,
+        DropdownModule,
+        MenubarModule,
+        TableModule,
+        ToastModule,
+        RippleModule,
+        CommonModule,
+        TabViewModule,
+        TooltipModule,
+        ChartModule,
+        CheckboxModule,
+        BrowserAnimationsModule,
+        NoopAnimationsModule,
+ReactiveFormsModule
+    ],
     providers: [],
     bootstrap: [AppComponent]
 })

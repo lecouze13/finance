@@ -1,1 +1,91 @@
-<p>comparateur-sci-ir-is works!</p>
+<main>
+<h1>Comparateur SCI à l’IR (Impôt sur le Revenu) vs SCI à l’IS (Impôt sur les Sociétés)</h1>
+    <br>
+  <div class="separator"></div><br>
+  <div class="card p-fluid flex flex-wrap gap-4">
+    <div class="flex-auto">
+      <p-floatLabel>
+        <p-inputNumber inputId="revenus" [(ngModel)]="revenus" mode="currency" currency="EUR" />
+        <label for="revenus">Revenus locatifs annuels</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="flex-auto">
+      <p-floatLabel>
+        <p-inputNumber inputId="charges" [(ngModel)]="charges" mode="currency" currency="EUR" />
+        <label for="charges">Charges déductibles annuelles</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="flex-auto">
+      <p-floatLabel>
+        <p-inputNumber inputId="amortissement" [(ngModel)]="amortissement" mode="currency" currency="EUR" />
+        <label for="amortissement">Amortissement annuel (IS)</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="flex-auto">
+      <p-floatLabel>
+        <p-inputNumber inputId="duree" [(ngModel)]="duree" suffix=" ans" />
+        <label for="duree">Durée de détention</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="flex-auto">
+      <p-floatLabel>
+        <p-inputNumber inputId="tauxIR" [(ngModel)]="tauxImpotIR" suffix="%" />
+        <label for="tauxIR">TMI (taux marginal IR)</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="flex-auto">
+      <button pButton  icon="pi pi-check" (click)="calculer()" class="p-button-success"></button>
+    </div>
+  </div>
+
+  <div *ngIf="resultat" class="resultats">
+    <h3>Résultats de la comparaison</h3>
+    <ul>
+      <li><strong>Impôt total sur 10 ans (SCI à l’IR) :</strong> {{ totalIR | number }} €</li>
+      <li><strong>Impôt total sur 10 ans (SCI à l’IS) :</strong> {{ totalIS | number }} €</li>
+      <li><strong>Gain de la SCI à l’IS :</strong> {{ gainISvsIR | number }} €</li>
+    </ul>
+  </div>
+    <br>  <br>  <div class="separator"></div><br>
+
+<section class="faq-section">
+  <h2>Questions fréquentes sur la SCI à l’IR et à l’IS</h2>
+  <dl>
+    <dt>Quelle est la différence entre SCI à l’IR et SCI à l’IS ?</dt>
+    <dd>La SCI à l’IR est fiscalement transparente : les revenus sont imposés au nom des associés. La SCI à l’IS paie l’impôt sur les sociétés elle-même, et les associés sont imposés sur les dividendes.</dd>
+
+    <dt>Quels sont les avantages de la SCI à l’IS ?</dt>
+    <dd>La SCI à l’IS permet d’amortir le bien immobilier, ce qui réduit fortement le bénéfice imposable. Elle est souvent avantageuse à court terme.</dd>
+
+    <dt>Quels sont les inconvénients de la SCI à l’IS ?</dt>
+    <dd>La plus-value à la revente est généralement plus fortement imposée et les dividendes sont soumis à la flat tax. Le régime est plus complexe à gérer.</dd>
+
+    <dt>Quels sont les taux d’imposition en SCI à l’IR ?</dt>
+    <dd>Les revenus sont imposés selon le barème progressif de l’impôt sur le revenu + 17,2% de prélèvements sociaux. Le taux peut atteindre plus de 45%.</dd>
+
+    <dt>Quels sont les taux en SCI à l’IS ?</dt>
+    <dd>L’IS est de 15% jusqu’à 42 500 € de bénéfices, puis 25% au-delà. Les dividendes sont ensuite imposés à 30% (flat tax).</dd>
+
+    <dt>Peut-on amortir un bien en SCI à l’IR ?</dt>
+    <dd>Non. L’amortissement comptable n’est autorisé qu’en SCI à l’IS.</dd>
+
+    <dt>Comment est calculée la plus-value en SCI à l’IR ?</dt>
+    <dd>Elle bénéficie d’un abattement progressif selon la durée de détention : exonération après 22 ans (IR) et 30 ans (prélèvements sociaux).</dd>
+
+    <dt>Peut-on changer de régime fiscal après création ?</dt>
+    <dd>Oui, passer de l’IR vers l’IS est possible mais irréversible. Le changement entraîne une cessation d’activité fiscale avec conséquences.</dd>
+
+    <dt>Lequel est plus adapté à la location meublée ?</dt>
+    <dd>La SCI à l’IR est déconseillée en meublé, car cela devient une activité commerciale. La SCI à l’IS est plus adaptée dans ce cas.</dd>
+
+    <dt>Quel régime est préférable pour un investissement long terme ?</dt>
+    <dd>La SCI à l’IR est souvent plus avantageuse sur le long terme grâce à l’exonération progressive de la plus-value immobilière.</dd>
+  </dl>
+</section>
+
+</main>
