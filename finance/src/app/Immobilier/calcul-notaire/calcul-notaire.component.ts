@@ -18,7 +18,7 @@ export class CalculNotaireComponent {
   calculerFrais() {
     const prix = this.valeurs['Prix du bien'];
     const type = this.valeurs['Type de bien'];
-    const taux = type .value=== 'ancien' ? 0.08 : 0.03;
+    const taux = type === 'ancien' ? 0.08 : 0.03;
     this.resultat = prix * taux;
   }
 
