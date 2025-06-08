@@ -1,0 +1,41 @@
+<main>
+  <h1>Simulateur de Prime d'Activité 2025 - Estimation complète</h1>
+  <br>
+  <div class="separator"></div><br>
+
+  <div class="card flex flex-column gap-4 p-fluid">
+    <p-floatLabel>
+      <p-inputNumber inputId="revenus" [(ngModel)]="revenusMensuels" mode="currency" currency="EUR" />
+      <label for="revenus">Revenus mensuels nets</label>
+    </p-floatLabel>
+
+    <p-floatLabel>
+      <p-inputNumber inputId="autres" [(ngModel)]="autresRevenus" mode="currency" currency="EUR" />
+      <label for="autres">Autres revenus mensuels (pensions, etc.)</label>
+    </p-floatLabel>
+
+    <p-floatLabel>
+      <p-dropdown inputId="statut" [options]="statuts" [(ngModel)]="statut" placeholder="Statut familial" />
+      <label for="statut">Statut</label>
+    </p-floatLabel>
+
+    <p-floatLabel>
+      <p-inputNumber inputId="enfants" [(ngModel)]="nombreEnfants" [min]="0" />
+      <label for="enfants">Nombre d'enfants à charge</label>
+    </p-floatLabel>
+
+    <p-floatLabel>
+      <p-inputNumber inputId="loyer" [(ngModel)]="loyerOuAide" mode="currency" currency="EUR" />
+      <label for="loyer">Loyer ou aide au logement</label>
+    </p-floatLabel>
+
+    <button type="button" pButton icon="pi pi-check" label="Calculer" (click)="calculerPrime()"
+      [disabled]="!statut || revenusMensuels < 0">
+    </button>
+  </div>
+
+  <div *ngIf="resultatVisible" class="resultat mt-4">
+    <h3>Résultat</h3>
+    <p>Prime d'activité estimée : <strong>{{ prime | currency:'EUR' }}</strong> / mois</p>
+  </div>
+</main>

@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RendementComponent } from './rendement/rendement.component'; // Assure-toi d'importer ton composant
-import { BudgetComponent } from './budget/budget.component'; // Assure-toi d'importer ton composant
-import { InvestissementComponent } from './investissement/investissement.component'; // Assure-toi d'importer ton composant
-import { CashflowComponent } from './cashflow/cashflow.component';
-import { MainComponent } from './main/main.component';
-import { TauxEmpruntComponent } from './taux-emprunt/taux-emprunt.component';
-import { TriImmoComponent } from './tri-immo/tri-immo.component';
-import { ComparateurAchatLocationComponent } from './comparateur-achat-location/comparateur-achat-location.component';
-import { CalculNotaireComponent } from './calcul-notaire/calcul-notaire.component';
-import { IntererComposerComponent } from './interer-composer/interer-composer.component';
-import { LmnpLmpComponent } from './lmnp-lmp/lmnp-lmp.component';
-import { AppRoutes } from './pathName.model';
-import { CalculatriceComponent } from './calculatrice/calculatrice.component';
-import { ImpotsRevenueComponent } from './impots-revenue/impots-revenue.component';
+import { RendementComponent } from './Immobilier/rendement/rendement.component'; // Assure-toi d'importer ton composant
+import { BudgetComponent } from './Finance/budget/budget.component'; // Assure-toi d'importer ton composant
+import { InvestissementComponent } from './Finance/investissement/investissement.component'; // Assure-toi d'importer ton composant
+import { CashflowComponent } from './Immobilier/cashflow/cashflow.component';
+import { MainComponent } from './Constructor/main/main.component';
+import { TauxEmpruntComponent } from './Immobilier/taux-emprunt/taux-emprunt.component';
+import { TriImmoComponent } from './Immobilier/tri-immo/tri-immo.component';
+import { ComparateurAchatLocationComponent } from './Immobilier/comparateur-achat-location/comparateur-achat-location.component';
+import { CalculNotaireComponent } from './Immobilier/calcul-notaire/calcul-notaire.component';
+import { IntererComposerComponent } from './Finance/interer-composer/interer-composer.component';
+import { LmnpLmpComponent } from './Immobilier/lmnp-lmp/lmnp-lmp.component';
+import { AppRoutes } from './Model/pathName.model';
+import { CalculatriceComponent } from './Outils/calculatrice/calculatrice.component';
+import { ImpotsRevenueComponent } from './Finance/impots-revenue/impots-revenue.component';
+import { SimulateurPrimeActiviteComponent } from './Finance/simulateur-prime-activite/simulateur-prime-activite.component';
 
 export const routes: Routes = [
     { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -29,6 +30,9 @@ export const routes: Routes = [
     { path: AppRoutes.LMNP_LMP, component: LmnpLmpComponent },
     // { path: AppRoutes.CALCULATRICE, component: CalculatriceComponent },
     { path: AppRoutes.IMPOT_REVENUE, component: ImpotsRevenueComponent },
+    { path: AppRoutes.PRIME_ACTIVITE, component: SimulateurPrimeActiviteComponent },
+    { path: '**', redirectTo: '', pathMatch: 'full' }
+
 
 ];
 
