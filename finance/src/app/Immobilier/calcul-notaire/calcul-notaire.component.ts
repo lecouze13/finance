@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-calcul-notaire',
   templateUrl: './calcul-notaire.component.html',
-  styleUrl: './calcul-notaire.component.scss'
+  styleUrls: ['./calcul-notaire.component.scss']
 })
 export class CalculNotaireComponent {
   valeurs: { [key: string]: any } = {};
@@ -18,7 +18,6 @@ export class CalculNotaireComponent {
   calculerFrais() {
     const prix = this.valeurs['Prix du bien'];
     const type = this.valeurs['Type de bien'];
-console.log(type)
     const taux = type .value=== 'ancien' ? 0.08 : 0.03;
     this.resultat = prix * taux;
   }
