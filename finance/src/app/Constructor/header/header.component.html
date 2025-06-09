@@ -1,6 +1,8 @@
 <div class="cardHeader">
+    
     <p-menubar [model]="items">
-     
+         <!-- <img src="../../../assets/image.webp" class="img-logo"> -->
+
 
         <ng-template pTemplate="item" let-item>
             <ng-container *ngIf="item.route; else urlRef">

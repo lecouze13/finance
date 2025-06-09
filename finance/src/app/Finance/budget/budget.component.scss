@@ -45,8 +45,7 @@ h1 {
     flex-direction: row;
     background-color: white;
     --mdb-card-box-shadow : none;
-    width: 400px;
-    row-gap: 30px;
+    max-width: 600px;    row-gap: 30px;
 }
 main{
 padding: 3% 15%;
