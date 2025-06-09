@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
+import { SeoService } from '../../Constructor/service/seo.service';
 
 
 interface Actif {
@@ -15,9 +16,112 @@ interface Actif {
   templateUrl: './interer-composer.component.html',
   styleUrls: ['./interer-composer.component.scss']
 })
-export class IntererComposerComponent {
+export class IntererComposerComponent implements OnInit {
+  constructor(private renderer: Renderer2, private seo: SeoService) { }
+
+  ngOnInit(): void {
+
+    this.seo.updateMetaData({
+      title: 'Simulateur intérêt composé 2025 | CalculateurFinance.fr',
+      description: 'Calculez la croissance de votre capital avec l’intérêt composé grâce à notre simulateur simple et gratuit. Prenez en compte capital initial, versements, taux et durée.',
+      url: 'https://www.calculateurfinance.fr/simulateur-interet-compose',
+      // image: 'https://www.calculateurfinance.fr/assets/simulateur-interet-compose-preview.png'
+    });
+
+    const script = this.renderer.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Qu’est-ce que l’intérêt composé ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "L’intérêt composé est le calcul des intérêts non seulement sur le capital initial mais aussi sur les intérêts déjà accumulés. Cela permet à votre capital de croître plus rapidement avec le temps."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment fonctionne ce calculateur ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ce calculateur vous permet d’estimer la croissance de votre capital en fonction d’un capital initial, de versements périodiques, d’un taux d’intérêt annuel, d’une durée et de la fréquence de capitalisation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quelle est la différence entre capitalisation annuelle et mensuelle ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La capitalisation annuelle signifie que les intérêts sont ajoutés une fois par an, tandis que la capitalisation mensuelle les ajoute chaque mois, ce qui accélère la croissance du capital."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Puis-je entrer un versement périodique nul ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, si vous ne faites pas de versements réguliers, entrez zéro. Le calcul se fera uniquement sur le capital initial et les intérêts composés."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Le taux d’intérêt est-il fixe ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ce calculateur utilise un taux fixe pour simplifier les calculs. Dans la réalité, les taux peuvent varier au fil du temps."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quels sont les avantages de l’intérêt composé ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "L’intérêt composé maximise la croissance du capital sur le long terme, permettant de bénéficier de l’effet boule de neige des intérêts générés."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Peut-on retirer de l’argent pendant la période de calcul ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non, ce calculateur suppose que le capital reste investi sans retrait pendant toute la durée indiquée."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quels paramètres influencent le résultat ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le capital initial, les versements périodiques, le taux d’intérêt, la fréquence de capitalisation et la durée sont les principaux paramètres."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Le calcul prend-il en compte l’inflation ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non, ce calculateur ne prend pas en compte l’inflation. Il estime la croissance nominale du capital."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Est-il possible d’exporter les résultats ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Actuellement, ce simulateur ne propose pas d’export, mais vous pouvez copier manuellement les résultats affichés."
+          }
+        }
+      ]
+    });
+    this.renderer.appendChild(document.head, script);
+  }
+
+
   champs = [
-    { key: 'nom', label: 'Nom'},
+    { key: 'nom', label: 'Nom' },
     { key: 'capitalInitial', label: 'Capital initial (€)', min: 0, step: 100 },
     { key: 'versementPeriodique', label: 'Versement périodique mensuel (€)', min: 0, step: 50 },
     { key: 'tauxAnnuel', label: 'Taux d’intérêt annuel (%)', min: 0, max: 100, step: 0.01, minFractionDigits: 2, maxFractionDigits: 2 },
@@ -85,7 +189,7 @@ export class IntererComposerComponent {
       }
     }
   };
-  
+
   ajouterActif() {
     this.actifs.push({
       nom: '',
@@ -138,11 +242,11 @@ export class IntererComposerComponent {
     const totalSansInterets = new Array(dureeMax + 1).fill(0);
 
     for (let m = 0; m <= dureeMax; m++) {
-        const annee = Math.floor(m / 12);
-        const mois = (m % 12) + 1;
-        labels.push(`Année ${annee + 1} - Mois ${mois}`);
-      } 
-    
+      const annee = Math.floor(m / 12);
+      const mois = (m % 12) + 1;
+      labels.push(`Année ${annee + 1} - Mois ${mois}`);
+    }
+
 
     this.actifs.forEach((actif, idx) => {
       const r = (actif.tauxAnnuel ?? 0) / 100 / 12;

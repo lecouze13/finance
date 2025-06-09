@@ -1,4 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
+import { SeoService } from '../../Constructor/service/seo.service';
 
 @Component({
   selector: 'app-simulateur-brut-net',
@@ -7,9 +8,19 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 })
 export class SimulateurBrutNetComponent implements OnInit {
 
-  constructor(private renderer: Renderer2) {}
- ngOnInit() {
-    const jsonLd = {
+  constructor(private renderer: Renderer2, private seo: SeoService) { }
+  ngOnInit() {
+
+    this.seo.updateMetaData({
+      title: 'Simulateur Brut-Net 2025 | CalculateurFinance.fr',
+      description: 'Calculez rapidement la conversion entre salaire brut et net avec notre simulateur simple et gratuit. Adapté aux dernières règles fiscales 2025.',
+      url: 'https://www.calculateurfinance.fr/simulateur-brut-net',
+      // image: 'https://www.calculateurfinance.fr/assets/simulateur-brut-net-preview.png'
+    });
+
+    const script = this.renderer.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
@@ -94,11 +105,12 @@ export class SimulateurBrutNetComponent implements OnInit {
           }
         }
       ]
-    };
-        this.renderer.appendChild(document.head, jsonLd);
+    })
+
+    this.renderer.appendChild(document.head, script);
 
   }
-    
+
   typeSalaire = [
     { label: 'Salaire Brut annuel', value: 'brutAnnuel' },
     { label: 'Salaire Brut mensuel', value: 'brutMensuel' },
@@ -191,7 +203,5 @@ export class SimulateurBrutNetComponent implements OnInit {
     }
   }
 }
-  function ngOnInit() {
-    throw new Error('Function not implemented.');
-  }
+
 

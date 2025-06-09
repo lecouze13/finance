@@ -1,4 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
+import { SeoService } from '../../Constructor/service/seo.service';
 
 @Component({
   selector: 'app-simulateur-plus-value-immobiliere',
@@ -16,9 +17,16 @@ export class SimulateurPlusValueImmobiliereComponent implements OnInit {
   plusValue: number | null = null;
   impositionTotale: number | null = null;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2,private seo: SeoService) {}
 
   ngOnInit(): void {
+      this.seo.updateMetaData({
+      title: 'Simulateur plus-value immobilière 2025 | CalculateurFinance.fr',
+      description: 'Calculez facilement votre plus-value immobilière en fonction du prix d’achat, du prix de vente, et des abattements légaux. Outil gratuit et simple.',
+      url: 'https://www.calculateurfinance.fr/simulateur-plus-value-immobiliere',
+      // image: 'https://www.calculateurfinance.fr/assets/simulateur-plus-value-preview.png'
+    });
+
     const script = this.renderer.createElement('script');
     script.type = 'application/ld+json';
     script.text = JSON.stringify({

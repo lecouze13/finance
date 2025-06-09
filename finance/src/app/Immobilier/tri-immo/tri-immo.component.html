@@ -1,148 +1,61 @@
-<head>
-  <meta name="description" content="Calculez facilement le TRI (Taux de Rentabilité Interne) de votre investissement immobilier avec notre outil gratuit. Estimez la rentabilité globale incluant loyers et revente.">
-  <meta name="keywords" content="calcul TRI immobilier, taux de rentabilité interne, TRI investissement locatif, simulateur TRI immobilier, rentabilité globale immobilier, calcul rentabilité projet immobilier">
-  <meta name="robots" content="index, follow">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Calcul du TRI Immobilier : Taux de Rentabilité Interne</title>
-
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Qu'est-ce que le TRI (Taux de Rentabilité Interne) ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Le TRI est un indicateur de rentabilité qui mesure le rendement annuel moyen d’un investissement immobilier, en prenant en compte les revenus locatifs et le prix de revente du bien."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Comment se calcule le TRI ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Le TRI se calcule à partir des flux de trésorerie générés par l'investissement, incluant l'investissement initial, les revenus locatifs annuels et la valeur de revente. Il s’agit du taux qui annule la valeur actuelle nette (VAN) des flux."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Pourquoi calculer le TRI est-il important ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Le TRI permet de comparer plusieurs investissements immobiliers en prenant en compte l’ensemble des flux financiers, et d’évaluer leur rentabilité réelle à long terme."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Comment utiliser le simulateur de TRI ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Saisissez l’investissement initial, les revenus locatifs annuels nets, la valeur de revente prévue, ainsi que la durée de l’investissement. Le simulateur calcule automatiquement le TRI pour vous."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Quelle différence entre le TRI et le rendement locatif ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Le rendement locatif mesure uniquement la rentabilité via les loyers, alors que le TRI prend aussi en compte la revente du bien et les flux sur toute la durée de l’investissement."
-      }
-    }
-  ]
-}
-</script>
-</head>
 <main>
-    <h1>Calcul du TRI (Taux de Rentabilité Interne)</h1>
-  
-    <div class="separator"></div><br>
+  <h1>Calcul du TRI (Taux de Rentabilité Interne)</h1>
 
-<div class="card-tri">
-  <div *ngFor="let element of Element">
-    <p-floatLabel class="input-label">
-      <p-inputNumber [(ngModel)]="values[element]" inputId="{{element}}" required />
-      <label for="{{element}}">{{element}}</label>
-    </p-floatLabel>
-  </div>
+  <div class="separator"></div><br>
 
-  <button type="button" pButton  class="p-button-success" (click)="calculTRI()" [disabled]="
+  <div class="card-tri">
+    <div *ngFor="let element of Element">
+      <p-floatLabel class="input-label">
+        <p-inputNumber [(ngModel)]="values[element]" inputId="{{element}}" required />
+        <label for="{{element}}">{{element}}</label>
+      </p-floatLabel>
+    </div>
+
+    <button type="button" pButton class="p-button-success" (click)="calculTRI()" [disabled]="
       !( values['Investissement initial'] > 0 ) ||
       !( values['Revenus locatifs par an net'] != 0 ) ||
       !( values['Revente du bien'] > 0 ) ||
       !( values['Nombre d’années'] > 0 )">
-    Calculer TRI
-  </button>
-</div>
+      Calculer TRI
+    </button>
+  </div>
 
-<h4>TRI : {{ tri !== null ? (tri | percent) : 'N/A' }}</h4>
+  <h4>TRI : {{ tri !== null ? (tri | percent) : 'N/A' }}</h4>
 
 
-<br>    <div class="separator"></div><br>
+  <br>
+  <div class="separator"></div><br>
 
-  
-    <h2>Qu'est-ce que le TRI ?</h2>
-    <p>
-      Le TRI (Taux de Rentabilité Interne) est un indicateur financier clé utilisé pour mesurer la rentabilité d'un investissement immobilier sur la durée. Il permet de déterminer le taux de rentabilité qui rend la somme actualisée des flux de trésorerie égale à zéro. En d'autres termes, il s'agit du taux de rendement annuel moyen que l'investisseur peut attendre de son bien immobilier, en prenant en compte à la fois les revenus locatifs et la revente du bien.
-    </p>
-  
-  
-    <h2>Comment calculer le TRI ?</h2>
-    <p>
-      Le calcul du TRI repose sur l'estimation des flux de trésorerie futurs générés par l'investissement immobilier. Ces flux de trésorerie comprennent :
-    </p>
-    <ul>
-      <li><strong>L'investissement initial</strong> (flux de trésorerie négatif, à la date d'achat du bien),</li>
-      <li><strong>Les revenus locatifs</strong> générés chaque année pendant la durée de l'investissement,</li>
-      <li><strong>Le prix de revente</strong> du bien immobilier à la fin de la période d'investissement.</li>
-    </ul>
-  
-    <h3>Formule du calcul :</h3>
-    <pre>
-      VAN = 0 = Σ (Flux de trésorerie à la période t) / (1 + TRI)^t
-    </pre>
-    <p>
-      Cette formule indique que la valeur actuelle nette (VAN) des flux de trésorerie futurs doit être égale à zéro. Le calcul du TRI est donc la recherche du taux d'actualisation qui rend cette somme nulle.
-    </p>
-  
-    <h3>Exemple pratique :</h3>
-    <p>
-      Supposons un investissement immobilier avec les flux suivants :
-    </p>
-    <ul>
-      <li>Investissement initial : 200 000 € (flux négatif),</li>
-      <li>Revenus locatifs : 10 000 € par an pendant 4 ans,</li>
-      <li>Revente du bien après 4 ans : 250 000 €.</li>
-    </ul>
-    <p>
-      Le calcul du TRI consiste à trouver le taux \( TRI \) qui rend la somme des flux de trésorerie actualisés égale à zéro. En d'autres termes, nous devons résoudre l'équation suivante pour \( TRI \) :
-    </p>
-    <pre>
-      0 = -200 000 + 10 000 / (1 + TRI)^1 + 10 000 / (1 + TRI)^2 + 10 000 / (1 + TRI)^3 + (250 000) / (1 + TRI)^4
-    </pre>
-    <p>
-      Le TRI est donc le taux qui permet d'équilibrer ces flux de trésorerie. En utilisant une méthode numérique, comme la méthode de Newton-Raphson, on peut calculer ce taux.
-    </p>
-  
-    <div class="separator"></div><br>
-  
-    <h2>Pourquoi est-il important de calculer le TRI ?</h2>
-    <p>
-      Le TRI permet à un investisseur de comparer différents projets immobiliers en termes de rentabilité. En d'autres termes, il aide à évaluer quel projet générera le meilleur rendement sur la durée.
-    </p>
-    <p>
-      Le TRI tient compte non seulement des revenus générés par le bien immobilier, mais aussi de la valorisation du bien à la revente, ce qui en fait un indicateur plus complet que le simple rendement locatif. Il permet ainsi d'obtenir une vision plus précise de la rentabilité d'un investissement immobilier.
-    </p>
-  
-    <div class="separator"></div><br>
-  
-    <h2>Essayez de calculer votre TRI</h2>
-    <p>
-      Pour vous aider à estimer la rentabilité de votre investissement immobilier, utilisez notre calculateur de TRI ci-dessus. Entrez les informations relatives à votre bien immobilier (investissement initial, revenus locatifs, revente) et découvrez le TRI de votre projet.
-    </p>
-  
-    <p>
-      Le TRI vous aidera à déterminer si l'investissement est rentable et à comparer plusieurs projets entre eux pour prendre des décisions éclairées.
-    </p>
-  </main>
+  <section class="faq-section mt-5">
+    <h2>FAQ – Questions fréquentes sur le Taux de Rentabilité Interne (TRI) et l’investissement immobilier</h2>
+    <dl>
+      <dt>Qu’est-ce que le Taux de Rentabilité Interne (TRI) ?</dt>
+      <dd>Le TRI est le taux d’actualisation qui rend la valeur actuelle nette (VAN) d’un investissement égale à zéro.
+        Il permet d’évaluer la rentabilité globale d’un projet.</dd>
+
+      <dt>Comment interpréter le TRI ?</dt>
+      <dd>Un TRI élevé signifie un bon rendement. Si le TRI est supérieur au taux d’intérêt du marché ou au coût du
+        capital, l’investissement est considéré rentable.</dd>
+
+      <dt>Quelle est la formule du calcul du TRI ?</dt>
+      <dd>Le TRI est la solution de l’équation {{ '{' }} ∑<sub>t=0</sub><sup>n</sup> CF<sub>t</sub> / (1 +
+        TRI)<sup>t</sup> = 0 {{ '}' }}, où CF<sub>t</sub> sont les flux nets de trésorerie annuels.
+      </dd>
+
+      <dt>Comment calculer le TRI ?</dt>
+      <dd>Le calcul du TRI est itératif et généralement réalisé avec un logiciel financier ou un simulateur qui teste
+        plusieurs taux d’actualisation.</dd>
+
+      <dt>Quelle est la différence entre TRI brut et TRI net ?</dt>
+      <dd>Le TRI brut ne prend pas en compte les charges fiscales et les frais, tandis que le TRI net intègre ces
+        éléments pour refléter la rentabilité réelle.</dd>
+
+      <dt>Qu’est-ce que le cashflow net ?</dt>
+      <dd>Le cashflow net est la différence entre les revenus locatifs et les dépenses (charges, impôts, remboursements)
+        liées à l’investissement.</dd>
+
+      <dt>Quels sont les facteurs influençant le TRI ?</dt>
+      <dd>Le prix d’achat, les loyers perçus, les charges, les frais de notaire, la fiscalité, et
+    </dl>
+  </section>
+</main>

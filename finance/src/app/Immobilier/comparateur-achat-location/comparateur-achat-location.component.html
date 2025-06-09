@@ -1,189 +1,77 @@
-<head>
-    <meta name="description" content="Comparez facilement l'achat et la location d'un bien immobilier avec notre simulateur gratuit. Prenez une décision éclairée selon votre situation." />
-    <meta name="keywords" content="comparateur achat location, acheter ou louer, simulation achat immobilier, simulation location, investissement immobilier" />
-    <meta name="robots" content="index, follow" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Comparateur Achat vs Location - Simulation Immobilière</title>
-  
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Quand est-il préférable d'acheter plutôt que de louer ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Acheter est préférable si vous envisagez de rester plusieurs années dans le même logement, permettant de rentabiliser les frais d'achat et d'accumuler un patrimoine."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels sont les principaux critères pour choisir entre achat et location ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Les critères incluent la durée prévue d'habitation, votre capacité d'épargne, les frais annexes (notaire, entretien), ainsi que votre stabilité professionnelle et personnelle."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment fonctionne un comparateur achat vs location ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Le comparateur analyse les coûts liés à l'achat (crédit, taxes, entretien) et à la location (loyer, charges) sur une période donnée pour déterminer la solution la plus économique."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Ce simulateur est-il fiable ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Ce simulateur fournit une estimation basée sur les données saisies. Il est conseillé de consulter un professionnel pour une analyse personnalisée."
-          }
-        }
-      ]
-    }
-    </script>
-  </head>
-  <main>
-    <h1>Comparateur Achat vs Location</h1>
-  
-    <div class="separator"></div><br>
-    <div class="card-tri">
-        <div *ngFor="let champ of champs" class="flex-auto">
-          <p-floatLabel class="input-label">
-            <p-inputNumber
-            [(ngModel)]="valeurs[champ]"
-            inputId="{{ champ }}"
-            [mode]="estTaux(champ) ? 'decimal' : 'decimal'"
-            [locale]="estTaux(champ) ? 'fr-FR' : 'fr-FR'"
-            [minFractionDigits]="estTaux(champ) ? 2 : 0"
-            required>
-          </p-inputNumber>
-            <label for="{{ champ }}">{{ champ }}</label>
-          </p-floatLabel>
-      </div>
- 
-        <button
-          type="button"
-          pButton
-          class="p-button-primary"
-          (click)="comparer()"
-          [disabled]="!estValide()"
-        >
-          Comparer
-        </button>
-      </div>
-      
-      <div *ngIf="resultat">
-        <h4>Résultat :</h4>
-        <pre>{{ resultat }}</pre>
-      </div>
-      
-      <p-chart
-        *ngIf="afficherGraph"
-        type="line"
-        [data]="{
+<main>
+  <h1>Comparateur Achat vs Location</h1>
+
+  <div class="separator"></div><br>
+  <div class="card-tri">
+    <div *ngFor="let champ of champs" class="flex-auto">
+      <p-floatLabel class="input-label">
+        <p-inputNumber [(ngModel)]="valeurs[champ]" inputId="{{ champ }}"
+          [mode]="estTaux(champ) ? 'decimal' : 'decimal'" [locale]="estTaux(champ) ? 'fr-FR' : 'fr-FR'"
+          [minFractionDigits]="estTaux(champ) ? 2 : 0" required>
+        </p-inputNumber>
+        <label for="{{ champ }}">{{ champ }}</label>
+      </p-floatLabel>
+    </div>
+
+    <button type="button" pButton class="p-button-primary" (click)="comparer()" [disabled]="!estValide()">
+      Comparer
+    </button>
+  </div>
+
+  <div *ngIf="resultat">
+    <h4>Résultat :</h4>
+    <pre>{{ resultat }}</pre>
+  </div>
+
+  <p-chart *ngIf="afficherGraph" type="line" [data]="{
           labels: lineChartLabels,
           datasets: lineChartData
-        }"
-        [options]="chartOptions"
-        style="width: 100%; max-width: 800px; margin-top: 2rem;"
-      ></p-chart>
+        }" [options]="chartOptions" style="width: 100%; max-width: 800px; margin-top: 2rem;"></p-chart>
 
 
 
 
 
-  <br/>
+  <br />
   <div class="separator"></div><br>
+  <section class="faq-section mt-5">
+    <h2>FAQ – Questions fréquentes sur l’achat vs la location immobilière</h2>
+    <dl>
+      <dt>Quelles sont les principales différences entre acheter et louer ?</dt>
+      <dd>Acheter implique un investissement initial et un crédit, tandis que louer permet plus de flexibilité sans
+        engagement à long terme.</dd>
 
-  <section class="faq-section" aria-label="Foire aux questions">
+      <dt>Quels coûts faut-il prendre en compte lors de l’achat ?</dt>
+      <dd>Le prix du bien, les frais de notaire, les intérêts d’emprunt, les charges de copropriété, la taxe foncière et
+        l’entretien.</dd>
 
-    <article itemscope itemtype="https://schema.org/Question">
-      <h3 itemprop="name">Quand est-il préférable d'acheter plutôt que de louer ?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">Acheter est préférable si vous envisagez de rester plusieurs années dans le même logement, permettant de rentabiliser les frais d'achat et d'accumuler un patrimoine.</p>
-      </div>
-    </article>
-  
-    <article itemscope itemtype="https://schema.org/Question">
-      <h3 itemprop="name">Quels sont les principaux critères pour choisir entre achat et location ?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">Les critères incluent la durée prévue d'habitation, votre capacité d'épargne, les frais annexes (notaire, entretien), ainsi que votre stabilité professionnelle et personnelle.</p>
-      </div>
-    </article>
-  
-    <article itemscope itemtype="https://schema.org/Question">
-      <h3 itemprop="name">Comment fonctionne un comparateur achat vs location ?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">Le comparateur analyse les coûts liés à l'achat (crédit, taxes, entretien) et à la location (loyer, charges) sur une période donnée pour déterminer la solution la plus économique.</p>
-      </div>
-    </article>
-  
-    <article itemscope itemtype="https://schema.org/Question">
-      <h3 itemprop="name">Ce simulateur est-il fiable ?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">Ce simulateur fournit une estimation basée sur les données saisies. Il est conseillé de consulter un professionnel pour une analyse personnalisée.</p>
-      </div>
-    </article>
-  
-    <!-- Articles supplémentaires SEO -->
-  
-    <article itemscope itemtype="https://schema.org/Question">
-      <h3 itemprop="name">Quels sont les frais à prendre en compte lors de l'achat d'un bien immobilier ?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">Les frais comprennent les frais de notaire, les intérêts du prêt immobilier, les charges de copropriété, la taxe foncière, l'assurance habitation, et les coûts d'entretien.</p>
-      </div>
-    </article>
-  
-    <article itemscope itemtype="https://schema.org/Question">
-      <h3 itemprop="name">Comment calculer la mensualité d'un prêt immobilier ?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p>
-            La mensualité est calculée en fonction du capital emprunté, du taux d’intérêt annuel, et de la durée du prêt. 
-            Elle inclut les intérêts et l'amortissement du capital. Voir 
-            <a routerLink="/emprunt"class="router-link"  >
-              calculateur d'emprunt.
-            </a>
-          </p>      </div>
-    </article>
-  
-    <article itemscope itemtype="https://schema.org/Question">
-      <h3 itemprop="name">Quels avantages fiscaux offre l’achat immobilier ?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">L'achat peut permettre de bénéficier de déductions fiscales comme le crédit d'impôt pour certains travaux, la réduction d'impôt Pinel, ou l'amortissement en location meublée.</p>
-      </div>
-    </article>
-  
-    <article itemscope itemtype="https://schema.org/Question">
-      <h3 itemprop="name">Comment la valorisation du bien impacte-t-elle le calcul de rentabilité ?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">La valorisation annuelle du bien augmente sa valeur patrimoniale, ce qui peut améliorer la rentabilité nette de l'achat comparé à la location.</p>
-      </div>
-    </article>
-  
-    <article itemscope itemtype="https://schema.org/Question">
-      <h3 itemprop="name">Comment prendre en compte les coûts d'entretien dans la comparaison achat vs location ?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">Les coûts d'entretien réguliers doivent être intégrés dans les dépenses annuelles pour refléter le coût réel de la propriété, contrairement à la location où ces coûts sont généralement inclus dans le loyer.</p>
-      </div>
-    </article>
-  
-    <article itemscope itemtype="https://schema.org/Question">
-      <h3 itemprop="name">Quelle est l'importance du taux de rendement de l'investissement en cas de location ?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">Le taux de rendement reflète la performance des économies réalisées en louant et en investissant cet argent, ce qui est essentiel pour comparer la rentabilité nette avec l'achat immobilier.</p>
-      </div>
-    </article>
-  
-    <article itemscope itemtype="https://schema.org/Question">
-      <h3 itemprop="name">Comment anticiper la durée idéale pour rester dans un logement avant d'acheter ?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">Il est conseillé d'envisager l'achat si vous prévoyez de rester au moins 7 à 10 ans, afin d'amortir les frais d'acquisition et bénéficier pleinement de la valorisation du bien.</p>
-      </div>
-    </article>
-  
+      <dt>Quels sont les avantages de la location ?</dt>
+      <dd>Moins d’engagement financier, pas de charges liées à la propriété, et plus de mobilité.</dd>
+
+      <dt>Comment comparer les coûts entre achat et location ?</dt>
+      <dd>En calculant le coût total mensuel de chaque option, incluant l’ensemble des frais et avantages fiscaux
+        éventuels.</dd>
+
+      <dt>L’achat est-il toujours plus rentable que la location ?</dt>
+      <dd>Pas forcément, cela dépend de la durée de détention, de l’évolution du marché et des taux d’intérêt.</dd>
+
+      <dt>Quels risques sont associés à l’achat immobilier ?</dt>
+      <dd>Risque de baisse de la valeur du bien, charges imprévues, et engagement à long terme.</dd>
+
+      <dt>Quels sont les avantages fiscaux de l’achat ?</dt>
+      <dd>Possibilité de déduire certains intérêts d’emprunt, travaux, et avantages liés au dispositif Pinel ou LMNP.
+      </dd>
+
+      <dt>Comment prendre en compte la valorisation du bien ?</dt>
+      <dd>La plus-value potentielle peut être intégrée dans la rentabilité globale de l’achat.</dd>
+
+      <dt>La location peut-elle être déductible fiscalement ?</dt>
+      <dd>Non, les loyers ne sont pas déductibles fiscalement, sauf cas particuliers comme la location meublée
+        professionnelle.</dd>
+
+      <dt>Où puis-je simuler un comparateur achat vs location ?</dt>
+      <dd>Utilisez notre outil gratuit en ligne sur CalculateurFinance.fr pour estimer votre situation.</dd>
+    </dl>
   </section>
-    </main>
+
+</main>
