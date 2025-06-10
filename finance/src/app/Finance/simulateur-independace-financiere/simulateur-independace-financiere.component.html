@@ -1,1 +1,130 @@
-<p>simulateur-independace-financiere works!</p>
+<main>
+  <h1>Simulateur d'indépendance financière (FIRE)</h1>
+  <br>
+  <div class="separator"></div>
+  <br>
+  <p>Calculez votre capital nécessaire ou l’âge auquel vous pourrez atteindre l’indépendance financière, en fonction de votre épargne, rendement et dépenses annuelles.</p>
+
+  <div class="card p-fluid flex flex-wrap gap-4">
+    <div class="flex-auto">
+      <p-floatLabel>
+        <p-inputNumber inputId="ageActuel" [(ngModel)]="ageActuel" inputStyleClass="w-full" min="0"
+          pTooltip="Votre âge actuel." tooltipPosition="top" />
+        <label for="ageActuel">Âge actuel</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="flex-auto">
+      <p-floatLabel>
+        <p-dropdown inputId="modeCalcul" [(ngModel)]="modeCalcul" [options]="modesCalcul" optionLabel="label"
+          placeholder="Choisissez le mode" />
+        <label for="modeCalcul">Mode de calcul</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="flex-auto" *ngIf="modeCalcul?.value === 'age'">
+      <p-floatLabel>
+        <p-inputNumber inputId="ageObjectif" [(ngModel)]="ageObjectif" inputStyleClass="w-full" min="0"
+          pTooltip="L'âge auquel vous souhaitez atteindre l'indépendance financière." tooltipPosition="top" />
+        <label for="ageObjectif">Âge cible de retraite</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="flex-auto">
+      <p-floatLabel>
+        <p-inputNumber inputId="depenses" [(ngModel)]="depensesAnnuelles" mode="currency" currency="EUR"
+          pTooltip="Vos dépenses annuelles estimées après indépendance." tooltipPosition="top" />
+        <label for="depenses">Dépenses annuelles (€)</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="flex-auto">
+      <p-floatLabel>
+        <p-inputNumber inputId="tauxRetrait" [(ngModel)]="tauxRetrait" suffix="%" mode="decimal"
+          pTooltip="Taux de retrait du capital (ex : 4%)." tooltipPosition="top" />
+        <label for="tauxRetrait">Taux de retrait (%)</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="flex-auto">
+      <p-floatLabel>
+        <p-inputNumber inputId="tauxRendement" [(ngModel)]="tauxRendement" suffix="%" mode="decimal"
+          pTooltip="Taux annuel moyen de rendement net sur vos investissements (hors inflation)." tooltipPosition="top" />
+        <label for="tauxRendement">Taux de rendement (%)</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="flex-auto">
+      <p-floatLabel>
+        <p-inputNumber inputId="capitalActuel" [(ngModel)]="capitalActuel" mode="currency" currency="EUR"
+          pTooltip="Capital déjà investi ou épargné." tooltipPosition="top" />
+        <label for="capitalActuel">Capital actuel (€)</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="flex-auto">
+      <p-floatLabel>
+        <p-inputNumber inputId="epargne" [(ngModel)]="epargneAnnuelle" mode="currency" currency="EUR"
+          pTooltip="Épargne annuelle que vous pouvez investir jusqu’à l’indépendance." tooltipPosition="top" />
+        <label for="epargne">Épargne annuelle (€)</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="flex-auto mt-2">
+      <button pButton type="button" label="Calculer" icon="pi pi-check" class="p-button-success" (click)="calculer()"
+        [disabled]="!ageActuel || !depensesAnnuelles || !tauxRetrait">
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="resultats" class="mt-4">
+    <h4 *ngIf="resultats.capitalNecessaire">Capital nécessaire : {{ resultats.capitalNecessaire | number:'1.0-0' }} €</h4>
+    <h4 *ngIf="modeCalcul?.value === 'independance' && resultats.ageAtteint">
+      Vous pourrez atteindre l’indépendance à : {{ resultats.ageAtteint }} ans
+    </h4>
+    <h4 *ngIf="modeCalcul?.value === 'age' && resultats.capitalAtteint !== null">
+      Capital estimé à {{ ageObjectif }} ans : {{ resultats.capitalAtteint | number:'1.0-0' }} €
+    </h4>
+    <h4 *ngIf="resultats.anneesRestantes !== null">
+      Années restantes d’épargne : {{ resultats.anneesRestantes }}
+    </h4>
+  </div>
+
+  <br><br>
+  <div class="separator"></div>
+
+  <section class="faq-section mt-5" aria-label="Foire aux questions sur l’indépendance financière FIRE">
+    <h2>FAQ – Questions fréquentes sur le FIRE</h2>
+    <dl>
+      <dt>Qu’est-ce que le mouvement FIRE ?</dt>
+      <dd>FIRE signifie "Financial Independence, Retire Early" : atteindre une liberté financière suffisante pour arrêter de travailler si on le souhaite.</dd>
+
+      <dt>Comment est calculé le capital nécessaire ?</dt>
+      <dd>En divisant vos dépenses annuelles par votre taux de retrait (ex : 25 fois les dépenses pour un taux de 4 %).</dd>
+
+      <dt>Quel taux de retrait est recommandé ?</dt>
+      <dd>Le taux de 4 % est souvent utilisé comme référence, mais 3 % est plus prudent selon les conditions de marché.</dd>
+
+      <dt>Peut-on atteindre FIRE sans investir ?</dt>
+      <dd>Oui, mais cela prend plus de temps. L’investissement (bourse, immobilier) accélère significativement le processus.</dd>
+
+      <dt>Quelle épargne annuelle viser ?</dt>
+      <dd>Un taux d’épargne de 50 % ou plus permet souvent d’atteindre l’indépendance en 15-20 ans selon les rendements.</dd>
+
+      <dt>Quelle différence entre FIRE et Coast FIRE ?</dt>
+      <dd>Coast FIRE consiste à avoir assez tôt un capital qui, sans nouvel effort d’épargne, vous permettra d’être FIRE à la retraite.</dd>
+
+      <dt>Le FIRE est-il réaliste en France ?</dt>
+      <dd>Oui, mais il faut adapter sa stratégie à la fiscalité française, au système de retraite et au coût de la vie local.</dd>
+
+      <dt>Dois-je arrêter complètement de travailler si je suis FIRE ?</dt>
+      <dd>Non. Beaucoup continuent des activités de passion, du bénévolat ou des projets entrepreneuriaux.</dd>
+
+      <dt>Faut-il viser une indépendance totale ou partielle ?</dt>
+      <dd>Certains préfèrent une indépendance partielle (Semi-FIRE) en combinant revenus passifs et temps partiel.</dd>
+
+      <dt>Quels sont les risques du FIRE ?</dt>
+      <dd>Inflation, rendements faibles, imprévus de santé ou de famille… d’où l’importance de bien planifier et diversifier ses revenus.</dd>
+    </dl>
+  </section>
+</main>
