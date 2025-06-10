@@ -1,0 +1,8 @@
+<div *ngIf="pageData; else notFound">
+  <h1>{{ pageData.titre }}</h1>
+  <div class="article-content" [innerHTML]="pageData.contenu"></div>
+</div>
+
+<ng-template #notFound>
+  <h2>Page non trouvée</h2>
+</ng-template>

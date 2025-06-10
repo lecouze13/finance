@@ -21,6 +21,7 @@ import { SimulateurIndependaceFinanciereComponent } from './Finance/simulateur-i
 import { SimulateurRetraiteComponent } from './Finance/simulateur-retraite/simulateur-retraite.component';
 import { SimulateurPlusValueImmobiliereComponent } from './Immobilier/simulateur-plus-value-immobiliere/simulateur-plus-value-immobiliere.component';
 import { ComparateurSciIrIsComponent } from './Immobilier/comparateur-sci-ir-is/comparateur-sci-ir-is.component';
+import { ContenuPageComponent } from './Constructor/generateur-article/generateur-article.component';
 
 export const routes: Routes = [
     { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -44,7 +45,8 @@ export const routes: Routes = [
     { path: AppRoutes.SCI_VS_IR, component: ComparateurSciIrIsComponent },
     { path: AppRoutes.PLUS_VALUE_IMMOBILIERE, component: SimulateurPlusValueImmobiliereComponent },
 
-   
+     { path: 'article/:slug', component: ContenuPageComponent }, // ex: /page/assurance-vie
+
     { path: '**', redirectTo: '', pathMatch: 'full' }
 
 

@@ -52,6 +52,7 @@ import { SimulateurBrutNetComponent } from './Finance/simulateur-brut-net/simula
 import { ComparateurSciIrIsComponent } from './Immobilier/comparateur-sci-ir-is/comparateur-sci-ir-is.component';
 import { SimulateurPlusValueImmobiliereComponent } from './Immobilier/simulateur-plus-value-immobiliere/simulateur-plus-value-immobiliere.component';
 import { ReactiveFormsModule } from '@angular/forms'; // Optionnel mais souvent utile
+import { ContenuPageComponent } from './Constructor/generateur-article/generateur-article.component';
 
 @NgModule({
     declarations: [
@@ -75,7 +76,8 @@ import { ReactiveFormsModule } from '@angular/forms'; // Optionnel mais souvent 
         BudgetGraphesComponent,
         SimulateurBrutNetComponent,
         ComparateurSciIrIsComponent,
-        SimulateurPlusValueImmobiliereComponent
+        SimulateurPlusValueImmobiliereComponent,
+        ContenuPageComponent
     ],
     imports: [
         BrowserModule,
