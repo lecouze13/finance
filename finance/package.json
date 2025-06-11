@@ -7,7 +7,8 @@
     "build": "ng build ",
   "build:ssr": "ng build --configuration production && ng run finance:server:production",
   "serve:ssr": "node dist/finance-server/main.js",
-  "netlify:build": "npm run build:ssr",
+  "netlify:build": "ng build && ng run finance:server",
+
 
     "prerender": "ng run finance:prerender",
     "watch": "ng build --watch --configuration development",

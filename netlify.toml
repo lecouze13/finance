@@ -1,6 +1,7 @@
 [build]
-  publish = "dist/finance/browser"
   command = "npm run netlify:build"
+  publish = "dist/finance/browser"
+  functions = "finance/netlify/functions"
 
 [[redirects]]
   from = "/*"

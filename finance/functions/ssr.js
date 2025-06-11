@@ -1,28 +1,31 @@
 const { join } = require('path');
 const { readFileSync } = require('fs');
 const { renderModule } = require('@angular/platform-server');
-const { AppServerModule } = require('./dist/finance-server/main'); // chemin relatif à adapter
+const { AppServerModule } = require('../../../dist/finance-server/main');
 
-const distFolder = join(__dirname, '../dist/finance/browser');
+const distFolder = join(__dirname, '../../../dist/finance/browser');
 const indexHtml = readFileSync(join(distFolder, 'index.html'), 'utf8');
 
-exports.handler = async function(event, context) {
+exports.handler = async (event) => {
   try {
     const url = event.rawUrl || event.path || '/';
     const html = await renderModule(AppServerModule, {
       document: indexHtml,
       url,
     });
+
     return {
       statusCode: 200,
-      headers: { 'Content-Type': 'text/html' },
+      headers: {
+        'Content-Type': 'text/html',
+      },
       body: html,
     };
-  } catch (error) {
-    console.error(error);
+  } catch (e) {
+    console.error('SSR error', e);
     return {
       statusCode: 500,
-      body: 'Erreur serveur',
+      body: 'Erreur SSR : ' + e.message,
     };
   }
 };
