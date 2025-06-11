@@ -1,9 +1,8 @@
 [build]
-  base = "finance"
   publish = "dist/finance/browser"
-  command = "npm run build"
+  command = "npm run netlify:build"
 
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/.netlify/functions/ssr"
   status = 200

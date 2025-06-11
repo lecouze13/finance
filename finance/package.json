@@ -5,11 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build ",
-  "build:client": "ng build --configuration production",
-  "build:server": "ng run finance:server:production",
-  "build:ssr": "npm run build:client && npm run build:server",
-  "serve:ssr": "node server.js",
-  "start:ssr": "npm run build:ssr && npm run serve:ssr",
+  "build:ssr": "ng build --configuration production && ng run finance:server:production",
+  "serve:ssr": "node dist/finance-server/main.js",
+  "netlify:build": "npm run build:ssr",
+
     "prerender": "ng run finance:prerender",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
