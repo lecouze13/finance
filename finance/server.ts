@@ -1,32 +1,31 @@
 import 'zone.js/node';
-
-import { ngExpressEngine } from '@nguniversal/express-engine';
-import express from 'express';
+import { createServer } from 'http';
+import { readFileSync } from 'fs';
 import { join } from 'path';
-
-import { AppServerModule } from './src/main.server';
-
-const app = express();
+import { renderModule } from '@angular/platform-server';
+import { AppServerModule } from './src/app/app.server.module';
+console.log('Starting server...');
 
 const distFolder = join(process.cwd(), 'dist/finance/browser');
-const indexHtml = 'index.html';
+const indexHtml = readFileSync(join(distFolder, 'index.html'), 'utf8');
+const PORT = process.env['PORT'] || 4000;
 
-// Our Universal express-engine (found @ https://github.com/angular/universal/tree/main/modules/express-engine)
-app.engine('html', ngExpressEngine({
-  bootstrap: AppServerModule,
-}));
-
-app.set('view engine', 'html');
-app.set('views', distFolder);
-
-// Server static files from /browser
-app.get('*.*', express.static(distFolder, {
-  maxAge: '1y'
-}));
-
-// All regular routes use the Universal engine
-app.get('*', (req, res) => {
-  res.render(indexHtml, { req });
+const server = createServer(async (req, res) => {
+  try {
+    const html = await renderModule(AppServerModule, {
+      document: indexHtml,
+      url: req.url,
+    });
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end(html);
+  } catch (e) {
+    console.error(e);
+    res.writeHead(500);
+    res.end('Erreur serveur');
+  }
 });
 
-export { app };
+
+server.listen(PORT, () => {
+  console.log(`Server listening on http://localhost:${PORT}`);
+});
