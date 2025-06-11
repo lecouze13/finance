@@ -1,31 +1,19 @@
-const { join } = require('path');
-const { readFileSync } = require('fs');
-const { renderModule } = require('@angular/platform-server');
-const { AppServerModule } = require('../../../dist/finance-server/main');
+const { builder } = require('@netlify/functions');
+const { AppServerModule } = require('../dist/finance-server/main.js');
+const { ngExpressEngine } = require('@nguniversal/express-engine');
+const express = require('express');
+const path = require('path');
 
-const distFolder = join(__dirname, '../../../dist/finance/browser');
-const indexHtml = readFileSync(join(distFolder, 'index.html'), 'utf8');
+const app = express();
 
-exports.handler = async (event) => {
-  try {
-    const url = event.rawUrl || event.path || '/';
-    const html = await renderModule(AppServerModule, {
-      document: indexHtml,
-      url,
-    });
+app.engine('html', ngExpressEngine({ bootstrap: AppServerModule }));
+app.set('view engine', 'html');
+app.set('views', path.join(__dirname, '../dist/finance/browser'));
 
-    return {
-      statusCode: 200,
-      headers: {
-        'Content-Type': 'text/html',
-      },
-      body: html,
-    };
-  } catch (e) {
-    console.error('SSR error', e);
-    return {
-      statusCode: 500,
-      body: 'Erreur SSR : ' + e.message,
-    };
-  }
-};
+app.get('*.*', express.static(path.join(__dirname, '../dist/finance/browser')));
+
+app.get('*', (req, res) => {
+  res.render('index', { req });
+});
+
+exports.handler = builder(app);
