@@ -3,7 +3,7 @@
   command = "npm run netlify:build"
 
 [functions]
-  directory = "functions"
+  directory = "netlify/functions"
 
 [[redirects]]
   from = "/*"
