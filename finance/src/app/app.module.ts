@@ -54,6 +54,7 @@ import { SimulateurPlusValueImmobiliereComponent } from './Immobilier/simulateur
 import { ReactiveFormsModule } from '@angular/forms'; // Optionnel mais souvent utile
 import { ContenuPageComponent } from './Constructor/generateur-article/generateur-article.component';
 import { SimulateurIndependaceFinanciereComponent } from './Finance/simulateur-independace-financiere/simulateur-independace-financiere.component';
+import { SimulateurImpotFortuneImmobiliereComponent } from './Finance/simulateur-impot-fortune-immobiliere/simulateur-impot-fortune-immobiliere.component';
 
 @NgModule({
     declarations: [
@@ -79,7 +80,8 @@ import { SimulateurIndependaceFinanciereComponent } from './Finance/simulateur-i
         ComparateurSciIrIsComponent,
         SimulateurPlusValueImmobiliereComponent,
         ContenuPageComponent,
-        SimulateurIndependaceFinanciereComponent
+        SimulateurIndependaceFinanciereComponent,
+        SimulateurImpotFortuneImmobiliereComponent
     ],
     imports: [
         BrowserModule,
