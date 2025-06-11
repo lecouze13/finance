@@ -1,0 +1,19 @@
+/
+ /rendement-locatif
+ /budget-immobilier
+ /investissement-locatif
+ /cashflow-immobilier
+ /calcul-emprunt
+ /tri-immobilier
+ /achat-vs-location
+ /calcul-frais-de-notaire
+ /interet-compose
+ /lmnp-lmp-regime-fiscal
+ /simulateur-impot-revenue
+ /simulateur-brut-net
+ /comparateur-sci-impot
+ /simulateur-plus-value-immobiliere
+ /article/pea
+ /article/assurance-vie
+ /simulateur-independance-financiere
+ /simulateur-impot-fortune-immobiliere
