@@ -1,6 +1,0 @@
-[build]
-  publish = "dist/finance"  # ← Remplace par ton dossier de build Angular exact
-
-[prerender]
-  enabled = true
-  crawl = false
