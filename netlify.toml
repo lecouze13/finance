@@ -1,6 +1,6 @@
 [build]
   base = "finance"
-  publish = "finance/dist/finance/browser"
+  publish = "dist/finance/browser"
   command = "npm run build"
 
 [[redirects]]
