@@ -157,6 +157,37 @@ export const pages: {
     <p>Le CTO est une solution idéale pour les investisseurs expérimentés qui souhaitent une liberté totale d’investissement, en contrepartie d’une fiscalité moins avantageuse que le PEA.</p>
     `,
   },
+'assurance-vie-luxembourgeoise': {
+  titre: 'Assurance Vie Luxembourgeoise',
+  description:
+    "L’assurance vie luxembourgeoise est un contrat d’investissement offrant une grande sécurité juridique, une flexibilité fiscale et une large gamme de supports d’investissement.",
+  contenu: `
+  <h2>Introduction</h2>
+  <p>L’<strong>assurance vie luxembourgeoise</strong> est un produit d’épargne et d’investissement haut de gamme, prisé pour sa protection juridique, sa neutralité fiscale et sa souplesse dans la gestion des actifs financiers.</p>
+
+  <h2>Fonctionnement</h2>
+  <p>Ce contrat est souscrit auprès d’une compagnie d’assurance basée au Luxembourg. Il permet d’investir dans des fonds euros, des unités de compte (UC), des fonds internes dédiés (FID) ou des fonds d’assurance spécialisés (FAS).</p>
+  <p>Le contrat est multi-devises, multi-gestionnaires, et peut être géré en architecture ouverte, offrant ainsi une grande personnalisation.</p>
+
+  <h2>Fiscalité</h2>
+  <ul>
+    <li>Pas d’imposition luxembourgeoise sur les gains : la fiscalité applicable est celle du pays de résidence du souscripteur.</li>
+    <li>En France, fiscalité avantageuse en cas de retrait après 8 ans (abattement annuel sur les gains, puis flat tax de 7,5 % ou 12,8 % + 17,2 % de prélèvements sociaux).</li>
+    <li>Transmission facilitée avec un cadre fiscal avantageux (article 990 I du CGI).</li>
+  </ul>
+
+  <h2>Avantages</h2>
+  <ul>
+    <li><strong>Triangle de sécurité luxembourgeois</strong> : séparation stricte entre les actifs de l’assureur et ceux des assurés, avec garantie par le Commissariat aux Assurances (CAA).</li>
+    <li>Protection des avoirs jusqu’à 100 % des montants déposés, sans plafond.</li>
+    <li>Souplesse de gestion et large choix de supports d’investissement internationaux.</li>
+    <li>Optimisation patrimoniale, successorale et fiscale pour les investisseurs fortunés ou expatriés.</li>
+  </ul>
+
+  <h2>Conclusion</h2>
+  <p>L’assurance vie luxembourgeoise est un outil performant pour les investisseurs recherchant une combinaison de sécurité juridique, de flexibilité et de stratégie patrimoniale internationale. Elle s’adresse particulièrement aux profils fortunés ou internationaux.</p>
+  `,
+},
 
    
   
