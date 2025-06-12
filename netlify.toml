@@ -1,0 +1,13 @@
+[build]
+  command = "npm install --legacy-peer-deps && npm run netlify:build"
+  publish = "dist/finance/browser"
+  functions = "netlify/functions"
+
+
+[functions]
+  directory = "netlify/functions"
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/ssr"
+  status = 200

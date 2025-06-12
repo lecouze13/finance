@@ -1,32 +1,47 @@
 import 'zone.js/node';
-
-import { ngExpressEngine } from '@nguniversal/express-engine';
-import express from 'express';
+import { createServer } from 'http';
+import { readFileSync, existsSync, createReadStream } from 'fs';
 import { join } from 'path';
-
-import { AppServerModule } from './src/main.server';
-
-const app = express();
+import { renderModule } from '@angular/platform-server';
+import { AppServerModule } from './src/app/app.server.module';
 
 const distFolder = join(process.cwd(), 'dist/finance/browser');
-const indexHtml = 'index.html';
+const PORT = process.env['PORT'] || 4000;
 
-// Our Universal express-engine (found @ https://github.com/angular/universal/tree/main/modules/express-engine)
-app.engine('html', ngExpressEngine({
-  bootstrap: AppServerModule,
-}));
+const server = createServer((req, res) => {
+  try {
+    const url = req.url || '/';
 
-app.set('view engine', 'html');
-app.set('views', distFolder);
+    // Servir les fichiers statiques directement
+    const filePath = join(distFolder, url);
+    if (existsSync(filePath) && !url.endsWith('/')) {
+      const fileStream = createReadStream(filePath);
+      fileStream.pipe(res);
+      return;
+    }
 
-// Server static files from /browser
-app.get('*.*', express.static(distFolder, {
-  maxAge: '1y'
-}));
+    // Sinon, rendu Angular Universal
+    const indexHtml = readFileSync(join(distFolder, 'index.html'), 'utf8');
 
-// All regular routes use the Universal engine
-app.get('*', (req, res) => {
-  res.render(indexHtml, { req });
+    renderModule(AppServerModule, {
+      document: indexHtml,
+      url: url,
+    }).then(html => {
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      res.end(html);
+    }).catch(err => {
+      console.error('Angular Universal render error:', err);
+      res.writeHead(500);
+      res.end('Erreur serveur');
+    });
+
+  } catch (e) {
+    console.error('Server error:', e);
+    res.writeHead(500);
+    res.end('Erreur serveur');
+  }
 });
 
-export { app };
+server.listen(PORT, () => {
+  console.log(`Server listening on http://localhost:${PORT}`);
+});

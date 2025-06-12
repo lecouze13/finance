@@ -1,21 +1,28 @@
-import { Component } from '@angular/core';
-
+import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrl: './main.component.scss'
+  styleUrls: ['./main.component.scss']
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
   isHomeRoute = true;
-  ngOnInit(): void {
-    const url = window.location.href;
-    if(url.includes('rendement') || url.includes('budget') || url.includes('investissement') || url.includes('cashflow')){
 
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const url = window.location.href;
+      if (
+        url.includes('rendement') ||
+        url.includes('budget') ||
+        url.includes('investissement') ||
+        url.includes('cashflow')
+      ) {
+        // C’est bien une route simulateur, pas la home
+        this.isHomeRoute = false;
+      }
     }
-    else{
-      this.isHomeRoute = false;
-    }
-    
   }
 }

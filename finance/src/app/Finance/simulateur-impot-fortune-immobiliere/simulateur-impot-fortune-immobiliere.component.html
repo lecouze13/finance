@@ -1,1 +1,99 @@
-<p>simulateur-impot-fortune-immobiliere works!</p>
+<main>
+  <h1>Simulateur IFI 2025</h1>
+  <p>Calculez votre impôt sur la fortune immobilière avec une ventilation par tranche.</p>
+
+  <div class="card p-fluid flex flex-wrap gap-4 mt-4">
+    <div class="flex-auto">
+      <p-floatLabel>
+        <p-inputNumber inputId="valeur" [(ngModel)]="valeurNetteTaxable" mode="currency" currency="EUR"
+          pTooltip="Valeur nette de votre patrimoine immobilier taxable au 1er janvier." tooltipPosition="top" />
+        <label for="valeur">Valeur nette taxable (€)</label>
+      </p-floatLabel>
+    </div>
+
+    <div class="flex-auto mt-2">
+      <button pButton aria-label="Calculer l’IFI" icon="pi pi-check" (click)="calculerIFI()" [disabled]="!valeurNetteTaxable" class="p-button-success"></button>
+      <!-- <button pButton label="Réinitialiser" class="p-button-secondary ml-2" icon="pi pi-refresh" (click)="reset()"></button> -->
+    </div>
+  </div>
+
+  <div *ngIf="totalIFI !== null" class="mt-4">
+    <h3>IFI dû : {{ totalIFI | number:'1.0-0' }} €</h3>
+
+    <p-table [value]="tranches" *ngIf="tranches.length > 0" class="mt-3">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Tranche</th>
+          <th>Taux</th>
+          <th>Impôt</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-tranche>
+        <tr>
+          <td>{{ tranche.plafondInf | number:'1.0-0' }} € – {{ tranche.affichagePlafondSup }}</td>
+          <td>{{ tranche.taux * 100 }} %</td>
+          <td>{{ tranche.impot | number:'1.0-0' }} €</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <br><br>
+  <div class="separator"></div>
+  <br>
+<section class="faq-section" aria-label="Foire aux questions - Impôt sur la Fortune Immobilière (IFI)">
+  <h2>Foire aux questions - IFI</h2>
+  <dl>
+    <dt>Qui est redevable de l’IFI ?</dt>
+    <dd>
+      Les personnes dont le patrimoine immobilier net taxable dépasse 1,3 million d’euros au 1er janvier.
+    </dd>
+
+    <dt>Quels biens sont soumis à l’IFI ?</dt>
+    <dd>
+      Les immeubles non professionnels : résidence principale (avec abattement de 30 %), résidence secondaire, biens locatifs, terrains, parts de SCPI, SCI, etc.
+    </dd>
+
+    <dt>Quel est le barème de l’IFI en 2025 ?</dt>
+    <dd>
+      L’IFI est calculé selon un barème progressif allant de 0,5 % à 1,5 %, appliqué sur les tranches de valeur nette taxable du patrimoine immobilier.
+    </dd>
+
+    <dt>Peut-on déduire certaines dettes ?</dt>
+    <dd>
+      Oui, les dettes contractées pour l'acquisition, l'entretien, l'amélioration, la construction ou la conservation des biens imposables peuvent être déduites. Certaines limitations s’appliquent selon la nature et la date des emprunts.
+    </dd>
+
+    <dt>La résidence principale est-elle totalement imposable ?</dt>
+    <dd>
+      Non, elle bénéficie d’un abattement de 30 % sur sa valeur vénale au 1er janvier.
+    </dd>
+
+    <dt>Comment déclarer l’IFI ?</dt>
+    <dd>
+      L’IFI se déclare via la déclaration d’impôt sur le revenu, en remplissant l’annexe 2042-IFI lors de la déclaration annuelle.
+    </dd>
+
+    <dt>Le barème est-il appliqué sur la totalité du patrimoine ?</dt>
+    <dd>
+      Non, il s’applique par tranches progressives sur la partie du patrimoine immobilier net taxable supérieure à 800 000 €.
+    </dd>
+
+    <dt>Quel est le seuil d’entrée dans l’IFI ?</dt>
+    <dd>
+      Le seuil de déclenchement de l’IFI est de 1,3 million d’euros de patrimoine immobilier net taxable. Mais l’impôt est calculé à partir de 800 000 €.
+    </dd>
+
+    <dt>Les biens professionnels sont-ils imposables ?</dt>
+    <dd>
+      Non, les biens immobiliers affectés à une activité professionnelle ne sont pas soumis à l’IFI, sous certaines conditions strictes.
+    </dd>
+
+    <dt>Puis-je bénéficier d’un plafonnement IFI/IR ?</dt>
+    <dd>
+      Oui, un mécanisme de plafonnement limite l’IFI si la somme de l’IFI et de l’impôt sur le revenu dépasse 75 % des revenus. Une demande doit être faite avec justificatifs.
+    </dd>
+  </dl>
+</section>
+
+</main>
