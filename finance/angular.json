@@ -35,19 +35,20 @@
               "src/sitemap.xml",
               "src/ads.txt"
             ],
-           "styles": [
-  "src/styles.scss",
-  "node_modules/primeicons/primeicons.css",
-"node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-  "node_modules/primeng/resources/primeng.min.css"
-
-],
-
-
-            
+            "styles": [
+              "src/styles.scss",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css"
+            ],
             "scripts": [
               "node_modules/chart.js/dist/chart.js"
-            ]
+            ],
+            "server": "src/main.server.ts",
+            "prerender": true,
+            "ssr": {
+              "entry": "server.ts"
+            }
           },
           "configurations": {
             "production": {
@@ -112,21 +113,6 @@
             "scripts": []
           }
         },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
-          "options": {
-            "outputPath": "dist/finance-server",
-            "main": "server.ts",    
-            "tsConfig": "tsconfig.server.json"
-          },
-          "configurations": {
-            "production": {
-              "outputHashing": "media",
-              "sourceMap": false,
-              "optimization": true
-            }
-          }
-        },
         "prerender": {
           "builder": "@angular-devkit/build-angular:prerender",
           "options": {
@@ -149,6 +135,19 @@
               "/comparateur-sci-impot",
               "/simulateur-plus-value-immobiliere"
             ]
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/finance-server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputPath": "dist/finance-server"
+            }
           }
         }
       }

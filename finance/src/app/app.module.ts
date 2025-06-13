@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
 // Angular Forms
 import { FormsModule } from '@angular/forms';
@@ -105,7 +105,9 @@ import { SimulateurImpotFortuneImmobiliereComponent } from './Finance/simulateur
         NoopAnimationsModule,
 ReactiveFormsModule
     ],
-    providers: [],
+    providers: [
+    provideClientHydration()
+  ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
