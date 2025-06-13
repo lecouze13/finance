@@ -133,7 +133,12 @@
               "/simulateur-impot-revenue",
               "/simulateur-brut-net",
               "/comparateur-sci-impot",
-              "/simulateur-plus-value-immobiliere"
+              "/simulateur-plus-value-immobiliere",
+              "/simulateur-impot-fortune-immobiliere",
+              "/independance-financiere",
+              "/retraite",
+              "/prime-activite",
+              "/calculatrice"
             ]
           }
         },

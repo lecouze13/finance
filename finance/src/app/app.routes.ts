@@ -45,7 +45,7 @@ export const routes: Routes = [
     { path: AppRoutes.SCI_VS_IR, component: ComparateurSciIrIsComponent },
     { path: AppRoutes.PLUS_VALUE_IMMOBILIERE, component: SimulateurPlusValueImmobiliereComponent },
 
-     { path: 'article/:slug', component: ContenuPageComponent }, // ex: /page/assurance-vie
+    //  { path: 'article/:slug', component: ContenuPageComponent }, // ex: /page/assurance-vie
 
     { path: '**', redirectTo: '', pathMatch: 'full' }
 
