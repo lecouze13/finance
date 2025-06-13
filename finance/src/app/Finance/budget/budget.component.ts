@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild, Renderer2 } from '@angular/co
 import { BehaviorSubject } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { SeoService } from '../../Constructor/service/seo.service';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-budget',
@@ -35,7 +37,8 @@ export class BudgetComponent implements OnInit {
   categoriesList: { label: string; value: string }[] =
     [{ label: 'Dépenses essentiels', value: 'essentiels' }, { label: 'Sorties-Loisirs', value: 'loisirs' }, { label: 'Epargne', value: 'epargne' }];
 
-  constructor(private renderer: Renderer2, private seo: SeoService) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+    private renderer: Renderer2, private seo: SeoService) { }
 
   ngOnInit() {
     this.seo.updateMetaData({
@@ -44,112 +47,114 @@ export class BudgetComponent implements OnInit {
       url: 'https://www.calculateurfinance.fr/simulateur-budget',
       // image: 'https://www.calculateurfinance.fr/assets/simulateur-budget-preview.png'
     });
-    const script = this.renderer.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Pourquoi utiliser un outil de gestion de budget ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Un outil de gestion de budget vous aide à mieux contrôler vos finances, à suivre vos revenus et vos dépenses, et à éviter les découverts ou les déficits en fin de mois."
+    if (isPlatformBrowser(this.platformId)) {
+
+      const script = this.renderer.createElement('script');
+      script.type = 'application/ld+json';
+      script.text = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Pourquoi utiliser un outil de gestion de budget ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Un outil de gestion de budget vous aide à mieux contrôler vos finances, à suivre vos revenus et vos dépenses, et à éviter les découverts ou les déficits en fin de mois."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "À quoi sert la gestion de budget au quotidien ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Elle vous permet de prendre de meilleures décisions financières, de prévoir vos dépenses, d’anticiper les imprévus, et de mettre de l’argent de côté régulièrement."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quels sont les avantages de suivre ses dépenses ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Suivre ses dépenses permet d’identifier les postes coûteux, d’adapter son mode de vie à ses moyens, et de limiter les achats impulsifs."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Comment un outil de budget peut-il m’aider à épargner ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "En visualisant vos excédents mensuels, vous pouvez définir un objectif d’épargne réaliste et suivre vos progrès vers ce but."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Est-ce que la catégorisation des dépenses est utile ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui, catégoriser ses dépenses aide à comprendre ses habitudes de consommation et à détecter facilement les postes sur lesquels vous pouvez économiser."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quels types de revenus et de dépenses faut-il renseigner ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Il faut indiquer tous les revenus nets (salaires, aides, pensions) ainsi que les dépenses fixes (loyer, abonnements) et variables (alimentation, loisirs, transport)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Est-ce que je peux comparer mes finances avec d'autres ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui, certaines fonctionnalités vous permettent de comparer vos chiffres avec des moyennes nationales pour situer votre niveau de dépenses."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Est-ce que cet outil est adapté aux débutants en gestion ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui, l’outil est conçu pour être simple d’utilisation, même pour ceux qui débutent dans la gestion financière personnelle."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Pourquoi est-il important de connaître son solde mensuel ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Connaître votre solde permet de savoir si vos revenus couvrent vos dépenses, d’éviter le surendettement et de planifier sereinement les mois à venir."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "L’outil est-il gratuit et accessible à tous ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui, notre outil est gratuit, sans inscription obligatoire, et accessible depuis tout type d’appareil (ordinateur, smartphone, tablette)."
+            }
           }
-        },
-        {
-          "@type": "Question",
-          "name": "À quoi sert la gestion de budget au quotidien ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Elle vous permet de prendre de meilleures décisions financières, de prévoir vos dépenses, d’anticiper les imprévus, et de mettre de l’argent de côté régulièrement."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels sont les avantages de suivre ses dépenses ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Suivre ses dépenses permet d’identifier les postes coûteux, d’adapter son mode de vie à ses moyens, et de limiter les achats impulsifs."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment un outil de budget peut-il m’aider à épargner ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "En visualisant vos excédents mensuels, vous pouvez définir un objectif d’épargne réaliste et suivre vos progrès vers ce but."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Est-ce que la catégorisation des dépenses est utile ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui, catégoriser ses dépenses aide à comprendre ses habitudes de consommation et à détecter facilement les postes sur lesquels vous pouvez économiser."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels types de revenus et de dépenses faut-il renseigner ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Il faut indiquer tous les revenus nets (salaires, aides, pensions) ainsi que les dépenses fixes (loyer, abonnements) et variables (alimentation, loisirs, transport)."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Est-ce que je peux comparer mes finances avec d'autres ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui, certaines fonctionnalités vous permettent de comparer vos chiffres avec des moyennes nationales pour situer votre niveau de dépenses."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Est-ce que cet outil est adapté aux débutants en gestion ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui, l’outil est conçu pour être simple d’utilisation, même pour ceux qui débutent dans la gestion financière personnelle."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Pourquoi est-il important de connaître son solde mensuel ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Connaître votre solde permet de savoir si vos revenus couvrent vos dépenses, d’éviter le surendettement et de planifier sereinement les mois à venir."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "L’outil est-il gratuit et accessible à tous ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui, notre outil est gratuit, sans inscription obligatoire, et accessible depuis tout type d’appareil (ordinateur, smartphone, tablette)."
+        ]
+
+      });
+      this.renderer.appendChild(document.head, script);
+
+
+      const documentStyle = getComputedStyle(document.documentElement);
+      const textColor = documentStyle.getPropertyValue('--text-color');
+
+      this.options = {
+        cutout: '60%',
+        plugins: {
+          legend: {
+            labels: {
+              color: textColor
+            }
           }
         }
-      ]
-
-    });
-    this.renderer.appendChild(document.head, script);
-
-
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-
-    this.options = {
-      cutout: '60%',
-      plugins: {
-        legend: {
-          labels: {
-            color: textColor
-          }
-        }
-      }
-    };
-
+      };
+    }
     this.data$.subscribe(data => {
       this.data$ = data;
     });
@@ -183,7 +188,6 @@ export class BudgetComponent implements OnInit {
   }
 
   private initializeData() {
-    const documentStyle = getComputedStyle(document.documentElement);
     return {
       labels: this.labels,
       datasets: [

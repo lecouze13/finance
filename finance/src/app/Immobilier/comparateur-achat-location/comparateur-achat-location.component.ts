@@ -1,13 +1,14 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { SeoService } from '../../Constructor/service/seo.service';
-@Component({
+import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';@Component({
   selector: 'app-comparateur-achat-location',
   templateUrl: './comparateur-achat-location.component.html',
   styleUrls: ['./comparateur-achat-location.component.scss']
 })
 export class ComparateurAchatLocationComponent implements OnInit {
 
-  constructor(private renderer: Renderer2, private seo: SeoService) { }
+  constructor(  @Inject(PLATFORM_ID) private platformId: Object, 
+private renderer: Renderer2, private seo: SeoService) { }
 
   champs: string[] = [
     'Prix du bien',
@@ -197,6 +198,7 @@ export class ComparateurAchatLocationComponent implements OnInit {
       url: 'https://www.calculateurfinance.fr/comparateur-achat-vs-location',
       // image: 'https://www.calculateurfinance.fr/assets/comparateur-achat-location-preview.png'
     });
+  if (isPlatformBrowser(this.platformId)) {
 
     const script = this.renderer.createElement('script');
     script.type = 'application/ld+json';
@@ -339,5 +341,6 @@ export class ComparateurAchatLocationComponent implements OnInit {
       }
     };
   }
+}
 
 }

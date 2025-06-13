@@ -13,7 +13,8 @@ export class HeaderComponent implements OnInit {
   items: MenuItem[] | undefined;
   afficherCalculatrice: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor( private platformId: Object, 
+private router: Router) {}
 
   ngOnInit() {
     const epargneItems = Object.entries(pages)

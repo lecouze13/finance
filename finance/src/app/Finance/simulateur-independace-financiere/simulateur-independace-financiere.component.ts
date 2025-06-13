@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { SeoService } from '../../Constructor/service/seo.service';
-
+import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-simulateur-independace-financiere',
@@ -11,7 +11,8 @@ import { SeoService } from '../../Constructor/service/seo.service';
 export class SimulateurIndependaceFinanciereComponent implements OnInit {
 
 
-  constructor(private renderer: Renderer2, private seo: SeoService) {}
+  constructor(  @Inject(PLATFORM_ID) private platformId: Object, 
+private renderer: Renderer2, private seo: SeoService) {}
 
   ngOnInit(): void {
     this.seo.updateMetaData({
@@ -19,6 +20,7 @@ export class SimulateurIndependaceFinanciereComponent implements OnInit {
       description: 'Calculez combien de capital il vous faut pour être libre financièrement avec notre simulateur FIRE. Évaluez vos dépenses, votre taux de retrait et votre épargne.',
       url: 'https://calculateurfinance.fr/simulateur-independance-financiere',
   });
+  if (isPlatformBrowser(this.platformId)) {
 
     const jsonLd = {
       "@context": "https://schema.org",
@@ -111,6 +113,7 @@ export class SimulateurIndependaceFinanciereComponent implements OnInit {
     script.type = 'application/ld+json';
     script.text = JSON.stringify(jsonLd);
     this.renderer.appendChild(document.head, script);
+  }
   }
 ageActuel: number = 30;
   ageObjectif: number | null = null;

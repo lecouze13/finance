@@ -1,8 +1,8 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Meta } from '@angular/platform-browser';
-import { SeoService } from '../../Constructor/service/seo.service';
-@Component({
+import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';@Component({
   selector: 'app-impots-revenue',
   templateUrl: './impots-revenue.component.html',
   styleUrls: ['./impots-revenue.component.scss']
@@ -16,7 +16,8 @@ export class ImpotsRevenueComponent implements OnInit {
   impot: number | null = null;
   impotBrut: number = 0;
   decote: number = 0;
-  constructor(private renderer: Renderer2, private seo: SeoService) { }
+  constructor(  @Inject(PLATFORM_ID) private platformId: Object, 
+private renderer: Renderer2, private seo: SeoService) { }
 
   ngOnInit(): void {
     this.seo.updateMetaData({
@@ -25,6 +26,7 @@ export class ImpotsRevenueComponent implements OnInit {
       url: 'https://www.calculateurfinance.fr/simulateur-impot-revenue',
       // image: 'https://www.calculateurfinance.fr/assets/simulateur-impot-preview.png'
     });
+  if (isPlatformBrowser(this.platformId)) {
 
     const script = this.renderer.createElement('script');
     script.type = 'application/ld+json';
@@ -115,6 +117,7 @@ export class ImpotsRevenueComponent implements OnInit {
       ]
     });
     this.renderer.appendChild(document.head, script);
+  }
   }
 
   calculerParts(): number {

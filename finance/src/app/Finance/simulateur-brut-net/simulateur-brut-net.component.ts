@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { SeoService } from '../../Constructor/service/seo.service';
-
+import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 @Component({
   selector: 'app-simulateur-brut-net',
   templateUrl: './simulateur-brut-net.component.html',
@@ -8,7 +8,8 @@ import { SeoService } from '../../Constructor/service/seo.service';
 })
 export class SimulateurBrutNetComponent implements OnInit {
 
-  constructor(private renderer: Renderer2, private seo: SeoService) { }
+  constructor(  @Inject(PLATFORM_ID) private platformId: Object, 
+private renderer: Renderer2, private seo: SeoService) { }
   ngOnInit() {
 
     this.seo.updateMetaData({
@@ -17,6 +18,7 @@ export class SimulateurBrutNetComponent implements OnInit {
       url: 'https://www.calculateurfinance.fr/simulateur-brut-net',
       // image: 'https://www.calculateurfinance.fr/assets/simulateur-brut-net-preview.png'
     });
+  if (isPlatformBrowser(this.platformId)) {
 
     const script = this.renderer.createElement('script');
     script.type = 'application/ld+json';
@@ -106,9 +108,9 @@ export class SimulateurBrutNetComponent implements OnInit {
         }
       ]
     })
-
+ 
     this.renderer.appendChild(document.head, script);
-
+ }
   }
 
   typeSalaire = [

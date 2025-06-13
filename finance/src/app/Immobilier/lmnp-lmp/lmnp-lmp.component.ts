@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { SeoService } from '../../Constructor/service/seo.service';
-
+import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 @Component({
   selector: 'app-lmnp-lmp',
   templateUrl: './lmnp-lmp.component.html',
@@ -8,7 +8,8 @@ import { SeoService } from '../../Constructor/service/seo.service';
 
 })
 export class LmnpLmpComponent implements OnInit {
-  constructor(private renderer: Renderer2, private seo: SeoService) { }
+  constructor(  @Inject(PLATFORM_ID) private platformId: Object, 
+private renderer: Renderer2, private seo: SeoService) { }
 
   ngOnInit(): void {
     this.seo.updateMetaData({
@@ -17,6 +18,7 @@ export class LmnpLmpComponent implements OnInit {
       url: 'https://www.calculateurfinance.fr/simulateur-lmnp-lmp',
       // image: 'https://www.calculateurfinance.fr/assets/simulateur-lmnp-lmp-preview.png'
     });
+  if (isPlatformBrowser(this.platformId)) {
 
     const script = this.renderer.createElement('script');
     script.type = 'application/ld+json';
@@ -108,6 +110,7 @@ export class LmnpLmpComponent implements OnInit {
     });
     this.renderer.appendChild(document.head, script);
   }
+}
 
   // Options du dropdown régime fiscal
   regimes = [

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SeoService } from '../service/seo.service'; // ajuste le chemin si besoin
 import { pages } from './article.model';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-generateur-article',
   templateUrl: './generateur-article.component.html',
@@ -14,6 +15,7 @@ export class ContenuPageComponent implements OnInit {
 
 
   constructor(
+
     private route: ActivatedRoute,
     private seoService: SeoService
   ) {}
@@ -34,3 +36,5 @@ export class ContenuPageComponent implements OnInit {
     });
   }
 }
+
+

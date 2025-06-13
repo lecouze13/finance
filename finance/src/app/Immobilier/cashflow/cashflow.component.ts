@@ -1,13 +1,14 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { SeoService } from '../../Constructor/service/seo.service';
-
+import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 @Component({
   selector: 'app-cashflow',
   templateUrl: './cashflow.component.html',
   styleUrl: './cashflow.component.scss'
 })
 export class CashflowComponent implements OnInit {
-  constructor(private renderer: Renderer2, private seo: SeoService) { }
+  constructor(  @Inject(PLATFORM_ID) private platformId: Object, 
+private renderer: Renderer2, private seo: SeoService) { }
   ngOnInit(): void {
     this.seo.updateMetaData({
       title: 'Simulateur cashflow immobilier 2025 | CalculateurFinance.fr',
@@ -15,6 +16,7 @@ export class CashflowComponent implements OnInit {
       url: 'https://www.calculateurfinance.fr/simulateur-cashflow-immobilier',
       // image: 'https://www.calculateurfinance.fr/assets/simulateur-cashflow-preview.png'
     });
+  if (isPlatformBrowser(this.platformId)) {
 
     const script = this.renderer.createElement('script');
     script.type = 'application/ld+json';
@@ -105,6 +107,7 @@ export class CashflowComponent implements OnInit {
       ]
     });
     this.renderer.appendChild(document.head, script);
+  }
   }
 
   Element: string[] = ['Loyer', 'Crédit', 'Charges', 'Impôts'];

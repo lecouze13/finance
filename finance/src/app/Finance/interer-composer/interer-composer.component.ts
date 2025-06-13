@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { SeoService } from '../../Constructor/service/seo.service';
-
+import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 
 interface Actif {
   nom: string | null;
@@ -17,7 +17,8 @@ interface Actif {
   styleUrls: ['./interer-composer.component.scss']
 })
 export class IntererComposerComponent implements OnInit {
-  constructor(private renderer: Renderer2, private seo: SeoService) { }
+  constructor(  @Inject(PLATFORM_ID) private platformId: Object, 
+private renderer: Renderer2, private seo: SeoService) { }
 
   ngOnInit(): void {
 
@@ -27,6 +28,7 @@ export class IntererComposerComponent implements OnInit {
       url: 'https://www.calculateurfinance.fr/simulateur-interet-compose',
       // image: 'https://www.calculateurfinance.fr/assets/simulateur-interet-compose-preview.png'
     });
+  if (isPlatformBrowser(this.platformId)) {
 
     const script = this.renderer.createElement('script');
     script.type = 'application/ld+json';
@@ -117,6 +119,7 @@ export class IntererComposerComponent implements OnInit {
       ]
     });
     this.renderer.appendChild(document.head, script);
+  }
   }
 
 

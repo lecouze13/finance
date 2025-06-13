@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { SeoService } from '../../Constructor/service/seo.service';
-
+import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 interface TrancheIFI {
   plafondInf: number;
   plafondSup: number;
@@ -28,7 +28,8 @@ export class SimulateurImpotFortuneImmobiliereComponent implements OnInit {
     { plafondInf: 10000000, plafondSup: Number.POSITIVE_INFINITY, taux: 0.015, impot: 0 }
   ];
 
-  constructor(private renderer: Renderer2, private seo: SeoService) {}
+  constructor(  @Inject(PLATFORM_ID) private platformId: Object, 
+private renderer: Renderer2, private seo: SeoService) {}
 
   ngOnInit(): void {
     this.seo.updateMetaData({
@@ -36,6 +37,7 @@ export class SimulateurImpotFortuneImmobiliereComponent implements OnInit {
       description: 'Calculez votre IFI selon le barème progressif 2025 avec ventilation par tranche. Simulateur précis et rapide.',
       url: 'https://calculateurfinance.fr/simulateur-impot-fortune-immobiliere'
     });
+  if (isPlatformBrowser(this.platformId)) {
 
     const faqJsonLd = {
       "@context": "https://schema.org",
@@ -88,6 +90,7 @@ export class SimulateurImpotFortuneImmobiliereComponent implements OnInit {
     script.type = 'application/ld+json';
     script.text = JSON.stringify(faqJsonLd);
     this.renderer.appendChild(document.head, script);
+  }
   }
 
   calculerIFI(): void {

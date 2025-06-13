@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { SeoService } from '../../Constructor/service/seo.service';
-
+import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 @Component({
   selector: 'app-comparateur-sci-ir-is',
   templateUrl: './comparateur-sci-ir-is.component.html',
@@ -19,7 +19,8 @@ export class ComparateurSciIrIsComponent implements OnInit {
   totalIS = 0;
   gainISvsIR = 0;
 
-  constructor(private renderer: Renderer2, private seo: SeoService) { }
+  constructor(  @Inject(PLATFORM_ID) private platformId: Object, 
+private renderer: Renderer2, private seo: SeoService) { }
   ngOnInit(): void {
     this.seo.updateMetaData({
       title: 'Comparateur SCI à l’IR vs SCI à l’IS 2025 | CalculateurFinance.fr',
@@ -27,6 +28,7 @@ export class ComparateurSciIrIsComponent implements OnInit {
       url: 'https://www.calculateurfinance.fr/comparateur-sci-ir-vs-is',
       // image: 'https://www.calculateurfinance.fr/assets/comparateur-sci-preview.png'
     });
+  if (isPlatformBrowser(this.platformId)) {
 
     const script = this.renderer.createElement('script');
     script.type = 'application/ld+json';
@@ -118,6 +120,7 @@ export class ComparateurSciIrIsComponent implements OnInit {
     });
     this.renderer.appendChild(document.head, script);
   }
+}
 
   calculer() {
     const revenuNet = this.revenus - this.charges;
