@@ -1,10 +1,9 @@
 [build]
-  command = "npm run prerender"
+  base = "finance"
   publish = "dist/finance/browser"
-  functions = "netlify/functions"
-
+  command = "npm run prerender"
 
 [[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
+  from = "/*"
+  to = "/index.html"
+  status = 200
