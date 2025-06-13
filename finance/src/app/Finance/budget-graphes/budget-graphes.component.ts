@@ -23,6 +23,8 @@ export class BudgetGraphesComponent {
     @Inject(PLATFORM_ID) private platformId: any
   ) { }
   ngOnInit() {
+        if (isPlatformBrowser(this.platformId)) {
+
     console.log(this.categoriesList);
     var data = JSON.parse(localStorage.getItem('data') || '{}');
 
@@ -44,7 +46,6 @@ export class BudgetGraphesComponent {
     this.percentagesCategory.map((elt: any) => elt.value = Math.round((elt.value / this.sommesTotal) * 100))
     console.log(this.percentagesCategory)
 
-    if (isPlatformBrowser(this.platformId)) {
 
       const documentStyle = getComputedStyle(document.documentElement);
       const textColor = documentStyle.getPropertyValue('--text-color');
