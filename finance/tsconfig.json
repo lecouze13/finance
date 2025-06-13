@@ -31,7 +31,10 @@
   },
   
   "exclude": [
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+       "src/app/app.config.ts",
+    "src/main.ts"
+  
   ]
 
 }
