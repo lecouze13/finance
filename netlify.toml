@@ -1,6 +1,6 @@
 [build]
   publish = "dist/finance/browser"
-  command = "npm run prerender"
+  command = "npm run build"
 
 [[redirects]]
   from = "/*"
