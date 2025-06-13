@@ -37,7 +37,7 @@ export class BudgetComponent implements OnInit {
   categoriesList: { label: string; value: string }[] =
     [{ label: 'Dépenses essentiels', value: 'essentiels' }, { label: 'Sorties-Loisirs', value: 'loisirs' }, { label: 'Epargne', value: 'epargne' }];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+  constructor(@Inject(PLATFORM_ID) private platformId: any,
     private renderer: Renderer2, private seo: SeoService) { }
 
   ngOnInit() {

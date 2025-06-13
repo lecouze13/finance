@@ -16,7 +16,7 @@ export class ImpotsRevenueComponent implements OnInit {
   impot: number | null = null;
   impotBrut: number = 0;
   decote: number = 0;
-  constructor(  @Inject(PLATFORM_ID) private platformId: Object, 
+  constructor(  @Inject(PLATFORM_ID) private platformId: any, 
 private renderer: Renderer2, private seo: SeoService) { }
 
   ngOnInit(): void {

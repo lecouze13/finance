@@ -28,7 +28,7 @@ export class SimulateurImpotFortuneImmobiliereComponent implements OnInit {
     { plafondInf: 10000000, plafondSup: Number.POSITIVE_INFINITY, taux: 0.015, impot: 0 }
   ];
 
-  constructor(  @Inject(PLATFORM_ID) private platformId: Object, 
+  constructor(  @Inject(PLATFORM_ID) private platformId: any, 
 private renderer: Renderer2, private seo: SeoService) {}
 
   ngOnInit(): void {

@@ -17,7 +17,7 @@ interface Actif {
   styleUrls: ['./interer-composer.component.scss']
 })
 export class IntererComposerComponent implements OnInit {
-  constructor(  @Inject(PLATFORM_ID) private platformId: Object, 
+  constructor(  @Inject(PLATFORM_ID) private platformId: any, 
 private renderer: Renderer2, private seo: SeoService) { }
 
   ngOnInit(): void {

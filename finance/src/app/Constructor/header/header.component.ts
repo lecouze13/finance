@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   items: MenuItem[] | undefined;
   afficherCalculatrice: boolean = false;
 
-  constructor( private platformId: Object, 
+  constructor(  
 private router: Router) {}
 
   ngOnInit() {

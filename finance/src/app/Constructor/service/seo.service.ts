@@ -5,7 +5,7 @@ import { Title, Meta } from '@angular/platform-browser';
   providedIn: 'root'
 })
 export class SeoService {
-  constructor(  @Inject(PLATFORM_ID) private platformId: Object, 
+  constructor( 
 private title: Title, private meta: Meta) {}
 
   updateMetaData(options: {

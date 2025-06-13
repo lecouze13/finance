@@ -20,7 +20,7 @@ export class BudgetGraphesComponent {
   constructor(
     private renderer: Renderer2,
     private seo: SeoService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: any
   ) { }
   ngOnInit() {
     console.log(this.categoriesList);

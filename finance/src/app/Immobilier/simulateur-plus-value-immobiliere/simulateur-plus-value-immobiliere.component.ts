@@ -17,7 +17,7 @@ export class SimulateurPlusValueImmobiliereComponent implements OnInit {
   plusValue: number | null = null;
   impositionTotale: number | null = null;
 
-  constructor(  @Inject(PLATFORM_ID) private platformId: Object, 
+  constructor(  @Inject(PLATFORM_ID) private platformId: any, 
 private renderer: Renderer2,private seo: SeoService) {}
 
   ngOnInit(): void {
