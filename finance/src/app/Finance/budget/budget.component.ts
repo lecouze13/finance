@@ -154,7 +154,7 @@ export class BudgetComponent implements OnInit {
           }
         }
       };
-    }
+
     this.data$.subscribe(data => {
       this.data$ = data;
     });
@@ -185,6 +185,7 @@ export class BudgetComponent implements OnInit {
       };
       this.dataSubject.next(this.updatedData);
     }
+  }
   }
 
   private initializeData() {
@@ -245,6 +246,7 @@ export class BudgetComponent implements OnInit {
           data: [...this.dataSubject.getValue().datasets[0].data, this.depense]
         }]
       };
+    if (isPlatformBrowser(this.platformId)) {
 
       var storedData = [];
       if (localStorage.getItem('data') !== null) {
@@ -261,12 +263,14 @@ export class BudgetComponent implements OnInit {
       this.nomDepense = '';
       this.depense = 0;
       this.categories = { label: '', value: '' };
+    }
 
     }
 
   }
 
   addRevenue() {
+    if (isPlatformBrowser(this.platformId)) {
 
 
     if (this.nomRevenue && this.revenue >= 0) {
@@ -284,8 +288,11 @@ export class BudgetComponent implements OnInit {
       this.nomRevenue = '';
       this.revenue = 0;
     }
+    }
   }
   reset() {
+        if (isPlatformBrowser(this.platformId)) {
+
     localStorage.clear();
     this.labels = [];
     this.sommeDepense = 0;
@@ -299,9 +306,12 @@ export class BudgetComponent implements OnInit {
     this.updatedData = undefined
     this.categoriesDepense = '';
     this.categories = { label: '', value: '' };
+        }
   }
 
   delete(index: number) {
+        if (isPlatformBrowser(this.platformId)) {
+
     this.sommeDepense -= this.dataSubject.getValue().datasets[0].data[index];
     this.cashflow = this.sommeRevenue - this.sommeDepense;
     this.dataSubject.getValue().datasets[0].data.splice(index, 1);
@@ -328,7 +338,10 @@ export class BudgetComponent implements OnInit {
     storedData.splice(index, 1);
     localStorage.setItem('data', JSON.stringify(storedData));
   }
+  }
   delete2(index: number) {
+        if (isPlatformBrowser(this.platformId)) {
+
     this.sommeRevenue -= this.revenueData[index].revenue;
     this.cashflow = this.sommeRevenue - this.sommeDepense;
 
@@ -343,6 +356,7 @@ export class BudgetComponent implements OnInit {
     }
 
     localStorage.setItem('revenue', JSON.stringify(this.revenueData));
+        }
   }
   compare() {
     this.isCompare = !this.isCompare;
