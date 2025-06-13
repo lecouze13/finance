@@ -8,7 +8,7 @@
     "build:ssr": "ng build --configuration production && ng run finance:server:production",
     "serve:ssr": "node dist/finance-server/main.js",
     "netlify:build": "ng build && ng run finance:server",
-    "prerender": "ng run finance:prerender --verbose --no-error-on-warnings",
+    "prerender": "ng run finance:prerender:production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:finance": "node dist/finance/server/server.mjs"

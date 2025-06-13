@@ -1,5 +1,4 @@
 [build]
-  base = "finance"
   publish = "dist/finance/browser"
   command = "npm run prerender"
 

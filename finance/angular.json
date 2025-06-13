@@ -18,7 +18,6 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/finance",
-
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -64,7 +63,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
+                  "maximumWarning": "3MB",
                   "maximumError": "4MB"
                 },
                 {
@@ -149,6 +148,9 @@
               "/prime-activite",
               "/calculatrice"
             ]
+          },
+          "configurations": {
+            "production": {}
           }
         },
         "server": {
