@@ -1,5 +1,5 @@
 [build]
-  command = "npm install --legacy-peer-deps && npm run netlify:build"
+  command = "npm run prerender"
   publish = "dist/finance/browser"
   functions = "netlify/functions"
 
