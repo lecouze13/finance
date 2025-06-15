@@ -22,6 +22,7 @@ import { SimulateurRetraiteComponent } from './Finance/simulateur-retraite/simul
 import { SimulateurPlusValueImmobiliereComponent } from './Immobilier/simulateur-plus-value-immobiliere/simulateur-plus-value-immobiliere.component';
 import { ComparateurSciIrIsComponent } from './Immobilier/comparateur-sci-ir-is/comparateur-sci-ir-is.component';
 import { ContenuPageComponent } from './Constructor/generateur-article/generateur-article.component';
+import { SimulateurCreditLombardComponent } from './Finance/simulateur-credit-lombard/simulateur-credit-lombard.component';
 
 export const routes: Routes = [
     { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -44,8 +45,10 @@ export const routes: Routes = [
     { path: AppRoutes.RETRAITE, component: SimulateurRetraiteComponent },
     { path: AppRoutes.SCI_VS_IR, component: ComparateurSciIrIsComponent },
     { path: AppRoutes.PLUS_VALUE_IMMOBILIERE, component: SimulateurPlusValueImmobiliereComponent },
+    { path: AppRoutes.CREDIT_LOMBARD, component: SimulateurCreditLombardComponent },
 
-    //  { path: 'article/:slug', component: ContenuPageComponent }, // ex: /page/assurance-vie
+    { path: 'article/:slug', component: ContenuPageComponent }, // ex: /page/assurance-vie
+    { path: 'article/pea', component: ContenuPageComponent }, // ex: /page/assurance-vie
 
     { path: '**', redirectTo: '', pathMatch: 'full' }
 

@@ -20,21 +20,20 @@ export class ContenuPageComponent implements OnInit {
     private seoService: SeoService
   ) {}
 
-  ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.pageSlug = params.get('slug') || '';
-      this.pageData = pages[this.pageSlug];
+ngOnInit() {
+  this.pageSlug = this.route.snapshot.paramMap.get('slug') || '';
+  this.pageData = pages[this.pageSlug];
 
-      if (this.pageData) {
-        this.seoService.updateMetaData({
-          title: this.pageData.titre + ' | CalculateurFinance.fr',
-          description: this.pageData.description,
-          url: 'https://calculateurfinance.fr/article/' + this.pageSlug,
-          image: '/assets/default-og-image.png'
-        });
-      }
+  if (this.pageData) {
+    this.seoService.updateMetaData({
+      title: this.pageData.titre + ' | CalculateurFinance.fr',
+      description: this.pageData.description,
+      url: 'https://calculateurfinance.fr/article/' + this.pageSlug,
+      image: '/assets/default-og-image.png'
     });
   }
+}
+
 }
 
 

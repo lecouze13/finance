@@ -146,7 +146,17 @@
               "/simulateur-independance-financiere",
               "/retraite",
               "/prime-activite",
-              "/calculatrice"
+              "/calculatrice",
+              "/article/pea-vs-assurance-vie",
+              "/article/pea",
+              "/article/assurance-vie",
+              "/article/perco",
+              "/article/per",
+              "/article/cto",
+              "/article/assurance-vie-luxembourgeoise",
+              "/article/credit-lombard",
+              "/simulateur-credit-lombard"
+              
             ]
           },
           "configurations": {

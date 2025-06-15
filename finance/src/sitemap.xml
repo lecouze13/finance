@@ -142,4 +142,76 @@
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
+
+        <url>
+        <loc>https://calculateurfinance.fr/simulateur-independance-financiere</loc>
+        <lastmod>2025-06-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://calculateurfinance.fr/retraite</loc>
+        <lastmod>2025-06-08</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://calculateurfinance.fr/prime-activite</loc>
+        <lastmod>2025-06-08</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://calculateurfinance.fr/calculatrice</loc>
+        <lastmod>2025-06-08</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://calculateurfinance.fr/article/pea-vs-assurance-vie</loc>
+        <lastmod>2025-06-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://calculateurfinance.fr/article/perco</loc>
+        <lastmod>2025-06-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://calculateurfinance.fr/article/per</loc>
+        <lastmod>2025-06-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://calculateurfinance.fr/article/cto</loc>
+        <lastmod>2025-06-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://calculateurfinance.fr/article/assurance-vie-luxembourgeoise</loc>
+        <lastmod>2025-06-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://calculateurfinance.fr/article/credit-lombard</loc>
+        <lastmod>2025-06-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+</urlset>
+
 </urlset>

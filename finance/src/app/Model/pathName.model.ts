@@ -19,5 +19,6 @@ export const AppRoutes = {
   RETRAITE: 'simulateur-retraite',
   PLUS_VALUE_IMMOBILIERE: 'simulateur-plus-value-immobiliere',
   SCI_VS_IR: 'comparateur-sci-impot',
+  CREDIT_LOMBARD: 'simulateur-credit-lombard',
 
 };

@@ -188,6 +188,37 @@ export const pages: {
   <p>L’assurance vie luxembourgeoise est un outil performant pour les investisseurs recherchant une combinaison de sécurité juridique, de flexibilité et de stratégie patrimoniale internationale. Elle s’adresse particulièrement aux profils fortunés ou internationaux.</p>
   `,
 },
+'credit-lombard': {
+  titre: 'Crédit Lombard',
+  description:
+    "Le crédit lombard est un prêt garanti par un portefeuille de titres financiers, offrant une solution de financement flexible et rapide pour les investisseurs disposant d’actifs.",
+  contenu: `
+  <h2>Introduction</h2>
+  <p>Le <strong>crédit lombard</strong> est un prêt à court ou moyen terme accordé par une banque ou un établissement financier, garanti par un portefeuille de valeurs mobilières (actions, obligations, OPCVM, contrats d’assurance vie, etc.). Il permet d’obtenir des liquidités sans avoir à vendre ses actifs.</p>
+
+  <h2>Fonctionnement</h2>
+  <p>Le montant du crédit dépend de la valeur des titres mis en garantie, appelée valeur de nantissement, et du niveau de risque de ces actifs. Le ratio de prêt varie généralement entre 50 % et 90 % selon la qualité du portefeuille.</p>
+  <p>Le crédit peut être utilisé librement : financement personnel, investissement immobilier, réinvestissement en bourse, etc. Les intérêts sont dus uniquement sur les sommes utilisées.</p>
+
+  <h2>Fiscalité</h2>
+  <ul>
+    <li>Pas de fiscalité spécifique liée à la mise en place du crédit lombard.</li>
+    <li>Les intérêts d’emprunt peuvent, dans certains cas, être déductibles des revenus (notamment dans le cadre de l’ISF/IFI ou d’un montage patrimonial structuré).</li>
+    <li>Les actifs nantissants ne sont pas vendus, ce qui évite la réalisation de plus-values et donc l’imposition immédiate.</li>
+  </ul>
+
+  <h2>Avantages</h2>
+  <ul>
+    <li><strong>Accès rapide à des liquidités</strong> sans avoir à désinvestir.</li>
+    <li><strong>Optimisation fiscale</strong> : maintien des titres en portefeuille, report de l’imposition des plus-values.</li>
+    <li><strong>Effet de levier</strong> : possibilité de réinvestir les fonds empruntés pour augmenter le rendement global du patrimoine.</li>
+    <li><strong>Souplesse</strong> dans le remboursement : crédit in fine ou amortissable, taux fixe ou variable.</li>
+  </ul>
+
+  <h2>Conclusion</h2>
+  <p>Le crédit lombard est un outil de financement patrimonial puissant, permettant de mobiliser la valeur d’un portefeuille sans le vendre. Il s’adresse particulièrement aux investisseurs avertis ou fortunés souhaitant gérer leur trésorerie ou optimiser leur stratégie financière sans perturber leur allocation d’actifs.</p>
+  `,
+}
 
    
   

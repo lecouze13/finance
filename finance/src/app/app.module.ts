@@ -55,6 +55,7 @@ import { ReactiveFormsModule } from '@angular/forms'; // Optionnel mais souvent 
 import { ContenuPageComponent } from './Constructor/generateur-article/generateur-article.component';
 import { SimulateurIndependaceFinanciereComponent } from './Finance/simulateur-independace-financiere/simulateur-independace-financiere.component';
 import { SimulateurImpotFortuneImmobiliereComponent } from './Finance/simulateur-impot-fortune-immobiliere/simulateur-impot-fortune-immobiliere.component';
+import { SimulateurCreditLombardComponent } from './Finance/simulateur-credit-lombard/simulateur-credit-lombard.component';
 
 @NgModule({
     declarations: [
@@ -81,7 +82,8 @@ import { SimulateurImpotFortuneImmobiliereComponent } from './Finance/simulateur
         SimulateurPlusValueImmobiliereComponent,
         ContenuPageComponent,
         SimulateurIndependaceFinanciereComponent,
-        SimulateurImpotFortuneImmobiliereComponent
+        SimulateurImpotFortuneImmobiliereComponent,
+        SimulateurCreditLombardComponent
     ],
     imports: [
         BrowserModule,
