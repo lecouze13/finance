@@ -20,5 +20,12 @@ export const AppRoutes = {
   PLUS_VALUE_IMMOBILIERE: 'simulateur-plus-value-immobiliere',
   SCI_VS_IR: 'comparateur-sci-impot',
   CREDIT_LOMBARD: 'simulateur-credit-lombard',
-
+  ARTICLE_PEA: 'article/pea',
+  ARTICLE_ASSURANCE_VIE: 'article/assurance-vie',
+  ARTICLE_PEA_VS_ASSURANCE_VIE: 'article/pea-vs-assurance-vie',
+  ARTICLE_PERCO: 'article/perco',
+  ARTICLE_PER: 'article/per',
+  ARTICLE_CTO: 'article/cto',
+  ARTICLE_ASSURANCE_VIE_LUX: 'article/assurance-vie-luxembourgeoise',
+  ARTICLE_CREDIT_LOMBARD: 'article/credit-lombard',
 };

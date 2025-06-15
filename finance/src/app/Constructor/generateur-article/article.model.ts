@@ -217,9 +217,12 @@ export const pages: {
 
   <h2>Conclusion</h2>
   <p>Le crédit lombard est un outil de financement patrimonial puissant, permettant de mobiliser la valeur d’un portefeuille sans le vendre. Il s’adresse particulièrement aux investisseurs avertis ou fortunés souhaitant gérer leur trésorerie ou optimiser leur stratégie financière sans perturber leur allocation d’actifs.</p>
+  <p>Pour estimer le montant que vous pouvez emprunter avec vos titres, essayez notre <a href="/simulateur-credit-lombard">simulateur de crédit lombard</a>.</p>
   `,
+},
+
 }
 
    
   
-};
+

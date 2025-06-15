@@ -46,9 +46,38 @@ export const routes: Routes = [
     { path: AppRoutes.SCI_VS_IR, component: ComparateurSciIrIsComponent },
     { path: AppRoutes.PLUS_VALUE_IMMOBILIERE, component: SimulateurPlusValueImmobiliereComponent },
     { path: AppRoutes.CREDIT_LOMBARD, component: SimulateurCreditLombardComponent },
-
-    { path: 'article/:slug', component: ContenuPageComponent }, // ex: /page/assurance-vie
-    { path: 'article/pea', component: ContenuPageComponent }, // ex: /page/assurance-vie
+    {
+        path: 'article/pea',
+        component: ContenuPageComponent
+    },
+    {
+        path: 'article/assurance-vie',
+        component: ContenuPageComponent
+    },
+    {
+        path: 'article/pea-vs-assurance-vie',
+        component: ContenuPageComponent
+    },
+    {
+        path: 'article/perco',
+        component: ContenuPageComponent
+    },
+    {
+        path: 'article/per',
+        component: ContenuPageComponent
+    },
+    {
+        path: 'article/cto',
+        component: ContenuPageComponent
+    },
+    {
+        path: 'article/assurance-vie-luxembourgeoise',
+        component: ContenuPageComponent
+    },
+    {
+        path: 'article/credit-lombard',
+        component: ContenuPageComponent
+    },
 
     { path: '**', redirectTo: '', pathMatch: 'full' }
 
