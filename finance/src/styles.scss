@@ -3,10 +3,6 @@ body {
     color: black;
 }
 
-span>label {
-    /* margin: 5px; */
-    // margin-top: -13px;
-}
 
 
 .img-logo{
@@ -91,6 +87,10 @@ a.router-link {
     /* Un peu plus gras */
     cursor: pointer;
     transition: color 0.3s ease;
+}
+button.p-element.p-button-success.p-button.p-component {
+    width: revert;
+        margin: auto;
 }
 
 a.router-link:hover,
@@ -330,3 +330,8 @@ button.p-button-success:hover {
     background-color: #059669;
     border-color: #059669;
 }
+
+form.card.p-fluid.flex.flex-wrap.gap-4.ng-untouched.ng-pristine.ng-valid.ng-submitted {
+    margin-bottom: 30px;
+}
+

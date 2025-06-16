@@ -31,7 +31,7 @@
           </div>
 
           <br><br>
-          <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="addElement()"
+          <button type="button" pButton label="Calculer" icon="pi pi-check"class="p-button-success" (click)="addElement()"
             [disabled]="!(depense && depense > 0) || (nomDepense === '')"
             pTooltip="Ajouter cette dépense à votre budget" tooltipPosition="top"></button>
         </div>
@@ -56,7 +56,7 @@
           </div>
 
           <br><br>
-          <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="addRevenue()"
+          <button type="button" pButton label="Calculer" icon="pi pi-check"class="p-button-success" (click)="addRevenue()"
             [disabled]="!(revenue && revenue > 0) || (nomRevenue === '')" pTooltip="Ajouter ce revenu à votre budget"
             tooltipPosition="top"></button>
         </div>

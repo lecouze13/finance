@@ -16,8 +16,6 @@
 
 
 
-
-
 Comparateur SCI à l’IR vs IS.
 
 📊 Impôts & fiscalité

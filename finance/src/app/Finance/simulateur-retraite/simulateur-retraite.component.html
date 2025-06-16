@@ -1,1 +1,149 @@
-<p>simulateur-retraite works!</p>
+<main><h1>Simulateur de retraite</h1>
+  <div class="separator"></div><br>
+
+<p>Estimez le montant de votre pension de retraite et le capital équivalent nécessaire pour la financer.</p>
+
+<form [formGroup]="form" (ngSubmit)="calculer()" class="card p-fluid flex flex-wrap gap-4">
+<div class="flex-auto">
+  <p-floatLabel>
+    <p-inputNumber inputId="ageActuel" formControlName="ageActuel" [min]="18" [max]="64"
+      pTooltip="Votre âge aujourd’hui. Min : 18 ans, Max : 64 ans." tooltipPosition="top"></p-inputNumber>
+    <label for="ageActuel">Âge actuel</label>
+  </p-floatLabel>
+</div>
+<div class="flex-auto">
+
+<p-floatLabel>
+    <p-inputNumber
+      formControlName="ageDebutTravail"
+      [min]="0"
+      [max]="120"
+      inputId="ageDebutTravail"
+      mode="decimal"
+      [useGrouping]="false"
+    ></p-inputNumber>
+    <label for="ageDebutTravail">Âge début travail</label>
+  </p-floatLabel>
+  </div>
+
+
+<div class="flex-auto">
+  <p-floatLabel>
+    <p-inputNumber inputId="ageDepart" formControlName="ageDepart" [min]="55" [max]="70"
+      pTooltip="Âge prévu de départ à la retraite. Généralement entre 62 et 67 ans." tooltipPosition="top"></p-inputNumber>
+    <label for="ageDepart">Âge de départ à la retraite</label>
+  </p-floatLabel>
+</div>
+
+<div class="flex-auto">
+  <p-floatLabel>
+    <p-inputNumber inputId="salaireBrutAnnuel" formControlName="salaireBrutAnnuel" [min]="10000" mode="currency" currency="EUR"
+      pTooltip="Salaire brut annuel avant impôt. Utilisé pour estimer votre pension." tooltipPosition="top"></p-inputNumber>
+    <label for="salaireBrutAnnuel">Salaire brut annuel (€)</label>
+  </p-floatLabel>
+</div>
+
+<div class="flex-auto">
+  <p-floatLabel>
+ <p-dropdown 
+  formControlName="typeMetier"
+  [options]="typesMetier"
+  optionLabel="label"
+  optionValue="value"
+  placeholder="Choisissez une profession">
+</p-dropdown>
+
+    <label for="typeMetier">Type de métier</label>
+  </p-floatLabel>
+</div>
+
+
+<div class="flex-auto">
+  <p-floatLabel>
+    <p-inputNumber inputId="tauxRevalorisation" formControlName="tauxRevalorisation" suffix="%" [min]="0"
+      pTooltip="Taux d’augmentation annuelle de votre pension (inflation, réévaluation)." tooltipPosition="top"></p-inputNumber>
+    <label for="tauxRevalorisation">Taux de revalorisation annuelle (%)</label>
+  </p-floatLabel>
+</div>
+
+<div class="flex-auto">
+  <p-floatLabel>
+    <p-inputNumber inputId="dureeRetraite" formControlName="dureeRetraite" [min]="1" [max]="40"
+      pTooltip="Durée pendant laquelle vous percevrez votre retraite. Estimation : 25 à 30 ans." tooltipPosition="top"></p-inputNumber>
+    <label for="dureeRetraite">Durée estimée de la retraite (en années)</label>
+  </p-floatLabel>
+</div>
+
+    <button pButton  type="submit"  label="Calculer" icon="pi pi-check"label="Calculer" icon="pi pi-check"class="p-button-success"  [disabled]="form.invalid" ></button>
+<p class="info-taux" style="font-style: italic; color: #555; margin-top: 1rem;">
+  Les taux indiqués sont des moyennes indicatives. Votre situation personnelle, notamment la durée de cotisation, l’âge de début de travail, et les régimes complémentaires, peuvent influencer le taux de remplacement réel.
+</p>
+
+</form>
+
+<p-panel *ngIf="result" header="Résultats de la simulation" class="mt-4">
+    <p>💰 <strong>Pension mensuelle estimée :</strong> {{ result.pensionMensuelle | number:'1.0-0' }} €</p>
+    <p>🛡️ <strong>Capital retraite équivalent :</strong> {{ result.capitalRetraite | number:'1.0-0' }} €</p>
+    <p>📆 <strong>Durée de cotisation :</strong> {{ result.anneesCotisees }} ans</p>
+</p-panel>
+
+<h2>Comprendre la simulation</h2>
+<p>Ce simulateur vous permet d’estimer votre pension de retraite et le capital nécessaire pour la maintenir. Il s’appuie sur des hypothèses simples comme un taux de remplacement fixe et une revalorisation annuelle moyenne.</p>
+<section class="faq-section" aria-label="Foire aux questions - Simulateur Retraite">
+  <h2>Foire aux questions - Retraite</h2>
+  <dl>
+    <dt>Quel est l’âge légal de départ à la retraite en France ?</dt>
+    <dd>
+      Depuis la réforme de 2023, l’âge légal est progressivement relevé à 64 ans pour les personnes nées à partir de 1968.
+    </dd>
+
+    <dt>Comment est calculée ma pension de retraite ?</dt>
+    <dd>
+      Elle dépend de vos revenus annuels moyens, de la durée de cotisation, du nombre de trimestres validés, et du régime de retraite auquel vous êtes affilié.
+    </dd>
+
+    <dt>Puis-je partir plus tôt avec une carrière longue ?</dt>
+    <dd>
+      Oui, sous certaines conditions, il est possible de partir avant l’âge légal si vous avez commencé à travailler jeune et cumulé suffisamment de trimestres.
+    </dd>
+
+    <dt>Quel est le montant minimum de pension retraite ?</dt>
+    <dd>
+      Le minimum contributif est d’environ 750 € par mois pour les assurés ayant une carrière complète à faible revenu.
+    </dd>
+
+    <dt>Comment valider un trimestre de retraite ?</dt>
+    <dd>
+      En 2025, il faut percevoir au moins 1 690 € brut sur l’année pour valider un trimestre dans le régime général.
+    </dd>
+
+    <dt>Les indépendants ont-ils droit à une retraite ?</dt>
+    <dd>
+      Oui, les indépendants cotisent à un régime spécifique (SSI ou CARMF, CIPAV…) et perçoivent une pension selon leurs cotisations.
+    </dd>
+
+    <dt>Puis-je cumuler emploi et retraite ?</dt>
+    <dd>
+      Oui, le cumul emploi-retraite est possible, partiel ou total, selon votre situation et votre régime.
+    </dd>
+
+    <dt>Comment racheter des trimestres ?</dt>
+    <dd>
+      Vous pouvez racheter jusqu’à 12 trimestres pour années incomplètes ou études supérieures, sous conditions et avec un coût variable.
+    </dd>
+
+    <dt>Dois-je déclarer ma retraite aux impôts ?</dt>
+    <dd>
+      Oui, les pensions de retraite sont imposables et doivent être déclarées comme des revenus.
+    </dd>
+
+    <dt>Existe-t-il un simulateur officiel de retraite ?</dt>
+    <dd>
+      Oui, le site <a href="https://www.info-retraite.fr" target="_blank" rel="noopener">Info-Retraite.fr</a> propose un simulateur officiel inter-régimes pour estimer votre retraite.
+    </dd>
+  </dl>
+</section>
+</main>
+
+
+

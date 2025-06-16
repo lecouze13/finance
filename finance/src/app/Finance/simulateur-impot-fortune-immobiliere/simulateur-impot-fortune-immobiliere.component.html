@@ -1,5 +1,7 @@
 <main>
   <h1>Simulateur IFI 2025</h1>
+    <div class="separator"></div><br>
+
   <p>Calculez votre impôt sur la fortune immobilière avec une ventilation par tranche.</p>
 
   <div class="card p-fluid flex flex-wrap gap-4 mt-4">
@@ -12,7 +14,7 @@
     </div>
 
     <div class="flex-auto mt-2">
-      <button pButton aria-label="Calculer l’IFI" icon="pi pi-check" (click)="calculerIFI()" [disabled]="!valeurNetteTaxable" class="p-button-success"></button>
+      <button pButton aria-label="Calculer l’IFI" label="Calculer" icon="pi pi-check"(click)="calculerIFI()" [disabled]="!valeurNetteTaxable" class="p-button-success"></button>
       <!-- <button pButton label="Réinitialiser" class="p-button-secondary ml-2" icon="pi pi-refresh" (click)="reset()"></button> -->
     </div>
   </div>

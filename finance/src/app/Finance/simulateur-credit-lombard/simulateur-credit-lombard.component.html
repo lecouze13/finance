@@ -1,5 +1,6 @@
 <main>
   <h1>Simulateur de crédit lombard</h1>
+  <div class="separator"></div><br>
 
 <form [formGroup]="form" (ngSubmit)="calculer()" class="form-lombard">
   <p-panel header="Paramètres du crédit">
@@ -47,7 +48,7 @@
     <button pButton icon="pi pi-plus" label="Ajouter un actif" type="button" (click)="addActif()" class="mt-2"></button>
   </p-panel>
 
-  <button pButton type="submit" label="Calculer" class="p-button-success"></button>
+  <button pButton type="submit" label="Calculer" icon="pi pi-check"class="p-button-success"></button>
 </form>
 
 <p-panel *ngIf="resultat" header="Résultats de la simulation" class="mt-4">

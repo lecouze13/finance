@@ -89,7 +89,7 @@
         </div>
         <div *ngIf="isCalculCoutTotal">
 
-            <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="calculCoutTotal()"
+            <button type="button" pButton label="Calculer" icon="pi pi-check"class="p-button-success" (click)="calculCoutTotal()"
                 [disabled]=" !(sommeEmprunte &&sommeEmprunte>0) || !(dureeDuCredit && dureeDuCredit>0)
           || !(interet && interet>0)
         
@@ -97,7 +97,7 @@
         "></button>
         </div>
         <div *ngIf="isCalculMensualite">
-            <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="calculMensualite()"
+            <button type="button" pButton label="Calculer" icon="pi pi-check"class="p-button-success" (click)="calculMensualite()"
                 [disabled]=" !(sommeEmprunte &&sommeEmprunte>0) || !(dureeDuCredit && dureeDuCredit>0)
               || !(interet && interet>0) 
             
@@ -106,7 +106,7 @@
         </div>
 
         <div *ngIf="isCapaciteEmprunt">
-            <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="calculCapaciteEmprunt()"
+            <button type="button" pButton label="Calculer" icon="pi pi-check"class="p-button-success" (click)="calculCapaciteEmprunt()"
                 [disabled]=" !(mensualite &&mensualite>0) || !(dureeDuCredit && dureeDuCredit>0)
               || !(interet && interet>0) 
             

@@ -220,6 +220,51 @@ export const pages: {
   <p>Pour estimer le montant que vous pouvez emprunter avec vos titres, essayez notre <a href="/simulateur-credit-lombard">simulateur de crédit lombard</a>.</p>
   `,
 },
+'etf': {
+  titre: 'ETF (Exchange Traded Funds) ',
+  description:
+    "Les ETF (Exchange Traded Funds) permettent d'investir facilement et à moindre coût sur les marchés financiers. Découvrez comment ils fonctionnent, leurs avantages et leurs usages pour les investisseurs particuliers.",
+  contenu: `
+  <h2>Qu’est-ce qu’un ETF&nbsp;?</h2>
+  <p>Un <strong>ETF</strong> (Exchange Traded Fund), aussi appelé <strong>tracker</strong>, est un fonds d’investissement coté en bourse qui réplique la performance d’un indice (comme le CAC 40, le S&P 500, le MSCI World, etc.). Il permet d’investir facilement dans un panier d’actions ou d’obligations, tout en bénéficiant d’une grande liquidité.</p>
+
+  <h2>Comment ça fonctionne&nbsp;?</h2>
+  <p>Les ETF sont achetés et vendus en bourse comme des actions classiques. Leur prix évolue tout au long de la journée, en fonction de la valeur de l’indice qu’ils suivent. Ils peuvent être logés dans un <strong>PEA</strong>, une <strong>assurance vie</strong>, un <strong>compte-titres</strong> ou un <strong>PER</strong>.</p>
+  <p>Ils peuvent être à réplication <strong>physique</strong> (achat réel des actifs) ou <strong>synthétique</strong> (via un contrat avec une banque).</p>
+
+  <h2>Avantages des ETF</h2>
+  <ul>
+    <li><strong>Frais réduits</strong> : bien moins chers que les fonds traditionnels (souvent moins de 0,30&nbsp;% par an).</li>
+    <li><strong>Diversification immédiate</strong> : avec un seul achat, vous accédez à des dizaines voire des centaines d’actifs.</li>
+    <li><strong>Transparence</strong> : composition des ETF publique et mise à jour quotidienne.</li>
+    <li><strong>Souplesse d’utilisation</strong> : achat et vente en temps réel, possibilité d’investissement programmé.</li>
+  </ul>
+
+  <h2>Risques à connaître</h2>
+  <ul>
+    <li><strong>Risque de marché</strong> : comme tout investissement en bourse, le capital n’est pas garanti.</li>
+    <li><strong>Risque de tracking error</strong> : l’ETF peut s’écarter légèrement de l’indice qu’il réplique.</li>
+    <li><strong>Risque de change</strong> : pour les ETF libellés en devises étrangères non couvertes.</li>
+  </ul>
+
+  <h2>Utilisation dans une stratégie long terme</h2>
+  <p>Les ETF sont particulièrement adaptés à une <strong>stratégie passive</strong> d’investissement à long terme (approche “buy & hold”). Ils permettent de construire un portefeuille robuste, mondialement diversifié et très peu coûteux.</p>
+  <p>Ils sont souvent utilisés dans les portefeuilles de type <em>lazy portfolios</em> ou dans une stratégie d’indépendance financière (FIRE).</p>
+
+  <h2>Fiscalité</h2>
+  <p>La fiscalité dépend du support utilisé&nbsp;:</p>
+  <ul>
+    <li>Dans un <strong>PEA</strong> : exonération d’impôt sur les plus-values après 5 ans, hors prélèvements sociaux.</li>
+    <li>Dans une <strong>assurance vie</strong> : fiscalité avantageuse après 8 ans, selon les retraits effectués.</li>
+    <li>Dans un <strong>compte-titres</strong> : imposition au PFU (30&nbsp;%), ou au barème progressif si option.</li>
+  </ul>
+
+  <h2>Conclusion</h2>
+  <p>Les ETF sont un outil moderne, simple et efficace pour investir en bourse. Ils s’adressent aussi bien aux débutants qu’aux investisseurs expérimentés souhaitant optimiser leur performance sur le long terme sans y consacrer trop de temps. Avant d’investir, il est essentiel de bien choisir ses indices et son enveloppe fiscale.</p>
+  <p>Envie de construire un portefeuille ETF personnalisé&nbsp;? Découvrez nos outils pour comparer les supports d’investissement (PEA, PER, assurance vie, CTO) et simuler vos performances potentielles.</p>
+  `
+}
+
 
 }
 

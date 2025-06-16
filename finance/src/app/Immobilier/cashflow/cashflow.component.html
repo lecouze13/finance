@@ -12,7 +12,7 @@
                 <label for="{{element}}">{{element}}</label>
             </p-floatLabel>
         </div>
-        <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="calculCashflow()" [disabled]="
+        <button type="button" pButton label="Calculer" icon="pi pi-check"class="p-button-success" (click)="calculCashflow()" [disabled]="
         !( values['Loyer']>0) ||
         !(values['Charges']>0) ||
         !( values['Impôts']>0 ) || 

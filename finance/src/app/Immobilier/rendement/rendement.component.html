@@ -19,7 +19,7 @@
             <label for="prixAcquisition">Prix d'acquisition (frais de notaire + agence compris)</label>
         </p-floatLabel>
     </div>
-    <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="calculRendementBrut()"
+    <button type="button" pButton label="Calculer" icon="pi pi-check"class="p-button-success" (click)="calculRendementBrut()"
     [disabled]=" !(prixAcquisition &&prixAcquisition>0) || !(loyerMensuel && loyerMensuel>0)"></button>
 </div>
 
@@ -49,7 +49,7 @@
             <label for="chargeLocatives">Charges locatives (taxe d'habitation comprise)</label>
         </p-floatLabel>
     </div>
-    <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="calculRendementNet()"
+    <button type="button" pButton label="Calculer" icon="pi pi-check"class="p-button-success" (click)="calculRendementNet()"
     [disabled]=" !(prixAcquisition2 &&prixAcquisition2>0) || !(loyerMensuel2 && loyerMensuel2>0)|| !(chargeLocatives && chargeLocatives>0)"></button>
 </div>
 
@@ -85,7 +85,7 @@
             <label for="impot">Impôts et prélèvements sociaux</label>
         </p-floatLabel>
     </div>
-    <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="calculRendementNetNet()"
+    <button type="button" pButton label="Calculer" icon="pi pi-check"class="p-button-success" (click)="calculRendementNetNet()"
     [disabled]=" !(prixAcquisition3 &&prixAcquisition3>0) || !(loyerMensuel3 && loyerMensuel3 > 0 ) || !(chargeLocatives2 && chargeLocatives2>0)|| !(impot && impot>0)"></button>
 </div>
 

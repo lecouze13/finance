@@ -78,6 +78,10 @@ export const routes: Routes = [
         path: 'article/credit-lombard',
         component: ContenuPageComponent
     },
+     {
+        path: 'article/etf',
+        component: ContenuPageComponent
+    },
 
     { path: '**', redirectTo: '', pathMatch: 'full' }
 
