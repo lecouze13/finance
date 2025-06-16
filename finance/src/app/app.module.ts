@@ -32,7 +32,7 @@ import { ImpotsRevenueComponent } from './Finance/impots-revenue/impots-revenue.
 import { SimulateurPrimeActiviteComponent } from './Finance/simulateur-prime-activite/simulateur-prime-activite.component';
 import { MenubarModule } from 'primeng/menubar';
 import { ChartModule } from 'primeng/chart';
-
+import { PanelModule } from 'primeng/panel';
 
 import { TabViewModule } from 'primeng/tabview';
 import { CommonModule } from '@angular/common';
@@ -105,7 +105,8 @@ import { SimulateurCreditLombardComponent } from './Finance/simulateur-credit-lo
         CheckboxModule,
         BrowserAnimationsModule,
         NoopAnimationsModule,
-ReactiveFormsModule
+    ReactiveFormsModule,
+    PanelModule
     ],
     providers: [
     provideClientHydration()

@@ -1,1 +1,99 @@
-<p>simulateur-credit-lombard works!</p>
+<main>
+  <h1>Simulateur de crédit lombard</h1>
+
+<form [formGroup]="form" (ngSubmit)="calculer()" class="form-lombard">
+  <p-panel header="Paramètres du crédit">
+    <div class="p-fluid grid">
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="taux" formControlName="taux" mode="decimal" [minFractionDigits]="2" suffix=" %" />
+          <label for="taux">Taux d'intérêt annuel</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="duree" formControlName="duree" [min]="1"  />
+          <label for="duree">Durée du prêt (en années)</label>
+        </p-floatLabel>
+      </div>
+    </div>
+  </p-panel>
+
+  <p-panel header="Actifs donnés en garantie">
+    <div formArrayName="actifs">
+      <div *ngFor="let actif of actifs.controls; let i = index" [formGroupName]="i" class="p-fluid grid border-round surface-100 p-3 mb-3">
+        <div class="flex-auto">
+          <p-dropdown 
+            formControlName="type"
+            [options]="typesActifs"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Type d'actif"
+          ></p-dropdown>
+        </div>
+        <div class="flex-auto">
+          <p-floatLabel>
+            <p-inputNumber inputId="valeur" formControlName="valeur" mode="currency" currency="EUR" />
+            <label for="valeur">Valeur de l’actif</label>
+          </p-floatLabel>
+        </div>
+        <div class="flex-auto flex align-items-center justify-content-end">
+          <button pButton icon="pi pi-trash" class="p-button-danger" type="button" (click)="removeActif(i)" *ngIf="actifs.length > 1"></button>
+        </div>
+      </div>
+    </div>
+
+    <button pButton icon="pi pi-plus" label="Ajouter un actif" type="button" (click)="addActif()" class="mt-2"></button>
+  </p-panel>
+
+  <button pButton type="submit" label="Calculer" class="p-button-success"></button>
+</form>
+
+<p-panel *ngIf="resultat" header="Résultats de la simulation" class="mt-4">
+  <p>🛡️ Montant total mobilisable en garantie : <strong>{{ resultat.montantGarantieTotal | currency:'EUR' }}</strong></p>
+  <p>💰 Montant empruntable : <strong>{{ resultat.capitalEmpruntable | currency:'EUR' }}</strong></p>
+  <p>📆 Mensualité de remboursement : <strong>{{ resultat.mensualite | currency:'EUR' }}</strong> sur {{ resultat.duree }} mois</p>
+  <p>💰 Montant total mis en nantis <strong>{{ resultat.nantis | currency:'EUR' }}</strong>
+  <p>💰 Cout total du crédit <strong>{{ resultat.coutTotalCredit | currency:'EUR' }}</strong>
+
+</p-panel>
+
+  <br><div class="separator"></div><br>
+
+<section class="faq-section" aria-label="Foire aux questions - Crédit Lombard">
+  <h2>FAQ - Crédit Lombard</h2>
+  <dl>
+    <dt>Qu’est-ce qu’un crédit lombard ?</dt>
+    <dd>Le crédit lombard est un prêt adossé à un portefeuille de valeurs mobilières (actions, obligations, OPCVM, assurance-vie en unités de compte) servant de garantie sans être vendu.</dd>
+
+    <dt>Quels types d’actifs peuvent être utilisés en garantie ?</dt>
+    <dd>Les actifs les plus courants sont les actions cotées, les obligations, les OPCVM, et les contrats d’assurance-vie en unités de compte, sous conditions de liquidité et de volatilité.</dd>
+
+    <dt>Quelle est la quotité maximale d’un crédit lombard ?</dt>
+    <dd>Elle varie de 50 % à 90 % selon le type d’actif, sa qualité, sa liquidité et la politique de la banque.</dd>
+
+    <dt>Combien puis-je emprunter avec un portefeuille de 100 000 € ?</dt>
+    <dd>Avec une quotité de 70 %, vous pouvez emprunter jusqu’à 70 000 € sans vendre vos actifs.</dd>
+
+    <dt>Quel est le taux d’intérêt moyen d’un crédit lombard ?</dt>
+    <dd>Il varie entre 2 % et 5 %, souvent indexé sur un taux de référence (ex. Euribor), selon la durée, le montant et votre profil.</dd>
+
+    <dt>Quelle est la durée typique d’un crédit lombard ?</dt>
+    <dd>La durée est souvent de 1 à 5 ans, mais certaines banques peuvent proposer des durées plus longues selon les garanties.</dd>
+
+    <dt>Quels sont les risques d’un crédit lombard ?</dt>
+    <dd>Le principal risque est l’appel de marge : si la valeur des actifs baisse trop, la banque peut demander un remboursement ou vendre une partie du portefeuille.</dd>
+
+    <dt>Peut-on rembourser un crédit lombard par anticipation ?</dt>
+    <dd>Oui, le remboursement anticipé est généralement possible à tout moment sans frais, selon les conditions contractuelles.</dd>
+
+    <dt>Le crédit lombard impacte-t-il la fiscalité ?</dt>
+    <dd>Non, puisque les actifs ne sont pas vendus, il n’y a pas de plus-value imposable. En revanche, les intérêts du prêt ne sont pas toujours déductibles.</dd>
+
+    <dt>Pourquoi utiliser un crédit lombard ?</dt>
+    <dd>Il permet de financer un besoin temporaire (achat immobilier, investissement, fiscalité) tout en conservant son exposition aux marchés financiers.</dd>
+  </dl>
+</section>
+
+</main>

@@ -7,7 +7,6 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  isHomeRoute = true;
 
   constructor(  @Inject(PLATFORM_ID) private platformId: any, 
 ) {}
@@ -21,8 +20,6 @@ export class MainComponent implements OnInit {
         url.includes('investissement') ||
         url.includes('cashflow')
       ) {
-        // C’est bien une route simulateur, pas la home
-        this.isHomeRoute = false;
       }
     }
   }

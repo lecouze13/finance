@@ -68,6 +68,7 @@ max-width: 900px;
     justify-content: center;
     align-items: stretch;
     gap: 30px;
+    
 }
 .p-grid.p-dir-col.p-align-center.p-text-center {
     text-align: center;
@@ -75,4 +76,15 @@ max-width: 900px;
 ;
     flex-direction: column;
     align-items: center;
+}
+
+
+.col-flex-footer{
+  display: flex;
+      gap: 20px;
+
+}
+
+.p-grid {
+    text-align: left;
 }

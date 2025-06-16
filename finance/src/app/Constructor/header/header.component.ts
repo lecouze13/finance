@@ -114,6 +114,10 @@ private router: Router) {}
                 label: 'Salaire brut / net',
                 route: AppRoutes.CONVERTISSEUR_BRUT_NET,
               },
+              {
+                label: 'Simulateur Credit lombard',
+                route: AppRoutes.CREDIT_LOMBARD,
+              },
             ].sort((a, b) => a.label.localeCompare(b.label)),
           },
         ],

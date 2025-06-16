@@ -6,44 +6,238 @@
     
     <!-- Texte d'introduction -->
     <div class="p-col-12 p-mb-3" style="max-width: 900px;">
-      <p class="p-text-justify" style="line-height: 1.6; color: #333;">
-        Ce site web a pour objectif de vous aider à évaluer le rendement de votre investissement immobilier,
-        vous permettant ainsi de déterminer sa rentabilité. Vous trouverez également divers outils financiers pour
-        gérer votre budget, simuler vos mensualités de crédit, estimer votre capacité d'emprunt, et bien plus encore.
-      </p>
+     <p class="p-text-justify" style="line-height: 1.6; color: #333;">
+  Ce site est une plateforme de simulateurs et de calculateurs dédiés à la finance et à l'immobilier. 
+  Il vous permet d'estimer la rentabilité de vos investissements, de simuler vos crédits, de calculer 
+  votre capacité d'emprunt, d'optimiser votre budget et bien plus encore grâce à des outils clairs, précis et accessibles à tous.
+</p>
+
     </div>
 
     <!-- Liens du plan du site -->
-    <div class="p-col-12 p-mb-3">
-      <h4 style="margin-bottom: 1rem; color: #444;">Plan du site</h4>
-      <div class="p-grid p-justify-center" style="max-width: 900px; row-gap: 0.5rem;">
-        <div class="p-col-12 p-sm-6 p-md-4 p-lg-3" *ngFor="let lien of [
-          { text: 'Accueil', url: '/' },
-          { text: 'Rendement locatif', url: '/rendement-locatif' },
-          { text: 'Budget immobilier', url: '/budget-immobilier' },
-          { text: 'Investissement locatif', url: '/investissement-locatif' },
-          { text: 'Cashflow immobilier', url: '/cashflow-immobilier' },
-          { text: 'Calcul emprunt', url: '/calcul-emprunt' },
-          { text: 'TRI immobilier', url: '/tri-immobilier' },
-          { text: 'Achat vs Location', url: '/achat-vs-location' },
-          { text: 'Frais de notaire', url: '/calcul-frais-de-notaire' },
-          { text: 'Intérêt composé', url: '/interet-compose' },
-          { text: 'LMNP / LMP', url: '/lmnp-lmp-regime-fiscal' },
-          { text: 'Impôt sur le revenu', url: '/simulateur-impot-revenue' },
-          { text: 'Brut / Net', url: '/simulateur-brut-net' },
-          { text: 'Comparateur SCI IR/IS', url: '/comparateur-sci-impot' },
-          { text: 'Plus-value immobilière', url: '/simulateur-plus-value-immobiliere' }
-        ]">
-          <p style="margin: 0.2rem 0;">
-            <a [routerLink]="lien.url" style="color: #007b8a; text-decoration: none;" 
-              onmouseover="this.style.textDecoration='underline'" 
-              onmouseout="this.style.textDecoration='none'">
-              {{ lien.text }}
-            </a>
-          </p>
-        </div>
+       <h4 style="margin-bottom: 1rem; color: #444;">Plan du site</h4>
+
+   <div class="col-flex-footer" style="max-width: 900px; margin: auto;">
+
+  <!-- Immobilier -->
+  <section style="margin-bottom: 2rem;">
+    <h5 style="color: #007b8a; border-bottom: 2px solid #007b8a; padding-bottom: 0.3rem;">Immobilier</h5>
+    <div class="p-grid" style="row-gap: 0.5rem;">
+    
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/rendement-locatif" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Rendement locatif</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/budget-immobilier" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Budget immobilier</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/investissement-locatif" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Investissement locatif</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/cashflow-immobilier" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Cashflow immobilier</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/calcul-emprunt" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Calcul emprunt</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/tri-immobilier" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">TRI immobilier</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/achat-vs-location" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Achat vs Location</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/calcul-frais-de-notaire" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Frais de notaire</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/lmnp-lmp-regime-fiscal" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Impôt LMNP / LMP</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/comparateur-sci-impot" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Comparateur SCI IR/IS</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/simulateur-plus-value-immobiliere" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Plus-value immobilière</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/simulateur-impot-fortune-immobiliere" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Impôt sur la fortune immobilière</a>
+        </p>
       </div>
     </div>
+  </section>
+
+  <!-- Finance -->
+  <section style="margin-bottom: 2rem;">
+    <h5 style="color: #007b8a; border-bottom: 2px solid #007b8a; padding-bottom: 0.3rem;">Finance</h5>
+    <div class="p-grid" style="row-gap: 0.5rem;">
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/interet-compose" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Intérêt composé</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/simulateur-impot-revenue" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Impôt sur le revenu</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/simulateur-brut-net" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Brut / Net</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/simulateur-independance-financiere" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Simulateur indépendance financière</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/retraite" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Retraite</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/prime-activite" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Prime activité</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/calculatrice" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Calculatrice</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/credit-lombard" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Crédit lombard</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Articles -->
+  <section style="margin-bottom: 2rem;">
+    <h5 style="color: #007b8a; border-bottom: 2px solid #007b8a; padding-bottom: 0.3rem;">Articles</h5>
+    <div class="p-grid" style="row-gap: 0.5rem;">
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/article/pea" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">PEA</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/article/assurance-vie" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Assurance vie</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/article/pea-vs-assurance-vie" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">PEA vs Assurance vie</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/article/perco" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">PERCO</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/article/per" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">PER</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/article/cto" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">CTO</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/article/assurance-vie-luxembourgeoise" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Assurance vie luxembourgeoise</a>
+        </p>
+      </div>
+      <div class="p-col-12 p-sm-6 p-md-4 p-lg-3">
+        <p style="margin: 0.2rem 0;">
+          <a href="/article/credit-lombard" style="color: #007b8a; text-decoration: none;"
+            onmouseover="this.style.textDecoration='underline'"
+            onmouseout="this.style.textDecoration='none'">Crédit lombard (article)</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
 
     <!-- Mentions légales -->
     <div class="p-col-12 p-text-center" style="margin-top: 2rem; font-size: 0.85rem; color: #555;">
