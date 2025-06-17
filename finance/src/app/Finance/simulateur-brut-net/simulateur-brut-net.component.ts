@@ -15,7 +15,7 @@ private renderer: Renderer2, private seo: SeoService) { }
     this.seo.updateMetaData({
       title: 'Simulateur Brut-Net 2025 | CalculateurFinance.fr',
       description: 'Calculez rapidement la conversion entre salaire brut et net avec notre simulateur simple et gratuit. Adapté aux dernières règles fiscales 2025.',
-      url: 'https://www.calculateurfinance.fr/simulateur-brut-net',
+      url: 'https://www.calculateurfinance.fr/simulateur-brut-net/',
       // image: 'https://www.calculateurfinance.fr/assets/simulateur-brut-net-preview.png'
     });
   if (isPlatformBrowser(this.platformId)) {

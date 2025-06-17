@@ -24,7 +24,7 @@ private renderer: Renderer2,private seo: SeoService) {}
       this.seo.updateMetaData({
       title: 'Simulateur plus-value immobilière 2025 | CalculateurFinance.fr',
       description: 'Calculez facilement votre plus-value immobilière en fonction du prix d’achat, du prix de vente, et des abattements légaux. Outil gratuit et simple.',
-      url: 'https://www.calculateurfinance.fr/simulateur-plus-value-immobiliere',
+      url: 'https://www.calculateurfinance.fr/simulateur-plus-value-immobiliere/',
       // image: 'https://www.calculateurfinance.fr/assets/simulateur-plus-value-preview.png'
     });
   if (isPlatformBrowser(this.platformId)) {

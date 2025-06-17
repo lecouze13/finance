@@ -32,7 +32,7 @@ export class ContenuPageComponent implements OnInit {
       this.seoService.updateMetaData({
         title: `${this.pageData.titre} | CalculateurFinance.fr`,
         description: this.pageData.description,
-        url: `https://calculateurfinance.fr/article/${this.pageSlug}`,
+        url: `https://calculateurfinance.fr/article/${this.pageSlug}/`,
         image: '/assets/default-og-image.png'
       });
     }

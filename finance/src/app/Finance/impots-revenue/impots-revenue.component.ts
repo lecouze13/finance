@@ -23,7 +23,7 @@ private renderer: Renderer2, private seo: SeoService) { }
     this.seo.updateMetaData({
       title: 'Simulateur impôt sur le revenu 2025 | CalculateurFinance.fr',
       description: 'Estimez rapidement votre impôt sur le revenu 2025 selon vos revenus et votre situation familiale. Simulateur simple, rapide et gratuit.',
-      url: 'https://www.calculateurfinance.fr/simulateur-impot-revenue',
+      url: 'https://www.calculateurfinance.fr/simulateur-impot-revenue/',
       // image: 'https://www.calculateurfinance.fr/assets/simulateur-impot-preview.png'
     });
   if (isPlatformBrowser(this.platformId)) {

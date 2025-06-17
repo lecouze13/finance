@@ -44,7 +44,7 @@ export class BudgetComponent implements OnInit {
     this.seo.updateMetaData({
       title: 'Simulateur de budget personnel 2025 | CalculateurFinance.fr',
       description: 'Gérez et optimisez votre budget personnel avec notre simulateur simple et gratuit. Suivez vos dépenses et vos revenus facilement.',
-      url: 'https://www.calculateurfinance.fr/simulateur-budget',
+      url: 'https://www.calculateurfinance.fr/simulateur-budget/',
       // image: 'https://www.calculateurfinance.fr/assets/simulateur-budget-preview.png'
     });
     if (isPlatformBrowser(this.platformId)) {

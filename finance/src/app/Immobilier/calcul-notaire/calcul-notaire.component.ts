@@ -14,7 +14,7 @@ private renderer: Renderer2, private seo: SeoService) { }
     this.seo.updateMetaData({
       title: 'Simulateur frais de notaire 2025 | CalculateurFinance.fr',
       description: 'Estimez facilement vos frais de notaire pour un achat immobilier neuf ou ancien. Outil gratuit, simple et précis.',
-      url: 'https://www.calculateurfinance.fr/simulateur-frais-notaire',
+      url: 'https://www.calculateurfinance.fr/simulateur-frais-notaire/',
       // image: 'https://www.calculateurfinance.fr/assets/simulateur-frais-notaire-preview.png'
     });
   if (isPlatformBrowser(this.platformId)) {

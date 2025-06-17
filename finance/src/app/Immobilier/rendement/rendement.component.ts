@@ -15,7 +15,7 @@ private renderer: Renderer2, private seo: SeoService) { }
     this.seo.updateMetaData({
       title: 'Simulateur Rendement Immobilier 2025 | Rendement Brut, Net et Net-Net',
       description: 'Calculez le rendement brut, net et net-net de votre investissement immobilier grâce à notre simulateur simple et précis.',
-      url: 'https://www.calculateurfinance.fr/simulateur-rendement-immobilier',
+      url: 'https://www.calculateurfinance.fr/simulateur-rendement-immobilier/',
       // image: 'https://www.calculateurfinance.fr/assets/simulateur-rendement-preview.png'
     });
   if (isPlatformBrowser(this.platformId)) {

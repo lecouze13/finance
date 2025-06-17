@@ -35,15 +35,19 @@ export class SeoService {
 
   }
 
-  setCanonicalUrl(url?: string) {
-    let link: HTMLLinkElement = this.document.querySelector(`link[rel='canonical']`) || this.document.createElement('link');
-    link.setAttribute('rel', 'canonical');
+setCanonicalUrl(url: string) {
+  let link: HTMLLinkElement =
+    this.document.querySelector(`link[rel='canonical']`) || this.document.createElement('link');
+  link.setAttribute('rel', 'canonical');
 
-    const cleanUrl = (url || this.document.location.href).replace(/\/+$/, ''); // sans slash final
-    link.setAttribute('href', cleanUrl);
+  // Nettoyer l'URL et ajouter un slash final s'il n'existe pas déjà
+  const cleanUrl = url.endsWith('/') ? url : url + '/';
 
-    if (!link.parentNode) {
-      this.document.head.appendChild(link);
-    }
+  link.setAttribute('href', cleanUrl);
+
+  if (!link.parentNode) {
+    this.document.head.appendChild(link);
   }
+}
+
 }

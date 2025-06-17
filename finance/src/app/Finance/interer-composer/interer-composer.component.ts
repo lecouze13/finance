@@ -25,7 +25,7 @@ private renderer: Renderer2, private seo: SeoService) { }
     this.seo.updateMetaData({
       title: 'Simulateur intérêt composé 2025 | CalculateurFinance.fr',
       description: 'Calculez la croissance de votre capital avec l’intérêt composé grâce à notre simulateur simple et gratuit. Prenez en compte capital initial, versements, taux et durée.',
-      url: 'https://www.calculateurfinance.fr/simulateur-interet-compose',
+      url: 'https://www.calculateurfinance.fr/simulateur-interet-compose/',
       // image: 'https://www.calculateurfinance.fr/assets/simulateur-interet-compose-preview.png'
     });
   if (isPlatformBrowser(this.platformId)) {

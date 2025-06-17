@@ -61,7 +61,7 @@ export class SimulateurCreditLombardComponent implements OnInit {
     this.seo.updateMetaData({
       title: 'Simulateur Crédit Lombard : Calculez votre capacité d’emprunt',
       description: 'Estimez le montant que vous pouvez emprunter via un crédit lombard en fonction de vos actifs financiers.',
-      url: 'https://calculateurfinance.fr/simulateur-credit-lombard'
+      url: 'https://calculateurfinance.fr/simulateur-credit-lombard/'
     });
 
     if (isPlatformBrowser(this.platformId)) {

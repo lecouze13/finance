@@ -15,7 +15,7 @@ private renderer: Renderer2, private seo: SeoService) { }
     this.seo.updateMetaData({
       title: 'Simulateur LMNP / LMP 2025 | Comparateur Micro-BIC vs Régime Réel',
       description: 'Comparez la rentabilité de votre location meublée en LMNP ou LMP selon le régime Micro-BIC ou le régime réel grâce à notre simulateur gratuit.',
-      url: 'https://www.calculateurfinance.fr/simulateur-lmnp-lmp',
+      url: 'https://www.calculateurfinance.fr/simulateur-lmnp-lmp/',
       // image: 'https://www.calculateurfinance.fr/assets/simulateur-lmnp-lmp-preview.png'
     });
   if (isPlatformBrowser(this.platformId)) {

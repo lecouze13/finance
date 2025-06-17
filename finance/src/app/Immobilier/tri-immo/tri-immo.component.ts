@@ -16,7 +16,7 @@ export class TriImmoComponent implements OnInit {
     this.seo.updateMetaData({
       title: 'Calcul du TRI (Taux de Rentabilité Interne) 2025 | CalculateurFinance.fr',
       description: 'Calculez facilement le Taux de Rentabilité Interne (TRI) de votre investissement immobilier grâce à notre simulateur gratuit et précis.',
-      url: 'https://www.calculateurfinance.fr/simulateur-tri',
+      url: 'https://www.calculateurfinance.fr/simulateur-tri/',
     });
     if (isPlatformBrowser(this.platformId)) {
 

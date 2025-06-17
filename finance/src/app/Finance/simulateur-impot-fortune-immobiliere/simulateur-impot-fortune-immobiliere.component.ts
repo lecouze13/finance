@@ -35,7 +35,7 @@ private renderer: Renderer2, private seo: SeoService) {}
     this.seo.updateMetaData({
       title: 'Simulateur IFI 2025 : Impôt sur la Fortune Immobilière',
       description: 'Calculez votre IFI selon le barème progressif 2025 avec ventilation par tranche. Simulateur précis et rapide.',
-      url: 'https://calculateurfinance.fr/simulateur-impot-fortune-immobiliere'
+      url: 'https://calculateurfinance.fr/simulateur-impot-fortune-immobiliere/'
     });
   if (isPlatformBrowser(this.platformId)) {
 
