@@ -9,7 +9,7 @@ import { Inject, PLATFORM_ID } from '@angular/core';@Component({
 })
 export class ImpotsRevenueComponent implements OnInit {
   revenus: number | null = null;
-  situation: string = ''; // celibataire, marie, veuf, divorce
+  situation: string = ''; 
   nbEnfants: number = 0;
   credits: number = 0;
 
