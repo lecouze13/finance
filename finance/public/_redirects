@@ -1,1 +1,4 @@
 /*    /index.html   200
+/:route/  /:route  301!
+/:route/:subroute/  /:route/:subroute  301!
+/:route/:subroute/:deep/  /:route/:subroute/:deep  301!
