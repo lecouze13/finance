@@ -7,23 +7,22 @@
 
 
 
-
-
-
-
-
-
-
-
-
-Comparateur SCI à l’IR vs IS.
-
-📊 Impôts & fiscalité
+Liste des composant à faire :
 Simulateur de déclaration de revenus fonciers (micro-foncier vs régime réel).
 
 
 
-Simulateur IFI (impôt sur la fortune immobilière).
+
+
+
+/calcul-rentabilite-airbnb-vs-location-classique
+/simulateur-apport-vs-emprunt
+
+
+
+composant permattant de mesurer combien de dividend il faut pour arrter de travail utiliser Yahoo Finance
+
+
 
 Simulateur de défiscalisation Pinel, Denormandie, Malraux…
 
@@ -36,7 +35,6 @@ Calculateur du montant de la PAJE (prestation d’accueil jeune enfant).
 
 Simulateur de quotient familial pour réduire impôts.
 
-Simulateur RSA 2025 (revenus, situation familiale, logement).
 
 Bonus : simulateurs plus “originaux”
 Simulateur de coût d’un animal de compagnie sur 10 ans.
@@ -47,5 +45,4 @@ Simulateur d’abonnement vs achat (ex. : Netflix, salle de sport, leasing).
 
 Simulateur d’inflation sur le pouvoir d’achat.
 
-Simulateur d’indépendance financière / FIRE (Financial Independence Retire Early).
 

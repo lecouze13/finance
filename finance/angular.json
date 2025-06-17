@@ -156,8 +156,10 @@
               "/article/assurance-vie-luxembourgeoise",
               "/article/credit-lombard",
               "/article/etf",
-              "/simulateur-credit-lombard"
-              
+              "/simulateur-location-nue-regime",
+              "/simulateur-apport-vs-emprunt",
+              "/airbnb-vs-location",
+              "/simulateur-dividend-fire"
             ]
           },
           "configurations": {

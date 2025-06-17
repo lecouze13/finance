@@ -28,4 +28,9 @@ export const AppRoutes = {
   ARTICLE_CTO: 'article/cto',
   ARTICLE_ASSURANCE_VIE_LUX: 'article/assurance-vie-luxembourgeoise',
   ARTICLE_CREDIT_LOMBARD: 'article/credit-lombard',
+  SIMULATEUR__LOCATION_NUE_REGIME: 'simulateur-location-nue-regime',
+  SIMULATEUR_APPORT_VS_EMPRUNT: 'simulateur-apport-vs-emprunt',
+  AIRBNB_VS_LOCATION: 'airbnb-vs-location',
+  SIMULATEUR_DIVIDEND_FIRE: 'simulateur-dividend-fire',
+
 };

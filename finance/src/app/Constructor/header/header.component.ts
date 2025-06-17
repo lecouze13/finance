@@ -80,6 +80,18 @@ private router: Router) {}
                 label: 'TRI (rentabilité interne)',
                 route: AppRoutes.TRI,
               },
+              {
+                label: 'Micro-foncier vs Réel (Location nue)',
+                route: AppRoutes.SIMULATEUR__LOCATION_NUE_REGIME,
+              },
+              {
+                label: 'Apport vs Emprunt',
+                route: AppRoutes.SIMULATEUR_APPORT_VS_EMPRUNT,
+              },
+              {
+                label: 'AIRBNB vs Location',
+                route: AppRoutes.AIRBNB_VS_LOCATION,
+              },
             ].sort((a, b) => a.label.localeCompare(b.label)),
           },
           {
@@ -115,9 +127,15 @@ private router: Router) {}
                 route: AppRoutes.CONVERTISSEUR_BRUT_NET,
               },
               {
-                label: 'Simulateur Credit lombard',
+                label: 'Credit lombard',
                 route: AppRoutes.CREDIT_LOMBARD,
               },
+                {
+                label: 'Dividendes FIRE',
+                route: AppRoutes.SIMULATEUR_DIVIDEND_FIRE,
+              }
+               
+              
             ].sort((a, b) => a.label.localeCompare(b.label)),
           },
         ],
