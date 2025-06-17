@@ -22,6 +22,16 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
 
+  // Redirige les URL avec slash final vers sans slash (sauf la racine '/')
+server.use((req, res, next) => {
+  const hasTrailingSlash = req.path.length > 1 && req.path.endsWith('/');
+  if (hasTrailingSlash) {
+    const newUrl = req.path.slice(0, -1) + req.url.slice(req.path.length);
+    return res.redirect(301, newUrl);
+  }
+  next();
+});
+
   // Servir les fichiers statiques du build client (css, js, assets...)
   server.get(
     '*.*',
