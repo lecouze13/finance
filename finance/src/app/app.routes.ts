@@ -89,7 +89,13 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes, { 
+  useHash: false,
+  scrollPositionRestoration: 'enabled',
+  anchorScrolling: 'enabled',
+  // 👇 C'est important pour éviter les slashs indésirables
+  urlUpdateStrategy: 'eager'
+})],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }
