@@ -58,6 +58,7 @@ import { SimulateurImpotFortuneImmobiliereComponent } from './Finance/simulateur
 import { SimulateurCreditLombardComponent } from './Finance/simulateur-credit-lombard/simulateur-credit-lombard.component';
 import { SimulateurRetraiteComponent } from './Finance/simulateur-retraite/simulateur-retraite.component';
 import { SimulateurApportVsEmpruntComponent } from './Immobilier/simulateur-apport-vs-emprunt/simulateur-apport-vs-emprunt.component';
+import { SimulateurImportLocationNueComponent } from './Immobilier/simulateur-import-location-nue/simulateur-import-location-nue.component';
 
 @NgModule({
     declarations: [
@@ -87,7 +88,8 @@ import { SimulateurApportVsEmpruntComponent } from './Immobilier/simulateur-appo
         SimulateurImpotFortuneImmobiliereComponent,
         SimulateurCreditLombardComponent,
         SimulateurRetraiteComponent,
-        SimulateurApportVsEmpruntComponent
+        SimulateurApportVsEmpruntComponent,
+        SimulateurImportLocationNueComponent
     ],
     imports: [
         BrowserModule,

@@ -37,8 +37,8 @@
 
         <div class="flex-auto" *ngIf="isReel">
             <p-floatLabel>
-                <p-inputNumber inputId="charges" pTooltip="Montant annuel des intérêts payés sur le prêt immobilier."
-                    tooltipPosition="top" [(ngModel)]="charges" mode="currency" currency="EUR"
+                <p-inputNumber inputId="charges" 
+                   [(ngModel)]="charges" mode="currency" currency="EUR"
                     pTooltip="Charges déductibles comme les frais de gestion, assurances, travaux, etc."
                     tooltipPosition="top" />
                 <label for="charges">Charges annuelles</label>

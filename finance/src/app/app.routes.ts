@@ -104,7 +104,6 @@ export const routes: Routes = [
   useHash: false,
   scrollPositionRestoration: 'enabled',
   anchorScrolling: 'enabled',
-  // 👇 C'est important pour éviter les slashs indésirables
   urlUpdateStrategy: 'eager'
 })],
     exports: [RouterModule]

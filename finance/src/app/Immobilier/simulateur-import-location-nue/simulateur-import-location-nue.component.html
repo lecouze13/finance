@@ -1,1 +1,177 @@
-<p>simulateur-import-location-nue works!</p>
+<main>
+
+    <h1>Simulateur impôt location nue 2025</h1>
+    <div class="separator"></div><br>
+
+    <form [formGroup]="form" (ngSubmit)="calculer()" class="form">
+        <p-panel header="Paramètres du simulateurs" class="p-panel-content">
+
+            <div class="flex-auto">
+                <p-floatLabel>
+                    <p-inputNumber formControlName="revenusFonciers" inputId="revenusFonciers" mode="currency"
+                        currency="EUR" locale="fr-FR"
+                        pTooltip="Loyers bruts perçus sur l’année avant déduction des charges."
+                        tooltipPosition="top"></p-inputNumber>
+                    <label for="revenusFonciers">Revenus fonciers annuels</label>
+                </p-floatLabel>
+            </div>
+
+            <div class="flex-auto">
+                <p-floatLabel>
+                    <p-inputNumber formControlName="chargesDeductibles" inputId="chargesDeductibles" mode="currency"
+                        currency="EUR" locale="fr-FR"
+                        pTooltip="Charges déductibles comme les frais de gestion, assurances, travaux, etc."
+                        tooltipPosition="top"></p-inputNumber>
+                    <label for="chargesDeductibles">Charges déductibles</label>
+                </p-floatLabel>
+            </div>
+
+            <div class="flex-auto">
+                <p-floatLabel>
+                    <p-inputNumber formControlName="interetsEmprunt" inputId="interetsEmprunt" mode="currency"
+                        currency="EUR" locale="fr-FR"
+                        pTooltip="Intérêts payés sur le prêt immobilier déductibles des revenus fonciers."
+                        tooltipPosition="top"></p-inputNumber>
+                    <label for="interetsEmprunt">Intérêts d’emprunt</label>
+                </p-floatLabel>
+            </div>
+
+            <div class="flex-auto">
+                <p-floatLabel>
+                    <p-inputNumber formControlName="travaux" inputId="travaux" mode="currency" currency="EUR"
+                        locale="fr-FR" pTooltip="Montant des travaux déductibles réalisés sur le bien immobilier."
+                        tooltipPosition="top"></p-inputNumber>
+                    <label for="travaux">Travaux déductibles</label>
+                </p-floatLabel>
+            </div>
+
+            <div class="flex-auto">
+                <p-floatLabel>
+                    <p-inputNumber formControlName="taxeFonciere" inputId="taxeFonciere" mode="currency" currency="EUR"
+                        locale="fr-FR" pTooltip="Taxe foncière annuelle déductible des revenus fonciers."
+                        tooltipPosition="top"></p-inputNumber>
+                    <label for="taxeFonciere">Taxe foncière</label>
+                </p-floatLabel>
+            </div>
+
+            <div class="flex-auto">
+                <p-floatLabel>
+                    <p-inputNumber formControlName="tauxMarginalImposition" inputId="tauxMarginalImposition" suffix=" %"
+                        [min]="0" [max]="45" [step]="1"
+                        pTooltip="Votre taux marginal d’imposition sur le revenu (TMI), exprimé en pourcentage."
+                        tooltipPosition="top"></p-inputNumber>
+                    <label for="tauxMarginalImposition">Taux marginal d'imposition (TMI)</label>
+                </p-floatLabel>
+            </div>
+
+        </p-panel>
+
+        <div class="col-span-2 text-center mt-4">
+            <button pButton class="p-button-success" type="submit" label="Calculer" icon="pi pi-check"></button>
+        </div>
+    </form>
+        <br><br>
+     <p-panel header="Résultats" *ngIf="resultat !== null" class="p-panel-content-res">
+
+  <!-- Résumé global (existant) -->
+<ul>
+  <li><strong>Revenu net foncier imposable :</strong> {{ baseImposable | number:'1.2-2' }} €</li>
+  <li><strong>Impôt total (IR + prélèvements sociaux) :</strong> {{ impot | number:'1.2-2' }} €</li>
+  <li><strong>Résultat net après impôt :</strong> {{ resultat | number:'1.2-2' }} €</li>
+</ul>
+
+  <hr class="my-4" />
+
+  <!-- Comparaison Micro-foncier vs Réel -->
+  <div class="grid">
+    <div class="col-12 md:col-6 p-3 border-right-1 surface-border">
+      <h4>Régime Micro-foncier</h4>
+      <p><strong>Base imposable estimée :</strong> {{ baseImposableMicro | number:'1.2-2' }} €</p>
+      <p><strong>Impôt estimé :</strong> {{ impotMicro | number:'1.2-2' }} €</p>
+    </div>
+    <div class="col-12 md:col-6 p-3">
+      <h4>Régime Réel</h4>
+      <p><strong>Base imposable estimée :</strong> {{ baseImposableReel | number:'1.2-2' }} €</p>
+      <p><strong>Impôt estimé :</strong> {{ impotReel | number:'1.2-2' }} €</p>
+    </div>
+  </div>
+
+  <div class="mt-4 p-3 surface-100 border-round">
+    <h5>Conclusion</h5>
+    <p *ngIf="impotReel < impotMicro" class="text-success">
+      Le régime réel est plus avantageux dans votre cas, avec un impôt estimé inférieur grâce à la déduction des charges.
+    </p>
+    <p *ngIf="impotReel >= impotMicro" class="text-warning">
+      Le régime micro-foncier est plus simple et peut être plus avantageux si vos charges sont faibles.
+    </p>
+  </div>
+  </p-panel>
+
+
+    <br><br>
+    <div class="separator"></div><br>
+
+    <section class="faq-section" aria-label="Foire aux questions - Régime réel des revenus fonciers">
+        <h2>FAQ - Régime réel des revenus fonciers</h2>
+        <dl>
+            <dt>Quelle est la différence entre le régime micro-foncier et réel ?</dt>
+            <dd>
+                Le régime micro-foncier applique un abattement forfaitaire de 30% sur les loyers.
+                Le régime réel permet de déduire les charges réelles (travaux, intérêts, taxe foncière, etc.).
+            </dd>
+
+            <dt>Qui peut bénéficier du régime micro-foncier ?</dt>
+            <dd>
+                Les bailleurs percevant moins de 15 000 € de loyers annuels issus de biens non meublés,
+                hors SCI ou monuments historiques, peuvent bénéficier du régime micro-foncier.
+            </dd>
+
+            <dt>Que puis-je déduire au régime réel ?</dt>
+            <dd>
+                Vous pouvez déduire toutes les charges liées au bien : travaux, intérêts d’emprunt, taxe foncière, frais
+                de gestion, etc.
+            </dd>
+
+            <dt>Le simulateur prend-il en compte les prélèvements sociaux ?</dt>
+            <dd>
+                Oui, le simulateur inclut les prélèvements sociaux au taux actuel de 17,2 % sur la base imposable
+                positive.
+            </dd>
+
+            <dt>Quel est le TMI à renseigner ?</dt>
+            <dd>
+                Le Taux Marginal d’Imposition (TMI) est votre tranche d’imposition sur le revenu.
+                Il est souvent de 11 %, 30 %, 41 % ou 45 %.
+            </dd>
+
+            <dt>Peut-on passer du régime micro-foncier au régime réel ?</dt>
+            <dd>
+                Oui, il est possible d’opter pour le régime réel. Cette option est irrévocable pendant 3 ans.
+            </dd>
+
+            <dt>Le régime réel est-il toujours plus avantageux ?</dt>
+            <dd>
+                Pas forcément. Il est plus avantageux si vos charges dépassent 30 % des loyers.
+                Sinon, le micro-foncier est plus simple.
+            </dd>
+
+            <dt>Peut-on déclarer en ligne ses revenus fonciers ?</dt>
+            <dd>
+                Oui, la déclaration des revenus fonciers se fait en ligne via votre espace personnel sur impots.gouv.fr.
+            </dd>
+
+            <dt>Quels sont les risques en cas d’erreur de déclaration ?</dt>
+            <dd>
+                Une erreur peut entraîner un redressement fiscal et des pénalités.
+                Il est important de conserver toutes les preuves de dépenses et loyers perçus.
+            </dd>
+
+            <dt>Le simulateur est-il fiable pour estimer mon impôt ?</dt>
+            <dd>
+                Oui, il donne une estimation réaliste de votre base imposable et des impôts dus selon le régime choisi.
+                Il ne remplace pas un conseil fiscal personnalisé.
+            </dd>
+        </dl>
+    </section>
+
+</main>
