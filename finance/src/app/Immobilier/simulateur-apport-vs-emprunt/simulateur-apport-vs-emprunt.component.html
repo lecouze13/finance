@@ -1,1 +1,135 @@
-<p>simulateur-apport-vs-emprunt works!</p>
+<main>
+
+    <h1>Simulateur : Apport vs Emprunt</h1>
+    <div class="separator"></div><br>
+
+    <form [formGroup]="form" (ngSubmit)="calculer()" class="form">
+        <p-panel header="Paramètres du crédit" class="p-panel-content">
+
+            <div class="flex-auto">
+                <p-floatLabel class="p-col-12 p-md-6">
+                    <input pInputText formControlName="montantBien" type="number" id="montantBien" />
+                    <label for="montantBien">Montant du bien (€)</label>
+                </p-floatLabel>
+            </div>
+            <div class="flex-auto">
+
+                <p-floatLabel class="p-col-12 p-md-6">
+                    <input pInputText formControlName="apport" type="number" id="apport" />
+                    <label for="apport">Montant de l'apport (€)</label>
+                </p-floatLabel>
+            </div>
+            <div class="flex-auto">
+
+                <p-floatLabel class="p-col-12 p-md-6">
+                    <input pInputText formControlName="dureeCredit" type="number" id="dureeCredit" />
+                    <label for="dureeCredit">Durée du crédit (ans)</label>
+                </p-floatLabel>
+            </div>
+            <div class="flex-auto">
+
+                <p-floatLabel class="p-col-12 p-md-6">
+                    <input pInputText formControlName="tauxCredit" type="number" id="tauxCredit" />
+                    <label for="tauxCredit">Taux d'emprunt (%)</label>
+                </p-floatLabel>
+            </div>
+            <div class="flex-auto">
+
+                <p-floatLabel class="p-col-12 p-md-6">
+                    <input pInputText formControlName="tauxInvestissement" type="number" id="tauxInvestissement" />
+                    <label for="tauxInvestissement">Taux d'investissement (%)</label>
+                </p-floatLabel>
+            </div>
+
+
+        </p-panel>
+   
+        <div class="p-col-12">
+            <button pButton type="submit" label="Calculer" [disabled]="form.invalid"></button>
+        </div>
+
+
+    </form>
+    <div *ngIf="resultat">
+
+     <p>💰Mensualité avec apport <strong>{{ mensualitesAvecApportAnnee | currency:'EUR' }}</strong>
+        <p>💰Mensualité sans apport <strong>{{ mensualitesSansApportAnnee| currency:'EUR' }}</strong>
+
+        <h2>Visualisation graphique</h2>
+
+        <p-chart type="line" [data]="comparatifChartData" [options]="comparatifChartOptions"></p-chart>
+
+    </div>
+
+    <br>
+    <div class="separator"></div><br>
+
+    <section class="faq-section" aria-label="Foire aux questions - Apport vs Emprunt">
+        <h2>FAQ - Apport vs Emprunt Immobilier</h2>
+        <dl>
+            <dt>Faut-il mettre un apport pour acheter un bien immobilier ?</dt>
+            <dd>
+               Un apport permet de réduire le montant emprunté, donc les intérêts à payer, et facilite l’obtention d’un 
+               crédit auprès de la banque. Toutefois, cet argent ne génère pas de rendement s’il est
+                immobilisé dans l’achat. Si cet argent peut être investi ailleurs avec un bon rendement,
+                il est alors préférable de ne pas faire d’apport, si possible.
+            </dd>
+
+            <dt>Est-ce rentable d’investir son apport au lieu de l’utiliser pour acheter ?</dt>
+            <dd>
+                Cela dépend du taux d’emprunt et du rendement attendu. Si le rendement de l’investissement est supérieur
+                au coût du crédit, cela peut être plus avantageux financièrement de ne pas utiliser son apport.
+            </dd>
+
+            <dt>Comment fonctionne ce simulateur ?</dt>
+            <dd>
+                Le simulateur compare deux scénarios : l’un avec apport (et moins de crédit), l’autre sans apport (et un
+                investissement parallèle de ce capital). Il affiche les mensualités, les coûts totaux et les gains
+                potentiels.
+            </dd>
+
+            <dt>Quelles hypothèses sont prises en compte dans le calcul ?</dt>
+            <dd>
+                Le montant du bien, l’apport, la durée et le taux de crédit, ainsi que le rendement espéré de
+                l’investissement si l’apport est conservé. Tous ces paramètres influencent les résultats.
+            </dd>
+
+            <dt>Ce simulateur prend-il en compte les impôts ou frais de notaire ?</dt>
+            <dd>
+                Non, ce simulateur est une approche simplifiée centrée sur le coût du crédit et le potentiel de
+                placement. Les frais annexes ne sont pas intégrés ici.
+            </dd>
+
+            <dt>Le résultat tient-il compte de l’inflation ?</dt>
+            <dd>
+                Non, tous les calculs sont en euros constants. Tu peux estimer l’effet de l’inflation en diminuant les
+                taux réels utilisés dans le formulaire.
+            </dd>
+
+            <dt>Quelle est la durée optimale pour comparer les deux stratégies ?</dt>
+            <dd>
+                Il est conseillé d’utiliser une durée correspondant à celle du crédit (ex. 20 ou 25 ans), pour que la
+                comparaison soit cohérente entre remboursement et investissement.
+            </dd>
+
+            <dt>Puis-je adapter ce calcul à un projet locatif ?</dt>
+            <dd>
+                Le simulateur est pensé pour une résidence principale, mais tu peux adapter les hypothèses pour simuler
+                un investissement locatif si tu connais le rendement net attendu.
+            </dd>
+
+            <dt>Ce simulateur fonctionne-t-il pour un achat sans crédit du tout ?</dt>
+            <dd>
+                Non, il compare deux scénarios de crédit : avec ou sans apport. Si tu achètes sans crédit du tout, ce
+                simulateur n’est pas adapté tel quel.
+            </dd>
+
+            <dt>À qui s’adresse ce simulateur ?</dt>
+            <dd>
+                À toute personne souhaitant optimiser son achat immobilier : primo-accédants, investisseurs, ou
+                emprunteurs hésitant entre utiliser leur épargne ou conserver un levier bancaire.
+            </dd>
+        </dl>
+    </section>
+
+</main>
