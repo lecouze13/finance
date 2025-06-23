@@ -8,3 +8,31 @@
 .grid{
     gap: 10px;
 }
+
+.table-quotites {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.table-quotites th,
+.table-quotites td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.table-quotites th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+.table-quotites tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.message-quotite {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #666;
+}

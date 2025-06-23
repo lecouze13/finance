@@ -24,7 +24,7 @@ import { ComparateurSciIrIsComponent } from './Immobilier/comparateur-sci-ir-is/
 import { ContenuPageComponent } from './Constructor/generateur-article/generateur-article.component';
 import { SimulateurCreditLombardComponent } from './Finance/simulateur-credit-lombard/simulateur-credit-lombard.component';
 import { SimulateurDividendFireComponent } from './Finance/simulateur-dividend-fire/simulateur-dividend-fire.component';
-import { AirbnbVsLocationComponent } from './airbnb-vs-location/airbnb-vs-location.component';
+import { AirbnbVsLocationComponent } from './Immobilier/airbnb-vs-location/airbnb-vs-location.component';
 import { SimulateurApportVsEmpruntComponent } from './Immobilier/simulateur-apport-vs-emprunt/simulateur-apport-vs-emprunt.component';
 import { SimulateurImportLocationNueComponent } from './Immobilier/simulateur-import-location-nue/simulateur-import-location-nue.component';
 
