@@ -13,18 +13,29 @@ export class HeaderComponent implements OnInit {
   items: MenuItem[] | undefined;
   afficherCalculatrice: boolean = false;
 
-  constructor(  
-private router: Router) {}
+  constructor(
+    private router: Router) { }
 
   ngOnInit() {
-    const epargneItems = Object.entries(pages)
-      .sort(([, a], [, b]) => a.titre.localeCompare(b.titre)) // tri par titre
-      .map(([key, value]) => {
-        return {
-          label: value.titre,
-          route: `/article/${key}`,
-        };
-      });
+    const allEntries = Object.entries(pages);
+
+    // Tri par titre (facultatif mais conseillé)
+    allEntries.sort(([, a], [, b]) => a.titre.localeCompare(b.titre));
+
+    // Séparation en 2 listes
+    const epargneItems = allEntries
+      .filter(([, value]) => value.categorie === 'epargne')
+      .map(([key, value]) => ({
+        label: value.titre,
+        route: `/article/${key}`,
+      }));
+
+    const investissementItems = allEntries
+      .filter(([, value]) => value.categorie === 'investissement')
+      .map(([key, value]) => ({
+        label: value.titre,
+        route: `/article/${key}`,
+      }));
     this.items = [
       {
         label: 'Home',
@@ -130,21 +141,30 @@ private router: Router) {}
                 label: 'Credit lombard',
                 route: AppRoutes.CREDIT_LOMBARD,
               },
-                {
+              {
                 label: 'Dividendes FIRE',
                 route: AppRoutes.SIMULATEUR_DIVIDEND_FIRE,
               }
-               
-              
+
+
             ].sort((a, b) => a.label.localeCompare(b.label)),
           },
         ],
       },
 
       {
-        label: 'Épargne & Investissements',
+        label: 'Article',
         icon: 'pi pi-wallet',
-        items: epargneItems,
+        items: [{
+          label: 'Épargne',
+          icon: 'pi pi-wallet',
+          items: epargneItems,
+        },
+        {
+          label: 'Investissements',
+          icon: 'pi pi-wallet',
+          items: investissementItems,
+        },]
       },
 
       {

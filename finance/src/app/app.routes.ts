@@ -24,7 +24,7 @@ import { ComparateurSciIrIsComponent } from './Immobilier/comparateur-sci-ir-is/
 import { ContenuPageComponent } from './Constructor/generateur-article/generateur-article.component';
 import { SimulateurCreditLombardComponent } from './Finance/simulateur-credit-lombard/simulateur-credit-lombard.component';
 import { SimulateurDividendFireComponent } from './Finance/simulateur-dividend-fire/simulateur-dividend-fire.component';
-import { AirbnbVsLocationComponent } from './airbnb-vs-location/airbnb-vs-location.component';
+import { AirbnbVsLocationComponent } from './Immobilier/airbnb-vs-location/airbnb-vs-location.component';
 import { SimulateurApportVsEmpruntComponent } from './Immobilier/simulateur-apport-vs-emprunt/simulateur-apport-vs-emprunt.component';
 import { SimulateurImportLocationNueComponent } from './Immobilier/simulateur-import-location-nue/simulateur-import-location-nue.component';
 
@@ -50,13 +50,13 @@ export const routes: Routes = [
     { path: AppRoutes.SCI_VS_IR, component: ComparateurSciIrIsComponent },
     { path: AppRoutes.PLUS_VALUE_IMMOBILIERE, component: SimulateurPlusValueImmobiliereComponent },
     { path: AppRoutes.CREDIT_LOMBARD, component: SimulateurCreditLombardComponent },
-    
+
     { path: AppRoutes.SIMULATEUR__LOCATION_NUE_REGIME, component: SimulateurImportLocationNueComponent },
     { path: AppRoutes.SIMULATEUR_APPORT_VS_EMPRUNT, component: SimulateurApportVsEmpruntComponent },
     { path: AppRoutes.AIRBNB_VS_LOCATION, component: AirbnbVsLocationComponent },
     { path: AppRoutes.SIMULATEUR_DIVIDEND_FIRE, component: SimulateurDividendFireComponent },
 
-    
+
     {
         path: 'article/pea',
         component: ContenuPageComponent
@@ -89,8 +89,37 @@ export const routes: Routes = [
         path: 'article/credit-lombard',
         component: ContenuPageComponent
     },
-     {
+    {
         path: 'article/etf',
+        component: ContenuPageComponent
+    },
+    {
+        path: 'article/livret-a',
+        component: ContenuPageComponent
+    },
+    {
+        path: 'article/ldds',
+        component: ContenuPageComponent
+    },
+    {
+        path: 'article/pel',
+        component: ContenuPageComponent
+    },
+    {
+        path: 'article/cel',
+        component: ContenuPageComponent
+    },
+    {
+        path: 'article/lep',
+        component: ContenuPageComponent
+    }
+    ,
+    {
+        path: 'article/livret-jeune',
+        component: ContenuPageComponent
+    },
+      {
+        path: 'article/livret-bleu',
         component: ContenuPageComponent
     },
 
@@ -100,12 +129,12 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, { 
-  useHash: false,
-  scrollPositionRestoration: 'enabled',
-  anchorScrolling: 'enabled',
-  urlUpdateStrategy: 'eager'
-})],
+    imports: [RouterModule.forRoot(routes, {
+        useHash: false,
+        scrollPositionRestoration: 'enabled',
+        anchorScrolling: 'enabled',
+        urlUpdateStrategy: 'eager'
+    })],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

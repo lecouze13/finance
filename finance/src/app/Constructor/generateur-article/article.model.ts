@@ -1,6 +1,9 @@
+import { livrets } from "./livrets.model";
+
 export const pages: {
-  [key: string]: { titre: string; contenu: string; description: string };
+  [key: string]: { titre: string; contenu: string; description: string, categorie: string };
 } = {
+   ...livrets,
   'pea-vs-assurance-vie': {
     titre: 'PEA ou Assurance Vie : Que choisir en 2025 ?',
     description:
@@ -54,6 +57,8 @@ export const pages: {
     </ul>
     <p>💡 Conseil : Ouvrir les deux peut être une excellente stratégie patrimoniale !</p>
   `,
+      categorie: 'investissement'
+
   },
 
   'pea': {
@@ -62,20 +67,27 @@ export const pages: {
       "<h2>Introduction</h2><p>Le <strong>Plan d'Épargne en Actions (PEA)</strong> est un dispositif d'épargne permettant d'investir en actions européennes tout en bénéficiant d'une fiscalité avantageuse. Il est destiné aux particuliers souhaitant dynamiser leur épargne sur le long terme.</p><h2>Fonctionnement</h2><p>Le PEA permet d'investir dans des actions et des fonds d'investissement européens. Les versements sont plafonnés à 150 000 € pour un PEA classique. Les gains réalisés sont exonérés d'impôt sur le revenu après 5 ans de détention, seuls les prélèvements sociaux de 17,2 % étant dus.</p><h2>Fiscalité</h2><ul><li><strong>Avant 5 ans :</strong> Les gains sont soumis à la flat tax de 30 % (prélèvements sociaux inclus).</li><li><strong>Après 5 ans :</strong> Exonération d'impôt sur le revenu, seuls les prélèvements sociaux sont appliqués.</li></ul><h2>Transmission</h2><p>En cas de décès, le PEA entre dans la succession et est soumis aux droits de succession selon les règles en vigueur.</p><h2>Conclusion</h2><p>Le PEA est un outil efficace pour les investisseurs souhaitant bénéficier d'une fiscalité avantageuse sur leurs investissements en actions européennes, à condition de respecter les conditions de durée de détention.</p>",
     description:
       'Le Plan d’Épargne en Actions (PEA) est un placement boursier avantageux sur le long terme.',
-  },
+       categorie: 'investissement'
+
+    },
 
     'assurance-vie': {
     titre: 'Assurance Vie',
     contenu: `<h2>Introduction</h2><p>L'<strong>assurance vie</strong> est un contrat d'épargne permettant de se constituer un capital ou une rente, avec des avantages fiscaux, notamment en matière de transmission de patrimoine.</p><h2>Fonctionnement</h2><p>Le contrat d'assurance vie peut être alimenté par des versements libres ou programmés. Les fonds peuvent être investis en fonds euros (sécurisés) ou en unités de compte (plus risquées mais potentiellement plus rentables).</p><h2>Fiscalité</h2><ul><li><strong>Avant 8 ans :</strong> Les gains sont soumis aux prélèvements sociaux de 17,2 % et à l'impôt sur le revenu ou à la flat tax de 30 %.</li><li><strong>Après 8 ans :</strong> Abattement annuel de 4 600 € (9 200 € pour un couple) sur les gains, puis imposition selon le barème progressif ou à la flat tax.</li></ul><h2>Transmission</h2><p>En cas de décès, les sommes transmises sont exonérées de droits de succession jusqu'à 152 500 € par bénéficiaire, sous certaines conditions.</p><h2>Conclusion</h2><p>L'assurance vie est un produit d'épargne flexible, offrant des avantages fiscaux intéressants, notamment pour la transmission de patrimoine.</p>
     `,
+          categorie: 'investissement',
+
     description:
       'Découvrez les avantages fiscaux de l’assurance vie pour épargner et transmettre votre patrimoine.',
   },
   'perco': {
     titre: 'PERCO : Plan d’Épargne pour la Retraite Collectif',
+
     description:
       "Le PERCO est un plan d’épargne salariale permettant de se constituer une retraite complémentaire dans un cadre fiscal avantageux.",
-    contenu: `
+    
+          categorie: 'investissement',
+  contenu: `
     <h2>Introduction</h2>
     <p>Le <strong>PERCO</strong> (Plan d’Épargne pour la Retraite Collectif) est un dispositif d’épargne salariale permettant aux salariés d’épargner pour leur retraite, avec l’aide de leur entreprise.</p>
 
@@ -102,6 +114,8 @@ export const pages: {
 
   'per': {
     titre: 'PER : Plan d’Épargne Retraite',
+              categorie: 'investissement',
+
     description:
       "Le PER est un produit d’épargne retraite individuel ou collectif, offrant des avantages fiscaux à l’entrée ou à la sortie.",
     contenu: `
@@ -131,6 +145,8 @@ export const pages: {
 
   'cto': {
     titre: 'Compte-Titres Ordinaire (CTO)',
+              categorie: 'investissement',
+
     description:
       "Le CTO permet d’investir librement sur tous les marchés financiers, sans plafond mais avec une fiscalité classique.",
     contenu: `
@@ -159,6 +175,8 @@ export const pages: {
   },
 'assurance-vie-luxembourgeoise': {
   titre: 'Assurance Vie Luxembourgeoise',
+            categorie: 'investissement',
+
   description:
     "L’assurance vie luxembourgeoise est un contrat d’investissement offrant une grande sécurité juridique, une flexibilité fiscale et une large gamme de supports d’investissement.",
   contenu: `
@@ -190,6 +208,8 @@ export const pages: {
 },
 'credit-lombard': {
   titre: 'Crédit Lombard',
+            categorie: 'investissement',
+
   description:
     "Le crédit lombard est un prêt garanti par un portefeuille de titres financiers, offrant une solution de financement flexible et rapide pour les investisseurs disposant d’actifs.",
   contenu: `
@@ -222,6 +242,8 @@ export const pages: {
 },
 'etf': {
   titre: 'ETF (Exchange Traded Funds) ',
+            categorie: 'investissement',
+
   description:
     "Les ETF (Exchange Traded Funds) permettent d'investir facilement et à moindre coût sur les marchés financiers. Découvrez comment ils fonctionnent, leurs avantages et leurs usages pour les investisseurs particuliers.",
   contenu: `
