@@ -54,7 +54,7 @@
 <p-panel *ngIf="resultat" header="Résultats de la simulation" class="mt-4">
   <p>🛡️ Montant total mobilisable en garantie : <strong>{{ resultat.montantGarantieTotal | currency:'EUR' }}</strong></p>
   <p>💰 Montant empruntable : <strong>{{ resultat.capitalEmpruntable | currency:'EUR' }}</strong></p>
-  <p>📆 Mensualité de remboursement : <strong>{{ resultat.mensualite | currency:'EUR' }}</strong> sur {{ resultat.duree }} mois</p>
+  <p>📆 Mensualité de remboursement : <strong>{{ resultat.mensualite | currency:'EUR' }}</strong> pendant {{ resultat.duree }} mois</p>
   <p>💰 Montant total mis en nantis <strong>{{ resultat.nantis | currency:'EUR' }}</strong>
   <p>💰 Cout total du crédit <strong>{{ resultat.coutTotalCredit | currency:'EUR' }}</strong>
 
