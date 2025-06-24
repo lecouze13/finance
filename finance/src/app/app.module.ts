@@ -59,6 +59,8 @@ import { SimulateurCreditLombardComponent } from './Finance/simulateur-credit-lo
 import { SimulateurRetraiteComponent } from './Finance/simulateur-retraite/simulateur-retraite.component';
 import { SimulateurApportVsEmpruntComponent } from './Immobilier/simulateur-apport-vs-emprunt/simulateur-apport-vs-emprunt.component';
 import { SimulateurImportLocationNueComponent } from './Immobilier/simulateur-import-location-nue/simulateur-import-location-nue.component';
+import { SimulateurDividendFireComponent } from './Finance/simulateur-dividend-fire/simulateur-dividend-fire.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -89,7 +91,8 @@ import { SimulateurImportLocationNueComponent } from './Immobilier/simulateur-im
         SimulateurCreditLombardComponent,
         SimulateurRetraiteComponent,
         SimulateurApportVsEmpruntComponent,
-        SimulateurImportLocationNueComponent
+        SimulateurImportLocationNueComponent,
+        SimulateurDividendFireComponent
     ],
     imports: [
         BrowserModule,
@@ -112,7 +115,9 @@ import { SimulateurImportLocationNueComponent } from './Immobilier/simulateur-im
         BrowserAnimationsModule,
         NoopAnimationsModule,
     ReactiveFormsModule,
-    PanelModule
+    PanelModule,
+        HttpClientModule 
+
     ],
     providers: [
     provideClientHydration()

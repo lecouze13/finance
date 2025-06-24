@@ -1,1 +1,88 @@
-<p>simulateur-dividend-fire works!</p>
+<main>
+  <h1>Simulateur Dividend FIRE</h1>
+  <div class="separator"></div><br>
+
+  <form (ngSubmit)="simulate()" style="margin-top:1em;">
+    <p-panel header="Paramètres du simulateur">
+      <div class="flex-auto" style="margin-bottom:1em;">
+        <p-dropdown
+          [options]="tickers"
+          [(ngModel)]="selectedTicker"
+          name="selectedTicker"
+          optionLabel="label"
+          (onChange)="loadDividendAndSimulate()"
+          placeholder="Choisir une action">
+        </p-dropdown>
+      </div>
+
+      <div class="flex-auto" style="margin-bottom:1em;">
+        <p-floatLabel>
+          <input
+            pInputText
+            type="number"
+            name="capitalInitial"
+            [(ngModel)]="capitalInitial"
+            required
+            min="0"
+            step="100" />
+          <label>Capital initial (€)</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto" style="margin-bottom:1em;">
+        <p-floatLabel>
+          <input
+            pInputText
+            type="number"
+            name="tauxCroissanceDividende"
+            [(ngModel)]="tauxCroissanceDividende"
+            required
+            min="0"
+            max="20"
+            step="0.1" />
+          <label>Taux de croissance annuel du dividende (%)</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto" style="margin-bottom:1em;">
+        <p-floatLabel>
+          <input
+            pInputText
+            type="number"
+            name="dureeAnnee"
+            [(ngModel)]="dureeAnnee"
+            required
+            min="1"
+            max="50" />
+          <label>Durée de la simulation (années)</label>
+        </p-floatLabel>
+      </div>
+
+      <button pButton type="submit" label="Simuler"></button>
+    </p-panel>
+  </form>
+
+  <p-chart *ngIf="chartData" type="line" [data]="chartData" [options]="chartOptions" style="margin-top:2em;"></p-chart>
+
+  <div *ngIf="results.length > 0" style="margin-top:1em;">
+    <h3>Détail par année</h3>
+    <table class="p-datatable p-component" style="width:100%">
+      <thead>
+        <tr>
+          <th>Année</th>
+          <th>Capital (€)</th>
+          <th>Dividende annuel (€)</th>
+          <th>Revenu dividendes (€)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of results">
+          <td>{{ row.annee }}</td>
+          <td>{{ row.capital | number:'1.2-2' }}</td>
+          <td>{{ row.dividende | number:'1.2-2' }}</td>
+          <td>{{ row.revenu | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>

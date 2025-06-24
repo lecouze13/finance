@@ -7,7 +7,8 @@ export const livrets: {
     description: 'Tout savoir sur le Livret A : fonctionnement, taux, plafond, fiscalité, conditions d’ouverture.',
     categorie: 'epargne',
     contenu: `
-      <h1>Livret A</h1>
+        <h2>Introduction</h2>
+
       <p>Le Livret A est un produit d’épargne réglementé, accessible à tous, sans frais d’ouverture ni de gestion. Il est géré par l’État français et distribué par la plupart des banques.</p>
       <h2>Fonctionnement</h2>
       <p>Les dépôts et retraits sont libres, à condition de respecter un solde minimum de 10 €.</p>
@@ -36,7 +37,7 @@ export const livrets: {
     description: 'Fonctionnement, conditions, taux et fiscalité du LDDS, un livret d’épargne responsable.',
     categorie: 'epargne',
     contenu: `
-      <h1>LDDS</h1>
+    <h2>Introduction</h2>
       <p>Le Livret de Développement Durable et Solidaire (LDDS) est un produit d’épargne réglementé destiné à financer des projets écologiques et solidaires. Il est réservé aux résidents fiscaux français majeurs.</p>
       <h2>Caractéristiques</h2>
       <ul>
@@ -59,7 +60,7 @@ export const livrets: {
     description: 'Découvrez le PEL, un produit d’épargne bloqué destiné à financer l’achat d’un bien immobilier.',
     categorie: 'epargne',
     contenu: `
-      <h1>PEL</h1>
+    <h2>Introduction</h2>
       <p>Le Plan Épargne Logement est un placement réglementé, conçu pour constituer une épargne en vue d’un projet immobilier. Il offre un taux garanti pendant toute la durée du plan.</p>
       <h2>Caractéristiques</h2>
       <ul>
@@ -87,7 +88,7 @@ export const livrets: {
     description: 'Le CEL, un livret souple lié à un projet immobilier, avec accès à un prêt avantageux.',
     categorie: 'epargne',
     contenu: `
-      <h1>CEL</h1>
+    <h2>Introduction</h2>
       <p>Le Compte Épargne Logement permet d’épargner en vue d’un projet immobilier tout en conservant une grande souplesse. Il est complémentaire au PEL.</p>
       <h2>Caractéristiques</h2>
       <ul>
@@ -114,7 +115,7 @@ export const livrets: {
     description: 'Le LEP est un placement rémunérateur réservé aux foyers modestes, avec un taux très avantageux.',
     categorie: 'epargne',
     contenu: `
-      <h1>LEP</h1>
+    <h2>Introduction</h2>
       <p>Le Livret d’Épargne Populaire est destiné aux contribuables modestes. Il offre un taux d’intérêt supérieur à celui du Livret A pour protéger l’épargne contre l’inflation.</p>
       <h2>Conditions d’éligibilité</h2>
       <p>Le revenu fiscal de référence ne doit pas dépasser un certain seuil, révisé chaque année. Pour 2025, ce seuil est de 22 419 € pour une personne seule.</p>
@@ -142,7 +143,7 @@ export const livrets: {
   description: 'Tout sur le Livret Bleu : fonctionnement, fiscalité, conditions et plafond. Équivalent du Livret A réservé aux clients du Crédit Mutuel.',
   categorie: 'epargne',
   contenu: `
-    <h1>Livret Bleu</h1>
+    <h2>Introduction</h2>
     <p>Le Livret Bleu est un livret d’épargne réglementé proposé exclusivement par le Crédit Mutuel. Il fonctionne de manière identique au Livret A, avec les mêmes taux, plafonds et exonérations fiscales.</p>
 
     <h2>Caractéristiques</h2>
@@ -162,7 +163,7 @@ export const livrets: {
   description: 'Le Livret Jeune est un produit d’épargne destiné aux 12-25 ans, avec un taux attractif et des intérêts exonérés d’impôts.',
   categorie: 'epargne',
   contenu: `
-    <h1>Livret Jeune</h1>
+    <h2>Introduction</h2>
     <p>Le Livret Jeune est une épargne réglementée dédiée aux jeunes entre 12 et 25 ans résidant en France. Il permet d’épargner avec un taux généralement supérieur à celui du Livret A, tout en bénéficiant d'une exonération fiscale complète.</p>
 
     <h2>Caractéristiques</h2>
