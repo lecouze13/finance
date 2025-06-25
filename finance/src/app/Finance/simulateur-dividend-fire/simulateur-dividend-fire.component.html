@@ -1,66 +1,67 @@
 <main>
-  <h1>Simulateur Dividend FIRE</h1>
+  <h1>Simulateur Dividendes FIRE</h1>
   <div class="separator"></div><br>
 
   <form (ngSubmit)="simulate()" style="margin-top:1em;">
     <p-panel header="Paramètres du simulateur">
-      <div class="flex-auto" style="margin-bottom:1em;">
-        <p-dropdown
-          [options]="tickers"
-          [(ngModel)]="selectedTicker"
-          name="selectedTicker"
-          optionLabel="label"
-          (onChange)="loadDividendAndSimulate()"
-          placeholder="Choisir une action">
-        </p-dropdown>
-      </div>
 
+      <!-- Sélecteur d'action -->
       <div class="flex-auto" style="margin-bottom:1em;">
         <p-floatLabel>
-          <input
-            pInputText
-            type="number"
-            name="capitalInitial"
-            [(ngModel)]="capitalInitial"
-            required
-            min="0"
-            step="100" />
+          <p-dropdown [options]="tickers" [(ngModel)]="selectedTicker" name="selectedTicker" optionLabel="label"
+            (onChange)="loadDividendAndSimulate()" placeholder="Choisir une action">
+          </p-dropdown>
+          <label>Action CAC 40</label>
+        </p-floatLabel>
+      </div>
+
+      <!-- Capital initial -->
+      <div class="flex-auto" style="margin-bottom:1em;">
+        <p-floatLabel>
+          <input pInputText type="number" name="capitalInitial" [(ngModel)]="capitalInitial"
+            (ngModelChange)="onCapitalChange()" required min="0" step="100" />
           <label>Capital initial (€)</label>
         </p-floatLabel>
       </div>
 
+      <!-- Nombre d'actions -->
       <div class="flex-auto" style="margin-bottom:1em;">
         <p-floatLabel>
-          <input
-            pInputText
-            type="number"
-            name="tauxCroissanceDividende"
-            [(ngModel)]="tauxCroissanceDividende"
-            required
-            min="0"
-            max="20"
-            step="0.1" />
+          <input pInputText type="number" name="nombreActions" [(ngModel)]="nombreActions"
+            (ngModelChange)="onNombreActionsChange()" required min="0" step="1" />
+          <label>Nombre d’actions</label>
+        </p-floatLabel>
+      </div>
+
+      <!-- Taux croissance dividende -->
+      <div class="flex-auto" style="margin-bottom:1em;">
+        <p-floatLabel>
+          <input pInputText type="number" name="tauxCroissanceDividende" [(ngModel)]="tauxCroissanceDividende" required
+            min="0" max="20" step="0.1" />
           <label>Taux de croissance annuel du dividende (%)</label>
         </p-floatLabel>
       </div>
 
+      <!-- Durée -->
       <div class="flex-auto" style="margin-bottom:1em;">
         <p-floatLabel>
-          <input
-            pInputText
-            type="number"
-            name="dureeAnnee"
-            [(ngModel)]="dureeAnnee"
-            required
-            min="1"
-            max="50" />
+          <input pInputText type="number" name="dureeAnnee" [(ngModel)]="dureeAnnee" required min="1" max="50" />
           <label>Durée de la simulation (années)</label>
         </p-floatLabel>
       </div>
 
+      <div class="flex-auto" style="margin-bottom:1em;">
+        <p-checkbox name="reinvestissement" [(ngModel)]="reinvestirDividendes" [binary]="true"
+          label="Réinvestir les dividendes ?" (ngModelChange)="simulate()">
+        </p-checkbox>
+      </div>
+
+
       <button pButton type="submit" label="Simuler"></button>
+
     </p-panel>
   </form>
+
 
   <p-chart *ngIf="chartData" type="line" [data]="chartData" [options]="chartOptions" style="margin-top:2em;"></p-chart>
 
@@ -85,4 +86,49 @@
       </tbody>
     </table>
   </div>
+
+<br>
+<div class="separator"></div><br>
+
+<section class="faq-section" aria-label="Foire aux questions - Dividende FIRE">
+  <h2>FAQ - Dividende FIRE</h2>
+  <dl>
+    <dt>Qu’est-ce que la stratégie FIRE par dividendes ?</dt>
+    <dd>Il s’agit d’atteindre l’indépendance financière en vivant des dividendes générés par un portefeuille d’actions,
+      sans vendre le capital investi.</dd>
+
+    <dt>Quel rendement annuel viser pour vivre de ses dividendes ?</dt>
+    <dd>Un rendement entre 3 % et 6 % est généralement recherché pour concilier stabilité et performance.</dd>
+
+    <dt>Combien de capital faut-il pour générer 2 000 € de revenus mensuels ?</dt>
+    <dd>Avec un rendement net de 4 %, il faut environ 600 000 € de capital (2 000 x 12 / 0,04).</dd>
+
+    <dt>Faut-il privilégier les actions françaises ou étrangères ?</dt>
+    <dd>Un portefeuille diversifié, incluant des sociétés françaises et internationales, permet de lisser les risques et
+      d’optimiser la fiscalité.</dd>
+
+    <dt>Les dividendes sont-ils fiscalisés ?</dt>
+    <dd>Oui, en France ils sont soumis à la flat tax de 30 %, sauf cas d’exonérations partielles (PEA, etc.).</dd>
+
+    <dt>Quels types d’actions versent des dividendes réguliers ?</dt>
+    <dd>Les entreprises matures et rentables (ex. TotalEnergies, Sanofi, Air Liquide) sont connues pour leur politique
+      stable de distribution.</dd>
+
+    <dt>Peut-on atteindre FIRE uniquement avec des dividendes ?</dt>
+    <dd>Oui, si le portefeuille est suffisamment capitalisé et bien réparti. Mais cela demande rigueur et discipline
+      d’investissement.</dd>
+
+    <dt>Le PEA est-il adapté à une stratégie dividendes ?</dt>
+    <dd>Oui, le PEA permet de percevoir des dividendes exonérés d’impôt après 5 ans, sous conditions, mais il est limité
+      aux actions européennes.</dd>
+
+    <dt>Comment optimiser la fiscalité des dividendes étrangers ?</dt>
+    <dd>En utilisant les conventions fiscales et crédits d’impôt, ou en investissant via des enveloppes fiscales
+      adaptées (ex. assurance-vie).</dd>
+
+    <dt>La stratégie dividendes est-elle adaptée à tous les profils ?</dt>
+    <dd>Elle convient aux investisseurs patients, recherchant des revenus passifs réguliers, avec une tolérance au
+      risque modérée.</dd>
+  </dl>
+</section>
 </main>

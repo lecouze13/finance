@@ -3,13 +3,13 @@
  pouvori naviquer sur al lignedela calculatrice quand trop de nombre sont écrits
   faire une mise en formecorrecte poru téléphone 
   Ajouté l'icone au header 
- simulateur retraite a repush
+Ajouter les mots cléf a chaque composantet article probablement
 
 
 
 Liste des composant à faire :
 Simulateur de déclaration de revenus fonciers (micro-foncier vs régime réel).
-
+faire un simulateur de dividende airbnb aussi
 
 
 
@@ -19,8 +19,9 @@ Simulateur de déclaration de revenus fonciers (micro-foncier vs régime réel).
 /simulateur-apport-vs-emprunt
 
 
+finir le simulateur dividende fire avec les requete api
 
-composant permattant de mesurer combien de dividend il faut pour arrter de travail utiliser Yahoo Finance
+
 
 
 

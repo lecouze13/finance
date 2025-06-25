@@ -15,15 +15,21 @@ export class SeoService {
     url: string;
     image?: string;
     robots?: string;
-  }): void {
-    this.title.setTitle(options.title);
+    keywords?: string;  // Ajouté ici
+}): void {
+  this.title.setTitle(options.title);
 
-    this.meta.updateTag({ name: 'description', content: options.description });
+  this.meta.updateTag({ name: 'description', content: options.description });
 
-    this.meta.updateTag({
-      name: 'robots',
-      content: options.robots || 'index, follow'
-    });
+  this.meta.updateTag({
+    name: 'robots',
+    content: options.robots || 'index, follow'
+  });
+
+  if (options.keywords) {
+    this.meta.updateTag({ name: 'keywords', content: options.keywords });
+  }
+
 
     // Open Graph
     this.meta.updateTag({ property: 'og:title', content: options.title });

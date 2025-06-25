@@ -61,6 +61,7 @@ import { SimulateurApportVsEmpruntComponent } from './Immobilier/simulateur-appo
 import { SimulateurImportLocationNueComponent } from './Immobilier/simulateur-import-location-nue/simulateur-import-location-nue.component';
 import { SimulateurDividendFireComponent } from './Finance/simulateur-dividend-fire/simulateur-dividend-fire.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AirbnbVsLocationComponent } from './Immobilier/airbnb-vs-location/airbnb-vs-location.component';
 
 @NgModule({
     declarations: [
@@ -92,7 +93,8 @@ import { HttpClientModule } from '@angular/common/http';
         SimulateurRetraiteComponent,
         SimulateurApportVsEmpruntComponent,
         SimulateurImportLocationNueComponent,
-        SimulateurDividendFireComponent
+        SimulateurDividendFireComponent,
+        AirbnbVsLocationComponent
     ],
     imports: [
         BrowserModule,
