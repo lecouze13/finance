@@ -3,22 +3,9 @@
 <h1>Simulateur Airbnb vs Location Classique</h1>
   <div class="separator"></div><br>
 
-<form (ngSubmit)="calculer()"class="form">
+<form (ngSubmit)="calculer()" [formGroup]="simulationForm" autocomplete="off" class="form">
       <p-panel header="Paramètres de la simulation">
 
- <div class="flex-auto">
-  <p-floatLabel>
-    <p-inputNumber inputId="prixAchat" formControlName="prixAchat" mode="decimal" [minFractionDigits]="0" suffix=" €" [min]="0" />
-    <label for="prixAchat">Prix d'achat (€)</label>
-  </p-floatLabel>
-</div>
-
-<div class="flex-auto">
-  <p-floatLabel>
-    <p-inputNumber inputId="fraisNotaire" formControlName="fraisNotaire" mode="decimal" [minFractionDigits]="2" suffix=" %" [min]="0" [max]="100" />
-    <label for="fraisNotaire">Frais de notaire (%)</label>
-  </p-floatLabel>
-</div>
 
 <div class="flex-auto">
   <p-floatLabel>
@@ -43,24 +30,12 @@
 
 <div class="flex-auto">
   <p-floatLabel>
-    <p-inputNumber inputId="fraisGestionAirbnb" formControlName="fraisGestionAirbnb" mode="decimal" [minFractionDigits]="2" suffix=" %" [min]="0" [max]="100" />
+    <p-inputNumber inputId="fraisGestionAirbnb" formControlName="fraisGestionAirbnb" mode="decimal" [minFractionDigits]="2" suffix=" %" [min]="0" [max]="100"    pTooltip="Si vous passez par une conciergerie (en général 20 à 30 %). Sinon 3 %"
+      tooltipPosition="top" />
     <label for="fraisGestionAirbnb">Frais de gestion Airbnb (%)</label>
   </p-floatLabel>
 </div>
 
-<div class="flex-auto">
-  <p-floatLabel>
-    <p-inputNumber inputId="chargesMensuelles" formControlName="chargesMensuelles" mode="decimal" [minFractionDigits]="0" suffix=" €" [min]="0" />
-    <label for="chargesMensuelles">Charges mensuelles (€)</label>
-  </p-floatLabel>
-</div>
-
-<div class="flex-auto">
-  <p-floatLabel>
-    <p-inputNumber inputId="taxeFonciereAnnuelle" formControlName="taxeFonciereAnnuelle" mode="decimal" [minFractionDigits]="0" suffix=" €" [min]="0" />
-    <label for="taxeFonciereAnnuelle">Taxe foncière annuelle (€)</label>
-  </p-floatLabel>
-</div>
 
 <div class="flex-auto">
   <p-floatLabel>
@@ -69,12 +44,6 @@
   </p-floatLabel>
 </div>
 
-<div class="flex-auto">
-  <p-floatLabel>
-    <p-inputNumber inputId="tauxAppreciationBien" formControlName="tauxAppreciationBien" mode="decimal" [minFractionDigits]="2" suffix=" %" [min]="-100" [max]="100" />
-    <label for="tauxAppreciationBien">Taux d’appréciation annuelle du bien (%)</label>
-  </p-floatLabel>
-</div>
 
 
   <button pButton type="submit" label="Calculer" icon="pi pi-check"class="p-button-success"></button>
@@ -83,48 +52,69 @@
 
 
 
-<p-panel  header="Résultats  annuels" class="mt-4">
-  <h2>Résultats </h2>
-  <p>Revenus location classique : {{ revenusLocClassiqueAnnuel | number:'1.0-0' }} €</p>
-  <p>Revenus Airbnb : {{ revenusAirbnbAnnuel | number:'1.0-0' }} €</p>
-  <p>Coût annuel location classique : {{ coutAnnuelClassique | number:'1.0-0' }} €</p>
-  <p>Coût annuel Airbnb : {{ coutAnnuelAirbnb | number:'1.0-0' }} €</p>
-  <p>Gain net annuel Airbnb vs location classique : {{ gainNetAirbnbVsClassique | number:'1.0-0' }} €</p>
+<p-panel  *ngIf="resultat" header="Résultats  annuels" class="mt-4">
+  Revenu location classique : {{ resultat.revenuLocationClassiqueTotal | number:'1.0-0' }} €<br>
+  Revenu net Airbnb : {{ resultat.revenuAirbnbTotal | number:'1.0-0' }} €<br>
+  Différence : {{ resultat.ecart | number:'1.0-0' }} €<br>
+  👉 Avantage : <strong>{{ resultat.avantage }}</strong>
 </p-panel>
 
   <div class="separator"></div><br>
 
-<section class="faq-section " aria-label="FAQ - Location Airbnb vs Location classique">
+  <section class="mt-3">
+  <h3>Explications sur les calculs et les modèles de location</h3>
+  <p>
+    Les résultats présentés ici sont calculés en tenant compte des revenus bruts générés par chaque type de location, diminués des frais et charges spécifiques. Pour la location classique, il s'agit principalement du loyer annuel perçu diminué des charges fixes. Pour la location Airbnb, le calcul intègre le taux d’occupation, les frais de gestion, ainsi que les charges variables liées à la gestion plus intensive.
+  </p>
+  <p>
+    La location classique offre généralement une source de revenus plus stable et prévisible, avec une gestion simplifiée et des contrats de longue durée. En revanche, la location via Airbnb peut générer des revenus plus élevés sur certaines périodes, mais demande plus de temps et d’attention pour la gestion quotidienne et peut être soumise à une plus grande variabilité.
+  </p>
+  <p>
+    Ce simulateur vous permet ainsi d'avoir une estimation chiffrée vous aidant à mieux comprendre les impacts financiers de chaque mode de location, afin d’adapter votre choix à vos attentes et votre disponibilité.
+  </p>
+</section>
+
+<section class="mt-3">
+  <h3>À propos de la location Airbnb</h3>
+  <p>
+    La location via Airbnb est une forme de location courte durée qui peut offrir des revenus potentiellement plus élevés grâce à une tarification dynamique et un taux d’occupation variable. Cependant, elle demande une gestion plus active, incluant la communication avec les locataires, le nettoyage régulier et la mise à jour constante des annonces.
+  </p>
+  <p>
+    Ce type de location est aussi soumis à des réglementations locales spécifiques qui peuvent limiter la durée ou les conditions de location. En contrepartie, elle permet de maximiser le rendement du bien, surtout dans les zones touristiques ou urbaines très demandées.
+  </p>
+  <p>
+    Notre simulateur prend en compte ces particularités pour vous fournir une estimation réaliste des revenus nets générés par Airbnb, en tenant compte du taux d’occupation et des frais de gestion spécifiques.
+  </p>
+  <p 
+  > <p>
+  Pour estimer précisément les impôts liés à votre location meublée (LMNP ou LMP) ou Airbnb, vous pouvez utiliser notre simulateur dédié en suivant ce lien : 
+  <a routerLink="/lmnp-lmp-regime-fiscal" title="Simulateur d'impôts LMNP/LMP">Simulateur d'impôts LMNP/LMP</a>.
+</p>
+</section>
+
+<section class="faq-section" aria-label="FAQ - Location Airbnb vs Location classique">
   <h2>FAQ – Questions fréquentes sur la location Airbnb vs location classique</h2>
   <dl>
     <dt>Quelle est la différence entre location Airbnb et location classique ?</dt>
-    <dd>La location Airbnb est une location courte durée, généralement plus rémunératrice mais avec plus de gestion, tandis que la location classique est une location longue durée avec moins de gestion.</dd>
+    <dd>La location Airbnb correspond à une location courte durée souvent plus flexible et rémunératrice, tandis que la location classique est une location longue durée avec une gestion plus stable et régulière.</dd>
 
     <dt>Quels sont les frais spécifiques à la location Airbnb ?</dt>
-    <dd>Les frais de gestion Airbnb, la vacance locative, les coûts de nettoyage et les charges variables plus élevées.</dd>
+    <dd>Les frais de gestion Airbnb, les coûts de nettoyage, ainsi que les charges variables plus élevées liées à la rotation fréquente des locataires.</dd>
 
     <dt>Comment est calculée la rentabilité dans ce simulateur ?</dt>
-    <dd>Le simulateur calcule les revenus bruts annuels, les charges, les frais de gestion, et estime la plus-value potentielle du bien.</dd>
+    <dd>Le simulateur calcule les revenus bruts annuels, les charges et les frais de gestion pour estimer la rentabilité nette de chaque type de location.</dd>
 
-    <dt>Peut-on inclure les frais de notaire et les taxes dans le calcul ?</dt>
-    <dd>Oui, les frais de notaire et la taxe foncière sont pris en compte dans les coûts annuels.</dd>
-
-    <dt>La simulation prend-elle en compte l'évolution du prix du bien ?</dt>
-    <dd>Oui, un taux d’appréciation annuel du bien immobilier est appliqué pour estimer sa valorisation future.</dd>
-
-    <dt>Quels sont les avantages fiscaux de la location Airbnb ?</dt>
-    <dd>La location courte durée peut bénéficier du régime micro-BIC ou réel, avec possibilité d’amortissement, réduisant l’imposition sur les revenus.</dd>
+    <dt>La fiscalité est-elle différente entre Airbnb et location classique ?</dt>
+    <dd>Non, dans les deux cas, les revenus locatifs sont imposés au titre des Bénéfices Industriels et Commerciaux (BIC), avec les mêmes options de régime micro-BIC ou réel.</dd>
 
     <dt>Quelle est la vacance locative moyenne en Airbnb comparée à la location classique ?</dt>
-    <dd>La vacance locative en Airbnb est souvent plus élevée en raison de la rotation des locataires et des périodes creuses, alors que la location classique offre généralement une occupation stable.</dd>
+    <dd>La vacance locative en Airbnb est souvent plus élevée à cause de la rotation rapide des locataires, tandis que la location classique offre généralement une occupation plus stable.</dd>
 
     <dt>Quels sont les risques liés à la location Airbnb ?</dt>
-    <dd>Les risques comprennent une gestion plus chronophage, la réglementation locale restrictive, et une variabilité des revenus liée à la demande saisonnière.</dd>
-
-    <dt>Comment sont pris en compte les frais de nettoyage dans le simulateur ?</dt>
-    <dd>Les frais de nettoyage sont inclus dans les charges variables spécifiques à la location Airbnb, impactant la rentabilité nette.</dd>
+    <dd>Les risques incluent une gestion plus chronophage, une réglementation locale parfois stricte, ainsi que la variabilité des revenus liée à la saisonnalité.</dd>
 
     <dt>Peut-on simuler un scénario mixte entre location Airbnb et location classique ?</dt>
-    <dd>Le simulateur est conçu pour comparer les deux modèles séparément, mais vous pouvez ajuster les paramètres pour estimer un usage mixte.</dd>
+    <dd>Le simulateur compare les deux modèles séparément, mais vous pouvez ajuster les paramètres pour estimer une utilisation mixte.</dd>
   </dl>
 </section>
+

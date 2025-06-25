@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { SeoService } from '../../Constructor/service/seo.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
 interface Ticker {
   label: string;
@@ -206,12 +207,16 @@ export class SimulateurDividendFireComponent implements OnInit {
       cours: 0,
     }, // Remarque : doublon MT déjà listé, retire selon besoin
   ];
+
+ 
   constructor(
     private fb: FormBuilder,
     @Inject(PLATFORM_ID) private platformId: any,
     private renderer: Renderer2,
     private seo: SeoService
-  ) {}
+  ) {
+  
+  }
 
   selectedTicker?: Ticker;
 

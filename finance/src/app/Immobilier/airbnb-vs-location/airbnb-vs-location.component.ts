@@ -1,137 +1,131 @@
-import { Component, OnInit, Renderer2, Inject, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Renderer2,
+  Inject,
+  PLATFORM_ID,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { SeoService } from '../../Constructor/service/seo.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-airbnb-vs-location',
- 
+
   templateUrl: './airbnb-vs-location.component.html',
-  styleUrl: './airbnb-vs-location.component.scss'
+  styleUrl: './airbnb-vs-location.component.scss',
 })
 export class AirbnbVsLocationComponent {
-
-
   // Données d'entrée (exemple)
-  prixAchat: number = 300000;
-  fraisNotaire: number = 7; // en %
   loyerMensuelClassique: number = 1200;
   tauxOccupationAirbnb: number = 70; // en %
   loyerNuitAirbnb: number = 80;
   fraisGestionAirbnb: number = 15; // en % des revenus Airbnb
-  chargesMensuelles: number = 200;
-  taxeFonciereAnnuelle: number = 1500;
   dureeSimulation: number = 10; // en années
-  tauxAppreciationBien: number = 2; // en % annuel
 
-  // Résultats
-  revenusLocClassiqueAnnuel: number = 0;
-  revenusAirbnbAnnuel: number = 0;
-  coutAnnuelClassique: number = 0;
-  coutAnnuelAirbnb: number = 0;
-  gainNetAirbnbVsClassique: number = 0;
+  resultat: {
+    revenuLocationClassiqueTotal: number;
+    revenuAirbnbTotal: number;
+    ecart: number;
+    avantage: string;
+  } = {
+    revenuLocationClassiqueTotal: 0,
+    revenuAirbnbTotal: 0,
+    ecart: 0,
+    avantage: '',
+  };
+
+  simulationForm: FormGroup;
 
   constructor(
+    private fb: FormBuilder,
     private seo: SeoService,
     private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) {
+    this.simulationForm = this.fb.group({
+      loyerMensuelClassique: [null],
+      tauxOccupationAirbnb: [null],
+      loyerNuitAirbnb: [null],
+      fraisGestionAirbnb: [null],
+      dureeSimulation: [10],
+    });
+  }
 
   ngOnInit(): void {
     this.seo.updateMetaData({
-      title: 'Simulateur Airbnb vs Location Classique : Calculez la rentabilité',
-      description: 'Comparez la rentabilité de votre investissement immobilier entre location classique et location Airbnb avec notre simulateur simple et rapide.',
+      title:
+        'Simulateur Airbnb vs Location Classique : Calculez la rentabilité',
+      description:
+        'Comparez la rentabilité de votre investissement immobilier entre location classique et location Airbnb avec notre simulateur simple et rapide.',
       url: 'https://calculateurfinance.fr/calcul-rentabilite-airbnb-vs-location-classique/',
-      keywords: 'simulateur airbnb, location classique, rentabilité location, investissement immobilier, comparaison location airbnb'
+      keywords:
+        'simulateur airbnb, location classique, rentabilité location, investissement immobilier, comparaison location airbnb',
     });
 
     if (isPlatformBrowser(this.platformId)) {
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Quelle est la différence entre location Airbnb et location classique ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "La location Airbnb est une location courte durée, généralement plus rémunératrice mais avec plus de gestion, tandis que la location classique est une location longue durée avec moins de gestion."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Quels sont les frais spécifiques à la location Airbnb ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Les frais de gestion Airbnb, la vacance locative, les coûts de nettoyage et les charges variables plus élevées."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Comment est calculée la rentabilité dans ce simulateur ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Le simulateur calcule les revenus bruts annuels, les charges, les frais de gestion, et estime la plus-value potentielle du bien."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Peut-on inclure les frais de notaire et les taxes dans le calcul ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Oui, les frais de notaire et la taxe foncière sont pris en compte dans les coûts annuels."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "La simulation prend-elle en compte l'évolution du prix du bien ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Oui, un taux d’appréciation annuel du bien immobilier est appliqué pour estimer sa valorisation future."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Quels sont les risques liés à la location Airbnb ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Les risques incluent la vacance locative, les dégradations, la gestion plus lourde et les éventuelles restrictions légales locales."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Comment calculer le taux d’occupation réaliste pour Airbnb ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Le taux d’occupation dépend de la localisation, la saisonnalité et la concurrence. Il est conseillé de se baser sur des données locales ou plateformes spécialisées."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Dois-je payer des impôts différents selon le type de location ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Oui, la fiscalité diffère entre location longue durée et courte durée (Airbnb). Il est conseillé de consulter un expert fiscal pour optimiser votre situation."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Est-il possible d’alterner entre location Airbnb et location classique ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Oui, mais cela peut nécessiter des adaptations contractuelles et réglementaires selon la commune."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Quelle est la durée idéale de simulation ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "La durée idéale dépend de votre horizon d’investissement, généralement entre 5 et 15 ans."
-      }
-    }
-  ]
-};
-
+      const faqJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'Quelle est la différence entre location Airbnb et location classique ?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'La location Airbnb correspond à une location courte durée souvent plus flexible et rémunératrice, tandis que la location classique est une location longue durée avec une gestion plus stable et régulière.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Quels sont les frais spécifiques à la location Airbnb ?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Les frais de gestion Airbnb, les coûts de nettoyage, ainsi que les charges variables plus élevées liées à la rotation fréquente des locataires.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Comment est calculée la rentabilité dans ce simulateur ?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Le simulateur calcule les revenus bruts annuels, les charges et les frais de gestion pour estimer la rentabilité nette de chaque type de location.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'La fiscalité est-elle différente entre Airbnb et location classique ?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Non, dans les deux cas, les revenus locatifs sont imposés au titre des Bénéfices Industriels et Commerciaux (BIC), avec les mêmes options de régime micro-BIC ou réel.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Quelle est la vacance locative moyenne en Airbnb comparée à la location classique ?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'La vacance locative en Airbnb est souvent plus élevée à cause de la rotation rapide des locataires, tandis que la location classique offre généralement une occupation plus stable.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Quels sont les risques liés à la location Airbnb ?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Les risques incluent une gestion plus chronophage, une réglementation locale parfois stricte, ainsi que la variabilité des revenus liée à la saisonnalité.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Peut-on simuler un scénario mixte entre location Airbnb et location classique ?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Le simulateur compare les deux modèles séparément, mais vous pouvez ajuster les paramètres pour estimer une utilisation mixte.',
+            },
+          },
+        ],
+      };
 
       const script = this.renderer.createElement('script');
       script.type = 'application/ld+json';
@@ -141,44 +135,33 @@ const faqJsonLd = {
 
     this.calculer();
   }
-
   calculer() {
-    // Frais notaire en valeur absolue
-    const fraisNotaireValeur = this.prixAchat * (this.fraisNotaire / 100);
+    const form = this.simulationForm.value;
 
-    // Revenus annuels location classique
-    this.revenusLocClassiqueAnnuel = this.loyerMensuelClassique * 12;
+    const dureeEnMois = form.dureeSimulation * 12;
 
-    // Revenus annuels Airbnb = nb nuits louées * prix nuit * taux occupation * 12 mois
-    const nuitsParAn = 365;
-    const nuitsLouees = nuitsParAn * (this.tauxOccupationAirbnb / 100);
-    this.revenusAirbnbAnnuel = nuitsLouees * this.loyerNuitAirbnb;
+    // Revenu location classique
+    const revenuLocationClassiqueTotal =
+      form.loyerMensuelClassique * dureeEnMois;
 
-    // Frais de gestion Airbnb
-    const fraisGestionAirbnbValeur = this.revenusAirbnbAnnuel * (this.fraisGestionAirbnb / 100);
+    // Revenu brut Airbnb (nombre de jours par an × taux d’occupation × loyer nuit)
+    const joursAn = 365;
+    const tauxOccupation = form.tauxOccupationAirbnb / 100;
+    const revenuBrutAnnuelAirbnb =
+      joursAn * tauxOccupation * form.loyerNuitAirbnb;
+    const revenuNetAnnuelAirbnb =
+      revenuBrutAnnuelAirbnb * (1 - form.fraisGestionAirbnb / 100);
+    const revenuAirbnbTotal = revenuNetAnnuelAirbnb * form.dureeSimulation;
 
-    // Charges annuelles (charges mensuelles * 12)
-    const chargesAnnuelles = this.chargesMensuelles * 12;
+    // Différence
+    const ecart = revenuAirbnbTotal - revenuLocationClassiqueTotal;
 
-    // Taxe foncière
-    const taxeFonciere = this.taxeFonciereAnnuelle;
-
-    // Coût total annuel location classique = charges + taxe
-    this.coutAnnuelClassique = chargesAnnuelles + taxeFonciere;
-
-    // Coût total annuel Airbnb = charges + taxe + frais gestion Airbnb
-    this.coutAnnuelAirbnb = chargesAnnuelles + taxeFonciere + fraisGestionAirbnbValeur;
-
-    // Plus-value sur le bien au bout de la durée (valeur finale - prix achat)
-    const valeurFuture = this.prixAchat * Math.pow(1 + (this.tauxAppreciationBien / 100), this.dureeSimulation);
-    const plusValue = valeurFuture - this.prixAchat;
-
-    // Gain net annuel = (revenus - coûts) + (plus-value / durée)
-    const gainNetAnnuelClassique = this.revenusLocClassiqueAnnuel - this.coutAnnuelClassique + (plusValue / this.dureeSimulation);
-    const gainNetAnnuelAirbnb = this.revenusAirbnbAnnuel - this.coutAnnuelAirbnb + (plusValue / this.dureeSimulation);
-
-    this.gainNetAirbnbVsClassique = gainNetAnnuelAirbnb - gainNetAnnuelClassique;
+    this.resultat = {
+      revenuLocationClassiqueTotal,
+      revenuAirbnbTotal,
+      ecart,
+      avantage:
+        ecart > 0 ? 'Airbnb' : ecart < 0 ? 'Location classique' : 'Égalité',
+    };
   }
 }
-
-
