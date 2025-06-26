@@ -19,7 +19,6 @@ private renderer: Renderer2, private seo: SeoService) {}
       title: 'Simulateur FIRE : Atteindre l’indépendance financière',
       description: 'Calculez combien de capital il vous faut pour être libre financièrement avec notre simulateur FIRE. Évaluez vos dépenses, votre taux de retrait et votre épargne.',
       keywords: 'simulateur indépendance financière, liberté financière, revenus passifs, épargne, investissement, calcul indépendance financière, FIRE, finances personnelles',
-
       url: 'https://calculateurfinance.fr/simulateur-independance-financiere/',
   });
   if (isPlatformBrowser(this.platformId)) {
