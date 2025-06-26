@@ -13,10 +13,9 @@ private renderer: Renderer2, private seo: SeoService) { }
     this.seo.updateMetaData({
       title: 'Simulateur cashflow immobilier 2025 | CalculateurFinance.fr',
       description: 'Estimez votre cashflow immobilier en prenant en compte vos loyers, charges et crédits. Outil simple et gratuit.',
-      url: 'https://www.calculateurfinance.fr/cashflow-immobilier/',
+      url: 'https://calculateurfinance.fr/cashflow-immobilier/',
       keywords: 'simulateur cashflow immobilier, cash flow locatif, flux de trésorerie, investissement locatif, revenus passifs, rentabilité immobilière, charges locatives, loyers, analyse financière, gestion immobilière',
 
-      // image: 'https://www.calculateurfinance.fr/assets/simulateur-cashflow-preview.png'
     });
   if (isPlatformBrowser(this.platformId)) {
 

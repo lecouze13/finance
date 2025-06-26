@@ -27,8 +27,7 @@ private renderer: Renderer2, private seo: SeoService) { }
       description: 'Comparez facilement la fiscalité et la rentabilité entre SCI à l’Impôt sur le Revenu et SCI à l’Impôt sur les Sociétés avec notre simulateur gratuit.',
       keywords: 'comparateur SCI, SCI à l’IR, SCI à l’IS, fiscalité SCI, simulation SCI, impôt SCI, optimisation fiscale SCI, régime fiscal SCI',
 
-      url: 'https://www.calculateurfinance.fr/comparateur-sci-impot/',
-      // image: 'https://www.calculateurfinance.fr/assets/comparateur-sci-preview.png'
+      url: 'https://calculateurfinance.fr/comparateur-sci-impot/',
     });
   if (isPlatformBrowser(this.platformId)) {
 

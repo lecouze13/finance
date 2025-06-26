@@ -44,10 +44,9 @@ export class BudgetComponent implements OnInit {
     this.seo.updateMetaData({
       title: 'Simulateur de budget personnel 2025 | CalculateurFinance.fr',
       description: 'Gérez et optimisez votre budget personnel avec notre simulateur simple et gratuit. Suivez vos dépenses et vos revenus facilement.',
-      url: 'https://www.calculateurfinance.fr/budget-immobilier/',
+      url: 'https://calculateurfinance.fr/budget-immobilier/',
      keywords: 'simulateur budget mensuel, gestion budget personnel, suivi dépenses mensuelles, calcul budget famille, reste à vivre, planification financière, revenus et charges, outils de budget en ligne, tableau de budget, épargne mensuelle',
 
-      // image: 'https://www.calculateurfinance.fr/assets/simulateur-budget-preview.png'
     });
     if (isPlatformBrowser(this.platformId)) {
 

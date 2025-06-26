@@ -16,8 +16,7 @@ private renderer: Renderer2, private seo: SeoService) { }
       description: 'Estimez facilement vos frais de notaire pour un achat immobilier neuf ou ancien. Outil gratuit, simple et précis.',
       keywords: 'simulateur frais de notaire, calcul frais notaire, estimation frais achat immobilier, frais d\'acquisition, coûts notariaux, achat immobilier, frais notaire pourcentage',
 
-      url: 'https://www.calculateurfinance.fr/calcul-frais-de-notaire/',
-      // image: 'https://www.calculateurfinance.fr/assets/simulateur-frais-notaire-preview.png'
+      url: 'https://calculateurfinance.fr/calcul-frais-de-notaire/',
     });
   if (isPlatformBrowser(this.platformId)) {
 

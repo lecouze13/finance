@@ -18,10 +18,9 @@ private renderer: Renderer2, private seo: SeoService) { }
     this.seo.updateMetaData({
       title: 'Simulateur Crédit Immobilier 2025 | Estimation Mensualités, Coût et Capacité',
       description: 'Calculez gratuitement vos mensualités, coût total du crédit et capacité d’emprunt grâce à notre simulateur immobilier simple et précis.',
-      url: 'https://www.calculateurfinance.fr/simulateur-credit-immobilier/',
+      url: 'https://calculateurfinance.fr/simulateur-credit-immobilier/',
       keywords: 'simulateur crédit immobilier, calcul mensualité prêt, taux immobilier, durée emprunt, capacité d\'emprunt, taux fixe, taux variable, prêt immobilier, simulation crédit, remboursement prêt',
 
-      // image: 'https://www.calculateurfinance.fr/assets/simulateur-credit-immobilier-preview.png'
     });
   if (isPlatformBrowser(this.platformId)) {
 

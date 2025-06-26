@@ -195,10 +195,8 @@ private renderer: Renderer2, private seo: SeoService) { }
     this.seo.updateMetaData({
       title: 'Comparateur achat vs location 2025 | CalculateurFinance.fr',
       description: 'Comparez facilement les coûts et avantages entre acheter et louer un bien immobilier avec notre simulateur simple et gratuit.',
-      url: 'https://www.calculateurfinance.fr/achat-vs-location/',
+      url: 'https://calculateurfinance.fr/achat-vs-location/',
       keywords: 'simulateur achat vs location, calcul achat immobilier, comparaison achat location, simulation investissement immobilier, coût location vs achat, frais achat immobilier, simulation budget immobilier',
-
-      // image: 'https://www.calculateurfinance.fr/assets/comparateur-achat-location-preview.png'
     });
   if (isPlatformBrowser(this.platformId)) {
 

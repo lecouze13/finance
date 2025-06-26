@@ -26,8 +26,7 @@ private renderer: Renderer2,private seo: SeoService) {}
       description: 'Calculez facilement votre plus-value immobilière en fonction du prix d’achat, du prix de vente, et des abattements légaux. Outil gratuit et simple.',
       keywords: 'simulateur plus-value immobilière, plus-value résidence principale, plus-value résidence secondaire, calcul plus-value, fiscalité immobilière, imposition plus-value, exonération plus-value, vente bien immobilier, calcul impôt plus-value, immobilier',
 
-      url: 'https://www.calculateurfinance.fr/simulateur-plus-value-immobiliere/',
-      // image: 'https://www.calculateurfinance.fr/assets/simulateur-plus-value-preview.png'
+      url: 'https://calculateurfinance.fr/simulateur-plus-value-immobiliere/',
     });
   if (isPlatformBrowser(this.platformId)) {
 

@@ -18,7 +18,7 @@ export class TriImmoComponent implements OnInit {
       description: 'Calculez facilement le Taux de Rentabilité Interne (TRI) de votre investissement immobilier grâce à notre simulateur gratuit et précis.',
       keywords: 'simulateur TRI immobilier, taux rendement interne, investissement locatif, calcul rentabilité immobilière, cash flow, flux de trésorerie, rentabilité nette, investissement immobilier, analyse financière, TRI',
 
-      url: 'https://www.calculateurfinance.fr/tri-immobilier/',
+      url: 'https://calculateurfinance.fr/tri-immobilier/',
     });
     if (isPlatformBrowser(this.platformId)) {
 
