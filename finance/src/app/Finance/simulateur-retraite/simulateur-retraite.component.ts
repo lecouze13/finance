@@ -43,6 +43,8 @@ this.form = this.fb.group({
     this.seo.updateMetaData({
       title: 'Simulateur Retraite 2025 : âge, pension et projections',
       description: 'Estimez votre âge de départ à la retraite et le montant de votre pension avec notre simulateur complet. Intègre carrière, statut et revenus.',
+      keywords: 'simulateur retraite, calcul retraite, âge de départ à la retraite, pension, épargne retraite, planning retraite, revenus retraite, projection retraite',
+
       url: 'https://calculateurfinance.fr/simulateur-retraite/'
     });
 

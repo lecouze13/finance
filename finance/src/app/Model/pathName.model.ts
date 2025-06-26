@@ -4,7 +4,7 @@ export const AppRoutes = {
   BUDGET: 'budget-immobilier',
   INVESTISSEMENT: 'investissement-locatif',
   CASHFLOW: 'cashflow-immobilier',
-  EMPRUNT: 'calcul-emprunt',
+  EMPRUNT: 'simulateur-credit-immobilier',
   TRI: 'tri-immobilier',
   ACHAT_VS_LOCATION: 'achat-vs-location',
   CALCUL_NOTAIRE: 'calcul-frais-de-notaire',

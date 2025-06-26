@@ -1,11 +1,13 @@
 // livret.pages.ts
 export const livrets: {
-  [key: string]: { titre: string; contenu: string; description: string; categorie: string };
+  [key: string]: { titre: string; contenu: string; description: string; categorie: string, keywords:string };
 } = {
   'livret-a': {
     titre: 'Livret A',
     description: 'Tout savoir sur le Livret A : fonctionnement, taux, plafond, fiscalité, conditions d’ouverture.',
     categorie: 'epargne',
+       keywords: 'livret A, épargne réglementée, taux livret A, placement sans risque, livret défiscalisé, plafond livret A',
+
     contenu: `
         <h2>Introduction</h2>
 
@@ -36,6 +38,8 @@ export const livrets: {
     titre: 'Livret de Développement Durable et Solidaire (LDDS)',
     description: 'Fonctionnement, conditions, taux et fiscalité du LDDS, un livret d’épargne responsable.',
     categorie: 'epargne',
+        keywords: 'LDDS, livret développement durable, livret défiscalisé, taux LDDS, épargne solidaire, plafond LDDS, épargne sécurisée'
+,
     contenu: `
     <h2>Introduction</h2>
       <p>Le Livret de Développement Durable et Solidaire (LDDS) est un produit d’épargne réglementé destiné à financer des projets écologiques et solidaires. Il est réservé aux résidents fiscaux français majeurs.</p>
@@ -58,6 +62,8 @@ export const livrets: {
   pel: {
     titre: 'Plan Épargne Logement (PEL)',
     description: 'Découvrez le PEL, un produit d’épargne bloqué destiné à financer l’achat d’un bien immobilier.',
+        keywords: 'PEL, plan épargne logement, prêt PEL, taux PEL, épargne logement, placement sécurisé, durée PEL',
+
     categorie: 'epargne',
     contenu: `
     <h2>Introduction</h2>
@@ -86,6 +92,8 @@ export const livrets: {
   cel: {
     titre: 'Compte Épargne Logement (CEL)',
     description: 'Le CEL, un livret souple lié à un projet immobilier, avec accès à un prêt avantageux.',
+        keywords: 'CEL, compte épargne logement, taux CEL, prêt immobilier CEL, épargne logement, fiscalité CEL, épargne projet immobilier',
+
     categorie: 'epargne',
     contenu: `
     <h2>Introduction</h2>
@@ -114,6 +122,8 @@ export const livrets: {
     titre: 'Livret d’Épargne Populaire (LEP)',
     description: 'Le LEP est un placement rémunérateur réservé aux foyers modestes, avec un taux très avantageux.',
     categorie: 'epargne',
+        keywords: 'LEP, livret d’épargne populaire, livret défiscalisé, conditions LEP, taux LEP, épargne sécurisée',
+
     contenu: `
     <h2>Introduction</h2>
       <p>Le Livret d’Épargne Populaire est destiné aux contribuables modestes. Il offre un taux d’intérêt supérieur à celui du Livret A pour protéger l’épargne contre l’inflation.</p>
@@ -142,6 +152,8 @@ export const livrets: {
   titre: 'Livret Bleu',
   description: 'Tout sur le Livret Bleu : fonctionnement, fiscalité, conditions et plafond. Équivalent du Livret A réservé aux clients du Crédit Mutuel.',
   categorie: 'epargne',
+      keywords: 'livret bleu, crédit mutuel, équivalent livret A, taux livret bleu, épargne défiscalisée, placement sécurisé',
+
   contenu: `
     <h2>Introduction</h2>
     <p>Le Livret Bleu est un livret d’épargne réglementé proposé exclusivement par le Crédit Mutuel. Il fonctionne de manière identique au Livret A, avec les mêmes taux, plafonds et exonérations fiscales.</p>
@@ -162,6 +174,8 @@ export const livrets: {
   titre: 'Livret Jeune',
   description: 'Le Livret Jeune est un produit d’épargne destiné aux 12-25 ans, avec un taux attractif et des intérêts exonérés d’impôts.',
   categorie: 'epargne',
+      keywords: 'livret jeune, épargne 12-25 ans, livret défiscalisé jeune, taux livret jeune, plafond livret jeune, épargne bancaire',
+
   contenu: `
     <h2>Introduction</h2>
     <p>Le Livret Jeune est une épargne réglementée dédiée aux jeunes entre 12 et 25 ans résidant en France. Il permet d’épargner avec un taux généralement supérieur à celui du Livret A, tout en bénéficiant d'une exonération fiscale complète.</p>

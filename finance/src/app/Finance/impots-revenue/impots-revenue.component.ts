@@ -24,6 +24,8 @@ private renderer: Renderer2, private seo: SeoService) { }
       title: 'Simulateur impôt sur le revenu 2025 | CalculateurFinance.fr',
       description: 'Estimez rapidement votre impôt sur le revenu 2025 selon vos revenus et votre situation familiale. Simulateur simple, rapide et gratuit.',
       url: 'https://www.calculateurfinance.fr/simulateur-impot-revenue/',
+          keywords: 'simulateur impôt sur le revenu, calcul impôt 2025, tranche d’imposition, barème fiscal, déclaration de revenus, fiscalité en France, quotient familial, réduction d’impôt, décote, taux marginal d’imposition'
+
       // image: 'https://www.calculateurfinance.fr/assets/simulateur-impot-preview.png'
     });
   if (isPlatformBrowser(this.platformId)) {

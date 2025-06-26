@@ -33,7 +33,8 @@ export class ContenuPageComponent implements OnInit {
         title: `${this.pageData.titre} | CalculateurFinance.fr`,
         description: this.pageData.description,
         url: `https://calculateurfinance.fr/article/${this.pageSlug}/`,
-        image: '/assets/default-og-image.png'
+        image: '/assets/default-og-image.png',
+        keywords:  `${this.pageData.keywords}`
       });
     }
   }

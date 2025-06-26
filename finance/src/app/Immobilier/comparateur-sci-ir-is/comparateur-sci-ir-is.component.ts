@@ -25,7 +25,9 @@ private renderer: Renderer2, private seo: SeoService) { }
     this.seo.updateMetaData({
       title: 'Comparateur SCI à l’IR vs SCI à l’IS 2025 | CalculateurFinance.fr',
       description: 'Comparez facilement la fiscalité et la rentabilité entre SCI à l’Impôt sur le Revenu et SCI à l’Impôt sur les Sociétés avec notre simulateur gratuit.',
-      url: 'https://www.calculateurfinance.fr/comparateur-sci-ir-vs-is/',
+      keywords: 'comparateur SCI, SCI à l’IR, SCI à l’IS, fiscalité SCI, simulation SCI, impôt SCI, optimisation fiscale SCI, régime fiscal SCI',
+
+      url: 'https://www.calculateurfinance.fr/comparateur-sci-impot/',
       // image: 'https://www.calculateurfinance.fr/assets/comparateur-sci-preview.png'
     });
   if (isPlatformBrowser(this.platformId)) {

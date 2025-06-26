@@ -58,7 +58,7 @@ export class AirbnbVsLocationComponent {
         'Simulateur Airbnb vs Location Classique : Calculez la rentabilité',
       description:
         'Comparez la rentabilité de votre investissement immobilier entre location classique et location Airbnb avec notre simulateur simple et rapide.',
-      url: 'https://calculateurfinance.fr/calcul-rentabilite-airbnb-vs-location-classique/',
+      url: 'https://calculateurfinance.fr/airbnb-vs-location/',
       keywords:
         'simulateur airbnb, location classique, rentabilité location, investissement immobilier, comparaison location airbnb',
     });

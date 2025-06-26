@@ -40,7 +40,9 @@ export class SimulateurImportLocationNueComponent implements OnInit {
       title: 'Simulateur impôt location nue 2025 | CalculateurFinance.fr',
       description:
         'Calculez rapidement l’impôt à payer sur vos revenus fonciers en location nue, selon le régime micro-foncier ou réel. Simulation simple et précise.',
-      url: 'https://www.calculateurfinance.fr/simulateur-impot-location-nue/'
+      url: 'https://www.calculateurfinance.fr/simulateur-location-nue-regime/',
+      keywords: 'simulateur location nue, régime location nue, fiscalité location nue, revenus fonciers, calcul impôt location nue, régime micro-foncier, régime réel, location vide, défiscalisation immobilière',
+
     });
 
     if (isPlatformBrowser(this.platformId)) {

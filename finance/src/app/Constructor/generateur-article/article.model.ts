@@ -1,14 +1,16 @@
 import { livrets } from "./livrets.model";
 
 export const pages: {
-  [key: string]: { titre: string; contenu: string; description: string, categorie: string };
+  [key: string]: { titre: string; contenu: string; description: string, categorie: string, keywords:string };
 } = {
    ...livrets,
   'pea-vs-assurance-vie': {
     titre: 'PEA ou Assurance Vie : Que choisir en 2025 ?',
     description:
       "Découvrez les différences clés entre le PEA et l'assurance vie en 2025 : fiscalité, rendement, liquidité et objectifs d'investissement.",
-    contenu: `
+        keywords: 'PEA ou assurance vie, comparaison PEA assurance vie, meilleur placement long terme, fiscalité assurance vie, fiscalité PEA, PEA vs assurance vie',
+
+      contenu: `                                                                                                                                                      
     <h2>Introduction</h2>
     <p>Le <strong>PEA (Plan d'Épargne en Actions)</strong> et l'<strong>assurance vie</strong> sont deux piliers de l’épargne en France. En 2025, ces deux enveloppes fiscales conservent un attrait important, mais ne répondent pas aux mêmes objectifs. Comparons-les pour vous aider à faire le bon choix selon votre profil.</p>
 
@@ -63,6 +65,8 @@ export const pages: {
 
   'pea': {
     titre: 'Plan d’Épargne en Actions (PEA)',
+        keywords: 'PEA, plan épargne en actions, fiscalité PEA, investir en bourse, avantages PEA, plafond PEA, placement boursier',
+
     contenu:
       "<h2>Introduction</h2><p>Le <strong>Plan d'Épargne en Actions (PEA)</strong> est un dispositif d'épargne permettant d'investir en actions européennes tout en bénéficiant d'une fiscalité avantageuse. Il est destiné aux particuliers souhaitant dynamiser leur épargne sur le long terme.</p><h2>Fonctionnement</h2><p>Le PEA permet d'investir dans des actions et des fonds d'investissement européens. Les versements sont plafonnés à 150 000 € pour un PEA classique. Les gains réalisés sont exonérés d'impôt sur le revenu après 5 ans de détention, seuls les prélèvements sociaux de 17,2 % étant dus.</p><h2>Fiscalité</h2><ul><li><strong>Avant 5 ans :</strong> Les gains sont soumis à la flat tax de 30 % (prélèvements sociaux inclus).</li><li><strong>Après 5 ans :</strong> Exonération d'impôt sur le revenu, seuls les prélèvements sociaux sont appliqués.</li></ul><h2>Transmission</h2><p>En cas de décès, le PEA entre dans la succession et est soumis aux droits de succession selon les règles en vigueur.</p><h2>Conclusion</h2><p>Le PEA est un outil efficace pour les investisseurs souhaitant bénéficier d'une fiscalité avantageuse sur leurs investissements en actions européennes, à condition de respecter les conditions de durée de détention.</p>",
     description:
@@ -73,6 +77,8 @@ export const pages: {
 
     'assurance-vie': {
     titre: 'Assurance Vie',
+        keywords: 'assurance vie, placement assurance vie, fiscalité assurance vie, rachat assurance vie, rendement assurance vie, épargne long terme',
+
     contenu: `<h2>Introduction</h2><p>L'<strong>assurance vie</strong> est un contrat d'épargne permettant de se constituer un capital ou une rente, avec des avantages fiscaux, notamment en matière de transmission de patrimoine.</p><h2>Fonctionnement</h2><p>Le contrat d'assurance vie peut être alimenté par des versements libres ou programmés. Les fonds peuvent être investis en fonds euros (sécurisés) ou en unités de compte (plus risquées mais potentiellement plus rentables).</p><h2>Fiscalité</h2><ul><li><strong>Avant 8 ans :</strong> Les gains sont soumis aux prélèvements sociaux de 17,2 % et à l'impôt sur le revenu ou à la flat tax de 30 %.</li><li><strong>Après 8 ans :</strong> Abattement annuel de 4 600 € (9 200 € pour un couple) sur les gains, puis imposition selon le barème progressif ou à la flat tax.</li></ul><h2>Transmission</h2><p>En cas de décès, les sommes transmises sont exonérées de droits de succession jusqu'à 152 500 € par bénéficiaire, sous certaines conditions.</p><h2>Conclusion</h2><p>L'assurance vie est un produit d'épargne flexible, offrant des avantages fiscaux intéressants, notamment pour la transmission de patrimoine.</p>
     `,
           categorie: 'investissement',
@@ -82,6 +88,8 @@ export const pages: {
   },
   'perco': {
     titre: 'PERCO : Plan d’Épargne pour la Retraite Collectif',
+        keywords: 'PERCO, plan épargne retraite collectif, épargne salariale, retraite entreprise, avantages PERCO, sortie en capital',
+
 
     description:
       "Le PERCO est un plan d’épargne salariale permettant de se constituer une retraite complémentaire dans un cadre fiscal avantageux.",
@@ -115,6 +123,7 @@ export const pages: {
   'per': {
     titre: 'PER : Plan d’Épargne Retraite',
               categorie: 'investissement',
+    keywords: 'PER, plan épargne retraite, retraite complémentaire, fiscalité PER, déduction impôts PER, sortie en rente, placement retraite',
 
     description:
       "Le PER est un produit d’épargne retraite individuel ou collectif, offrant des avantages fiscaux à l’entrée ou à la sortie.",
@@ -146,6 +155,7 @@ export const pages: {
   'cto': {
     titre: 'Compte-Titres Ordinaire (CTO)',
               categorie: 'investissement',
+    keywords: 'CTO, compte-titres ordinaire, investir en bourse, fiscalité CTO, dividendes CTO, titres étrangers, placement libre',
 
     description:
       "Le CTO permet d’investir librement sur tous les marchés financiers, sans plafond mais avec une fiscalité classique.",
@@ -176,7 +186,8 @@ export const pages: {
 'assurance-vie-luxembourgeoise': {
   titre: 'Assurance Vie Luxembourgeoise',
             categorie: 'investissement',
-
+    keywords: 'assurance vie luxembourgeoise, contrat luxembourg, triangle de sécurité, fiscalité expatrié, sur-mesure luxembourg, haut de gamme assurance vie'
+,
   description:
     "L’assurance vie luxembourgeoise est un contrat d’investissement offrant une grande sécurité juridique, une flexibilité fiscale et une large gamme de supports d’investissement.",
   contenu: `
@@ -209,6 +220,7 @@ export const pages: {
 'credit-lombard': {
   titre: 'Crédit Lombard',
             categorie: 'investissement',
+    keywords: 'crédit lombard, prêt adossé portefeuille, levier investissement, financement bourse, effet de levier, nantissement titres',
 
   description:
     "Le crédit lombard est un prêt garanti par un portefeuille de titres financiers, offrant une solution de financement flexible et rapide pour les investisseurs disposant d’actifs.",
@@ -243,6 +255,7 @@ export const pages: {
 'etf': {
   titre: 'ETF (Exchange Traded Funds) ',
             categorie: 'investissement',
+    keywords: 'ETF, fonds indiciels, investir ETF, bourse passive, ETF CAC 40, ETF S&P 500, diversification portefeuille',
 
   description:
     "Les ETF (Exchange Traded Funds) permettent d'investir facilement et à moindre coût sur les marchés financiers. Découvrez comment ils fonctionnent, leurs avantages et leurs usages pour les investisseurs particuliers.",

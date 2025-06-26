@@ -24,6 +24,8 @@ export class SimulateurApportVsEmpruntComponent {
       description:
         "Comparez facilement la retabilité entre faire un apport ou non lors d' un crédit immobilier",
       url: 'https://www.calculateurfinance.fr/simulateur-apport-vs-emprunt/',
+      keywords: 'simulateur apport, simulateur emprunt, calcul apport personnel, simulation crédit immobilier, comparaison apport emprunt, capacité d’emprunt, prêt immobilier, financement achat immobilier',
+
     });
     if (isPlatformBrowser(this.platformId)) {
       const script = this.renderer.createElement('script');
