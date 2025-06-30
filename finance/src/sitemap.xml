@@ -283,5 +283,80 @@
   <priority>0.6</priority>
 </url>
 
+<url>
+  <loc>https://calculateurfinance.fr/article/obligations/</loc>
+  <lastmod>2025-06-30</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://calculateurfinance.fr/article/cac40/</loc>
+  <lastmod>2025-06-30</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/sp500/</loc>
+  <lastmod>2025-06-30</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/msciworld/</loc>
+  <lastmod>2025-06-30</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/msci-emerging-markets/</loc>
+  <lastmod>2025-06-30</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/dax40/</loc>
+  <lastmod>2025-06-30</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/ftse100/</loc>
+  <lastmod>2025-06-30</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/nikkei225/</loc>
+  <lastmod>2025-06-30</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/tsx-composite/</loc>
+  <lastmod>2025-06-30</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://calculateurfinance.fr/article/ibex35/</loc>
+  <lastmod>2025-06-30</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://calculateurfinance.fr/article/ftse-mib/</loc>
+  <lastmod>2025-06-30</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+
 </urlset>
 

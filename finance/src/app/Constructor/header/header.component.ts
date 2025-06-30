@@ -36,6 +36,12 @@ export class HeaderComponent implements OnInit {
         label: value.titre,
         route: `/article/${key}`,
       }));
+      const indiceitems = allEntries
+      .filter(([, value]) => value.categorie === 'indices mondiaux')
+      .map(([key, value]) => ({
+        label: value.titre,
+        route: `/article/${key}`,
+      }));
     this.items = [
       {
         label: 'Home',
@@ -164,7 +170,15 @@ export class HeaderComponent implements OnInit {
           label: 'Investissements',
           icon: 'pi pi-wallet',
           items: investissementItems,
-        },]
+        },
+      {
+          label: 'indices mondiaux',
+          icon: 'pi pi-wallet',
+          items: indiceitems,
+        },
+      
+      
+      ]
       },
 
       {

@@ -1,16 +1,19 @@
+import { indice } from "./indice.model";
 import { livrets } from "./livrets.model";
 
 export const pages: {
-  [key: string]: { titre: string; contenu: string; description: string, categorie: string, keywords:string };
+  [key: string]: { titre: string; contenu: string; description: string, categorie: string, keywords: string };
 } = {
-   ...livrets,
+  ...livrets,
+    ...indice,
+
   'pea-vs-assurance-vie': {
     titre: 'PEA ou Assurance Vie : Que choisir en 2025 ?',
     description:
       "Découvrez les différences clés entre le PEA et l'assurance vie en 2025 : fiscalité, rendement, liquidité et objectifs d'investissement.",
-        keywords: 'PEA ou assurance vie, comparaison PEA assurance vie, meilleur placement long terme, fiscalité assurance vie, fiscalité PEA, PEA vs assurance vie',
+    keywords: 'PEA ou assurance vie, comparaison PEA assurance vie, meilleur placement long terme, fiscalité assurance vie, fiscalité PEA, PEA vs assurance vie',
 
-      contenu: `                                                                                                                                                      
+    contenu: `                                                                                                                                                      
     <h2>Introduction</h2>
     <p>Le <strong>PEA (Plan d'Épargne en Actions)</strong> et l'<strong>assurance vie</strong> sont deux piliers de l’épargne en France. En 2025, ces deux enveloppes fiscales conservent un attrait important, mais ne répondent pas aux mêmes objectifs. Comparons-les pour vous aider à faire le bon choix selon votre profil.</p>
 
@@ -59,43 +62,43 @@ export const pages: {
     </ul>
     <p>💡 Conseil : Ouvrir les deux peut être une excellente stratégie patrimoniale !</p>
   `,
-      categorie: 'investissement'
+    categorie: 'investissement'
 
   },
 
   'pea': {
     titre: 'Plan d’Épargne en Actions (PEA)',
-        keywords: 'PEA, plan épargne en actions, fiscalité PEA, investir en bourse, avantages PEA, plafond PEA, placement boursier',
+    keywords: 'PEA, plan épargne en actions, fiscalité PEA, investir en bourse, avantages PEA, plafond PEA, placement boursier',
 
     contenu:
       "<h2>Introduction</h2><p>Le <strong>Plan d'Épargne en Actions (PEA)</strong> est un dispositif d'épargne permettant d'investir en actions européennes tout en bénéficiant d'une fiscalité avantageuse. Il est destiné aux particuliers souhaitant dynamiser leur épargne sur le long terme.</p><h2>Fonctionnement</h2><p>Le PEA permet d'investir dans des actions et des fonds d'investissement européens. Les versements sont plafonnés à 150 000 € pour un PEA classique. Les gains réalisés sont exonérés d'impôt sur le revenu après 5 ans de détention, seuls les prélèvements sociaux de 17,2 % étant dus.</p><h2>Fiscalité</h2><ul><li><strong>Avant 5 ans :</strong> Les gains sont soumis à la flat tax de 30 % (prélèvements sociaux inclus).</li><li><strong>Après 5 ans :</strong> Exonération d'impôt sur le revenu, seuls les prélèvements sociaux sont appliqués.</li></ul><h2>Transmission</h2><p>En cas de décès, le PEA entre dans la succession et est soumis aux droits de succession selon les règles en vigueur.</p><h2>Conclusion</h2><p>Le PEA est un outil efficace pour les investisseurs souhaitant bénéficier d'une fiscalité avantageuse sur leurs investissements en actions européennes, à condition de respecter les conditions de durée de détention.</p>",
     description:
       'Le Plan d’Épargne en Actions (PEA) est un placement boursier avantageux sur le long terme.',
-       categorie: 'investissement'
+    categorie: 'investissement'
 
-    },
+  },
 
-    'assurance-vie': {
+  'assurance-vie': {
     titre: 'Assurance Vie',
-        keywords: 'assurance vie, placement assurance vie, fiscalité assurance vie, rachat assurance vie, rendement assurance vie, épargne long terme',
+    keywords: 'assurance vie, placement assurance vie, fiscalité assurance vie, rachat assurance vie, rendement assurance vie, épargne long terme',
 
     contenu: `<h2>Introduction</h2><p>L'<strong>assurance vie</strong> est un contrat d'épargne permettant de se constituer un capital ou une rente, avec des avantages fiscaux, notamment en matière de transmission de patrimoine.</p><h2>Fonctionnement</h2><p>Le contrat d'assurance vie peut être alimenté par des versements libres ou programmés. Les fonds peuvent être investis en fonds euros (sécurisés) ou en unités de compte (plus risquées mais potentiellement plus rentables).</p><h2>Fiscalité</h2><ul><li><strong>Avant 8 ans :</strong> Les gains sont soumis aux prélèvements sociaux de 17,2 % et à l'impôt sur le revenu ou à la flat tax de 30 %.</li><li><strong>Après 8 ans :</strong> Abattement annuel de 4 600 € (9 200 € pour un couple) sur les gains, puis imposition selon le barème progressif ou à la flat tax.</li></ul><h2>Transmission</h2><p>En cas de décès, les sommes transmises sont exonérées de droits de succession jusqu'à 152 500 € par bénéficiaire, sous certaines conditions.</p><h2>Conclusion</h2><p>L'assurance vie est un produit d'épargne flexible, offrant des avantages fiscaux intéressants, notamment pour la transmission de patrimoine.</p>
     `,
-          categorie: 'investissement',
+    categorie: 'investissement',
 
     description:
       'Découvrez les avantages fiscaux de l’assurance vie pour épargner et transmettre votre patrimoine.',
   },
   'perco': {
     titre: 'PERCO : Plan d’Épargne pour la Retraite Collectif',
-        keywords: 'PERCO, plan épargne retraite collectif, épargne salariale, retraite entreprise, avantages PERCO, sortie en capital',
+    keywords: 'PERCO, plan épargne retraite collectif, épargne salariale, retraite entreprise, avantages PERCO, sortie en capital',
 
 
     description:
       "Le PERCO est un plan d’épargne salariale permettant de se constituer une retraite complémentaire dans un cadre fiscal avantageux.",
-    
-          categorie: 'investissement',
-  contenu: `
+
+    categorie: 'investissement',
+    contenu: `
     <h2>Introduction</h2>
     <p>Le <strong>PERCO</strong> (Plan d’Épargne pour la Retraite Collectif) est un dispositif d’épargne salariale permettant aux salariés d’épargner pour leur retraite, avec l’aide de leur entreprise.</p>
 
@@ -122,7 +125,7 @@ export const pages: {
 
   'per': {
     titre: 'PER : Plan d’Épargne Retraite',
-              categorie: 'investissement',
+    categorie: 'investissement',
     keywords: 'PER, plan épargne retraite, retraite complémentaire, fiscalité PER, déduction impôts PER, sortie en rente, placement retraite',
 
     description:
@@ -154,7 +157,7 @@ export const pages: {
 
   'cto': {
     titre: 'Compte-Titres Ordinaire (CTO)',
-              categorie: 'investissement',
+    categorie: 'investissement',
     keywords: 'CTO, compte-titres ordinaire, investir en bourse, fiscalité CTO, dividendes CTO, titres étrangers, placement libre',
 
     description:
@@ -183,14 +186,14 @@ export const pages: {
     <p>Le CTO est une solution idéale pour les investisseurs expérimentés qui souhaitent une liberté totale d’investissement, en contrepartie d’une fiscalité moins avantageuse que le PEA.</p>
     `,
   },
-'assurance-vie-luxembourgeoise': {
-  titre: 'Assurance Vie Luxembourgeoise',
-            categorie: 'investissement',
+  'assurance-vie-luxembourgeoise': {
+    titre: 'Assurance Vie Luxembourgeoise',
+    categorie: 'investissement',
     keywords: 'assurance vie luxembourgeoise, contrat luxembourg, triangle de sécurité, fiscalité expatrié, sur-mesure luxembourg, haut de gamme assurance vie'
-,
-  description:
-    "L’assurance vie luxembourgeoise est un contrat d’investissement offrant une grande sécurité juridique, une flexibilité fiscale et une large gamme de supports d’investissement.",
-  contenu: `
+    ,
+    description:
+      "L’assurance vie luxembourgeoise est un contrat d’investissement offrant une grande sécurité juridique, une flexibilité fiscale et une large gamme de supports d’investissement.",
+    contenu: `
   <h2>Introduction</h2>
   <p>L’<strong>assurance vie luxembourgeoise</strong> est un produit d’épargne et d’investissement haut de gamme, prisé pour sa protection juridique, sa neutralité fiscale et sa souplesse dans la gestion des actifs financiers.</p>
 
@@ -216,15 +219,15 @@ export const pages: {
   <h2>Conclusion</h2>
   <p>L’assurance vie luxembourgeoise est un outil performant pour les investisseurs recherchant une combinaison de sécurité juridique, de flexibilité et de stratégie patrimoniale internationale. Elle s’adresse particulièrement aux profils fortunés ou internationaux.</p>
   `,
-},
-'credit-lombard': {
-  titre: 'Crédit Lombard',
-            categorie: 'investissement',
+  },
+  'credit-lombard': {
+    titre: 'Crédit Lombard',
+    categorie: 'investissement',
     keywords: 'crédit lombard, prêt adossé portefeuille, levier investissement, financement bourse, effet de levier, nantissement titres',
 
-  description:
-    "Le crédit lombard est un prêt garanti par un portefeuille de titres financiers, offrant une solution de financement flexible et rapide pour les investisseurs disposant d’actifs.",
-  contenu: `
+    description:
+      "Le crédit lombard est un prêt garanti par un portefeuille de titres financiers, offrant une solution de financement flexible et rapide pour les investisseurs disposant d’actifs.",
+    contenu: `
   <h2>Introduction</h2>
   <p>Le <strong>crédit lombard</strong> est un prêt à court ou moyen terme accordé par une banque ou un établissement financier, garanti par un portefeuille de valeurs mobilières (actions, obligations, OPCVM, contrats d’assurance vie, etc.). Il permet d’obtenir des liquidités sans avoir à vendre ses actifs.</p>
 
@@ -251,15 +254,15 @@ export const pages: {
   <p>Le crédit lombard est un outil de financement patrimonial puissant, permettant de mobiliser la valeur d’un portefeuille sans le vendre. Il s’adresse particulièrement aux investisseurs avertis ou fortunés souhaitant gérer leur trésorerie ou optimiser leur stratégie financière sans perturber leur allocation d’actifs.</p>
   <p>Pour estimer le montant que vous pouvez emprunter avec vos titres, essayez notre <a href="/simulateur-credit-lombard">simulateur de crédit lombard</a>.</p>
   `,
-},
-'etf': {
-  titre: 'ETF (Exchange Traded Funds) ',
-            categorie: 'investissement',
+  },
+  'etf': {
+    titre: 'ETF (Exchange Traded Funds) ',
+    categorie: 'investissement',
     keywords: 'ETF, fonds indiciels, investir ETF, bourse passive, ETF CAC 40, ETF S&P 500, diversification portefeuille',
 
-  description:
-    "Les ETF (Exchange Traded Funds) permettent d'investir facilement et à moindre coût sur les marchés financiers. Découvrez comment ils fonctionnent, leurs avantages et leurs usages pour les investisseurs particuliers.",
-  contenu: `
+    description:
+      "Les ETF (Exchange Traded Funds) permettent d'investir facilement et à moindre coût sur les marchés financiers. Découvrez comment ils fonctionnent, leurs avantages et leurs usages pour les investisseurs particuliers.",
+    contenu: `
   <h2>Qu’est-ce qu’un ETF&nbsp;?</h2>
   <p>Un <strong>ETF</strong> (Exchange Traded Fund), aussi appelé <strong>tracker</strong>, est un fonds d’investissement coté en bourse qui réplique la performance d’un indice (comme le CAC 40, le S&P 500, le MSCI World, etc.). Il permet d’investir facilement dans un panier d’actions ou d’obligations, tout en bénéficiant d’une grande liquidité.</p>
 
@@ -298,11 +301,58 @@ export const pages: {
   <p>Les ETF sont un outil moderne, simple et efficace pour investir en bourse. Ils s’adressent aussi bien aux débutants qu’aux investisseurs expérimentés souhaitant optimiser leur performance sur le long terme sans y consacrer trop de temps. Avant d’investir, il est essentiel de bien choisir ses indices et son enveloppe fiscale.</p>
   <p>Envie de construire un portefeuille ETF personnalisé&nbsp;? Découvrez nos outils pour comparer les supports d’investissement (PEA, PER, assurance vie, CTO) et simuler vos performances potentielles.</p>
   `
+  },
+  'obligations': {
+    titre: 'Obligations : fonctionnement, avantages et risques',
+    categorie: 'investissement',
+    keywords: 'obligations, investissement obligataire, rendement fixe, obligations d’État, obligations entreprises, taux d’intérêt',
+    description:
+      "Les obligations sont des titres de créance permettant d'investir avec un rendement généralement fixe. Découvrez comment elles fonctionnent, les types d'obligations et leurs avantages pour les investisseurs.",
+    contenu: `
+  <h2>Qu’est-ce qu’une obligation&nbsp;?</h2>
+  <p>Une <strong>obligation</strong> est un titre de créance émis par un État, une entreprise ou une collectivité, pour emprunter de l’argent sur les marchés financiers. En achetant une obligation, vous prêtez de l’argent à l’émetteur, qui vous verse des <strong>intérêts réguliers</strong> (le <em>coupon</em>) et vous rembourse le capital à l’échéance.</p>
+
+  <h2>Fonctionnement des obligations</h2>
+  <p>Chaque obligation a :</p>
+  <ul>
+    <li>Un <strong>montant nominal</strong> (ex. 1 000&nbsp;€),</li>
+    <li>Un <strong>taux d’intérêt</strong> (fixe ou variable),</li>
+    <li>Une <strong>échéance</strong> (ex. 5 ou 10 ans),</li>
+    <li>Une <strong>notation</strong> qui évalue le risque de défaut.</li>
+  </ul>
+  <p>Les obligations peuvent être revendues sur les marchés avant leur échéance. Leur prix varie selon les taux d’intérêt et la solvabilité de l’émetteur.</p>
+
+  <h2>Types d’obligations</h2>
+  <ul>
+    <li><strong>Obligations d’État</strong> : emprunts des pays (ex. OAT en France, Bund en Allemagne).</li>
+    <li><strong>Obligations d’entreprises</strong> : souvent plus risquées mais plus rémunératrices.</li>
+    <li><strong>Obligations indexées</strong> : le coupon évolue avec l’inflation.</li>
+  </ul>
+
+  <h2>Avantages des obligations</h2>
+  <ul>
+    <li><strong>Revenus réguliers</strong> grâce aux coupons.</li>
+    <li><strong>Moins volatiles</strong> que les actions en général.</li>
+    <li><strong>Bonne diversification</strong> dans un portefeuille mixte.</li>
+  </ul>
+
+  <h2>Risques à connaître</h2>
+  <ul>
+    <li><strong>Risque de taux</strong> : une hausse des taux fait baisser le prix des obligations existantes.</li>
+    <li><strong>Risque de crédit</strong> : en cas de défaut de l’émetteur, vous pouvez perdre votre capital.</li>
+    <li><strong>Risque de liquidité</strong> : certaines obligations se revendent difficilement.</li>
+  </ul>
+
+  <h2>Fiscalité</h2>
+  <p>Les revenus obligataires sont généralement soumis au <strong>prélèvement forfaitaire unique (PFU) de 30&nbsp;%</strong>, sauf choix du barème de l’impôt sur le revenu.</p>
+
+  <h2>Conclusion</h2>
+  <p>Les obligations sont idéales pour les investisseurs recherchant <strong>stabilité et revenus fixes</strong>. Elles s’intègrent bien dans une stratégie de diversification ou de préparation à la retraite. Cependant, il est crucial d’évaluer la qualité de l’émetteur et les conditions de taux avant d’investir.</p>
+  `
+  },
+
 }
 
 
-}
 
-   
-  
 

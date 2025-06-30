@@ -118,8 +118,43 @@ export const routes: Routes = [
         path: 'article/livret-jeune',
         component: ContenuPageComponent
     },
-      {
+    {
         path: 'article/livret-bleu',
+        component: ContenuPageComponent
+    },
+    {
+        path: 'article/obligations',
+        component: ContenuPageComponent
+    }, {
+        path: 'article/cac40',
+        component: ContenuPageComponent
+    }, {
+        path: 'article/sp500',
+        component: ContenuPageComponent
+    }, {
+        path: 'article/msciworld',
+        component: ContenuPageComponent
+    }, {
+        path: 'article/msci-emerging-markets',
+        component: ContenuPageComponent
+    }, {
+        path: 'article/dax40',
+        component: ContenuPageComponent
+    }, {
+        path: 'article/ftse100',
+        component: ContenuPageComponent
+    }, {
+        path: 'article/nikkei225',
+        component: ContenuPageComponent
+    }, {
+        path: 'article/tsx-composite',
+        component: ContenuPageComponent
+    },
+    {
+        path: 'article/ftse-mib',
+        component: ContenuPageComponent
+    }, {
+        path: 'article/ibex35',
         component: ContenuPageComponent
     },
 
