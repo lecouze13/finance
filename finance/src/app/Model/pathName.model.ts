@@ -32,5 +32,8 @@ export const AppRoutes = {
   SIMULATEUR_APPORT_VS_EMPRUNT: 'simulateur-apport-vs-emprunt',
   AIRBNB_VS_LOCATION: 'airbnb-vs-location',
   SIMULATEUR_DIVIDEND_FIRE: 'simulateur-dividend-fire',
+    SIMULATEUR_DIVIDEND_ENTREPRISE: 'simulateur-dividendes-entreprise',
+
+
 
 };

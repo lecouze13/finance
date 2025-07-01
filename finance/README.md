@@ -8,8 +8,7 @@ Ajouter les mots cléf a chaque composantet article probablement
 
 
 Liste des composant à faire :
-Simulateur de déclaration de revenus fonciers (micro-foncier vs régime réel).
-faire un simulateur de dividende airbnb aussi
+faire un simulateur de dividende  aussi
 
 
 

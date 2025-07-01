@@ -64,6 +64,7 @@
 
 
   <p-chart *ngIf="chartData" type="line" [data]="chartData" [options]="chartOptions" style="margin-top:2em;"></p-chart>
+<p class="message-quotite"><em>Les résultats du simulateur sont donnés à titre indicatif et ne constituent pas un conseil en investissement. Les performances passées ne préjugent pas des performances futures.</em></p>
 
   <div *ngIf="results.length > 0" style="margin-top:1em;">
     <h3>Détail par année</h3>
@@ -89,6 +90,31 @@
 
 <br>
 <div class="separator"></div><br>
+<h2>Définition</h2>
+<p>Le <strong>simulateur Dividendes FIRE</strong> est un outil en ligne permettant d’estimer les revenus passifs générés par les dividendes d’actions sur le long terme. Il s’inscrit dans la stratégie FIRE (Financial Independence, Retire Early), qui vise à atteindre l’indépendance financière grâce à des investissements en bourse, sans vendre son capital.</p>
+
+<h2>Fonctionnement</h2>
+<p>En saisissant un <strong>capital initial</strong>, un <strong>nombre d’années d’investissement</strong> et un <strong>taux de croissance des dividendes</strong>, le simulateur projette l’évolution du portefeuille année après année. Il prend également en compte l’option de réinvestir ou non les dividendes perçus pour maximiser l’effet boule de neige.</p>
+<p>L’outil peut être utilisé pour modéliser des portefeuilles investis dans des actions du CAC 40, avec ou sans versement de dividendes, afin d’évaluer la viabilité d’une stratégie FIRE uniquement basée sur les dividendes.</p>
+
+<h2>Fiscalité</h2>
+<ul>
+  <li>En France, les dividendes sont soumis à la flat tax (prélèvement forfaitaire unique) de 30 %, sauf cas d’exonérations (ex. : PEA après 5 ans).</li>
+  <li>Le simulateur ne prend pas en compte automatiquement la fiscalité, mais l’utilisateur peut ajuster ses hypothèses de rendement net.</li>
+  <li>L’utilisation d’enveloppes fiscales adaptées comme le PEA ou l’assurance-vie permet d’optimiser la fiscalité des dividendes sur le long terme.</li>
+</ul>
+
+<h2>Avantages</h2>
+<ul>
+  <li><strong>Projection claire</strong> de vos revenus passifs futurs grâce à un tableau détaillé année par année.</li>
+  <li><strong>Planification FIRE facilitée</strong> : visualisation des revenus sans vendre de capital.</li>
+  <li><strong>Modélisation personnalisable</strong> : choix du rendement, durée, et réinvestissement des dividendes.</li>
+  <li><strong>Outil gratuit et accessible</strong> à tous les investisseurs, du débutant au profil expérimenté.</li>
+</ul>
+
+<h2>Conclusion</h2>
+<p>Le simulateur Dividendes FIRE est un outil essentiel pour quiconque souhaite atteindre l’indépendance financière en vivant de ses dividendes. Il permet de tester différents scénarios d’investissement, d’évaluer la croissance potentielle d’un portefeuille, et de planifier efficacement sa retraite anticipée. Un outil pratique et pédagogique pour se lancer dans la stratégie FIRE en toute confiance.</p>
+
 
 <section class="faq-section" aria-label="Foire aux questions - Dividende FIRE">
   <h2>FAQ - Dividende FIRE</h2>

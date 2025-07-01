@@ -1,0 +1,162 @@
+<main>
+    <h1>Simulateur de dividendes par type d’entreprise</h1>
+    <div class="separator"></div><br>
+
+    <form [formGroup]="form" (ngSubmit)="calculer()">
+        <p-panel header="Paramètres du simulateur">
+            <div class="flex-auto">
+       
+            <p-dropdown 
+  formControlName="statut"
+  [options]="statuts"
+  optionLabel="label"
+  placeholder="Type d’entreprise">
+</p-dropdown>
+</div> 
+<p-floatLabel>
+  <p-inputNumber 
+    formControlName="chiffreAffaires"
+    inputId="chiffreAffaires"
+    mode="currency" 
+    currency="EUR" 
+    locale="fr-FR"
+    [min]="0">
+  </p-inputNumber>
+  <label for="chiffreAffaires">Chiffre d'affaires annuel (€)</label>
+</p-floatLabel>
+          
+                <button pButton type="submit" label="Calculer les dividendes"></button>
+        </p-panel>
+
+    </form>
+
+    <div *ngIf="result" class="resultats">
+        <h2>Résultats pour une {{ result.typeEntreprise }}</h2>
+        <p><strong>Capital social :</strong> {{ result.capitalSocial | number }} €</p>
+        <p><strong>Seuil de réserve légale requis :</strong> {{ result.seuilReserveLegale | number }} €</p>
+        <p><strong>Réserve légale à affecter cette année :</strong> {{ result.reserveLegaleAffectee | number }} €</p>
+        <p><strong>Résultat distribuable (dividendes max) :</strong> {{ result.resultatDistributable | number }} €</p>
+    </div>
+
+    <h3>Explication</h3>
+    <div [innerHTML]="getExplication(result?.typeEntreprise)"></div>
+    <div class="separator"></div><br>
+<section class="entreprise-section" aria-label="Différences entre les types d'entreprise">
+  <h2>Différences entre les types d'entreprise en France</h2>
+  <p>En France, plusieurs statuts juridiques permettent de créer une entreprise. Le choix dépend de vos objectifs, de votre chiffre d’affaires, de votre situation personnelle et de votre besoin de protection. Voici une présentation des principales formes juridiques et de leurs plafonds en 2025 :</p>
+
+  <h3>1. EI – Entreprise Individuelle</h3>
+  <ul>
+    <li><strong>Responsabilité :</strong> illimitée (protège la résidence principale automatiquement).</li>
+    <li><strong>Fiscalité :</strong> impôt sur le revenu (IR).</li>
+    <li><strong>Régime social :</strong> Travailleur Non Salarié (TNS).</li>
+    <li><strong>Plafonds :</strong> aucun plafond de chiffre d'affaires.</li>
+    <li><strong>Idéal pour :</strong> artisans, commerçants, professions libérales.</li>
+  </ul>
+
+  <h3>2. Micro-entreprise</h3>
+  <ul>
+    <li><strong>Forme simplifiée de l’EI</strong> avec comptabilité allégée.</li>
+    <li><strong>Plafond CA 2025 :</strong> 
+      <ul>
+        <li>188 700 € pour les activités de vente de biens, hébergement.</li>
+        <li>77 700 € pour les prestations de service et professions libérales.</li>
+      </ul>
+    </li>
+    <li><strong>Charges sociales :</strong> environ 12,3 % à 21,2 % selon l’activité.</li>
+    <li><strong>Fiscalité :</strong> IR (avec ou sans versement libératoire).</li>
+    <li><strong>Idéal pour :</strong> activité secondaire, test de projet, freelances débutants.</li>
+  </ul>
+
+  <h3>3. EURL – Entreprise Unipersonnelle à Responsabilité Limitée</h3>
+  <ul>
+    <li><strong>Forme :</strong> SARL avec un seul associé.</li>
+    <li><strong>Responsabilité :</strong> limitée au capital (pas de minimum).</li>
+    <li><strong>Fiscalité :</strong> IR par défaut, option IS possible.</li>
+    <li><strong>Dirigeant :</strong> TNS si gérant associé.</li>
+    <li><strong>Idéal pour :</strong> entrepreneur solo souhaitant une structure distincte.</li>
+  </ul>
+
+  <h3>4. SARL – Société à Responsabilité Limitée</h3>
+  <ul>
+    <li><strong>Associés :</strong> de 2 à 100.</li>
+    <li><strong>Responsabilité :</strong> limitée au capital (pas de minimum requis).</li>
+    <li><strong>Fiscalité :</strong> IS (option IR possible pour petites SARL familiales).</li>
+    <li><strong>Dirigeant :</strong> TNS ou assimilé salarié selon sa part.</li>
+    <li><strong>Idéal pour :</strong> entreprises familiales, structure stable.</li>
+  </ul>
+
+  <h3>5. SASU – Société par Actions Simplifiée Unipersonnelle</h3>
+  <ul>
+    <li><strong>Un seul associé.</strong></li>
+    <li><strong>Responsabilité :</strong> limitée au capital (pas de minimum requis).</li>
+    <li><strong>Fiscalité :</strong> IS par défaut, option IR possible 5 ans.</li>
+    <li><strong>Dirigeant :</strong> Président assimilé salarié (URSSAF + cotisations élevées).</li>
+    <li><strong>Idéal pour :</strong> indépendants souhaitant se verser des dividendes avec bonne protection sociale.</li>
+  </ul>
+
+  <h3>6. SAS – Société par Actions Simplifiée</h3>
+  <ul>
+    <li><strong>Associés :</strong> au moins 2.</li>
+    <li><strong>Responsabilité :</strong> limitée au capital (pas de minimum requis).</li>
+    <li><strong>Souplesse :</strong> statuts libres, très flexible.</li>
+    <li><strong>Fiscalité :</strong> IS (option IR sous conditions pour 5 ans max).</li>
+    <li><strong>Dirigeant :</strong> Président assimilé salarié (cotisations sociales élevées).</li>
+    <li><strong>Idéal pour :</strong> startups, projets de croissance, levées de fonds.</li>
+  </ul>
+
+  <h3>7. SA – Société Anonyme</h3>
+  <ul>
+    <li><strong>Capital minimum :</strong> 37 000 €.</li>
+    <li><strong>Associés :</strong> minimum 2 (ou 7 si société cotée).</li>
+    <li><strong>Responsabilité :</strong> limitée au capital.</li>
+    <li><strong>Fiscalité :</strong> IS uniquement.</li>
+    <li><strong>Dirigeants :</strong> conseil d'administration + président directeur général.</li>
+    <li><strong>Idéal pour :</strong> grandes entreprises ou sociétés cotées.</li>
+  </ul>
+</section>
+
+    <section class="faq-section" aria-label="Foire aux questions - Réserve légale">
+        <h2>FAQ - Réserve légale</h2>
+        <dl>
+            <dt>Qu’est-ce que la réserve légale ?</dt>
+            <dd>C’est une part du bénéfice net qu'une entreprise doit conserver, jusqu’à atteindre 10 % du capital
+                social. Elle est obligatoire pour les sociétés de capitaux.</dd>
+
+            <dt>Quel est le taux de réserve légale à constituer ?</dt>
+            <dd>Le taux est de 5 % du bénéfice net chaque année, jusqu’à ce que la réserve atteigne 10 % du capital
+                social.</dd>
+
+            <dt>Quelles entreprises sont concernées par la réserve légale ?</dt>
+            <dd>Les sociétés comme les SARL, EURL, SAS, SASU et SA doivent constituer une réserve légale.</dd>
+
+            <dt>La réserve légale est-elle obligatoire en SASU ?</dt>
+            <dd>Oui, la SASU doit constituer une réserve légale de 5 % du bénéfice net annuel, jusqu’à atteindre 10 % du
+                capital social.</dd>
+
+            <dt>Peut-on distribuer des dividendes sans réserve légale suffisante ?</dt>
+            <dd>Non, la réserve légale doit être constituée avant toute distribution complète des bénéfices en
+                dividendes.</dd>
+
+            <dt>La réserve légale est-elle bloquée ?</dt>
+            <dd>Oui, la réserve légale est indisponible. Elle ne peut pas être utilisée pour des distributions aux
+                associés.</dd>
+
+            <dt>Que se passe-t-il si la réserve atteint 10 % du capital ?</dt>
+            <dd>La société n’a plus besoin de prélever les 5 % annuels sur le bénéfice et peut distribuer tout le solde
+                disponible.</dd>
+
+            <dt>Comment calcule-t-on le montant distribuable en dividendes ?</dt>
+            <dd>Il faut d’abord soustraire la réserve légale à constituer, puis les éventuelles autres réserves
+                statutaires. Le reste peut être distribué.</dd>
+
+            <dt>Les entreprises individuelles doivent-elles constituer une réserve légale ?</dt>
+            <dd>Non, seules les sociétés de capitaux y sont soumises. Les EI ou micro-entreprises ne sont pas
+                concernées.</dd>
+
+            <dt>Peut-on utiliser la réserve légale en cas de pertes ?</dt>
+            <dd>Oui, mais uniquement si toutes les autres réserves disponibles ont été épuisées.</dd>
+        </dl>
+    </section>
+
+</main>

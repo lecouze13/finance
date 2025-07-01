@@ -27,114 +27,144 @@ import { SimulateurDividendFireComponent } from './Finance/simulateur-dividend-f
 import { AirbnbVsLocationComponent } from './Immobilier/airbnb-vs-location/airbnb-vs-location.component';
 import { SimulateurApportVsEmpruntComponent } from './Immobilier/simulateur-apport-vs-emprunt/simulateur-apport-vs-emprunt.component';
 import { SimulateurImportLocationNueComponent } from './Immobilier/simulateur-import-location-nue/simulateur-import-location-nue.component';
+import { SimulateurDividendeEntrepriseComponent } from './simulateur-dividende-entreprise/simulateur-dividende-entreprise.component';
 
 export const routes: Routes = [
-    { path: AppRoutes.RENDEMENT, component: RendementComponent },
-    { path: AppRoutes.BUDGET, component: BudgetComponent },
-    { path: AppRoutes.INVESTISSEMENT, component: InvestissementComponent },
-    { path: AppRoutes.CASHFLOW, component: CashflowComponent },
-    { path: AppRoutes.EMPRUNT, component: TauxEmpruntComponent },
-    { path: AppRoutes.TRI, component: TriImmoComponent },
-    { path: AppRoutes.HOME, component: MainComponent },
-    { path: AppRoutes.ACHAT_VS_LOCATION, component: ComparateurAchatLocationComponent },
-    { path: AppRoutes.CALCUL_NOTAIRE, component: CalculNotaireComponent },
-    { path: AppRoutes.INTERET_COMPOSE, component: IntererComposerComponent },
-    { path: AppRoutes.LMNP_LMP, component: LmnpLmpComponent },
-    // { path: AppRoutes.CALCULATRICE, component: CalculatriceComponent },
-    { path: AppRoutes.IMPOT_REVENUE, component: ImpotsRevenueComponent },
-    // { path: AppRoutes.PRIME_ACTIVITE, component: SimulateurPrimeActiviteComponent },
-    { path: AppRoutes.CONVERTISSEUR_BRUT_NET, component: SimulateurBrutNetComponent },
-    { path: AppRoutes.IMPOT_FORTUNE_IMMOBILIERE, component: SimulateurImpotFortuneImmobiliereComponent },
-    { path: AppRoutes.INDEPENDANCE_FINANCIERE, component: SimulateurIndependaceFinanciereComponent },
-    { path: AppRoutes.RETRAITE, component: SimulateurRetraiteComponent },
-    { path: AppRoutes.SCI_VS_IR, component: ComparateurSciIrIsComponent },
-    { path: AppRoutes.PLUS_VALUE_IMMOBILIERE, component: SimulateurPlusValueImmobiliereComponent },
-    { path: AppRoutes.CREDIT_LOMBARD, component: SimulateurCreditLombardComponent },
+  { path: AppRoutes.RENDEMENT, component: RendementComponent },
+  { path: AppRoutes.BUDGET, component: BudgetComponent },
+  { path: AppRoutes.INVESTISSEMENT, component: InvestissementComponent },
+  { path: AppRoutes.CASHFLOW, component: CashflowComponent },
+  { path: AppRoutes.EMPRUNT, component: TauxEmpruntComponent },
+  { path: AppRoutes.TRI, component: TriImmoComponent },
+  { path: AppRoutes.HOME, component: MainComponent },
+  {
+    path: AppRoutes.ACHAT_VS_LOCATION,
+    component: ComparateurAchatLocationComponent,
+  },
+  { path: AppRoutes.CALCUL_NOTAIRE, component: CalculNotaireComponent },
+  { path: AppRoutes.INTERET_COMPOSE, component: IntererComposerComponent },
+  { path: AppRoutes.LMNP_LMP, component: LmnpLmpComponent },
+  // { path: AppRoutes.CALCULATRICE, component: CalculatriceComponent },
+  { path: AppRoutes.IMPOT_REVENUE, component: ImpotsRevenueComponent },
+  // { path: AppRoutes.PRIME_ACTIVITE, component: SimulateurPrimeActiviteComponent },
+  {
+    path: AppRoutes.CONVERTISSEUR_BRUT_NET,
+    component: SimulateurBrutNetComponent,
+  },
+  {
+    path: AppRoutes.IMPOT_FORTUNE_IMMOBILIERE,
+    component: SimulateurImpotFortuneImmobiliereComponent,
+  },
+  {
+    path: AppRoutes.INDEPENDANCE_FINANCIERE,
+    component: SimulateurIndependaceFinanciereComponent,
+  },
+  { path: AppRoutes.RETRAITE, component: SimulateurRetraiteComponent },
+  { path: AppRoutes.SCI_VS_IR, component: ComparateurSciIrIsComponent },
+  {
+    path: AppRoutes.PLUS_VALUE_IMMOBILIERE,
+    component: SimulateurPlusValueImmobiliereComponent,
+  },
+  {
+    path: AppRoutes.CREDIT_LOMBARD,
+    component: SimulateurCreditLombardComponent,
+  },
 
-    { path: AppRoutes.SIMULATEUR__LOCATION_NUE_REGIME, component: SimulateurImportLocationNueComponent },
-    { path: AppRoutes.SIMULATEUR_APPORT_VS_EMPRUNT, component: SimulateurApportVsEmpruntComponent },
-    { path: AppRoutes.AIRBNB_VS_LOCATION, component: AirbnbVsLocationComponent },
-    { path: AppRoutes.SIMULATEUR_DIVIDEND_FIRE, component: SimulateurDividendFireComponent },
+  {
+    path: AppRoutes.SIMULATEUR__LOCATION_NUE_REGIME,
+    component: SimulateurImportLocationNueComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_APPORT_VS_EMPRUNT,
+    component: SimulateurApportVsEmpruntComponent,
+  },
+  { path: AppRoutes.AIRBNB_VS_LOCATION, component: AirbnbVsLocationComponent },
+  {
+    path: AppRoutes.SIMULATEUR_DIVIDEND_FIRE,
+    component: SimulateurDividendFireComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_DIVIDEND_ENTREPRISE,
+    component: SimulateurDividendeEntrepriseComponent,
+  },
 
+  {
+    path: 'article/pea',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/assurance-vie',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/pea-vs-assurance-vie',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/perco',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/per',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/cto',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/assurance-vie-luxembourgeoise',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/credit-lombard',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/etf',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/livret-a',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/ldds',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/pel',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/cel',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/lep',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/livret-jeune',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/livret-bleu',
+    component: ContenuPageComponent,
+  },
 
-    {
-        path: 'article/pea',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/assurance-vie',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/pea-vs-assurance-vie',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/perco',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/per',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/cto',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/assurance-vie-luxembourgeoise',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/credit-lombard',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/etf',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/livret-a',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/ldds',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/pel',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/cel',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/lep',
-        component: ContenuPageComponent
-    }
-    ,
-    {
-        path: 'article/livret-jeune',
-        component: ContenuPageComponent
-    },
-      {
-        path: 'article/livret-bleu',
-        component: ContenuPageComponent
-    },
-
-    { path: '**', redirectTo: '', pathMatch: 'full' }
-
-
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, {
-        useHash: false,
-        scrollPositionRestoration: 'enabled',
-        anchorScrolling: 'enabled',
-        urlUpdateStrategy: 'eager'
-    })],
-    exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      useHash: false,
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled',
+      urlUpdateStrategy: 'eager',
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

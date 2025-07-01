@@ -13,8 +13,7 @@ export class HeaderComponent implements OnInit {
   items: MenuItem[] | undefined;
   afficherCalculatrice: boolean = false;
 
-  constructor(
-    private router: Router) { }
+  constructor(private router: Router) {}
 
   ngOnInit() {
     const allEntries = Object.entries(pages);
@@ -144,9 +143,12 @@ export class HeaderComponent implements OnInit {
               {
                 label: 'Dividendes FIRE',
                 route: AppRoutes.SIMULATEUR_DIVIDEND_FIRE,
-              }
+              },
 
-
+              {
+                label: 'Dividendes entreprise',
+                route: AppRoutes.SIMULATEUR_DIVIDEND_ENTREPRISE,
+              },
             ].sort((a, b) => a.label.localeCompare(b.label)),
           },
         ],
@@ -155,16 +157,18 @@ export class HeaderComponent implements OnInit {
       {
         label: 'Article',
         icon: 'pi pi-wallet',
-        items: [{
-          label: 'Épargne',
-          icon: 'pi pi-wallet',
-          items: epargneItems,
-        },
-        {
-          label: 'Investissements',
-          icon: 'pi pi-wallet',
-          items: investissementItems,
-        },]
+        items: [
+          {
+            label: 'Épargne',
+            icon: 'pi pi-wallet',
+            items: epargneItems,
+          },
+          {
+            label: 'Investissements',
+            icon: 'pi pi-wallet',
+            items: investissementItems,
+          },
+        ],
       },
 
       {
