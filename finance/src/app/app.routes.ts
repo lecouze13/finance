@@ -27,6 +27,7 @@ import { SimulateurDividendFireComponent } from './Finance/simulateur-dividend-f
 import { AirbnbVsLocationComponent } from './Immobilier/airbnb-vs-location/airbnb-vs-location.component';
 import { SimulateurApportVsEmpruntComponent } from './Immobilier/simulateur-apport-vs-emprunt/simulateur-apport-vs-emprunt.component';
 import { SimulateurImportLocationNueComponent } from './Immobilier/simulateur-import-location-nue/simulateur-import-location-nue.component';
+import { SimulateurLivretComponent } from './Constructor/simulateur-livret/simulateur-livret.component';
 
 export const routes: Routes = [
     { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -157,7 +158,13 @@ export const routes: Routes = [
         path: 'article/ibex35',
         component: ContenuPageComponent
     },
-
+{ path: 'simulateur-livret/lep', component: SimulateurLivretComponent },
+{ path: 'simulateur-livret/livret-a', component: SimulateurLivretComponent },
+{ path: 'simulateur-livret/ldds', component: SimulateurLivretComponent },
+{ path: 'simulateur-livret/cel', component: SimulateurLivretComponent },
+{ path: 'simulateur-livret/livret-bleu', component: SimulateurLivretComponent },
+{ path: 'simulateur-livret/livret-jeune', component: SimulateurLivretComponent },
+{ path: 'simulateur-livret/pel', component: SimulateurLivretComponent },
     { path: '**', redirectTo: '', pathMatch: 'full' }
 
 
