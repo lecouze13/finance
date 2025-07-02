@@ -124,6 +124,10 @@ export const routes: Routes = [
         component: ContenuPageComponent
     },
     {
+        path: 'article/lea',
+        component: ContenuPageComponent
+    },
+    {
         path: 'article/obligations',
         component: ContenuPageComponent
     }, {
@@ -165,7 +169,11 @@ export const routes: Routes = [
 { path: 'simulateur-livret/livret-bleu', component: SimulateurLivretComponent },
 { path: 'simulateur-livret/livret-jeune', component: SimulateurLivretComponent },
 { path: 'simulateur-livret/pel', component: SimulateurLivretComponent },
-    { path: '**', redirectTo: '', pathMatch: 'full' }
+    { path: 'simulateur-livret/lea', component: SimulateurLivretComponent },
+
+
+
+{ path: '**', redirectTo: '', pathMatch: 'full' }
 
 
 ];

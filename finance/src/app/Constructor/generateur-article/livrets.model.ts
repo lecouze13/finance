@@ -192,6 +192,37 @@ export const livrets: {
     <h2>Avantages</h2>
     <p>Le Livret Jeune est idéal pour initier les jeunes à la gestion de leur épargne, grâce à sa fiscalité avantageuse et son rendement souvent supérieur.</p>
   `
+},
+'lea': {
+  titre: 'Livret d’Épargne pour les Autres (LEA)',
+  description: 'Le Livret d’Épargne pour les Autres est un produit d’épargne destiné aux personnes ne pouvant pas ouvrir les livrets réglementés classiques, offrant un placement sécurisé et flexible.',
+  categorie: 'epargne',
+  keywords: 'livret épargne pour les autres, LEA, épargne accessible, taux livret, placement sécurisé',
+
+  contenu: `
+    <h2>Introduction</h2>
+    <p>Le Livret d’Épargne pour les Autres (LEA) est un compte d’épargne conçu pour permettre à un public plus large d’épargner dans des conditions sécurisées. Ce livret s’adresse notamment aux personnes ne remplissant pas les critères d’éligibilité des livrets réglementés traditionnels.</p>
+
+    <h2>Caractéristiques</h2>
+    <ul>
+      <li><strong>Ouverture :</strong> accessible à tous, sans conditions de revenus ou de situation</li>
+      <li><strong>Plafond :</strong> variable selon les établissements, souvent plus élevé que les livrets réglementés</li>
+      <li><strong>Taux d’intérêt :</strong> fixé librement par la banque, généralement compétitif mais non réglementé</li>
+      <li><strong>Fiscalité :</strong> les intérêts sont soumis à l’impôt sur le revenu et aux prélèvements sociaux</li>
+      <li><strong>Disponibilité :</strong> retraits possibles à tout moment sans frais</li>
+      <li><strong>Frais :</strong> généralement aucun frais d’ouverture ni de gestion</li>
+    </ul>
+
+    <h2>Avantages</h2>
+    <p>Le LEA offre une solution d’épargne accessible à tous, notamment aux personnes non éligibles aux livrets réglementés. Il combine flexibilité et sécurité, avec la possibilité de retirer les fonds à tout moment.</p>
+
+    <h2>Inconvénients</h2>
+    <p>Les intérêts du LEA ne bénéficient pas des avantages fiscaux des livrets réglementés, ce qui peut rendre ce produit moins attractif selon le taux proposé par la banque.</p>
+
+    <h2>Comment ouvrir un LEA ?</h2>
+    <p>Ce livret est proposé par certaines banques et établissements financiers. Pour l’ouvrir, il suffit de se rendre en agence ou sur le site de la banque et de fournir une pièce d’identité ainsi qu’un justificatif de domicile.</p>
+  `
 }
+
 
 };

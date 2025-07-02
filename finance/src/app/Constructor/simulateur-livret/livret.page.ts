@@ -1,4 +1,4 @@
-export const livrets: Record<string, { title: string; taux: number }> = {
+export const livretsSimu: Record<string, { title: string; taux: number }> = {
   'lep': {
     title: 'Simulateur LEP – Livret d’Épargne Populaire',
     taux: 3.5,
@@ -24,7 +24,12 @@ export const livrets: Record<string, { title: string; taux: number }> = {
     taux: 2.4,
   },
   'pel': {
-    title: 'Simulateur PEL - Plan Épargne Logement (PEL)',
+    title: 'Simulateur PEL - Plan Épargne Logement ',
     taux: 2.4,
+  },
+
+  'lea': {
+    title: 'Simulateur LEA - Livret d’Épargne pour les Autres',
+    taux: 2.9,
   },
 };

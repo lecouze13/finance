@@ -2,8 +2,9 @@ import { Component, Inject, Input, PLATFORM_ID, Renderer2 } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SeoService } from '../service/seo.service';
 import { ActivatedRoute } from '@angular/router';
-import { livrets } from './livret.page';
+import { livretsSimu } from './livret.page';
 import { isPlatformBrowser } from '@angular/common';
+import { livrets } from '../generateur-article/livrets.model';
 
 @Component({
   selector: 'app-simulateur-livret',
@@ -13,6 +14,8 @@ import { isPlatformBrowser } from '@angular/common';
 export class SimulateurLivretComponent {
   @Input() title: string | undefined
   @Input() taux: number | undefined
+  @Input() text: any | undefined
+
   capitalFinal: number | null = null;
   interets: number | null = null;
   form!: FormGroup;
@@ -21,8 +24,8 @@ export class SimulateurLivretComponent {
 
       const fullPath = this.route.routeConfig?.path ?? '';
       const match = fullPath.match(/^simulateur-livret\/(.+)$/);
-      const type = match?.[1] ?? ''; const livret = livrets[type ?? ''];
-      console.log(type)
+      const type = match?.[1] ?? ''; 
+      const livret = livretsSimu[type ?? ''];
       if (!livret) {
         this.title = 'Livret inconnu';
         return;
@@ -30,7 +33,8 @@ export class SimulateurLivretComponent {
 
       this.title = livret.title;
       this.taux = livret.taux;
-
+      this.text =livrets[type]['contenu']
+      console.log(this.text)
       this.form = this.fb.group({
         capital: [null, [Validators.required, Validators.min(0)]],
         duree: [null, [Validators.required, Validators.min(1)]],
