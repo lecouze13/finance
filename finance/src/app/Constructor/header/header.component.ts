@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AppRoutes } from '../../Model/pathName.model';
 import { pages } from '../generateur-article/article.model';
-
+import { livretsSimu } from '../simulateur-livret/livret.page';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -18,10 +18,11 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     const allEntries = Object.entries(pages);
+    const allEntriesSimu = Object.entries(livretsSimu);
 
     // Tri par titre (facultatif mais conseillé)
     allEntries.sort(([, a], [, b]) => a.titre.localeCompare(b.titre));
-
+    allEntriesSimu.sort(([, a], [, b]) => a.title.localeCompare(b.title));
     // Séparation en 2 listes
     const epargneItems = allEntries
       .filter(([, value]) => value.categorie === 'epargne')
@@ -42,6 +43,14 @@ export class HeaderComponent implements OnInit {
         label: value.titre,
         route: `/article/${key}`,
       }));
+
+
+      const simuLivret = allEntriesSimu
+      .map(([key, value]) => ({
+        label: value.title,
+        route: `/simulateur-livret/${key}`,
+      }));
+
     this.items = [
       {
         label: 'Home',
@@ -109,6 +118,10 @@ export class HeaderComponent implements OnInit {
                 label: 'AIRBNB vs Location',
                 route: AppRoutes.AIRBNB_VS_LOCATION,
               },
+                {
+                label: 'Defiscalisation (loi pinel, Denormandie, etc) ',
+                route: AppRoutes.SIMULATEUR_DEFISCALISATION,
+              },
             ].sort((a, b) => a.label.localeCompare(b.label)),
           },
           {
@@ -154,7 +167,14 @@ export class HeaderComponent implements OnInit {
 
 
             ].sort((a, b) => a.label.localeCompare(b.label)),
+            
           },
+          {
+              label: 'Simulateurs Livrets',
+        icon: 'pi pi-building',
+
+        items:simuLivret
+          }
         ],
       },
 

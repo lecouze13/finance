@@ -1,0 +1,40 @@
+<main>
+
+<h1>Simulateur Loi de Défiscalisation Immobilière</h1>
+  <div class="separator"></div><br>
+<form [formGroup]="form" (ngSubmit)="calculer()" class="p-fluid">
+    
+  <p-dropdown formControlName="loi" [options]="[
+    {label: 'Pinel', value: 'pinel'},
+    {label: 'Denormandie', value: 'denormandie'},
+    {label: 'Malraux', value: 'malraux'},
+    {label: 'Monuments Historiques', value: 'monuments_historiques'},
+    {label: 'Censi-Bouvard', value: 'censi_bouvard'}
+  ]" placeholder="Choisissez une loi"></p-dropdown>
+
+  <p-inputNumber formControlName="montantInvesti" [min]="0" prefix="€ " inputId="investi" placeholder="Montant investi"></p-inputNumber>
+
+  <p-inputNumber formControlName="montantTravaux" [min]="0" prefix="€ " inputId="travaux" placeholder="Montant travaux (si applicable)"></p-inputNumber>
+
+  <p-dropdown *ngIf="form.value.loi === 'pinel'" formControlName="duree" [options]="[
+    {label: '6 ans', value: 6},
+    {label: '9 ans', value: 9},
+    {label: '12 ans', value: 12}
+  ]" placeholder="Durée de location"></p-dropdown>
+
+  <p-dropdown *ngIf="form.value.loi === 'malraux'" formControlName="zone" [options]="[
+    {label: 'Secteur sauvegardé', value: 'secteur_sauvegarde'},
+    {label: 'ZPPAUP', value: 'zppaup'}
+  ]" placeholder="Zone Malraux"></p-dropdown>
+
+  <button pButton type="submit" label="Calculer"></button>
+</form>
+
+<div *ngIf="result" class="resultats p-mt-4">
+  <h2>Résultats</h2>
+  <p>{{ result.info }}</p>
+  <p>Montant total de la réduction d'impôt : <strong>{{ result.reduction | currency:'EUR' }}</strong></p>
+</div>
+
+
+</main>

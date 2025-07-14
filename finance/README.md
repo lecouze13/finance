@@ -8,15 +8,10 @@ Ajouter les mots cléf a chaque composantet article probablement
 
 
 Liste des composant à faire :
-Simulateur de déclaration de revenus fonciers (micro-foncier vs régime réel).
 faire un simulateur de dividende airbnb aussi
 
 
 
-
-
-/calcul-rentabilite-airbnb-vs-location-classique
-/simulateur-apport-vs-emprunt
 
 
 finir le simulateur dividende fire avec les requete api

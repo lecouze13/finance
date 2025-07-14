@@ -20,11 +20,17 @@ export class SimulateurLivretComponent {
   interets: number | null = null;
   form!: FormGroup;
   ngOnInit(): void {
+
     if (isPlatformBrowser(this.platformId)) {
+   
+
 
       const fullPath = this.route.routeConfig?.path ?? '';
-      const match = fullPath.match(/^simulateur-livret\/(.+)$/);
+      const match = fullPath.match(/^simulateur-livret\/([^/]+)\/?$/);
+      console.log(match)
       const type = match?.[1] ?? ''; 
+            console.log(type)
+
       const livret = livretsSimu[type ?? ''];
       if (!livret) {
         this.title = 'Livret inconnu';
@@ -34,6 +40,16 @@ export class SimulateurLivretComponent {
       this.title = livret.title;
       this.taux = livret.taux;
       this.text =livrets[type]['contenu']
+
+      const description = `Calculez les intérêts générés avec le ${this.title?.replace('Simulateur ', '')} grâce à notre outil simple et rapide.`;
+      const keywords = `simulateur ${type}, ${type} taux, calcul intérêts ${type}, livret épargne ${type}, simulation ${type}, rendement ${type}`;
+
+      this.seo.updateMetaData({
+        title: this.title,
+        description,
+        url: `https://calculateurfinance.fr/simulateur-livret/${type}`,
+        keywords,
+  });
       console.log(this.text)
       this.form = this.fb.group({
         capital: [null, [Validators.required, Validators.min(0)]],

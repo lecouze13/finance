@@ -28,6 +28,7 @@ import { AirbnbVsLocationComponent } from './Immobilier/airbnb-vs-location/airbn
 import { SimulateurApportVsEmpruntComponent } from './Immobilier/simulateur-apport-vs-emprunt/simulateur-apport-vs-emprunt.component';
 import { SimulateurImportLocationNueComponent } from './Immobilier/simulateur-import-location-nue/simulateur-import-location-nue.component';
 import { SimulateurLivretComponent } from './Constructor/simulateur-livret/simulateur-livret.component';
+import { SimulateurDefiscalisationComponent } from './simulateur-defiscalisation/simulateur-defiscalisation.component';
 
 export const routes: Routes = [
     { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -56,6 +57,7 @@ export const routes: Routes = [
     { path: AppRoutes.SIMULATEUR_APPORT_VS_EMPRUNT, component: SimulateurApportVsEmpruntComponent },
     { path: AppRoutes.AIRBNB_VS_LOCATION, component: AirbnbVsLocationComponent },
     { path: AppRoutes.SIMULATEUR_DIVIDEND_FIRE, component: SimulateurDividendFireComponent },
+    { path: AppRoutes.SIMULATEUR_DEFISCALISATION, component: SimulateurDefiscalisationComponent },
 
 
     {
