@@ -1,0 +1,36 @@
+<main>
+    <h1>{{title}}</h1>
+
+    <div class="separator"></div><br>
+    <form  *ngIf="form" [formGroup]="form" (ngSubmit)="calculer()" class="form">
+        <p-panel header="Paramètres du Simulateurs">
+
+            <div class="flex-auto">
+                <p-floatLabel>
+                    <p-inputNumber inputId="capital" formControlName="capital" />
+                    <label for="capital">Capital initial (€)</label>
+                </p-floatLabel>
+            </div>
+            <div class="flex-auto">
+                <p-floatLabel>
+                    <p-inputNumber inputId="duree" formControlName="duree" [min]="1" />
+                    <label for="duree">Durée du prêt (en années)</label>
+                </p-floatLabel>
+            </div>
+            <div class="flex-auto">
+                <p-floatLabel>
+                    <p-inputNumber inputId="taux" formControlName="taux" />
+                    <label for="taux">Taux annuel</label>
+                </p-floatLabel>
+            </div>
+            <button pButton type="submit" label="Calculer" icon="pi pi-check" class="p-button-success"></button>
+
+        </p-panel>
+    </form>
+
+    <p-panel header="Résultats" *ngIf="capitalFinal !== null">
+        <p><strong>Capital final estimé :</strong> {{ capitalFinal | number: '1.2-2' }} €</p>
+        <p><strong>Intérêts générés :</strong> {{ interets | number: '1.2-2' }} €</p>
+    </p-panel>
+     <div class="article-content" [innerHTML]="text"></div>
+</main>

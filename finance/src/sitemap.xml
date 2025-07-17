@@ -356,6 +356,60 @@
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-livret/lep/</loc>
+  <lastmod>2025-07-02</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-livret/livret-a/</loc>
+  <lastmod>2025-07-02</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-livret/ldds/</loc>
+  <lastmod>2025-07-02</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-livret/cel/</loc>
+  <lastmod>2025-07-02</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-livret/livret-bleu/</loc>
+  <lastmod>2025-07-02</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-livret/livret-jeune/</loc>
+  <lastmod>2025-07-02</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-livret/pel/</loc>
+  <lastmod>2025-07-02</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-livret/lea/</loc>
+  <lastmod>2025-07-02</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://calculateurfinance.fr/article/lea/</loc>
+  <lastmod>2025-07-02</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
 
 
 </urlset>
