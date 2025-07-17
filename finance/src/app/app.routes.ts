@@ -28,7 +28,7 @@ import { AirbnbVsLocationComponent } from './Immobilier/airbnb-vs-location/airbn
 import { SimulateurApportVsEmpruntComponent } from './Immobilier/simulateur-apport-vs-emprunt/simulateur-apport-vs-emprunt.component';
 import { SimulateurImportLocationNueComponent } from './Immobilier/simulateur-import-location-nue/simulateur-import-location-nue.component';
 import { SimulateurDividendeEntrepriseComponent } from './simulateur-dividende-entreprise/simulateur-dividende-entreprise.component';
-import { SimulateurLivretComponent } from './Constructor/simulateur-livret/simulateur-livret.component';
+import { SimulateurLivretComponent } from './Constructor/generateur-article/simulateur-livret/simulateur-livret.component';
 import { SimulateurDefiscalisationComponent } from './simulateur-defiscalisation/simulateur-defiscalisation.component';
 
 export const routes: Routes = [
@@ -200,6 +200,13 @@ export const routes: Routes = [
         path: 'article/ibex35',
         component: ContenuPageComponent
     },
+ {
+        path: 'article/reforme-taux-aout-2025',
+        component: ContenuPageComponent
+    },
+
+
+ 
 { path: 'simulateur-livret/lep', component: SimulateurLivretComponent },
 { path: 'simulateur-livret/livret-a', component: SimulateurLivretComponent },
 { path: 'simulateur-livret/ldds', component: SimulateurLivretComponent },

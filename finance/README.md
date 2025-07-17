@@ -8,11 +8,7 @@ Ajouter les mots cléf a chaque composantet article probablement
 
 
 Liste des composant à faire :
-<<<<<<< HEAD
-faire un simulateur de dividende  aussi
-=======
 faire un simulateur de dividende airbnb aussi
->>>>>>> 2304b137abf672e54ae582d6a6342449d96e5529
 
 
 

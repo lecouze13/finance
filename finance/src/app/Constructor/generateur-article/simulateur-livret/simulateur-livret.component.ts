@@ -1,10 +1,10 @@
 import { Component, Inject, Input, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SeoService } from '../service/seo.service';
+import { SeoService } from '../../service/seo.service';
 import { ActivatedRoute } from '@angular/router';
 import { livretsSimu } from './livret.page';
 import { isPlatformBrowser } from '@angular/common';
-import { livrets } from '../generateur-article/livrets.model';
+import { livrets } from '../livrets.model';
 
 @Component({
   selector: 'app-simulateur-livret',

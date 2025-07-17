@@ -20,9 +20,7 @@
             "outputPath": "dist/finance",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -41,9 +39,7 @@
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css"
             ],
-            "scripts": [
-              "node_modules/chart.js/dist/chart.js"
-            ],
+            "scripts": ["node_modules/chart.js/dist/chart.js"],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -100,10 +96,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -162,8 +155,7 @@
               "/article/livret-a",
               "/article/livret-jeune",
               "/article/livret-bleu",
-               "/article/lea",
-              
+              "/article/lea",
 
               "/article/obligations",
               "/article/cac40",
@@ -177,20 +169,21 @@
               "/article/ibex35",
               "/article/ftse-mib",
 
-              
               "/article/etf",
+              "/article/reforme-taux-aout-2025",
+
               "/simulateur-location-nue-regime",
               "/simulateur-apport-vs-emprunt",
               "/airbnb-vs-location",
               "/simulateur-dividend-fire",
               "/simulateur-livret/lep",
-"/simulateur-livret/livret-a",
-"/simulateur-livret/ldds",
-"/simulateur-livret/cel",
-"/simulateur-livret/livret-bleu",
-"/simulateur-livret/livret-jeune",
-"/simulateur-livret/pel",
-"/simulateur-livret/lea"
+              "/simulateur-livret/livret-a",
+              "/simulateur-livret/ldds",
+              "/simulateur-livret/cel",
+              "/simulateur-livret/livret-bleu",
+              "/simulateur-livret/livret-jeune",
+              "/simulateur-livret/pel",
+              "/simulateur-livret/lea"
             ]
           },
           "configurations": {

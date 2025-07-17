@@ -16,7 +16,7 @@ export const livrets: {
       <p>Les dépôts et retraits sont libres, à condition de respecter un solde minimum de 10 €.</p>
       <h2>Caractéristiques</h2>
       <ul>
-        <li><strong>Taux :</strong> 2.4 % net (au 1er février 2025)</li>
+        <li><strong>Taux :</strong> 1.7 % net (au 1er février 2025)</li>
         <li><strong>Plafond :</strong> 22 950 €</li>
         <li><strong>Fiscalité :</strong> Exonération totale d’impôt sur le revenu et de prélèvements sociaux</li>
         <li><strong>Liquidité :</strong> Disponible à tout moment</li>
@@ -45,7 +45,7 @@ export const livrets: {
       <p>Le Livret de Développement Durable et Solidaire (LDDS) est un produit d’épargne réglementé destiné à financer des projets écologiques et solidaires. Il est réservé aux résidents fiscaux français majeurs.</p>
       <h2>Caractéristiques</h2>
       <ul>
-        <li><strong>Taux :</strong> 2.4 % (identique au Livret A)</li>
+        <li><strong>Taux :</strong> 1.7 % (identique au Livret A)</li>
         <li><strong>Plafond :</strong> 12 000 €</li>
         <li><strong>Fiscalité :</strong> Exonération d’impôt sur le revenu et de prélèvements sociaux</li>
         <li><strong>Retraits :</strong> libres et sans frais</li>
@@ -131,7 +131,7 @@ export const livrets: {
       <p>Le revenu fiscal de référence ne doit pas dépasser un certain seuil, révisé chaque année. Pour 2025, ce seuil est de 22 419 € pour une personne seule.</p>
       <h2>Caractéristiques</h2>
       <ul>
-        <li><strong>Taux :</strong> 3.5 % (en 2025)</li>
+        <li><strong>Taux :</strong> 2.7 % (en 2025)</li>
         <li><strong>Plafond :</strong> 10 000 €</li>
         <li><strong>Fiscalité :</strong> Intérêts exonérés d’impôt et de prélèvements sociaux</li>
         <li><strong>Ouverture :</strong> sur justificatif de revenu</li>
@@ -160,7 +160,7 @@ export const livrets: {
 
     <h2>Caractéristiques</h2>
     <ul>
-      <li><strong>Taux d’intérêt :</strong> 2.4 % (en 2025)</li>
+      <li><strong>Taux d’intérêt :</strong> 1.7 % (en 2025)</li>
       <li><strong>Plafond de versement :</strong> 22 950 € (hors intérêts capitalisés)</li>
       <li><strong>Fiscalité :</strong> Intérêts exonérés d'impôt sur le revenu et de prélèvements sociaux</li>
       <li><strong>Conditions :</strong> Réservé aux clients du Crédit Mutuel</li>
@@ -184,7 +184,7 @@ export const livrets: {
     <ul>
       <li><strong>Âge :</strong> de 12 à 25 ans</li>
       <li><strong>Plafond :</strong> 1 600 €</li>
-      <li><strong>Taux :</strong> librement fixé par les banques mais supérieur ou égal à celui du Livret A (souvent entre 2.4 % et 4 % en 2025)</li>
+      <li><strong>Taux :</strong> librement fixé par les banques mais supérieur ou égal à celui du Livret A (souvent entre 1.7 % et 2.4% en 2025)</li>
       <li><strong>Fiscalité :</strong> intérêts exonérés d’impôt sur le revenu et de prélèvements sociaux</li>
       <li><strong>Disponibilité :</strong> retraits autorisés à partir de 16 ans (avec accord parental avant)</li>
     </ul>
@@ -222,7 +222,71 @@ export const livrets: {
     <h2>Comment ouvrir un LEA ?</h2>
     <p>Ce livret est proposé par certaines banques et établissements financiers. Pour l’ouvrir, il suffit de se rendre en agence ou sur le site de la banque et de fournir une pièce d’identité ainsi qu’un justificatif de domicile.</p>
   `
-}
+},
+'reforme-taux-aout-2025': {
+  titre: 'Réforme des taux des livrets d’épargne – 1ᵉʳ août 2025',
+  description: 'Découvrez les nouveaux taux 2025 des livrets réglementés (Livret A, LDDS, LEP, PEL, CEL…) après la réforme du 1er août : baisses, formules de calcul, impacts pour les épargnants.',
+  categorie: 'epargne',
+  keywords: 'réforme taux livret 2025, livret A août 2025, nouveau taux LDDS, baisse taux LEP, taux PEL 2025, CEL, taux livret jeune, livret réglementé, placement sécurisé',
 
+  contenu: `
+  <p>À partir du <strong>1er août 2025</strong>, plusieurs livrets d’épargne réglementés voient leurs taux ajustés, conformément aux formules semestrielles fixées par la Banque de France et le ministère de l’Économie.</p>
+
+  <h2>📉 Livret A & LDDS</h2>
+  <p>
+    <strong>Taux avant le 1er août 2025 :</strong> 2,40 %<br>
+    <strong>Nouveau taux :</strong> 1,70 %<br>
+    Le gouvernement applique strictement la formule liée à l’inflation (0,88 %) et au taux €STR.
+  </p>
+
+  <h2>📈 Livret d’Épargne Populaire (LEP)</h2>
+  <p>
+    <strong>Taux avant :</strong> 3,50 %<br>
+    <strong>Nouveau taux :</strong> 2,70 %<br>
+    La formule réglementaire aurait abaissé le LEP à ~2,20 %, mais le gouvernement a maintenu un coup de pouce pour protéger les ménages modestes.
+  </p>
+
+  <h2>🏦 Autres livrets réglementés</h2>
+  <ul>
+    <li><strong>LDDS</strong> : aligné sur le Livret A → <strong>1,70 %</strong>.</li>
+    <li><strong>Livret Jeune</strong> : taux libre mais ≥ Livret A → ≥ <strong>1,70 %</strong>.</li>
+    <li><strong>CEL (Compte Épargne Logement)</strong> : 2/3 du taux Livret A arrondi → environ <strong>1,13 %</strong>, mais souvent arrondi à <strong>1,50 %</strong>.</li>
+    <li><strong>PEL (Plan Épargne Logement)</strong> :
+      <ul>
+        <li><strong>1,75 %</strong> pour les nouveaux PEL ouverts après le 31 décembre 2024</li>
+        <li>Les anciens gardent leur taux (ex. 2,25 %).</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>📋 Tableau synthèse</h2>
+  <table border="1" cellpadding="4">
+    <thead><tr><th>Livret</th><th>Avant 1ᵉʳ août</th><th>Après 1ᵉʳ août 2025</th></tr></thead>
+    <tbody>
+      <tr><td>Livret A</td><td>2,40 %</td><td>1,70 %</td></tr>
+      <tr><td>LDDS</td><td>2,40 %</td><td>1,70 %</td></tr>
+      <tr><td>LEP</td><td>3,50 %</td><td>2,70 %</td></tr>
+      <tr><td>Livret Jeune</td><td>≥ 2,40 %</td><td>≥ 1,70 %</td></tr>
+      <tr><td>CEL</td><td>≈ 1,60 %</td><td>≈ 1,13 % (ou 1,50 %)</td></tr>
+      <tr><td>PEL (nouveau)</td><td>N/A</td><td>1,75 %</td></tr>
+      <tr><td>PEL (ancien)</td><td>2,25 % ou +</td><td>inchangé</td></tr>
+    </tbody>
+  </table>
+
+  <h2>🔮 Pourquoi ces ajustements ?</h2>
+  <p>La formule de calcul prend en compte :</p>
+  <ul>
+    <li>L’inflation (0,88 % sur le dernier semestre)</li>
+    <li>Le taux interbancaire européen (€STR)</li>
+  </ul>
+  <p>Le Livret A bénéficie directement de cette formule. Le LEP, lui, a été ajusté pour préserver le pouvoir d’achat des plus modestes.</p>
+
+  <h2>🔍 Impacts pour les épargnants</h2>
+  <p>Les livrets restent au‑dessus de l’inflation, assurant un rendement réel positif. Cependant, l’équivalent annuel à plein plafond baisse : ex. pour le Livret A, la différence sur 22 950 € est notable.</p>
+
+  <h2>🎯 Conclusion</h2>
+  <p>La réforme du 1ᵉʳ août 2025 adapte les taux des livrets réglementés à un contexte économique plus calme. Le Livret A et le LDDS passent à 1,70 %, le LEP reste avantageux à 2,70 %. Le CEL et le PEL évoluent selon leurs règles spécifiques. Ces produits conservent leur sécurité, leur liquidité et leur fiscalité favorable.</p>
+  `
+}
 
 };

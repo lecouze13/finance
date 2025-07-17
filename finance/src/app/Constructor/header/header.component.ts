@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AppRoutes } from '../../Model/pathName.model';
 import { pages } from '../generateur-article/article.model';
-import { livretsSimu } from '../simulateur-livret/livret.page';
+import { livretsSimu } from '../generateur-article/simulateur-livret/livret.page';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

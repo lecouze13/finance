@@ -1,0 +1,33 @@
+<main>
+  <h1>{{titre}}</h1>
+  <div class="separator"></div><br>
+
+<form [formGroup]="form" (ngSubmit)="calculer()" class="form">
+  <p-panel header="Paramètres du crédit">
+  
+  </p-panel>
+
+    </div>
+
+  </p-panel>
+
+  <button pButton type="submit" label="Calculer" icon="pi pi-check"class="p-button-success"></button>
+</form>
+
+<p-panel *ngIf="resultat" header="Résultats de la simulation" class="mt-4">
+ {{resultat}}
+</p-panel>
+
+  <br><div class="separator"></div><br>
+  {{courbe}}
+  {{tab}}
+{{texteExplicatif}}
+
+
+    <br><div class="separator"></div><br>
+
+<section class="faq-section" aria-label="Foire aux questions">
+{{faq}}
+</section>
+
+</main>
