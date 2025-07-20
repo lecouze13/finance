@@ -1,15 +1,15 @@
-// import { Component, OnInit, Renderer2 } from '@angular/core';
-// import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
-// import { Inject, PLATFORM_ID } from '@angular/core';
-// @Component({
-//   selector: 'app-cashflow',
-//   templateUrl: './cashflow.component.html',
-//   styleUrl: './cashflow.component.scss'
-// })
-// export class CashflowComponent implements OnInit {
+import { Component, OnInit, Renderer2 } from '@angular/core';
+import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
+@Component({
+  selector: 'app-cashflow',
+  templateUrl: './cashflow.component.html',
+  styleUrl: './cashflow.component.scss'
+})
+export class CashflowComponent implements OnInit {
 //   constructor(  @Inject(PLATFORM_ID) private platformId: any, 
 // private renderer: Renderer2, private seo: SeoService) { }
-//   ngOnInit(): void {
+   ngOnInit(): void {}
 //     this.seo.updateMetaData({
 //       title: 'Simulateur cashflow immobilier 2025 | CalculateurFinance.fr',
 //       description: 'Estimez votre cashflow immobilier en prenant en compte vos loyers, charges et crédits. Outil simple et gratuit.',
@@ -118,4 +118,4 @@
 //     this.cashflow = this.values['Loyer'] - this.values['Crédit'] - this.values['Charges'] - this.values['Impôts'];
 
 //   }
-// }
+ }
