@@ -30,7 +30,6 @@ private renderer: Renderer2, private seo: SeoService) { }
 
     });
   if (isPlatformBrowser(this.platformId)) {
-
     const script = this.renderer.createElement('script');
     script.type = 'application/ld+json';
     script.text = JSON.stringify({
