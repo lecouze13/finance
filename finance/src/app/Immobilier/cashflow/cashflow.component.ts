@@ -4,7 +4,7 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 @Component({
   selector: 'app-cashflow',
   templateUrl: './cashflow.component.html',
-  styleUrl: './cashflow.component.scss'
+
 })
 export class CashflowComponent implements OnInit {
 //   constructor(  @Inject(PLATFORM_ID) private platformId: any, 

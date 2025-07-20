@@ -6,7 +6,6 @@ import { Inject, PLATFORM_ID } from '@angular/core';
   selector: 'app-taux-emprunt',
 
   templateUrl: './taux-emprunt.component.html',
-  styleUrl: './taux-emprunt.component.scss'
 })
 export class TauxEmpruntComponent implements OnInit {
 
