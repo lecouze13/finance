@@ -1,8 +1,0 @@
-# Rediriger toutes les requêtes vers index.html (SPA)
-/*    /index.html   200
-
-# Forcer HTTPS (redirection de http vers https)
-http://*    https://calculateurfinance.fr/:splat   301!
-
-# Forcer domaine sans www (rediriger www vers racine)
-https://www.calculateurfinance.fr/*    https://calculateurfinance.fr/:splat    301!
