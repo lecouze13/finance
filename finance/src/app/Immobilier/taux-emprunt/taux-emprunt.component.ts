@@ -9,8 +9,11 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 })
 export class TauxEmpruntComponent implements OnInit {
 
-  constructor(  @Inject(PLATFORM_ID) private platformId: any, 
-private renderer: Renderer2, private seo: SeoService) { }
+ constructor(
+    private seo: SeoService,
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: any
+  ) { }
 
 
   ngOnInit(): void {
