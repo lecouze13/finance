@@ -147,54 +147,73 @@ resultat: any;
 
 calculer() {
   const { chiffreAffaires, statut } = this.form.value;
+  const chiffre = Number(chiffreAffaires);
+  if (!chiffre || chiffre <= 0) return;
+
   let chargesSociales = 0;
   let baseImposable = 0;
   let impotSociete = 0;
+  let resultatNet = 0;
   let dividendesBruts = 0;
   let dividendesNets = 0;
 
+  const capitalSocial = 10000;
+  const reserveLegaleExistante = 0;
+  const seuilReserveLegale = capitalSocial * 0.1;
+  let reserveLegaleAffectee = 0;
+  let resultatDistributable = 0;
+
   switch (statut) {
     case 'sasu':
-      chargesSociales = chiffreAffaires * 0.45;
-      baseImposable = chiffreAffaires - chargesSociales;
-      impotSociete = baseImposable * 0.25;
-      dividendesBruts = baseImposable - impotSociete;
-      break;
-
     case 'eurl_is':
-      chargesSociales = chiffreAffaires * 0.45;
-      baseImposable = chiffreAffaires - chargesSociales;
+      chargesSociales = chiffre * 0.45;
+      baseImposable = chiffre - chargesSociales;
       impotSociete = baseImposable * 0.25;
-      dividendesBruts = baseImposable - impotSociete;
+      resultatNet = baseImposable - impotSociete;
+
+      const reservePotentielle = resultatNet * 0.05;
+      reserveLegaleAffectee = Math.min(reservePotentielle, seuilReserveLegale - reserveLegaleExistante);
+      resultatDistributable = resultatNet - reserveLegaleAffectee;
+
+      dividendesBruts = resultatDistributable;
+      dividendesNets = dividendesBruts * 0.7;
       break;
 
     case 'eurl_ir':
     case 'ei':
-      chargesSociales = chiffreAffaires * 0.45;
-      dividendesBruts = chiffreAffaires - chargesSociales;
+      chargesSociales = chiffre * 0.45;
+      resultatNet = chiffre - chargesSociales;
+      dividendesBruts = resultatNet;
+      dividendesNets = dividendesBruts * 0.7;
       break;
 
     case 'micro':
-      const abattement = 0.5; // BIC par défaut
-      baseImposable = chiffreAffaires * (1 - abattement);
-      chargesSociales = chiffreAffaires * 0.22;
-      dividendesBruts = chiffreAffaires - chargesSociales;
+      const abattement = 0.5;
+      const revenuNetMicro = chiffre * (1 - abattement);
+      chargesSociales = chiffre * 0.22;
+      resultatNet = chiffre - chargesSociales;
+      dividendesBruts = resultatNet;
+      dividendesNets = dividendesBruts * 0.7;
       break;
   }
 
-  // Flat tax 30% sur les dividendes perçus
-  const flatTax = 0.3;
-  dividendesNets = dividendesBruts * (1 - flatTax);
-
   this.resultat = {
+    typeEntreprise: this.statuts.find((s) => s.value === statut)?.label,
+    capitalSocial,
+    seuilReserveLegale,
+    reserveLegaleAffectee,
     chargesSociales,
     impotSociete,
+    resultatNet,
+    resultatDistributable,
     dividendesBruts,
     dividendesNets
   };
 }
 
+
   getExplication(type: string): string {
+    console.log(type)
   switch (type) {
     case 'SASU':
     case 'SAS':

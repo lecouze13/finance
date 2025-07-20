@@ -16,7 +16,7 @@ export const livrets: {
       <p>Les dépôts et retraits sont libres, à condition de respecter un solde minimum de 10 €.</p>
       <h2>Caractéristiques</h2>
       <ul>
-        <li><strong>Taux :</strong> 1.7 % net (au 1er février 2025)</li>
+        <li><strong>Taux :</strong> 1.7 % net (au 1er aout 2025)</li>
         <li><strong>Plafond :</strong> 22 950 €</li>
         <li><strong>Fiscalité :</strong> Exonération totale d’impôt sur le revenu et de prélèvements sociaux</li>
         <li><strong>Liquidité :</strong> Disponible à tout moment</li>

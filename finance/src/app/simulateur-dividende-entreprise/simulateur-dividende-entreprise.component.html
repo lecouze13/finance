@@ -14,32 +14,35 @@
 </p-dropdown>
 </div> 
 <p-floatLabel>
-  <p-inputNumber 
+  <p-inputNumber
     formControlName="chiffreAffaires"
     inputId="chiffreAffaires"
-    mode="currency" 
-    currency="EUR" 
+    mode="currency"
+    currency="EUR"
     locale="fr-FR"
-    [min]="0">
+    [min]="0"
+    [useGrouping]="true"
+    [showButtons]="true"
+    [step]="1000">
   </p-inputNumber>
   <label for="chiffreAffaires">Chiffre d'affaires annuel (€)</label>
 </p-floatLabel>
+
           
                 <button pButton type="submit" label="Calculer les dividendes"></button>
         </p-panel>
 
     </form>
-
-    <div *ngIf="result" class="resultats">
-        <h2>Résultats pour une {{ result.typeEntreprise }}</h2>
-        <p><strong>Capital social :</strong> {{ result.capitalSocial | number }} €</p>
-        <p><strong>Seuil de réserve légale requis :</strong> {{ result.seuilReserveLegale | number }} €</p>
-        <p><strong>Réserve légale à affecter cette année :</strong> {{ result.reserveLegaleAffectee | number }} €</p>
-        <p><strong>Résultat distribuable (dividendes max) :</strong> {{ result.resultatDistributable | number }} €</p>
-    </div>
+<div *ngIf="resultat" class="resultats">
+  <h2>Résultats pour une {{ resultat.typeEntreprise }}</h2>
+  <p><strong>Capital social :</strong> {{ resultat.capitalSocial | number }} €</p>
+  <p><strong>Seuil de réserve légale requis :</strong> {{ resultat.seuilReserveLegale | number }} €</p>
+  <p><strong>Réserve légale à affecter cette année :</strong> {{ resultat.reserveLegaleAffectee | number }} €</p>
+  <p><strong>Résultat distribuable (dividendes max) :</strong> {{ resultat.resultatDistributable | number }} €</p>
+  <p><strong>Dividendes nets après Flat Tax :</strong> {{ resultat.dividendesNets | number }} €</p>
+</div>
 
     <h3>Explication</h3>
-    <div [innerHTML]="getExplication(result?.typeEntreprise)"></div>
     <div class="separator"></div><br>
 <section class="entreprise-section" aria-label="Différences entre les types d'entreprise">
   <h2>Différences entre les types d'entreprise en France</h2>
