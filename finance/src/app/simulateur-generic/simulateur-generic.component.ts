@@ -14,5 +14,5 @@ export class SimulateurGenericComponent {
 @Input() textExplicatif:any;
 @Input() titre:any;
 @Input() resultat:any;
-
+ resultats:any= "eeeee"
 }
