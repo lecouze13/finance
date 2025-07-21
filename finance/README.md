@@ -14,10 +14,9 @@ faire un simulateur de dividende airbnb aussi
 /cashflow-immobilier
 /simulateur-credit-immobilier
 
-
-
 /tri-immobilier
 /achat-vs-location
+
 /calcul-frais-de-notaire
 /comparateur-sci-impot
 /simulateur-impot-fortune-immobiliere
