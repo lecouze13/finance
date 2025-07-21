@@ -4,22 +4,10 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 @Component({
   selector: 'app-comparateur-sci-ir-is',
   templateUrl: './comparateur-sci-ir-is.component.html',
- 
+
 })
 export class ComparateurSciIrIsComponent implements OnInit {
-  revenus = 0;
-  charges = 0;
-  duree = 10;
-  tauxImpotIR = 30;
-  tauxCsg = 17.2;
-  amortissement = 0;
-  resultat: boolean = false;
-
-  totalIR = 0;
-  totalIS = 0;
-  gainISvsIR = 0;
-
- constructor(
+  constructor(
     private seo: SeoService,
     private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: any
@@ -32,99 +20,111 @@ export class ComparateurSciIrIsComponent implements OnInit {
 
       url: 'https://calculateurfinance.fr/comparateur-sci-impot/',
     });
-  if (isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.platformId)) {
 
-    const script = this.renderer.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Qu’est-ce qu’une SCI à l’IR ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La SCI est imposée directement au niveau des associés, selon leur tranche d’imposition sur le revenu."
+      const script = this.renderer.createElement('script');
+      script.type = 'application/ld+json';
+      script.text = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Qu’est-ce qu’une SCI à l’IR ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "La SCI est imposée directement au niveau des associés, selon leur tranche d’imposition sur le revenu."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Qu’est-ce qu’une SCI à l’IS ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "La SCI est imposée sur ses bénéfices au taux de l’impôt sur les sociétés, puis les associés sont imposés sur les dividendes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quels sont les avantages de la SCI à l’IR ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Transparence fiscale, imposition au niveau des associés, et possibilité de bénéficier de certains abattements."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quels sont les avantages de la SCI à l’IS ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Possibilité d’amortir le bien, taux d’imposition plus faible sur les bénéfices, mais fiscalité plus complexe."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Comment choisir entre SCI à l’IR et SCI à l’IS ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Selon la durée de détention, le type d’investissement, et la stratégie patrimoniale des associés."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quels impacts fiscaux sur la revente ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "À l’IR, imposition sur la plus-value personnelle ; à l’IS, imposition sur la plus-value au niveau de la société."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "La SCI à l’IS permet-elle de déduire les charges ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui, les charges et amortissements peuvent être déduits des bénéfices imposables."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quels sont les inconvénients de la SCI à l’IS ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Fiscalité des dividendes à la sortie et complexité comptable plus importante."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Est-ce que les associés peuvent changer de régime fiscal ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui, sous conditions, la SCI peut opter ou renoncer à l’IS dans certains délais."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Où puis-je simuler ma fiscalité SCI ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Utilisez notre comparateur SCI à l’IR vs SCI à l’IS sur CalculateurFinance.fr."
+            }
           }
-        },
-        {
-          "@type": "Question",
-          "name": "Qu’est-ce qu’une SCI à l’IS ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La SCI est imposée sur ses bénéfices au taux de l’impôt sur les sociétés, puis les associés sont imposés sur les dividendes."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels sont les avantages de la SCI à l’IR ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Transparence fiscale, imposition au niveau des associés, et possibilité de bénéficier de certains abattements."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels sont les avantages de la SCI à l’IS ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Possibilité d’amortir le bien, taux d’imposition plus faible sur les bénéfices, mais fiscalité plus complexe."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment choisir entre SCI à l’IR et SCI à l’IS ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Selon la durée de détention, le type d’investissement, et la stratégie patrimoniale des associés."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels impacts fiscaux sur la revente ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "À l’IR, imposition sur la plus-value personnelle ; à l’IS, imposition sur la plus-value au niveau de la société."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "La SCI à l’IS permet-elle de déduire les charges ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui, les charges et amortissements peuvent être déduits des bénéfices imposables."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels sont les inconvénients de la SCI à l’IS ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Fiscalité des dividendes à la sortie et complexité comptable plus importante."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Est-ce que les associés peuvent changer de régime fiscal ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui, sous conditions, la SCI peut opter ou renoncer à l’IS dans certains délais."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Où puis-je simuler ma fiscalité SCI ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Utilisez notre comparateur SCI à l’IR vs SCI à l’IS sur CalculateurFinance.fr."
-          }
-        }
-      ]
-    });
-    this.renderer.appendChild(document.head, script);
+        ]
+      });
+      this.renderer.appendChild(document.head, script);
+    }
   }
-}
+  
+  revenus = 0;
+  charges = 0;
+  duree = 10;
+  tauxImpotIR = 30;
+  tauxCsg = 17.2;
+  amortissement = 0;
+  resultat: boolean = false;
+
+  totalIR = 0;
+  totalIS = 0;
+  gainISvsIR = 0;
 
   calculer() {
     const revenuNet = this.revenus - this.charges;
