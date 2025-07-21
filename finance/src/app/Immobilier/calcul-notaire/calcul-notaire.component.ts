@@ -5,7 +5,6 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 @Component({
   selector: 'app-calcul-notaire',
   templateUrl: './calcul-notaire.component.html',
-  styleUrls: ['./calcul-notaire.component.scss']
 })
 export class CalculNotaireComponent implements OnInit {
  constructor(

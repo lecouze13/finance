@@ -4,7 +4,7 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 @Component({
   selector: 'app-comparateur-sci-ir-is',
   templateUrl: './comparateur-sci-ir-is.component.html',
-  styleUrls: ['./comparateur-sci-ir-is.component.scss']
+ 
 })
 export class ComparateurSciIrIsComponent implements OnInit {
   revenus = 0;
@@ -19,8 +19,11 @@ export class ComparateurSciIrIsComponent implements OnInit {
   totalIS = 0;
   gainISvsIR = 0;
 
-  constructor(  @Inject(PLATFORM_ID) private platformId: any, 
-private renderer: Renderer2, private seo: SeoService) { }
+ constructor(
+    private seo: SeoService,
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: any
+  ) { }
   ngOnInit(): void {
     this.seo.updateMetaData({
       title: 'Comparateur SCI à l’IR vs SCI à l’IS 2025 | CalculateurFinance.fr',
