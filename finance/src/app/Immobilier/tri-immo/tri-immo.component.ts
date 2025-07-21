@@ -4,15 +4,17 @@ import { Inject, PLATFORM_ID } from '@angular/core';;
 @Component({
   selector: 'app-tri-immo',
   templateUrl: './tri-immo.component.html',
-  styleUrl: './tri-immo.component.scss'
 })
 export class TriImmoComponent implements OnInit {
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any,
-    private renderer: Renderer2, private seo: SeoService) { }
+ constructor(
+    private seo: SeoService,
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: any
+  ) { }
+
 
   ngOnInit(): void {
-
     this.seo.updateMetaData({
       title: 'Calcul du TRI (Taux de Rentabilité Interne) 2025 | CalculateurFinance.fr',
       description: 'Calculez facilement le Taux de Rentabilité Interne (TRI) de votre investissement immobilier grâce à notre simulateur gratuit et précis.',
@@ -135,29 +137,24 @@ export class TriImmoComponent implements OnInit {
 
   // Fonction de calcul du TRI
   calculTRI() {
-    const investment = this.values['Investissement initial']; // Investissement initial (flux de trésorerie négatif)
-    const revenues = this.values['Revenus locatifs par an net']; // Revenus locatifs annuels
-    const resale = this.values['Revente du bien']; // Revente du bien
-    const years = this.values['Nombre d’années']; // Durée de l'investissement en années
+    const investment = this.values['Investissement initial']; 
+    const revenues = this.values['Revenus locatifs par an net']; 
+    const resale = this.values['Revente du bien']; 
+    const years = this.values['Nombre d’années']; 
 
-    const cashFlows = [-investment]; // Flux de trésorerie initial (investissement initial, négatif)
+    const cashFlows = [-investment]; 
 
-    // Ajouter les flux de trésorerie des revenus locatifs pour chaque année
     for (let i = 1; i <= years; i++) {
-      cashFlows.push(revenues); // Revenus locatifs chaque année
+      cashFlows.push(revenues); 
     }
 
-    // Ajouter le flux de trésorerie final de la revente
-    cashFlows.push(resale); // Flux de trésorerie de la revente à la fin de l'investissement
-
-    // Calcul du TRI en utilisant une approximation numérique
+    cashFlows.push(resale);
     this.tri = this.calculateIRR(cashFlows);
   }
 
-  // Méthode de calcul du TRI (Taux de Rentabilité Interne) par approximation numérique
   calculateIRR(cashFlows: number[]): number {
-    let guess = 0.1; // Estimation initiale du TRI (10%)
-    const tolerance = 0.0001; // Tolérance pour l'approximation
+    let guess = 0.1; 
+    const tolerance = 0.0001; 
     let iteration = 0;
 
     while (iteration < 1000) {
@@ -165,22 +162,17 @@ export class TriImmoComponent implements OnInit {
       let npv = 0;
       let derivative = 0;
 
-      // Calculer la VAN et sa dérivée (pour la méthode de Newton-Raphson)
       for (let t = 0; t < cashFlows.length; t++) {
-        npv += cashFlows[t] / Math.pow(1 + guess, t); // VAN
+        npv += cashFlows[t] / Math.pow(1 + guess, t); 
         derivative -= t * cashFlows[t] / Math.pow(1 + guess, t + 1); // Dérivée de la VAN par rapport au taux
       }
 
-      // Si la VAN est proche de zéro, on trouve le TRI
       if (Math.abs(npv) < tolerance) {
         return guess;
       }
-
-      // Calculer un nouvel estimateur du TRI avec la méthode de Newton-Raphson
+      
       guess = guess - npv / derivative;
     }
-
-    // Retourner le dernier TRI calculé
     return guess;
   }
 }
