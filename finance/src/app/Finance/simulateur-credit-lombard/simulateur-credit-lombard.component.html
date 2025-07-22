@@ -1,6 +1,8 @@
 <main>
   <h1>Simulateur de crédit lombard</h1>
   <div class="separator"></div><br>
+ <h2>Définition</h2>
+  <p>Le <strong>crédit lombard</strong> est un prêt à court ou moyen terme accordé par une banque ou un établissement financier, garanti par un portefeuille de valeurs mobilières (actions, obligations, OPCVM, contrats d’assurance vie, etc.). Il permet d’obtenir des liquidités sans avoir à vendre ses actifs.</p>
 
 <form [formGroup]="form" (ngSubmit)="calculer()" class="form">
   <p-panel header="Paramètres du crédit">
@@ -61,8 +63,6 @@
 </p-panel>
 
   <br><div class="separator"></div><br>
- <h2>Définition</h2>
-  <p>Le <strong>crédit lombard</strong> est un prêt à court ou moyen terme accordé par une banque ou un établissement financier, garanti par un portefeuille de valeurs mobilières (actions, obligations, OPCVM, contrats d’assurance vie, etc.). Il permet d’obtenir des liquidités sans avoir à vendre ses actifs.</p>
 
   <h2>Fonctionnement</h2>
   <p>Le montant du crédit dépend de la valeur des titres mis en garantie, appelée valeur de nantissement, et du niveau de risque de ces actifs. Le ratio de prêt varie généralement entre 50 % et 90 % selon la qualité du portefeuille.</p>
