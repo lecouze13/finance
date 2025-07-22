@@ -27,9 +27,7 @@ export class SimulateurLivretComponent {
 
       const fullPath = this.route.routeConfig?.path ?? '';
       const match = fullPath.match(/^simulateur-livret\/([^/]+)\/?$/);
-      console.log(match)
       const type = match?.[1] ?? ''; 
-            console.log(type)
 
       const livret = livretsSimu[type ?? ''];
       if (!livret) {
@@ -50,7 +48,6 @@ export class SimulateurLivretComponent {
         url: `https://calculateurfinance.fr/simulateur-livret/${type}`,
         keywords,
   });
-      console.log(this.text)
       this.form = this.fb.group({
         capital: [null, [Validators.required, Validators.min(0)]],
         duree: [null, [Validators.required, Validators.min(1)]],
@@ -78,8 +75,7 @@ const taux = rawValues.taux / 100;
     // Formule des intérêts composés : Cf = C0 × (1 + t)^n
     const capitalFinal = capital * Math.pow(1 + taux, duree);
     const interets = capitalFinal - capital;
-console.log(capitalFinal)
-console.log(interets)
+
     this.capitalFinal = Math.round(capitalFinal * 100) / 100;
     this.interets = Math.round(interets * 100) / 100;
 

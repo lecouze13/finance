@@ -18,11 +18,13 @@ faire un simulateur de dividende airbnb aussi
 /achat-vs-location
 
 /calcul-frais-de-notaire
+
 /comparateur-sci-impot
+
 /simulateur-impot-fortune-immobiliere
-/simulateur-retraite
-/prime-activite
-/calculatrice
+
+/simulateur-retraite 
+
 /article/pea-vs-assurance-vie
 /article/pea
 /article/assurance-vie
@@ -43,6 +45,8 @@ faire un simulateur de dividende airbnb aussi
 /article/etf
 /article/reforme-taux-aout-2025
 /simulateur-apport-vs-emprunt
+
+
 /simulateur-dividend-fire
 /simulateur-livret/lep
 /simulateur-livret/livret-a
