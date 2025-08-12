@@ -1,81 +1,103 @@
-<main class="container">
-    <h1>Simulateur Micro‑entrepreneur / Freelance</h1>
+<main>
+    <h1>Simulateur Micro-Entrepreneur</h1>
+    <div class="separator"></div><br>
 
-    <form [formGroup]="form" (ngSubmit)="calculer()" class="card p-fluid">
-        <div class="grid">
-            <div class="col-12 md:col-6">
+    <form [formGroup]="form" (ngSubmit)="calculer()" class="form">
+        <p-panel header="Paramètres du simulateur">
+
+            <div class="flex-auto">
                 <p-floatLabel>
-                    <p-inputNumber formControlName="chiffreAffaires" inputId="ca" [min]="0" [step]="100"
-                        mode="decimal"></p-inputNumber>
+                    <p-inputNumber formControlName="chiffreAffaires" mode="currency" currency="EUR"
+                        minFractionDigits="0" maxFractionDigits="0" inputId="ca">
+                    </p-inputNumber>
                     <label for="ca">Chiffre d'affaires annuel (€)</label>
                 </p-floatLabel>
             </div>
 
-            <div class="col-12 md:col-6">
-                <p-dropdown formControlName="activite" [options]="activites" optionLabel="label"
-                    placeholder="Type d'activité"></p-dropdown>
-            </div>
-
-            <div class="col-12 md:col-6">
-                <p-checkbox formControlName="versementLiberatoire" binary="true"></p-checkbox>
-                <label class="ml-2">Versement libératoire de l'impôt</label>
-            </div>
-
-            <div class="col-12 md:col-6" *ngIf="form.value.versementLiberatoire">
+            <div class="flex-auto">
                 <p-floatLabel>
-                    <p-inputNumber formControlName="tauxVersement" inputId="tauxVersement" [min]="0" [max]="100"
-                        [step]="0.1" suffix=" %"></p-inputNumber>
-                    <label for="tauxVersement">Taux versement libératoire (%)</label>
+                    <p-dropdown formControlName="activite" inputId="activite" [options]="[
+            { label: 'Vente de marchandises (BIC)', value: 'vente' },
+            { label: 'Prestation de services (BIC)', value: 'prestation' },
+            { label: 'Profession libérale (BNC)', value: 'liberale' }
+          ]">
+                    </p-dropdown>
+                    <label for="activite">Activité</label>
                 </p-floatLabel>
             </div>
 
-            <div class="col-12 md:col-6">
+            <div class="field col-12">
+                <p-checkbox formControlName="versementLiberatoire" binary="true"
+                    label="Versement libératoire de l'impôt sur le revenu">
+                </p-checkbox>
+            </div>
+
+            <div class="flex-auto">
                 <p-floatLabel>
-                    <p-inputNumber formControlName="tauxSocial" inputId="tauxSocial" [min]="0" [max]="100" [step]="0.1"
-                        minFractionDigits="1" maxFractionDigits="2" suffix=" %"></p-inputNumber>
+                    <p-inputNumber formControlName="tauxSocial" mode="decimal" minFractionDigits="1"
+                        maxFractionDigits="1" inputId="tauxSocial">
+                    </p-inputNumber>
                     <label for="tauxSocial">Taux cotisations sociales (%)</label>
                 </p-floatLabel>
             </div>
 
-            <div class="col-12 md:col-6">
+            <div class="flex-auto">
                 <p-floatLabel>
-                    <p-inputNumber formControlName="tmi" inputId="tmi" [min]="0" [max]="60" [step]="0.1"
-                        [minFractionDigits]="1" [maxFractionDigits]="3" suffix=" %">
+                    <p-inputNumber formControlName="tauxVersement" mode="decimal" minFractionDigits="1"
+                        maxFractionDigits="1" inputId="tauxVersement">
                     </p-inputNumber>
-                    <label for="tmi">Taux marginal d'imposition (si PAS par barème) (%)</label>
+                    <label for="tauxVersement">Taux versement libératoire (%)</label>
                 </p-floatLabel>
-            </div>
 
-            <div class="col-12">
-                <button pButton type="submit" label="Calculer" class="p-button-primary"></button>
             </div>
+        </p-panel>
+        <div class="p-field p-col-12">
+    <button pButton type="submit" label="Calculer" icon="pi pi-check" class="p-button-success"></button>
         </div>
     </form>
 
-    <section *ngIf="resultat" class="card mt-3">
-        <h2>Résultats</h2>
-        <p><strong>Chiffre d'affaires :</strong> {{ resultat.ca | number }} €</p>
-        <p><strong>Taux social appliqué :</strong> {{ resultat.tauxSocial }} % → {{ resultat.chargesSociales | number }}
-            €</p>
-        <p><strong>Abattement fiscal (micro) :</strong> {{ resultat.abattement }} % → base imposable: {{
-            resultat.baseImposable | number }} €</p>
-        <p *ngIf="form.value.versementLiberatoire"><strong>Impôt (versement libératoire) :</strong> {{ resultat.impot |
-            number }} € ({{ form.value.tauxVersement }} %)</p>
-        <p *ngIf="!form.value.versementLiberatoire"><strong>Impôt estimé par TMI :</strong> {{ resultat.impot | number
-            }} € (tmi simulé: {{ form.value.tmi }} %)</p>
-        <p><strong>Revenu net après cotisations et impôts :</strong> {{ resultat.revenuNet | number }} €</p>
-        <p><strong>Revenu net mensuel estimé :</strong> {{ resultat.revenuMensuel | number }} €</p>
-    </section>
-
-    <section class="mt-4">
-        <h3>Explication et hypothèses</h3>
+    <div *ngIf="resultat" class="p-mt-3">
+        <h3>Résultats</h3>
         <ul>
-            <li>Le simulateur utilise un <em>modèle classique</em> micro‑entrepreneur (abattement forfaitaire pour
-                calcul de la base imposable).</li>
-            <li>Les valeurs par défaut des taux sont modifiables par l'utilisateur pour rester souple.</li>
-            <li>En absence de versement libératoire, l'impôt est estimé simplement en appliquant le TMI choisi sur la
-                base imposable (simplification).</li>
+            <li>Chiffre d'affaires : {{ resultat.ca | currency:'EUR' }}</li>
+            <li>Cotisations sociales : {{ resultat.cotisations | currency:'EUR' }}</li>
+            <li>Impôt sur le revenu : {{ resultat.impot | currency:'EUR' }}</li>
+            <li><strong>Revenu brut : {{ resultat.brut | currency:'EUR' }}</strong></li>
+            <li><strong>Revenu net : {{ resultat.net | currency:'EUR' }}</strong></li>
         </ul>
-    </section>
+    </div>
+ <br>
+      <div class="separator"></div><br>
 
+<h2>Comment fonctionne ce calcul ?</h2>
+  <p>En micro-entreprise, vous payez des charges sociales calculées en pourcentage de votre chiffre d’affaires, 
+    ainsi qu’un impôt sur le revenu. Si vous optez pour le versement libératoire, cet impôt est prélevé en même temps 
+    que vos charges sociales, à un taux fixe qui dépend de votre activité :</p>
+  <ul>
+    <li>Vente de marchandises : 1 %</li>
+    <li>Prestations de services commerciales ou artisanales : 1,7 %</li>
+    <li>Professions libérales : 2,2 %</li>
+  </ul>
+  <p>Si vous n’optez pas pour le versement libératoire, votre impôt est calculé selon le barème progressif 
+    de l’impôt sur le revenu, en fonction de vos autres revenus et de votre situation familiale.</p>
+
+  <!-- FAQ -->
+  <section class="faq-section" aria-label="Foire aux questions - Charges micro-entrepreneur">
+    <dl>
+      <dt>Comment savoir si le versement libératoire est avantageux ?</dt>
+      <dd>Il est généralement intéressant si votre taux marginal d’imposition est supérieur au taux fixe applicable à votre activité.</dd>
+
+      <dt>Les taux de charges sociales changent-ils chaque année ?</dt>
+      <dd>Oui, ils peuvent évoluer légèrement selon les lois de finances et les réformes sociales.</dd>
+
+      <dt>Le chiffre d’affaires pris en compte est-il brut ?</dt>
+      <dd>Oui, il s’agit du total encaissé sur l’année, sans déduction des charges réelles.</dd>
+
+      <dt>Puis-je déduire mes frais réels ?</dt>
+      <dd>Non, en micro-entreprise, vous bénéficiez d’un abattement forfaitaire au lieu de déduire les frais réels.</dd>
+
+      <dt>Que se passe-t-il si je dépasse le plafond de chiffre d’affaires ?</dt>
+      <dd>Vous perdez le statut de micro-entrepreneur l’année suivante et passez au régime réel d’imposition.</dd>
+    </dl>
+  </section>
 </main>

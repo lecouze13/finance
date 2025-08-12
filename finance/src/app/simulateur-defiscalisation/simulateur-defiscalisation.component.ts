@@ -10,10 +10,12 @@ import { SeoService } from '../Constructor/service/seo.service';
 })
 
 export class SimulateurDefiscalisationComponent implements OnInit {
-  form: FormGroup;
+  form: FormGroup ;
   result: any = null;
   constructor(@Inject(PLATFORM_ID) private platformId: any,
     private renderer: Renderer2, private seo: SeoService, private fb: FormBuilder) {
+
+
 
     this.form = this.fb.group({
       loi: ['pinel', Validators.required],
@@ -24,8 +26,9 @@ export class SimulateurDefiscalisationComponent implements OnInit {
       montantTravaux: [],
       montantLoyer: []
     });
-  }
 
+
+  }
   ngOnInit(): void {
     this.seo.updateMetaData({
       title: 'Simulateur Défiscalisation 2025 | CalculateurFinance.fr',
