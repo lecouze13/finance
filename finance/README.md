@@ -8,6 +8,7 @@ Ajouter les mots cléf a chaque composantet article probablement
 
 
 Liste des composant à faire :
+<<<<<<< HEAD
 faire un simulateur de dividende airbnb aussi
 /rendement-locatif
 /investissement-locatif
@@ -53,6 +54,8 @@ faire un simulateur de dividende airbnb aussi
 /simulateur-livret/lea
 
 
+=======
+>>>>>>> 5db534ed251482a6f4d3f97f2e9d793d5c95f361
 
 
 
