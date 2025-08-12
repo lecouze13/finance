@@ -14,12 +14,12 @@ export class SimulateurDefiscalisationComponent {
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       loi: ['pinel', Validators.required],
-      montantInvesti: [200000, [Validators.required, Validators.min(1)]],
-      duree: [9],
-      revenus: [40000],
+      montantInvesti: [, [Validators.required, Validators.min(1)]],
+      duree: [],
+      revenus: [],
       zone: ['A'],
-      montantTravaux: [0],
-      montantLoyer: [700]
+      montantTravaux: [],
+      montantLoyer: []
     });
   }
 

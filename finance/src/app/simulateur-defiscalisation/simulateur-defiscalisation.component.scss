@@ -1,0 +1,10 @@
+.panel-colonnes {
+  display: flex;
+  flex-direction: column; 
+  gap: 20px;          
+  align-items: flex-start;
+}
+
+.panel-colonnes .colonne {
+  flex: 1;           
+}

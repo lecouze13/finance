@@ -1,40 +1,197 @@
 <main>
 
-<h1>Simulateur Loi de Défiscalisation Immobilière</h1>
+  <h1>Simulateur Loi de Défiscalisation Immobilière</h1>
   <div class="separator"></div><br>
-<form [formGroup]="form" (ngSubmit)="calculer()" class="p-fluid">
-    
-  <p-dropdown formControlName="loi" [options]="[
-    {label: 'Pinel', value: 'pinel'},
-    {label: 'Denormandie', value: 'denormandie'},
-    {label: 'Malraux', value: 'malraux'},
-    {label: 'Monuments Historiques', value: 'monuments_historiques'},
-    {label: 'Censi-Bouvard', value: 'censi_bouvard'}
-  ]" placeholder="Choisissez une loi"></p-dropdown>
+  <form [formGroup]="form" (ngSubmit)="calculer()" class="form">
+    <p-panel header="Paramètres du simulateur">
 
-  <p-inputNumber formControlName="montantInvesti" [min]="0" prefix="€ " inputId="investi" placeholder="Montant investi"></p-inputNumber>
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-dropdown formControlName="loi" [options]="[
+            {label: 'Pinel', value: 'pinel'},
+            {label: 'Denormandie', value: 'denormandie'},
+            {label: 'Malraux', value: 'malraux'},
+            {label: 'Monuments Historiques', value: 'monuments_historiques'},
+            {label: 'Censi-Bouvard', value: 'censi_bouvard'}
+          ]"></p-dropdown>
+          <label for="loi">Choisissez une loi</label>
+        </p-floatLabel>
+      </div>
 
-  <p-inputNumber formControlName="montantTravaux" [min]="0" prefix="€ " inputId="travaux" placeholder="Montant travaux (si applicable)"></p-inputNumber>
+      <!-- Montant investi -->
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber formControlName="montantInvesti" [min]="0" prefix="€ " inputId="investi"></p-inputNumber>
+          <label for="investi">Montant investi</label>
+        </p-floatLabel>
+      </div>
 
-  <p-dropdown *ngIf="form.value.loi === 'pinel'" formControlName="duree" [options]="[
-    {label: '6 ans', value: 6},
-    {label: '9 ans', value: 9},
-    {label: '12 ans', value: 12}
-  ]" placeholder="Durée de location"></p-dropdown>
+      <!-- Montant travaux -->
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber formControlName="montantTravaux" [min]="0" prefix="€ " inputId="travaux"></p-inputNumber>
+          <label for="travaux">Montant travaux (si applicable)</label>
+        </p-floatLabel>
+      </div>
 
-  <p-dropdown *ngIf="form.value.loi === 'malraux'" formControlName="zone" [options]="[
-    {label: 'Secteur sauvegardé', value: 'secteur_sauvegarde'},
-    {label: 'ZPPAUP', value: 'zppaup'}
-  ]" placeholder="Zone Malraux"></p-dropdown>
+      <!-- Durée Pinel -->
+      <div class="flex-auto" *ngIf="form.value.loi === 'pinel'">
+        <p-floatLabel>
+          <p-dropdown formControlName="duree" [options]="[
+            {label: '6 ans', value: 6},
+            {label: '9 ans', value: 9},
+            {label: '12 ans', value: 12}
+          ]"></p-dropdown>
+          <label for="duree">Durée de location</label>
+        </p-floatLabel>
+      </div>
 
-  <button pButton type="submit" label="Calculer"></button>
-</form>
+      <!-- Zone Malraux -->
+      <div class="flex-auto" *ngIf="form.value.loi === 'malraux'">
+        <p-floatLabel>
+          <p-dropdown formControlName="zone" [options]="[
+            {label: 'Secteur sauvegardé', value: 'secteur_sauvegarde'},
+            {label: 'ZPPAUP', value: 'zppaup'}
+          ]"></p-dropdown>
+          <label for="zone">Zone Malraux</label>
+        </p-floatLabel>
+      </div>
 
-<div *ngIf="result" class="resultats p-mt-4">
-  <h2>Résultats</h2>
-  <p>{{ result.info }}</p>
-  <p>Montant total de la réduction d'impôt : <strong>{{ result.reduction | currency:'EUR' }}</strong></p>
-</div>
+    </p-panel>
+    <button pButton type="submit" label="Calculer" icon="pi pi-check" class="p-button-success"></button>
 
+
+    <p-panel *ngIf="result" header="Résultats de la simulation" class="flex-auto panel-colonnes">
+      <div class="panel-colonnes">
+        <div class="colonne">
+          <p>{{ result.info }}</p>
+        </div>
+        <div class="colonne">
+          <p>Montant total de la réduction d'impôt :
+            <strong>{{ result.reduction | currency:'EUR' }}</strong>
+          </p>
+        </div>
+      </div>
+    </p-panel>
+
+  </form>
+  <br>
+  <div class="separator"></div><br>
+  <h2>Les principales lois fiscales en investissement immobilier et financier</h2>
+  <p>En France, plusieurs lois encadrent et encouragent l’investissement immobilier ou financier. Elles permettent aux
+    investisseurs de réduire leurs impôts, d’optimiser leur fiscalité ou de bénéficier de régimes avantageux. Connaître
+    ces dispositifs est essentiel pour investir intelligemment.</p>
+
+  <h2>Les lois fiscales en immobilier locatif</h2>
+  <ul>
+    <li><strong>Loi Pinel :</strong> réduction d’impôt pour l’achat d’un logement neuf destiné à la location pendant 6,
+      9 ou 12 ans.</li>
+    <li><strong>Loi Denormandie :</strong> similaire au Pinel mais applicable aux biens anciens à rénover dans certaines
+      zones.</li>
+    <li><strong>LMNP (Loueur Meublé Non Professionnel) :</strong> statut fiscal avantageux permettant l’amortissement du
+      bien et la déduction des charges.</li>
+    <li><strong>Cosse (Louer Abordable) :</strong> réduction d’impôt en échange d’un loyer modéré et d’une location à
+      des ménages modestes.</li>
+  </ul>
+
+  <h2>Les lois fiscales pour les monuments historiques</h2>
+  <ul>
+    <li><strong>Loi Malraux :</strong> réduction d’impôt pour la restauration de biens situés dans des secteurs
+      sauvegardés.</li>
+    <li><strong>Monuments Historiques :</strong> déduction totale des travaux de restauration sur le revenu imposable,
+      sans plafond.</li>
+  </ul>
+
+  <h2>Les dispositifs en épargne et investissement</h2>
+  <ul>
+    <li><strong>PEA (Plan d'Épargne en Actions) :</strong> exonération d’impôt sur les gains après 5 ans de détention
+      (hors prélèvements sociaux).</li>
+    <li><strong>PER (Plan d'Épargne Retraite) :</strong> déduction des versements volontaires du revenu imposable et
+      sortie optimisée fiscalement.</li>
+    <li><strong>Assurance Vie :</strong> fiscalité dégressive après 8 ans, avec un abattement annuel sur les gains
+      retirés.</li>
+  </ul>
+
+  <h2>Comment choisir la loi adaptée ?</h2>
+  <p>Le choix dépend de vos objectifs : réduire vos impôts immédiatement, préparer votre retraite, transmettre un
+    patrimoine ou générer des revenus complémentaires. Une analyse personnalisée est recommandée.</p>
+
+  <h2>Exemple concret</h2>
+  <p>Un investisseur achetant un appartement neuf de 200 000 € en zone Pinel pour 9 ans peut obtenir jusqu’à 18 000 € de
+    réduction d’impôt, en plus des loyers perçus pendant la période.</p>
+
+  <h2>Avantages des dispositifs fiscaux</h2>
+  <ul>
+    <li>Réduction ou report d’impôt</li>
+    <li>Optimisation des revenus locatifs ou financiers</li>
+    <li>Constitution d’un patrimoine à moindre coût</li>
+    <li>Préparation de la retraite</li>
+  </ul>
+
+  <h2>Conclusion</h2>
+  <p>Les lois fiscales françaises offrent de nombreuses opportunités d’optimisation pour les investisseurs. Les
+    connaître permet de construire une stratégie sur mesure, en fonction de son profil et de ses objectifs.</p>
+
+  <br><br>
+
+  <section class="faq-section" aria-label="Foire aux questions - Lois fiscales et investissement">
+    <dl>
+      <dt>Qu’est-ce que la loi Pinel ?</dt>
+      <dd>
+        La loi Pinel permet de réduire ses impôts en investissant dans un logement neuf ou réhabilité, à condition de le
+        louer pendant une durée minimale.
+      </dd>
+
+      <dt>Quelle différence entre loi Pinel et loi Denormandie ?</dt>
+      <dd>
+        Le Pinel s’applique aux logements neufs, le Denormandie aux logements anciens à rénover situés dans des villes
+        éligibles.
+      </dd>
+
+      <dt>Qu’est-ce que le statut LMNP ?</dt>
+      <dd>
+        Le LMNP est un régime fiscal pour la location meublée permettant d’amortir le bien et de réduire l’imposition
+        sur les loyers.
+      </dd>
+
+      <dt>La loi Malraux est-elle encore valable ?</dt>
+      <dd>
+        Oui, elle permet toujours une réduction d’impôt pour la restauration d’immeubles situés dans certains secteurs
+        historiques.
+      </dd>
+
+      <dt>Quelles sont les conditions pour le dispositif Cosse ?</dt>
+      <dd>
+        Il faut louer à un loyer modéré à des locataires aux revenus plafonnés, avec un bail conventionné avec l’Anah.
+      </dd>
+
+      <dt>Le PEA est-il vraiment exonéré d’impôts ?</dt>
+      <dd>
+        Oui, après 5 ans, les gains sont exonérés d’impôt sur le revenu, mais restent soumis aux prélèvements sociaux.
+      </dd>
+
+      <dt>Le PER est-il intéressant pour tout le monde ?</dt>
+      <dd>
+        Il est surtout avantageux pour les contribuables imposés à un taux élevé, car les versements sont déductibles du
+        revenu imposable.
+      </dd>
+
+      <dt>Quelle différence entre assurance vie et PER ?</dt>
+      <dd>
+        L’assurance vie est plus flexible pour les retraits et la transmission, le PER est optimisé pour préparer la
+        retraite.
+      </dd>
+
+      <dt>Peut-on cumuler plusieurs dispositifs fiscaux ?</dt>
+      <dd>
+        Oui, sous certaines conditions, mais il faut veiller à ne pas dépasser les plafonds globaux de niches fiscales.
+      </dd>
+
+      <dt>Faut-il passer par un conseiller pour investir ?</dt>
+      <dd>
+        C’est fortement recommandé pour optimiser la fiscalité et éviter les pièges liés à chaque dispositif.
+      </dd>
+    </dl>
+  </section>
 
 </main>

@@ -5,9 +5,10 @@ body {
 
 
 
-.img-logo{
+.img-logo {
     width: 20px;
 }
+
 .separator {
 
     border-bottom: 1px solid #00000029;
@@ -29,7 +30,7 @@ h1 {
     --mdb-card-box-shadow: none;
     row-gap: 30px;
     align-items: center;
-padding: 2%;
+    padding: 2%;
 }
 
 
@@ -76,14 +77,15 @@ h4,
     align-items: center;
     justify-content: center;
 }
-.form{
-    display: flex
-;
+
+.form {
+    display: flex;
     flex-direction: column;
     align-items: center;
-        gap: 20px;
+    gap: 20px;
 }
-.grid{
+
+.grid {
     gap: 10px;
 }
 
@@ -97,9 +99,10 @@ a.router-link {
     cursor: pointer;
     transition: color 0.3s ease;
 }
+
 button.p-element.p-button-success.p-button.p-component {
     width: revert;
-        margin: auto;
+    margin: auto;
 }
 
 a.router-link:hover,
@@ -345,8 +348,7 @@ form.card.p-fluid.flex.flex-wrap.gap-4.ng-untouched.ng-pristine.ng-valid.ng-subm
 }
 
 .p-panel-content {
-    display: flex
-;
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-end;
