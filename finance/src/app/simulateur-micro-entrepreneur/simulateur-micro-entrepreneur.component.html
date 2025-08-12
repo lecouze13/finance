@@ -1,0 +1,81 @@
+<main class="container">
+    <h1>Simulateur Micro‑entrepreneur / Freelance</h1>
+
+    <form [formGroup]="form" (ngSubmit)="calculer()" class="card p-fluid">
+        <div class="grid">
+            <div class="col-12 md:col-6">
+                <p-floatLabel>
+                    <p-inputNumber formControlName="chiffreAffaires" inputId="ca" [min]="0" [step]="100"
+                        mode="decimal"></p-inputNumber>
+                    <label for="ca">Chiffre d'affaires annuel (€)</label>
+                </p-floatLabel>
+            </div>
+
+            <div class="col-12 md:col-6">
+                <p-dropdown formControlName="activite" [options]="activites" optionLabel="label"
+                    placeholder="Type d'activité"></p-dropdown>
+            </div>
+
+            <div class="col-12 md:col-6">
+                <p-checkbox formControlName="versementLiberatoire" binary="true"></p-checkbox>
+                <label class="ml-2">Versement libératoire de l'impôt</label>
+            </div>
+
+            <div class="col-12 md:col-6" *ngIf="form.value.versementLiberatoire">
+                <p-floatLabel>
+                    <p-inputNumber formControlName="tauxVersement" inputId="tauxVersement" [min]="0" [max]="100"
+                        [step]="0.1" suffix=" %"></p-inputNumber>
+                    <label for="tauxVersement">Taux versement libératoire (%)</label>
+                </p-floatLabel>
+            </div>
+
+            <div class="col-12 md:col-6">
+                <p-floatLabel>
+                    <p-inputNumber formControlName="tauxSocial" inputId="tauxSocial" [min]="0" [max]="100" [step]="0.1"
+                        minFractionDigits="1" maxFractionDigits="2" suffix=" %"></p-inputNumber>
+                    <label for="tauxSocial">Taux cotisations sociales (%)</label>
+                </p-floatLabel>
+            </div>
+
+            <div class="col-12 md:col-6">
+                <p-floatLabel>
+                    <p-inputNumber formControlName="tmi" inputId="tmi" [min]="0" [max]="60" [step]="0.1"
+                        [minFractionDigits]="1" [maxFractionDigits]="3" suffix=" %">
+                    </p-inputNumber>
+                    <label for="tmi">Taux marginal d'imposition (si PAS par barème) (%)</label>
+                </p-floatLabel>
+            </div>
+
+            <div class="col-12">
+                <button pButton type="submit" label="Calculer" class="p-button-primary"></button>
+            </div>
+        </div>
+    </form>
+
+    <section *ngIf="resultat" class="card mt-3">
+        <h2>Résultats</h2>
+        <p><strong>Chiffre d'affaires :</strong> {{ resultat.ca | number }} €</p>
+        <p><strong>Taux social appliqué :</strong> {{ resultat.tauxSocial }} % → {{ resultat.chargesSociales | number }}
+            €</p>
+        <p><strong>Abattement fiscal (micro) :</strong> {{ resultat.abattement }} % → base imposable: {{
+            resultat.baseImposable | number }} €</p>
+        <p *ngIf="form.value.versementLiberatoire"><strong>Impôt (versement libératoire) :</strong> {{ resultat.impot |
+            number }} € ({{ form.value.tauxVersement }} %)</p>
+        <p *ngIf="!form.value.versementLiberatoire"><strong>Impôt estimé par TMI :</strong> {{ resultat.impot | number
+            }} € (tmi simulé: {{ form.value.tmi }} %)</p>
+        <p><strong>Revenu net après cotisations et impôts :</strong> {{ resultat.revenuNet | number }} €</p>
+        <p><strong>Revenu net mensuel estimé :</strong> {{ resultat.revenuMensuel | number }} €</p>
+    </section>
+
+    <section class="mt-4">
+        <h3>Explication et hypothèses</h3>
+        <ul>
+            <li>Le simulateur utilise un <em>modèle classique</em> micro‑entrepreneur (abattement forfaitaire pour
+                calcul de la base imposable).</li>
+            <li>Les valeurs par défaut des taux sont modifiables par l'utilisateur pour rester souple.</li>
+            <li>En absence de versement libératoire, l'impôt est estimé simplement en appliquant le TMI choisi sur la
+                base imposable (simplification).</li>
+        </ul>
+    </section>
+
+</main>

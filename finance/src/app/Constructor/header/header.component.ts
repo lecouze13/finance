@@ -168,6 +168,10 @@ export class HeaderComponent implements OnInit {
                 label: 'Dividendes entreprise',
                 route: AppRoutes.SIMULATEUR_DIVIDEND_ENTREPRISE,
               },
+              {
+                label: 'Micro entrepreneur',
+                route: AppRoutes.SIMULATEUR_MICRO_ENTREPRENEUR,
+              },
             ].sort((a, b) => a.label.localeCompare(b.label)),
             
           },

@@ -30,6 +30,7 @@ import { SimulateurImportLocationNueComponent } from './Immobilier/simulateur-im
 import { SimulateurDividendeEntrepriseComponent } from './simulateur-dividende-entreprise/simulateur-dividende-entreprise.component';
 import { SimulateurLivretComponent } from './Constructor/generateur-article/simulateur-livret/simulateur-livret.component';
 import { SimulateurDefiscalisationComponent } from './simulateur-defiscalisation/simulateur-defiscalisation.component';
+import { SimulateurMicroEntrepreneurComponent } from './simulateur-micro-entrepreneur/simulateur-micro-entrepreneur.component';
 
 export const routes: Routes = [
   { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -88,6 +89,10 @@ export const routes: Routes = [
   {
     path: AppRoutes.SIMULATEUR_DIVIDEND_ENTREPRISE,
     component: SimulateurDividendeEntrepriseComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_MICRO_ENTREPRENEUR,
+    component: SimulateurMicroEntrepreneurComponent,
   },
     { path: AppRoutes.SIMULATEUR__LOCATION_NUE_REGIME, component: SimulateurImportLocationNueComponent },
     { path: AppRoutes.SIMULATEUR_APPORT_VS_EMPRUNT, component: SimulateurApportVsEmpruntComponent },
@@ -216,6 +221,7 @@ export const routes: Routes = [
 { path: 'simulateur-livret/pel', component: SimulateurLivretComponent },
     { path: 'simulateur-livret/lea', component: SimulateurLivretComponent },
 
+    { path: 'simulateur', component: SimulateurLivretComponent },
 
 
 { path: '**', redirectTo: '', pathMatch: 'full' }

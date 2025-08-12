@@ -1,0 +1,56 @@
+@media (max-width: 768px) {
+  main .card.p-fluid.flex.flex-wrap.gap-4 {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  main .card.p-fluid.flex.flex-wrap.gap-4 > div {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+
+  /* S'assure que les champs et labels prennent toute la largeur */
+  main .card.p-fluid input,
+  main .card.p-fluid .p-inputnumber,
+  main .card.p-fluid .p-dropdown {
+    width: 100% !important;
+  }
+
+  /* Bouton calculer plein écran sur mobile */
+  main .card.p-fluid button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  main .card.p-fluid.flex.flex-wrap.gap-4 {
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  main .card.p-fluid.flex.flex-wrap.gap-4 > div {
+    min-width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Labels plus petits */
+  main .card.p-fluid label {
+    font-size: 0.85rem;
+  }
+
+  /* Réduction taille texte et padding des champs */
+  main .card.p-fluid input,
+  main .card.p-fluid .p-inputnumber input,
+  main .card.p-fluid .p-dropdown {
+    font-size: 0.9rem;
+    padding: 0.4rem;
+  }
+
+  /* Bouton plein écran et compact */
+  main .card.p-fluid button {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+}

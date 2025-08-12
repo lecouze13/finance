@@ -18,7 +18,7 @@ private renderer: Renderer2, private seo: SeoService) {}
     this.seo.updateMetaData({
       title: 'Simulateur FIRE : Atteindre l’indépendance financière',
       description: 'Calculez combien de capital il vous faut pour être libre financièrement avec notre simulateur FIRE. Évaluez vos dépenses, votre taux de retrait et votre épargne.',
-      keywords: 'simulateur indépendance financière, liberté financière, revenus passifs, épargne, investissement, calcul indépendance financière, FIRE, finances personnelles',
+      keywords: 'simulateur indépendance financière, simulateur FIRE, calculateur fire,  liberté financière, revenus passifs, épargne, investissement, calcul indépendance financière, FIRE, finances personnelles',
       url: 'https://calculateurfinance.fr/simulateur-independance-financiere/',
   });
   if (isPlatformBrowser(this.platformId)) {
@@ -116,13 +116,13 @@ private renderer: Renderer2, private seo: SeoService) {}
     this.renderer.appendChild(document.head, script);
   }
   }
-ageActuel: number = 30;
+  ageActuel: number = 0;
   ageObjectif: number | null = null;
-  depensesAnnuelles: number = 20000;
-  tauxRetrait: number = 4;
-  tauxRendement: number = 5;
+  depensesAnnuelles: number = 0;
+  tauxRetrait: number = 0;
+  tauxRendement: number = 0;
   capitalActuel: number = 0;
-  epargneAnnuelle: number = 10000;
+  epargneAnnuelle: number = 0;
 
   modeCalcul: any = { label: 'Âge cible de retraite', value: 'age' };
   modesCalcul = [

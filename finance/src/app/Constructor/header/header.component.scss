@@ -7,24 +7,46 @@ ol, ul {
 }
 
   
-  .calculatrice-wrapper {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    width: 320px;
-    max-width: 90vw;
-    position: absolute;
-    right: 5%;
-    background: white;
-    z-index: 1000;
-    border: solid 2px black;
-    padding: 20px;
-    border-radius: 20px;
-  }
-  
+.overlay-calculatrice {
+  position: fixed; /* couvre tout l'écran */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4); /* semi-transparent pour l'effet overlay */
+  z-index: 9999; /* au-dessus du menubar */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto; /* IMPORTANT : bloque les clics derrière */
+}
+
+.calculatrice-wrapper {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+}
   
 .fermer-btn{
-
+  top: 5px;
+  right: 10px;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
     color: red;
     background-color: inherit;
     border: none;
     transform: scale(1.5);
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent; /* ou semi-transparent si tu veux assombrir */
+  z-index: 999; /* juste en dessous du menu */
+  pointer-events: auto;
 }

@@ -139,6 +139,7 @@
               "/simulateur-impot-fortune-immobiliere",
               "/simulateur-independance-financiere",
               "/simulateur-retraite",
+              "/simulateur-micro-entrepreneur",
               "/prime-activite",
               "/calculatrice",
               "/article/pea-vs-assurance-vie",
@@ -185,6 +186,7 @@
               "/simulateur-livret/livret-jeune",
               "/simulateur-livret/pel",
               "/simulateur-livret/lea"
+              
             ]
           },
           "configurations": {

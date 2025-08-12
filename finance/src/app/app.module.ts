@@ -65,6 +65,7 @@ import { AirbnbVsLocationComponent } from './Immobilier/airbnb-vs-location/airbn
 import { SimulateurLivretComponent } from './Constructor/generateur-article/simulateur-livret/simulateur-livret.component';
 import { SimulateurDefiscalisationComponent } from './simulateur-defiscalisation/simulateur-defiscalisation.component';
 import { SimulateurDividendeEntrepriseComponent } from './simulateur-dividende-entreprise/simulateur-dividende-entreprise.component';
+import { SimulateurMicroEntrepreneurComponent } from './simulateur-micro-entrepreneur/simulateur-micro-entrepreneur.component';
 
 @NgModule({
     declarations: [
@@ -100,7 +101,8 @@ import { SimulateurDividendeEntrepriseComponent } from './simulateur-dividende-e
         AirbnbVsLocationComponent,
         SimulateurLivretComponent,
         SimulateurDefiscalisationComponent,
-        SimulateurDividendeEntrepriseComponent
+        SimulateurDividendeEntrepriseComponent,
+        SimulateurMicroEntrepreneurComponent
     ],
     imports: [
         BrowserModule,

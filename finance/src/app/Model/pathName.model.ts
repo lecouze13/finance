@@ -34,6 +34,7 @@ export const AppRoutes = {
   SIMULATEUR_DIVIDEND_FIRE: 'simulateur-dividend-fire',
   SIMULATEUR_DEFISCALISATION: 'simulateur-defiscalisation',
     SIMULATEUR_DIVIDEND_ENTREPRISE: 'simulateur-dividendes-entreprise',
+    SIMULATEUR_MICRO_ENTREPRENEUR: 'simulateur-micro-entrepreneur',
 
 
 

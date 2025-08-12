@@ -6,7 +6,7 @@
   <p>Calculez votre capital nécessaire ou l’âge auquel vous pourrez atteindre l’indépendance financière, en fonction de votre épargne, rendement et dépenses annuelles.</p>
 
   <div class="card p-fluid flex flex-wrap gap-4">
-    <div class="flex-auto">
+    <div >
       <p-floatLabel>
         <p-inputNumber inputId="ageActuel" [(ngModel)]="ageActuel" inputStyleClass="w-full" min="0"
           pTooltip="Votre âge actuel." tooltipPosition="top" />
@@ -14,7 +14,7 @@
       </p-floatLabel>
     </div>
 
-    <div class="flex-auto">
+    <div >
       <p-floatLabel>
         <p-dropdown inputId="modeCalcul" [(ngModel)]="modeCalcul" [options]="modesCalcul" optionLabel="label"
           placeholder="Choisissez le mode" />
@@ -22,7 +22,7 @@
       </p-floatLabel>
     </div>
 
-    <div class="flex-auto" *ngIf="modeCalcul?.value === 'age'">
+    <div  *ngIf="modeCalcul?.value === 'age'">
       <p-floatLabel>
         <p-inputNumber inputId="ageObjectif" [(ngModel)]="ageObjectif" inputStyleClass="w-full" min="0"
           pTooltip="L'âge auquel vous souhaitez atteindre l'indépendance financière." tooltipPosition="top" />
@@ -30,42 +30,42 @@
       </p-floatLabel>
     </div>
 
-    <div class="flex-auto">
+    <div >
       <p-floatLabel>
-        <p-inputNumber inputId="depenses" [(ngModel)]="depensesAnnuelles" mode="currency" currency="EUR"
+        <p-inputNumber inputId="depenses" [(ngModel)]="depensesAnnuelles"  minFractionDigits="0" maxFractionDigits="0" mode="currency" currency="EUR"
           pTooltip="Vos dépenses annuelles estimées après indépendance." tooltipPosition="top" />
         <label for="depenses">Dépenses annuelles (€)</label>
       </p-floatLabel>
     </div>
 
-    <div class="flex-auto">
+    <div >
       <p-floatLabel>
-        <p-inputNumber inputId="tauxRetrait" [(ngModel)]="tauxRetrait" suffix="%" mode="decimal"
+        <p-inputNumber inputId="tauxRetrait" [(ngModel)]="tauxRetrait" mode="decimal"
           pTooltip="Taux de retrait du capital (ex : 4%)." tooltipPosition="top" />
         <label for="tauxRetrait">Taux de retrait (%)</label>
       </p-floatLabel>
     </div>
 
-    <div class="flex-auto">
+    <div >
       <p-floatLabel>
-        <p-inputNumber inputId="tauxRendement" [(ngModel)]="tauxRendement" suffix="%" mode="decimal"
+        <p-inputNumber inputId="tauxRendement" [(ngModel)]="tauxRendement" mode="decimal"
           pTooltip="Taux annuel moyen de rendement net sur vos investissements (hors inflation)." tooltipPosition="top" />
         <label for="tauxRendement">Taux de rendement (%)</label>
       </p-floatLabel>
     </div>
 
-    <div class="flex-auto">
+    <div >
       <p-floatLabel>
         <p-inputNumber inputId="capitalActuel" [(ngModel)]="capitalActuel" mode="currency" currency="EUR"
-          pTooltip="Capital déjà investi ou épargné." tooltipPosition="top" />
+          minFractionDigits="0" maxFractionDigits="0" pTooltip="Capital déjà investi ou épargné." tooltipPosition="top" />
         <label for="capitalActuel">Capital actuel (€)</label>
       </p-floatLabel>
     </div>
 
-    <div class="flex-auto">
+    <div >
       <p-floatLabel>
         <p-inputNumber inputId="epargne" [(ngModel)]="epargneAnnuelle" mode="currency" currency="EUR"
-          pTooltip="Épargne annuelle que vous pouvez investir jusqu’à l’indépendance." tooltipPosition="top" />
+          minFractionDigits="0" maxFractionDigits="0" pTooltip="Épargne annuelle que vous pouvez investir jusqu’à l’indépendance." tooltipPosition="top" />
         <label for="epargne">Épargne annuelle (€)</label>
       </p-floatLabel>
     </div>

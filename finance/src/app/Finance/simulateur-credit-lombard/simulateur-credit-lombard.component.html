@@ -7,7 +7,7 @@
     <div class="p-fluid grid">
       <div class="flex-auto">
         <p-floatLabel>
-          <p-inputNumber inputId="taux" formControlName="taux" mode="decimal" [minFractionDigits]="2" suffix=" %" />
+          <p-inputNumber inputId="taux" formControlName="taux" mode="decimal" [minFractionDigits]="2" />
           <label for="taux">Taux d'intérêt annuel</label>
         </p-floatLabel>
       </div>
@@ -35,7 +35,7 @@
         </div>
         <div class="flex-auto">
           <p-floatLabel>
-            <p-inputNumber inputId="valeur" formControlName="valeur" mode="currency" currency="EUR" />
+            <p-inputNumber inputId="valeur" formControlName="valeur" mode="currency" currency="EUR"  minFractionDigits="0" maxFractionDigits="0"/>
             <label for="valeur">Valeur de l’actif</label>
           </p-floatLabel>
         </div>
