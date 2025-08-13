@@ -66,6 +66,7 @@ import { SimulateurLivretComponent } from './Constructor/generateur-article/simu
 import { SimulateurDefiscalisationComponent } from './simulateur-defiscalisation/simulateur-defiscalisation.component';
 import { SimulateurDividendeEntrepriseComponent } from './simulateur-dividende-entreprise/simulateur-dividende-entreprise.component';
 import { SimulateurMicroEntrepreneurComponent } from './simulateur-micro-entrepreneur/simulateur-micro-entrepreneur.component';
+import { SimulateurEligibiliteLepComponent } from './Finance/simulateur-eligibilite-lep/simulateur-eligibilite-lep.component';
 
 @NgModule({
     declarations: [
@@ -102,7 +103,8 @@ import { SimulateurMicroEntrepreneurComponent } from './simulateur-micro-entrepr
         SimulateurLivretComponent,
         SimulateurDefiscalisationComponent,
         SimulateurDividendeEntrepriseComponent,
-        SimulateurMicroEntrepreneurComponent
+        SimulateurMicroEntrepreneurComponent,
+        SimulateurEligibiliteLepComponent
     ],
     imports: [
         BrowserModule,

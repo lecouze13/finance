@@ -1,0 +1,81 @@
+<main>
+  <h1>Simulateur d’éligibilité au Livret d’Épargne Populaire (LEP)</h1>
+  <div class="separator"></div><br>
+
+  <p-panel header="Paramètres">
+    <form [formGroup]="form" (ngSubmit)="calculer()" class="p-fluid grid">
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber formControlName="rfr" mode="currency" currency="EUR" inputId="rfr" [min]="0" [minFractionDigits]="0" />
+          <label for="rfr">Revenu Fiscal de Référence (RFR) N-2</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber formControlName="parts" inputId="parts" [min]="1" [step]="0.5" [minFractionDigits]="0" [maxFractionDigits]="2" />
+          <label for="parts">Nombre de parts fiscales</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-dropdown formControlName="anneeReference" [options]="[
+            {label:'N-2', value:'N-2'},
+            {label:'N-1 (à titre indicatif)', value:'N-1'}
+          ]"></p-dropdown>
+          <label for="anneeReference">Année de référence (RFR)</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex align-items-center justify-content-start mt-3">
+        <button pButton type="submit" label="Vérifier l’éligibilité" icon="pi pi-check" class="p-button-success"></button>
+      </div>
+    </form>
+  </p-panel>
+
+  <p-panel *ngIf="resultat" header="Résultat" class="mt-4 panel-colonnes">
+    <div class="panel-colonnes">
+      <div class="colonne">
+        <p><strong>{{ resultat.message }}</strong></p>
+        <p>RFR saisi : <strong>{{ resultat.rfr | currency:'EUR' }}</strong></p>
+        <p>Parts fiscales : <strong>{{ resultat.parts }}</strong></p>
+      </div>
+      <div class="colonne">
+        <p>Plafond RFR applicable : <strong>{{ resultat.plafondRfr | currency:'EUR' }}</strong></p>
+        <p *ngIf="resultat.eligible">Marge sous plafond : <strong>{{ resultat.marge | currency:'EUR' }}</strong></p>
+        <p>Plafond de dépôts LEP (info) : <strong>{{ resultat.plafondDepot | currency:'EUR' }}</strong></p>
+        <p class="text-sm">{{ resultat.justificatif }}</p>
+      </div>
+    </div>
+  </p-panel>
+
+  <br><div class="separator"></div><br>
+
+  <h2>Comment fonctionne l’éligibilité au LEP ?</h2>
+  <p>
+    Pour ouvrir (ou maintenir) un LEP, le <strong>Revenu Fiscal de Référence (RFR) N-2</strong> de votre foyer fiscal
+    doit être inférieur ou égal à un <strong>plafond</strong> dépendant du <strong>nombre de parts</strong>.
+  </p>
+  <p>
+    Ce simulateur compare votre RFR et vos parts au barème en vigueur (paramétrable dans l’outil).
+  </p>
+
+  <section class="faq-section" aria-label="Foire aux questions - LEP">
+    <h2>FAQ – LEP</h2>
+    <dl>
+      <dt>Qu’est-ce que le LEP ?</dt>
+      <dd>Un livret réglementé destiné aux contribuables aux revenus modestes, avec un taux d’intérêt avantageux.</dd>
+
+      <dt>Comment savoir si je suis éligible ?</dt>
+      <dd>Comparez votre RFR N-2 au plafond correspondant à votre nombre de parts fiscales. S’il est inférieur ou égal, vous êtes éligible.</dd>
+
+      <dt>Où trouver mon RFR ?</dt>
+      <dd>Sur votre dernier avis d’imposition, en première page de synthèse.</dd>
+
+      <dt>Quel est le plafond de dépôts ?</dt>
+      <dd>Le plafond des dépôts est réglementé. Dans ce simulateur, il est paramétré à 10 000 € (modifiable si la règle change).</dd>
+
+      <dt>Quels justificatifs fournir à la banque ?</dt>
+      <dd>Votre avis d’imposition (RFR N-2) et les pièces d’identité et de domicile habituelles.</dd>
+    </dl>

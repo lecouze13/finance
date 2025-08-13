@@ -179,7 +179,10 @@ export class HeaderComponent implements OnInit {
               label: 'Simulateurs Livrets',
         icon: 'pi pi-building',
 
-        items:simuLivret
+        items:[...simuLivret, {
+                label: 'Eligibilité LEP',
+                route: AppRoutes.SIMULATEUR_ELIGIBILITE_LEP,
+              }, ]
           }
         ],
       },

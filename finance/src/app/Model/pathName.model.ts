@@ -35,7 +35,7 @@ export const AppRoutes = {
   SIMULATEUR_DEFISCALISATION: 'simulateur-defiscalisation',
     SIMULATEUR_DIVIDEND_ENTREPRISE: 'simulateur-dividendes-entreprise',
     SIMULATEUR_MICRO_ENTREPRENEUR: 'simulateur-micro-entrepreneur',
-
+    SIMULATEUR_ELIGIBILITE_LEP: 'simulateur-eligibilite-lep',
 
 
 };

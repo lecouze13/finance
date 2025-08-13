@@ -31,6 +31,7 @@ import { SimulateurDividendeEntrepriseComponent } from './simulateur-dividende-e
 import { SimulateurLivretComponent } from './Constructor/generateur-article/simulateur-livret/simulateur-livret.component';
 import { SimulateurDefiscalisationComponent } from './simulateur-defiscalisation/simulateur-defiscalisation.component';
 import { SimulateurMicroEntrepreneurComponent } from './simulateur-micro-entrepreneur/simulateur-micro-entrepreneur.component';
+import { SimulateurEligibiliteLepComponent } from './Finance/simulateur-eligibilite-lep/simulateur-eligibilite-lep.component';
 
 export const routes: Routes = [
   { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -94,139 +95,158 @@ export const routes: Routes = [
     path: AppRoutes.SIMULATEUR_MICRO_ENTREPRENEUR,
     component: SimulateurMicroEntrepreneurComponent,
   },
-    { path: AppRoutes.SIMULATEUR__LOCATION_NUE_REGIME, component: SimulateurImportLocationNueComponent },
-    { path: AppRoutes.SIMULATEUR_APPORT_VS_EMPRUNT, component: SimulateurApportVsEmpruntComponent },
-    { path: AppRoutes.AIRBNB_VS_LOCATION, component: AirbnbVsLocationComponent },
-    { path: AppRoutes.SIMULATEUR_DIVIDEND_FIRE, component: SimulateurDividendFireComponent },
-    { path: AppRoutes.SIMULATEUR_DEFISCALISATION, component: SimulateurDefiscalisationComponent },
+  {
+    path: AppRoutes.SIMULATEUR__LOCATION_NUE_REGIME,
+    component: SimulateurImportLocationNueComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_APPORT_VS_EMPRUNT,
+    component: SimulateurApportVsEmpruntComponent,
+  },
+  { path: AppRoutes.AIRBNB_VS_LOCATION, component: AirbnbVsLocationComponent },
+  {
+    path: AppRoutes.SIMULATEUR_DIVIDEND_FIRE,
+    component: SimulateurDividendFireComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_DEFISCALISATION,
+    component: SimulateurDefiscalisationComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_ELIGIBILITE_LEP,
+    component: SimulateurEligibiliteLepComponent,
+  },
 
+  {
+    path: 'article/pea',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/assurance-vie',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/pea-vs-assurance-vie',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/perco',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/per',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/cto',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/assurance-vie-luxembourgeoise',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/credit-lombard',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/etf',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/livret-a',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/ldds',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/pel',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/cel',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/lep',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/livret-jeune',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/livret-bleu',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/lea',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/obligations',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/cac40',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/sp500',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/msciworld',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/msci-emerging-markets',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/dax40',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/ftse100',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/nikkei225',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/tsx-composite',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/ftse-mib',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/ibex35',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/reforme-taux-aout-2025',
+    component: ContenuPageComponent,
+  },
 
-    {
-        path: 'article/pea',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/assurance-vie',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/pea-vs-assurance-vie',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/perco',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/per',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/cto',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/assurance-vie-luxembourgeoise',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/credit-lombard',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/etf',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/livret-a',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/ldds',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/pel',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/cel',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/lep',
-        component: ContenuPageComponent
-    }
-    ,
-    {
-        path: 'article/livret-jeune',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/livret-bleu',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/lea',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/obligations',
-        component: ContenuPageComponent
-    }, {
-        path: 'article/cac40',
-        component: ContenuPageComponent
-    }, {
-        path: 'article/sp500',
-        component: ContenuPageComponent
-    }, {
-        path: 'article/msciworld',
-        component: ContenuPageComponent
-    }, {
-        path: 'article/msci-emerging-markets',
-        component: ContenuPageComponent
-    }, {
-        path: 'article/dax40',
-        component: ContenuPageComponent
-    }, {
-        path: 'article/ftse100',
-        component: ContenuPageComponent
-    }, {
-        path: 'article/nikkei225',
-        component: ContenuPageComponent
-    }, {
-        path: 'article/tsx-composite',
-        component: ContenuPageComponent
-    },
-    {
-        path: 'article/ftse-mib',
-        component: ContenuPageComponent
-    }, {
-        path: 'article/ibex35',
-        component: ContenuPageComponent
-    },
- {
-        path: 'article/reforme-taux-aout-2025',
-        component: ContenuPageComponent
-    },
-
-
- 
-{ path: 'simulateur-livret/lep', component: SimulateurLivretComponent },
-{ path: 'simulateur-livret/livret-a', component: SimulateurLivretComponent },
-{ path: 'simulateur-livret/ldds', component: SimulateurLivretComponent },
-{ path: 'simulateur-livret/cel', component: SimulateurLivretComponent },
-{ path: 'simulateur-livret/livret-bleu', component: SimulateurLivretComponent },
-{ path: 'simulateur-livret/livret-jeune', component: SimulateurLivretComponent },
-{ path: 'simulateur-livret/pel', component: SimulateurLivretComponent },
-    { path: 'simulateur-livret/lea', component: SimulateurLivretComponent },
-
-    { path: 'simulateur', component: SimulateurLivretComponent },
-
-
-{ path: '**', redirectTo: '', pathMatch: 'full' }
-
- 
+  { path: 'simulateur-livret/lep', component: SimulateurLivretComponent },
+  { path: 'simulateur-livret/livret-a', component: SimulateurLivretComponent },
+  { path: 'simulateur-livret/ldds', component: SimulateurLivretComponent },
+  { path: 'simulateur-livret/cel', component: SimulateurLivretComponent },
+  {
+    path: 'simulateur-livret/livret-bleu',
+    component: SimulateurLivretComponent,
+  },
+  {path: 'simulateur-livret/livret-jeune', component: SimulateurLivretComponent,},
+  { path: 'simulateur-livret/pel', component: SimulateurLivretComponent },
+  { path: 'simulateur-livret/lea', component: SimulateurLivretComponent },
+  { path: 'simulateur', component: SimulateurLivretComponent },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
