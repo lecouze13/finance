@@ -1,7 +1,13 @@
 <main>
     <h1>Simulateur Micro-Entrepreneur</h1>
     <div class="separator"></div><br>
-
+  <p>
+        Ce simulateur vous permet d’estimer rapidement vos revenus en tant que micro-entrepreneur, 
+        après déduction des cotisations sociales et de l’impôt sur le revenu. 
+        Il prend en compte votre activité (vente, prestation de services, profession libérale), 
+        le taux de charges applicable, ainsi que l’option éventuelle pour le versement libératoire.
+    </p>
+    <br>
     <form [formGroup]="form" (ngSubmit)="calculer()" class="form">
         <p-panel header="Paramètres du simulateur">
 
