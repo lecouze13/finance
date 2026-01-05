@@ -1,0 +1,88 @@
+<main>
+  <h1>Simulateur APL - Aide Personnalisée au Logement</h1>
+  <div class="separator"></div><br>
+
+  <p-panel header="Informations">
+    <form [formGroup]="form" (ngSubmit)="calculer()" class="p-fluid grid">
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-dropdown formControlName="situation" [options]="situationsOptions" inputId="situation"></p-dropdown>
+          <label for="situation">Situation familiale</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber formControlName="nombreEnfants" inputId="nombreEnfants" [min]="0" [showButtons]="true"></p-inputNumber>
+          <label for="nombreEnfants">Nombre d'enfants à charge</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber formControlName="ressourcesMensuelles" mode="currency" currency="EUR" inputId="ressources" [min]="0"></p-inputNumber>
+          <label for="ressources">Ressources mensuelles (nets)</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber formControlName="loyerMensuel" mode="currency" currency="EUR" inputId="loyer" [min]="0"></p-inputNumber>
+          <label for="loyer">Loyer mensuel (charges comprises)</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-dropdown formControlName="typeLogement" [options]="typeLogementOptions" inputId="typeLogement"></p-dropdown>
+          <label for="typeLogement">Type de logement</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-dropdown formControlName="zone" [options]="zoneOptions" inputId="zone"></p-dropdown>
+          <label for="zone">Zone géographique</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex align-items-center justify-content-start mt-3">
+        <button pButton type="submit" label="Calculer l'APL" icon="pi pi-calculator" class="p-button-success"></button>
+      </div>
+    </form>
+  </p-panel>
+
+  <p-panel *ngIf="resultat" header="Résultat" class="mt-4">
+    <div *ngIf="resultat.eligible" class="resultats">
+      <h3>Montant estimé de l'APL</h3>
+      <ul>
+        <li><strong>APL mensuelle :</strong> {{ resultat.apl | currency:'EUR' }}</li>
+        <li><strong>Loyer après APL :</strong> {{ resultat.loyerApresApl | currency:'EUR' }}</li>
+        <li><strong>Loyer retenu :</strong> {{ resultat.loyerRetenu | currency:'EUR' }}</li>
+        <li><strong>Plafond de loyer :</strong> {{ resultat.plafondLoyer | currency:'EUR' }}</li>
+        <li><strong>Forfait charges :</strong> {{ resultat.forfaitCharges | currency:'EUR' }}</li>
+      </ul>
+    </div>
+    <div *ngIf="!resultat.eligible" class="info-smic">
+      Vous ne semblez pas éligible à l'APL selon les critères estimés.
+    </div>
+  </p-panel>
+
+  <br><div class="separator"></div><br>
+
+  <h2>Comment fonctionne l'APL ?</h2>
+  <p>
+    L'APL est calculée en fonction de plusieurs critères : vos ressources, votre situation familiale,
+    le montant de votre loyer, et la zone géographique de votre logement.
+  </p>
+  <p>
+    Le calcul prend en compte un <strong>plafond de loyer</strong> et un <strong>forfait charges</strong>.
+    Une participation personnelle minimale est toujours demandée.
+  </p>
+
+  <app-faq-section
+    [title]="'FAQ - APL'"
+    [faqItems]="faqItems"
+    [ariaLabel]="'Foire aux questions sur l\'APL'">
+  </app-faq-section>
+</main>

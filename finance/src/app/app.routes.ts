@@ -32,6 +32,7 @@ import { SimulateurLivretComponent } from './Constructor/generateur-article/simu
 import { SimulateurDefiscalisationComponent } from './simulateur-defiscalisation/simulateur-defiscalisation.component';
 import { SimulateurMicroEntrepreneurComponent } from './simulateur-micro-entrepreneur/simulateur-micro-entrepreneur.component';
 import { SimulateurEligibiliteLepComponent } from './Finance/simulateur-eligibilite-lep/simulateur-eligibilite-lep.component';
+import { SimulateurAplComponent } from './Finance/simulateur-apl/simulateur-apl.component';
 
 export const routes: Routes = [
   { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -115,6 +116,10 @@ export const routes: Routes = [
   {
     path: AppRoutes.SIMULATEUR_ELIGIBILITE_LEP,
     component: SimulateurEligibiliteLepComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_APL,
+    component: SimulateurAplComponent,
   },
 
   {

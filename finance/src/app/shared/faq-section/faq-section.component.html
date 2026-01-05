@@ -1,0 +1,9 @@
+<section class="faq-section" [attr.aria-label]="ariaLabel">
+  <h2>{{ title }}</h2>
+  <dl>
+    <ng-container *ngFor="let item of faqItems">
+      <dt>{{ item.question }}</dt>
+      <dd>{{ item.answer }}</dd>
+    </ng-container>
+  </dl>
+</section>
