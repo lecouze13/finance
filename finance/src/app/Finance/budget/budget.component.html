@@ -127,50 +127,11 @@
 
   <div class="separator"></div><br>
 
-  <section class="faq-section mt-5">
-    <h2>FAQ – Questions fréquentes sur la gestion de budget</h2>
-    <dl>
-      <dt>Pourquoi utiliser un outil de gestion de budget ?</dt>
-      <dd>Un outil de gestion de budget vous aide à mieux contrôler vos finances, à suivre vos revenus et vos dépenses,
-        et à éviter les découverts ou les déficits en fin de mois.</dd>
-
-      <dt>À quoi sert la gestion de budget au quotidien ?</dt>
-      <dd>Elle vous permet de prendre de meilleures décisions financières, de prévoir vos dépenses, d’anticiper les
-        imprévus, et de mettre de l’argent de côté régulièrement.</dd>
-
-      <dt>Quels sont les avantages de suivre ses dépenses ?</dt>
-      <dd>Suivre ses dépenses permet d’identifier les postes coûteux, d’adapter son mode de vie à ses moyens, et de
-        limiter les achats impulsifs.</dd>
-
-      <dt>Comment un outil de budget peut-il m’aider à épargner ?</dt>
-      <dd>En visualisant vos excédents mensuels, vous pouvez définir un objectif d’épargne réaliste et suivre vos
-        progrès vers ce but.</dd>
-
-      <dt>Est-ce que la catégorisation des dépenses est utile ?</dt>
-      <dd>Oui, catégoriser ses dépenses aide à comprendre ses habitudes de consommation et à détecter facilement les
-        postes sur lesquels vous pouvez économiser.</dd>
-
-      <dt>Quels types de revenus et de dépenses faut-il renseigner ?</dt>
-      <dd>Il faut indiquer tous les revenus nets (salaires, aides, pensions) ainsi que les dépenses fixes (loyer,
-        abonnements) et variables (alimentation, loisirs, transport).</dd>
-
-      <dt>Est-ce que je peux comparer mes finances avec d'autres ?</dt>
-      <dd>Oui, certaines fonctionnalités vous permettent de comparer vos chiffres avec des moyennes nationales pour
-        situer votre niveau de dépenses.</dd>
-
-      <dt>Est-ce que cet outil est adapté aux débutants en gestion ?</dt>
-      <dd>Oui, l’outil est conçu pour être simple d’utilisation, même pour ceux qui débutent dans la gestion financière
-        personnelle.</dd>
-
-      <dt>Pourquoi est-il important de connaître son solde mensuel ?</dt>
-      <dd>Connaître votre solde permet de savoir si vos revenus couvrent vos dépenses, d’éviter le surendettement et de
-        planifier sereinement les mois à venir.</dd>
-
-      <dt>L’outil est-il gratuit et accessible à tous ?</dt>
-      <dd>Oui, notre outil est gratuit, sans inscription obligatoire, et accessible depuis tout type d’appareil
-        (ordinateur, smartphone, tablette).</dd>
-    </dl>
-  </section>
+  <app-faq-section
+    [title]="&quot;FAQ – Questions fréquentes sur la gestion de budget'&quot;"
+    [faqItems]="faqItems"
+    [ariaLabel]="&quot;Foire aux questions'&quot;">
+  </app-faq-section>
 
 
   <p>Commencez dès maintenant à reprendre le contrôle de vos finances personnelles avec notre <strong>outil de gestion

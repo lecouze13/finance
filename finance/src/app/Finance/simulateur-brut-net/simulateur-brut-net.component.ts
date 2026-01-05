@@ -1,12 +1,56 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
+import { FaqSectionComponent, FaqItem } from '../../shared/faq-section/faq-section.component';
 @Component({
   selector: 'app-simulateur-brut-net',
   templateUrl: './simulateur-brut-net.component.html',
   styleUrls: ['./simulateur-brut-net.component.scss']
 })
 export class SimulateurBrutNetComponent implements OnInit {
+
+  faqItems: FaqItem[] = [
+    {
+      question: 'Comment passer du salaire brut au salaire net ?',
+      answer: 'Pour passer du salaire brut au salaire net, on soustrait les charges sociales salariales qui représentent environ 22% à 25% du brut selon le statut.'
+    },
+    {
+      question: 'Quelle est la formule de conversion brut-net ?',
+      answer: 'On applique un coefficient multiplicateur entre 0,70 et 0,85 au salaire brut selon le statut et le secteur.'
+    },
+    {
+      question: 'Dans quoi passent les charges sociales ?',
+      answer: 'Elles financent la retraite, la sécurité sociale, l\'assurance chômage et les prestations sociales.'
+    },
+    {
+      question: 'Quelles sont les taxes pour les différentes professions ?',
+      answer: 'Cadre (~25%), non-cadre (~23%), public (~15%), libéral (~30%).'
+    },
+    {
+      question: 'Que faire des impôts sur le revenu ?',
+      answer: 'Les impôts ne sont pas inclus ici. Utilisez notre simulateur : https://calculateurfinance.fr/simulateur-impot-revenue'
+    },
+    {
+      question: 'Quelle différence entre brut et net pour un indépendant ?',
+      answer: 'Un indépendant paie ses propres charges sociales. Le net est après déduction de ces cotisations.'
+    },
+    {
+      question: 'Le salaire net affiché est-il avant ou après impôt ?',
+      answer: 'Le salaire net affiché est avant impôt (prélèvement à la source non déduit).'
+    },
+    {
+      question: 'Comment est calculé le SMIC net ?',
+      answer: 'Le SMIC net est obtenu après déduction des charges du SMIC brut (≈1794 € brut en 2025).'
+    },
+    {
+      question: 'Un temps partiel influence-t-il le net ?',
+      answer: 'Oui, le temps de travail réduit proportionnellement le brut et donc le net.'
+    },
+    {
+      question: 'Existe-t-il des charges réduites pour certains statuts ?',
+      answer: 'Oui, apprentis, stagiaires ou certains régimes spéciaux peuvent avoir des charges allégées.'
+    }
+  ];
 
   constructor(  @Inject(PLATFORM_ID) private platformId: any, 
 private renderer: Renderer2, private seo: SeoService) { }
@@ -21,97 +65,7 @@ private renderer: Renderer2, private seo: SeoService) { }
     });
   if (isPlatformBrowser(this.platformId)) {
 
-    const script = this.renderer.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Comment passer du salaire brut au salaire net ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Pour passer du salaire brut au salaire net, on soustrait les charges sociales salariales qui représentent environ 22% à 25% du brut selon le statut."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quelle est la formule de conversion brut-net ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "On applique un coefficient multiplicateur entre 0,70 et 0,85 au salaire brut selon le statut et le secteur."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Dans quoi passent les charges sociales ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Elles financent la retraite, la sécurité sociale, l'assurance chômage et les prestations sociales."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quelles sont les taxes pour les différentes professions ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Cadre (~25%), non-cadre (~23%), public (~15%), libéral (~30%)."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Que faire des impôts sur le revenu ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Les impôts ne sont pas inclus ici. Utilisez notre simulateur : https://calculateurfinance.fr/simulateur-impot-revenue"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quelle différence entre brut et net pour un indépendant ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Un indépendant paie ses propres charges sociales. Le net est après déduction de ces cotisations."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Le salaire net affiché est-il avant ou après impôt ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Le salaire net affiché est avant impôt (prélèvement à la source non déduit)."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment est calculé le SMIC net ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Le SMIC net est obtenu après déduction des charges du SMIC brut (≈1794 € brut en 2025)."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Un temps partiel influence-t-il le net ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui, le temps de travail réduit proportionnellement le brut et donc le net."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Existe-t-il des charges réduites pour certains statuts ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui, apprentis, stagiaires ou certains régimes spéciaux peuvent avoir des charges allégées."
-          }
-        }
-      ]
-    })
- 
-    this.renderer.appendChild(document.head, script);
- }
+    }
   }
 
   typeSalaire = [

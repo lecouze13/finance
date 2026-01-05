@@ -2,6 +2,7 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Meta } from '@angular/platform-browser';
 import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
+import { FaqSectionComponent, FaqItem } from '../../shared/faq-section/faq-section.component';
 import { Inject, PLATFORM_ID } from '@angular/core';@Component({
   selector: 'app-impots-revenue',
   templateUrl: './impots-revenue.component.html',
@@ -16,6 +17,49 @@ export class ImpotsRevenueComponent implements OnInit {
   impot: number | null = null;
   impotBrut: number = 0;
   decote: number = 0;
+  faqItems: FaqItem[] = [
+    {
+      question: 'Quel est le barème de l’impôt sur le revenu en 2025 ?',
+      answer: 'Le barème 2025 est progressif : 0% jusqu\'à 11 497 €, 11% de 11 498 à 29 315 €, 30% jusqu\'à 83 823 €, 41% jusqu\'à 180 294 €, et 45% au-delà.'
+    },
+    {
+      question: 'Qu’est-ce que la décote pour revenus modestes ?',
+      answer: 'La décote est une réduction automatique de l’impôt pour les foyers modestes. En 2025, elle s’applique si l’impôt brut est inférieur à 1 964 € (célibataire) ou 3 248 € (couple). La formule est : 889 € - 45,25% de l’impôt brut pour une personne seule, ou 1 470 € - 45,25% pour un couple.'
+    },
+    {
+      question: 'Quelle est la différence entre impôt brut et impôt net ?',
+      answer: 'L’impôt brut est le montant calculé avant toute réduction. L’impôt net est le montant final à payer après application des décotes et crédits d’impôt éventuels.'
+    },
+    {
+      question: 'La situation familiale influence-t-elle l’impôt ?',
+      answer: 'Oui. Le quotient familial prend en compte la situation maritale (célibataire, marié, veuf...) et le nombre de parts fiscales (enfants à charge, etc.) pour ajuster l’imposition.'
+    },
+    {
+      question: 'Comment sont pris en compte les enfants à charge ?',
+      answer: 'Chaque enfant à charge donne droit à une demi-part ou une part entière selon leur rang. Cela augmente le nombre de parts fiscales et diminue l’impôt.'
+    },
+    {
+      question: 'Qu’est-ce que le quotient familial ?',
+      answer: 'Le quotient familial est le revenu imposable divisé par le nombre de parts fiscales du foyer. Il permet de rendre l’impôt plus équitable selon la taille du ménage.'
+    },
+    {
+      question: 'Quels crédits d’impôt peut-on déclarer ?',
+      answer: 'Vous pouvez déclarer des crédits pour emploi à domicile, frais de garde, dons aux associations, dépenses de transition énergétique, etc. Ils réduisent l’impôt à payer.'
+    },
+    {
+      question: 'L’impôt peut-il être annulé totalement ?',
+      answer: 'Oui. Si la décote et les crédits d’impôt dépassent l’impôt brut, l’impôt net à payer peut être nul. Cela concerne souvent les revenus modestes ou les foyers très défiscalisés.'
+    },
+    {
+      question: 'Quels revenus doivent être déclarés ?',
+      answer: 'Tous les revenus doivent être déclarés : salaires, pensions, retraites, revenus fonciers, bénéfices industriels et commerciaux (BIC), etc.'
+    },
+    {
+      question: 'Comment est calculé l’impôt sur le revenu ?',
+      answer: 'L’impôt est calculé selon un barème progressif. On divise le revenu imposable par le nombre de parts fiscales, on applique le barème par tranche, puis on multiplie par les parts. On déduit ensuite la décote et les crédits d’impôt éventuels.'
+    }
+  ];
+
   constructor(  @Inject(PLATFORM_ID) private platformId: any, 
 private renderer: Renderer2, private seo: SeoService) { }
 
@@ -29,96 +73,7 @@ private renderer: Renderer2, private seo: SeoService) { }
     });
   if (isPlatformBrowser(this.platformId)) {
 
-    const script = this.renderer.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Quel est le barème de l’impôt sur le revenu en 2025 ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Le barème 2025 est progressif : 0% jusqu'à 11 497 €, 11% de 11 498 à 29 315 €, 30% jusqu'à 83 823 €, 41% jusqu'à 180 294 €, et 45% au-delà."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Qu’est-ce que la décote pour revenus modestes ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La décote est une réduction automatique de l’impôt pour les foyers modestes. En 2025, elle s’applique si l’impôt brut est inférieur à 1 964 € (célibataire) ou 3 248 € (couple). La formule est : 889 € - 45,25% de l’impôt brut pour une personne seule, ou 1 470 € - 45,25% pour un couple."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quelle est la différence entre impôt brut et impôt net ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "L’impôt brut est le montant calculé avant toute réduction. L’impôt net est le montant final à payer après application des décotes et crédits d’impôt éventuels."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "La situation familiale influence-t-elle l’impôt ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui. Le quotient familial prend en compte la situation maritale (célibataire, marié, veuf...) et le nombre de parts fiscales (enfants à charge, etc.) pour ajuster l’imposition."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment sont pris en compte les enfants à charge ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Chaque enfant à charge donne droit à une demi-part ou une part entière selon leur rang. Cela augmente le nombre de parts fiscales et diminue l’impôt."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Qu’est-ce que le quotient familial ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Le quotient familial est le revenu imposable divisé par le nombre de parts fiscales du foyer. Il permet de rendre l’impôt plus équitable selon la taille du ménage."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels crédits d’impôt peut-on déclarer ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Vous pouvez déclarer des crédits pour emploi à domicile, frais de garde, dons aux associations, dépenses de transition énergétique, etc. Ils réduisent l’impôt à payer."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "L’impôt peut-il être annulé totalement ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui. Si la décote et les crédits d’impôt dépassent l’impôt brut, l’impôt net à payer peut être nul. Cela concerne souvent les revenus modestes ou les foyers très défiscalisés."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels revenus doivent être déclarés ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Tous les revenus doivent être déclarés : salaires, pensions, retraites, revenus fonciers, bénéfices industriels et commerciaux (BIC), etc."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment est calculé l’impôt sur le revenu ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "L’impôt est calculé selon un barème progressif. On divise le revenu imposable par le nombre de parts fiscales, on applique le barème par tranche, puis on multiplie par les parts. On déduit ensuite la décote et les crédits d’impôt éventuels."
-          }
-        }
-      ]
-    });
-    this.renderer.appendChild(document.head, script);
-  }
+    }
   }
 
   calculerParts(): number {

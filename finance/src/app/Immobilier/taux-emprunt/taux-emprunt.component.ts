@@ -1,6 +1,7 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
+import { FaqSectionComponent, FaqItem } from '../../shared/faq-section/faq-section.component';
 
 @Component({
   selector: 'app-taux-emprunt',
@@ -8,6 +9,49 @@ import { Inject, PLATFORM_ID } from '@angular/core';
   templateUrl: './taux-emprunt.component.html',
 })
 export class TauxEmpruntComponent implements OnInit {
+
+  faqItems: FaqItem[] = [
+    {
+      question: 'Qu’est-ce qu’un crédit immobilier ?',
+      answer: 'Un prêt bancaire destiné à financer l’achat d’un bien immobilier, avec remboursement en mensualités sur une durée définie.'
+    },
+    {
+      question: 'Comment calculer les mensualités ?',
+      answer: 'Les mensualités se calculent en fonction du capital emprunté, du taux d’intérêt, de la durée du prêt et des assurances.'
+    },
+    {
+      question: 'Qu’est-ce que le TAEG ?',
+      answer: 'Le Taux Annuel Effectif Global regroupe le taux d’intérêt et les frais annexes pour donner le coût total du crédit.'
+    },
+    {
+      question: 'Comment calculer le coût total du crédit ?',
+      answer: 'Le coût total correspond aux intérêts payés sur la durée du prêt plus les frais annexes (assurances, garanties).'
+    },
+    {
+      question: 'Qu’est-ce que la capacité d’emprunt ?',
+      answer: 'La capacité d’emprunt représente le montant maximum que vous pouvez emprunter en fonction de vos revenus et charges.'
+    },
+    {
+      question: 'Comment augmenter sa capacité d’emprunt ?',
+      answer: 'En diminuant vos charges, augmentant vos revenus ou en apportant un apport personnel plus important.'
+    },
+    {
+      question: 'Qu’est-ce que l’assurance emprunteur ?',
+      answer: 'Une assurance qui garantit le remboursement du crédit en cas de décès, invalidité ou incapacité de travail.'
+    },
+    {
+      question: 'Puis-je rembourser mon crédit par anticipation ?',
+      answer: 'Oui, sous certaines conditions, vous pouvez rembourser tout ou partie de votre crédit avant la fin du contrat.'
+    },
+    {
+      question: 'Que se passe-t-il en cas de retard de paiement ?',
+      answer: 'Des pénalités peuvent être appliquées, et en cas de non-paiement prolongé, la banque peut engager une procédure de recouvrement.'
+    },
+    {
+      question: 'Où puis-je simuler mon crédit immobilier ?',
+      answer: 'Utilisez notre simulateur de crédit immobilier sur CalculateurFinance.fr pour estimer vos mensualités, coût total et capacité d’emprunt.'
+    }
+  ];
 
  constructor(
     private seo: SeoService,
@@ -26,96 +70,7 @@ export class TauxEmpruntComponent implements OnInit {
     });
   if (isPlatformBrowser(this.platformId)) {
 
-    const script = this.renderer.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Qu’est-ce qu’un crédit immobilier ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Un prêt bancaire destiné à financer l’achat d’un bien immobilier, avec remboursement en mensualités sur une durée définie."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment calculer les mensualités ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Les mensualités se calculent en fonction du capital emprunté, du taux d’intérêt, de la durée du prêt et des assurances."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Qu’est-ce que le TAEG ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Le Taux Annuel Effectif Global regroupe le taux d’intérêt et les frais annexes pour donner le coût total du crédit."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment calculer le coût total du crédit ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Le coût total correspond aux intérêts payés sur la durée du prêt plus les frais annexes (assurances, garanties)."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Qu’est-ce que la capacité d’emprunt ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La capacité d’emprunt représente le montant maximum que vous pouvez emprunter en fonction de vos revenus et charges."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment augmenter sa capacité d’emprunt ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "En diminuant vos charges, augmentant vos revenus ou en apportant un apport personnel plus important."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Qu’est-ce que l’assurance emprunteur ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Une assurance qui garantit le remboursement du crédit en cas de décès, invalidité ou incapacité de travail."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Puis-je rembourser mon crédit par anticipation ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui, sous certaines conditions, vous pouvez rembourser tout ou partie de votre crédit avant la fin du contrat."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Que se passe-t-il en cas de retard de paiement ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Des pénalités peuvent être appliquées, et en cas de non-paiement prolongé, la banque peut engager une procédure de recouvrement."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Où puis-je simuler mon crédit immobilier ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Utilisez notre simulateur de crédit immobilier sur CalculateurFinance.fr pour estimer vos mensualités, coût total et capacité d’emprunt."
-          }
-        }
-      ]
-    });
-    this.renderer.appendChild(document.head, script);
-  }
+    }
 }
 
   sommeEmprunte: number | undefined = 0;

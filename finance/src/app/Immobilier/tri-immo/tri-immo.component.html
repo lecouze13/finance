@@ -71,36 +71,9 @@
 <p>Le TRI immobilier est un outil puissant pour mesurer la rentabilité d’un investissement. En combinant tous les flux financiers, il donne une vision complète et temporelle de la performance. Toutefois, il doit être utilisé avec d’autres indicateurs et en tenant compte du contexte global du projet.</p>
 <br><br>
 
-  <section class="faq-section mt-5">
-    <h2>FAQ – Questions fréquentes sur le Taux de Rentabilité Interne (TRI) et l’investissement immobilier</h2>
-    <dl>
-      <dt>Qu’est-ce que le Taux de Rentabilité Interne (TRI) ?</dt>
-      <dd>Le TRI est le taux d’actualisation qui rend la valeur actuelle nette (VAN) d’un investissement égale à zéro.
-        Il permet d’évaluer la rentabilité globale d’un projet.</dd>
-
-      <dt>Comment interpréter le TRI ?</dt>
-      <dd>Un TRI élevé signifie un bon rendement. Si le TRI est supérieur au taux d’intérêt du marché ou au coût du
-        capital, l’investissement est considéré rentable.</dd>
-
-      <dt>Quelle est la formule du calcul du TRI ?</dt>
-      <dd>Le TRI est la solution de l’équation {{ '{' }} ∑<sub>t=0</sub><sup>n</sup> CF<sub>t</sub> / (1 +
-        TRI)<sup>t</sup> = 0 {{ '}' }}, où CF<sub>t</sub> sont les flux nets de trésorerie annuels.
-      </dd>
-
-      <dt>Comment calculer le TRI ?</dt>
-      <dd>Le calcul du TRI est itératif et généralement réalisé avec un logiciel financier ou un simulateur qui teste
-        plusieurs taux d’actualisation.</dd>
-
-      <dt>Quelle est la différence entre TRI brut et TRI net ?</dt>
-      <dd>Le TRI brut ne prend pas en compte les charges fiscales et les frais, tandis que le TRI net intègre ces
-        éléments pour refléter la rentabilité réelle.</dd>
-
-      <dt>Qu’est-ce que le cashflow net ?</dt>
-      <dd>Le cashflow net est la différence entre les revenus locatifs et les dépenses (charges, impôts, remboursements)
-        liées à l’investissement.</dd>
-
-      <dt>Quels sont les facteurs influençant le TRI ?</dt>
-      <dd>Le prix d’achat, les loyers perçus, les charges, les frais de notaire, la fiscalité, et
-    </dl>
-  </section>
+  <app-faq-section
+    [title]="&quot;FAQ – Questions fréquentes sur le Taux de Rentabilité Interne (TRI) et l’investissement immobilier'&quot;"
+    [faqItems]="faqItems"
+    [ariaLabel]="&quot;Foire aux questions'&quot;">
+  </app-faq-section>
 </main>

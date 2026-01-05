@@ -1,11 +1,55 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
+import { FaqSectionComponent, FaqItem } from '../../shared/faq-section/faq-section.component';
 import { Inject, PLATFORM_ID } from '@angular/core';@Component({
   selector: 'app-comparateur-achat-location',
   templateUrl: './comparateur-achat-location.component.html',
   styleUrls: ['./comparateur-achat-location.component.scss']
 })
 export class ComparateurAchatLocationComponent implements OnInit {
+
+  faqItems: FaqItem[] = [
+    {
+      question: 'Quelles sont les principales différences entre acheter et louer ?',
+      answer: 'Acheter implique un investissement initial et un crédit, tandis que louer permet plus de flexibilité sans engagement à long terme.'
+    },
+    {
+      question: 'Quels coûts faut-il prendre en compte lors de l’achat ?',
+      answer: 'Le prix du bien, les frais de notaire, les intérêts d’emprunt, les charges de copropriété, la taxe foncière et l’entretien.'
+    },
+    {
+      question: 'Quels sont les avantages de la location ?',
+      answer: 'Moins d’engagement financier, pas de charges liées à la propriété, et plus de mobilité.'
+    },
+    {
+      question: 'Comment comparer les coûts entre achat et location ?',
+      answer: 'En calculant le coût total mensuel de chaque option, incluant l’ensemble des frais et avantages fiscaux éventuels.'
+    },
+    {
+      question: 'L’achat est-il toujours plus rentable que la location ?',
+      answer: 'Pas forcément, cela dépend de la durée de détention, de l’évolution du marché et des taux d’intérêt.'
+    },
+    {
+      question: 'Quels risques sont associés à l’achat immobilier ?',
+      answer: 'Risque de baisse de la valeur du bien, charges imprévues, et engagement à long terme.'
+    },
+    {
+      question: 'Quels sont les avantages fiscaux de l’achat ?',
+      answer: 'Possibilité de déduire certains intérêts d’emprunt, travaux, et avantages liés au dispositif Pinel ou LMNP.'
+    },
+    {
+      question: 'Comment prendre en compte la valorisation du bien ?',
+      answer: 'La plus-value potentielle peut être intégrée dans la rentabilité globale de l’achat.'
+    },
+    {
+      question: 'La location peut-elle être déductible fiscalement ?',
+      answer: 'Non, les loyers ne sont pas déductibles fiscalement, sauf cas particuliers comme la location meublée professionnelle.'
+    },
+    {
+      question: 'Où puis-je simuler un comparateur achat vs location ?',
+      answer: 'Utilisez notre outil gratuit en ligne sur CalculateurFinance.fr pour estimer votre situation.'
+    }
+  ];
 
   constructor(  @Inject(PLATFORM_ID) private platformId: any, 
 private renderer: Renderer2, private seo: SeoService) { }
@@ -199,97 +243,6 @@ private renderer: Renderer2, private seo: SeoService) { }
       keywords: 'simulateur achat vs location, calcul achat immobilier, comparaison achat location, simulation investissement immobilier, coût location vs achat, frais achat immobilier, simulation budget immobilier',
     });
   if (isPlatformBrowser(this.platformId)) {
-
-    const script = this.renderer.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Quelles sont les principales différences entre acheter et louer ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Acheter implique un investissement initial et un crédit, tandis que louer permet plus de flexibilité sans engagement à long terme."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels coûts faut-il prendre en compte lors de l’achat ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Le prix du bien, les frais de notaire, les intérêts d’emprunt, les charges de copropriété, la taxe foncière et l’entretien."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels sont les avantages de la location ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Moins d’engagement financier, pas de charges liées à la propriété, et plus de mobilité."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment comparer les coûts entre achat et location ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "En calculant le coût total mensuel de chaque option, incluant l’ensemble des frais et avantages fiscaux éventuels."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "L’achat est-il toujours plus rentable que la location ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Pas forcément, cela dépend de la durée de détention, de l’évolution du marché et des taux d’intérêt."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels risques sont associés à l’achat immobilier ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Risque de baisse de la valeur du bien, charges imprévues, et engagement à long terme."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels sont les avantages fiscaux de l’achat ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Possibilité de déduire certains intérêts d’emprunt, travaux, et avantages liés au dispositif Pinel ou LMNP."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment prendre en compte la valorisation du bien ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La plus-value potentielle peut être intégrée dans la rentabilité globale de l’achat."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "La location peut-elle être déductible fiscalement ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Non, les loyers ne sont pas déductibles fiscalement, sauf cas particuliers comme la location meublée professionnelle."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Où puis-je simuler un comparateur achat vs location ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Utilisez notre outil gratuit en ligne sur CalculateurFinance.fr pour estimer votre situation."
-          }
-        }
-      ]
-    });
-    this.renderer.appendChild(document.head, script);
-
 
     const isSmallScreen = window.innerWidth <= 400;
 

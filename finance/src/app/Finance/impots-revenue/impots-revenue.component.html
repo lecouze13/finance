@@ -129,51 +129,10 @@
 
   <br><br>
 
-  <section class="faq-section mt-5" aria-label="Foire aux questions sur l'impôt sur le revenu">
-    <h2>FAQ – Questions fréquentes sur l'impôt sur le revenu</h2>
-    <dl>
-      <dt>Quel est le barème de l’impôt sur le revenu en 2025 ?</dt>
-      <dd>Le barème 2025 est progressif : 0% jusqu'à 11 497 €, 11% de 11 498 à 29 315 €, 30% jusqu'à 83 823 €, 41%
-        jusqu'à 180 294 €, et 45% au-delà.</dd>
-
-      <dt>Qu’est-ce que la décote pour revenus modestes ?</dt>
-      <dd>La décote est une réduction automatique de l’impôt pour les foyers modestes. En 2025, elle s’applique si
-        l’impôt brut est inférieur à 1 964 € (célibataire) ou 3 248 € (couple). La formule est : 889 € - 45,25% de
-        l’impôt brut pour une personne seule, ou 1 470 € - 45,25% pour un couple.</dd>
-
-      <dt>Quelle est la différence entre impôt brut et impôt net ?</dt>
-      <dd>L’impôt brut est le montant calculé avant toute réduction. L’impôt net est le montant final à payer après
-        application des décotes et crédits d’impôt éventuels.</dd>
-
-      <dt>La situation familiale influence-t-elle l’impôt ?</dt>
-      <dd>Oui. Le quotient familial prend en compte la situation maritale (célibataire, marié, veuf...) et le nombre de
-        parts fiscales (enfants à charge, etc.) pour ajuster l’imposition.</dd>
-
-      <dt>Comment sont pris en compte les enfants à charge ?</dt>
-      <dd>Chaque enfant à charge donne droit à une demi-part ou une part entière selon leur rang. Cela augmente le
-        nombre de parts fiscales et diminue l’impôt.</dd>
-
-      <dt>Qu’est-ce que le quotient familial ?</dt>
-      <dd>Le quotient familial est le revenu imposable divisé par le nombre de parts fiscales du foyer. Il permet de
-        rendre l’impôt plus équitable selon la taille du ménage.</dd>
-
-      <dt>Quels crédits d’impôt peut-on déclarer ?</dt>
-      <dd>Vous pouvez déclarer des crédits pour emploi à domicile, frais de garde, dons aux associations, dépenses de
-        transition énergétique, etc. Ils réduisent l’impôt à payer.</dd>
-
-      <dt>L’impôt peut-il être annulé totalement ?</dt>
-      <dd>Oui. Si la décote et les crédits d’impôt dépassent l’impôt brut, l’impôt net à payer peut être nul. Cela
-        concerne souvent les revenus modestes ou les foyers très défiscalisés.</dd>
-
-      <dt>Quels revenus doivent être déclarés ?</dt>
-      <dd>Tous les revenus doivent être déclarés : salaires, pensions, retraites, revenus fonciers, bénéfices
-        industriels et commerciaux (BIC), etc.</dd>
-
-      <dt>Comment est calculé l’impôt sur le revenu ?</dt>
-      <dd>L’impôt est calculé selon un barème progressif. On divise le revenu imposable par le nombre de parts fiscales,
-        on applique le barème par tranche, puis on multiplie par les parts. On déduit ensuite la décote et les crédits
-        d’impôt éventuels.</dd>
-    </dl>
-  </section>
+  <app-faq-section
+    [title]="&quot;FAQ – Questions fréquentes sur l'impôt sur le revenu'&quot;"
+    [faqItems]="faqItems"
+    [ariaLabel]="&quot;Foire aux questions'&quot;">
+  </app-faq-section>
 
 </main>

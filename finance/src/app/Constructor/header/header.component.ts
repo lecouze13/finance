@@ -176,10 +176,15 @@ export class HeaderComponent implements OnInit {
             
           },
           {
-              label: 'Simulateurs Livrets',
+              label: 'Simulateurs Livrets & Aides',
         icon: 'pi pi-building',
 
-        items:[...simuLivret, {
+        items:[...simuLivret,
+              {
+                label: 'APL (Aide au logement)',
+                route: AppRoutes.SIMULATEUR_APL,
+              },
+              {
                 label: 'Eligibilité LEP',
                 route: AppRoutes.SIMULATEUR_ELIGIBILITE_LEP,
               }, ]

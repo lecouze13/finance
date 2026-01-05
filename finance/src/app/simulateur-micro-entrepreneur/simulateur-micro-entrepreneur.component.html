@@ -88,22 +88,9 @@
     de l’impôt sur le revenu, en fonction de vos autres revenus et de votre situation familiale.</p>
 
   <!-- FAQ -->
-  <section class="faq-section" aria-label="Foire aux questions - Charges micro-entrepreneur">
-    <dl>
-      <dt>Comment savoir si le versement libératoire est avantageux ?</dt>
-      <dd>Il est généralement intéressant si votre taux marginal d’imposition est supérieur au taux fixe applicable à votre activité.</dd>
-
-      <dt>Les taux de charges sociales changent-ils chaque année ?</dt>
-      <dd>Oui, ils peuvent évoluer légèrement selon les lois de finances et les réformes sociales.</dd>
-
-      <dt>Le chiffre d’affaires pris en compte est-il brut ?</dt>
-      <dd>Oui, il s’agit du total encaissé sur l’année, sans déduction des charges réelles.</dd>
-
-      <dt>Puis-je déduire mes frais réels ?</dt>
-      <dd>Non, en micro-entreprise, vous bénéficiez d’un abattement forfaitaire au lieu de déduire les frais réels.</dd>
-
-      <dt>Que se passe-t-il si je dépasse le plafond de chiffre d’affaires ?</dt>
-      <dd>Vous perdez le statut de micro-entrepreneur l’année suivante et passez au régime réel d’imposition.</dd>
-    </dl>
-  </section>
+  <app-faq-section
+    [title]="&quot;FAQ'&quot;"
+    [faqItems]="faqItems"
+    [ariaLabel]="&quot;Foire aux questions'&quot;">
+  </app-faq-section>
 </main>

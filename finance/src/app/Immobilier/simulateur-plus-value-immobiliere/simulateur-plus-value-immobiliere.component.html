@@ -198,40 +198,9 @@
 
   <br><br>
 
-  <section class="faq-section mt-5">
-    <h2>FAQ – Questions fréquentes sur la plus-value immobilière</h2>
-    <dl>
-      <dt>Qu’est-ce que la plus-value immobilière ?</dt>
-      <dd>La différence entre le prix de vente et le prix d'achat, frais et travaux inclus.</dd>
-
-      <dt>Quels sont les biens concernés ?</dt>
-      <dd>Résidences secondaires, biens locatifs ou terrains.</dd>
-
-      <dt>Comment est calculée la plus-value brute ?</dt>
-      <dd>Prix de vente – (Prix d’achat + frais + travaux).</dd>
-
-      <dt>Quels sont les taux d’imposition ?</dt>
-      <dd>19% d’impôt + 17,2% de prélèvements sociaux, soit 36,2% avant abattements.</dd>
-
-      <dt>Y a-t-il des abattements ?</dt>
-      <dd>Oui, selon la durée de détention : exonération totale après 22 ans (impôt) ou 30 ans (prélèvements sociaux).
-      </dd>
-
-      <dt>Ma résidence principale est-elle imposable ?</dt>
-      <dd>Non, en général elle est totalement exonérée.</dd>
-
-      <dt>Puis-je déduire les travaux ?</dt>
-      <dd>Oui, sur justificatifs ou via un forfait de 15% après 5 ans de détention.</dd>
-
-      <dt>Comment déclarer la plus-value ?</dt>
-      <dd>Par le notaire via le formulaire 2048-IMM au moment de la vente.</dd>
-
-      <dt>Y a-t-il une surtaxe ?</dt>
-      <dd>Oui, de 2% à 6% si la plus-value dépasse 50 000 € net.</dd>
-
-      <dt>Et les impôts sur le revenu ?</dt>
-      <dd>Utilisez notre <a href="https://calculateurfinance.fr/simulateur-impot-revenue" target="_blank">simulateur
-          d'impôt sur le revenu</a> pour les déclarations annuelles.</dd>
-    </dl>
-  </section>
+  <app-faq-section
+    [title]="&quot;FAQ – Questions fréquentes sur la plus-value immobilière'&quot;"
+    [faqItems]="faqItems"
+    [ariaLabel]="&quot;Foire aux questions'&quot;">
+  </app-faq-section>
 </main>

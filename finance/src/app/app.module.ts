@@ -67,6 +67,7 @@ import { SimulateurDefiscalisationComponent } from './simulateur-defiscalisation
 import { SimulateurDividendeEntrepriseComponent } from './simulateur-dividende-entreprise/simulateur-dividende-entreprise.component';
 import { SimulateurMicroEntrepreneurComponent } from './simulateur-micro-entrepreneur/simulateur-micro-entrepreneur.component';
 import { SimulateurEligibiliteLepComponent } from './Finance/simulateur-eligibilite-lep/simulateur-eligibilite-lep.component';
+import { FaqSectionComponent } from './shared/faq-section/faq-section.component';
 
 @NgModule({
     declarations: [
@@ -126,9 +127,10 @@ import { SimulateurEligibiliteLepComponent } from './Finance/simulateur-eligibil
         CheckboxModule,
         BrowserAnimationsModule,
         NoopAnimationsModule,
-    ReactiveFormsModule,
-    PanelModule,
-        HttpClientModule 
+        ReactiveFormsModule,
+        PanelModule,
+        HttpClientModule,
+        FaqSectionComponent
 
     ],
     providers: [

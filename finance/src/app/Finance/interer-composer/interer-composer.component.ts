@@ -1,6 +1,7 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
+import { FaqSectionComponent, FaqItem } from '../../shared/faq-section/faq-section.component';
 
 interface Actif {
   nom: string | null;
@@ -17,6 +18,49 @@ interface Actif {
   styleUrls: ['./interer-composer.component.scss']
 })
 export class IntererComposerComponent implements OnInit {
+  faqItems: FaqItem[] = [
+    {
+      question: 'Qu’est-ce que l’intérêt composé ?',
+      answer: 'L’intérêt composé est le calcul des intérêts non seulement sur le capital initial mais aussi sur les intérêts déjà accumulés. Cela permet à votre capital de croître plus rapidement avec le temps.'
+    },
+    {
+      question: 'Comment fonctionne ce calculateur ?',
+      answer: 'Ce calculateur vous permet d’estimer la croissance de votre capital en fonction d’un capital initial, de versements périodiques, d’un taux d’intérêt annuel, d’une durée et de la fréquence de capitalisation.'
+    },
+    {
+      question: 'Quelle est la différence entre capitalisation annuelle et mensuelle ?',
+      answer: 'La capitalisation annuelle signifie que les intérêts sont ajoutés une fois par an, tandis que la capitalisation mensuelle les ajoute chaque mois, ce qui accélère la croissance du capital.'
+    },
+    {
+      question: 'Puis-je entrer un versement périodique nul ?',
+      answer: 'Oui, si vous ne faites pas de versements réguliers, entrez zéro. Le calcul se fera uniquement sur le capital initial et les intérêts composés.'
+    },
+    {
+      question: 'Le taux d’intérêt est-il fixe ?',
+      answer: 'Ce calculateur utilise un taux fixe pour simplifier les calculs. Dans la réalité, les taux peuvent varier au fil du temps.'
+    },
+    {
+      question: 'Quels sont les avantages de l’intérêt composé ?',
+      answer: 'L’intérêt composé maximise la croissance du capital sur le long terme, permettant de bénéficier de l’effet boule de neige des intérêts générés.'
+    },
+    {
+      question: 'Peut-on retirer de l’argent pendant la période de calcul ?',
+      answer: 'Non, ce calculateur suppose que le capital reste investi sans retrait pendant toute la durée indiquée.'
+    },
+    {
+      question: 'Quels paramètres influencent le résultat ?',
+      answer: 'Le capital initial, les versements périodiques, le taux d’intérêt, la fréquence de capitalisation et la durée sont les principaux paramètres.'
+    },
+    {
+      question: 'Le calcul prend-il en compte l’inflation ?',
+      answer: 'Non, ce calculateur ne prend pas en compte l’inflation. Il estime la croissance nominale du capital.'
+    },
+    {
+      question: 'Est-il possible d’exporter les résultats ?',
+      answer: 'Actuellement, ce simulateur ne propose pas d’export, mais vous pouvez copier manuellement les résultats affichés.'
+    }
+  ];
+
   constructor(  @Inject(PLATFORM_ID) private platformId: any, 
 private renderer: Renderer2, private seo: SeoService) { }
 
@@ -30,96 +74,7 @@ private renderer: Renderer2, private seo: SeoService) { }
 
     });
   if (isPlatformBrowser(this.platformId)) {
-    const script = this.renderer.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Qu’est-ce que l’intérêt composé ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "L’intérêt composé est le calcul des intérêts non seulement sur le capital initial mais aussi sur les intérêts déjà accumulés. Cela permet à votre capital de croître plus rapidement avec le temps."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment fonctionne ce calculateur ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Ce calculateur vous permet d’estimer la croissance de votre capital en fonction d’un capital initial, de versements périodiques, d’un taux d’intérêt annuel, d’une durée et de la fréquence de capitalisation."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quelle est la différence entre capitalisation annuelle et mensuelle ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La capitalisation annuelle signifie que les intérêts sont ajoutés une fois par an, tandis que la capitalisation mensuelle les ajoute chaque mois, ce qui accélère la croissance du capital."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Puis-je entrer un versement périodique nul ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui, si vous ne faites pas de versements réguliers, entrez zéro. Le calcul se fera uniquement sur le capital initial et les intérêts composés."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Le taux d’intérêt est-il fixe ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Ce calculateur utilise un taux fixe pour simplifier les calculs. Dans la réalité, les taux peuvent varier au fil du temps."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels sont les avantages de l’intérêt composé ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "L’intérêt composé maximise la croissance du capital sur le long terme, permettant de bénéficier de l’effet boule de neige des intérêts générés."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Peut-on retirer de l’argent pendant la période de calcul ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Non, ce calculateur suppose que le capital reste investi sans retrait pendant toute la durée indiquée."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels paramètres influencent le résultat ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Le capital initial, les versements périodiques, le taux d’intérêt, la fréquence de capitalisation et la durée sont les principaux paramètres."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Le calcul prend-il en compte l’inflation ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Non, ce calculateur ne prend pas en compte l’inflation. Il estime la croissance nominale du capital."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Est-il possible d’exporter les résultats ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Actuellement, ce simulateur ne propose pas d’export, mais vous pouvez copier manuellement les résultats affichés."
-          }
-        }
-      ]
-    });
-    this.renderer.appendChild(document.head, script);
-  }
+    }
   }
 
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
+import { FaqSectionComponent, FaqItem } from '../../shared/faq-section/faq-section.component';
 @Component({
   selector: 'app-simulateur-plus-value-immobiliere',
   templateUrl: './simulateur-plus-value-immobiliere.component.html',
@@ -17,6 +18,49 @@ export class SimulateurPlusValueImmobiliereComponent implements OnInit {
   plusValue: number | null = null;
   impositionTotale: number | null = null;
 
+  faqItems: FaqItem[] = [
+    {
+      question: 'Qu’est-ce que la plus-value immobilière ?',
+      answer: 'La plus-value immobilière correspond à la différence entre le prix de vente et le prix d’acquisition d’un bien immobilier, après déduction de certains frais et travaux.'
+    },
+    {
+      question: 'Quels sont les biens concernés par la plus-value ?',
+      answer: 'Les biens immobiliers hors résidence principale, comme les résidences secondaires ou les biens locatifs, sont soumis à l’imposition sur la plus-value en cas de vente.'
+    },
+    {
+      question: 'Comment est calculée la plus-value brute ?',
+      answer: 'La plus-value brute se calcule en soustrayant du prix de vente le prix d\'achat majoré des frais d\'acquisition et des travaux.'
+    },
+    {
+      question: 'Quels sont les abattements pour durée de détention ?',
+      answer: 'L\'impôt sur la plus-value bénéficie d’un abattement progressif à partir de 6 ans de détention et d\'une exonération totale après 22 ans pour l’impôt et 30 ans pour les prélèvements sociaux.'
+    },
+    {
+      question: 'Quels sont les taux d’imposition applicables ?',
+      answer: 'La plus-value nette est soumise à un impôt de 19% et aux prélèvements sociaux de 17,2%, soit un taux global de 36,2% avant abattements.'
+    },
+    {
+      question: 'La résidence principale est-elle imposée ?',
+      answer: 'Non, la plus-value sur la vente d’une résidence principale est exonérée d’impôt dans la majorité des cas.'
+    },
+    {
+      question: 'Peut-on déduire les travaux ?',
+      answer: 'Oui, les travaux d’amélioration peuvent être déduits s’ils sont justifiés. Si le bien est détenu depuis plus de 5 ans, un forfait de 15% est possible.'
+    },
+    {
+      question: 'Comment déclarer une plus-value immobilière ?',
+      answer: 'La déclaration est généralement faite par le notaire lors de la vente, via un formulaire spécifique (2048-IMM).'
+    },
+    {
+      question: 'Existe-t-il une surtaxe sur les grosses plus-values ?',
+      answer: 'Oui, une surtaxe s’applique si la plus-value nette dépasse 50 000 €, selon un barème progressif de 2% à 6%.'
+    },
+    {
+      question: 'Où simuler son impôt sur le revenu ?',
+      answer: 'Vous pouvez utiliser notre simulateur dédié : https://calculateurfinance.fr/simulateur-impot-revenue'
+    }
+  ];
+
   constructor(  @Inject(PLATFORM_ID) private platformId: any, 
 private renderer: Renderer2,private seo: SeoService) {}
 
@@ -30,96 +74,7 @@ private renderer: Renderer2,private seo: SeoService) {}
     });
   if (isPlatformBrowser(this.platformId)) {
 
-    const script = this.renderer.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Qu’est-ce que la plus-value immobilière ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La plus-value immobilière correspond à la différence entre le prix de vente et le prix d’acquisition d’un bien immobilier, après déduction de certains frais et travaux."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels sont les biens concernés par la plus-value ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Les biens immobiliers hors résidence principale, comme les résidences secondaires ou les biens locatifs, sont soumis à l’imposition sur la plus-value en cas de vente."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment est calculée la plus-value brute ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La plus-value brute se calcule en soustrayant du prix de vente le prix d'achat majoré des frais d'acquisition et des travaux."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels sont les abattements pour durée de détention ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "L'impôt sur la plus-value bénéficie d’un abattement progressif à partir de 6 ans de détention et d'une exonération totale après 22 ans pour l’impôt et 30 ans pour les prélèvements sociaux."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels sont les taux d’imposition applicables ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La plus-value nette est soumise à un impôt de 19% et aux prélèvements sociaux de 17,2%, soit un taux global de 36,2% avant abattements."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "La résidence principale est-elle imposée ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Non, la plus-value sur la vente d’une résidence principale est exonérée d’impôt dans la majorité des cas."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Peut-on déduire les travaux ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui, les travaux d’amélioration peuvent être déduits s’ils sont justifiés. Si le bien est détenu depuis plus de 5 ans, un forfait de 15% est possible."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment déclarer une plus-value immobilière ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La déclaration est généralement faite par le notaire lors de la vente, via un formulaire spécifique (2048-IMM)."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Existe-t-il une surtaxe sur les grosses plus-values ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui, une surtaxe s’applique si la plus-value nette dépasse 50 000 €, selon un barème progressif de 2% à 6%."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Où simuler son impôt sur le revenu ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Vous pouvez utiliser notre simulateur dédié : https://calculateurfinance.fr/simulateur-impot-revenue"
-          }
-        }
-      ]
-    });
-    this.renderer.appendChild(document.head, script);
-  }
+    }
   }
 
   calculerPlusValue(): void {

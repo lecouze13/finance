@@ -1,6 +1,7 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
+import { FaqSectionComponent, FaqItem } from '../../shared/faq-section/faq-section.component';
 @Component({
   selector: 'app-lmnp-lmp',
   templateUrl: './lmnp-lmp.component.html',
@@ -8,6 +9,49 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 
 })
 export class LmnpLmpComponent implements OnInit {
+  faqItems: FaqItem[] = [
+    {
+      question: 'Qu’est-ce que le statut LMNP ?',
+      answer: 'Le Loueur en Meublé Non Professionnel (LMNP) concerne les particuliers qui louent un bien meublé sans en faire leur activité principale.'
+    },
+    {
+      question: 'Qu’est-ce que le statut LMP ?',
+      answer: 'Le Loueur en Meublé Professionnel (LMP) concerne les loueurs dont les revenus locatifs meublés dépassent certains seuils et qui sont inscrits au registre du commerce.'
+    },
+    {
+      question: 'Qu’est-ce que le régime Micro-BIC ?',
+      answer: 'Un régime simplifié où un abattement forfaitaire de 50% s’applique sur les revenus locatifs, sans possibilité de déduire les charges réelles.'
+    },
+    {
+      question: 'Qu’est-ce que le régime réel ?',
+      answer: 'Le régime réel permet de déduire l’ensemble des charges réelles liées à la location, y compris amortissements, intérêts d’emprunt et frais divers.'
+    },
+    {
+      question: 'Quels sont les avantages du régime Micro-BIC ?',
+      answer: 'Simplicité de déclaration et abattement automatique qui peut être intéressant pour les faibles charges.'
+    },
+    {
+      question: 'Quels sont les avantages du régime réel ?',
+      answer: 'Optimisation fiscale possible grâce à la déduction précise des charges et amortissements, souvent avantageux pour les locations avec beaucoup de frais.'
+    },
+    {
+      question: 'Comment savoir quel régime choisir ?',
+      answer: 'Selon le montant des charges, la complexité comptable souhaitée et les revenus locatifs, notre simulateur aide à choisir le meilleur régime.'
+    },
+    {
+      question: 'Le statut LMP offre-t-il des avantages spécifiques ?',
+      answer: 'Oui, notamment la possibilité d’imputer les déficits sur le revenu global et une exonération possible de plus-value après 5 ans d’activité.'
+    },
+    {
+      question: 'Comment déclarer ses revenus en LMNP / LMP ?',
+      answer: 'Les revenus doivent être déclarés dans la catégorie des BIC, soit via le régime Micro-BIC, soit au régime réel avec bilan comptable.'
+    },
+    {
+      question: 'Où puis-je simuler la rentabilité de ma location meublée ?',
+      answer: 'Utilisez notre simulateur LMNP / LMP sur CalculateurFinance.fr pour comparer facilement les régimes et estimer votre rentabilité.'
+    }
+  ];
+
   constructor(  @Inject(PLATFORM_ID) private platformId: any, 
 private renderer: Renderer2, private seo: SeoService) { }
 
@@ -21,96 +65,7 @@ private renderer: Renderer2, private seo: SeoService) { }
     });
   if (isPlatformBrowser(this.platformId)) {
 
-    const script = this.renderer.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Qu’est-ce que le statut LMNP ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Le Loueur en Meublé Non Professionnel (LMNP) concerne les particuliers qui louent un bien meublé sans en faire leur activité principale."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Qu’est-ce que le statut LMP ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Le Loueur en Meublé Professionnel (LMP) concerne les loueurs dont les revenus locatifs meublés dépassent certains seuils et qui sont inscrits au registre du commerce."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Qu’est-ce que le régime Micro-BIC ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Un régime simplifié où un abattement forfaitaire de 50% s’applique sur les revenus locatifs, sans possibilité de déduire les charges réelles."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Qu’est-ce que le régime réel ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Le régime réel permet de déduire l’ensemble des charges réelles liées à la location, y compris amortissements, intérêts d’emprunt et frais divers."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels sont les avantages du régime Micro-BIC ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Simplicité de déclaration et abattement automatique qui peut être intéressant pour les faibles charges."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quels sont les avantages du régime réel ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Optimisation fiscale possible grâce à la déduction précise des charges et amortissements, souvent avantageux pour les locations avec beaucoup de frais."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment savoir quel régime choisir ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Selon le montant des charges, la complexité comptable souhaitée et les revenus locatifs, notre simulateur aide à choisir le meilleur régime."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Le statut LMP offre-t-il des avantages spécifiques ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui, notamment la possibilité d’imputer les déficits sur le revenu global et une exonération possible de plus-value après 5 ans d’activité."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment déclarer ses revenus en LMNP / LMP ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Les revenus doivent être déclarés dans la catégorie des BIC, soit via le régime Micro-BIC, soit au régime réel avec bilan comptable."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Où puis-je simuler la rentabilité de ma location meublée ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Utilisez notre simulateur LMNP / LMP sur CalculateurFinance.fr pour comparer facilement les régimes et estimer votre rentabilité."
-          }
-        }
-      ]
-    });
-    this.renderer.appendChild(document.head, script);
-  }
+    }
 }
 
   // Options du dropdown régime fiscal

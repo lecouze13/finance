@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { SeoService } from '../Constructor/service/seo.service';
+import { FaqSectionComponent, FaqItem } from '../shared/faq-section/faq-section.component';
 
 @Component({
   selector: 'app-simulateur-micro',
@@ -24,7 +25,48 @@ export class SimulateurMicroEntrepreneurComponent implements OnInit {
   };
 
   resultat: any = null;
-  private jsonLdScript?: HTMLScriptElement;
+faqItems: FaqItem[] = [
+    {
+      question: 'Qu\'est-ce que le régime micro-entrepreneur ?',
+      answer: 'Régime simplifié d\'imposition avec abattement forfaitaire pour le calcul de la base imposable et cotisations sociales proportionnelles au chiffre d\'affaires.'
+    },
+    {
+      question: 'Qu\'est-ce que le versement libératoire ?',
+      answer: 'Option permettant de régler l\'impôt sur le revenu en pourcentage du chiffre d\'affaires (en lieu et place du calcul via le barème).'
+    },
+    {
+      question: 'Comment est calculé le revenu net ?',
+      answer: 'Le revenu net correspond au chiffre d\'affaires diminué des cotisations sociales et de l\'impôt (versement libératoire ou estimation via TMI).'
+    },
+    {
+      question: 'Quel est le taux de cotisations sociales en micro-entreprise ?',
+      answer: 'Il dépend de l\'activité exercée : environ 12,3 % pour les ventes, 21,2 % pour les prestations de services artisanales et commerciales, et 21,1 % pour les professions libérales relevant de la CIPAV.'
+    },
+    {
+      question: 'Quels sont les taux du versement libératoire ?',
+      answer: '1 % pour la vente de marchandises, 1,7 % pour les prestations de services commerciales et artisanales, et 2,2 % pour les professions libérales.'
+    },
+    {
+      question: 'Puis-je bénéficier du versement libératoire ?',
+      answer: 'Oui, si votre revenu fiscal de référence ne dépasse pas un certain plafond et si vous en faites la demande auprès de l\'Urssaf.'
+    },
+    {
+      question: 'Quelle différence entre chiffre d\'affaires et revenu net ?',
+      answer: 'Le chiffre d\'affaires est le total facturé à vos clients, tandis que le revenu net est ce qui reste après déduction des cotisations sociales et de l\'impôt.'
+    },
+    {
+      question: 'Dois-je payer la TVA en micro-entreprise ?',
+      answer: 'En dessous des seuils de franchise en base, vous ne facturez pas la TVA. Au-delà, vous devez l\'appliquer et la reverser.'
+    },
+    {
+      question: 'Le simulateur prend-il en compte le TMI ?',
+      answer: 'Oui, si vous n\'optez pas pour le versement libératoire, l\'impôt est estimé en fonction de votre tranche marginale d\'imposition (TMI).'
+    },
+    {
+      question: 'Le calcul est-il fiable ?',
+      answer: 'Le simulateur fournit une estimation basée sur les taux en vigueur, mais le résultat peut varier en fonction de votre situation fiscale globale.'
+    }
+  ];
 
   constructor(@Inject(PLATFORM_ID) private platformId: any,
     private renderer: Renderer2, private seo: SeoService, private fb: FormBuilder) {
@@ -51,103 +93,7 @@ export class SimulateurMicroEntrepreneurComponent implements OnInit {
 
     });
 
-    if (isPlatformBrowser(this.platformId)) {
-      if (!document.getElementById('jsonld-micro-faq')) {
-        this.jsonLdScript = this.renderer.createElement('script');
-        if (this.jsonLdScript) {
-
-          this.jsonLdScript.type = 'application/ld+json';
-          this.jsonLdScript.id = 'jsonld-micro-faq';
-          this.jsonLdScript.text = JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Qu'est-ce que le régime micro-entrepreneur ?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Régime simplifié d'imposition avec abattement forfaitaire pour le calcul de la base imposable et cotisations sociales proportionnelles au chiffre d'affaires."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Qu'est-ce que le versement libératoire ?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Option permettant de régler l'impôt sur le revenu en pourcentage du chiffre d'affaires (en lieu et place du calcul via le barème)."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Comment est calculé le revenu net ?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Le revenu net correspond au chiffre d'affaires diminué des cotisations sociales et de l'impôt (versement libératoire ou estimation via TMI)."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Quel est le taux de cotisations sociales en micro-entreprise ?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Il dépend de l'activité exercée : environ 12,3 % pour les ventes, 21,2 % pour les prestations de services artisanales et commerciales, et 21,1 % pour les professions libérales relevant de la CIPAV."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Quels sont les taux du versement libératoire ?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "1 % pour la vente de marchandises, 1,7 % pour les prestations de services commerciales et artisanales, et 2,2 % pour les professions libérales."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Puis-je bénéficier du versement libératoire ?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Oui, si votre revenu fiscal de référence ne dépasse pas un certain plafond et si vous en faites la demande auprès de l'Urssaf."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Quelle différence entre chiffre d'affaires et revenu net ?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Le chiffre d'affaires est le total facturé à vos clients, tandis que le revenu net est ce qui reste après déduction des cotisations sociales et de l'impôt."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Dois-je payer la TVA en micro-entreprise ?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "En dessous des seuils de franchise en base, vous ne facturez pas la TVA. Au-delà, vous devez l'appliquer et la reverser."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Le simulateur prend-il en compte le TMI ?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Oui, si vous n'optez pas pour le versement libératoire, l'impôt est estimé en fonction de votre tranche marginale d'imposition (TMI)."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Le calcul est-il fiable ?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Le simulateur fournit une estimation basée sur les taux en vigueur, mais le résultat peut varier en fonction de votre situation fiscale globale."
-                }
-              }
-            ]
-          });
-        }
-        this.renderer.appendChild(document.head, this.jsonLdScript);
-      }
-    }
+    
 
     Object.keys(this.abattements).forEach(k => { if (this.form.controls['activite'].value === k) { } });
   }
