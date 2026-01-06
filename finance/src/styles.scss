@@ -425,3 +425,72 @@ form.card.p-fluid.flex.flex-wrap.gap-4.ng-untouched.ng-pristine.ng-valid.ng-subm
 
     margin-top: 0px !important
 }
+
+/* ============================================
+   FIX: Menu déroulant au-dessus du contenu
+   ============================================ */
+
+/* Header / Menubar PrimeNG - z-index élevé */
+.p-menubar {
+    position: relative;
+    z-index: 1000 !important;
+}
+
+/* Menu popup/dropdown - z-index très élevé */
+.p-menubar .p-submenu-list,
+.p-menubar .p-menuitem-content,
+.p-menubar-root-list,
+.p-submenu-list {
+    z-index: 1001 !important;
+}
+
+/* Overlay des sous-menus */
+.p-menubar .p-submenu-list {
+    position: absolute !important;
+    z-index: 1002 !important;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Fix pour mobile - menu hamburger */
+@media (max-width: 960px) {
+    .p-menubar {
+        position: sticky !important;
+        top: 0;
+        z-index: 1000 !important;
+        background: white;
+    }
+
+    .p-menubar-root-list {
+        position: absolute !important;
+        z-index: 1001 !important;
+        background: white;
+        width: 100%;
+        left: 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .p-menubar .p-submenu-list {
+        position: relative !important;
+        z-index: 1002 !important;
+        box-shadow: none;
+        background: #f8f9fa;
+    }
+
+    /* S'assurer que le contenu principal ne recouvre pas le menu */
+    main {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Inputs et éléments interactifs sous le menu */
+    input,
+    .p-inputtext,
+    .p-inputnumber,
+    .p-dropdown,
+    .p-button,
+    .p-panel {
+        position: relative;
+        z-index: 1;
+    }
+}
