@@ -436,5 +436,77 @@
 
 
 
-</urlset>
 
+
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-ptz/</loc>
+  <lastmod>2026-01-06</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-droits-succession/</loc>
+  <lastmod>2026-01-06</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-cout-enfant/</loc>
+  <lastmod>2026-01-06</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-viager/</loc>
+  <lastmod>2026-01-06</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-capacite-emprunt/</loc>
+  <lastmod>2026-01-08</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-rachat-credit/</loc>
+  <lastmod>2026-01-08</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-per/</loc>
+  <lastmod>2026-01-08</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-frais-garde/</loc>
+  <lastmod>2026-01-08</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-sasu-eurl/</loc>
+  <lastmod>2026-01-08</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-pea-assurance-vie/</loc>
+  <lastmod>2026-01-08</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.9</priority>
+</url>
+</urlset>

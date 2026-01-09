@@ -121,6 +121,18 @@ export class HeaderComponent implements OnInit {
                 label: 'Defiscalisation (loi pinel, Denormandie, etc) ',
                 route: AppRoutes.SIMULATEUR_DEFISCALISATION,
               },
+              {
+                label: 'PTZ (Prêt à Taux Zéro)',
+                route: AppRoutes.SIMULATEUR_PTZ,
+              },
+              {
+                label: 'Capacite emprunt',
+                route: AppRoutes.SIMULATEUR_CAPACITE_EMPRUNT,
+              },
+              {
+                label: 'Viager (calcul rente)',
+                route: AppRoutes.SIMULATEUR_VIAGER,
+              },
             ].sort((a, b) => a.label.localeCompare(b.label)),
           },
           {
@@ -172,8 +184,16 @@ export class HeaderComponent implements OnInit {
                 label: 'Micro entrepreneur',
                 route: AppRoutes.SIMULATEUR_MICRO_ENTREPRENEUR,
               },
+              {
+                label: 'Droits de succession',
+                route: AppRoutes.SIMULATEUR_SUCCESSION,
+              },
+              {
+                label: 'Coût d\'un enfant',
+                route: AppRoutes.SIMULATEUR_COUT_ENFANT,
+              },
             ].sort((a, b) => a.label.localeCompare(b.label)),
-            
+
           },
           {
               label: 'Simulateurs Livrets & Aides',

@@ -1,0 +1,187 @@
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Simulateur PER - Plan Épargne Retraite</h1>
+    <p class="subtitle">Calculez votre économie d'impôt et le capital accumulé pour votre retraite</p>
+  </div>
+
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Votre Situation" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="revenuAnnuel">Revenu annuel imposable</label>
+            <p-inputNumber
+              id="revenuAnnuel"
+              [(ngModel)]="revenuAnnuel"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="tmi">Tranche marginale d'imposition</label>
+            <p-dropdown
+              id="tmi"
+              [options]="tranchesOptions"
+              [(ngModel)]="trancheMarginalImposition"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="trancheRetraite">TMI estimée à la retraite</label>
+            <p-dropdown
+              id="trancheRetraite"
+              [options]="tranchesOptions"
+              [(ngModel)]="trancheRetraite"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Vos Versements" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="versementMensuel">Versement mensuel</label>
+            <p-inputNumber
+              id="versementMensuel"
+              [(ngModel)]="versementMensuel"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="versementExceptionnel">Versement exceptionnel annuel</label>
+            <p-inputNumber
+              id="versementExceptionnel"
+              [(ngModel)]="versementExceptionnel"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="dureeEpargne">Durée d'épargne</label>
+            <p-inputNumber
+              id="dureeEpargne"
+              [(ngModel)]="dureeEpargne"
+              (ngModelChange)="calculer()"
+              [min]="1"
+              [max]="50"
+              suffix=" ans">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="rendementAnnuel">Rendement annuel estimé</label>
+            <p-inputNumber
+              id="rendementAnnuel"
+              [(ngModel)]="rendementAnnuel"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="1"
+              [maxFractionDigits]="1"
+              [min]="0"
+              [max]="15"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+        </div>
+
+        <div class="plafond-info">
+          <i class="pi pi-info-circle"></i>
+          <div>
+            <strong>Plafond déductible :</strong> {{ formatCurrency(plafondDeductible) }}/an
+            <br>
+            <small>Vos versements : {{ formatCurrency(versementAnnuelTotal) }}/an
+              <span *ngIf="versementAnnuelTotal > plafondDeductible" class="warning">
+                ({{ formatCurrency(versementAnnuelTotal - plafondDeductible) }} non déductibles)
+              </span>
+            </small>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+
+    <div class="results-section">
+      <p-panel header="Résultats de votre Simulation" styleClass="results-panel">
+        <div class="result-highlight">
+          <span class="result-label">Capital accumulé à la retraite</span>
+          <span class="result-value primary">{{ formatCurrency(capitalAccumule) }}</span>
+        </div>
+
+        <div class="result-highlight small">
+          <span class="result-label">Économie d'impôt annuelle</span>
+          <span class="result-value success">{{ formatCurrency(economieImpotAnnuelle) }}</span>
+        </div>
+
+        <div class="results-details">
+          <div class="detail-row">
+            <span class="detail-label">Total versé sur {{ dureeEpargne }} ans</span>
+            <span class="detail-value">{{ formatCurrency(totalVerse) }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Intérêts générés</span>
+            <span class="detail-value positive">+ {{ formatCurrency(interetsGeneres) }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Économie d'impôt totale</span>
+            <span class="detail-value positive">+ {{ formatCurrency(economieImpotAnnuelle * dureeEpargne) }}</span>
+          </div>
+        </div>
+
+        <div class="sortie-comparison">
+          <h4>Comparatif des modes de sortie</h4>
+          <div class="sortie-grid">
+            <div class="sortie-option">
+              <span class="sortie-title">Sortie en Capital</span>
+              <span class="sortie-impot">Impôt estimé : {{ formatCurrency(impotSortieCapital) }}</span>
+              <span class="sortie-gain" [ngClass]="{'positive': gainNetCapital > 0}">
+                Gain net : {{ formatCurrency(gainNetCapital) }}
+              </span>
+            </div>
+            <div class="sortie-option">
+              <span class="sortie-title">Sortie en Rente</span>
+              <span class="sortie-impot">Impôt estimé : {{ formatCurrency(impotSortieRente) }}</span>
+              <span class="sortie-gain" [ngClass]="{'positive': gainNetRente > 0}">
+                Gain net : {{ formatCurrency(gainNetRente) }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box" *ngIf="trancheMarginalImposition > trancheRetraite">
+          <i class="pi pi-check-circle"></i>
+          <span>Stratégie optimale : votre TMI baissera à la retraite. Vous économisez {{ trancheMarginalImposition }}% maintenant et serez imposé à {{ trancheRetraite }}% à la sortie.</span>
+        </div>
+
+        <div class="info-box warning" *ngIf="trancheMarginalImposition <= trancheRetraite && trancheMarginalImposition > 0">
+          <i class="pi pi-exclamation-triangle"></i>
+          <span>Attention : votre TMI à la retraite sera égale ou supérieure. Le PER reste intéressant pour le différé d'imposition, mais comparez avec l'assurance-vie.</span>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <app-faq-section
+    [faqItems]="faqItems"
+    pageTitle="Simulateur PER - Plan Épargne Retraite">
+  </app-faq-section>
+</div>

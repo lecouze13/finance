@@ -1,0 +1,156 @@
+<main>
+  <h1>Simulateur PTZ 2026 - Prêt à Taux Zéro</h1>
+
+  <p>
+    Vérifiez votre éligibilité au <strong>Prêt à Taux Zéro (PTZ)</strong> et calculez le montant que vous pouvez obtenir
+    pour financer l'achat de votre résidence principale. Le PTZ est un prêt sans intérêts accordé par l'État
+    aux primo-accédants sous conditions de ressources.
+  </p>
+
+  <div class="separator"></div>
+
+  <section class="mb-4">
+    <h2>Calculer mon PTZ</h2>
+
+    <form class="card p-fluid flex flex-wrap gap-4" (ngSubmit)="calculer()">
+      <p-panel header="Votre projet immobilier">
+        <div class="p-float-label">
+          <p-inputNumber
+            [(ngModel)]="prixBien"
+            name="prixBien"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0"
+            inputId="prixBien">
+          </p-inputNumber>
+          <label for="prixBien">Prix du bien (frais inclus)</label>
+        </div>
+
+        <div class="p-float-label">
+          <p-dropdown
+            [options]="typesLogement"
+            [(ngModel)]="typeLogement"
+            name="typeLogement"
+            optionLabel="label"
+            optionValue="value"
+            inputId="typeLogement">
+          </p-dropdown>
+          <label for="typeLogement">Type de logement</label>
+        </div>
+
+        <div class="p-float-label">
+          <p-dropdown
+            [options]="zones"
+            [(ngModel)]="zone"
+            name="zone"
+            optionLabel="label"
+            optionValue="value"
+            inputId="zone">
+          </p-dropdown>
+          <label for="zone">Zone géographique</label>
+        </div>
+      </p-panel>
+
+      <p-panel header="Votre situation">
+        <div class="p-float-label">
+          <p-inputNumber
+            [(ngModel)]="nbPersonnes"
+            name="nbPersonnes"
+            [min]="1"
+            [max]="8"
+            inputId="nbPersonnes">
+          </p-inputNumber>
+          <label for="nbPersonnes">Nombre de personnes dans le foyer</label>
+        </div>
+
+        <div class="p-float-label">
+          <p-inputNumber
+            [(ngModel)]="revenuFiscal"
+            name="revenuFiscal"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0"
+            inputId="revenuFiscal">
+          </p-inputNumber>
+          <label for="revenuFiscal">Revenu fiscal de référence (N-2)</label>
+        </div>
+      </p-panel>
+
+      <button pButton type="submit" label="Calculer mon PTZ" class="p-button-success"></button>
+    </form>
+  </section>
+
+  <section *ngIf="resultat" class="mb-4">
+    <h3>Résultat de votre simulation PTZ</h3>
+
+    <div class="resultats" [ngClass]="{'eligible': resultat.eligible, 'non-eligible': !resultat.eligible}">
+      <h3>{{ resultat.eligible ? '✅ Vous êtes éligible au PTZ !' : '❌ Non éligible au PTZ' }}</h3>
+
+      <ul *ngIf="resultat.eligible">
+        <li>
+          <strong>Montant du PTZ :</strong>
+          <span>{{ resultat.montantPTZ | number:'1.0-0':'fr-FR' }} €</span>
+        </li>
+        <li>
+          <strong>Quotité finançable :</strong>
+          <span>{{ resultat.quotitePTZ }}% du prix</span>
+        </li>
+        <li>
+          <strong>Mensualité estimée (20 ans) :</strong>
+          <span>{{ resultat.mensualitePTZ | number:'1.0-0':'fr-FR' }} € / mois</span>
+        </li>
+        <li>
+          <strong>Plafond de ressources :</strong>
+          <span>{{ resultat.plafondRessources | number:'1.0-0':'fr-FR' }} €</span>
+        </li>
+      </ul>
+
+      <div *ngIf="!resultat.eligible" class="info-smic">
+        <p *ngIf="typeLogement === 'ancien'">
+          ⚠️ Le PTZ n'est plus disponible pour l'ancien avec travaux depuis 2024 (sauf exceptions en zones B2/C).
+        </p>
+        <p *ngIf="revenuFiscal && revenuFiscal > resultat.plafondRessources">
+          ⚠️ Vos revenus ({{ revenuFiscal | number:'1.0-0':'fr-FR' }} €) dépassent le plafond de {{ resultat.plafondRessources | number:'1.0-0':'fr-FR' }} € pour votre zone et composition familiale.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="separator"></div>
+
+  <section class="mb-4">
+    <h2>Comment fonctionne le PTZ ?</h2>
+
+    <div class="panel-colonnes">
+      <div class="colonne">
+        <h4>📋 Conditions d'éligibilité</h4>
+        <ul>
+          <li>Être primo-accédant (pas propriétaire depuis 2 ans)</li>
+          <li>Acheter sa résidence principale</li>
+          <li>Respecter les plafonds de ressources</li>
+          <li>Logement neuf ou ancien HLM</li>
+        </ul>
+      </div>
+
+      <div class="colonne">
+        <h4>💰 Avantages du PTZ</h4>
+        <ul>
+          <li>Aucun intérêt à rembourser</li>
+          <li>Différé de remboursement possible</li>
+          <li>Jusqu'à 150 000 € de financement</li>
+          <li>Cumulable avec d'autres prêts</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="separator"></div>
+
+  <app-faq-section
+    [title]="'Questions fréquentes sur le PTZ'"
+    [faqItems]="faqItems"
+    [ariaLabel]="'FAQ PTZ'">
+  </app-faq-section>
+</main>

@@ -1,0 +1,40 @@
+.panel-colonnes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.colonne {
+  flex: 1;
+  min-width: 280px;
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #007b8a;
+}
+
+.colonne h4 {
+  margin-top: 0;
+  color: #005f70;
+}
+
+.colonne ul {
+  padding-left: 1.2rem;
+  margin: 0;
+}
+
+.colonne li {
+  margin-bottom: 0.5rem;
+  color: #475569;
+}
+
+.resultats.eligible {
+  background-color: #ecfdf5;
+  border-left-color: #10b981;
+}
+
+.resultats.non-eligible {
+  background-color: #fef2f2;
+  border-left-color: #ef4444;
+}

@@ -33,6 +33,16 @@ import { SimulateurDefiscalisationComponent } from './simulateur-defiscalisation
 import { SimulateurMicroEntrepreneurComponent } from './simulateur-micro-entrepreneur/simulateur-micro-entrepreneur.component';
 import { SimulateurEligibiliteLepComponent } from './Finance/simulateur-eligibilite-lep/simulateur-eligibilite-lep.component';
 import { SimulateurAplComponent } from './Finance/simulateur-apl/simulateur-apl.component';
+import { SimulateurPtzComponent } from './Immobilier/simulateur-ptz/simulateur-ptz.component';
+import { SimulateurSuccessionComponent } from './Finance/simulateur-succession/simulateur-succession.component';
+import { SimulateurCoutEnfantComponent } from './Finance/simulateur-cout-enfant/simulateur-cout-enfant.component';
+import { SimulateurViagerComponent } from './Immobilier/simulateur-viager/simulateur-viager.component';
+import { SimulateurCapaciteEmpruntComponent } from './Immobilier/simulateur-capacite-emprunt/simulateur-capacite-emprunt.component';
+import { SimulateurRachatCreditComponent } from './Finance/simulateur-rachat-credit/simulateur-rachat-credit.component';
+import { SimulateurPerComponent } from './Finance/simulateur-per/simulateur-per.component';
+import { SimulateurFraisGardeComponent } from './Finance/simulateur-frais-garde/simulateur-frais-garde.component';
+import { SimulateurSasuEurlComponent } from './Finance/simulateur-sasu-eurl/simulateur-sasu-eurl.component';
+import { SimulateurPeaAssuranceVieComponent } from './Finance/simulateur-pea-assurance-vie/simulateur-pea-assurance-vie.component';
 
 export const routes: Routes = [
   { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -120,6 +130,46 @@ export const routes: Routes = [
   {
     path: AppRoutes.SIMULATEUR_APL,
     component: SimulateurAplComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_PTZ,
+    component: SimulateurPtzComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_SUCCESSION,
+    component: SimulateurSuccessionComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_COUT_ENFANT,
+    component: SimulateurCoutEnfantComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_VIAGER,
+    component: SimulateurViagerComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_CAPACITE_EMPRUNT,
+    component: SimulateurCapaciteEmpruntComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_RACHAT_CREDIT,
+    component: SimulateurRachatCreditComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_PER,
+    component: SimulateurPerComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_FRAIS_GARDE,
+    component: SimulateurFraisGardeComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_SASU_EURL,
+    component: SimulateurSasuEurlComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_PEA_ASSURANCE_VIE,
+    component: SimulateurPeaAssuranceVieComponent,
   },
 
   {

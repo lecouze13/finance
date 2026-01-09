@@ -1,0 +1,220 @@
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Simulateur de Capacité d'Emprunt Immobilier</h1>
+    <p class="subtitle">Calculez le montant maximum que vous pouvez emprunter pour votre projet immobilier</p>
+  </div>
+
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Vos Revenus" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="revenus">Revenus nets mensuels</label>
+            <p-inputNumber
+              id="revenus"
+              [(ngModel)]="revenus"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              placeholder="Vos revenus nets">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="revenusConjoint">Revenus co-emprunteur</label>
+            <p-inputNumber
+              id="revenusConjoint"
+              [(ngModel)]="revenusConjoint"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              placeholder="Revenus du conjoint">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="autresRevenus">Autres revenus</label>
+            <p-inputNumber
+              id="autresRevenus"
+              [(ngModel)]="autresRevenus"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              placeholder="Revenus locatifs, etc.">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Vos Charges" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="chargesMensuelles">Charges mensuelles</label>
+            <p-inputNumber
+              id="chargesMensuelles"
+              [(ngModel)]="chargesMensuelles"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              placeholder="Loyer, pensions, etc.">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="creditEnCours">Crédits en cours</label>
+            <p-inputNumber
+              id="creditEnCours"
+              [(ngModel)]="creditEnCours"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              placeholder="Mensualités crédit auto, conso...">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Votre Projet" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="apportPersonnel">Apport personnel</label>
+            <p-inputNumber
+              id="apportPersonnel"
+              [(ngModel)]="apportPersonnel"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              placeholder="Épargne disponible">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="dureeEmprunt">Durée du prêt</label>
+            <p-dropdown
+              id="dureeEmprunt"
+              [options]="dureeOptions"
+              [(ngModel)]="dureeEmprunt"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label for="tauxInteret">Taux d'intérêt (%)</label>
+            <p-inputNumber
+              id="tauxInteret"
+              [(ngModel)]="tauxInteret"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="2"
+              [maxFractionDigits]="2"
+              [min]="0"
+              [max]="10"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="tauxAssurance">Taux assurance (%)</label>
+            <p-inputNumber
+              id="tauxAssurance"
+              [(ngModel)]="tauxAssurance"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="2"
+              [maxFractionDigits]="2"
+              [min]="0"
+              [max]="2"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="tauxEndettementMax">Taux d'endettement max (%)</label>
+            <p-inputNumber
+              id="tauxEndettementMax"
+              [(ngModel)]="tauxEndettementMax"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="0"
+              [maxFractionDigits]="0"
+              [min]="20"
+              [max]="40"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+
+    <div class="results-section">
+      <p-panel header="Votre Capacité d'Emprunt" styleClass="results-panel">
+        <div class="result-highlight">
+          <span class="result-label">Capacité d'emprunt</span>
+          <span class="result-value primary">{{ formatCurrency(capaciteEmprunt) }}</span>
+        </div>
+
+        <div class="result-highlight">
+          <span class="result-label">Budget total (avec apport)</span>
+          <span class="result-value success">{{ formatCurrency(budgetTotal) }}</span>
+        </div>
+
+        <div class="results-details">
+          <div class="detail-row">
+            <span class="detail-label">Revenus totaux</span>
+            <span class="detail-value">{{ formatCurrency(revenusTotaux) }}/mois</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Mensualité maximale ({{ tauxEndettementMax }}%)</span>
+            <span class="detail-value">{{ formatCurrency(mensualiteMax) }}/mois</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Mensualité disponible</span>
+            <span class="detail-value">{{ formatCurrency(mensualiteDisponible) }}/mois</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Coût total du crédit</span>
+            <span class="detail-value">{{ formatCurrency(coutTotalCredit) }}</span>
+          </div>
+          <div class="detail-row" [ngClass]="{'warning': tauxEndettementActuel > 20}">
+            <span class="detail-label">Endettement actuel</span>
+            <span class="detail-value">{{ tauxEndettementActuel | number:'1.1-1' }}%</span>
+          </div>
+          <div class="detail-row" [ngClass]="{'warning': resteAVivre < 1000}">
+            <span class="detail-label">Reste à vivre estimé</span>
+            <span class="detail-value">{{ formatCurrency(resteAVivre) }}/mois</span>
+          </div>
+        </div>
+
+        <div class="info-box" *ngIf="resteAVivre < 700">
+          <i class="pi pi-exclamation-triangle"></i>
+          <span>Attention : votre reste à vivre est faible. Les banques exigent généralement un minimum de 700-1000€ par personne.</span>
+        </div>
+
+        <div class="info-box success" *ngIf="resteAVivre >= 1500">
+          <i class="pi pi-check-circle"></i>
+          <span>Bon reste à vivre ! Vous pourriez potentiellement négocier un taux d'endettement légèrement supérieur.</span>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <app-faq-section
+    [faqItems]="faqItems"
+    pageTitle="Simulateur de Capacité d'Emprunt Immobilier">
+  </app-faq-section>
+</div>

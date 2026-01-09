@@ -1,0 +1,245 @@
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Comparateur SASU vs EURL</h1>
+    <p class="subtitle">Simulez et comparez les revenus nets selon votre statut juridique</p>
+  </div>
+
+  <div class="form-section-top">
+    <p-panel header="Paramètres de Simulation" styleClass="custom-panel">
+      <div class="form-grid-wide">
+        <div class="form-group">
+          <label for="chiffreAffaires">Chiffre d'affaires annuel</label>
+          <p-inputNumber
+            id="chiffreAffaires"
+            [(ngModel)]="chiffreAffaires"
+            (ngModelChange)="calculer()"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0">
+          </p-inputNumber>
+        </div>
+
+        <div class="form-group">
+          <label for="charges">Charges d'exploitation</label>
+          <p-inputNumber
+            id="charges"
+            [(ngModel)]="charges"
+            (ngModelChange)="calculer()"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0">
+          </p-inputNumber>
+        </div>
+
+        <div class="form-group">
+          <label for="remunerationSouhaitee">Rémunération nette souhaitée</label>
+          <p-inputNumber
+            id="remunerationSouhaitee"
+            [(ngModel)]="remunerationSouhaitee"
+            (ngModelChange)="calculer()"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0">
+          </p-inputNumber>
+        </div>
+
+        <div class="form-group">
+          <label for="dividendes">Dividendes souhaités</label>
+          <p-inputNumber
+            id="dividendes"
+            [(ngModel)]="dividendes"
+            (ngModelChange)="calculer()"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0">
+          </p-inputNumber>
+        </div>
+
+        <div class="form-group">
+          <label for="situationFamiliale">Situation familiale</label>
+          <p-dropdown
+            id="situationFamiliale"
+            [options]="situationsOptions"
+            [(ngModel)]="situationFamiliale"
+            (ngModelChange)="calculer()"
+            optionLabel="label"
+            optionValue="value"
+            styleClass="w-full">
+          </p-dropdown>
+        </div>
+      </div>
+    </p-panel>
+  </div>
+
+  <div class="comparison-grid">
+    <!-- SASU -->
+    <div class="status-card sasu">
+      <div class="card-header">
+        <h2>SASU</h2>
+        <span class="badge">Assimilé salarié</span>
+      </div>
+
+      <div class="card-content">
+        <div class="section-title">Coût de la rémunération</div>
+        <div class="detail-row">
+          <span>Rémunération nette</span>
+          <span>{{ formatCurrency(remunerationSouhaitee) }}</span>
+        </div>
+        <div class="detail-row">
+          <span>Charges sociales (~82%)</span>
+          <span class="negative">{{ formatCurrency(sasuChargesSociales) }}</span>
+        </div>
+        <div class="detail-row highlight">
+          <span>Coût total entreprise</span>
+          <span>{{ formatCurrency(sasuCoutRemuneration) }}</span>
+        </div>
+
+        <div class="section-title">Fiscalité société</div>
+        <div class="detail-row">
+          <span>Résultat avant IS</span>
+          <span>{{ formatCurrency(sasuResultatAvantIS) }}</span>
+        </div>
+        <div class="detail-row">
+          <span>Impôt sur les sociétés</span>
+          <span class="negative">{{ formatCurrency(sasuIS) }}</span>
+        </div>
+
+        <div class="section-title">Dividendes</div>
+        <div class="detail-row">
+          <span>Dividendes bruts</span>
+          <span>{{ formatCurrency(sasuDividendesBruts) }}</span>
+        </div>
+        <div class="detail-row">
+          <span>PFU (30%)</span>
+          <span class="negative">{{ formatCurrency(sasuPFUDividendes) }}</span>
+        </div>
+        <div class="detail-row highlight">
+          <span>Dividendes nets</span>
+          <span>{{ formatCurrency(sasuDividendesNets) }}</span>
+        </div>
+
+        <div class="section-title">Revenus personnels</div>
+        <div class="detail-row">
+          <span>Total revenus nets</span>
+          <span>{{ formatCurrency(sasuRevenusNets) }}</span>
+        </div>
+        <div class="detail-row">
+          <span>IR estimé (sur salaire)</span>
+          <span class="negative">{{ formatCurrency(sasuIREstime) }}</span>
+        </div>
+
+        <div class="total-row">
+          <span>NET APRÈS IMPÔTS</span>
+          <span>{{ formatCurrency(sasuNetApresImpots) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EURL -->
+    <div class="status-card eurl">
+      <div class="card-header">
+        <h2>EURL</h2>
+        <span class="badge">TNS</span>
+      </div>
+
+      <div class="card-content">
+        <div class="section-title">Coût de la rémunération</div>
+        <div class="detail-row">
+          <span>Rémunération nette</span>
+          <span>{{ formatCurrency(remunerationSouhaitee) }}</span>
+        </div>
+        <div class="detail-row">
+          <span>Cotisations TNS (~45%)</span>
+          <span class="negative">{{ formatCurrency(eurlChargesSociales) }}</span>
+        </div>
+        <div class="detail-row highlight">
+          <span>Coût total entreprise</span>
+          <span>{{ formatCurrency(eurlCoutRemuneration) }}</span>
+        </div>
+
+        <div class="section-title">Fiscalité société</div>
+        <div class="detail-row">
+          <span>Résultat avant IS</span>
+          <span>{{ formatCurrency(eurlResultatAvantIS) }}</span>
+        </div>
+        <div class="detail-row">
+          <span>Impôt sur les sociétés</span>
+          <span class="negative">{{ formatCurrency(eurlIS) }}</span>
+        </div>
+
+        <div class="section-title">Dividendes</div>
+        <div class="detail-row">
+          <span>Dividendes bruts</span>
+          <span>{{ formatCurrency(eurlDividendesBruts) }}</span>
+        </div>
+        <div class="detail-row">
+          <span>Cotisations sur dividendes</span>
+          <span class="negative">{{ formatCurrency(eurlCotisationsDividendes) }}</span>
+        </div>
+        <div class="detail-row highlight">
+          <span>Dividendes nets</span>
+          <span>{{ formatCurrency(eurlDividendesNets) }}</span>
+        </div>
+
+        <div class="section-title">Revenus personnels</div>
+        <div class="detail-row">
+          <span>Total revenus nets</span>
+          <span>{{ formatCurrency(eurlRevenusNets) }}</span>
+        </div>
+        <div class="detail-row">
+          <span>IR estimé (sur rémunération)</span>
+          <span class="negative">{{ formatCurrency(eurlIREstime) }}</span>
+        </div>
+
+        <div class="total-row">
+          <span>NET APRÈS IMPÔTS</span>
+          <span>{{ formatCurrency(eurlNetApresImpots) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict-section">
+    <div class="verdict" [ngClass]="{'sasu': meilleurStatut === 'SASU', 'eurl': meilleurStatut === 'EURL'}">
+      <div class="verdict-icon">
+        <i class="pi pi-trophy"></i>
+      </div>
+      <div class="verdict-content">
+        <span class="verdict-label">Statut le plus avantageux</span>
+        <span class="verdict-value">{{ meilleurStatut }}</span>
+        <span class="verdict-detail">
+          Différence : {{ formatCurrency(Math.abs(difference)) }}/an
+          <span *ngIf="difference > 0"> en faveur de la SASU</span>
+          <span *ngIf="difference < 0"> en faveur de l'EURL</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <i class="pi pi-shield"></i>
+        <h4>Protection sociale</h4>
+        <p>La SASU offre une meilleure couverture (régime général) mais coûte plus cher en charges.</p>
+      </div>
+      <div class="tip-card">
+        <i class="pi pi-wallet"></i>
+        <h4>Dividendes</h4>
+        <p>Les dividendes EURL > 10% du capital sont soumis aux cotisations TNS. Privilégiez la rémunération en EURL.</p>
+      </div>
+      <div class="tip-card">
+        <i class="pi pi-chart-line"></i>
+        <h4>Croissance</h4>
+        <p>La SASU est plus flexible pour accueillir des investisseurs ou associés.</p>
+      </div>
+    </div>
+  </div>
+
+  <app-faq-section
+    [faqItems]="faqItems"
+    pageTitle="Comparateur SASU vs EURL">
+  </app-faq-section>
+</div>

@@ -1,0 +1,247 @@
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Comparateur PEA vs Assurance-vie</h1>
+    <p class="subtitle">Simulez et comparez la fiscalité de vos placements financiers</p>
+  </div>
+
+  <div class="form-section-top">
+    <p-panel header="Paramètres de Simulation" styleClass="custom-panel">
+      <div class="form-grid-wide">
+        <div class="form-group">
+          <label for="montantInitial">Versement initial</label>
+          <p-inputNumber
+            id="montantInitial"
+            [(ngModel)]="montantInitial"
+            (ngModelChange)="calculer()"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0">
+          </p-inputNumber>
+        </div>
+
+        <div class="form-group">
+          <label for="versementMensuel">Versement mensuel</label>
+          <p-inputNumber
+            id="versementMensuel"
+            [(ngModel)]="versementMensuel"
+            (ngModelChange)="calculer()"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0">
+          </p-inputNumber>
+        </div>
+
+        <div class="form-group">
+          <label for="dureeInvestissement">Durée d'investissement</label>
+          <p-inputNumber
+            id="dureeInvestissement"
+            [(ngModel)]="dureeInvestissement"
+            (ngModelChange)="calculer()"
+            [min]="1"
+            [max]="40"
+            suffix=" ans">
+          </p-inputNumber>
+        </div>
+
+        <div class="form-group">
+          <label for="rendementAnnuel">Rendement annuel espéré</label>
+          <p-inputNumber
+            id="rendementAnnuel"
+            [(ngModel)]="rendementAnnuel"
+            (ngModelChange)="calculer()"
+            mode="decimal"
+            [minFractionDigits]="1"
+            [maxFractionDigits]="1"
+            [min]="0"
+            [max]="20"
+            suffix=" %">
+          </p-inputNumber>
+        </div>
+
+        <div class="form-group">
+          <label for="objectif">Objectif principal</label>
+          <p-dropdown
+            id="objectif"
+            [options]="objectifOptions"
+            [(ngModel)]="objectif"
+            (ngModelChange)="calculer()"
+            optionLabel="label"
+            optionValue="value"
+            styleClass="w-full">
+          </p-dropdown>
+        </div>
+      </div>
+    </p-panel>
+  </div>
+
+  <div class="timeline-section">
+    <div class="timeline">
+      <div class="timeline-item" [ngClass]="{'active': dureeInvestissement >= 5}">
+        <div class="timeline-marker">5 ans</div>
+        <div class="timeline-content">
+          <strong>PEA</strong>: Exonération IR (17.2% PS uniquement)
+        </div>
+      </div>
+      <div class="timeline-item" [ngClass]="{'active': dureeInvestissement >= 8}">
+        <div class="timeline-marker">8 ans</div>
+        <div class="timeline-content">
+          <strong>Assurance-vie</strong>: Abattement 4 600€/9 200€ + taux réduit
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="comparison-grid">
+    <!-- PEA -->
+    <div class="product-card pea">
+      <div class="card-header">
+        <h2>PEA</h2>
+        <span class="badge">Actions européennes</span>
+      </div>
+
+      <div class="card-content">
+        <div class="main-result">
+          <span class="label">Capital net après impôts</span>
+          <span class="value">{{ formatCurrency(peaNetApresImpots) }}</span>
+        </div>
+
+        <div class="details-grid">
+          <div class="detail-item">
+            <span class="label">Capital final brut</span>
+            <span class="value">{{ formatCurrency(peaCapitalFinal) }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Total versé</span>
+            <span class="value">{{ formatCurrency(peaTotalVerse) }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Plus-values</span>
+            <span class="value positive">+ {{ formatCurrency(peaPlusValues) }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Fiscalité</span>
+            <span class="value negative">- {{ formatCurrency(peaFiscaliteRetrait) }}</span>
+          </div>
+        </div>
+
+        <div class="fiscal-info">
+          <span class="fiscal-rate" *ngIf="dureeInvestissement >= 5">17.2% (PS seuls)</span>
+          <span class="fiscal-rate warning" *ngIf="dureeInvestissement < 5">30% (PFU)</span>
+          <span class="fiscal-label">Taux d'imposition sur les gains</span>
+        </div>
+
+        <div class="rendement-net">
+          <span class="label">Rendement net annualisé</span>
+          <span class="value">{{ peaRendementNet | number:'1.2-2' }}%</span>
+        </div>
+      </div>
+
+      <div class="card-features">
+        <div class="feature">
+          <i class="pi pi-check"></i>
+          <span>Meilleure fiscalité après 5 ans</span>
+        </div>
+        <div class="feature">
+          <i class="pi pi-check"></i>
+          <span>Plafond 150 000€ de versements</span>
+        </div>
+        <div class="feature warning">
+          <i class="pi pi-exclamation-triangle"></i>
+          <span>Actions européennes uniquement</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Assurance-vie -->
+    <div class="product-card av">
+      <div class="card-header">
+        <h2>Assurance-vie</h2>
+        <span class="badge">Multi-supports</span>
+      </div>
+
+      <div class="card-content">
+        <div class="main-result">
+          <span class="label">Capital net après impôts</span>
+          <span class="value">{{ formatCurrency(avNetApresImpots) }}</span>
+        </div>
+
+        <div class="details-grid">
+          <div class="detail-item">
+            <span class="label">Capital final brut</span>
+            <span class="value">{{ formatCurrency(avCapitalFinal) }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Total versé</span>
+            <span class="value">{{ formatCurrency(avTotalVerse) }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Plus-values</span>
+            <span class="value positive">+ {{ formatCurrency(avPlusValues) }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Fiscalité</span>
+            <span class="value negative">- {{ formatCurrency(avFiscaliteRetrait) }}</span>
+          </div>
+        </div>
+
+        <div class="fiscal-info">
+          <span class="fiscal-rate" *ngIf="dureeInvestissement >= 8">24.7% (après abattement)</span>
+          <span class="fiscal-rate warning" *ngIf="dureeInvestissement < 8">30% (PFU)</span>
+          <span class="fiscal-label">Taux d'imposition sur les gains</span>
+        </div>
+
+        <div class="rendement-net">
+          <span class="label">Rendement net annualisé</span>
+          <span class="value">{{ avRendementNet | number:'1.2-2' }}%</span>
+        </div>
+      </div>
+
+      <div class="card-features">
+        <div class="feature">
+          <i class="pi pi-check"></i>
+          <span>Pas de plafond de versement</span>
+        </div>
+        <div class="feature">
+          <i class="pi pi-check"></i>
+          <span>Excellent pour la transmission</span>
+        </div>
+        <div class="feature">
+          <i class="pi pi-check"></i>
+          <span>Supports diversifiés (fonds €, UC)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict-section">
+    <div class="verdict" [ngClass]="{'pea': meilleurProduit === 'PEA', 'av': meilleurProduit === 'Assurance-vie'}">
+      <div class="verdict-icon">
+        <i class="pi pi-star-fill"></i>
+      </div>
+      <div class="verdict-content">
+        <span class="verdict-label">Recommandation selon votre objectif</span>
+        <span class="verdict-value">{{ meilleurProduit }}</span>
+        <span class="verdict-detail" *ngIf="objectif !== 'transmission'">
+          Différence : {{ formatCurrency(Math.abs(difference)) }} en faveur du {{ meilleurProduit }}
+        </span>
+        <span class="verdict-detail" *ngIf="objectif === 'transmission'">
+          L'assurance-vie offre une fiscalité avantageuse pour la transmission (152 500€ d'abattement par bénéficiaire)
+        </span>
+      </div>
+    </div>
+
+    <div class="recommendation-box">
+      <i class="pi pi-lightbulb"></i>
+      <div>
+        <strong>Notre conseil :</strong> Combinez les deux ! Utilisez le PEA pour vos actions européennes (fiscalité optimale) et l'assurance-vie pour diversifier (fonds euros, immobilier, actions mondiales) et préparer votre transmission.
+      </div>
+    </div>
+  </div>
+
+  <app-faq-section
+    [faqItems]="faqItems"
+    pageTitle="Comparateur PEA vs Assurance-vie">
+  </app-faq-section>
+</div>

@@ -1,0 +1,213 @@
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Simulateur de Rachat de Crédit</h1>
+    <p class="subtitle">Calculez les économies potentielles en regroupant vos crédits</p>
+  </div>
+
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Vos Crédits Actuels" styleClass="custom-panel">
+        <div class="credits-list">
+          <div class="credit-item" *ngFor="let credit of credits; let i = index">
+            <div class="credit-header">
+              <input type="text" [(ngModel)]="credit.nom" (ngModelChange)="calculer()" class="credit-name-input">
+              <button class="btn-delete" (click)="supprimerCredit(i)" *ngIf="credits.length > 1">
+                <i class="pi pi-times"></i>
+              </button>
+            </div>
+            <div class="credit-fields">
+              <div class="form-group">
+                <label>Capital restant</label>
+                <p-inputNumber
+                  [(ngModel)]="credit.capitalRestant"
+                  (ngModelChange)="calculer()"
+                  mode="currency"
+                  currency="EUR"
+                  locale="fr-FR"
+                  [min]="0">
+                </p-inputNumber>
+              </div>
+              <div class="form-group">
+                <label>Mensualité</label>
+                <p-inputNumber
+                  [(ngModel)]="credit.mensualite"
+                  (ngModelChange)="calculer()"
+                  mode="currency"
+                  currency="EUR"
+                  locale="fr-FR"
+                  [min]="0">
+                </p-inputNumber>
+              </div>
+              <div class="form-group">
+                <label>Taux actuel</label>
+                <p-inputNumber
+                  [(ngModel)]="credit.tauxActuel"
+                  (ngModelChange)="calculer()"
+                  mode="decimal"
+                  [minFractionDigits]="2"
+                  [maxFractionDigits]="2"
+                  suffix=" %">
+                </p-inputNumber>
+              </div>
+              <div class="form-group">
+                <label>Mois restants</label>
+                <p-inputNumber
+                  [(ngModel)]="credit.dureeMoisRestante"
+                  (ngModelChange)="calculer()"
+                  [min]="1"
+                  suffix=" mois">
+                </p-inputNumber>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-add" (click)="ajouterCredit()">
+          <i class="pi pi-plus"></i> Ajouter un crédit
+        </button>
+      </p-panel>
+
+      <p-panel header="Conditions du Rachat" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Nouveau taux proposé</label>
+            <p-inputNumber
+              [(ngModel)]="nouveauTaux"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="2"
+              [maxFractionDigits]="2"
+              [min]="0"
+              [max]="15"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Nouvelle durée</label>
+            <p-dropdown
+              [options]="dureeOptions"
+              [(ngModel)]="nouvelleDuree"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label>Frais de garantie</label>
+            <p-inputNumber
+              [(ngModel)]="fraisRachat"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="2"
+              [maxFractionDigits]="2"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Frais de dossier</label>
+            <p-inputNumber
+              [(ngModel)]="fraisDossier"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>IRA (indemnités remb.)</label>
+            <p-inputNumber
+              [(ngModel)]="indemniteRemboursement"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="1"
+              [maxFractionDigits]="1"
+              [min]="0"
+              [max]="3"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+
+    <div class="results-section">
+      <p-panel header="Comparatif Avant / Après" [styleClass]="isRentable ? 'results-panel success' : 'results-panel'">
+        <div class="comparison-grid">
+          <div class="comparison-column">
+            <h3>Situation Actuelle</h3>
+            <div class="comparison-item">
+              <span class="label">Capital total</span>
+              <span class="value">{{ formatCurrency(totalCapitalActuel) }}</span>
+            </div>
+            <div class="comparison-item">
+              <span class="label">Mensualité totale</span>
+              <span class="value">{{ formatCurrency(totalMensualiteActuelle) }}</span>
+            </div>
+            <div class="comparison-item">
+              <span class="label">Coût total restant</span>
+              <span class="value">{{ formatCurrency(coutTotalActuel) }}</span>
+            </div>
+          </div>
+
+          <div class="comparison-column highlight">
+            <h3>Après Rachat</h3>
+            <div class="comparison-item">
+              <span class="label">Capital refinancé</span>
+              <span class="value">{{ formatCurrency(totalCapitalActuel + fraisTotaux) }}</span>
+            </div>
+            <div class="comparison-item">
+              <span class="label">Nouvelle mensualité</span>
+              <span class="value">{{ formatCurrency(nouvelleMensualite) }}</span>
+            </div>
+            <div class="comparison-item">
+              <span class="label">Coût total nouveau</span>
+              <span class="value">{{ formatCurrency(coutTotalRachat) }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="results-summary">
+          <div class="result-row">
+            <span class="label">Frais totaux du rachat</span>
+            <span class="value negative">{{ formatCurrency(fraisTotaux) }}</span>
+          </div>
+          <div class="result-row">
+            <span class="label">Économie mensuelle</span>
+            <span class="value" [ngClass]="{'positive': totalMensualiteActuelle > nouvelleMensualite, 'negative': totalMensualiteActuelle <= nouvelleMensualite}">
+              {{ formatCurrency(totalMensualiteActuelle - nouvelleMensualite) }}/mois
+            </span>
+          </div>
+          <div class="result-row highlight-row">
+            <span class="label">Économie totale</span>
+            <span class="value" [ngClass]="{'positive': economieNette > 0, 'negative': economieNette <= 0}">
+              {{ formatCurrency(economieNette) }}
+            </span>
+          </div>
+          <div class="result-row">
+            <span class="label">Seuil de rentabilité</span>
+            <span class="value">{{ seuilRentabilite < 999 ? seuilRentabilite + ' mois' : 'Non rentable' }}</span>
+          </div>
+        </div>
+
+        <div class="verdict" [ngClass]="{'positive': isRentable, 'negative': !isRentable}">
+          <i class="pi" [ngClass]="{'pi-check-circle': isRentable, 'pi-times-circle': !isRentable}"></i>
+          <div class="verdict-text">
+            <strong>{{ isRentable ? 'Rachat recommandé' : 'Rachat non recommandé' }}</strong>
+            <p *ngIf="isRentable">Vous amortirez les frais en {{ seuilRentabilite }} mois et économiserez {{ formatCurrency(economieNette) }} au total.</p>
+            <p *ngIf="!isRentable">Les frais de rachat sont trop élevés par rapport aux économies potentielles ou le seuil de rentabilité est trop long.</p>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <app-faq-section
+    [faqItems]="faqItems"
+    pageTitle="Simulateur de Rachat de Crédit">
+  </app-faq-section>
+</div>

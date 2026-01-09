@@ -1,0 +1,177 @@
+<main>
+  <h1>Simulateur Cout d'un Enfant 2026</h1>
+
+  <p>
+    Estimez le <strong>budget mensuel et annuel</strong> necessaire pour elever un enfant selon son age
+    et votre niveau de vie. Notre simulateur detaille les differents postes de depenses et estime
+    les aides CAF auxquelles vous pouvez pretendre.
+  </p>
+
+  <div class="separator"></div>
+
+  <section class="mb-4">
+    <h2>Calculer le cout de mon enfant</h2>
+
+    <form class="card p-fluid flex flex-wrap gap-4" (ngSubmit)="calculer()">
+      <p-panel header="Profil de l'enfant">
+        <div class="p-float-label">
+          <p-dropdown
+            [options]="tranches"
+            [(ngModel)]="trancheAge"
+            name="trancheAge"
+            optionLabel="label"
+            optionValue="value"
+            inputId="trancheAge">
+          </p-dropdown>
+          <label for="trancheAge">Tranche d'age de l'enfant</label>
+        </div>
+
+        <div class="p-float-label" *ngIf="trancheAge === '0-3' || trancheAge === '3-6'">
+          <p-dropdown
+            [options]="modesGarde"
+            [(ngModel)]="modeGarde"
+            name="modeGarde"
+            optionLabel="label"
+            optionValue="value"
+            inputId="modeGarde">
+          </p-dropdown>
+          <label for="modeGarde">Mode de garde</label>
+        </div>
+      </p-panel>
+
+      <p-panel header="Votre situation">
+        <div class="p-float-label">
+          <p-dropdown
+            [options]="niveauxVie"
+            [(ngModel)]="niveauVie"
+            name="niveauVie"
+            optionLabel="label"
+            optionValue="value"
+            inputId="niveauVie">
+          </p-dropdown>
+          <label for="niveauVie">Niveau de vie du foyer</label>
+        </div>
+
+        <div class="p-float-label">
+          <p-inputNumber
+            [(ngModel)]="nbEnfants"
+            name="nbEnfants"
+            [min]="1"
+            [max]="10"
+            inputId="nbEnfants">
+          </p-inputNumber>
+          <label for="nbEnfants">Nombre total d'enfants</label>
+        </div>
+      </p-panel>
+
+      <button pButton type="submit" label="Calculer le budget" class="p-button-success"></button>
+    </form>
+  </section>
+
+  <section *ngIf="resultat" class="mb-4">
+    <h3>Budget estime pour votre enfant</h3>
+
+    <div class="resultats-grid">
+      <div class="resultat-card principal">
+        <span class="montant">{{ resultat.coutMensuelTotal | number:'1.0-0':'fr-FR' }} €</span>
+        <span class="label">Par mois</span>
+      </div>
+      <div class="resultat-card">
+        <span class="montant">{{ resultat.coutAnnuelTotal | number:'1.0-0':'fr-FR' }} €</span>
+        <span class="label">Par an</span>
+      </div>
+      <div class="resultat-card">
+        <span class="montant">{{ resultat.coutJusqua18ans | number:'1.0-0':'fr-FR' }} €</span>
+        <span class="label">Estimation 0-18 ans</span>
+      </div>
+    </div>
+
+    <div class="detail-categories">
+      <h4>Detail par categorie</h4>
+      <table class="table-detail">
+        <thead>
+          <tr>
+            <th>Poste de depense</th>
+            <th>Mensuel</th>
+            <th>Annuel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cat of resultat.categories">
+            <td>{{ cat.nom }}</td>
+            <td>{{ cat.mensuel | number:'1.0-0':'fr-FR' }} €</td>
+            <td>{{ cat.annuel | number:'1.0-0':'fr-FR' }} €</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td><strong>Total</strong></td>
+            <td><strong>{{ resultat.coutMensuelTotal | number:'1.0-0':'fr-FR' }} €</strong></td>
+            <td><strong>{{ resultat.coutAnnuelTotal | number:'1.0-0':'fr-FR' }} €</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="aides-section" *ngIf="resultat.aidesPotentielles > 0">
+      <h4>Aides potentielles CAF</h4>
+      <ul>
+        <li>
+          <strong>Aides estimees :</strong>
+          <span class="aide-montant">{{ resultat.aidesPotentielles | number:'1.0-0':'fr-FR' }} € / mois</span>
+        </li>
+        <li>
+          <strong>Cout net apres aides :</strong>
+          <span>{{ resultat.coutNetAides | number:'1.0-0':'fr-FR' }} € / mois</span>
+        </li>
+      </ul>
+      <p class="note">* Estimation indicative. Consultez la CAF pour un calcul precis de vos droits.</p>
+    </div>
+  </section>
+
+  <div class="separator"></div>
+
+  <section class="mb-4">
+    <h2>Les principales aides pour les familles</h2>
+
+    <div class="panel-colonnes">
+      <div class="colonne">
+        <h4>Allocations familiales</h4>
+        <ul>
+          <li>A partir de 2 enfants</li>
+          <li>~140€/mois pour 2 enfants</li>
+          <li>~320€/mois pour 3 enfants</li>
+          <li>Sous conditions de ressources</li>
+        </ul>
+      </div>
+
+      <div class="colonne">
+        <h4>PAJE (0-3 ans)</h4>
+        <ul>
+          <li>Prime a la naissance : 1 019 €</li>
+          <li>Allocation de base : ~185€/mois</li>
+          <li>CMG (aide garde) : jusqu'a 500€/mois</li>
+          <li>Sous conditions de ressources</li>
+        </ul>
+      </div>
+
+      <div class="colonne">
+        <h4>Avantages fiscaux</h4>
+        <ul>
+          <li>1/2 part par enfant (1 a partir du 3e)</li>
+          <li>Credit impot garde (50%)</li>
+          <li>Reduction scolarite</li>
+          <li>Plafond quotient familial</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="separator"></div>
+
+  <app-faq-section
+    [title]="'Questions frequentes sur le cout d\'un enfant'"
+    [faqItems]="faqItems"
+    [ariaLabel]="'FAQ Cout Enfant'">
+  </app-faq-section>
+</main>

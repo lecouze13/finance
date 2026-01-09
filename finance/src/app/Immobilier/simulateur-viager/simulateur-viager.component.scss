@@ -1,0 +1,148 @@
+.resultats-viager {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.resultat-principal {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.montant-principal .label {
+  display: block;
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+.montant-principal .montant {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.montant-secondaire {
+  margin-top: 0.5rem;
+  opacity: 0.85;
+}
+
+.details-calcul,
+.cout-total {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #3b82f6;
+}
+
+.details-calcul h4,
+.cout-total h4 {
+  margin-top: 0;
+  color: #1e40af;
+}
+
+.details-calcul ul,
+.cout-total ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.details-calcul li,
+.cout-total li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.details-calcul li:last-child,
+.cout-total li:last-child {
+  border-bottom: none;
+}
+
+.highlight {
+  background-color: #dbeafe;
+  padding: 0.6rem !important;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+}
+
+.highlight-warning {
+  background-color: #fef3c7;
+  padding: 0.6rem !important;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+}
+
+.note {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+.panel-colonnes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.colonne {
+  flex: 1;
+  min-width: 250px;
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.colonne.viager-occupe {
+  border-left: 4px solid #f59e0b;
+}
+
+.colonne.viager-occupe h4 {
+  color: #b45309;
+}
+
+.colonne.viager-libre {
+  border-left: 4px solid #3b82f6;
+}
+
+.colonne.viager-libre h4 {
+  color: #1e40af;
+}
+
+.colonne.avantages {
+  border-left: 4px solid #10b981;
+}
+
+.colonne.avantages h4 {
+  color: #047857;
+}
+
+.colonne h4 {
+  margin-top: 0;
+}
+
+.colonne ul {
+  padding-left: 1.2rem;
+  margin: 0;
+}
+
+.colonne li {
+  margin-bottom: 0.5rem;
+  color: #475569;
+}
+
+@media (max-width: 767px) {
+  .montant-principal .montant {
+    font-size: 1.8rem;
+  }
+
+  .resultat-principal {
+    padding: 1.5rem;
+  }
+}

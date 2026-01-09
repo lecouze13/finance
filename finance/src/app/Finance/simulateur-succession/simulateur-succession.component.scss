@@ -1,0 +1,58 @@
+.panel-colonnes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.colonne {
+  flex: 1;
+  min-width: 280px;
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #7c3aed;
+}
+
+.colonne h4 {
+  margin-top: 0;
+  color: #5b21b6;
+}
+
+.table-bareme {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.table-bareme td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.table-bareme td:last-child {
+  text-align: right;
+  color: #5b21b6;
+}
+
+.highlight {
+  background-color: #fef3c7;
+  padding: 0.5rem !important;
+  border-radius: 4px;
+}
+
+.highlight-green {
+  background-color: #d1fae5;
+  padding: 0.5rem !important;
+  border-radius: 4px;
+}
+
+.info-success {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #ecfdf5;
+  border-left: 4px solid #10b981;
+  border-radius: 4px;
+  color: #065f46;
+  font-weight: 600;
+}

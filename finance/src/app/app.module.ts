@@ -1,5 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+
+// Enregistrer la locale française
+registerLocaleData(localeFr, 'fr-FR');
 
 // Angular Forms
 import { FormsModule } from '@angular/forms';
@@ -68,6 +73,16 @@ import { SimulateurDividendeEntrepriseComponent } from './simulateur-dividende-e
 import { SimulateurMicroEntrepreneurComponent } from './simulateur-micro-entrepreneur/simulateur-micro-entrepreneur.component';
 import { SimulateurEligibiliteLepComponent } from './Finance/simulateur-eligibilite-lep/simulateur-eligibilite-lep.component';
 import { FaqSectionComponent } from './shared/faq-section/faq-section.component';
+import { SimulateurPtzComponent } from './Immobilier/simulateur-ptz/simulateur-ptz.component';
+import { SimulateurSuccessionComponent } from './Finance/simulateur-succession/simulateur-succession.component';
+import { SimulateurCoutEnfantComponent } from './Finance/simulateur-cout-enfant/simulateur-cout-enfant.component';
+import { SimulateurViagerComponent } from './Immobilier/simulateur-viager/simulateur-viager.component';
+import { SimulateurCapaciteEmpruntComponent } from './Immobilier/simulateur-capacite-emprunt/simulateur-capacite-emprunt.component';
+import { SimulateurRachatCreditComponent } from './Finance/simulateur-rachat-credit/simulateur-rachat-credit.component';
+import { SimulateurPerComponent } from './Finance/simulateur-per/simulateur-per.component';
+import { SimulateurFraisGardeComponent } from './Finance/simulateur-frais-garde/simulateur-frais-garde.component';
+import { SimulateurSasuEurlComponent } from './Finance/simulateur-sasu-eurl/simulateur-sasu-eurl.component';
+import { SimulateurPeaAssuranceVieComponent } from './Finance/simulateur-pea-assurance-vie/simulateur-pea-assurance-vie.component';
 
 @NgModule({
     declarations: [
@@ -105,7 +120,17 @@ import { FaqSectionComponent } from './shared/faq-section/faq-section.component'
         SimulateurDefiscalisationComponent,
         SimulateurDividendeEntrepriseComponent,
         SimulateurMicroEntrepreneurComponent,
-        SimulateurEligibiliteLepComponent
+        SimulateurEligibiliteLepComponent,
+        SimulateurPtzComponent,
+        SimulateurSuccessionComponent,
+        SimulateurCoutEnfantComponent,
+        SimulateurViagerComponent,
+        SimulateurCapaciteEmpruntComponent,
+        SimulateurRachatCreditComponent,
+        SimulateurPerComponent,
+        SimulateurFraisGardeComponent,
+        SimulateurSasuEurlComponent,
+        SimulateurPeaAssuranceVieComponent
     ],
     imports: [
         BrowserModule,
@@ -134,7 +159,8 @@ import { FaqSectionComponent } from './shared/faq-section/faq-section.component'
 
     ],
     providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    { provide: LOCALE_ID, useValue: 'fr-FR' }
   ],
     bootstrap: [AppComponent]
 })

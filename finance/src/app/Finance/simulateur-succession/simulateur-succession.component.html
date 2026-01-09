@@ -1,0 +1,151 @@
+<main>
+  <h1>Simulateur Droits de Succession 2026</h1>
+
+  <p>
+    Estimez les <strong>droits de succession</strong> que vous ou vos héritiers devrez payer lors d'une transmission
+    de patrimoine. Notre simulateur prend en compte les abattements légaux et le barème fiscal 2026 selon le lien
+    de parenté avec le défunt.
+  </p>
+
+  <div class="separator"></div>
+
+  <section class="mb-4">
+    <h2>Calculer les droits de succession</h2>
+
+    <form class="card p-fluid flex flex-wrap gap-4" (ngSubmit)="calculer()">
+      <p-panel header="Patrimoine à transmettre">
+        <div class="p-float-label">
+          <p-inputNumber
+            [(ngModel)]="montantSuccession"
+            name="montantSuccession"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0"
+            inputId="montantSuccession">
+          </p-inputNumber>
+          <label for="montantSuccession">Valeur totale du patrimoine</label>
+        </div>
+
+        <div class="p-float-label">
+          <p-inputNumber
+            [(ngModel)]="dettes"
+            name="dettes"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0"
+            inputId="dettes">
+          </p-inputNumber>
+          <label for="dettes">Dettes et passif (optionnel)</label>
+        </div>
+      </p-panel>
+
+      <p-panel header="Situation des héritiers">
+        <div class="p-float-label">
+          <p-dropdown
+            [options]="liensParente"
+            [(ngModel)]="lienParente"
+            name="lienParente"
+            optionLabel="label"
+            optionValue="value"
+            inputId="lienParente">
+          </p-dropdown>
+          <label for="lienParente">Lien de parenté avec le défunt</label>
+        </div>
+
+        <div class="p-float-label">
+          <p-inputNumber
+            [(ngModel)]="nbHeritiers"
+            name="nbHeritiers"
+            [min]="1"
+            [max]="20"
+            inputId="nbHeritiers">
+          </p-inputNumber>
+          <label for="nbHeritiers">Nombre d'héritiers de même rang</label>
+        </div>
+      </p-panel>
+
+      <button pButton type="submit" label="Calculer les droits" class="p-button-success"></button>
+    </form>
+  </section>
+
+  <section *ngIf="resultat" class="mb-4">
+    <h3>Résultat par héritier</h3>
+
+    <div class="resultats">
+      <h3>Estimation des droits de succession</h3>
+
+      <ul>
+        <li>
+          <strong>Part brute par héritier :</strong>
+          <span>{{ resultat.partBrute | number:'1.0-0':'fr-FR' }} €</span>
+        </li>
+        <li>
+          <strong>Abattement applicable :</strong>
+          <span>{{ resultat.abattement | number:'1.0-0':'fr-FR' }} €</span>
+        </li>
+        <li>
+          <strong>Part taxable :</strong>
+          <span>{{ resultat.partTaxable | number:'1.0-0':'fr-FR' }} €</span>
+        </li>
+        <li class="highlight">
+          <strong>Droits de succession :</strong>
+          <span>{{ resultat.droitsSuccession | number:'1.0-0':'fr-FR' }} €</span>
+        </li>
+        <li class="highlight-green">
+          <strong>Part nette reçue :</strong>
+          <span>{{ resultat.partNette | number:'1.0-0':'fr-FR' }} €</span>
+        </li>
+        <li>
+          <strong>Taux effectif d'imposition :</strong>
+          <span>{{ resultat.tauxEffectif }}%</span>
+        </li>
+      </ul>
+
+      <div *ngIf="resultat.droitsSuccession === 0" class="info-success">
+        ✅ Aucun droit de succession à payer grâce à l'abattement !
+      </div>
+    </div>
+  </section>
+
+  <div class="separator"></div>
+
+  <section class="mb-4">
+    <h2>Barème et abattements 2026</h2>
+
+    <div class="panel-colonnes">
+      <div class="colonne">
+        <h4>💰 Abattements par lien de parenté</h4>
+        <table class="table-bareme">
+          <tr><td>Enfant / Parent</td><td><strong>100 000 €</strong></td></tr>
+          <tr><td>Petit-enfant (donation)</td><td><strong>31 865 €</strong></td></tr>
+          <tr><td>Frère / Soeur</td><td><strong>15 932 €</strong></td></tr>
+          <tr><td>Neveu / Nièce</td><td><strong>7 967 €</strong></td></tr>
+          <tr><td>Conjoint / Partenaire PACS</td><td><strong>Exonéré</strong></td></tr>
+        </table>
+      </div>
+
+      <div class="colonne">
+        <h4>📊 Barème ligne directe</h4>
+        <table class="table-bareme">
+          <tr><td>Jusqu'à 8 072 €</td><td><strong>5%</strong></td></tr>
+          <tr><td>8 072 € - 12 109 €</td><td><strong>10%</strong></td></tr>
+          <tr><td>12 109 € - 15 932 €</td><td><strong>15%</strong></td></tr>
+          <tr><td>15 932 € - 552 324 €</td><td><strong>20%</strong></td></tr>
+          <tr><td>552 324 € - 902 838 €</td><td><strong>30%</strong></td></tr>
+          <tr><td>902 838 € - 1 805 677 €</td><td><strong>40%</strong></td></tr>
+          <tr><td>Au-delà</td><td><strong>45%</strong></td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div class="separator"></div>
+
+  <app-faq-section
+    [title]="'Questions fréquentes sur les droits de succession'"
+    [faqItems]="faqItems"
+    [ariaLabel]="'FAQ Succession'">
+  </app-faq-section>
+</main>

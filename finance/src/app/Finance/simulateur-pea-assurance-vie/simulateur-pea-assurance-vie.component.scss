@@ -1,0 +1,81 @@
+.simulateur-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+.header-section { text-align: center; margin-bottom: 2rem;
+  h1 { color: #1e3a5f; margin-bottom: 0.5rem; font-size: 2rem; }
+  .subtitle { color: #6c757d; font-size: 1.1rem; }
+}
+.form-section-top { margin-bottom: 2rem; }
+.form-grid-wide { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem;
+  @media (max-width: 1024px) { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 768px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 576px) { grid-template-columns: 1fr; }
+}
+.form-group { display: flex; flex-direction: column; gap: 0.5rem;
+  label { font-weight: 500; color: #495057; font-size: 0.85rem; }
+  :host ::ng-deep { .p-inputnumber, .p-dropdown { width: 100%; } }
+}
+.timeline-section { margin-bottom: 2rem; }
+.timeline { display: flex; justify-content: center; gap: 4rem; padding: 1.5rem; background: #f8f9fa; border-radius: 12px;
+  @media (max-width: 768px) { flex-direction: column; gap: 1rem; }
+}
+.timeline-item { display: flex; align-items: center; gap: 1rem; opacity: 0.5; transition: opacity 0.3s;
+  &.active { opacity: 1;
+    .timeline-marker { background: #28a745; color: white; }
+  }
+}
+.timeline-marker { background: #e9ecef; color: #6c757d; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; font-size: 0.9rem; white-space: nowrap; }
+.timeline-content { font-size: 0.9rem; color: #495057; strong { color: #1e3a5f; } }
+.comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;
+  @media (max-width: 768px) { grid-template-columns: 1fr; }
+}
+.product-card { border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); background: white;
+  &.pea .card-header { background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%); }
+  &.av .card-header { background: linear-gradient(135deg, #00897b 0%, #26a69a 100%); }
+}
+.card-header { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem; color: white;
+  h2 { margin: 0; font-size: 1.5rem; }
+  .badge { background: rgba(255,255,255,0.2); padding: 0.35rem 0.75rem; border-radius: 20px; font-size: 0.8rem; }
+}
+.card-content { padding: 1.5rem; }
+.main-result { text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; margin-bottom: 1.5rem;
+  .label { display: block; font-size: 0.9rem; color: #6c757d; margin-bottom: 0.5rem; }
+  .value { font-size: 2rem; font-weight: 700; color: #1e3a5f; }
+}
+.details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.5rem; }
+.detail-item { display: flex; flex-direction: column; padding: 0.75rem; background: #f8f9fa; border-radius: 8px;
+  .label { font-size: 0.8rem; color: #6c757d; margin-bottom: 0.25rem; }
+  .value { font-weight: 600; color: #1e3a5f; &.positive { color: #28a745; } &.negative { color: #dc3545; } }
+}
+.fiscal-info { display: flex; flex-direction: column; align-items: center; padding: 1rem; background: #e8f5e9; border-radius: 8px; margin-bottom: 1rem;
+  .fiscal-rate { font-size: 1.5rem; font-weight: 700; color: #2e7d32; &.warning { color: #f57c00; } }
+  .fiscal-label { font-size: 0.85rem; color: #6c757d; }
+}
+.rendement-net { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background: #1e3a5f; border-radius: 8px; color: white;
+  .label { font-size: 0.9rem; } .value { font-size: 1.25rem; font-weight: 600; }
+}
+.card-features { padding: 1rem 1.5rem; background: #f8f9fa; border-top: 1px solid #e9ecef; }
+.feature { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0; font-size: 0.9rem; color: #495057;
+  i { color: #28a745; font-size: 0.85rem; } &.warning i { color: #f57c00; }
+}
+.verdict-section { margin-bottom: 2rem; }
+.verdict { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem 2rem; border-radius: 12px; margin-bottom: 1rem;
+  &.pea { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border: 2px solid #1565c0;
+    .verdict-icon { background: #1565c0; } .verdict-value { color: #1565c0; }
+  }
+  &.av { background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%); border: 2px solid #00897b;
+    .verdict-icon { background: #00897b; } .verdict-value { color: #00897b; }
+  }
+}
+.verdict-icon { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  i { font-size: 1.75rem; color: white; }
+}
+.verdict-content { display: flex; flex-direction: column; gap: 0.25rem;
+  .verdict-label { font-size: 0.9rem; color: #6c757d; }
+  .verdict-value { font-size: 2rem; font-weight: 700; }
+  .verdict-detail { font-size: 0.95rem; color: #495057; }
+}
+.recommendation-box { display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem; background: #fff8e1; border: 1px solid #ffc107; border-radius: 10px;
+  i { color: #f57c00; font-size: 1.5rem; flex-shrink: 0; } strong { color: #e65100; } div { color: #5d4037; line-height: 1.5; }
+}
+:host ::ng-deep {
+  .custom-panel { .p-panel-header { background: #1e3a5f; color: white; border-radius: 8px 8px 0 0; } .p-panel-content { padding: 1.5rem; } }
+}

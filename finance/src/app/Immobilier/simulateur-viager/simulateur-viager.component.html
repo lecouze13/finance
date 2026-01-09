@@ -1,0 +1,206 @@
+<main>
+  <h1>Simulateur Viager 2026 - Calcul Rente et Bouquet</h1>
+
+  <p>
+    Calculez le montant du <strong>bouquet</strong> et de la <strong>rente viagere</strong> pour un achat
+    en viager occupe ou libre. Notre simulateur prend en compte l'age du vendeur, son esperance de vie
+    et la decote d'occupation pour estimer le cout reel de l'investissement.
+  </p>
+
+  <div class="separator"></div>
+
+  <section class="mb-4">
+    <h2>Calculer mon viager</h2>
+
+    <form class="card p-fluid flex flex-wrap gap-4" (ngSubmit)="calculer()">
+      <p-panel header="Le bien immobilier">
+        <div class="p-float-label">
+          <p-inputNumber
+            [(ngModel)]="valeurBien"
+            name="valeurBien"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0"
+            inputId="valeurBien">
+          </p-inputNumber>
+          <label for="valeurBien">Valeur venale du bien</label>
+        </div>
+
+        <div class="p-float-label">
+          <p-dropdown
+            [options]="typesViager"
+            [(ngModel)]="typeViager"
+            name="typeViager"
+            optionLabel="label"
+            optionValue="value"
+            inputId="typeViager">
+          </p-dropdown>
+          <label for="typeViager">Type de viager</label>
+        </div>
+
+        <div class="p-float-label">
+          <p-inputNumber
+            [(ngModel)]="bouquetSouhaite"
+            name="bouquetSouhaite"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0"
+            inputId="bouquetSouhaite">
+          </p-inputNumber>
+          <label for="bouquetSouhaite">Bouquet souhaite</label>
+        </div>
+      </p-panel>
+
+      <p-panel header="Le vendeur (credirentier)">
+        <div class="p-float-label">
+          <p-inputNumber
+            [(ngModel)]="ageVendeur"
+            name="ageVendeur"
+            [min]="60"
+            [max]="100"
+            suffix=" ans"
+            inputId="ageVendeur">
+          </p-inputNumber>
+          <label for="ageVendeur">Age du vendeur</label>
+        </div>
+
+        <div class="p-float-label">
+          <p-dropdown
+            [options]="sexes"
+            [(ngModel)]="sexeVendeur"
+            name="sexeVendeur"
+            optionLabel="label"
+            optionValue="value"
+            inputId="sexeVendeur">
+          </p-dropdown>
+          <label for="sexeVendeur">Sexe du vendeur</label>
+        </div>
+
+        <div class="p-float-label">
+          <p-inputNumber
+            [(ngModel)]="tauxRendement"
+            name="tauxRendement"
+            [min]="1"
+            [max]="10"
+            suffix=" %"
+            [minFractionDigits]="1"
+            [maxFractionDigits]="1"
+            inputId="tauxRendement">
+          </p-inputNumber>
+          <label for="tauxRendement">Taux de rendement</label>
+        </div>
+      </p-panel>
+
+      <button pButton type="submit" label="Calculer le viager" class="p-button-success"></button>
+    </form>
+  </section>
+
+  <section *ngIf="resultat" class="mb-4">
+    <h3>Resultat de la simulation</h3>
+
+    <div class="resultats-viager">
+      <div class="resultat-principal">
+        <div class="montant-principal">
+          <span class="label">Rente mensuelle</span>
+          <span class="montant">{{ resultat.renteMensuelle | number:'1.0-0':'fr-FR' }} €</span>
+        </div>
+        <div class="montant-secondaire">
+          <span>soit {{ resultat.renteAnnuelle | number:'1.0-0':'fr-FR' }} € / an</span>
+        </div>
+      </div>
+
+      <div class="details-calcul">
+        <h4>Detail du calcul</h4>
+        <ul>
+          <li>
+            <strong>Valeur du bien :</strong>
+            <span>{{ valeurBien | number:'1.0-0':'fr-FR' }} €</span>
+          </li>
+          <li *ngIf="typeViager === 'occupe'">
+            <strong>Decote d'occupation (DUH) :</strong>
+            <span>- {{ resultat.valeurOccupation | number:'1.0-0':'fr-FR' }} €</span>
+          </li>
+          <li>
+            <strong>Bouquet verse :</strong>
+            <span>- {{ bouquetSouhaite | number:'1.0-0':'fr-FR' }} €</span>
+          </li>
+          <li class="highlight">
+            <strong>Capital pour la rente :</strong>
+            <span>{{ resultat.capitalRente | number:'1.0-0':'fr-FR' }} €</span>
+          </li>
+          <li>
+            <strong>Esperance de vie estimee :</strong>
+            <span>{{ resultat.esperanceVie }} ans</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="cout-total">
+        <h4>Estimation du cout total</h4>
+        <ul>
+          <li>
+            <strong>Cout initial (bouquet + frais) :</strong>
+            <span>{{ resultat.coutTotal | number:'1.0-0':'fr-FR' }} €</span>
+          </li>
+          <li>
+            <strong>Frais de notaire :</strong>
+            <span>{{ resultat.fraisNotaire | number:'1.0-0':'fr-FR' }} €</span>
+          </li>
+          <li class="highlight-warning">
+            <strong>Cout estime sur esperance vie :</strong>
+            <span>{{ resultat.coutEstimeReel | number:'1.0-0':'fr-FR' }} €</span>
+          </li>
+        </ul>
+        <p class="note">* Le cout reel depend de la duree effective du viager (alea viager)</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="separator"></div>
+
+  <section class="mb-4">
+    <h2>Comprendre le viager</h2>
+
+    <div class="panel-colonnes">
+      <div class="colonne viager-occupe">
+        <h4>Viager occupe</h4>
+        <ul>
+          <li>Le vendeur reste dans le bien</li>
+          <li>Decote de 30% a 50% sur la valeur</li>
+          <li>Rente plus faible</li>
+          <li>Moins de risque pour l'acheteur</li>
+        </ul>
+      </div>
+
+      <div class="colonne viager-libre">
+        <h4>Viager libre</h4>
+        <ul>
+          <li>L'acheteur dispose du bien immediatement</li>
+          <li>Pas de decote d'occupation</li>
+          <li>Rente plus elevee</li>
+          <li>Possibilite de louer le bien</li>
+        </ul>
+      </div>
+
+      <div class="colonne avantages">
+        <h4>Avantages du viager</h4>
+        <ul>
+          <li>Pas de credit bancaire</li>
+          <li>Prix potentiellement avantageux</li>
+          <li>Complement de retraite pour le vendeur</li>
+          <li>Fiscalite allegee sur la rente</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="separator"></div>
+
+  <app-faq-section
+    [title]="'Questions frequentes sur le viager'"
+    [faqItems]="faqItems"
+    [ariaLabel]="'FAQ Viager'">
+  </app-faq-section>
+</main>

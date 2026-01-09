@@ -1,0 +1,182 @@
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Simulateur Frais de Garde d'Enfant</h1>
+    <p class="subtitle">Calculez le coût réel après crédit d'impôt et aides CAF (CMG)</p>
+  </div>
+
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Mode de Garde" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="modeGarde">Type de garde</label>
+            <p-dropdown
+              id="modeGarde"
+              [options]="modesGardeOptions"
+              [(ngModel)]="modeGarde"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label for="nombreEnfants">Nombre d'enfants gardés</label>
+            <p-inputNumber
+              id="nombreEnfants"
+              [(ngModel)]="nombreEnfants"
+              (ngModelChange)="calculer()"
+              [min]="1"
+              [max]="5"
+              [showButtons]="true">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="revenuAnnuel">Revenus annuels du foyer</label>
+            <p-inputNumber
+              id="revenuAnnuel"
+              [(ngModel)]="revenuAnnuel"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Coût de la Garde" styleClass="custom-panel">
+        <div class="form-grid" *ngIf="modeGarde === 'creche' || modeGarde === 'microcreche'">
+          <div class="form-group full-width">
+            <label for="coutMensuel">Coût mensuel de la crèche</label>
+            <p-inputNumber
+              id="coutMensuel"
+              [(ngModel)]="coutMensuel"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+        </div>
+
+        <div class="form-grid" *ngIf="modeGarde === 'assmat' || modeGarde === 'domicile'">
+          <div class="form-group">
+            <label for="tauxHoraire">Taux horaire (brut)</label>
+            <p-inputNumber
+              id="tauxHoraire"
+              [(ngModel)]="tauxHoraire"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="heuresParSemaine">Heures par semaine</label>
+            <p-inputNumber
+              id="heuresParSemaine"
+              [(ngModel)]="heuresParSemaine"
+              (ngModelChange)="calculer()"
+              [min]="1"
+              [max]="50"
+              suffix=" h">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="nombreSemainesAn">Semaines de garde par an</label>
+            <p-inputNumber
+              id="nombreSemainesAn"
+              [(ngModel)]="nombreSemainesAn"
+              (ngModelChange)="calculer()"
+              [min]="1"
+              [max]="52"
+              suffix=" sem.">
+            </p-inputNumber>
+          </div>
+        </div>
+
+        <div class="checkbox-group" *ngIf="modeGarde !== 'creche'">
+          <p-checkbox
+            [(ngModel)]="cmgDejaDeduit"
+            (ngModelChange)="calculer()"
+            [binary]="true"
+            inputId="cmgDeduit">
+          </p-checkbox>
+          <label for="cmgDeduit">Le CMG est déjà déduit du montant saisi</label>
+        </div>
+      </p-panel>
+    </div>
+
+    <div class="results-section">
+      <p-panel header="Coût Réel de la Garde" styleClass="results-panel">
+        <div class="result-highlight">
+          <span class="result-label">Coût mensuel final</span>
+          <span class="result-value primary">{{ formatCurrency(coutMensuelFinal) }}/mois</span>
+        </div>
+
+        <div class="result-highlight small success-bg">
+          <span class="result-label">Économie totale annuelle</span>
+          <span class="result-value success">{{ formatCurrency(economieAnnuelle) }}</span>
+          <span class="result-percent">{{ tauxPriseEnCharge | number:'1.0-0' }}% de prise en charge</span>
+        </div>
+
+        <div class="results-breakdown">
+          <h4>Détail du calcul annuel</h4>
+
+          <div class="breakdown-row">
+            <span class="label">Coût brut annuel</span>
+            <span class="value">{{ formatCurrency(coutAnnuelBrut) }}</span>
+          </div>
+
+          <div class="breakdown-row aide" *ngIf="cmgEstime > 0 && !cmgDejaDeduit">
+            <span class="label">CMG estimé (aide CAF)</span>
+            <span class="value negative">- {{ formatCurrency(cmgEstime) }}</span>
+          </div>
+
+          <div class="breakdown-row subtotal">
+            <span class="label">Reste à charge avant crédit d'impôt</span>
+            <span class="value">{{ formatCurrency(coutAnnuelNet) }}</span>
+          </div>
+
+          <div class="breakdown-row aide">
+            <span class="label">Crédit d'impôt (50%)</span>
+            <span class="value negative">- {{ formatCurrency(creditImpot) }}</span>
+          </div>
+
+          <div class="breakdown-row total">
+            <span class="label">Coût final annuel</span>
+            <span class="value">{{ formatCurrency(coutFinal) }}</span>
+          </div>
+        </div>
+
+        <div class="info-box" *ngIf="modeGarde === 'creche'">
+          <i class="pi pi-info-circle"></i>
+          <span>La crèche collective n'ouvre pas droit au CMG car le tarif est déjà calculé selon vos revenus. Vous bénéficiez uniquement du crédit d'impôt.</span>
+        </div>
+
+        <div class="info-box" *ngIf="modeGarde === 'microcreche'">
+          <i class="pi pi-info-circle"></i>
+          <span>Les micro-crèches PAJE permettent de bénéficier du CMG en plus du crédit d'impôt, contrairement aux crèches collectives.</span>
+        </div>
+
+        <div class="info-box warning" *ngIf="creditImpot >= 1750 * nombreEnfants && modeGarde !== 'domicile'">
+          <i class="pi pi-exclamation-triangle"></i>
+          <span>Vous atteignez le plafond du crédit d'impôt ({{ formatCurrency(1750 * nombreEnfants) }} pour {{ nombreEnfants }} enfant(s)). Les frais au-delà ne génèrent plus d'avantage fiscal.</span>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <app-faq-section
+    [faqItems]="faqItems"
+    pageTitle="Simulateur Frais de Garde d'Enfant">
+  </app-faq-section>
+</div>

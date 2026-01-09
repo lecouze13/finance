@@ -1,0 +1,154 @@
+.resultats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.resultat-card {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  border-left: 4px solid #3b82f6;
+}
+
+.resultat-card.principal {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  border-left: none;
+}
+
+.resultat-card .montant {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.resultat-card .label {
+  display: block;
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-top: 0.5rem;
+}
+
+.detail-categories {
+  margin-top: 2rem;
+}
+
+.table-detail {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.table-detail th,
+.table-detail td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.table-detail th {
+  background: #f1f5f9;
+  font-weight: 600;
+  color: #475569;
+}
+
+.table-detail td:not(:first-child) {
+  text-align: right;
+}
+
+.table-detail th:not(:first-child) {
+  text-align: right;
+}
+
+.table-detail tfoot {
+  background: #f0fdf4;
+}
+
+.table-detail tfoot td {
+  border-top: 2px solid #10b981;
+}
+
+.aides-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #eff6ff;
+  border-radius: 8px;
+  border-left: 4px solid #3b82f6;
+}
+
+.aides-section h4 {
+  margin-top: 0;
+  color: #1e40af;
+}
+
+.aides-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.aides-section li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+}
+
+.aide-montant {
+  color: #059669;
+  font-weight: 600;
+}
+
+.note {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+.panel-colonnes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.colonne {
+  flex: 1;
+  min-width: 250px;
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #f59e0b;
+}
+
+.colonne h4 {
+  margin-top: 0;
+  color: #b45309;
+}
+
+.colonne ul {
+  padding-left: 1.2rem;
+  margin: 0;
+}
+
+.colonne li {
+  margin-bottom: 0.5rem;
+  color: #475569;
+}
+
+@media (max-width: 767px) {
+  .resultat-card .montant {
+    font-size: 1.4rem;
+  }
+
+  .table-detail {
+    font-size: 0.9rem;
+  }
+
+  .table-detail th,
+  .table-detail td {
+    padding: 0.5rem;
+  }
+}

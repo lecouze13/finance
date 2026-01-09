@@ -1,7 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ng generate:*)"
+      "Bash(ng generate:*)",
+      "Bash(node migrate-simulators.js:*)",
+      "Bash(npm run build:*)",
+      "Bash(cat:*)",
+      "Bash(node clean-jsonld.js:*)",
+      "Bash(node clean-html-faq.js:*)",
+      "Bash(find:*)",
+      "Bash(node fix-html-quotes.js:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(dir /s /b \"c:\\\\Users\\\\loren\\\\Desktop\\\\Dev appli web 2\\\\finance\\\\finance\\\\src\\\\sitemap*\")"
     ]
   }
 }
