@@ -2,6 +2,9 @@
   <header class="header-section">
     <h1>Simulateur d'Épargne Objectif</h1>
     <p class="subtitle">Calculez l'épargne mensuelle nécessaire pour atteindre votre objectif financier</p>
+    <div class="export-actions">
+      <app-export-buttons [exportData]="getExportData()" [showPrint]="true"></app-export-buttons>
+    </div>
   </header>
 
   <div class="content-grid">

@@ -1,6 +1,9 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { FaqItem } from '../../shared/faq-section/faq-section.component';
+import { ExportData } from '../../shared/services/export.service';
+import { ScenarioComparisonService, ScenarioResult, ComparisonMetric } from '../../shared/services/scenario-comparison.service';
+import { ScenarioComparisonComponent } from '../../shared/components/scenario-comparison/scenario-comparison.component';
 
 @Component({
   selector: 'app-simulateur-credit-conso',
@@ -88,9 +91,20 @@ export class SimulateurCreditConsoComponent implements OnInit {
     }
   ];
 
+  // Comparaison de scénarios
+  @ViewChild('comparisonComponent') comparisonComponent?: ScenarioComparisonComponent;
+  readonly simulatorType = 'credit-conso';
+  comparisonMetrics: ComparisonMetric[] = [
+    { key: 'Mensualité totale', label: 'Mensualité totale', type: 'currency', higherIsBetter: false },
+    { key: 'TAEG', label: 'TAEG', type: 'percent', higherIsBetter: false },
+    { key: 'Coût des intérêts', label: 'Coût des intérêts', type: 'currency', higherIsBetter: false },
+    { key: 'Coût total', label: 'Coût total', type: 'currency', higherIsBetter: false }
+  ];
+
   constructor(
     private meta: Meta,
     private title: Title,
+    private comparisonService: ScenarioComparisonService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
@@ -202,5 +216,66 @@ export class SimulateurCreditConsoComponent implements OnInit {
 
   formatCurrency(value: number): string {
     return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 2 }).format(value);
+  }
+
+  // Méthode pour ajouter le scénario actuel à la comparaison
+  addToComparison(): void {
+    const scenarioName = `${this.formatCurrency(this.montantEmprunte)} - ${this.dureeMois}m`;
+    const results: ScenarioResult[] = [
+      { label: 'Mensualité totale', value: this.mensualiteAvecAssurance, type: 'currency' },
+      { label: 'TAEG', value: this.taeg, type: 'percent' },
+      { label: 'Coût des intérêts', value: this.coutInterets, type: 'currency' },
+      { label: 'Coût total', value: this.coutTotalCredit, type: 'currency' }
+    ];
+
+    const data = {
+      montant: this.montantEmprunte,
+      taux: this.tauxAnnuel,
+      duree: this.dureeMois,
+      assurance: this.assuranceMensuelle,
+      frais: this.fraisDossier
+    };
+
+    this.comparisonService.addScenario(this.simulatorType, scenarioName, data, results);
+  }
+
+  getExportData(): ExportData {
+    return {
+      title: 'Simulation Crédit Consommation',
+      subtitle: this.modeCalcul === 'mensualite'
+        ? `Emprunt de ${this.formatCurrency(this.montantEmprunte)} sur ${this.dureeMois} mois`
+        : `Capacité d'emprunt avec ${this.formatCurrency(this.mensualiteMax)}/mois`,
+      date: new Date(),
+      sections: [
+        {
+          title: 'Paramètres du crédit',
+          rows: [
+            { label: 'Montant emprunté', value: this.montantEmprunte, type: 'currency' },
+            { label: 'Taux annuel', value: this.tauxAnnuel, type: 'percent' },
+            { label: 'Durée', value: `${this.dureeMois} mois (${(this.dureeMois / 12).toFixed(1)} ans)`, type: 'text' },
+            { label: 'Frais de dossier', value: this.fraisDossier, type: 'currency' },
+            { label: 'Assurance mensuelle', value: this.assuranceMensuelle, type: 'currency' }
+          ]
+        },
+        {
+          title: 'Résultats',
+          rows: [
+            { label: 'Mensualité hors assurance', value: this.mensualiteHorsAssurance, type: 'currency' },
+            { label: 'Mensualité avec assurance', value: this.mensualiteAvecAssurance, type: 'currency', highlight: true },
+            { label: 'TAEG', value: this.taeg, type: 'percent' }
+          ]
+        },
+        {
+          title: 'Coûts du crédit',
+          rows: [
+            { label: 'Capital emprunté', value: this.montantEmprunte, type: 'currency' },
+            { label: 'Coût des intérêts', value: this.coutInterets, type: 'currency' },
+            { label: 'Coût de l\'assurance', value: this.coutAssurance, type: 'currency' },
+            { label: 'Frais de dossier', value: this.fraisDossier, type: 'currency' },
+            { label: 'Coût total du crédit', value: this.coutTotalCredit, type: 'currency', highlight: true }
+          ]
+        }
+      ]
+    };
   }
 }

@@ -2,6 +2,9 @@
   <section class="header-section">
     <h1>Simulateur SCPI</h1>
     <p class="subtitle">Calculez la rentabilité de votre investissement en pierre-papier</p>
+    <div class="export-actions">
+      <app-export-buttons [exportData]="getExportData()" [showPrint]="true"></app-export-buttons>
+    </div>
   </section>
 
   <div class="content-grid">
@@ -33,7 +36,7 @@
           </div>
 
           <div class="form-group">
-            <label>Taux de distribution</label>
+            <label>Taux de distribution <app-info-tooltip category="scpi" tooltipKey="taux-distribution"></app-info-tooltip></label>
             <p-inputNumber [(ngModel)]="tauxDistribution" suffix=" %" [minFractionDigits]="2"
                            [min]="0" [max]="10" (ngModelChange)="calculer()"></p-inputNumber>
           </div>
@@ -45,7 +48,7 @@
           </div>
 
           <div class="form-group">
-            <label>Frais d'entrée</label>
+            <label>Frais d'entrée <app-info-tooltip category="scpi" tooltipKey="frais-entree"></app-info-tooltip></label>
             <p-inputNumber [(ngModel)]="fraisEntree" suffix=" %" [minFractionDigits]="1"
                            [min]="0" [max]="15" (ngModelChange)="calculer()"></p-inputNumber>
           </div>
@@ -88,7 +91,7 @@
       <p-panel header="Fiscalité" styleClass="custom-panel">
         <div class="form-grid">
           <div class="form-group">
-            <label>Tranche marginale d'imposition (TMI)</label>
+            <label>Tranche marginale d'imposition (TMI) <app-info-tooltip category="scpi" tooltipKey="tmi"></app-info-tooltip></label>
             <p-dropdown [options]="tmiOptions" [(ngModel)]="trancheMarginaleTMI"
                         optionLabel="label" optionValue="value" (ngModelChange)="calculer()"></p-dropdown>
           </div>
@@ -245,6 +248,13 @@
       </div>
     </p-panel>
   </section>
+
+  <app-scenario-comparison
+    [simulatorType]="simulatorType"
+    [metrics]="comparisonMetrics"
+    panelTitle="Comparer mes scénarios SCPI"
+    (addRequested)="addToComparison()">
+  </app-scenario-comparison>
 
   <app-faq-section [faqItems]="faqItems" title="Questions fréquentes sur les SCPI"></app-faq-section>
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { FaqItem } from '../../shared/faq-section/faq-section.component';
+import { ExportData } from '../../shared/services/export.service';
 
 @Component({
   selector: 'app-simulateur-epargne-objectif',
@@ -171,5 +172,34 @@ export class SimulateurEpargneObjectifComponent implements OnInit {
 
   formatCurrency(value: number): string {
     return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(value);
+  }
+
+  getExportData(): ExportData {
+    return {
+      title: 'Simulation Épargne Objectif',
+      subtitle: `Objectif : ${this.formatCurrency(this.objectifMontant)} en ${this.dureeNecessaire} ans`,
+      date: new Date(),
+      sections: [
+        {
+          title: 'Paramètres',
+          rows: [
+            { label: 'Objectif à atteindre', value: this.objectifMontant, type: 'currency' },
+            { label: 'Capital initial', value: this.capitalInitial, type: 'currency' },
+            { label: 'Taux de rendement annuel', value: this.tauxRendement, type: 'percent' },
+            { label: 'Durée', value: `${this.dureeNecessaire} ans`, type: 'text' }
+          ]
+        },
+        {
+          title: 'Résultats',
+          rows: [
+            { label: 'Épargne mensuelle nécessaire', value: this.epargneMensuelleNecessaire, type: 'currency', highlight: true },
+            { label: 'Épargne annuelle', value: this.epargneMensuelleNecessaire * 12, type: 'currency' },
+            { label: 'Total versé', value: this.totalVerse, type: 'currency' },
+            { label: 'Intérêts générés', value: this.interetsGeneres, type: 'currency' },
+            { label: 'Capital final', value: this.capitalFinal, type: 'currency', highlight: true }
+          ]
+        }
+      ]
+    };
   }
 }

@@ -73,6 +73,8 @@ import { SimulateurDividendeEntrepriseComponent } from './simulateur-dividende-e
 import { SimulateurMicroEntrepreneurComponent } from './simulateur-micro-entrepreneur/simulateur-micro-entrepreneur.component';
 import { SimulateurEligibiliteLepComponent } from './Finance/simulateur-eligibilite-lep/simulateur-eligibilite-lep.component';
 import { FaqSectionComponent } from './shared/faq-section/faq-section.component';
+import { ScenarioComparisonComponent } from './shared/components/scenario-comparison/scenario-comparison.component';
+import { InfoTooltipComponent } from './shared/components/info-tooltip/info-tooltip.component';
 import { SimulateurPtzComponent } from './Immobilier/simulateur-ptz/simulateur-ptz.component';
 import { SimulateurSuccessionComponent } from './Finance/simulateur-succession/simulateur-succession.component';
 import { SimulateurCoutEnfantComponent } from './Finance/simulateur-cout-enfant/simulateur-cout-enfant.component';
@@ -88,6 +90,7 @@ import { SimulateurRemboursementAnticipeComponent } from './Finance/simulateur-r
 import { SimulateurPouvoirAchatComponent } from './Finance/simulateur-pouvoir-achat/simulateur-pouvoir-achat.component';
 import { SimulateurCreditConsoComponent } from './Finance/simulateur-credit-conso/simulateur-credit-conso.component';
 import { SimulateurScpiComponent } from './Finance/simulateur-scpi/simulateur-scpi.component';
+import { ExportButtonsComponent } from './shared/components/export-buttons/export-buttons.component';
 
 @NgModule({
     declarations: [
@@ -165,7 +168,10 @@ import { SimulateurScpiComponent } from './Finance/simulateur-scpi/simulateur-sc
         ReactiveFormsModule,
         PanelModule,
         HttpClientModule,
-        FaqSectionComponent
+        FaqSectionComponent,
+        ExportButtonsComponent,
+        ScenarioComparisonComponent,
+        InfoTooltipComponent
 
     ],
     providers: [

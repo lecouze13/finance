@@ -2,6 +2,9 @@
   <section class="header-section">
     <h1>Simulateur Crédit Consommation</h1>
     <p class="subtitle">Calculez votre mensualité ou votre capacité d'emprunt</p>
+    <div class="export-actions">
+      <app-export-buttons [exportData]="getExportData()" [showPrint]="true"></app-export-buttons>
+    </div>
   </section>
 
   <div class="content-grid">
@@ -33,7 +36,7 @@
           </div>
 
           <div class="form-group">
-            <label>Taux annuel (TAEG)</label>
+            <label>Taux annuel (TAEG) <app-info-tooltip category="credit" tooltipKey="taeg"></app-info-tooltip></label>
             <p-inputNumber [(ngModel)]="tauxAnnuel" suffix=" %" [minFractionDigits]="2"
                            [min]="0.1" [max]="25" (ngModelChange)="calculer()"></p-inputNumber>
           </div>
@@ -45,13 +48,13 @@
           </div>
 
           <div class="form-group">
-            <label>Frais de dossier</label>
+            <label>Frais de dossier <app-info-tooltip category="credit" tooltipKey="frais-dossier"></app-info-tooltip></label>
             <p-inputNumber [(ngModel)]="fraisDossier" mode="currency" currency="EUR" locale="fr-FR"
                            [min]="0" [max]="1000" (ngModelChange)="calculer()"></p-inputNumber>
           </div>
 
           <div class="form-group">
-            <label>Assurance mensuelle</label>
+            <label>Assurance mensuelle <app-info-tooltip category="credit" tooltipKey="assurance-emprunteur"></app-info-tooltip></label>
             <p-inputNumber [(ngModel)]="assuranceMensuelle" mode="currency" currency="EUR" locale="fr-FR"
                            [min]="0" [max]="200" (ngModelChange)="calculer()"></p-inputNumber>
           </div>
@@ -176,6 +179,14 @@
       </div>
     </p-panel>
   </section>
+
+  <app-scenario-comparison
+    #comparisonComponent
+    [simulatorType]="simulatorType"
+    [metrics]="comparisonMetrics"
+    panelTitle="Comparer mes scénarios de crédit"
+    (addRequested)="addToComparison()">
+  </app-scenario-comparison>
 
   <app-faq-section [faqItems]="faqItems" title="Questions fréquentes sur le crédit consommation"></app-faq-section>
 </div>

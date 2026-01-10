@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { FaqItem } from '../../shared/faq-section/faq-section.component';
+import { ExportData } from '../../shared/services/export.service';
+import { ScenarioComparisonService, ScenarioResult, ComparisonMetric } from '../../shared/services/scenario-comparison.service';
 
 @Component({
   selector: 'app-simulateur-scpi',
@@ -113,9 +115,19 @@ export class SimulateurScpiComponent implements OnInit {
     }
   ];
 
+  // Comparaison de scénarios
+  readonly simulatorType = 'scpi';
+  comparisonMetrics: ComparisonMetric[] = [
+    { key: 'Revenus nets/an', label: 'Revenus nets/an', type: 'currency', higherIsBetter: true },
+    { key: 'Rendement net', label: 'Rendement net', type: 'percent', higherIsBetter: true },
+    { key: 'Valeur finale', label: 'Valeur finale', type: 'currency', higherIsBetter: true },
+    { key: 'Rendement global', label: 'Rendement global', type: 'percent', higherIsBetter: true }
+  ];
+
   constructor(
     private meta: Meta,
-    private title: Title
+    private title: Title,
+    private comparisonService: ScenarioComparisonService
   ) {}
 
   ngOnInit(): void {
@@ -277,5 +289,66 @@ export class SimulateurScpiComponent implements OnInit {
 
   formatCurrency(value: number): string {
     return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(value);
+  }
+
+  addToComparison(): void {
+    const scenarioName = `${this.formatCurrency(this.valeurAcquisition)} - ${this.tauxDistribution}%`;
+    const results: ScenarioResult[] = [
+      { label: 'Revenus nets/an', value: this.revenuAnnuelNet, type: 'currency' },
+      { label: 'Rendement net', value: this.rendementNetApresImpot, type: 'percent' },
+      { label: 'Valeur finale', value: this.valeurFinale, type: 'currency' },
+      { label: 'Rendement global', value: this.rendementGlobal, type: 'percent' }
+    ];
+
+    const data = {
+      montant: this.montantInvesti,
+      tauxDistribution: this.tauxDistribution,
+      fraisEntree: this.fraisEntree,
+      duree: this.dureeDetention,
+      tmi: this.trancheMarginaleTMI
+    };
+
+    this.comparisonService.addScenario(this.simulatorType, scenarioName, data, results);
+  }
+
+  getExportData(): ExportData {
+    return {
+      title: 'Simulation Investissement SCPI',
+      subtitle: `${this.nombreParts} parts - ${this.formatCurrency(this.valeurAcquisition)} - ${this.dureeDetention} ans`,
+      date: new Date(),
+      sections: [
+        {
+          title: 'Paramètres d\'investissement',
+          rows: [
+            { label: 'Montant investi', value: this.montantInvesti, type: 'currency' },
+            { label: 'Prix par part', value: this.prixPart, type: 'currency' },
+            { label: 'Nombre de parts', value: this.nombreParts, type: 'number' },
+            { label: 'Taux de distribution', value: this.tauxDistribution, type: 'percent' },
+            { label: 'Frais d\'entrée', value: this.fraisEntree, type: 'percent' },
+            { label: 'Durée de détention', value: `${this.dureeDetention} ans`, type: 'text' }
+          ]
+        },
+        {
+          title: 'Revenus annuels',
+          rows: [
+            { label: 'Revenus bruts / an', value: this.revenuAnnuelBrut, type: 'currency' },
+            { label: 'Revenus bruts / mois', value: this.revenuMensuelBrut, type: 'currency' },
+            { label: 'Impôt sur le revenu', value: this.impotAnnuel, type: 'currency' },
+            { label: 'Prélèvements sociaux', value: this.prelevementsSociaux, type: 'currency' },
+            { label: 'Revenus nets / an', value: this.revenuAnnuelNet, type: 'currency', highlight: true }
+          ]
+        },
+        {
+          title: 'Bilan après ' + this.dureeDetention + ' ans',
+          rows: [
+            { label: 'Valeur finale des parts', value: this.valeurFinale, type: 'currency' },
+            { label: 'Plus-value', value: this.plusValue, type: 'currency' },
+            { label: 'Total revenus nets perçus', value: this.totalRevenusPercus, type: 'currency' },
+            { label: 'Rendement net après impôt', value: this.rendementNetApresImpot, type: 'percent', highlight: true },
+            { label: 'Rendement global', value: this.rendementGlobal, type: 'percent', highlight: true }
+          ]
+        }
+      ]
+    };
   }
 }
