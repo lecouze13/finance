@@ -1,0 +1,181 @@
+<div class="simulateur-container">
+  <section class="header-section">
+    <h1>Simulateur Crédit Consommation</h1>
+    <p class="subtitle">Calculez votre mensualité ou votre capacité d'emprunt</p>
+  </section>
+
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Mode de calcul" styleClass="custom-panel">
+        <div class="mode-selector">
+          <div *ngFor="let mode of modeOptions"
+               class="mode-option"
+               [class.active]="modeCalcul === mode.value"
+               (click)="modeCalcul = mode.value; calculer()">
+            <i [class]="mode.value === 'mensualite' ? 'pi pi-calculator' : 'pi pi-wallet'"></i>
+            <span>{{ mode.label }}</span>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Paramètres du crédit" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group" *ngIf="modeCalcul === 'mensualite'">
+            <label>Montant à emprunter</label>
+            <p-inputNumber [(ngModel)]="montantEmprunte" mode="currency" currency="EUR" locale="fr-FR"
+                           [min]="500" [max]="75000" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
+
+          <div class="form-group" *ngIf="modeCalcul === 'capacite'">
+            <label>Mensualité maximale souhaitée</label>
+            <p-inputNumber [(ngModel)]="mensualiteMax" mode="currency" currency="EUR" locale="fr-FR"
+                           [min]="50" [max]="3000" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Taux annuel (TAEG)</label>
+            <p-inputNumber [(ngModel)]="tauxAnnuel" suffix=" %" [minFractionDigits]="2"
+                           [min]="0.1" [max]="25" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Durée (mois)</label>
+            <p-inputNumber [(ngModel)]="dureeMois" suffix=" mois"
+                           [min]="6" [max]="84" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Frais de dossier</label>
+            <p-inputNumber [(ngModel)]="fraisDossier" mode="currency" currency="EUR" locale="fr-FR"
+                           [min]="0" [max]="1000" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Assurance mensuelle</label>
+            <p-inputNumber [(ngModel)]="assuranceMensuelle" mode="currency" currency="EUR" locale="fr-FR"
+                           [min]="0" [max]="200" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Taux indicatifs par type de crédit" styleClass="custom-panel" [toggleable]="true" [collapsed]="true">
+        <div class="taux-reference">
+          <div class="taux-item" *ngFor="let exemple of exempleTaux">
+            <span class="taux-type">{{ exemple.type }}</span>
+            <span class="taux-valeur">{{ exemple.taux }}</span>
+          </div>
+        </div>
+        <p class="taux-note">Ces taux sont donnés à titre indicatif et varient selon votre profil et l'organisme prêteur.</p>
+      </p-panel>
+    </div>
+
+    <div class="results-section">
+      <p-panel header="Résultats" styleClass="results-panel">
+        <div class="main-result" *ngIf="modeCalcul === 'mensualite'">
+          <div class="result-icon"><i class="pi pi-money-bill"></i></div>
+          <div class="result-content">
+            <span class="result-value">{{ mensualiteAvecAssurance | currency:'EUR':'symbol':'1.2-2':'fr-FR' }}</span>
+            <span class="result-label">Mensualité totale</span>
+          </div>
+        </div>
+
+        <div class="main-result capacity" *ngIf="modeCalcul === 'capacite'">
+          <div class="result-icon"><i class="pi pi-wallet"></i></div>
+          <div class="result-content">
+            <span class="result-value">{{ capaciteEmprunt | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+            <span class="result-label">Capacité d'emprunt</span>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-value">{{ mensualiteHorsAssurance | currency:'EUR':'symbol':'1.2-2':'fr-FR' }}</span>
+            <span class="stat-label">Mensualité hors assurance</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value highlight">{{ taeg | number:'1.2-2':'fr-FR' }} %</span>
+            <span class="stat-label">TAEG calculé</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">{{ dureeMois / 12 | number:'1.1-1':'fr-FR' }} ans</span>
+            <span class="stat-label">Durée</span>
+          </div>
+        </div>
+
+        <div class="cost-breakdown">
+          <h4>Décomposition du coût total</h4>
+          <div class="cost-row">
+            <span class="cost-label">Capital emprunté</span>
+            <span class="cost-value">{{ montantEmprunte | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+          </div>
+          <div class="cost-row">
+            <span class="cost-label">Coût des intérêts</span>
+            <span class="cost-value negative">+ {{ coutInterets | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+          </div>
+          <div class="cost-row">
+            <span class="cost-label">Coût de l'assurance</span>
+            <span class="cost-value negative">+ {{ coutAssurance | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+          </div>
+          <div class="cost-row">
+            <span class="cost-label">Frais de dossier</span>
+            <span class="cost-value negative">+ {{ fraisDossier | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+          </div>
+          <div class="cost-row total">
+            <span class="cost-label">Coût total du crédit</span>
+            <span class="cost-value">{{ coutTotalCredit | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+          </div>
+        </div>
+
+        <div class="cost-visualization">
+          <div class="cost-bar">
+            <div class="cost-segment capital" [style.width.%]="(montantEmprunte / coutTotalCredit) * 100"></div>
+            <div class="cost-segment interets" [style.width.%]="(coutInterets / coutTotalCredit) * 100"></div>
+            <div class="cost-segment assurance" [style.width.%]="(coutAssurance / coutTotalCredit) * 100"></div>
+            <div class="cost-segment frais" [style.width.%]="(fraisDossier / coutTotalCredit) * 100"></div>
+          </div>
+          <div class="cost-legend">
+            <span class="legend-capital"><i></i> Capital</span>
+            <span class="legend-interets"><i></i> Intérêts</span>
+            <span class="legend-assurance"><i></i> Assurance</span>
+            <span class="legend-frais"><i></i> Frais</span>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <section class="amortissement-section">
+    <p-panel header="Tableau d'amortissement" styleClass="custom-panel" [toggleable]="true" [collapsed]="!showAmortissement">
+      <button class="toggle-btn" (click)="showAmortissement = !showAmortissement">
+        {{ showAmortissement ? 'Masquer' : 'Afficher' }} le tableau complet
+      </button>
+
+      <div class="table-container" *ngIf="showAmortissement">
+        <table class="amortissement-table">
+          <thead>
+            <tr>
+              <th>Mois</th>
+              <th>Mensualité</th>
+              <th>Capital</th>
+              <th>Intérêts</th>
+              <th>Assurance</th>
+              <th>Capital restant</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ligne of amortissement">
+              <td>{{ ligne.mois }}</td>
+              <td>{{ ligne.mensualite + ligne.assurance | currency:'EUR':'symbol':'1.2-2':'fr-FR' }}</td>
+              <td>{{ ligne.capital | currency:'EUR':'symbol':'1.2-2':'fr-FR' }}</td>
+              <td class="interets">{{ ligne.interets | currency:'EUR':'symbol':'1.2-2':'fr-FR' }}</td>
+              <td>{{ ligne.assurance | currency:'EUR':'symbol':'1.2-2':'fr-FR' }}</td>
+              <td>{{ ligne.capitalRestant | currency:'EUR':'symbol':'1.2-2':'fr-FR' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </p-panel>
+  </section>
+
+  <app-faq-section [faqItems]="faqItems" title="Questions fréquentes sur le crédit consommation"></app-faq-section>
+</div>

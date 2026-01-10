@@ -192,6 +192,46 @@ export class HeaderComponent implements OnInit {
                 label: 'Coût d\'un enfant',
                 route: AppRoutes.SIMULATEUR_COUT_ENFANT,
               },
+              {
+                label: 'Rachat de crédit',
+                route: AppRoutes.SIMULATEUR_RACHAT_CREDIT,
+              },
+              {
+                label: 'PER (Plan Épargne Retraite)',
+                route: AppRoutes.SIMULATEUR_PER,
+              },
+              {
+                label: 'Frais de garde',
+                route: AppRoutes.SIMULATEUR_FRAIS_GARDE,
+              },
+              {
+                label: 'SASU vs EURL',
+                route: AppRoutes.SIMULATEUR_SASU_EURL,
+              },
+              {
+                label: 'PEA vs Assurance-vie',
+                route: AppRoutes.SIMULATEUR_PEA_ASSURANCE_VIE,
+              },
+              {
+                label: 'Épargne objectif',
+                route: AppRoutes.SIMULATEUR_EPARGNE_OBJECTIF,
+              },
+              {
+                label: 'Remboursement anticipé',
+                route: AppRoutes.SIMULATEUR_REMBOURSEMENT_ANTICIPE,
+              },
+              {
+                label: 'Pouvoir d\'achat / Inflation',
+                route: AppRoutes.SIMULATEUR_POUVOIR_ACHAT,
+              },
+              {
+                label: 'Crédit consommation',
+                route: AppRoutes.SIMULATEUR_CREDIT_CONSO,
+              },
+              {
+                label: 'SCPI (rentabilité)',
+                route: AppRoutes.SIMULATEUR_SCPI,
+              },
             ].sort((a, b) => a.label.localeCompare(b.label)),
 
           },

@@ -1,0 +1,157 @@
+<div class="simulateur-container">
+  <header class="header-section">
+    <h1>Simulateur Pouvoir d'Achat et Inflation</h1>
+    <p class="subtitle">Mesurez l'impact de l'inflation sur votre argent et votre salaire</p>
+  </header>
+
+  <div class="content-grid">
+    <!-- Formulaire -->
+    <section class="form-section">
+      <p-panel header="Paramètres de calcul" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label>Mode de calcul</label>
+            <p-dropdown [options]="modeOptions" [(ngModel)]="modeCalcul" (onChange)="calculer()" optionLabel="label" optionValue="value"></p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label>Montant de référence (€)</label>
+            <p-inputNumber [(ngModel)]="montantInitial" (onInput)="calculer()" mode="currency" currency="EUR" locale="fr-FR" [min]="1"></p-inputNumber>
+          </div>
+
+          <div class="form-group" *ngIf="modeCalcul === 'custom'">
+            <label>Taux d'inflation annuel (%)</label>
+            <p-inputNumber [(ngModel)]="tauxInflationCustom" (onInput)="calculer()" [min]="0" [max]="20" suffix=" %" [minFractionDigits]="1"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Année de départ</label>
+            <p-inputNumber [(ngModel)]="anneeDebut" (onInput)="calculer()" [min]="2000" [max]="2024"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Année de fin</label>
+            <p-inputNumber [(ngModel)]="anneeFin" (onInput)="calculer()" [min]="2001" [max]="2025"></p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Évolution de votre salaire" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Salaire mensuel net ({{ anneeDebut }})</label>
+            <p-inputNumber [(ngModel)]="salaireMensuel" (onInput)="calculer()" mode="currency" currency="EUR" locale="fr-FR" [min]="0"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Augmentation moyenne annuelle (%)</label>
+            <p-inputNumber [(ngModel)]="augmentationAnnuelle" (onInput)="calculer()" [min]="0" [max]="10" suffix=" %" [minFractionDigits]="1"></p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+    </section>
+
+    <!-- Résultats -->
+    <section class="results-section">
+      <p-panel header="Impact de l'inflation" styleClass="results-panel">
+
+        <!-- Résultat principal -->
+        <div class="main-result negative">
+          <div class="result-icon"><i class="pi pi-arrow-down"></i></div>
+          <div class="result-content">
+            <span class="result-value">{{ formatCurrency(valeurActuelle) }}</span>
+            <span class="result-label">Pouvoir d'achat de {{ formatCurrency(montantInitial) }} de {{ anneeDebut }}</span>
+          </div>
+        </div>
+
+        <!-- Stats clés -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-value negative">-{{ pertePourcentage | number:'1.1-1' }}%</span>
+            <span class="stat-label">Perte de pouvoir d'achat</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">+{{ inflationCumulee | number:'1.1-1' }}%</span>
+            <span class="stat-label">Inflation cumulée</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value negative">{{ formatCurrency(perteValeur) }}</span>
+            <span class="stat-label">Valeur perdue</span>
+          </div>
+        </div>
+
+        <!-- Équivalence -->
+        <div class="equivalence-box">
+          <div class="equiv-row">
+            <span class="equiv-label">{{ formatCurrency(montantInitial) }} en {{ anneeDebut }}</span>
+            <i class="pi pi-arrow-right"></i>
+            <span class="equiv-value">{{ formatCurrency(equivalentAujourdhui) }} en {{ anneeFin }}</span>
+          </div>
+          <p class="equiv-explain">Pour acheter la même chose qu'avec {{ formatCurrency(montantInitial) }} en {{ anneeDebut }}, il faut {{ formatCurrency(equivalentAujourdhui) }} en {{ anneeFin }}.</p>
+        </div>
+
+        <!-- Évolution salaire réel -->
+        <div class="salary-section" *ngIf="salaireMensuel > 0">
+          <h4>Votre salaire réel</h4>
+          <div class="salary-comparison">
+            <div class="salary-item">
+              <span class="salary-label">Salaire nominal en {{ anneeFin }}</span>
+              <span class="salary-value">{{ formatCurrency(salaireMensuel * Math.pow(1 + augmentationAnnuelle/100, anneeFin - anneeDebut)) }}</span>
+            </div>
+            <div class="salary-item">
+              <span class="salary-label">Pouvoir d'achat réel (en € de {{ anneeDebut }})</span>
+              <span class="salary-value" [class.positive]="evolutionSalaireReel > 0" [class.negative]="evolutionSalaireReel < 0">{{ formatCurrency(salaireReel) }}</span>
+            </div>
+            <div class="salary-item total">
+              <span class="salary-label">Évolution réelle du pouvoir d'achat</span>
+              <span class="salary-value" [class.positive]="evolutionSalaireReel > 0" [class.negative]="evolutionSalaireReel < 0">
+                {{ evolutionSalaireReel > 0 ? '+' : '' }}{{ evolutionSalaireReel | number:'1.1-1' }}%
+              </span>
+            </div>
+          </div>
+          <div class="verdict-salary" [class.positive]="evolutionSalaireReel > 0" [class.negative]="evolutionSalaireReel <= 0">
+            <i class="pi" [class.pi-check-circle]="evolutionSalaireReel > 0" [class.pi-exclamation-triangle]="evolutionSalaireReel <= 0"></i>
+            <span *ngIf="evolutionSalaireReel > 0">Votre salaire a gagné du pouvoir d'achat</span>
+            <span *ngIf="evolutionSalaireReel <= 0">Votre salaire a perdu du pouvoir d'achat</span>
+          </div>
+        </div>
+
+      </p-panel>
+    </section>
+  </div>
+
+  <!-- Tableau historique -->
+  <section class="projection-section" *ngIf="projectionAnnuelle.length > 0">
+    <p-panel header="Évolution année par année" styleClass="custom-panel">
+      <div class="table-container">
+        <table class="projection-table">
+          <thead>
+            <tr>
+              <th>Année</th>
+              <th>Inflation</th>
+              <th>Inflation cumulée</th>
+              <th>Valeur de {{ formatCurrency(montantInitial) }}</th>
+              <th>Perte</th>
+              <th *ngIf="salaireMensuel > 0">Salaire nominal</th>
+              <th *ngIf="salaireMensuel > 0">Salaire réel</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of projectionAnnuelle">
+              <td><strong>{{ row.annee }}</strong></td>
+              <td>{{ row.inflation | number:'1.1-1' }}%</td>
+              <td>{{ row.inflationCumulee | number:'1.1-1' }}%</td>
+              <td>{{ formatCurrency(row.valeurReelle) }}</td>
+              <td class="negative">-{{ formatCurrency(row.perte) }}</td>
+              <td *ngIf="salaireMensuel > 0">{{ formatCurrency(row.salaireNominal) }}</td>
+              <td *ngIf="salaireMensuel > 0" [class.positive]="row.salaireReel > salaireMensuel" [class.negative]="row.salaireReel < salaireMensuel">{{ formatCurrency(row.salaireReel) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </p-panel>
+  </section>
+
+  <!-- FAQ -->
+  <app-faq-section [faqItems]="faqItems" title="Questions fréquentes sur l'inflation et le pouvoir d'achat"></app-faq-section>
+</div>

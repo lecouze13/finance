@@ -1,0 +1,150 @@
+<div class="simulateur-container">
+  <header class="header-section">
+    <h1>Simulateur d'Épargne Objectif</h1>
+    <p class="subtitle">Calculez l'épargne mensuelle nécessaire pour atteindre votre objectif financier</p>
+  </header>
+
+  <div class="content-grid">
+    <!-- Formulaire -->
+    <section class="form-section">
+      <p-panel header="Votre objectif" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label>Mode de calcul</label>
+            <p-dropdown [options]="modeOptions" [(ngModel)]="modeCalcul" (onChange)="calculer()" optionLabel="label" optionValue="value"></p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label>Objectif à atteindre (€)</label>
+            <p-inputNumber [(ngModel)]="objectifMontant" (onInput)="calculer()" mode="currency" currency="EUR" locale="fr-FR" [min]="1000"></p-inputNumber>
+          </div>
+
+          <div class="form-group" *ngIf="modeCalcul === 'mensualite'">
+            <label>Délai souhaité (années)</label>
+            <p-inputNumber [(ngModel)]="delaiAnnees" (onInput)="calculer()" [min]="1" [max]="50" suffix=" ans"></p-inputNumber>
+          </div>
+
+          <div class="form-group" *ngIf="modeCalcul === 'duree'">
+            <label>Épargne mensuelle disponible (€)</label>
+            <p-inputNumber [(ngModel)]="epargneDisponible" (onInput)="calculer()" mode="currency" currency="EUR" locale="fr-FR" [min]="10"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Capital initial (€)</label>
+            <p-inputNumber [(ngModel)]="capitalInitial" (onInput)="calculer()" mode="currency" currency="EUR" locale="fr-FR" [min]="0"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Rendement annuel estimé (%)</label>
+            <p-inputNumber [(ngModel)]="tauxRendement" (onInput)="calculer()" [min]="0" [max]="15" suffix=" %" [minFractionDigits]="1" [maxFractionDigits]="2"></p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Aide rendement -->
+      <div class="help-box">
+        <h4><i class="pi pi-info-circle"></i> Rendements indicatifs</h4>
+        <div class="help-grid">
+          <span><strong>Livret A / LDDS :</strong> 2,4%</span>
+          <span><strong>Fonds euros :</strong> 2-3%</span>
+          <span><strong>Obligations :</strong> 3-4%</span>
+          <span><strong>Actions (LT) :</strong> 6-8%</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Résultats -->
+    <section class="results-section">
+      <p-panel [header]="modeCalcul === 'mensualite' ? 'Épargne nécessaire' : 'Durée nécessaire'" styleClass="results-panel">
+
+        <div class="main-result">
+          <div class="result-value" *ngIf="modeCalcul === 'mensualite'">
+            {{ formatCurrency(epargneMensuelleNecessaire) }}
+            <span class="result-label">/mois</span>
+          </div>
+          <div class="result-value" *ngIf="modeCalcul === 'duree'">
+            {{ dureeNecessaire }} ans
+            <span class="result-label">pour atteindre {{ formatCurrency(objectifMontant) }}</span>
+          </div>
+        </div>
+
+        <div class="results-details">
+          <div class="result-row">
+            <span class="label">Objectif</span>
+            <span class="value">{{ formatCurrency(objectifMontant) }}</span>
+          </div>
+          <div class="result-row">
+            <span class="label">Capital initial</span>
+            <span class="value">{{ formatCurrency(capitalInitial) }}</span>
+          </div>
+          <div class="result-row">
+            <span class="label">Versements totaux</span>
+            <span class="value">{{ formatCurrency(totalVerse - capitalInitial) }}</span>
+          </div>
+          <div class="result-row highlight">
+            <span class="label">Intérêts générés</span>
+            <span class="value positive">+ {{ formatCurrency(interetsGeneres) }}</span>
+          </div>
+          <div class="result-row total">
+            <span class="label">Capital final</span>
+            <span class="value">{{ formatCurrency(capitalFinal) }}</span>
+          </div>
+        </div>
+
+        <!-- Barre de progression -->
+        <div class="progress-section">
+          <h4>Composition du capital final</h4>
+          <div class="progress-bar-container">
+            <div class="progress-bar">
+              <div class="progress-initial" [style.width.%]="(capitalInitial / capitalFinal) * 100"></div>
+              <div class="progress-versements" [style.width.%]="((totalVerse - capitalInitial) / capitalFinal) * 100"></div>
+              <div class="progress-interets" [style.width.%]="(interetsGeneres / capitalFinal) * 100"></div>
+            </div>
+            <div class="progress-legend">
+              <span class="legend-initial"><i></i> Capital initial ({{ ((capitalInitial / capitalFinal) * 100) | number:'1.0-0' }}%)</span>
+              <span class="legend-versements"><i></i> Versements ({{ (((totalVerse - capitalInitial) / capitalFinal) * 100) | number:'1.0-0' }}%)</span>
+              <span class="legend-interets"><i></i> Intérêts ({{ ((interetsGeneres / capitalFinal) * 100) | number:'1.0-0' }}%)</span>
+            </div>
+          </div>
+        </div>
+
+      </p-panel>
+    </section>
+  </div>
+
+  <!-- Projection annuelle -->
+  <section class="projection-section" *ngIf="projectionAnnuelle.length > 0">
+    <p-panel header="Projection année par année" styleClass="custom-panel">
+      <div class="table-container">
+        <table class="projection-table">
+          <thead>
+            <tr>
+              <th>Année</th>
+              <th>Versements cumulés</th>
+              <th>Intérêts cumulés</th>
+              <th>Capital total</th>
+              <th>Progression</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of projectionAnnuelle">
+              <td>{{ row.annee }}</td>
+              <td>{{ formatCurrency(row.versementsCumules) }}</td>
+              <td class="positive">{{ formatCurrency(row.interetsCumules) }}</td>
+              <td><strong>{{ formatCurrency(row.capitalTotal) }}</strong></td>
+              <td>
+                <div class="mini-progress">
+                  <div class="mini-bar" [style.width.%]="row.progression"></div>
+                  <span>{{ row.progression }}%</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </p-panel>
+  </section>
+
+  <!-- FAQ -->
+  <app-faq-section [faqItems]="faqItems" title="Questions fréquentes sur l'épargne objectif"></app-faq-section>
+</div>

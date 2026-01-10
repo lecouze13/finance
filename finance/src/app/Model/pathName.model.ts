@@ -47,4 +47,9 @@ export const AppRoutes = {
   SIMULATEUR_FRAIS_GARDE: 'simulateur-frais-garde',
   SIMULATEUR_SASU_EURL: 'simulateur-sasu-eurl',
   SIMULATEUR_PEA_ASSURANCE_VIE: 'simulateur-pea-assurance-vie',
+  SIMULATEUR_EPARGNE_OBJECTIF: 'simulateur-epargne-objectif',
+  SIMULATEUR_REMBOURSEMENT_ANTICIPE: 'simulateur-remboursement-anticipe',
+  SIMULATEUR_POUVOIR_ACHAT: 'simulateur-pouvoir-achat',
+  SIMULATEUR_CREDIT_CONSO: 'simulateur-credit-consommation',
+  SIMULATEUR_SCPI: 'simulateur-scpi',
 };

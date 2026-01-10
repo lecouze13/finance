@@ -43,6 +43,11 @@ import { SimulateurPerComponent } from './Finance/simulateur-per/simulateur-per.
 import { SimulateurFraisGardeComponent } from './Finance/simulateur-frais-garde/simulateur-frais-garde.component';
 import { SimulateurSasuEurlComponent } from './Finance/simulateur-sasu-eurl/simulateur-sasu-eurl.component';
 import { SimulateurPeaAssuranceVieComponent } from './Finance/simulateur-pea-assurance-vie/simulateur-pea-assurance-vie.component';
+import { SimulateurEpargneObjectifComponent } from './Finance/simulateur-epargne-objectif/simulateur-epargne-objectif.component';
+import { SimulateurRemboursementAnticipeComponent } from './Finance/simulateur-remboursement-anticipe/simulateur-remboursement-anticipe.component';
+import { SimulateurPouvoirAchatComponent } from './Finance/simulateur-pouvoir-achat/simulateur-pouvoir-achat.component';
+import { SimulateurCreditConsoComponent } from './Finance/simulateur-credit-conso/simulateur-credit-conso.component';
+import { SimulateurScpiComponent } from './Finance/simulateur-scpi/simulateur-scpi.component';
 
 export const routes: Routes = [
   { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -170,6 +175,26 @@ export const routes: Routes = [
   {
     path: AppRoutes.SIMULATEUR_PEA_ASSURANCE_VIE,
     component: SimulateurPeaAssuranceVieComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_EPARGNE_OBJECTIF,
+    component: SimulateurEpargneObjectifComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_REMBOURSEMENT_ANTICIPE,
+    component: SimulateurRemboursementAnticipeComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_POUVOIR_ACHAT,
+    component: SimulateurPouvoirAchatComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_CREDIT_CONSO,
+    component: SimulateurCreditConsoComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_SCPI,
+    component: SimulateurScpiComponent,
   },
 
   {

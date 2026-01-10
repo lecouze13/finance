@@ -1,0 +1,250 @@
+<div class="simulateur-container">
+  <section class="header-section">
+    <h1>Simulateur SCPI</h1>
+    <p class="subtitle">Calculez la rentabilité de votre investissement en pierre-papier</p>
+  </section>
+
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Mode de financement" styleClass="custom-panel">
+        <div class="mode-selector">
+          <div *ngFor="let mode of financementOptions"
+               class="mode-option"
+               [class.active]="modeFinancement === mode.value"
+               (click)="modeFinancement = mode.value; calculer()">
+            <i [class]="mode.value === 'comptant' ? 'pi pi-wallet' : 'pi pi-credit-card'"></i>
+            <span>{{ mode.label }}</span>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Investissement SCPI" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Montant à investir</label>
+            <p-inputNumber [(ngModel)]="montantInvesti" mode="currency" currency="EUR" locale="fr-FR"
+                           [min]="1000" [max]="1000000" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Prix d'une part</label>
+            <p-inputNumber [(ngModel)]="prixPart" mode="currency" currency="EUR" locale="fr-FR"
+                           [min]="50" [max]="2000" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Taux de distribution</label>
+            <p-inputNumber [(ngModel)]="tauxDistribution" suffix=" %" [minFractionDigits]="2"
+                           [min]="0" [max]="10" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Revalorisation annuelle</label>
+            <p-inputNumber [(ngModel)]="tauxRevalorisation" suffix=" %" [minFractionDigits]="2"
+                           [min]="-5" [max]="5" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Frais d'entrée</label>
+            <p-inputNumber [(ngModel)]="fraisEntree" suffix=" %" [minFractionDigits]="1"
+                           [min]="0" [max]="15" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Durée de détention</label>
+            <p-inputNumber [(ngModel)]="dureeDetention" suffix=" ans"
+                           [min]="1" [max]="30" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Crédit immobilier" styleClass="custom-panel" *ngIf="modeFinancement === 'credit'">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Montant emprunté</label>
+            <p-inputNumber [(ngModel)]="montantCredit" mode="currency" currency="EUR" locale="fr-FR"
+                           [min]="0" [max]="montantInvesti" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Taux du crédit</label>
+            <p-inputNumber [(ngModel)]="tauxCredit" suffix=" %" [minFractionDigits]="2"
+                           [min]="0" [max]="10" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Durée du crédit</label>
+            <p-inputNumber [(ngModel)]="dureeCredit" suffix=" ans"
+                           [min]="5" [max]="25" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Apport personnel</label>
+            <div class="calculated-value">{{ apportPersonnel | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</div>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Fiscalité" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Tranche marginale d'imposition (TMI)</label>
+            <p-dropdown [options]="tmiOptions" [(ngModel)]="trancheMarginaleTMI"
+                        optionLabel="label" optionValue="value" (ngModelChange)="calculer()"></p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label>Régime fiscal</label>
+            <p-dropdown [options]="regimeOptions" [(ngModel)]="regimeFiscal"
+                        optionLabel="label" optionValue="value" (ngModelChange)="calculer()"></p-dropdown>
+          </div>
+        </div>
+        <div class="fiscal-info">
+          <p *ngIf="regimeFiscal === 'microfoncier'">
+            <i class="pi pi-info-circle"></i>
+            Micro-foncier : abattement forfaitaire de 30% sur les revenus (si revenus fonciers &lt; 15 000€/an)
+          </p>
+          <p *ngIf="regimeFiscal === 'reel' && modeFinancement === 'credit'">
+            <i class="pi pi-info-circle"></i>
+            Régime réel : les intérêts d'emprunt sont déductibles des revenus fonciers
+          </p>
+        </div>
+      </p-panel>
+    </div>
+
+    <div class="results-section">
+      <p-panel header="Résultats de l'investissement" styleClass="results-panel">
+        <div class="acquisition-summary">
+          <div class="summary-row">
+            <span>Nombre de parts</span>
+            <strong>{{ nombreParts }}</strong>
+          </div>
+          <div class="summary-row">
+            <span>Valeur d'acquisition</span>
+            <strong>{{ valeurAcquisition | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</strong>
+          </div>
+          <div class="summary-row">
+            <span>Frais d'entrée</span>
+            <strong class="negative">- {{ fraisEntreeTotal | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</strong>
+          </div>
+        </div>
+
+        <div class="main-result">
+          <div class="result-icon"><i class="pi pi-percentage"></i></div>
+          <div class="result-content">
+            <span class="result-value">{{ rendementNetApresImpot | number:'1.2-2':'fr-FR' }} %</span>
+            <span class="result-label">Rendement net après impôt</span>
+          </div>
+        </div>
+
+        <div class="revenus-section">
+          <h4>Revenus annuels</h4>
+          <div class="revenus-grid">
+            <div class="revenu-card">
+              <span class="revenu-value">{{ revenuAnnuelBrut | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+              <span class="revenu-label">Brut / an</span>
+            </div>
+            <div class="revenu-card">
+              <span class="revenu-value">{{ revenuMensuelBrut | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+              <span class="revenu-label">Brut / mois</span>
+            </div>
+            <div class="revenu-card highlight">
+              <span class="revenu-value">{{ revenuAnnuelNet | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+              <span class="revenu-label">Net / an</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fiscalite-detail">
+          <h4>Détail fiscalité</h4>
+          <div class="fiscal-row">
+            <span>Impôt sur le revenu (TMI {{ trancheMarginaleTMI }}%)</span>
+            <span class="negative">- {{ impotAnnuel | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+          </div>
+          <div class="fiscal-row">
+            <span>Prélèvements sociaux (17,2%)</span>
+            <span class="negative">- {{ prelevementsSociaux | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+          </div>
+          <div class="fiscal-row total">
+            <span>Total fiscalité</span>
+            <span>{{ (impotAnnuel + prelevementsSociaux) | currency:'EUR':'symbol':'1.0-0':'fr-FR' }} / an</span>
+          </div>
+        </div>
+
+        <div class="credit-section" *ngIf="modeFinancement === 'credit'">
+          <h4>Financement à crédit</h4>
+          <div class="credit-row">
+            <span>Mensualité crédit</span>
+            <strong>{{ mensualiteCredit | currency:'EUR':'symbol':'1.2-2':'fr-FR' }}</strong>
+          </div>
+          <div class="credit-row">
+            <span>Coût total du crédit</span>
+            <span class="negative">{{ coutTotalCredit | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+          </div>
+          <div class="credit-row effort" [class.positive]="effortEpargne < 0" [class.negative]="effortEpargne > 0">
+            <span>Effort d'épargne mensuel</span>
+            <strong>{{ effortEpargne | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</strong>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Bilan après {{ dureeDetention }} ans" styleClass="bilan-panel">
+        <div class="bilan-grid">
+          <div class="bilan-card">
+            <i class="pi pi-building"></i>
+            <span class="bilan-value">{{ valeurFinale | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+            <span class="bilan-label">Valeur des parts</span>
+          </div>
+          <div class="bilan-card">
+            <i class="pi pi-chart-line"></i>
+            <span class="bilan-value" [class.positive]="plusValue > 0" [class.negative]="plusValue < 0">
+              {{ plusValue >= 0 ? '+' : '' }}{{ plusValue | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}
+            </span>
+            <span class="bilan-label">Plus-value</span>
+          </div>
+          <div class="bilan-card">
+            <i class="pi pi-money-bill"></i>
+            <span class="bilan-value positive">{{ totalRevenusPercus | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+            <span class="bilan-label">Revenus nets perçus</span>
+          </div>
+          <div class="bilan-card highlight">
+            <i class="pi pi-percentage"></i>
+            <span class="bilan-value">{{ rendementGlobal | number:'1.1-1':'fr-FR' }} %</span>
+            <span class="bilan-label">Rendement global</span>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <section class="projection-section">
+    <p-panel header="Projection sur {{ dureeDetention }} ans" styleClass="custom-panel" [toggleable]="true" [collapsed]="true">
+      <div class="table-container">
+        <table class="projection-table">
+          <thead>
+            <tr>
+              <th>Année</th>
+              <th>Valeur des parts</th>
+              <th>Revenus bruts</th>
+              <th>Revenus nets</th>
+              <th>Cumul revenus nets</th>
+              <th *ngIf="modeFinancement === 'credit'">Capital restant dû</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ligne of projection">
+              <td>{{ ligne.annee }}</td>
+              <td>{{ ligne.valeurParts | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</td>
+              <td>{{ ligne.revenusBruts | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</td>
+              <td class="positive">{{ ligne.revenus | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</td>
+              <td>{{ ligne.totalRevenus | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</td>
+              <td *ngIf="modeFinancement === 'credit'">{{ ligne.capitalRestant | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </p-panel>
+  </section>
+
+  <app-faq-section [faqItems]="faqItems" title="Questions fréquentes sur les SCPI"></app-faq-section>
+</div>

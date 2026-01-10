@@ -1,0 +1,93 @@
+.simulateur-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+.header-section { text-align: center; margin-bottom: 2rem;
+  h1 { color: #1e3a5f; margin-bottom: 0.5rem; font-size: 2rem; }
+  .subtitle { color: #6c757d; font-size: 1.1rem; }
+}
+.content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+  @media (max-width: 968px) { grid-template-columns: 1fr; }
+}
+.form-section { display: flex; flex-direction: column; gap: 1.5rem; }
+.form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+  @media (max-width: 576px) { grid-template-columns: 1fr; }
+}
+.form-group { display: flex; flex-direction: column; gap: 0.5rem;
+  label { font-weight: 500; color: #495057; font-size: 0.9rem; }
+  :host ::ng-deep { .p-inputnumber, .p-dropdown { width: 100%; } }
+}
+.mode-selector { display: flex; gap: 1rem;
+  @media (max-width: 576px) { flex-direction: column; }
+}
+.mode-option { flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem; border: 2px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s;
+  &:hover { border-color: #1976d2; }
+  &.active { border-color: #1976d2; background: #e3f2fd; color: #1565c0;
+    i { color: #1976d2; }
+  }
+  i { font-size: 1.2rem; color: #6c757d; }
+  span { font-weight: 500; }
+}
+.taux-reference { display: flex; flex-direction: column; gap: 0.5rem; }
+.taux-item { display: flex; justify-content: space-between; padding: 0.5rem; background: #f8f9fa; border-radius: 4px;
+  .taux-type { color: #495057; }
+  .taux-valeur { font-weight: 600; color: #1976d2; }
+}
+.taux-note { margin: 1rem 0 0; font-size: 0.8rem; color: #6c757d; font-style: italic; }
+.results-section { position: sticky; top: 2rem; height: fit-content; }
+.main-result { display: flex; align-items: center; gap: 1rem; padding: 1.5rem; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 12px; margin-bottom: 1.5rem;
+  &.capacity { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    .result-icon { background: rgba(46,125,50,0.15); i { color: #2e7d32; } }
+    .result-value { color: #2e7d32; }
+  }
+  .result-icon { width: 50px; height: 50px; background: rgba(25,118,210,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    i { font-size: 1.5rem; color: #1976d2; }
+  }
+  .result-content { display: flex; flex-direction: column; }
+  .result-value { font-size: 2rem; font-weight: 700; color: #1565c0; }
+  .result-label { font-size: 0.9rem; color: #6c757d; }
+}
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1.5rem;
+  @media (max-width: 576px) { grid-template-columns: 1fr; }
+}
+.stat-card { background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;
+  .stat-value { display: block; font-size: 1.3rem; font-weight: 700; color: #1e3a5f;
+    &.highlight { color: #e65100; }
+  }
+  .stat-label { font-size: 0.75rem; color: #6c757d; }
+}
+.cost-breakdown { background: #f8f9fa; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;
+  h4 { margin: 0 0 0.75rem; font-size: 0.95rem; color: #495057; }
+}
+.cost-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #e9ecef;
+  &:last-child { border-bottom: none; }
+  &.total { background: #1e3a5f; color: white; margin: 0.5rem -1rem -1rem; padding: 0.75rem 1rem; border-radius: 0 0 8px 8px; }
+  .cost-label { color: #6c757d; }
+  .cost-value { font-weight: 600; &.negative { color: #c62828; } }
+  &.total .cost-label, &.total .cost-value { color: white; }
+}
+.cost-visualization { margin-top: 1rem; }
+.cost-bar { display: flex; height: 20px; border-radius: 10px; overflow: hidden; }
+.cost-segment { &.capital { background: #1976d2; } &.interets { background: #f44336; } &.assurance { background: #ff9800; } &.frais { background: #9e9e9e; } }
+.cost-legend { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.5rem; font-size: 0.8rem;
+  span { display: flex; align-items: center; gap: 0.25rem; }
+  i { width: 12px; height: 12px; border-radius: 3px; }
+  .legend-capital i { background: #1976d2; }
+  .legend-interets i { background: #f44336; }
+  .legend-assurance i { background: #ff9800; }
+  .legend-frais i { background: #9e9e9e; }
+}
+.amortissement-section { margin-top: 2rem; }
+.toggle-btn { background: #1976d2; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer; margin-bottom: 1rem;
+  &:hover { background: #1565c0; }
+}
+.table-container { overflow-x: auto; }
+.amortissement-table { width: 100%; border-collapse: collapse; font-size: 0.85rem;
+  th, td { padding: 0.6rem; text-align: right; border-bottom: 1px solid #e9ecef; }
+  th { background: #f8f9fa; font-weight: 600; color: #495057; text-align: right; &:first-child { text-align: left; } }
+  td:first-child { text-align: left; }
+  .interets { color: #c62828; }
+}
+:host ::ng-deep {
+  .custom-panel .p-panel-header { background: #1e3a5f; color: white; border-radius: 8px 8px 0 0; }
+  .custom-panel .p-panel-content { padding: 1.5rem; }
+  .results-panel .p-panel-header { background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%); color: white; border-radius: 8px 8px 0 0; }
+  .results-panel .p-panel-content { padding: 1.5rem; }
+}

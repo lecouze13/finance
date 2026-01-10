@@ -1,0 +1,66 @@
+.simulateur-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+.header-section { text-align: center; margin-bottom: 2rem;
+  h1 { color: #1e3a5f; margin-bottom: 0.5rem; font-size: 2rem; }
+  .subtitle { color: #6c757d; font-size: 1.1rem; }
+}
+.content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+  @media (max-width: 968px) { grid-template-columns: 1fr; }
+}
+.form-section { display: flex; flex-direction: column; gap: 1.5rem; }
+.form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+  @media (max-width: 576px) { grid-template-columns: 1fr; }
+}
+.form-group { display: flex; flex-direction: column; gap: 0.5rem;
+  &.full-width { grid-column: 1 / -1; }
+  label { font-weight: 500; color: #495057; font-size: 0.9rem; }
+  .hint { color: #6c757d; font-size: 0.8rem; margin-top: 0.25rem; }
+  :host ::ng-deep { .p-inputnumber, .p-dropdown { width: 100%; } }
+}
+.calculated-value { background: #e9ecef; padding: 0.75rem 1rem; border-radius: 6px; font-weight: 600; color: #1e3a5f; }
+.results-section { position: sticky; top: 2rem; height: fit-content; }
+.main-result { text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 12px; margin-bottom: 1.5rem;
+  &.negative { background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+    .result-value { color: #c62828; }
+    .result-label { color: #d32f2f; }
+  }
+  .result-value { font-size: 2.5rem; font-weight: 700; color: #2e7d32; }
+  .result-label { font-size: 1rem; color: #558b2f; margin-top: 0.25rem; }
+}
+.comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+.comparison-column { padding: 1rem; border-radius: 8px;
+  &.before { background: #f5f5f5; }
+  &.after { background: #e3f2fd; }
+  h4 { margin: 0 0 0.75rem 0; font-size: 0.9rem; color: #495057; text-align: center; }
+}
+.comparison-item { display: flex; justify-content: space-between; padding: 0.4rem 0; font-size: 0.85rem;
+  .label { color: #6c757d; }
+  .value { font-weight: 600; color: #1e3a5f; &.highlight { color: #1565c0; } }
+}
+.economy-details { background: #f8f9fa; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+.economy-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #e9ecef;
+  &:last-child { border-bottom: none; }
+  &.total { font-weight: 600; padding-top: 0.75rem; margin-top: 0.5rem; border-top: 2px solid #dee2e6; border-bottom: none; }
+  .label { color: #495057; }
+  .value { font-weight: 600; &.positive { color: #28a745; } &.negative { color: #dc3545; } }
+}
+.indicators { display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+.indicator { display: flex; align-items: center; gap: 0.75rem; background: #f0f7ff; padding: 0.75rem 1rem; border-radius: 8px; flex: 1; min-width: 140px;
+  i { font-size: 1.5rem; color: #1976d2; }
+  .indicator-content { display: flex; flex-direction: column; }
+  .indicator-value { font-weight: 700; color: #1e3a5f; font-size: 1.1rem; }
+  .indicator-label { font-size: 0.75rem; color: #6c757d; }
+}
+.verdict { display: flex; align-items: flex-start; gap: 1rem; margin-top: 1rem; padding: 1rem; border-radius: 8px;
+  &.positive { background: #d4edda; border: 1px solid #28a745; i { color: #28a745; } strong, p { color: #155724; } }
+  &.neutral { background: #fff3cd; border: 1px solid #ffc107; i { color: #856404; } strong, p { color: #856404; } }
+  &.negative { background: #f8d7da; border: 1px solid #dc3545; i { color: #dc3545; } strong, p { color: #721c24; } }
+  i { font-size: 1.5rem; flex-shrink: 0; }
+  .verdict-text { strong { display: block; margin-bottom: 0.25rem; } p { margin: 0; font-size: 0.9rem; line-height: 1.4; } }
+}
+:host ::ng-deep {
+  .custom-panel .p-panel-header { background: #1e3a5f; color: white; border-radius: 8px 8px 0 0; }
+  .custom-panel .p-panel-content { padding: 1.5rem; }
+  .results-panel .p-panel-header { background: #6c757d; color: white; border-radius: 8px 8px 0 0; }
+  .results-panel.success .p-panel-header { background: linear-gradient(135deg, #28a745 0%, #20c997 100%); }
+  .results-panel .p-panel-content { padding: 1.5rem; }
+}

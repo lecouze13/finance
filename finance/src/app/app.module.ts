@@ -83,6 +83,11 @@ import { SimulateurPerComponent } from './Finance/simulateur-per/simulateur-per.
 import { SimulateurFraisGardeComponent } from './Finance/simulateur-frais-garde/simulateur-frais-garde.component';
 import { SimulateurSasuEurlComponent } from './Finance/simulateur-sasu-eurl/simulateur-sasu-eurl.component';
 import { SimulateurPeaAssuranceVieComponent } from './Finance/simulateur-pea-assurance-vie/simulateur-pea-assurance-vie.component';
+import { SimulateurEpargneObjectifComponent } from './Finance/simulateur-epargne-objectif/simulateur-epargne-objectif.component';
+import { SimulateurRemboursementAnticipeComponent } from './Finance/simulateur-remboursement-anticipe/simulateur-remboursement-anticipe.component';
+import { SimulateurPouvoirAchatComponent } from './Finance/simulateur-pouvoir-achat/simulateur-pouvoir-achat.component';
+import { SimulateurCreditConsoComponent } from './Finance/simulateur-credit-conso/simulateur-credit-conso.component';
+import { SimulateurScpiComponent } from './Finance/simulateur-scpi/simulateur-scpi.component';
 
 @NgModule({
     declarations: [
@@ -130,7 +135,12 @@ import { SimulateurPeaAssuranceVieComponent } from './Finance/simulateur-pea-ass
         SimulateurPerComponent,
         SimulateurFraisGardeComponent,
         SimulateurSasuEurlComponent,
-        SimulateurPeaAssuranceVieComponent
+        SimulateurPeaAssuranceVieComponent,
+        SimulateurEpargneObjectifComponent,
+        SimulateurRemboursementAnticipeComponent,
+        SimulateurPouvoirAchatComponent,
+        SimulateurCreditConsoComponent,
+        SimulateurScpiComponent
     ],
     imports: [
         BrowserModule,

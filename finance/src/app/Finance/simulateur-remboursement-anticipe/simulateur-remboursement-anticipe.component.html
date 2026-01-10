@@ -1,0 +1,161 @@
+<div class="simulateur-container">
+  <header class="header-section">
+    <h1>Simulateur de Remboursement Anticipé</h1>
+    <p class="subtitle">Calculez l'économie réalisée en remboursant votre crédit par anticipation</p>
+  </header>
+
+  <div class="content-grid">
+    <!-- Formulaire -->
+    <section class="form-section">
+      <p-panel header="Votre crédit actuel" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Capital restant dû (€)</label>
+            <p-inputNumber [(ngModel)]="capitalRestant" (onInput)="calculerMensualiteActuelle()" mode="currency" currency="EUR" locale="fr-FR" [min]="1000"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Taux d'intérêt (%)</label>
+            <p-inputNumber [(ngModel)]="tauxInteret" (onInput)="calculerMensualiteActuelle()" [min]="0" [max]="20" suffix=" %" [minFractionDigits]="2" [maxFractionDigits]="2"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Durée restante (années)</label>
+            <p-inputNumber [(ngModel)]="dureeRestante" (onInput)="calculerMensualiteActuelle()" [min]="1" [max]="30" suffix=" ans"></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Mensualité actuelle</label>
+            <div class="calculated-value">{{ formatCurrency(mensualiteActuelle) }}</div>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Remboursement anticipé" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label>Montant du remboursement anticipé (€)</label>
+            <p-inputNumber [(ngModel)]="montantRemboursement" (onInput)="calculer()" mode="currency" currency="EUR" locale="fr-FR" [min]="0" [max]="capitalRestant"></p-inputNumber>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Type de remboursement</label>
+            <p-dropdown [options]="typeOptions" [(ngModel)]="typeRemboursement" (onChange)="calculer()" optionLabel="label" optionValue="value"></p-dropdown>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Frais de remboursement anticipé (%)</label>
+            <p-inputNumber [(ngModel)]="fraisRemboursement" (onInput)="calculer()" [min]="0" [max]="3" suffix=" %" [minFractionDigits]="1"></p-inputNumber>
+            <small class="hint">Plafond légal : 3% du capital ou 6 mois d'intérêts</small>
+          </div>
+        </div>
+      </p-panel>
+    </section>
+
+    <!-- Résultats -->
+    <section class="results-section">
+      <p-panel header="Votre économie" [styleClass]="economieNette > 0 ? 'results-panel success' : 'results-panel'">
+
+        <div class="main-result" [class.negative]="economieNette <= 0">
+          <div class="result-value">{{ formatCurrency(economieNette) }}</div>
+          <div class="result-label">d'économie nette</div>
+        </div>
+
+        <!-- Comparaison avant/après -->
+        <div class="comparison-grid">
+          <div class="comparison-column before">
+            <h4>Sans remboursement</h4>
+            <div class="comparison-item">
+              <span class="label">Durée restante</span>
+              <span class="value">{{ dureeRestante }} ans</span>
+            </div>
+            <div class="comparison-item">
+              <span class="label">Mensualité</span>
+              <span class="value">{{ formatCurrency(mensualiteActuelle) }}</span>
+            </div>
+            <div class="comparison-item">
+              <span class="label">Intérêts totaux</span>
+              <span class="value">{{ formatCurrency(interetsTotauxAvant) }}</span>
+            </div>
+          </div>
+
+          <div class="comparison-column after">
+            <h4>Avec remboursement</h4>
+            <div class="comparison-item">
+              <span class="label">Durée restante</span>
+              <span class="value highlight">{{ nouvelleDuree }} ans</span>
+            </div>
+            <div class="comparison-item">
+              <span class="label">Mensualité</span>
+              <span class="value highlight">{{ formatCurrency(nouvelleMensualite) }}</span>
+            </div>
+            <div class="comparison-item">
+              <span class="label">Intérêts totaux</span>
+              <span class="value highlight">{{ formatCurrency(interetsTotauxApres) }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Détails économie -->
+        <div class="economy-details">
+          <div class="economy-row">
+            <span class="label">Économie d'intérêts</span>
+            <span class="value positive">+ {{ formatCurrency(economieInterets) }}</span>
+          </div>
+          <div class="economy-row" *ngIf="fraisIRA > 0">
+            <span class="label">Frais de remboursement (IRA)</span>
+            <span class="value negative">- {{ formatCurrency(fraisIRA) }}</span>
+          </div>
+          <div class="economy-row total">
+            <span class="label">Économie nette</span>
+            <span class="value" [class.positive]="economieNette > 0" [class.negative]="economieNette <= 0">{{ formatCurrency(economieNette) }}</span>
+          </div>
+        </div>
+
+        <!-- Indicateurs -->
+        <div class="indicators" *ngIf="typeRemboursement === 'duree'">
+          <div class="indicator">
+            <i class="pi pi-calendar-minus"></i>
+            <div class="indicator-content">
+              <span class="indicator-value">{{ moisGagnes }} mois</span>
+              <span class="indicator-label">de crédit en moins</span>
+            </div>
+          </div>
+          <div class="indicator" *ngIf="rentabiliteRemboursement > 0">
+            <i class="pi pi-percentage"></i>
+            <div class="indicator-content">
+              <span class="indicator-value">{{ rentabiliteRemboursement | number:'1.1-1' }}%</span>
+              <span class="indicator-label">rendement annuel équivalent</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="indicators" *ngIf="typeRemboursement === 'mensualite'">
+          <div class="indicator">
+            <i class="pi pi-money-bill"></i>
+            <div class="indicator-content">
+              <span class="indicator-value">{{ formatCurrency(mensualiteActuelle - nouvelleMensualite) }}</span>
+              <span class="indicator-label">de moins par mois</span>
+            </div>
+          </div>
+        </div>
+
+      </p-panel>
+
+      <!-- Verdict -->
+      <div class="verdict" [class.positive]="economieNette > montantRemboursement * 0.02" [class.neutral]="economieNette > 0 && economieNette <= montantRemboursement * 0.02" [class.negative]="economieNette <= 0">
+        <i class="pi" [class.pi-check-circle]="economieNette > 0" [class.pi-times-circle]="economieNette <= 0"></i>
+        <div class="verdict-text">
+          <strong *ngIf="economieNette > montantRemboursement * 0.02">Remboursement très avantageux</strong>
+          <strong *ngIf="economieNette > 0 && economieNette <= montantRemboursement * 0.02">Remboursement modérément avantageux</strong>
+          <strong *ngIf="economieNette <= 0">Remboursement peu intéressant</strong>
+          <p *ngIf="economieNette > 0">Vous économisez {{ formatCurrency(economieNette) }} en remboursant {{ formatCurrency(montantRemboursement) }} aujourd'hui.</p>
+          <p *ngIf="economieNette <= 0">Les frais de remboursement annulent l'économie d'intérêts. Envisagez un autre placement.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- FAQ -->
+  <app-faq-section [faqItems]="faqItems" title="Questions fréquentes sur le remboursement anticipé"></app-faq-section>
+</div>
