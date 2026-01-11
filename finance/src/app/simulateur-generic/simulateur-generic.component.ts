@@ -4,8 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'app-simulateur-generic',
   standalone: true,
   imports: [],
-  templateUrl: './simulateur-generic.component.html',
-  styleUrl: './simulateur-generic.component.scss'
+  templateUrl: './simulateur-generic.component.html'
 })
 export class SimulateurGenericComponent {
 @Input() faq:any;

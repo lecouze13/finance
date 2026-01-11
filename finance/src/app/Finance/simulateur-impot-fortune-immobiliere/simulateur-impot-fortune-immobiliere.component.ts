@@ -12,7 +12,7 @@ interface TrancheIFI {
 @Component({
   selector: 'app-simulateur-impot-fortune-immobiliere',
   templateUrl: './simulateur-impot-fortune-immobiliere.component.html',
-  styleUrls: ['./simulateur-impot-fortune-immobiliere.component.scss']
+  standalone: false
 })
 export class SimulateurImpotFortuneImmobiliereComponent implements OnInit {
   valeurNetteTaxable: number | null = null;

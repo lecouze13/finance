@@ -1,173 +1,245 @@
-<main>
-    <h1>Calculateur d’Intérêt Composé avec plusieurs actifs</h1>
-    <div class="separator"></div><br>
-
-    <button pButton type="button" class="p-button-primary" id="addActif" (click)="ajouterActif()">
-        Ajouter un actif
-      </button>
-      <div class="liste-actifs">
-        <div class="actif" *ngFor="let actif of actifs; let i = index">
-          <div class="actif-header">
-            <h3 class="actif-titre">Actif {{ i + 1 }}</h3>
-            <button pButton type="button"
-                    class="p-button-danger p-button-sm p-button-rounded"
-                    (click)="supprimerActif(i)"
-                    pTooltip="Supprimer cet actif"
-                    tooltipPosition="left">
-              <i class="pi pi-times"></i>
-            </button>
-          </div>
-      
-          <br>
-      
-          <p-floatLabel>
-            <input
-              pInputText
-              [(ngModel)]="actif.nom"
-              id="nom{{i}}"
-              name="nom{{i}}"
-              required
-              pTooltip="Donnez un nom descriptif à cet actif (ex. : Livret A, PEA, Immobilier)"
-              tooltipPosition="right"
-            />
-            <label for="nom{{i}}">Nom</label>
-          </p-floatLabel>
-      
-          <p-floatLabel>
-            <p-inputNumber
-              [(ngModel)]="actif.tauxAnnuel"
-              inputId="tauxAnnuel{{i}}"
-              [min]="0"
-              [max]="100"
-              [step]="0.01"
-              pTooltip="Taux de rendement annuel estimé, en pourcentage (ex. : 4,5)"
-              tooltipPosition="right"
-            ></p-inputNumber>
-            <label for="tauxAnnuel{{i}}">Taux d’intérêt annuel (%)</label>
-          </p-floatLabel>
-      
-          <p-floatLabel>
-            <p-inputNumber
-              [(ngModel)]="actif.versementPeriodique"
-              inputId="versement{{i}}"
-              [min]="0"
-              [step]="1"
-              pTooltip="Montant que vous ajoutez régulièrement (chaque mois)"
-              tooltipPosition="right"
-            ></p-inputNumber>
-            <label for="versement{{i}}">Versement périodique (€)</label>
-          </p-floatLabel>
-      
-          <p-floatLabel>
-            <p-inputNumber
-              [(ngModel)]="actif.dureeAnnees"
-              inputId="duree{{i}}"
-              [min]="1"
-              [step]="1"
-              pTooltip="Nombre total d’années pendant lesquelles vous investissez"
-              tooltipPosition="right"
-            ></p-inputNumber>
-            <label for="duree{{i}}">Durée (années)</label>
-          </p-floatLabel>
-      
-          <p-floatLabel>
-            <p-inputNumber
-              [(ngModel)]="actif.capitalInitial"
-              inputId="capital{{i}}"
-              [min]="0"
-              [step]="100"
-              pTooltip="Montant de départ investi dès le début"
-              tooltipPosition="right"
-            ></p-inputNumber>
-            <label for="capital{{i}}">Capital initial (€)</label>
-          </p-floatLabel>
-      
-        </div>
-      </div>
-  
-   
-    <button pButton type="button" class="p-button-success" id="intererComposer" (click)="calculer()">
-      Calculer l'intérêt composé
-    </button>
-  
-    <div *ngIf="resultat">
-      <h2>Résultat</h2>
-      <pre>{{ resultat }}</pre>
+<div class="simulateur-container">
+  <section class="header-section">
+    <h1>Simulateur Intérêts Composés</h1>
+    <p class="subtitle">Visualisez la puissance de l'effet boule de neige sur votre épargne</p>
+    <div class="export-actions">
+      <app-export-buttons [exportData]="getExportData()" [showPrint]="true"></app-export-buttons>
     </div>
-  
-    <p-chart
-      *ngIf="afficherGraph"
-      type="line"
-      [data]="{
-        labels: lineChartLabels,
-        datasets: lineChartData
-      }"
-      [options]="chartOptions"
-      style="width: 100%; max-width: 800px; margin-top: 2rem;">
-    </p-chart>
-    <br>  <br>  <div class="separator"></div><br>
-<h2>Qu’est-ce que l’intérêt composé ?</h2>
-<p>L’intérêt composé est un mécanisme financier où les intérêts générés par un capital sont réinvestis, ce qui permet de générer à leur tour des intérêts. Autrement dit, les intérêts produisent des intérêts, entraînant une croissance exponentielle du capital au fil du temps.</p>
+  </section>
 
-<h2>Différence entre intérêt simple et intérêt composé</h2>
-<ul>
-  <li><strong>Intérêt simple :</strong> les intérêts sont calculés uniquement sur le capital initial.</li>
-  <li><strong>Intérêt composé :</strong> les intérêts s’ajoutent au capital initial et génèrent eux-mêmes des intérêts aux périodes suivantes.</li>
-</ul>
-<p>Cette différence fait toute la puissance de l’intérêt composé dans la constitution d’un capital sur le long terme.</p>
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Mode de calcul" styleClass="custom-panel">
+        <div class="mode-selector">
+          <div class="mode-option" [class.active]="modeSimple" (click)="modeSimple = true; calculer()">
+            <i class="pi pi-calculator"></i>
+            <span>Simple</span>
+          </div>
+          <div class="mode-option" [class.active]="!modeSimple" (click)="toggleMode()">
+            <i class="pi pi-th-large"></i>
+            <span>Multi-actifs</span>
+          </div>
+        </div>
+      </p-panel>
 
-<h2>La formule des intérêts composés</h2>
-<p>La valeur future d’un capital avec intérêts composés est calculée par la formule :</p>
-<p style="text-align:center; font-weight: bold;">  
-  <em>V = C × (1 + i)^n</em>
-</p>
-<ul>
-  <li><strong>V</strong> : valeur future du capital</li>
-  <li><strong>C</strong> : capital initial</li>
-  <li><strong>i</strong> : taux d’intérêt périodique (en décimal)</li>
-  <li><strong>n</strong> : nombre de périodes (années, mois, etc.)</li>
-</ul>
+      <!-- Mode Simple -->
+      <p-panel *ngIf="modeSimple" header="Paramètres de l'investissement" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Capital initial</label>
+            <p-inputNumber [(ngModel)]="capitalInitial" mode="currency" currency="EUR" locale="fr-FR"
+                           [min]="0" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
 
-<h2>Exemple concret</h2>
-<p>Si vous investissez 1 000 € à un taux annuel de 5 %, les intérêts composés permettent d’obtenir :</p>
-<ul>
-  <li>Après 1 an : 1 000 × (1 + 0,05)^1 = 1 050 €</li>
-  <li>Après 5 ans : 1 000 × (1 + 0,05)^5 ≈ 1 276,28 €</li>
-  <li>Après 10 ans : 1 000 × (1 + 0,05)^10 ≈ 1 628,89 €</li>
-</ul>
+          <div class="form-group">
+            <label>Versement mensuel</label>
+            <p-inputNumber [(ngModel)]="versementMensuel" mode="currency" currency="EUR" locale="fr-FR"
+                           [min]="0" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
 
-<h2>Pourquoi l’intérêt composé est-il puissant ?</h2>
-<p>Grâce à l’effet boule de neige, plus la durée est longue, plus la croissance du capital s’accélère. Il favorise :</p>
-<ul>
-  <li>La constitution d’un capital important sur le long terme</li>
-  <li>L’investissement régulier, qui multiplie les effets des intérêts composés</li>
-  <li>L’épargne et l’investissement en général</li>
-</ul>
+          <div class="form-group">
+            <label>Taux de rendement annuel</label>
+            <p-inputNumber [(ngModel)]="tauxAnnuel" suffix=" %"
+                           [min]="0" [max]="30" [minFractionDigits]="1" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
 
-<h2>Applications pratiques</h2>
-<p>Les intérêts composés sont omniprésents dans les placements financiers comme :</p>
-<ul>
-  <li>Les comptes d’épargne rémunérés</li>
-  <li>Les fonds d’investissement</li>
-  <li>Les plans d’épargne retraite</li>
-  <li>Les emprunts (où ils se traduisent en intérêts cumulés sur la dette)</li>
-</ul>
+          <div class="form-group">
+            <label>Durée d'investissement</label>
+            <p-inputNumber [(ngModel)]="dureeAnnees" suffix=" ans"
+                           [min]="1" [max]="50" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
+        </div>
 
-<h2>Conseils pour maximiser les intérêts composés</h2>
-<ul>
-  <li>Investir tôt pour profiter de la durée</li>
-  <li>Réinvestir systématiquement les gains</li>
-  <li>Choisir des placements avec un taux d’intérêt intéressant</li>
-  <li>Être patient, car l’effet se ressent surtout sur le moyen et long terme</li>
-</ul>
+        <div class="help-box" style="margin-top: 1rem;">
+          <h4><i class="pi pi-lightbulb"></i> Taux indicatifs</h4>
+          <p style="margin: 0; font-size: 0.9rem;">
+            <strong>Livret A :</strong> 3% • <strong>Fonds euros :</strong> 2-3% • <strong>ETF Monde :</strong> 7-8% historique
+          </p>
+        </div>
+      </p-panel>
 
-<h2>Conclusion</h2>
-<p>L’intérêt composé est l’un des concepts les plus puissants en finance personnelle. Il permet de faire fructifier un capital de façon exponentielle, à condition de laisser le temps agir et de réinvestir les gains. Comprendre ce mécanisme est essentiel pour optimiser ses placements et son épargne.</p>
+      <!-- Mode Multi-actifs -->
+      <ng-container *ngIf="!modeSimple">
+        <div class="actifs-list">
+          <p-panel *ngFor="let actif of actifs; let i = index"
+                   [header]="actif.nom || 'Actif ' + (i + 1)"
+                   styleClass="custom-panel actif-panel">
+            <div class="actif-header-actions">
+              <button pButton type="button" icon="pi pi-times" class="p-button-danger p-button-sm p-button-text"
+                      (click)="supprimerActif(i)" *ngIf="actifs.length > 1"></button>
+            </div>
 
-<br>
-<br>
-  <app-faq-section
-    [title]="&quot;FAQ'&quot;"
-    [faqItems]="faqItems"
-    [ariaLabel]="&quot;Foire aux questions'&quot;">
-  </app-faq-section>  </main>
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label>Nom de l'actif</label>
+                <input pInputText [(ngModel)]="actif.nom" (ngModelChange)="calculer()" />
+              </div>
+
+              <div class="form-group">
+                <label>Capital initial</label>
+                <p-inputNumber [(ngModel)]="actif.capitalInitial" mode="currency" currency="EUR" locale="fr-FR"
+                               [min]="0" (ngModelChange)="calculer()"></p-inputNumber>
+              </div>
+
+              <div class="form-group">
+                <label>Versement mensuel</label>
+                <p-inputNumber [(ngModel)]="actif.versementPeriodique" mode="currency" currency="EUR" locale="fr-FR"
+                               [min]="0" (ngModelChange)="calculer()"></p-inputNumber>
+              </div>
+
+              <div class="form-group">
+                <label>Taux annuel</label>
+                <p-inputNumber [(ngModel)]="actif.tauxAnnuel" suffix=" %"
+                               [min]="0" [max]="30" [minFractionDigits]="1" (ngModelChange)="calculer()"></p-inputNumber>
+              </div>
+
+              <div class="form-group">
+                <label>Durée</label>
+                <p-inputNumber [(ngModel)]="actif.dureeAnnees" suffix=" ans"
+                               [min]="1" [max]="50" (ngModelChange)="calculer()"></p-inputNumber>
+              </div>
+            </div>
+
+            <div class="actif-result" *ngIf="actif.valeurFinale">
+              <span class="result-value">{{ actif.valeurFinale | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+              <span class="result-label">Capital final • Gains : {{ actif.gainsInterets | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+            </div>
+          </p-panel>
+        </div>
+
+        <button pButton type="button" label="Ajouter un actif" icon="pi pi-plus"
+                class="p-button-outlined add-actif-btn" (click)="ajouterActif()"></button>
+      </ng-container>
+    </div>
+
+    <div class="results-section">
+      <!-- Résultats Mode Simple -->
+      <p-panel *ngIf="modeSimple" header="Votre capital futur" styleClass="results-panel">
+        <div class="main-result">
+          <div class="result-icon">
+            <i class="pi pi-chart-line"></i>
+          </div>
+          <div class="result-content">
+            <span class="result-value">{{ valeurFinale | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+            <span class="result-label">Capital après {{ dureeAnnees }} ans</span>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-value">{{ totalVerse | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+            <span class="stat-label">Total versé</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value highlight">{{ gainsInterets | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+            <span class="stat-label">Gains (intérêts)</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">{{ (valeurFinale / totalVerse) | number:'1.2-2':'fr-FR' }}x</span>
+            <span class="stat-label">Multiplicateur</span>
+          </div>
+        </div>
+
+        <div class="cost-visualization" style="margin-top: 1rem;">
+          <div class="cost-bar">
+            <div class="cost-segment capital" [style.width.%]="(totalVerse / valeurFinale) * 100"
+                 pTooltip="Versements" tooltipPosition="top"></div>
+            <div class="cost-segment interets" [style.width.%]="(gainsInterets / valeurFinale) * 100"
+                 pTooltip="Intérêts composés" tooltipPosition="top"></div>
+          </div>
+          <div class="cost-legend">
+            <span class="legend-capital"><i></i> Versements ({{ ((totalVerse / valeurFinale) * 100) | number:'1.0-0' }}%)</span>
+            <span class="legend-interets"><i></i> Intérêts ({{ ((gainsInterets / valeurFinale) * 100) | number:'1.0-0' }}%)</span>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Résultats Mode Multi-actifs -->
+      <p-panel *ngIf="!modeSimple && actifs.length > 0" header="Récapitulatif multi-actifs" styleClass="results-panel">
+        <div class="main-result">
+          <div class="result-icon">
+            <i class="pi pi-wallet"></i>
+          </div>
+          <div class="result-content">
+            <span class="result-value">{{ totalGeneral | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+            <span class="result-label">Capital total</span>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-value">{{ totalVerseGeneral | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+            <span class="stat-label">Total versé</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value highlight">{{ totalGainsGeneral | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+            <span class="stat-label">Total gains</span>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Graphique -->
+      <p-panel header="Évolution du capital" styleClass="custom-panel" *ngIf="afficherGraph">
+        <div class="chart-container" style="height: 350px;">
+          <p-chart type="line"
+                   [data]="{ labels: lineChartLabels, datasets: lineChartData }"
+                   [options]="chartOptions">
+          </p-chart>
+        </div>
+      </p-panel>
+
+      <!-- Tableau d'évolution (mode simple) -->
+      <p-panel *ngIf="modeSimple && evolutionAnnuelle.length > 0"
+               header="Évolution année par année" styleClass="custom-panel" [toggleable]="true" [collapsed]="true">
+        <div class="table-container">
+          <table class="evolution-table">
+            <thead>
+              <tr>
+                <th>Année</th>
+                <th>Capital</th>
+                <th>Versé</th>
+                <th>Intérêts cumulés</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let e of evolutionAnnuelle">
+                <td>{{ e.annee }}</td>
+                <td class="highlight">{{ e.capital | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</td>
+                <td>{{ e.verse | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</td>
+                <td class="positive">{{ e.interets | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <p-panel header="Comprendre les intérêts composés" styleClass="custom-panel" [toggleable]="true" [collapsed]="true">
+      <h3>L'effet boule de neige</h3>
+      <p>Les intérêts composés, c'est quand vos gains génèrent eux-mêmes des gains. Au lieu de toucher des intérêts uniquement sur votre mise de départ, vous touchez des intérêts sur votre mise + tous les intérêts déjà accumulés.</p>
+
+      <h3>La formule magique</h3>
+      <p><strong>Capital final = Capital initial × (1 + taux)^années</strong></p>
+      <p>Exemple : 10 000€ à 7% pendant 30 ans = 10 000 × 1,07^30 = 76 123€ (sans aucun versement supplémentaire !)</p>
+
+      <h3>Pourquoi commencer tôt ?</h3>
+      <ul>
+        <li><strong>À 25 ans :</strong> 200€/mois à 7% = 525 000€ à 65 ans</li>
+        <li><strong>À 35 ans :</strong> 400€/mois (le double !) à 7% = 489 000€ à 65 ans</li>
+        <li>10 ans de retard nécessitent de doubler l'effort pour un résultat inférieur</li>
+      </ul>
+
+      <h3>La règle des 72</h3>
+      <p>Divisez 72 par votre taux pour savoir en combien d'années votre capital double :</p>
+      <ul>
+        <li>À 3% : 72/3 = 24 ans</li>
+        <li>À 7% : 72/7 = 10 ans</li>
+        <li>À 10% : 72/10 = 7 ans</li>
+      </ul>
+    </p-panel>
+  </section>
+
+  <app-faq-section [faqItems]="faqItems" pageTitle="Simulateur Intérêts Composés"></app-faq-section>
+</div>

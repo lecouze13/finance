@@ -2,10 +2,11 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { FaqSectionComponent, FaqItem } from '../../shared/faq-section/faq-section.component';
+
 @Component({
   selector: 'app-simulateur-brut-net',
   templateUrl: './simulateur-brut-net.component.html',
-  styleUrls: ['./simulateur-brut-net.component.scss']
+  standalone: false
 })
 export class SimulateurBrutNetComponent implements OnInit {
 

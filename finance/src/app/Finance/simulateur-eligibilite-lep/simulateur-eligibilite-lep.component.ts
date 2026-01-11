@@ -8,7 +8,7 @@ import { FaqItem } from '../../shared/faq-section/faq-section.component';
 @Component({
   selector: 'app-simulateur-eligibilite-lep',
   templateUrl: './simulateur-eligibilite-lep.component.html',
-  styleUrls: ['./simulateur-eligibilite-lep.component.scss'],
+  standalone: false
 })
 export class SimulateurEligibiliteLepComponent implements OnInit {
   form: FormGroup;

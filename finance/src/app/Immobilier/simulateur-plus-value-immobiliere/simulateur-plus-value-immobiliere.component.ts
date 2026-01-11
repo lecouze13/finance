@@ -5,7 +5,7 @@ import { FaqSectionComponent, FaqItem } from '../../shared/faq-section/faq-secti
 @Component({
   selector: 'app-simulateur-plus-value-immobiliere',
   templateUrl: './simulateur-plus-value-immobiliere.component.html',
-  styleUrls: ['./simulateur-plus-value-immobiliere.component.scss']
+  standalone: false
 })
 export class SimulateurPlusValueImmobiliereComponent implements OnInit {
   prixAchat: number = 0;

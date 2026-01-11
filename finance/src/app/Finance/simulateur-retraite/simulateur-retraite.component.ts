@@ -6,8 +6,7 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 @Component({
   selector: 'app-simulateur-retraite',
   templateUrl: './simulateur-retraite.component.html',
-  styleUrls: ['./simulateur-retraite.component.scss'],
-
+  standalone: false
 })
 export class SimulateurRetraiteComponent implements OnInit {
   form: FormGroup;

@@ -4,7 +4,7 @@ import { AnalyticsService } from "./shared/services/analytics.service";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  standalone: false
 })
 export class AppComponent implements OnInit {
   private analyticsService = inject(AnalyticsService);

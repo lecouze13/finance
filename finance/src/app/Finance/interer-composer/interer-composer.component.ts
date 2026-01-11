@@ -1,142 +1,65 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
-import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
-import { Inject, PLATFORM_ID } from '@angular/core';
-import { FaqSectionComponent, FaqItem } from '../../shared/faq-section/faq-section.component';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { SeoService } from '../../Constructor/service/seo.service';
+import { FaqItem } from '../../shared/faq-section/faq-section.component';
+import { ExportData, ExportSection, ExportRow } from '../../shared/services/export.service';
 
 interface Actif {
-  nom: string | null;
-  capitalInitial: number | null;
-  versementPeriodique: number | null;
-  tauxAnnuel: number | null;
-  dureeAnnees: number | null;
-  [key: string]: any;
+  nom: string;
+  capitalInitial: number;
+  versementPeriodique: number;
+  tauxAnnuel: number;
+  dureeAnnees: number;
+  valeurFinale?: number;
+  totalVerse?: number;
+  gainsInterets?: number;
 }
 
 @Component({
   selector: 'app-interer-composer',
   templateUrl: './interer-composer.component.html',
-  styleUrls: ['./interer-composer.component.scss']
+  styleUrls: ['./interer-composer.component.scss'],
+  standalone: false
 })
 export class IntererComposerComponent implements OnInit {
-  faqItems: FaqItem[] = [
-    {
-      question: 'Qu’est-ce que l’intérêt composé ?',
-      answer: 'L’intérêt composé est le calcul des intérêts non seulement sur le capital initial mais aussi sur les intérêts déjà accumulés. Cela permet à votre capital de croître plus rapidement avec le temps.'
-    },
-    {
-      question: 'Comment fonctionne ce calculateur ?',
-      answer: 'Ce calculateur vous permet d’estimer la croissance de votre capital en fonction d’un capital initial, de versements périodiques, d’un taux d’intérêt annuel, d’une durée et de la fréquence de capitalisation.'
-    },
-    {
-      question: 'Quelle est la différence entre capitalisation annuelle et mensuelle ?',
-      answer: 'La capitalisation annuelle signifie que les intérêts sont ajoutés une fois par an, tandis que la capitalisation mensuelle les ajoute chaque mois, ce qui accélère la croissance du capital.'
-    },
-    {
-      question: 'Puis-je entrer un versement périodique nul ?',
-      answer: 'Oui, si vous ne faites pas de versements réguliers, entrez zéro. Le calcul se fera uniquement sur le capital initial et les intérêts composés.'
-    },
-    {
-      question: 'Le taux d’intérêt est-il fixe ?',
-      answer: 'Ce calculateur utilise un taux fixe pour simplifier les calculs. Dans la réalité, les taux peuvent varier au fil du temps.'
-    },
-    {
-      question: 'Quels sont les avantages de l’intérêt composé ?',
-      answer: 'L’intérêt composé maximise la croissance du capital sur le long terme, permettant de bénéficier de l’effet boule de neige des intérêts générés.'
-    },
-    {
-      question: 'Peut-on retirer de l’argent pendant la période de calcul ?',
-      answer: 'Non, ce calculateur suppose que le capital reste investi sans retrait pendant toute la durée indiquée.'
-    },
-    {
-      question: 'Quels paramètres influencent le résultat ?',
-      answer: 'Le capital initial, les versements périodiques, le taux d’intérêt, la fréquence de capitalisation et la durée sont les principaux paramètres.'
-    },
-    {
-      question: 'Le calcul prend-il en compte l’inflation ?',
-      answer: 'Non, ce calculateur ne prend pas en compte l’inflation. Il estime la croissance nominale du capital.'
-    },
-    {
-      question: 'Est-il possible d’exporter les résultats ?',
-      answer: 'Actuellement, ce simulateur ne propose pas d’export, mais vous pouvez copier manuellement les résultats affichés.'
-    }
-  ];
+  // Mode de calcul
+  modeSimple: boolean = true;
 
-  constructor(  @Inject(PLATFORM_ID) private platformId: any, 
-private renderer: Renderer2, private seo: SeoService) { }
+  // Paramètres mode simple
+  capitalInitial: number = 10000;
+  versementMensuel: number = 200;
+  tauxAnnuel: number = 7;
+  dureeAnnees: number = 20;
 
-  ngOnInit(): void {
+  // Résultats mode simple
+  valeurFinale: number = 0;
+  totalVerse: number = 0;
+  gainsInterets: number = 0;
+  evolutionAnnuelle: { annee: number; capital: number; verse: number; interets: number }[] = [];
 
-    this.seo.updateMetaData({
-      title: 'Simulateur intérêt composé 2025 | CalculateurFinance.fr',
-      description: 'Calculez la croissance de votre capital avec l’intérêt composé grâce à notre simulateur simple et gratuit. Prenez en compte capital initial, versements, taux et durée.',
-      url: 'https://calculateurfinance.fr/interet-compose/',
-          keywords: 'simulateur intérêt composé, intérêt composé avec plusieurs actifs, calcul capitalisation, épargne long terme, rendement composé, calcul intérêts cumulés, investissement régulier, croissance du capital, effet boule de neige, finance personnelle'
+  // Mode multi-actifs
+  actifs: Actif[] = [];
+  totalGeneral: number = 0;
+  totalVerseGeneral: number = 0;
+  totalGainsGeneral: number = 0;
 
-    });
-  if (isPlatformBrowser(this.platformId)) {
-    }
-  }
-
-
-  champs = [
-    { key: 'nom', label: 'Nom' },
-    { key: 'capitalInitial', label: 'Capital initial (€)', min: 0, step: 100 },
-    { key: 'versementPeriodique', label: 'Versement périodique mensuel (€)', min: 0, step: 50 },
-    { key: 'tauxAnnuel', label: 'Taux d’intérêt annuel (%)', min: 0, max: 100, step: 0.01, minFractionDigits: 2, maxFractionDigits: 2 },
-    { key: 'dureeAnnees', label: 'Durée (années)', min: 1, step: 1 }
-  ];
-
-  actifs: Actif[] = [
-    {
-      nom: '',
-      capitalInitial: null,
-      versementPeriodique: null,
-      tauxAnnuel: null,
-      dureeAnnees: null,
-    }
-  ];
-
-  resultat: string | null = null;
-  afficherGraph = false;
-
+  // Chart
+  afficherGraph: boolean = false;
   lineChartLabels: string[] = [];
   lineChartData: any[] = [];
 
   chartOptions: any = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: { position: 'top' },
-      title: {
-        display: true,
-        text: 'Évolution du capital avec intérêts composés'
-      },
       tooltip: {
-        mode: 'nearest',
+        mode: 'index',
         intersect: false,
-        backgroundColor: 'rgba(0, 0, 0, 0.85)',
-        titleFont: {
-          size: 18
-        },
-        bodyFont: {
-          size: 16
-        },
-        padding: 20,
-        cornerRadius: 8,
-        titleColor: '#ffffff',
-        bodyColor: '#eeeeee',
         callbacks: {
-          label: (context: any) =>
-            context.dataset.label + ': ' + context.parsed.y.toLocaleString('fr-FR') + ' €'
+          label: (context: any) => `${context.dataset.label}: ${context.parsed.y.toLocaleString('fr-FR')} €`
         }
       }
-    },
-    interaction: {
-      mode: 'nearest',
-      axis: 'x',
-      intersect: false
-    },
-    elements: {
-      point: { radius: 0 }
     },
     scales: {
       y: {
@@ -148,156 +71,276 @@ private renderer: Renderer2, private seo: SeoService) { }
     }
   };
 
-  ajouterActif() {
-    this.actifs.push({
-      nom: '',
-      capitalInitial: null,
-      versementPeriodique: null,
-      tauxAnnuel: null,
-      dureeAnnees: null
+  faqItems: FaqItem[] = [
+    {
+      question: "Qu'est-ce que l'intérêt composé ?",
+      answer: "L'intérêt composé, c'est quand les intérêts générés sont réinvestis et produisent eux-mêmes des intérêts. C'est l'effet \"boule de neige\" : votre capital croît de façon exponentielle au fil du temps."
+    },
+    {
+      question: "Pourquoi l'intérêt composé est-il si puissant ?",
+      answer: "Einstein aurait dit que c'est la 8ème merveille du monde. Un capital de 10 000€ à 7%/an devient 76 000€ après 30 ans sans rien ajouter. Avec 200€/mois en plus, vous atteignez 300 000€ !"
+    },
+    {
+      question: "Quelle est la différence avec l'intérêt simple ?",
+      answer: "L'intérêt simple calcule les gains uniquement sur le capital initial. L'intérêt composé calcule les gains sur le capital + les intérêts accumulés. Sur 20 ans, la différence peut doubler votre capital final."
+    },
+    {
+      question: "Quel taux de rendement utiliser ?",
+      answer: "Pour des actions (ETF monde) : 7-8% historique. Livret A : 3%. Assurance-vie fonds euros : 2-3%. Immobilier locatif : 3-5% net. N'oubliez pas de déduire l'inflation (2%) pour un rendement réel."
+    },
+    {
+      question: "Vaut-il mieux investir tôt ou beaucoup ?",
+      answer: "Investir tôt ! Commencer à 25 ans avec 200€/mois à 7% donne 525 000€ à 65 ans. Commencer à 35 ans avec 400€/mois (le double !) donne seulement 489 000€. Le temps est votre meilleur allié."
+    },
+    {
+      question: "Comment fonctionne la capitalisation mensuelle ?",
+      answer: "Au lieu de calculer les intérêts une fois par an, on les calcule chaque mois (taux annuel / 12). Cela accélère légèrement la croissance car les intérêts commencent à produire plus tôt."
+    },
+    {
+      question: "Ce simulateur tient-il compte de l'inflation ?",
+      answer: "Non, les montants sont en euros courants. Pour une vision réaliste, utilisez un taux net d'inflation. Si vous espérez 7% et l'inflation est à 2%, utilisez 5% dans le simulateur."
+    },
+    {
+      question: "Comment atteindre l'indépendance financière ?",
+      answer: "La règle des 4% suggère qu'un capital de 25x vos dépenses annuelles permet de vivre des intérêts. Pour 2 000€/mois, visez 600 000€. Ce simulateur vous aide à planifier ce parcours."
+    },
+    {
+      question: "Puis-je simuler plusieurs placements ?",
+      answer: "Oui ! Passez en mode multi-actifs pour comparer différents placements (PEA, assurance-vie, SCPI...) avec des taux et durées différents, et voir l'évolution de chacun."
+    },
+    {
+      question: "Les frais sont-ils pris en compte ?",
+      answer: "Non, utilisez le taux net de frais. Pour un ETF à 7% brut avec 0,3% de frais annuels, entrez 6,7%. Les frais réduisent significativement le rendement sur le long terme."
+    }
+  ];
+
+  constructor(
+    private seo: SeoService,
+    @Inject(PLATFORM_ID) private platformId: any
+  ) {}
+
+  ngOnInit(): void {
+    this.seo.updateMetaData({
+      title: 'Simulateur Intérêts Composés 2025 | Calculez votre Capital Futur',
+      description: "Simulez la puissance des intérêts composés. Calculez la croissance de votre épargne avec versements réguliers. Visualisez l'effet boule de neige sur votre capital.",
+      keywords: 'intérêt composé, simulateur épargne, calculateur investissement, effet boule de neige, capital futur, versements réguliers, rendement composé',
+      url: 'https://calculateurfinance.fr/interet-compose/',
+    });
+
+    this.calculer();
+  }
+
+  calculer(): void {
+    if (this.modeSimple) {
+      this.calculerSimple();
+    } else {
+      this.calculerMultiActifs();
+    }
+    this.genererGraphique();
+  }
+
+  calculerSimple(): void {
+    const r = this.tauxAnnuel / 100 / 12;
+    const n = this.dureeAnnees * 12;
+
+    let capital = this.capitalInitial;
+    let verse = this.capitalInitial;
+    this.evolutionAnnuelle = [];
+
+    for (let mois = 1; mois <= n; mois++) {
+      capital = capital * (1 + r) + this.versementMensuel;
+      verse += this.versementMensuel;
+
+      if (mois % 12 === 0) {
+        this.evolutionAnnuelle.push({
+          annee: mois / 12,
+          capital: Math.round(capital),
+          verse: verse,
+          interets: Math.round(capital - verse)
+        });
+      }
+    }
+
+    this.valeurFinale = Math.round(capital);
+    this.totalVerse = verse;
+    this.gainsInterets = Math.round(capital - verse);
+  }
+
+  calculerMultiActifs(): void {
+    this.totalGeneral = 0;
+    this.totalVerseGeneral = 0;
+    this.totalGainsGeneral = 0;
+
+    this.actifs.forEach(actif => {
+      const r = actif.tauxAnnuel / 100 / 12;
+      const n = actif.dureeAnnees * 12;
+
+      let capital = actif.capitalInitial;
+      let verse = actif.capitalInitial;
+
+      for (let mois = 1; mois <= n; mois++) {
+        capital = capital * (1 + r) + actif.versementPeriodique;
+        verse += actif.versementPeriodique;
+      }
+
+      actif.valeurFinale = Math.round(capital);
+      actif.totalVerse = verse;
+      actif.gainsInterets = Math.round(capital - verse);
+
+      this.totalGeneral += actif.valeurFinale;
+      this.totalVerseGeneral += actif.totalVerse;
+      this.totalGainsGeneral += actif.gainsInterets;
     });
   }
 
-  supprimerActif(index: number) {
-    this.actifs.splice(index, 1);
-  }
+  genererGraphique(): void {
+    if (this.modeSimple) {
+      this.lineChartLabels = this.evolutionAnnuelle.map(e => `Année ${e.annee}`);
+      this.lineChartData = [
+        {
+          data: this.evolutionAnnuelle.map(e => e.capital),
+          label: 'Capital total',
+          borderColor: '#1976d2',
+          backgroundColor: 'rgba(25, 118, 210, 0.1)',
+          fill: true
+        },
+        {
+          data: this.evolutionAnnuelle.map(e => e.verse),
+          label: 'Montant versé',
+          borderColor: '#666',
+          borderDash: [5, 5],
+          fill: false
+        }
+      ];
+    } else {
+      const dureeMax = Math.max(...this.actifs.map(a => a.dureeAnnees));
+      this.lineChartLabels = Array.from({ length: dureeMax }, (_, i) => `Année ${i + 1}`);
 
-  estValide(): boolean {
-    return this.actifs.every(actif =>
-      typeof actif.nom === 'string' && actif.nom.trim().length > 0 &&
-      typeof actif.capitalInitial === 'number' && actif.capitalInitial >= 0 &&
-      typeof actif.versementPeriodique === 'number' && actif.versementPeriodique >= 0 &&
-      typeof actif.tauxAnnuel === 'number' && actif.tauxAnnuel >= 0 && actif.tauxAnnuel <= 100 &&
-      typeof actif.dureeAnnees === 'number' && actif.dureeAnnees >= 1
-    );
-  }
+      const datasets: any[] = [];
+      const couleurs = ['#1976d2', '#2e7d32', '#d32f2f', '#f57c00', '#7b1fa2'];
 
-  calculerValeurFuture(actif: Actif): number {
-    const P = actif.capitalInitial ?? 0;
-    const PMT = actif.versementPeriodique ?? 0;
-    const r = (actif.tauxAnnuel ?? 0) / 100 / 12;
-    const n = (actif.dureeAnnees ?? 0) * 12;
+      this.actifs.forEach((actif, idx) => {
+        const r = actif.tauxAnnuel / 100 / 12;
+        const values: number[] = [];
+        let capital = actif.capitalInitial;
 
-    let valeur = P;
-    for (let i = 1; i <= n; i++) {
-      valeur = valeur * (1 + r) + PMT;
-    }
-    return valeur;
-  }
+        for (let annee = 1; annee <= dureeMax; annee++) {
+          if (annee <= actif.dureeAnnees) {
+            for (let mois = 0; mois < 12; mois++) {
+              capital = capital * (1 + r) + actif.versementPeriodique;
+            }
+          }
+          values.push(Math.round(capital));
+        }
 
-  calculer() {
-    if (!this.estValide()) {
-      this.resultat = "Veuillez remplir correctement tous les champs (nom obligatoire).";
-      this.afficherGraph = false;
-      return;
-    }
-
-    const labels: string[] = [];
-    const datasets: any[] = [];
-
-    const dureeMax = Math.max(...this.actifs.map(a => (a.dureeAnnees ?? 0) * 12));
-    const cumulesParMois = new Array(dureeMax + 1).fill(0);
-    const totalSansInterets = new Array(dureeMax + 1).fill(0);
-
-    for (let m = 0; m <= dureeMax; m++) {
-      const annee = Math.floor(m / 12);
-      const mois = (m % 12) + 1;
-      labels.push(`Année ${annee + 1} - Mois ${mois}`);
-    }
-
-
-    this.actifs.forEach((actif, idx) => {
-      const r = (actif.tauxAnnuel ?? 0) / 100 / 12;
-      let valeur = actif.capitalInitial ?? 0;
-      const values: number[] = [valeur];
-      const duree = (actif.dureeAnnees ?? 0) * 12;
-      for (let mois = 1; mois <= duree; mois++) {
-        valeur = valeur * (1 + r) + (actif.versementPeriodique ?? 0);
-        values.push(+valeur.toFixed(2));
-      }
-
-      const valeurFinale = values[values.length - 1];
-      while (values.length <= dureeMax) {
-        values.push(valeurFinale);
-      }
-
-      for (let i = 0; i <= dureeMax; i++) {
-        cumulesParMois[i] += (values[i] || 0);
-      }
-
-      datasets.push({
-        data: values,
-        label: actif.nom || `Actif ${idx + 1}`,
-        borderColor: this.couleurActif(idx),
-        fill: false,
-        tension: 0.3
+        datasets.push({
+          data: values,
+          label: actif.nom || `Actif ${idx + 1}`,
+          borderColor: couleurs[idx % couleurs.length],
+          fill: false
+        });
       });
 
-      const totalApports: number[] = [];
-      const capitalInit = actif.capitalInitial ?? 0;
-      const versement = actif.versementPeriodique ?? 0;
+      this.lineChartData = datasets;
+    }
 
-      for (let mois = 0; mois <= dureeMax; mois++) {
-        const versementsValides = mois <= duree ? mois * versement : duree * versement;
-        const total = capitalInit + versementsValides;
-        totalApports.push(total);
-        totalSansInterets[mois] += total;
-      }
-
-      datasets.push({
-        data: totalApports,
-        label: (actif.nom || `Actif ${idx + 1}`) + ' (sans intérêts)',
-        borderColor: this.couleurClair(idx),
-        borderDash: [4, 2],
-        fill: false,
-        tension: 0.3
-      });
-    });
-
-    datasets.push({
-      data: cumulesParMois,
-      label: 'Total cumulé (avec intérêts)',
-      borderColor: 'black',
-      borderWidth: 2,
-      fill: false,
-      tension: 0.3
-    });
-
-    datasets.push({
-      data: totalSansInterets,
-      label: 'Total cumulé (sans intérêts)',
-      borderColor: 'gray',
-      borderDash: [8, 4],
-      borderWidth: 2,
-      fill: false,
-      tension: 0.3
-    });
-
-    this.lineChartLabels = labels;
-    this.lineChartData = datasets;
-
-    let texteResultat = 'Résultats par actif :\n';
-    this.actifs.forEach((actif, idx) => {
-      const vf = this.calculerValeurFuture(actif);
-      texteResultat += `- ${actif.nom || 'Actif ' + (idx + 1)} : ${vf.toFixed(2)} € après ${(actif.dureeAnnees ?? 0)} an(s)\n`;
-    });
-
-    const total = cumulesParMois[dureeMax];
-    const totalSimple = totalSansInterets[dureeMax];
-    texteResultat += `\nTotal cumulé de tous les actifs (avec intérêts) : ${total.toFixed(2)} €`;
-    texteResultat += `\nTotal cumulé de tous les actifs (sans intérêts) : ${totalSimple.toFixed(2)} €`;
-
-    this.resultat = texteResultat;
     this.afficherGraph = true;
   }
 
-  couleurActif(index: number): string {
-    const couleurs = ['blue', 'green', 'red', 'orange', 'purple', 'brown', 'cyan', 'magenta'];
-    return couleurs[index % couleurs.length];
+  ajouterActif(): void {
+    this.actifs.push({
+      nom: `Actif ${this.actifs.length + 1}`,
+      capitalInitial: 5000,
+      versementPeriodique: 100,
+      tauxAnnuel: 5,
+      dureeAnnees: 10
+    });
+    this.calculer();
   }
 
-  couleurClair(index: number): string {
-    const couleursClaires = ['lightblue', 'lightgreen', 'pink', 'wheat', 'plum', 'burlywood', 'lightcyan', 'thistle'];
-    return couleursClaires[index % couleursClaires.length];
+  supprimerActif(index: number): void {
+    this.actifs.splice(index, 1);
+    if (this.actifs.length > 0) {
+      this.calculer();
+    }
+  }
+
+  toggleMode(): void {
+    this.modeSimple = !this.modeSimple;
+    if (!this.modeSimple && this.actifs.length === 0) {
+      this.ajouterActif();
+    }
+    this.calculer();
+  }
+
+  formatCurrency(value: number): string {
+    return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(value);
+  }
+
+  getExportData(): ExportData {
+    if (this.modeSimple) {
+      return {
+        title: 'Simulation Intérêts Composés',
+        subtitle: `${this.formatCurrency(this.capitalInitial)} initial + ${this.formatCurrency(this.versementMensuel)}/mois à ${this.tauxAnnuel}% sur ${this.dureeAnnees} ans`,
+        date: new Date(),
+        sections: [
+          {
+            title: 'Paramètres',
+            rows: [
+              { label: 'Capital initial', value: this.capitalInitial, type: 'currency' },
+              { label: 'Versement mensuel', value: this.versementMensuel, type: 'currency' },
+              { label: 'Taux annuel', value: this.tauxAnnuel, type: 'percent' },
+              { label: 'Durée', value: `${this.dureeAnnees} ans`, type: 'text' }
+            ]
+          },
+          {
+            title: 'Résultats',
+            rows: [
+              { label: 'Capital final', value: this.valeurFinale, type: 'currency', highlight: true },
+              { label: 'Total versé', value: this.totalVerse, type: 'currency' },
+              { label: 'Gains (intérêts)', value: this.gainsInterets, type: 'currency', highlight: true },
+              { label: 'Multiplicateur', value: `${(this.valeurFinale / this.totalVerse).toFixed(2)}x`, type: 'text' }
+            ]
+          },
+          {
+            title: 'Évolution par année',
+            rows: this.evolutionAnnuelle.slice(-5).map(e => ({
+              label: `Année ${e.annee}`,
+              value: e.capital,
+              type: 'currency' as const
+            }))
+          }
+        ]
+      };
+    } else {
+      const sections: ExportSection[] = [
+        {
+          title: 'Récapitulatif',
+          rows: [
+            { label: 'Total capital final', value: this.totalGeneral, type: 'currency', highlight: true },
+            { label: 'Total versé', value: this.totalVerseGeneral, type: 'currency' },
+            { label: 'Total gains', value: this.totalGainsGeneral, type: 'currency', highlight: true }
+          ]
+        }
+      ];
+
+      this.actifs.forEach(actif => {
+        const actifRows: ExportRow[] = [
+          { label: 'Capital initial', value: actif.capitalInitial, type: 'currency' },
+          { label: 'Versement mensuel', value: actif.versementPeriodique, type: 'currency' },
+          { label: 'Taux annuel', value: actif.tauxAnnuel, type: 'percent' },
+          { label: 'Durée (années)', value: actif.dureeAnnees, type: 'number' },
+          { label: 'Capital final', value: actif.valeurFinale ?? 0, type: 'currency', highlight: true }
+        ];
+        sections.push({ title: actif.nom, rows: actifRows });
+      });
+
+      return {
+        title: 'Simulation Multi-Actifs',
+        subtitle: `Comparaison de ${this.actifs.length} actifs`,
+        date: new Date(),
+        sections
+      };
+    }
   }
 }

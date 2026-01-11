@@ -1,10 +1,12 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { SeoService } from '../../Constructor/service/seo.service'; import { isPlatformBrowser } from '@angular/common';
 import { FaqSectionComponent, FaqItem } from '../../shared/faq-section/faq-section.component';
-import { Inject, PLATFORM_ID } from '@angular/core';@Component({
+import { Inject, PLATFORM_ID } from '@angular/core';
+
+@Component({
   selector: 'app-comparateur-achat-location',
   templateUrl: './comparateur-achat-location.component.html',
-  styleUrls: ['./comparateur-achat-location.component.scss']
+  standalone: false
 })
 export class ComparateurAchatLocationComponent implements OnInit {
 

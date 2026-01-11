@@ -1,92 +1,169 @@
-<main>
-  <h1>Calculateur de Frais de Notaire</h1>
+<div class="simulateur-container">
+  <section class="header-section">
+    <h1>Simulateur Frais de Notaire</h1>
+    <p class="subtitle">Calculez précisément les frais d'acquisition pour votre achat immobilier</p>
+    <div class="export-actions">
+      <app-export-buttons [exportData]="getExportData()" [showPrint]="true"></app-export-buttons>
+    </div>
+  </section>
 
-  <div class="separator"></div><br>
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Informations du bien" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label>Prix du bien</label>
+            <p-inputNumber [(ngModel)]="prixBien" mode="currency" currency="EUR" locale="fr-FR"
+                           [min]="0" (ngModelChange)="calculer()"></p-inputNumber>
+          </div>
 
-  <div class="card-tri">
-    <div class="flex-auto">
-      <p-floatLabel class="input-label">
-        <p-inputNumber [(ngModel)]="valeurs['Prix du bien']" inputId="prixBien" required />
-        <label for="prixBien">Prix du bien</label>
-      </p-floatLabel>
+          <div class="form-group">
+            <label>Type de bien</label>
+            <p-dropdown [options]="typesBien" [(ngModel)]="typeBien" optionLabel="label" optionValue="value"
+                        (ngModelChange)="calculer()"></p-dropdown>
+          </div>
+
+          <div class="form-group" *ngIf="typeBien !== 'neuf'">
+            <label>Département</label>
+            <p-dropdown [options]="departements" [(ngModel)]="departement" optionLabel="label" optionValue="value"
+                        (ngModelChange)="calculer()"></p-dropdown>
+          </div>
+        </div>
+
+        <div class="help-box" style="margin-top: 1rem;">
+          <h4><i class="pi pi-info-circle"></i> Bon à savoir</h4>
+          <p style="margin: 0; font-size: 0.9rem;">
+            <strong>Ancien :</strong> 7-8% du prix • <strong>Neuf :</strong> 2-3% du prix • <strong>Terrain :</strong> 7-8% du prix
+          </p>
+        </div>
+      </p-panel>
+
+      <p-panel header="Barème des émoluments du notaire (2025)" styleClass="custom-panel" [toggleable]="true" [collapsed]="true">
+        <table class="bareme-table">
+          <thead>
+            <tr>
+              <th>Tranche du prix</th>
+              <th>Taux TTC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0 € à 6 500 €</td>
+              <td>3,945 %</td>
+            </tr>
+            <tr>
+              <td>6 500 € à 17 000 €</td>
+              <td>1,627 %</td>
+            </tr>
+            <tr>
+              <td>17 000 € à 60 000 €</td>
+              <td>1,085 %</td>
+            </tr>
+            <tr>
+              <td>Au-delà de 60 000 €</td>
+              <td>0,814 %</td>
+            </tr>
+          </tbody>
+        </table>
+      </p-panel>
     </div>
 
-    <div class="flex-auto">
-      <p-floatLabel class="input-label">
-        <p-dropdown inputId="typeBien" [options]="typesBien" [(ngModel)]="valeurs['Type de bien']" optionLabel="label"
-          placeholder="Sélectionner le type de bien">
-        </p-dropdown>
-        <label for="typeBien">Type de bien</label>
-      </p-floatLabel>
+    <div class="results-section">
+      <p-panel header="Estimation des frais de notaire" styleClass="results-panel">
+        <div class="main-result">
+          <div class="result-icon">
+            <i class="pi pi-file-edit"></i>
+          </div>
+          <div class="result-content">
+            <span class="result-value">{{ totalFrais | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+            <span class="result-label">Frais de notaire estimés</span>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-value">{{ pourcentageFrais | number:'1.2-2':'fr-FR' }} %</span>
+            <span class="stat-label">Du prix du bien</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value highlight">{{ prixTotal | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+            <span class="stat-label">Prix total acquisition</span>
+          </div>
+        </div>
+
+        <div class="cost-breakdown">
+          <h4>Détail des frais</h4>
+          <div class="cost-row">
+            <span class="cost-label">Droits de mutation (taxes)</span>
+            <span class="cost-value">{{ droitsMutation | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+          </div>
+          <div class="cost-row">
+            <span class="cost-label">Émoluments du notaire</span>
+            <span class="cost-value">{{ emolumentsNotaire | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+          </div>
+          <div class="cost-row">
+            <span class="cost-label">Contribution sécurité immobilière</span>
+            <span class="cost-value">{{ contributionSecurite | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+          </div>
+          <div class="cost-row">
+            <span class="cost-label">Débours et formalités</span>
+            <span class="cost-value">{{ debours | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+          </div>
+          <div class="cost-row total">
+            <span class="cost-label">Total frais de notaire</span>
+            <span class="cost-value">{{ totalFrais | currency:'EUR':'symbol':'1.0-0':'fr-FR' }}</span>
+          </div>
+        </div>
+
+        <div class="cost-visualization">
+          <div class="cost-bar">
+            <div class="cost-segment droits" [style.width.%]="(droitsMutation / totalFrais) * 100"
+                 pTooltip="Droits de mutation" tooltipPosition="top"></div>
+            <div class="cost-segment emoluments" [style.width.%]="(emolumentsNotaire / totalFrais) * 100"
+                 pTooltip="Émoluments" tooltipPosition="top"></div>
+            <div class="cost-segment securite" [style.width.%]="(contributionSecurite / totalFrais) * 100"
+                 pTooltip="Sécurité immo." tooltipPosition="top"></div>
+            <div class="cost-segment debours" [style.width.%]="(debours / totalFrais) * 100"
+                 pTooltip="Débours" tooltipPosition="top"></div>
+          </div>
+          <div class="cost-legend">
+            <span class="legend-droits"><i></i> Droits de mutation</span>
+            <span class="legend-emoluments"><i></i> Émoluments</span>
+            <span class="legend-securite"><i></i> Sécurité immo.</span>
+            <span class="legend-debours"><i></i> Débours</span>
+          </div>
+        </div>
+      </p-panel>
+
+      <div class="help-box" style="margin-top: 1rem;">
+        <h4><i class="pi pi-lightbulb"></i> Astuces pour réduire les frais</h4>
+        <ul style="margin: 0.5rem 0 0 0; padding-left: 1.2rem; font-size: 0.9rem;">
+          <li>Achetez dans le neuf : frais réduits à 2-3%</li>
+          <li>Déduisez le mobilier du prix (cuisine équipée, etc.)</li>
+          <li>Négociez les émoluments au-delà de 100 000€ (max -20%)</li>
+        </ul>
+      </div>
     </div>
-
-    <button type="button" pButton label="Calculer" icon="pi pi-check"class="p-button-success" (click)="calculerFrais()"
-      [disabled]="!valeurs['Prix du bien'] || !valeurs['Type de bien']">
-    </button>
   </div>
 
-  <div *ngIf="resultat !== null">
-    <h4>Frais de notaire estimés : {{ resultat | currency:'EUR' }}</h4>
-  </div>
+  <section class="content-section">
+    <p-panel header="Comprendre les frais de notaire" styleClass="custom-panel" [toggleable]="true" [collapsed]="true">
+      <h3>Composition des frais de notaire</h3>
+      <p>Les "frais de notaire" regroupent en réalité plusieurs types de frais :</p>
+      <ul>
+        <li><strong>Droits de mutation (≈80%) :</strong> Taxes reversées à l'État et aux collectivités. C'est la part la plus importante et elle n'est pas négociable.</li>
+        <li><strong>Émoluments du notaire (≈10%) :</strong> Rémunération du notaire calculée selon un barème réglementé. Partiellement négociable au-delà de 100 000€.</li>
+        <li><strong>Débours (≈10%) :</strong> Frais avancés par le notaire (état hypothécaire, cadastre, timbres, etc.).</li>
+        <li><strong>Contribution de sécurité immobilière :</strong> 0,10% du prix pour l'inscription au fichier immobilier.</li>
+      </ul>
 
-  <br><br>
-  <div class="separator"></div>
-  <br>
-  <h2>Tout savoir sur les frais de notaire</h2>
-<p>Les frais de notaire représentent l’ensemble des coûts liés à l’achat ou à la vente d’un bien immobilier. Ils sont principalement composés des taxes, des émoluments du notaire et des débours. Ces frais sont obligatoires et incombent généralement à l’acquéreur.</p>
+      <h3>Différence entre neuf et ancien</h3>
+      <p>Dans l'ancien, les droits de mutation s'élèvent à 5,81% (taux normal) contre seulement 0,715% dans le neuf. Cette différence explique l'écart important entre les deux types de biens.</p>
 
-<h2>Composition des frais de notaire</h2>
-<ul>
-  <li><strong>Les droits de mutation :</strong> ce sont des taxes perçues par l’État et les collectivités territoriales, représentant la majeure partie des frais (environ 80%).</li>
-  <li><strong>Les émoluments du notaire :</strong> ce sont les honoraires du notaire, calculés selon un barème progressif fixé par décret.</li>
-  <li><strong>Les débours :</strong> frais avancés par le notaire pour le compte de l’acquéreur (ex. : frais d’enregistrement, cadastre, copies de documents).</li>
-</ul>
+      <h3>Quand sont payés les frais ?</h3>
+      <p>Les frais sont payés le jour de la signature de l'acte authentique chez le notaire. Ils sont versés au notaire qui se charge de reverser les taxes aux administrations concernées.</p>
+    </p-panel>
+  </section>
 
-<h2>Montant des frais de notaire</h2>
-<p>En général, les frais de notaire s’élèvent à environ :</p>
-<ul>
-  <li><strong>7 à 8 %</strong> du prix d’achat pour un bien ancien</li>
-  <li><strong>2 à 3 %</strong> pour un bien neuf</li>
-</ul>
-<p>Ces pourcentages peuvent varier selon les départements et la nature du bien.</p>
-
-<h2>Barème des émoluments du notaire (au 1er janvier 2025)</h2>
-<table border="1" cellpadding="4">
-  <thead>
-    <tr>
-      <th>Tranche du prix d’achat</th>
-      <th>Taux applicable</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>De 0 à 6 500 €</td><td>3,945 %</td></tr>
-    <tr><td>De 6 501 à 17 000 €</td><td>1,627 %</td></tr>
-    <tr><td>De 17 001 à 60 000 €</td><td>1,085 %</td></tr>
-    <tr><td>Au-delà de 60 000 €</td><td>0,814 %</td></tr>
-  </tbody>
-</table>
-
-<h2>Comment réduire les frais de notaire ?</h2>
-<ul>
-  <li>Acheter dans le neuf, où les frais sont généralement plus faibles.</li>
-  <li>Négocier certains frais annexes avec le notaire.</li>
-  <li>Prendre en compte les frais dans le calcul global du budget immobilier.</li>
-</ul>
-
-<h2>À qui s’adressent les frais de notaire ?</h2>
-<p>Les frais sont payés à l’occasion de la signature de l’acte authentique chez le notaire, qui collecte et reverse ensuite les taxes aux administrations concernées.</p>
-
-<h2>Conclusion</h2>
-<p>Les frais de notaire sont une part importante du coût total d’un achat immobilier. Il est essentiel de bien les anticiper et de comprendre leur composition pour mieux gérer son budget lors d’une acquisition.</p>
-
-  
-  <br>
-  <br>
-  <app-faq-section
-    [title]="&quot;FAQ – Questions fréquentes sur les frais de notaire'&quot;"
-    [faqItems]="faqItems"
-    [ariaLabel]="&quot;Foire aux questions'&quot;">
-  </app-faq-section>
-
-
-</main>
+  <app-faq-section [faqItems]="faqItems" pageTitle="Simulateur Frais de Notaire"></app-faq-section>
+</div>

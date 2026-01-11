@@ -19,7 +19,7 @@ interface Ticker {
 @Component({
   selector: 'app-simulateur-dividend-fire',
   templateUrl: './simulateur-dividend-fire.component.html',
-  styleUrls: ['./simulateur-dividend-fire.component.scss'],
+  standalone: false
 })
 export class SimulateurDividendFireComponent implements OnInit {
   tickers: Ticker[] = [

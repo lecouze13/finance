@@ -6,7 +6,7 @@ import { SeoService } from '../../Constructor/service/seo.service';
 @Component({
   selector: 'app-simulateur-apport-vs-emprunt',
   templateUrl: './simulateur-apport-vs-emprunt.component.html',
-  styleUrls: ['./simulateur-apport-vs-emprunt.component.scss'],
+  standalone: false
 })
 export class SimulateurApportVsEmpruntComponent {
   form: FormGroup;

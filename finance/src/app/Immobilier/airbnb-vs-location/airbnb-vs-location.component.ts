@@ -11,9 +11,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-airbnb-vs-location',
-
   templateUrl: './airbnb-vs-location.component.html',
-  styleUrl: './airbnb-vs-location.component.scss',
+  standalone: false
 })
 export class AirbnbVsLocationComponent {
   // Données d'entrée (exemple)

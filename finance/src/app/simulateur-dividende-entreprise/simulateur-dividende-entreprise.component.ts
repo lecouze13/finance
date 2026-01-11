@@ -13,7 +13,7 @@ import { SeoService } from '../Constructor/service/seo.service';
 @Component({
   selector: 'app-simulateur-dividende-entreprise',
   templateUrl: './simulateur-dividende-entreprise.component.html',
-  styleUrls: ['./simulateur-dividende-entreprise.component.scss'],
+  standalone: false
 })
 export class SimulateurDividendeEntrepriseComponent implements OnInit {
   form: FormGroup;

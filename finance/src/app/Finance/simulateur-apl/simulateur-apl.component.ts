@@ -22,8 +22,7 @@ import { FaqSectionComponent, FaqItem } from '../../shared/faq-section/faq-secti
     DropdownModule,
     FaqSectionComponent
   ],
-  templateUrl: './simulateur-apl.component.html',
-  styleUrl: './simulateur-apl.component.scss'
+  templateUrl: './simulateur-apl.component.html'
 })
 export class SimulateurAplComponent implements OnInit {
   form: FormGroup;

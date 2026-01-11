@@ -5,9 +5,8 @@ import { FaqSectionComponent, FaqItem } from '../../shared/faq-section/faq-secti
 
 @Component({
   selector: 'app-rendement',
-
   templateUrl: './rendement.component.html',
-  styleUrl: './rendement.component.scss'
+  standalone: false
 })
 export class RendementComponent implements OnInit {
   faqItems: FaqItem[] = [

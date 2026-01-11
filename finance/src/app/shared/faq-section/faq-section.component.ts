@@ -10,8 +10,7 @@ export interface FaqItem {
   selector: 'app-faq-section',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './faq-section.component.html',
-  styleUrl: './faq-section.component.scss'
+  templateUrl: './faq-section.component.html'
 })
 export class FaqSectionComponent implements OnInit {
   @Input() title: string = 'FAQ';

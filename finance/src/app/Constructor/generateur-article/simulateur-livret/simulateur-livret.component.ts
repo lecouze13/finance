@@ -15,7 +15,7 @@ import { livrets } from '../livrets.model';
 @Component({
   selector: 'app-simulateur-livret',
   templateUrl: './simulateur-livret.component.html',
-  styleUrl: './simulateur-livret.component.scss',
+  standalone: false
 })
 export class SimulateurLivretComponent {
   @Input() title: string | undefined;
