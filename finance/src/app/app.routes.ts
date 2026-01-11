@@ -310,7 +310,128 @@ export const routes: Routes = [
     component: ContenuPageComponent,
   },
   {
+    path: 'article/hang-seng',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/asx200',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/stoxx600',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/eurostoxx50',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/nasdaq100',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/sensex',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/kospi',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/bovespa',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/smi',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/aex',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/nifty50',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/shanghai-composite',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/csi300',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/taiex',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/set',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/jse-top40',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/omx-stockholm',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/bel20',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/psi',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/athex',
+    component: ContenuPageComponent,
+  },
+  {
     path: 'article/reforme-taux-aout-2025',
+    component: ContenuPageComponent,
+  },
+  // Articles Immobilier
+  {
+    path: 'article/investissement-locatif',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/lmnp-guide',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/sci-immobiliere',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/frais-notaire',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/plus-value-immobiliere',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/pret-immobilier',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/fiscalite-immobiliere',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/rendement-locatif-guide',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/defiscalisation-immobiliere',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/viager-immobilier',
     component: ContenuPageComponent,
   },
 

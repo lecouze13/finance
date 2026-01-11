@@ -36,12 +36,12 @@ export class HeaderComponent implements OnInit {
         label: value.titre,
         route: `/article/${key}`,
       }));
-      const indiceitems = allEntries
-      .filter(([, value]) => value.categorie === 'indices mondiaux')
-      .map(([key, value]) => ({
-        label: value.titre,
-        route: `/article/${key}`,
-      }));
+      // const indiceitems = allEntries
+      // .filter(([, value]) => value.categorie === 'indices mondiaux')
+      // .map(([key, value]) => ({
+      //   label: value.titre,
+      //   route: `/article/${key}`,
+      // }));
 
 
       const simuLivret = allEntriesSimu
@@ -265,13 +265,6 @@ export class HeaderComponent implements OnInit {
           icon: 'pi pi-wallet',
           items: investissementItems,
         },
-      {
-          label: 'indices mondiaux',
-          icon: 'pi pi-wallet',
-          items: indiceitems,
-        },
-      
-      
       ]
       },
 

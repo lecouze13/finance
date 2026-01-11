@@ -1,11 +1,13 @@
 import { indice } from "./indice.model";
 import { livrets } from "./livrets.model";
+import { immobilier } from "./immobilier.model";
 
 export const pages: {
   [key: string]: { titre: string; contenu: string; description: string, categorie: string, keywords: string };
 } = {
   ...livrets,
-    ...indice,
+  ...indice,
+  ...immobilier,
 
   'pea-vs-assurance-vie': {
     titre: 'PEA ou Assurance Vie : Que choisir en 2025 ?',
