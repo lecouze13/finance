@@ -1,3 +1,6 @@
+// Styles spécifiques au simulateur PTZ
+// Les styles communs sont importés via styles.scss (_simulator-common.scss)
+
 .panel-colonnes {
   display: flex;
   flex-wrap: wrap;
@@ -12,21 +15,21 @@
   padding: 1.5rem;
   border-radius: 8px;
   border-left: 4px solid #007b8a;
-}
 
-.colonne h4 {
-  margin-top: 0;
-  color: #005f70;
-}
+  h4 {
+    margin-top: 0;
+    color: #005f70;
+  }
 
-.colonne ul {
-  padding-left: 1.2rem;
-  margin: 0;
-}
+  ul {
+    padding-left: 1.2rem;
+    margin: 0;
+  }
 
-.colonne li {
-  margin-bottom: 0.5rem;
-  color: #475569;
+  li {
+    margin-bottom: 0.5rem;
+    color: #475569;
+  }
 }
 
 .resultats.eligible {

@@ -1,72 +1,5 @@
-.simulateur-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.header-section {
-  text-align: center;
-  margin-bottom: 2rem;
-
-  h1 {
-    color: #1e3a5f;
-    margin-bottom: 0.5rem;
-    font-size: 2rem;
-  }
-
-  .subtitle {
-    color: #6c757d;
-    font-size: 1.1rem;
-  }
-}
-
-.content-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-
-  @media (max-width: 968px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.form-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-
-  @media (max-width: 576px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-
-  &.full-width {
-    grid-column: 1 / -1;
-  }
-
-  label {
-    font-weight: 500;
-    color: #495057;
-    font-size: 0.9rem;
-  }
-
-  :host ::ng-deep {
-    .p-inputnumber, .p-dropdown {
-      width: 100%;
-    }
-  }
-}
+// Styles spécifiques au simulateur Frais de garde
+// Les styles communs sont importés via styles.scss (_simulator-common.scss)
 
 .checkbox-group {
   display: flex;
@@ -84,12 +17,6 @@
   }
 }
 
-.results-section {
-  position: sticky;
-  top: 2rem;
-  height: fit-content;
-}
-
 .result-highlight {
   display: flex;
   flex-direction: column;
@@ -99,13 +26,8 @@
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   border-radius: 12px;
 
-  &.small {
-    padding: 1rem;
-  }
-
-  &.success-bg {
-    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-  }
+  &.small { padding: 1rem; }
+  &.success-bg { background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%); }
 
   .result-label {
     font-size: 0.95rem;
@@ -117,14 +39,8 @@
     font-size: 2rem;
     font-weight: 700;
 
-    &.primary {
-      color: #1e3a5f;
-    }
-
-    &.success {
-      color: #28a745;
-      font-size: 1.5rem;
-    }
+    &.primary { color: #1e3a5f; }
+    &.success { color: #28a745; font-size: 1.5rem; }
   }
 
   .result-percent {
@@ -153,9 +69,7 @@
   padding: 0.75rem 0;
   border-bottom: 1px solid #f1f3f4;
 
-  &:last-child {
-    border-bottom: none;
-  }
+  &:last-child { border-bottom: none; }
 
   &.aide {
     background: #e8f5e9;
@@ -181,24 +95,14 @@
     border-radius: 8px;
     border-bottom: none;
 
-    .label, .value {
-      color: white;
-      font-weight: 600;
-    }
+    .label, .value { color: white; font-weight: 600; }
   }
 
-  .label {
-    color: #6c757d;
-    font-size: 0.9rem;
-  }
-
+  .label { color: #6c757d; font-size: 0.9rem; }
   .value {
     font-weight: 600;
     color: #1e3a5f;
-
-    &.negative {
-      color: #28a745;
-    }
+    &.negative { color: #28a745; }
   }
 }
 
@@ -212,50 +116,19 @@
   background-color: #e3f2fd;
   border: 1px solid #2196f3;
 
-  i {
-    color: #1565c0;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-  }
-
-  span {
-    color: #1565c0;
-    font-size: 0.85rem;
-    line-height: 1.4;
-  }
+  i { color: #1565c0; font-size: 1.2rem; flex-shrink: 0; }
+  span { color: #1565c0; font-size: 0.85rem; line-height: 1.4; }
 
   &.warning {
     background-color: #fff3cd;
     border-color: #ffc107;
-
-    i, span {
-      color: #856404;
-    }
+    i, span { color: #856404; }
   }
 }
 
+// Override panel spécifique
 :host ::ng-deep {
-  .custom-panel {
-    .p-panel-header {
-      background: #1e3a5f;
-      color: white;
-      border-radius: 8px 8px 0 0;
-    }
-
-    .p-panel-content {
-      padding: 1.5rem;
-    }
-  }
-
-  .results-panel {
-    .p-panel-header {
-      background: linear-gradient(135deg, #e91e63 0%, #f06292 100%);
-      color: white;
-      border-radius: 8px 8px 0 0;
-    }
-
-    .p-panel-content {
-      padding: 1.5rem;
-    }
+  .results-panel .p-panel-header {
+    background: linear-gradient(135deg, #e91e63 0%, #f06292 100%);
   }
 }

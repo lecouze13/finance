@@ -1,153 +1,240 @@
-<main><h1>Rendement locatif : formule de calcul et calculateur</h1>
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Simulateur de Rendement Locatif</h1>
+    <p class="subtitle">Calculez le rendement brut, net et net-net de votre investissement immobilier</p>
+  </div>
 
-<br>
-<div class="separator"></div><br>
+  <div class="content-grid">
+    <div class="form-section">
+      <!-- Rendement Brut -->
+      <p-panel header="Rendement Brut" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Loyer mensuel</label>
+            <p-inputNumber
+              [(ngModel)]="loyerMensuel"
+              (ngModelChange)="calculRendementBrut()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+          <div class="form-group">
+            <label>Prix d'acquisition (frais inclus)</label>
+            <p-inputNumber
+              [(ngModel)]="prixAcquisition"
+              (ngModelChange)="calculRendementBrut()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+        </div>
+        <div class="main-result" *ngIf="rendementBrut !== undefined" style="margin-top: 1rem;">
+          <div class="result-icon">
+            <i class="pi pi-percentage"></i>
+          </div>
+          <div class="result-content">
+            <span class="result-value">{{ rendementBrut | number:'1.2-2' }} %</span>
+            <span class="result-label">Rendement brut annuel</span>
+          </div>
+        </div>
+      </p-panel>
 
+      <!-- Rendement Net -->
+      <p-panel header="Rendement Net" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Loyer mensuel (hors charges)</label>
+            <p-inputNumber
+              [(ngModel)]="loyerMensuel2"
+              (ngModelChange)="calculRendementNet()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+          <div class="form-group">
+            <label>Prix d'acquisition (frais inclus)</label>
+            <p-inputNumber
+              [(ngModel)]="prixAcquisition2"
+              (ngModelChange)="calculRendementNet()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+          <div class="form-group full-width">
+            <label>Charges annuelles (taxe foncière, copro, etc.)</label>
+            <p-inputNumber
+              [(ngModel)]="chargeLocatives"
+              (ngModelChange)="calculRendementNet()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+        </div>
+        <div class="main-result" *ngIf="rendementNet !== undefined" style="margin-top: 1rem;">
+          <div class="result-icon">
+            <i class="pi pi-percentage"></i>
+          </div>
+          <div class="result-content">
+            <span class="result-value">{{ rendementNet | number:'1.2-2' }} %</span>
+            <span class="result-label">Rendement net annuel</span>
+          </div>
+        </div>
+      </p-panel>
 
-<h2>Calculateur du rendement brut :</h2>
-<br>
-<div class="card flex gap-3 p-fluid align-items-end flex-wrap">
-    <div class="flex-auto">
-        <p-floatLabel class="input-label">
-            <p-inputNumber inputId="loyerMensuel" [(ngModel)]="loyerMensuel" requ />
-            <label for="loyerMensuel">Loyer mensuel</label>
-        </p-floatLabel>
+      <!-- Rendement Net-Net -->
+      <p-panel header="Rendement Net-Net (après impôts)" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Loyer mensuel (hors charges)</label>
+            <p-inputNumber
+              [(ngModel)]="loyerMensuel3"
+              (ngModelChange)="calculRendementNetNet()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+          <div class="form-group">
+            <label>Prix d'acquisition (frais inclus)</label>
+            <p-inputNumber
+              [(ngModel)]="prixAcquisition3"
+              (ngModelChange)="calculRendementNetNet()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+          <div class="form-group">
+            <label>Charges annuelles</label>
+            <p-inputNumber
+              [(ngModel)]="chargeLocatives2"
+              (ngModelChange)="calculRendementNetNet()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+          <div class="form-group">
+            <label>Impôts et prélèvements sociaux</label>
+            <p-inputNumber
+              [(ngModel)]="impot"
+              (ngModelChange)="calculRendementNetNet()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+        </div>
+        <div class="main-result" *ngIf="rendementNetNet !== undefined" style="margin-top: 1rem;" [ngClass]="{'negative': rendementNetNet < 0}">
+          <div class="result-icon">
+            <i class="pi pi-percentage"></i>
+          </div>
+          <div class="result-content">
+            <span class="result-value">{{ rendementNetNet | number:'1.2-2' }} %</span>
+            <span class="result-label">Rendement net-net annuel</span>
+          </div>
+        </div>
+      </p-panel>
     </div>
-    <div class="flex-auto">
-        <p-floatLabel class="input-label">
-            <p-inputNumber inputId="prixAcquisition" [(ngModel)]="prixAcquisition" />
-            <label for="prixAcquisition">Prix d'acquisition (frais de notaire + agence compris)</label>
-        </p-floatLabel>
+
+    <div class="results-section">
+      <p-panel header="Comprendre le rendement" styleClass="results-panel">
+        <div class="help-box">
+          <h4><i class="pi pi-info-circle"></i> Les 3 types de rendement</h4>
+          <div class="stats-grid" style="grid-template-columns: 1fr;">
+            <div class="stat-card">
+              <span class="stat-value">Brut</span>
+              <span class="stat-label">Loyers / Prix d'achat (simple)</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value">Net</span>
+              <span class="stat-label">Après charges (plus réaliste)</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value">Net-Net</span>
+              <span class="stat-label">Après impôts (rendement réel)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-row" style="margin-top: 1.5rem;">
+          <span class="label">Formule rendement brut</span>
+          <span class="value">(Loyer × 12) ÷ Prix × 100</span>
+        </div>
+        <div class="result-row">
+          <span class="label">Formule rendement net</span>
+          <span class="value">(Loyers - Charges) ÷ Prix × 100</span>
+        </div>
+        <div class="result-row">
+          <span class="label">Formule rendement net-net</span>
+          <span class="value">(Loyers - Charges - Impôts) ÷ Prix × 100</span>
+        </div>
+
+        <div class="help-box" style="margin-top: 1.5rem; background: #fff3cd; border-left-color: #ffc107;">
+          <h4 style="color: #856404;"><i class="pi pi-lightbulb"></i> Conseil</h4>
+          <p style="margin: 0; color: #856404; font-size: 0.9rem;">
+            Un rendement brut de 7% correspond souvent à un rendement net-net de 4-5% après charges et fiscalité. Tenez toujours compte de la fiscalité dans vos calculs !
+          </p>
+        </div>
+      </p-panel>
     </div>
-    <button type="button" pButton label="Calculer" icon="pi pi-check"class="p-button-success" (click)="calculRendementBrut()"
-    [disabled]=" !(prixAcquisition &&prixAcquisition>0) || !(loyerMensuel && loyerMensuel>0)"></button>
-</div>
+  </div>
 
-<h4>Rendement brut : {{ rendementBrut !== undefined ? rendementBrut : 'N/A' }} %</h4>
+  <section class="content-section" style="margin-top: 2rem;">
+    <p-panel header="Guide du rendement immobilier" styleClass="custom-panel" [toggleable]="true" [collapsed]="true">
+      <h3>Comprendre le rendement en immobilier</h3>
+      <p>Le rendement immobilier est un indicateur clé pour évaluer la performance d'un investissement locatif. Il mesure la rentabilité brute ou nette générée par un bien immobilier par rapport au capital investi.</p>
 
-<br><br><br>
+      <h3>Le rendement brut</h3>
+      <p>Le rendement brut correspond au rapport entre les revenus locatifs annuels et le prix d'achat du bien :</p>
+      <p><em>Rendement brut = (Loyer annuel × 100) ÷ Prix d'achat</em></p>
+      <ul>
+        <li>Il ne tient pas compte des charges, frais d'entretien, fiscalité ni vacances locatives.</li>
+        <li>Il permet une première estimation rapide de la rentabilité.</li>
+      </ul>
 
-<h2>Calculateur du rendement net :</h2>
-<br>
-<div class="card flex gap-3 p-fluid align-items-end flex-wrap">
-    <div class="flex-auto">
-        <p-floatLabel class="input-label">
-            <p-inputNumber inputId="loyerMensuel" [(ngModel)]="loyerMensuel2" requ />
-            <label for="loyerMensuel">Loyer mensuel sans les charges</label>
-        </p-floatLabel>
-    </div>
-    <div class="flex-auto">
-        <p-floatLabel class="input-label">
-            <p-inputNumber inputId="prixAcquisition" [(ngModel)]="prixAcquisition2" />
-            <label for="prixAcquisition">Prix d'acquisition (frais de notaire + agence compris)</label>
-        </p-floatLabel>
-    </div>
+      <h3>Le rendement net</h3>
+      <p>Le rendement net est plus précis car il prend en compte les charges déductibles :</p>
+      <p><em>Rendement net = ((Loyer annuel – Charges – Taxe foncière – Assurance) × 100) ÷ Prix d'achat</em></p>
+      <ul>
+        <li>Inclut les frais de gestion, assurances, travaux, charges de copropriété, et taxes.</li>
+        <li>Ne prend pas encore en compte la fiscalité (impôts sur les revenus locatifs).</li>
+      </ul>
 
-    <div class="flex-auto">
-        <p-floatLabel class="input-label">
-            <p-inputNumber inputId="chargeLocatives" [(ngModel)]="chargeLocatives" />
-            <label for="chargeLocatives">Charges locatives (taxe d'habitation comprise)</label>
-        </p-floatLabel>
-    </div>
-    <button type="button" pButton label="Calculer" icon="pi pi-check"class="p-button-success" (click)="calculRendementNet()"
-    [disabled]=" !(prixAcquisition2 &&prixAcquisition2>0) || !(loyerMensuel2 && loyerMensuel2>0)|| !(chargeLocatives && chargeLocatives>0)"></button>
-</div>
+      <h3>Le rendement net-net (ou rendement après impôt)</h3>
+      <p>Le rendement net-net correspond au rendement après déduction de l'impôt sur les revenus fonciers ou BIC :</p>
+      <p><em>Rendement net-net = (Revenu net après impôt × 100) ÷ Prix d'achat</em></p>
+      <ul>
+        <li>Permet de connaître la rentabilité réelle perçue par l'investisseur.</li>
+        <li>Inclut l'impact de la fiscalité, très variable selon le régime choisi.</li>
+      </ul>
 
-<h4>Rendement Net : {{ rendementNet !== undefined ? rendementNet : 'N/A' }} %</h4>
+      <h3>Exemple de calcul</h3>
+      <p>Un appartement acheté 200 000 € génère 10 000 € de loyers annuels. Les charges et taxes s'élèvent à 2 500 € :</p>
+      <ul>
+        <li>Rendement brut = (10 000 × 100) ÷ 200 000 = <strong>5 %</strong></li>
+        <li>Rendement net = ((10 000 – 2 500) × 100) ÷ 200 000 = <strong>3,75 %</strong></li>
+        <li>Si la fiscalité réduit le revenu net à 6 500 €, alors rendement net-net = <strong>3,25 %</strong></li>
+      </ul>
+    </p-panel>
+  </section>
 
-<br><br><br>
-<h2>Calculateur du rendement net-net :</h2>
-<br>
-<div class="card flex gap-3 p-fluid align-items-end flex-wrap">
-    <div class="flex-auto">
-        <p-floatLabel class="input-label">
-            <p-inputNumber inputId="loyerMensuel" [(ngModel)]="loyerMensuel3" requ />
-            <label for="loyerMensuel">Loyer mensuel sans les charges</label>
-        </p-floatLabel>
-    </div>
-    <div class="flex-auto">
-        <p-floatLabel class="input-label">
-            <p-inputNumber inputId="prixAcquisition" [(ngModel)]="prixAcquisition3" />
-            <label for="prixAcquisition">Prix d'acquisition (frais de notaire + agence compris)</label>
-        </p-floatLabel>
-    </div>
-
-    <div class="flex-auto">
-        <p-floatLabel class="input-label">
-            <p-inputNumber inputId="chargeLocatives" [(ngModel)]="chargeLocatives2" />
-            <label for="chargeLocatives">Charges locatives (taxe d'habitation comprise)</label>
-        </p-floatLabel>
-    </div>
-
-    <div class="flex-auto">
-        <p-floatLabel class="input-label">
-            <p-inputNumber inputId="impot" [(ngModel)]="impot" />
-            <label for="impot">Impôts et prélèvements sociaux</label>
-        </p-floatLabel>
-    </div>
-    <button type="button" pButton label="Calculer" icon="pi pi-check"class="p-button-success" (click)="calculRendementNetNet()"
-    [disabled]=" !(prixAcquisition3 &&prixAcquisition3>0) || !(loyerMensuel3 && loyerMensuel3 > 0 ) || !(chargeLocatives2 && chargeLocatives2>0)|| !(impot && impot>0)"></button>
-</div>
-
-<h4>Rendement net-net : {{ rendementNetNet !== undefined ? rendementNetNet : 'N/A' }} %</h4>
-
-<br><br>
-<div class="separator"></div><br>
-
-<h2>Comprendre le rendement en immobilier</h2>
-<p>Le rendement immobilier est un indicateur clé pour évaluer la performance d’un investissement locatif. Il mesure la rentabilité brute ou nette générée par un bien immobilier par rapport au capital investi.</p>
-
-<h2>Le rendement brut</h2>
-<p>Le rendement brut correspond au rapport entre les revenus locatifs annuels et le prix d’achat du bien :</p>
-<p><em>Rendement brut = (Loyer annuel × 100) ÷ Prix d’achat</em></p>
-<ul>
-  <li>Il ne tient pas compte des charges, frais d’entretien, fiscalité ni vacances locatives.</li>
-  <li>Il permet une première estimation rapide de la rentabilité.</li>
-</ul>
-
-<h2>Le rendement net</h2>
-<p>Le rendement net est plus précis car il prend en compte les charges déductibles :</p>
-<p><em>Rendement net = ((Loyer annuel – Charges – Taxe foncière – Assurance) × 100) ÷ Prix d’achat</em></p>
-<ul>
-  <li>Inclut les frais de gestion, assurances, travaux, charges de copropriété, et taxes.</li>
-  <li>Ne prend pas encore en compte la fiscalité (impôts sur les revenus locatifs).</li>
-</ul>
-
-<h2>Le rendement net-net (ou rendement après impôt)</h2>
-<p>Le rendement net-net correspond au rendement après déduction de l’impôt sur les revenus fonciers ou BIC :</p>
-<p><em>Rendement net-net = (Revenu net après impôt × 100) ÷ Prix d’achat</em></p>
-<ul>
-  <li>Permet de connaître la rentabilité réelle perçue par l’investisseur.</li>
-  <li>Inclut l’impact de la fiscalité, très variable selon le régime choisi (location vide, meublée, SCI, etc.).</li>
-</ul>
-
-<h2>Autres indicateurs complémentaires</h2>
-<ul>
-  <li><strong>Cashflow :</strong> revenu net de trésorerie après remboursement des emprunts.</li>
-  <li><strong>Rentabilité financière :</strong> rendement du capital propre investi (fonds propres uniquement).</li>
-  <li><strong>Plus-value potentielle :</strong> valorisation du bien dans le temps.</li>
-</ul>
-
-<h2>Exemple de calcul</h2>
-<p>Un appartement acheté 200 000 € génère 10 000 € de loyers annuels. Les charges et taxes s’élèvent à 2 500 € :</p>
-<ul>
-  <li>Rendement brut = (10 000 × 100) ÷ 200 000 = 5 %</li>
-  <li>Rendement net = ((10 000 – 2 500) × 100) ÷ 200 000 = 3,75 %</li>
-  <li>Si la fiscalité réduit le revenu net à 6 500 €, alors rendement net-net = (6 500 × 100) ÷ 200 000 = 3,25 %</li>
-</ul>
-
-<h2>Pourquoi le rendement est-il important ?</h2>
-<p>Le rendement permet de comparer différents placements immobiliers entre eux et avec d’autres types d’investissements. Il aide à évaluer si le projet est viable financièrement et s’il correspond aux objectifs de l’investisseur (revenus complémentaires, constitution de patrimoine, etc.).</p>
-
-<h2>Conclusion</h2>
-<p>Le rendement immobilier doit toujours être analysé en tenant compte des charges, de la fiscalité et du contexte local. Il ne faut pas négliger les autres critères comme la valorisation du bien et le cashflow. Une bonne estimation du rendement aide à prendre des décisions d’investissement éclairées.</p>
-
-<br><br>
-<app-faq-section
-    [title]="&quot;FAQ – Questions fréquentes sur le rendement immobilier'&quot;"
+  <app-faq-section
     [faqItems]="faqItems"
-    [ariaLabel]="&quot;Foire aux questions'&quot;">
+    pageTitle="Simulateur de Rendement Locatif">
   </app-faq-section>
-
-
-</main>
+</div>

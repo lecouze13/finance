@@ -1,3 +1,6 @@
+// Styles spécifiques au simulateur Viager
+// Les styles communs sont importés via styles.scss (_simulator-common.scss)
+
 .resultats-viager {
   display: grid;
   gap: 1.5rem;
@@ -11,17 +14,19 @@
   text-align: center;
 }
 
-.montant-principal .label {
-  display: block;
-  font-size: 1rem;
-  opacity: 0.9;
-  margin-bottom: 0.5rem;
-}
+.montant-principal {
+  .label {
+    display: block;
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+  }
 
-.montant-principal .montant {
-  display: block;
-  font-size: 2.5rem;
-  font-weight: 700;
+  .montant {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
 }
 
 .montant-secondaire {
@@ -35,32 +40,26 @@
   padding: 1.5rem;
   border-radius: 8px;
   border-left: 4px solid #3b82f6;
-}
 
-.details-calcul h4,
-.cout-total h4 {
-  margin-top: 0;
-  color: #1e40af;
-}
+  h4 {
+    margin-top: 0;
+    color: #1e40af;
+  }
 
-.details-calcul ul,
-.cout-total ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 
-.details-calcul li,
-.cout-total li {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.6rem 0;
-  border-bottom: 1px solid #e2e8f0;
-}
+  li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #e2e8f0;
 
-.details-calcul li:last-child,
-.cout-total li:last-child {
-  border-bottom: none;
+    &:last-child { border-bottom: none; }
+  }
 }
 
 .highlight {
@@ -97,52 +96,36 @@
   background: #f8fafc;
   padding: 1.5rem;
   border-radius: 8px;
-}
 
-.colonne.viager-occupe {
-  border-left: 4px solid #f59e0b;
-}
+  &.viager-occupe {
+    border-left: 4px solid #f59e0b;
+    h4 { color: #b45309; }
+  }
 
-.colonne.viager-occupe h4 {
-  color: #b45309;
-}
+  &.viager-libre {
+    border-left: 4px solid #3b82f6;
+    h4 { color: #1e40af; }
+  }
 
-.colonne.viager-libre {
-  border-left: 4px solid #3b82f6;
-}
+  &.avantages {
+    border-left: 4px solid #10b981;
+    h4 { color: #047857; }
+  }
 
-.colonne.viager-libre h4 {
-  color: #1e40af;
-}
+  h4 { margin-top: 0; }
 
-.colonne.avantages {
-  border-left: 4px solid #10b981;
-}
+  ul {
+    padding-left: 1.2rem;
+    margin: 0;
+  }
 
-.colonne.avantages h4 {
-  color: #047857;
-}
-
-.colonne h4 {
-  margin-top: 0;
-}
-
-.colonne ul {
-  padding-left: 1.2rem;
-  margin: 0;
-}
-
-.colonne li {
-  margin-bottom: 0.5rem;
-  color: #475569;
+  li {
+    margin-bottom: 0.5rem;
+    color: #475569;
+  }
 }
 
 @media (max-width: 767px) {
-  .montant-principal .montant {
-    font-size: 1.8rem;
-  }
-
-  .resultat-principal {
-    padding: 1.5rem;
-  }
+  .montant-principal .montant { font-size: 1.8rem; }
+  .resultat-principal { padding: 1.5rem; }
 }

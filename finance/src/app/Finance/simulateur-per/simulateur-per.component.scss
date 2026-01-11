@@ -1,72 +1,5 @@
-.simulateur-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.header-section {
-  text-align: center;
-  margin-bottom: 2rem;
-
-  h1 {
-    color: #1e3a5f;
-    margin-bottom: 0.5rem;
-    font-size: 2rem;
-  }
-
-  .subtitle {
-    color: #6c757d;
-    font-size: 1.1rem;
-  }
-}
-
-.content-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-
-  @media (max-width: 968px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.form-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-
-  @media (max-width: 576px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-
-  &.full-width {
-    grid-column: 1 / -1;
-  }
-
-  label {
-    font-weight: 500;
-    color: #495057;
-    font-size: 0.9rem;
-  }
-
-  :host ::ng-deep {
-    .p-inputnumber, .p-dropdown {
-      width: 100%;
-    }
-  }
-}
+// Styles spécifiques au simulateur PER
+// Les styles communs sont importés via styles.scss (_simulator-common.scss)
 
 .plafond-info {
   display: flex;
@@ -85,9 +18,7 @@
     margin-top: 2px;
   }
 
-  strong {
-    color: #1565c0;
-  }
+  strong { color: #1565c0; }
 
   small {
     color: #6c757d;
@@ -101,12 +32,6 @@
   }
 }
 
-.results-section {
-  position: sticky;
-  top: 2rem;
-  height: fit-content;
-}
-
 .result-highlight {
   display: flex;
   flex-direction: column;
@@ -116,9 +41,7 @@
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   border-radius: 12px;
 
-  &.small {
-    padding: 1rem;
-  }
+  &.small { padding: 1rem; }
 
   .result-label {
     font-size: 0.95rem;
@@ -130,21 +53,9 @@
     font-size: 2rem;
     font-weight: 700;
 
-    &.primary {
-      color: #1e3a5f;
-    }
-
-    &.success {
-      color: #28a745;
-      font-size: 1.5rem;
-    }
+    &.primary { color: #1e3a5f; }
+    &.success { color: #28a745; font-size: 1.5rem; }
   }
-}
-
-.results-details {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #e9ecef;
 }
 
 .detail-row {
@@ -154,9 +65,7 @@
   padding: 0.75rem 0;
   border-bottom: 1px solid #f1f3f4;
 
-  &:last-child {
-    border-bottom: none;
-  }
+  &:last-child { border-bottom: none; }
 
   .detail-label {
     color: #6c757d;
@@ -167,9 +76,7 @@
     font-weight: 600;
     color: #1e3a5f;
 
-    &.positive {
-      color: #28a745;
-    }
+    &.positive { color: #28a745; }
   }
 }
 
@@ -191,9 +98,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 
-  @media (max-width: 576px) {
-    grid-template-columns: 1fr;
-  }
+  @media (max-width: 576px) { grid-template-columns: 1fr; }
 }
 
 .sortie-option {
@@ -222,66 +127,13 @@
     font-size: 1.1rem;
     color: #1e3a5f;
 
-    &.positive {
-      color: #28a745;
-    }
+    &.positive { color: #28a745; }
   }
 }
 
-.info-box {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 1rem;
-  margin-top: 1rem;
-  border-radius: 8px;
-  background-color: #d4edda;
-  border: 1px solid #28a745;
-
-  i {
-    color: #155724;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-  }
-
-  span {
-    color: #155724;
-    font-size: 0.9rem;
-    line-height: 1.4;
-  }
-
-  &.warning {
-    background-color: #fff3cd;
-    border-color: #ffc107;
-
-    i, span {
-      color: #856404;
-    }
-  }
-}
-
+// Override panel spécifique PER (violet)
 :host ::ng-deep {
-  .custom-panel {
-    .p-panel-header {
-      background: #1e3a5f;
-      color: white;
-      border-radius: 8px 8px 0 0;
-    }
-
-    .p-panel-content {
-      padding: 1.5rem;
-    }
-  }
-
-  .results-panel {
-    .p-panel-header {
-      background: linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%);
-      color: white;
-      border-radius: 8px 8px 0 0;
-    }
-
-    .p-panel-content {
-      padding: 1.5rem;
-    }
+  .results-panel .p-panel-header {
+    background: linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%);
   }
 }

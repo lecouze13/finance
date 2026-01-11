@@ -1,13 +1,7 @@
-.p-panel-content-res{
-    display: flex;
-    flex-direction: column;
-    
-    
-}
+// Styles spécifiques au simulateur Location nue
+// Les styles communs sont importés via styles.scss (_simulator-common.scss)
 
-.grid.ng-tns-c794833568-1 {
-    width: 100%;
-    flex-direction: row;
-        flex-wrap: nowrap;
-
+.p-panel-content-res {
+  display: flex;
+  flex-direction: column;
 }

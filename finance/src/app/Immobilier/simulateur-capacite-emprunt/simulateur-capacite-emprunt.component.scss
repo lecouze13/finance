@@ -1,74 +1,5 @@
-.simulateur-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.header-section {
-  text-align: center;
-  margin-bottom: 2rem;
-
-  h1 {
-    color: #1e3a5f;
-    margin-bottom: 0.5rem;
-    font-size: 2rem;
-  }
-
-  .subtitle {
-    color: #6c757d;
-    font-size: 1.1rem;
-  }
-}
-
-.content-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-
-  @media (max-width: 968px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.form-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-
-  @media (max-width: 576px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-
-  label {
-    font-weight: 500;
-    color: #495057;
-    font-size: 0.9rem;
-  }
-
-  :host ::ng-deep {
-    .p-inputnumber, .p-dropdown {
-      width: 100%;
-    }
-  }
-}
-
-.results-section {
-  position: sticky;
-  top: 2rem;
-  height: fit-content;
-}
+// Styles spécifiques au simulateur Capacité d'emprunt
+// Les styles communs sont importés via styles.scss (_simulator-common.scss)
 
 .result-highlight {
   display: flex;
@@ -89,13 +20,8 @@
     font-size: 2rem;
     font-weight: 700;
 
-    &.primary {
-      color: #1e3a5f;
-    }
-
-    &.success {
-      color: #28a745;
-    }
+    &.primary { color: #1e3a5f; }
+    &.success { color: #28a745; }
   }
 }
 
@@ -112,15 +38,11 @@
   padding: 0.75rem 0;
   border-bottom: 1px solid #f1f3f4;
 
-  &:last-child {
-    border-bottom: none;
-  }
+  &:last-child { border-bottom: none; }
 
-  &.warning {
-    .detail-value {
-      color: #dc3545;
-      font-weight: 600;
-    }
+  &.warning .detail-value {
+    color: #dc3545;
+    font-weight: 600;
   }
 
   .detail-label {
@@ -160,34 +82,13 @@
     background-color: #d4edda;
     border-color: #28a745;
 
-    i, span {
-      color: #155724;
-    }
+    i, span { color: #155724; }
   }
 }
 
+// Override panel spécifique
 :host ::ng-deep {
-  .custom-panel {
-    .p-panel-header {
-      background: #1e3a5f;
-      color: white;
-      border-radius: 8px 8px 0 0;
-    }
-
-    .p-panel-content {
-      padding: 1.5rem;
-    }
-  }
-
-  .results-panel {
-    .p-panel-header {
-      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-      color: white;
-      border-radius: 8px 8px 0 0;
-    }
-
-    .p-panel-content {
-      padding: 1.5rem;
-    }
+  .results-panel .p-panel-header {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
   }
 }

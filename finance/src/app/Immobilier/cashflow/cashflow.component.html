@@ -1,111 +1,169 @@
-<main>
-    <h1>Calculateur de Cashflow Immobilier : Estimez votre Flux de Trésorerie et Rentabilité</h1>
-
-    <br>
-    <div class="separator"></div><br>
-
-    
-    <div class="card flex gap-3 p-fluid align-items-center flex-wrap">
-        <div class="flex-auto" *ngFor="let element of Element">
-            <p-floatLabel class="input-label">
-                <p-inputNumber [(ngModel)]="values[element]" inputId="{{element}}" required />
-                <label for="{{element}}">{{element}}</label>
-            </p-floatLabel>
-        </div>
-        <button type="button" pButton label="Calculer" icon="pi pi-check"class="p-button-success" (click)="calculCashflow()" [disabled]="
-        !( values['Loyer']>0) ||
-        !(values['Charges']>0) ||
-        !( values['Impôts']>0 ) || 
-        !(values['Crédit']>0)
-      "></button>
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Simulateur de Cashflow Immobilier</h1>
+    <p class="subtitle">Calculez votre flux de trésorerie mensuel et évaluez la rentabilité de votre investissement</p>
   </div>
 
-    <h4>Votre Cashflow Immobilier : {{ cashflow !== undefined ? cashflow : 'N/A' }}€ </h4>
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Vos Revenus et Charges" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Loyer mensuel perçu</label>
+            <p-inputNumber
+              [(ngModel)]="values['Loyer']"
+              (ngModelChange)="calculCashflow()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+          <div class="form-group">
+            <label>Mensualité crédit</label>
+            <p-inputNumber
+              [(ngModel)]="values['Crédit']"
+              (ngModelChange)="calculCashflow()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+          <div class="form-group">
+            <label>Charges mensuelles</label>
+            <p-inputNumber
+              [(ngModel)]="values['Charges']"
+              (ngModelChange)="calculCashflow()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+          <div class="form-group">
+            <label>Impôts mensuels</label>
+            <p-inputNumber
+              [(ngModel)]="values['Impôts']"
+              (ngModelChange)="calculCashflow()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+        </div>
 
-    <br><br>
-    <div class="separator"></div><br>
-    <h2>Comprendre le cashflow en investissement immobilier</h2>
-<p>Le cashflow représente la différence entre les revenus générés par un investissement (loyers, dividendes, etc.) et les dépenses associées (charges, remboursements de crédit, impôts, etc.). C’est un indicateur clé pour évaluer la rentabilité nette et la santé financière d’un investissement.</p>
+        <div class="help-box" style="margin-top: 1rem;">
+          <h4><i class="pi pi-info-circle"></i> Formule du cashflow</h4>
+          <p style="margin: 0; font-size: 0.9rem;">
+            <strong>Cashflow = Loyer - Crédit - Charges - Impôts</strong>
+          </p>
+        </div>
+      </p-panel>
+    </div>
 
-<h2>Calcul du cashflow</h2>
-<p>Le cashflow se calcule de la manière suivante :</p>
-<ul>
-  <li><strong>Cashflow = Revenus nets – Dépenses</strong></li>
-</ul>
-<p>Où :</p>
-<ul>
-  <li><strong>Revenus nets :</strong> loyers perçus après déduction des impôts et charges récupérables.</li>
-  <li><strong>Dépenses :</strong> remboursement du prêt, charges non récupérables, frais d’entretien, taxes foncières, assurance, etc.</li>
-</ul>
+    <div class="results-section">
+      <p-panel header="Résultat" [styleClass]="cashflow >= 0 ? 'results-panel success' : 'results-panel'">
+        <div class="main-result" [ngClass]="{'negative': cashflow < 0}">
+          <div class="result-icon">
+            <i class="pi" [ngClass]="{'pi-arrow-up': cashflow >= 0, 'pi-arrow-down': cashflow < 0}"></i>
+          </div>
+          <div class="result-content">
+            <span class="result-value">{{ cashflow | number:'1.0-0' }} €</span>
+            <span class="result-label">Cashflow mensuel</span>
+          </div>
+        </div>
 
-<h2>Types de cashflow</h2>
-<ul>
-  <li><strong>Cashflow positif :</strong> les revenus couvrent toutes les dépenses, générant un surplus de trésorerie.</li>
-  <li><strong>Cashflow négatif :</strong> les dépenses dépassent les revenus, entraînant un besoin de financement supplémentaire.</li>
-  <li><strong>Cashflow neutre :</strong> revenus et dépenses s’équilibrent.</li>
-</ul>
+        <div class="stats-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="stat-card">
+            <span class="stat-value">{{ cashflow * 12 | number:'1.0-0' }} €</span>
+            <span class="stat-label">Cashflow annuel</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" [ngClass]="{'highlight': cashflow < 0}">
+              {{ cashflow >= 0 ? 'Positif' : 'Négatif' }}
+            </span>
+            <span class="stat-label">Statut</span>
+          </div>
+        </div>
 
-<h2>Importance du cashflow pour l’investisseur</h2>
-<ul>
-  <li>Assure la capacité à rembourser les emprunts sans puiser dans d’autres ressources.</li>
-  <li>Permet d’évaluer la rentabilité réelle d’un investissement au-delà du simple rendement brut.</li>
-  <li>Indique la liquidité disponible pour financer de nouveaux projets ou faire face aux imprévus.</li>
-</ul>
+        <div class="verdict" [ngClass]="{'positive': cashflow > 0, 'neutral': cashflow === 0, 'negative': cashflow < 0}" style="margin-top: 1rem;">
+          <i class="pi" [ngClass]="{'pi-check-circle': cashflow > 0, 'pi-minus-circle': cashflow === 0, 'pi-times-circle': cashflow < 0}"></i>
+          <div class="verdict-text">
+            <strong *ngIf="cashflow > 0">Investissement autofinancé</strong>
+            <strong *ngIf="cashflow === 0">Équilibre atteint</strong>
+            <strong *ngIf="cashflow < 0">Effort d'épargne requis</strong>
+            <p *ngIf="cashflow > 0">Votre investissement génère un surplus de {{ cashflow | number:'1.0-0' }} €/mois.</p>
+            <p *ngIf="cashflow === 0">Les loyers couvrent exactement vos charges.</p>
+            <p *ngIf="cashflow < 0">Vous devez compléter de {{ -cashflow | number:'1.0-0' }} €/mois.</p>
+          </div>
+        </div>
+      </p-panel>
 
-<h2>Exemple pratique</h2>
-<p>Un investisseur perçoit 1 000 € de loyers mensuels. Ses dépenses (crédit, charges, impôts) s’élèvent à 800 € par mois. Son cashflow mensuel est donc :</p>
-<p><strong>1 000 € - 800 € = 200 €</strong> positif, ce qui signifie un excédent de trésorerie.</p>
+      <div style="margin-top: 1rem;">
+        <p-panel header="Types de cashflow" styleClass="custom-panel">
+          <div class="stats-grid" style="grid-template-columns: 1fr;">
+            <div class="stat-card" style="background: #d4edda;">
+              <span class="stat-value" style="color: #155724;">Positif</span>
+              <span class="stat-label">Les revenus couvrent toutes les dépenses</span>
+            </div>
+            <div class="stat-card" style="background: #fff3cd;">
+              <span class="stat-value" style="color: #856404;">Neutre</span>
+              <span class="stat-label">Revenus et dépenses s'équilibrent</span>
+            </div>
+            <div class="stat-card" style="background: #f8d7da;">
+              <span class="stat-value" style="color: #721c24;">Négatif</span>
+              <span class="stat-label">Les dépenses dépassent les revenus</span>
+            </div>
+          </div>
+        </p-panel>
+      </div>
+    </div>
+  </div>
 
-<h2>Comment améliorer son cashflow ?</h2>
-<ul>
-  <li>Optimiser les charges en négociant les contrats et en limitant les dépenses inutiles.</li>
-  <li>Rechercher des biens offrant un bon rapport loyer/prix d’achat.</li>
-  <li>Utiliser l’effet de levier du crédit pour maximiser le rendement.</li>
-  <li>Minimiser la fiscalité grâce aux dispositifs fiscaux adaptés.</li>
-</ul>
+  <section class="content-section" style="margin-top: 2rem;">
+    <p-panel header="Comprendre le cashflow immobilier" styleClass="custom-panel" [toggleable]="true" [collapsed]="true">
+      <h3>Qu'est-ce que le cashflow ?</h3>
+      <p>Le cashflow représente la différence entre les revenus générés par un investissement (loyers) et les dépenses associées (charges, remboursements de crédit, impôts). C'est un indicateur clé pour évaluer la rentabilité nette et la santé financière d'un investissement.</p>
 
-<h2>Conclusion</h2>
-<p>Le cashflow est un indicateur fondamental pour tout investisseur immobilier. Un cashflow positif garantit une bonne gestion de son investissement et une stabilité financière à long terme.</p>
+      <h3>Calcul du cashflow</h3>
+      <p><strong>Cashflow = Revenus nets – Dépenses</strong></p>
+      <ul>
+        <li><strong>Revenus nets :</strong> loyers perçus après déduction des impôts et charges récupérables.</li>
+        <li><strong>Dépenses :</strong> remboursement du prêt, charges non récupérables, frais d'entretien, taxes foncières, assurance, etc.</li>
+      </ul>
 
-    <br>
-    
-    <br>
-<section class="faq-section mt-5">
-  <h2>FAQ – Questions fréquentes sur le cashflow immobilier</h2>
-  <dl>
-    <dt>Qu’est-ce que le cashflow immobilier ?</dt>
-    <dd>Le cashflow immobilier est la différence entre les revenus locatifs perçus et les charges liées au bien (crédit, taxes, entretien, etc.).</dd>
+      <h3>Comment améliorer son cashflow ?</h3>
+      <ul>
+        <li>Optimiser les charges en négociant les contrats</li>
+        <li>Rechercher des biens offrant un bon rapport loyer/prix</li>
+        <li>Utiliser l'effet de levier du crédit</li>
+        <li>Minimiser la fiscalité grâce aux dispositifs adaptés</li>
+      </ul>
 
-    <dt>Comment calculer le cashflow ?</dt>
-    <dd>Il faut soustraire toutes les dépenses (mensualités, charges, taxes) des loyers perçus.</dd>
+      <h3>Exemple pratique</h3>
+      <p>Un investisseur perçoit 1 000 € de loyers mensuels. Ses dépenses (crédit, charges, impôts) s'élèvent à 800 € par mois. Son cashflow mensuel est donc : <strong>1 000 € - 800 € = 200 €</strong> positif.</p>
+    </p-panel>
+  </section>
 
-    <dt>Pourquoi le cashflow est-il important ?</dt>
-    <dd>Il permet de vérifier si l’investissement génère un revenu positif ou négatif chaque mois.</dd>
+  <section class="faq-section" style="margin-top: 2rem;">
+    <h2>FAQ – Questions fréquentes sur le cashflow immobilier</h2>
+    <dl>
+      <dt>Qu'est-ce que le cashflow immobilier ?</dt>
+      <dd>Le cashflow immobilier est la différence entre les revenus locatifs perçus et les charges liées au bien (crédit, taxes, entretien, etc.).</dd>
 
-    <dt>Quels sont les principaux postes de charges à prendre en compte ?</dt>
-    <dd>Le remboursement du crédit, les charges de copropriété, la taxe foncière, l’assurance et les frais d’entretien.</dd>
+      <dt>Comment calculer le cashflow ?</dt>
+      <dd>Il faut soustraire toutes les dépenses (mensualités, charges, taxes) des loyers perçus.</dd>
 
-    <dt>Le cashflow peut-il être négatif ?</dt>
-    <dd>Oui, surtout au début d’un investissement, si les charges dépassent les loyers perçus.</dd>
+      <dt>Pourquoi le cashflow est-il important ?</dt>
+      <dd>Il permet de vérifier si l'investissement génère un revenu positif ou négatif chaque mois.</dd>
 
-    <dt>Comment améliorer son cashflow immobilier ?</dt>
-    <dd>En optimisant le financement, en réduisant les charges ou en augmentant les loyers.</dd>
+      <dt>Le cashflow peut-il être négatif ?</dt>
+      <dd>Oui, surtout au début d'un investissement, si les charges dépassent les loyers perçus.</dd>
 
-    <dt>Le cashflow tient-il compte de la valorisation du bien ?</dt>
-    <dd>Non, il ne considère que les flux financiers mensuels.</dd>
-
-    <dt>Quels risques sont liés à un cashflow négatif ?</dt>
-    <dd>Il faut pouvoir couvrir les dépenses avec d’autres ressources pour éviter les difficultés financières.</dd>
-
-    <dt>Comment utiliser un simulateur de cashflow ?</dt>
-    <dd>En renseignant vos loyers, vos charges, vos mensualités de crédit et autres dépenses pour estimer votre flux net.</dd>
-
-    <dt>Où trouver un simulateur fiable de cashflow immobilier ?</dt>
-    <dd>Vous pouvez utiliser notre outil en ligne gratuit sur CalculateurFinance.fr.</dd>
-  </dl>
-</section>
-
-    
-</main>
-
-
+      <dt>Comment améliorer son cashflow immobilier ?</dt>
+      <dd>En optimisant le financement, en réduisant les charges ou en augmentant les loyers.</dd>
+    </dl>
+  </section>
+</div>
