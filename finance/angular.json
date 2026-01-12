@@ -210,7 +210,27 @@
               "/simulateur-livret/livret-bleu",
               "/simulateur-livret/livret-jeune",
               "/simulateur-livret/pel",
-              "/simulateur-livret/lea"
+              "/simulateur-livret/lea",
+              "/article/nifty50",
+              "/article/shanghai-composite",
+              "/article/csi300",
+              "/article/taiex",
+              "/article/set",
+              "/article/jse-top40",
+              "/article/omx-stockholm",
+              "/article/bel20",
+              "/article/psi",
+              "/article/athex",
+              "/article/investissement-locatif",
+              "/article/lmnp-guide",
+              "/article/sci-immobiliere",
+              "/article/frais-notaire",
+              "/article/plus-value-immobiliere",
+              "/article/pret-immobilier",
+              "/article/fiscalite-immobiliere",
+              "/article/rendement-locatif-guide",
+              "/article/defiscalisation-immobiliere",
+              "/article/viager-immobilier"
             ]
           },
           "configurations": {

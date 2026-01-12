@@ -8,6 +8,9 @@ ol, ul {
 
 .cardHeader {
   width: 100%;
+  overflow: visible;
+  position: relative;
+  z-index: 1000;
 }
 
 :host ::ng-deep {
@@ -15,14 +18,36 @@ ol, ul {
     width: 100%;
     flex-wrap: wrap;
     position: relative;
+    overflow: visible;
 
     .p-menubar-root-list {
       flex-wrap: wrap;
+      overflow: visible;
+
+      > .p-menuitem {
+        position: relative;
+
+        > .p-submenu-list {
+          position: absolute;
+          z-index: 1001;
+          top: 100%;
+          left: 0;
+          min-width: 200px;
+          background: white;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          border-radius: 4px;
+        }
+      }
     }
 
     .p-menuitem-link {
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    .p-submenu-list {
+      z-index: 1001;
+      overflow: visible;
     }
   }
 
