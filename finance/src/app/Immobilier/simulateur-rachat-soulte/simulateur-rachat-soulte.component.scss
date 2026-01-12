@@ -1,0 +1,125 @@
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+.resultats-container {
+  margin-top: 2rem;
+}
+
+.resultats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.resultat-card {
+  background: #f8f9fa;
+  border: 1px solid #dce1e7;
+  border-radius: 12px;
+  padding: 1.5rem;
+
+  &.principal {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #eef4ff 0%, #dbeafe 100%);
+    border-color: #3b82f6;
+    text-align: center;
+
+    h3 {
+      margin: 0 0 0.5rem 0;
+      color: #1e40af;
+    }
+
+    .montant-principal {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1e40af;
+    }
+
+    .sous-texte {
+      color: #64748b;
+      margin: 0.5rem 0 0 0;
+    }
+  }
+
+  h4 {
+    margin: 0 0 1rem 0;
+    color: #1c2e4a;
+    border-bottom: 2px solid #3b82f6;
+    padding-bottom: 0.5rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &.total {
+        background: rgba(16, 185, 129, 0.1);
+        margin: 0.5rem -1rem;
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        font-weight: 600;
+        color: #059669;
+      }
+    }
+  }
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+
+  th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid #dce1e7;
+  }
+
+  th {
+    background: #f1f5f9;
+    font-weight: 600;
+  }
+
+  tr.racheteur {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  }
+
+  tr:nth-child(even):not(.racheteur) {
+    background: #f8fafc;
+  }
+}
+
+.formule-box {
+  background: #fef3c7;
+  border-left: 4px solid #f59e0b;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  font-family: monospace;
+}
+
+ol {
+  padding-left: 1.5rem;
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+}

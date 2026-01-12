@@ -1,0 +1,353 @@
+<main>
+  <h1>Simulateur Holding vs Nom Propre : Quelle Structure pour votre Immobilier ?</h1>
+  <p>Comparez la fiscalité entre la détention immobilière en nom propre et via une holding (SCI IS). Découvrez l'impact de l'amortissement, de l'IS et de la flat tax sur vos revenus.</p>
+  <br>
+  <div class="separator"></div>
+  <br>
+
+  <div class="card p-fluid">
+    <h3>Votre bien immobilier</h3>
+
+    <div class="flex flex-wrap gap-4">
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="valeurBien" [(ngModel)]="valeurBien" mode="currency" currency="EUR"
+            pTooltip="Valeur d'acquisition du bien" tooltipPosition="top" />
+          <label for="valeurBien">Valeur du bien</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="loyerAnnuel" [(ngModel)]="loyerAnnuel" mode="currency" currency="EUR"
+            pTooltip="Loyers bruts annuels" tooltipPosition="top" />
+          <label for="loyerAnnuel">Loyers annuels</label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <h3 class="mt-4">Charges et financement</h3>
+
+    <div class="flex flex-wrap gap-4">
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="chargesAnnuelles" [(ngModel)]="chargesAnnuelles" mode="currency" currency="EUR"
+            pTooltip="Charges de copropriété, taxe foncière, assurance..." tooltipPosition="top" />
+          <label for="chargesAnnuelles">Charges annuelles</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="interetsEmprunt" [(ngModel)]="interetsEmprunt" mode="currency" currency="EUR"
+            pTooltip="Intérêts d'emprunt annuels" tooltipPosition="top" />
+          <label for="interetsEmprunt">Intérêts d'emprunt</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="travauxAnnuels" [(ngModel)]="travauxAnnuels" mode="currency" currency="EUR"
+            pTooltip="Budget travaux annuel moyen" tooltipPosition="top" />
+          <label for="travauxAnnuels">Travaux annuels</label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <h3 class="mt-4">Votre profil fiscal</h3>
+
+    <div class="flex flex-wrap gap-4">
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-dropdown inputId="tmi" [options]="tranhesTMI" [(ngModel)]="selectedTMI"
+            optionLabel="label" placeholder="Votre tranche marginale" />
+          <label for="tmi">Tranche Marginale d'Imposition (TMI)</label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <h3 class="mt-4">Options Holding</h3>
+
+    <div class="flex flex-wrap gap-4 align-items-center">
+      <div class="flex-auto">
+        <p-checkbox inputId="distribuer" [(ngModel)]="distribuerDividendes" [binary]="true"
+          label="Distribuer des dividendes" />
+      </div>
+
+      <div class="flex-auto" *ngIf="distribuerDividendes">
+        <p-floatLabel>
+          <p-inputNumber inputId="tauxDistribution" [(ngModel)]="tauxDistribution" suffix=" %"
+            [min]="0" [max]="100" pTooltip="Part du résultat distribué en dividendes" tooltipPosition="top" />
+          <label for="tauxDistribution">Taux de distribution</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="dureeAmortissement" [(ngModel)]="dureeAmortissement" suffix=" ans"
+            [min]="20" [max]="50" pTooltip="Durée d'amortissement du bien (hors terrain)" tooltipPosition="top" />
+          <label for="dureeAmortissement">Durée amortissement</label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <button pButton type="button" label="Comparer les deux options" class="p-button-success"
+        (click)="calculer()" [disabled]="!valeurBien || !loyerAnnuel || !selectedTMI"></button>
+    </div>
+  </div>
+
+  <br>
+
+  <div *ngIf="resultats" class="resultats-container">
+    <h2>Comparaison fiscale détaillée</h2>
+
+    <div class="comparaison-grid">
+      <!-- NOM PROPRE -->
+      <div class="option-card" [class.best-option]="resultats.meilleureOption === 'nom_propre'">
+        <div class="option-header">
+          <h3>Nom Propre (IR)</h3>
+          <span *ngIf="resultats.meilleureOption === 'nom_propre'" class="badge-best">Meilleure option</span>
+        </div>
+
+        <div class="option-detail">
+          <span>Revenus bruts</span>
+          <span>{{ resultats.nomPropre.revenusBruts | number:'1.0-0' }} EUR</span>
+        </div>
+        <div class="option-detail">
+          <span>Charges déductibles</span>
+          <span>-{{ resultats.nomPropre.chargesDeductibles | number:'1.0-0' }} EUR</span>
+        </div>
+        <div class="option-detail highlight">
+          <span>Revenu net foncier</span>
+          <span>{{ resultats.nomPropre.revenuNet | number:'1.0-0' }} EUR</span>
+        </div>
+        <div class="option-detail deduction">
+          <span>Impôt sur le revenu (TMI)</span>
+          <span>-{{ resultats.nomPropre.impotRevenu | number:'1.0-0' }} EUR</span>
+        </div>
+        <div class="option-detail deduction">
+          <span>Prélèvements sociaux (17,2%)</span>
+          <span>-{{ resultats.nomPropre.prelevementsSociaux | number:'1.0-0' }} EUR</span>
+        </div>
+        <div class="option-detail total">
+          <span>Revenu net après impôt</span>
+          <span>{{ resultats.nomPropre.revenuNetApresImpot | number:'1.0-0' }} EUR/an</span>
+        </div>
+        <div class="taux-effectif">
+          Taux d'imposition effectif : {{ resultats.nomPropre.tauxImpositionEffectif | number:'1.1-1' }}%
+        </div>
+      </div>
+
+      <!-- HOLDING -->
+      <div class="option-card" [class.best-option]="resultats.meilleureOption === 'holding'">
+        <div class="option-header">
+          <h3>Holding (SCI IS)</h3>
+          <span *ngIf="resultats.meilleureOption === 'holding'" class="badge-best">Meilleure option</span>
+        </div>
+
+        <div class="option-detail">
+          <span>Revenus bruts</span>
+          <span>{{ resultats.holding.revenusBruts | number:'1.0-0' }} EUR</span>
+        </div>
+        <div class="option-detail">
+          <span>Charges déductibles</span>
+          <span>-{{ (resultats.holding.chargesDeductibles - resultats.holding.amortissement) | number:'1.0-0' }} EUR</span>
+        </div>
+        <div class="option-detail avantage">
+          <span>Amortissement</span>
+          <span>-{{ resultats.holding.amortissement | number:'1.0-0' }} EUR</span>
+        </div>
+        <div class="option-detail highlight">
+          <span>Résultat fiscal</span>
+          <span>{{ resultats.holding.resultatFiscal | number:'1.0-0' }} EUR</span>
+        </div>
+        <div class="option-detail deduction">
+          <span>Impôt sur les sociétés (IS)</span>
+          <span>-{{ resultats.holding.impotSocietes | number:'1.0-0' }} EUR</span>
+        </div>
+        <div class="option-detail">
+          <span>Résultat net société</span>
+          <span>{{ resultats.holding.resultatNet | number:'1.0-0' }} EUR</span>
+        </div>
+
+        <div *ngIf="distribuerDividendes" class="dividendes-section">
+          <div class="option-detail">
+            <span>Dividendes distribués</span>
+            <span>{{ resultats.holding.dividendesBruts | number:'1.0-0' }} EUR</span>
+          </div>
+          <div class="option-detail deduction">
+            <span>Flat tax (30%)</span>
+            <span>-{{ resultats.holding.flatTax | number:'1.0-0' }} EUR</span>
+          </div>
+          <div class="option-detail total">
+            <span>Dividendes nets perçus</span>
+            <span>{{ resultats.holding.dividendesNets | number:'1.0-0' }} EUR/an</span>
+          </div>
+        </div>
+
+        <div class="capitalisation" *ngIf="resultats.holding.tresorerieHolding > 0">
+          <strong>Capitalisé dans la holding :</strong> {{ resultats.holding.tresorerieHolding | number:'1.0-0' }} EUR/an
+        </div>
+
+        <div class="taux-effectif">
+          Taux d'imposition effectif : {{ resultats.holding.tauxImpositionEffectif | number:'1.1-1' }}%
+        </div>
+      </div>
+    </div>
+
+    <!-- SYNTHÈSE -->
+    <div class="synthese-box" [class.holding-mieux]="resultats.meilleureOption === 'holding'" [class.np-mieux]="resultats.meilleureOption === 'nom_propre'">
+      <h3>Synthèse</h3>
+      <div class="synthese-content">
+        <div class="synthese-item">
+          <span>Gain/Perte annuel avec holding</span>
+          <span [class.positif]="resultats.gainAnnuel > 0" [class.negatif]="resultats.gainAnnuel < 0">
+            {{ resultats.gainAnnuel > 0 ? '+' : '' }}{{ resultats.gainAnnuel | number:'1.0-0' }} EUR/an
+          </span>
+        </div>
+        <div class="synthese-item">
+          <span>Cumul sur 10 ans (nom propre)</span>
+          <span>{{ resultats.cumulNomPropre10ans | number:'1.0-0' }} EUR</span>
+        </div>
+        <div class="synthese-item">
+          <span>Cumul sur 10 ans (holding)</span>
+          <span>{{ resultats.cumulHolding10ans | number:'1.0-0' }} EUR</span>
+        </div>
+        <div class="synthese-item highlight">
+          <span>Différence sur 10 ans</span>
+          <span [class.positif]="resultats.gainCumule10ans > 0" [class.negatif]="resultats.gainCumule10ans < 0">
+            {{ resultats.gainCumule10ans > 0 ? '+' : '' }}{{ resultats.gainCumule10ans | number:'1.0-0' }} EUR
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AVANTAGES -->
+    <div class="avantages-grid">
+      <div class="avantages-card holding">
+        <h4>Avantages de la Holding</h4>
+        <ul>
+          <li *ngFor="let avantage of resultats.avantagesHolding">{{ avantage }}</li>
+        </ul>
+      </div>
+
+      <div class="avantages-card nom-propre">
+        <h4>Avantages du Nom Propre</h4>
+        <ul>
+          <li *ngFor="let avantage of resultats.avantagesNomPropre">{{ avantage }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="attention-box">
+      <h4>Points d'attention</h4>
+      <ul>
+        <li><strong>Coûts de structure :</strong> La holding implique des frais (comptable ~1500-3000€/an, frais juridiques)</li>
+        <li><strong>Plus-value à la revente :</strong> En SCI IS, pas d'abattement pour durée de détention. La plus-value est calculée sur la valeur nette comptable</li>
+        <li><strong>Option irrévocable :</strong> Le passage à l'IS est définitif pour une SCI</li>
+        <li><strong>Seuil de rentabilité :</strong> Généralement intéressant à partir de 2-3 biens ou TMI > 30%</li>
+      </ul>
+    </div>
+  </div>
+
+  <br><br>
+  <div class="separator"></div>
+  <br>
+
+  <h2>Comprendre la holding immobilière</h2>
+
+  <h3>Schéma de la structure holding</h3>
+  <div class="schema-box">
+    <div class="schema-niveau">
+      <div class="schema-entite associe">Vous (Associé)</div>
+    </div>
+    <div class="schema-fleche">Détient 100%</div>
+    <div class="schema-niveau">
+      <div class="schema-entite holding">Holding (SAS)</div>
+    </div>
+    <div class="schema-fleche">Détient 100%</div>
+    <div class="schema-niveau">
+      <div class="schema-entite sci">SCI à l'IS</div>
+    </div>
+    <div class="schema-fleche">Détient</div>
+    <div class="schema-niveau">
+      <div class="schema-entite bien">Bien Immobilier</div>
+    </div>
+  </div>
+
+  <h3>Comparatif des régimes fiscaux</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Critère</th>
+        <th>Nom Propre (IR)</th>
+        <th>Holding (SCI IS)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Imposition des revenus</td>
+        <td>TMI + 17,2% PS</td>
+        <td>IS 15%/25% + Flat tax 30% si distribution</td>
+      </tr>
+      <tr>
+        <td>Amortissement</td>
+        <td>Non</td>
+        <td>Oui (réduit la base imposable)</td>
+      </tr>
+      <tr>
+        <td>Comptabilité</td>
+        <td>Simple (déclaration 2044)</td>
+        <td>Obligatoire (bilan, compte de résultat)</td>
+      </tr>
+      <tr>
+        <td>Plus-value</td>
+        <td>Abattement durée détention</td>
+        <td>Plus-value professionnelle sur valeur nette</td>
+      </tr>
+      <tr>
+        <td>Transmission</td>
+        <td>Droits de succession sur le bien</td>
+        <td>Droits sur les parts (possibilité de décote)</td>
+      </tr>
+      <tr>
+        <td>Réinvestissement</td>
+        <td>Sur revenus après impôts</td>
+        <td>Avec trésorerie société (fiscalité réduite)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Quand choisir quelle structure ?</h3>
+  <div class="conseil-grid">
+    <div class="conseil-card np">
+      <h4>Privilégiez le Nom Propre si :</h4>
+      <ul>
+        <li>Votre TMI est inférieur à 30%</li>
+        <li>Vous n'avez qu'un seul bien</li>
+        <li>Vous souhaitez consommer vos revenus</li>
+        <li>Vous envisagez de revendre à moyen terme</li>
+        <li>Vous préférez la simplicité administrative</li>
+      </ul>
+    </div>
+
+    <div class="conseil-card holding">
+      <h4>Privilégiez la Holding si :</h4>
+      <ul>
+        <li>Votre TMI est supérieur à 30%</li>
+        <li>Vous avez plusieurs biens (ou prévoyez d'en avoir)</li>
+        <li>Vous souhaitez capitaliser et réinvestir</li>
+        <li>Vous préparez la transmission de votre patrimoine</li>
+        <li>Vous acceptez la complexité administrative</li>
+      </ul>
+    </div>
+  </div>
+
+  <br><br>
+  <app-faq-section
+    [title]="'FAQ – Holding vs Nom Propre'"
+    [faqItems]="faqItems"
+    [ariaLabel]="'Foire aux questions'">
+  </app-faq-section>
+</main>

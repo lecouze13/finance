@@ -230,7 +230,12 @@
               "/article/fiscalite-immobiliere",
               "/article/rendement-locatif-guide",
               "/article/defiscalisation-immobiliere",
-              "/article/viager-immobilier"
+              "/article/viager-immobilier",
+              "/simulateur-sortie-pinel",
+              "/simulateur-rachat-soulte",
+              "/simulateur-passoire-thermique",
+              "/simulateur-holding-vs-direct",
+              "/simulateur-arbitrage-av-immo"
             ]
           },
           "configurations": {

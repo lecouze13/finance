@@ -1,0 +1,190 @@
+<main>
+  <h1>Simulateur Rachat de Soulte : Calculez le coût pour racheter un bien en indivision</h1>
+  <p>Vous héritez d'un bien avec d'autres personnes et souhaitez le garder ? Calculez le montant de la soulte à verser aux co-héritiers, les frais de notaire et le financement possible.</p>
+  <br>
+  <div class="separator"></div>
+  <br>
+
+  <div class="card p-fluid">
+    <h3>Informations sur le bien et la succession</h3>
+
+    <div class="flex flex-wrap gap-4">
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="valeurBien" [(ngModel)]="valeurBien" mode="currency" currency="EUR"
+            pTooltip="Valeur estimée du bien immobilier" tooltipPosition="top" />
+          <label for="valeurBien">Valeur du bien</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="nombreHeritiers" [(ngModel)]="nombreHeritiers" [min]="2" [max]="10"
+            pTooltip="Nombre total d'héritiers (vous inclus)" tooltipPosition="top" />
+          <label for="nombreHeritiers">Nombre d'héritiers</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="capitalRestant" [(ngModel)]="capitalRestantDu" mode="currency" currency="EUR"
+            pTooltip="Capital restant dû sur un éventuel crédit immobilier" tooltipPosition="top" />
+          <label for="capitalRestant">Capital restant dû (si crédit)</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="tauxNotaire" [(ngModel)]="tauxNotaire" suffix=" %" [min]="5" [max]="10"
+            pTooltip="Taux des frais de notaire (7-8% en moyenne)" tooltipPosition="top" />
+          <label for="tauxNotaire">Frais de notaire (%)</label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <h3 class="mt-4">Financement du rachat (optionnel)</h3>
+
+    <div class="flex flex-wrap gap-4">
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="tauxCredit" [(ngModel)]="tauxCredit" suffix=" %" [minFractionDigits]="2"
+            pTooltip="Taux d'intérêt annuel du prêt" tooltipPosition="top" />
+          <label for="tauxCredit">Taux du crédit (%)</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="dureeCredit" [(ngModel)]="dureeCredit" suffix=" ans" [min]="5" [max]="25"
+            pTooltip="Durée du crédit en années" tooltipPosition="top" />
+          <label for="dureeCredit">Durée du crédit</label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <button pButton type="button" label="Calculer la soulte" class="p-button-success"
+        (click)="calculer()" [disabled]="!valeurBien || !nombreHeritiers || nombreHeritiers < 2"></button>
+    </div>
+  </div>
+
+  <br>
+
+  <div *ngIf="resultats" class="resultats-container">
+    <h2>Résultat du calcul de soulte</h2>
+
+    <div class="resultats-grid">
+      <div class="resultat-card principal">
+        <h3>Montant de la soulte à verser</h3>
+        <div class="montant-principal">{{ resultats.montantSoulte | number:'1.0-0' }} EUR</div>
+        <p class="sous-texte">Pour racheter {{ resultats.nombrePartsRachetees }} part(s) sur {{ nombreHeritiers }}</p>
+      </div>
+
+      <div class="resultat-card">
+        <h4>Détail du calcul</h4>
+        <ul>
+          <li><strong>Valeur du bien :</strong> {{ resultats.valeurBien | number:'1.0-0' }} EUR</li>
+          <li *ngIf="resultats.capitalRestant > 0"><strong>Capital restant dû :</strong> -{{ resultats.capitalRestant | number:'1.0-0' }} EUR</li>
+          <li><strong>Valeur nette :</strong> {{ resultats.valeurNette | number:'1.0-0' }} EUR</li>
+          <li><strong>Part par héritier :</strong> {{ resultats.partParHeritier | number:'1.0-0' }} EUR</li>
+        </ul>
+      </div>
+
+      <div class="resultat-card">
+        <h4>Coût total du rachat</h4>
+        <ul>
+          <li><strong>Soulte :</strong> {{ resultats.montantSoulte | number:'1.0-0' }} EUR</li>
+          <li><strong>Frais de notaire :</strong> {{ resultats.fraisNotaire | number:'1.0-0' }} EUR</li>
+          <li class="total"><strong>Total à financer :</strong> {{ resultats.coutTotalRachat | number:'1.0-0' }} EUR</li>
+        </ul>
+      </div>
+
+      <div class="resultat-card" *ngIf="resultats.mensualiteCredit > 0">
+        <h4>Financement par crédit</h4>
+        <ul>
+          <li><strong>Mensualité :</strong> {{ resultats.mensualiteCredit | number:'1.0-0' }} EUR/mois</li>
+          <li><strong>Coût total du crédit :</strong> {{ resultats.coutTotalCredit | number:'1.0-0' }} EUR</li>
+          <li><strong>Intérêts totaux :</strong> {{ resultats.interetsTotaux | number:'1.0-0' }} EUR</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="mt-4">Répartition par héritier</h3>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Héritier</th>
+            <th>Part initiale</th>
+            <th>Soulte reçue</th>
+            <th>Soulte versée</th>
+            <th>Propriété finale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let h of resultats.detailHeritiers" [class.racheteur]="h.soulteVersee > 0">
+            <td>{{ h.nom }}</td>
+            <td>{{ h.partInitiale | number:'1.0-0' }} EUR</td>
+            <td>{{ h.soulteRecue | number:'1.0-0' }} EUR</td>
+            <td>{{ h.soulteVersee | number:'1.0-0' }} EUR</td>
+            <td><strong>{{ h.propriete }}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <br><br>
+  <div class="separator"></div>
+  <br>
+
+  <h2>Comprendre le rachat de soulte</h2>
+
+  <h3>Qu'est-ce que la soulte ?</h3>
+  <p>Lorsqu'un bien est détenu en <strong>indivision</strong> (suite à un héritage, un divorce, ou un achat à plusieurs), chaque indivisaire possède une quote-part. Si l'un d'eux souhaite devenir seul propriétaire, il doit <strong>racheter les parts des autres</strong> en leur versant une somme d'argent : c'est la <strong>soulte</strong>.</p>
+
+  <h3>Comment calculer la soulte ?</h3>
+  <p>Le calcul est relativement simple :</p>
+  <ol>
+    <li>Déterminer la <strong>valeur du bien</strong> (estimation par un notaire ou agent immobilier)</li>
+    <li>Déduire le <strong>capital restant dû</strong> sur un éventuel crédit</li>
+    <li>Diviser par le <strong>nombre d'indivisaires</strong> pour obtenir la part de chacun</li>
+    <li>Multiplier par le <strong>nombre de parts à racheter</strong></li>
+  </ol>
+
+  <div class="formule-box">
+    <strong>Formule :</strong> Soulte = (Valeur du bien - Capital restant) ÷ Nombre d'héritiers × (Nombre d'héritiers - 1)
+  </div>
+
+  <h3>Les frais de notaire sur le rachat de soulte</h3>
+  <p>Le rachat de soulte nécessite un acte notarié. Les frais de notaire sont calculés sur le <strong>montant de la soulte</strong> uniquement, pas sur la valeur totale du bien. Ils représentent environ <strong>7 à 8%</strong> de la soulte et comprennent :</p>
+  <ul>
+    <li>Les émoluments du notaire</li>
+    <li>Les droits d'enregistrement</li>
+    <li>Les frais divers (copies, formalités...)</li>
+  </ul>
+
+  <h3>Financer un rachat de soulte</h3>
+  <p>Plusieurs options de financement existent :</p>
+  <ul>
+    <li><strong>Prêt immobilier classique</strong> : le bien racheté sert de garantie hypothécaire</li>
+    <li><strong>Prêt personnel</strong> : pour les petits montants, plus rapide mais taux plus élevé</li>
+    <li><strong>Rachat de crédit</strong> : si vous avez d'autres crédits en cours</li>
+    <li><strong>Apport personnel</strong> : économies, donation, vente d'un autre bien</li>
+  </ul>
+
+  <h3>Cas particuliers</h3>
+
+  <h4>Rachat de soulte en cas de divorce</h4>
+  <p>Lors d'un divorce, si l'un des époux souhaite garder le logement familial, il doit racheter la part de l'autre. Le calcul est identique mais s'inscrit dans le cadre de la liquidation du régime matrimonial.</p>
+
+  <h4>Partage inégal</h4>
+  <p>Si les parts ne sont pas égales (testament spécifique, donation préalable...), le calcul doit être ajusté en fonction des quotes-parts réelles de chaque indivisaire.</p>
+
+  <br><br>
+  <app-faq-section
+    [title]="'FAQ – Questions sur le rachat de soulte'"
+    [faqItems]="faqItems"
+    [ariaLabel]="'Foire aux questions'">
+  </app-faq-section>
+</main>

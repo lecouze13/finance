@@ -1,0 +1,358 @@
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+.resultats-container {
+  margin-top: 2rem;
+}
+
+.comparaison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+
+  @media (max-width: 968px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.option-card {
+  background: #f8f9fa;
+  border: 2px solid #dce1e7;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+
+  &.best-option {
+    border-color: #10b981;
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+  }
+
+  .option-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    h3 {
+      margin: 0;
+      color: #1c2e4a;
+    }
+  }
+
+  .badge-best {
+    background: #10b981;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .option-detail {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    &.highlight {
+      background: rgba(59, 130, 246, 0.1);
+      margin: 0.5rem -1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    &.total {
+      background: rgba(16, 185, 129, 0.15);
+      margin: 0.5rem -1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      font-weight: 700;
+      color: #059669;
+    }
+
+    &.deduction {
+      color: #dc2626;
+    }
+
+    &.avantage {
+      color: #059669;
+      font-weight: 500;
+    }
+  }
+
+  .dividendes-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px dashed #dce1e7;
+  }
+
+  .capitalisation {
+    background: rgba(59, 130, 246, 0.1);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+    text-align: center;
+    color: #1e40af;
+  }
+
+  .taux-effectif {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #dce1e7;
+    text-align: center;
+    color: #64748b;
+    font-size: 0.9rem;
+  }
+}
+
+.synthese-box {
+  background: #f8f9fa;
+  border: 2px solid #dce1e7;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+
+  &.holding-mieux {
+    border-color: #3b82f6;
+    background: linear-gradient(135deg, #eef4ff 0%, #dbeafe 100%);
+  }
+
+  &.np-mieux {
+    border-color: #f59e0b;
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  }
+
+  h3 {
+    margin: 0 0 1rem 0;
+    color: #1c2e4a;
+  }
+
+  .synthese-content {
+    .synthese-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &.highlight {
+        font-weight: 700;
+        font-size: 1.1rem;
+        padding: 0.75rem 0;
+      }
+
+      .positif {
+        color: #059669;
+        font-weight: 600;
+      }
+
+      .negatif {
+        color: #dc2626;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.avantages-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.avantages-card {
+  border-radius: 12px;
+  padding: 1.5rem;
+
+  &.holding {
+    background: linear-gradient(135deg, #eef4ff 0%, #dbeafe 100%);
+    border: 1px solid #3b82f6;
+  }
+
+  &.nom-propre {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border: 1px solid #f59e0b;
+  }
+
+  h4 {
+    margin: 0 0 1rem 0;
+    color: #1c2e4a;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.25rem;
+
+    li {
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.attention-box {
+  background: #fef2f2;
+  border-left: 4px solid #ef4444;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+
+  h4 {
+    margin: 0 0 1rem 0;
+    color: #dc2626;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.25rem;
+
+    li {
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.schema-box {
+  background: #f8f9fa;
+  border: 1px solid #dce1e7;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  margin: 1rem 0;
+
+  .schema-niveau {
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem 0;
+  }
+
+  .schema-entite {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+
+    &.associe {
+      background: #dbeafe;
+      border: 2px solid #3b82f6;
+      color: #1e40af;
+    }
+
+    &.holding {
+      background: #fef3c7;
+      border: 2px solid #f59e0b;
+      color: #92400e;
+    }
+
+    &.sci {
+      background: #d1fae5;
+      border: 2px solid #10b981;
+      color: #065f46;
+    }
+
+    &.bien {
+      background: #e0e7ff;
+      border: 2px solid #6366f1;
+      color: #4338ca;
+    }
+  }
+
+  .schema-fleche {
+    color: #64748b;
+    font-size: 0.85rem;
+    padding: 0.25rem 0;
+
+    &::before {
+      content: '↓ ';
+    }
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+
+  th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid #dce1e7;
+  }
+
+  th {
+    background: #f1f5f9;
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) {
+    background: #f8fafc;
+  }
+}
+
+.conseil-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 1rem 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.conseil-card {
+  border-radius: 12px;
+  padding: 1.5rem;
+
+  &.np {
+    background: #fffbeb;
+    border: 1px solid #f59e0b;
+  }
+
+  &.holding {
+    background: #eef4ff;
+    border: 1px solid #3b82f6;
+  }
+
+  h4 {
+    margin: 0 0 1rem 0;
+    color: #1c2e4a;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.25rem;
+
+    li {
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

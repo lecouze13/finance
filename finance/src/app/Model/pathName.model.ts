@@ -52,4 +52,9 @@ export const AppRoutes = {
   SIMULATEUR_POUVOIR_ACHAT: 'simulateur-pouvoir-achat',
   SIMULATEUR_CREDIT_CONSO: 'simulateur-credit-consommation',
   SIMULATEUR_SCPI: 'simulateur-scpi',
+  SIMULATEUR_SORTIE_PINEL: 'simulateur-sortie-pinel',
+  SIMULATEUR_RACHAT_SOULTE: 'simulateur-rachat-soulte',
+  SIMULATEUR_PASSOIRE_THERMIQUE: 'simulateur-passoire-thermique',
+  SIMULATEUR_HOLDING_VS_DIRECT: 'simulateur-holding-vs-direct',
+  SIMULATEUR_ARBITRAGE_AV_IMMO: 'simulateur-arbitrage-av-immo',
 };

@@ -48,6 +48,11 @@ import { SimulateurRemboursementAnticipeComponent } from './Finance/simulateur-r
 import { SimulateurPouvoirAchatComponent } from './Finance/simulateur-pouvoir-achat/simulateur-pouvoir-achat.component';
 import { SimulateurCreditConsoComponent } from './Finance/simulateur-credit-conso/simulateur-credit-conso.component';
 import { SimulateurScpiComponent } from './Finance/simulateur-scpi/simulateur-scpi.component';
+import { SimulateurSortiePinelComponent } from './Immobilier/simulateur-sortie-pinel/simulateur-sortie-pinel.component';
+import { SimulateurRachatSoulteComponent } from './Immobilier/simulateur-rachat-soulte/simulateur-rachat-soulte.component';
+import { SimulateurPassoireThermiquComponent } from './Immobilier/simulateur-passoire-thermique/simulateur-passoire-thermique.component';
+import { SimulateurHoldingVsDirectComponent } from './Immobilier/simulateur-holding-vs-direct/simulateur-holding-vs-direct.component';
+import { SimulateurArbitrageAvImmoComponent } from './Immobilier/simulateur-arbitrage-av-immo/simulateur-arbitrage-av-immo.component';
 
 export const routes: Routes = [
   { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -447,6 +452,26 @@ export const routes: Routes = [
   { path: 'simulateur-livret/pel', component: SimulateurLivretComponent },
   { path: 'simulateur-livret/lea', component: SimulateurLivretComponent },
   { path: 'simulateur', component: SimulateurLivretComponent },
+  {
+    path: AppRoutes.SIMULATEUR_SORTIE_PINEL,
+    component: SimulateurSortiePinelComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_RACHAT_SOULTE,
+    component: SimulateurRachatSoulteComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_PASSOIRE_THERMIQUE,
+    component: SimulateurPassoireThermiquComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_HOLDING_VS_DIRECT,
+    component: SimulateurHoldingVsDirectComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_ARBITRAGE_AV_IMMO,
+    component: SimulateurArbitrageAvImmoComponent,
+  },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

@@ -133,6 +133,26 @@ export class HeaderComponent implements OnInit {
                 label: 'Viager (calcul rente)',
                 route: AppRoutes.SIMULATEUR_VIAGER,
               },
+              {
+                label: 'Sortie de Pinel',
+                route: AppRoutes.SIMULATEUR_SORTIE_PINEL,
+              },
+              {
+                label: 'Rachat de soulte (héritage)',
+                route: AppRoutes.SIMULATEUR_RACHAT_SOULTE,
+              },
+              {
+                label: 'Passoire thermique (DPE)',
+                route: AppRoutes.SIMULATEUR_PASSOIRE_THERMIQUE,
+              },
+              {
+                label: 'Holding vs Nom Propre',
+                route: AppRoutes.SIMULATEUR_HOLDING_VS_DIRECT,
+              },
+              {
+                label: 'Arbitrage AV vs Immo',
+                route: AppRoutes.SIMULATEUR_ARBITRAGE_AV_IMMO,
+              },
             ].sort((a, b) => a.label.localeCompare(b.label)),
           },
           {

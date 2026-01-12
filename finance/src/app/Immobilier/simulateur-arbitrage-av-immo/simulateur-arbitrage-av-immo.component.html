@@ -1,0 +1,351 @@
+<main>
+  <h1>Simulateur Arbitrage Assurance-Vie vs Immobilier</h1>
+  <p>Faut-il retirer de votre assurance-vie pour investir dans l'immobilier ? Comparez la fiscalité du rachat, l'effet de levier du crédit et les rendements sur 10 ans.</p>
+  <br>
+  <div class="separator"></div>
+  <br>
+
+  <div class="card p-fluid">
+    <h3>Votre assurance-vie actuelle</h3>
+
+    <div class="flex flex-wrap gap-4">
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="capitalAV" [(ngModel)]="capitalAV" mode="currency" currency="EUR"
+            pTooltip="Valeur totale de votre contrat" tooltipPosition="top" />
+          <label for="capitalAV">Capital total</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="plusValueAV" [(ngModel)]="plusValueAV" mode="currency" currency="EUR"
+            pTooltip="Plus-value cumulée (gains)" tooltipPosition="top" />
+          <label for="plusValueAV">Plus-value</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="ancienneteContrat" [(ngModel)]="ancienneteContrat" suffix=" ans"
+            pTooltip="Ancienneté du contrat" tooltipPosition="top" />
+          <label for="ancienneteContrat">Ancienneté</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="rendementAV" [(ngModel)]="rendementAV" suffix=" %"
+            pTooltip="Rendement annuel moyen attendu" tooltipPosition="top" />
+          <label for="rendementAV">Rendement annuel</label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <div class="anciennete-info" *ngIf="ancienneteContrat >= 8">
+      Contrat de plus de 8 ans : vous bénéficiez de l'abattement fiscal de 4 600€
+    </div>
+    <div class="anciennete-warning" *ngIf="ancienneteContrat < 8">
+      Contrat de moins de 8 ans : pas d'abattement fiscal sur les gains
+    </div>
+
+    <h3 class="mt-4">Retrait envisagé</h3>
+
+    <div class="flex flex-wrap gap-4">
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="montantRetrait" [(ngModel)]="montantRetrait" mode="currency" currency="EUR"
+            pTooltip="Montant que vous souhaitez retirer" tooltipPosition="top" />
+          <label for="montantRetrait">Montant du retrait</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-dropdown inputId="optionFiscale" [options]="optionsFiscales" [(ngModel)]="optionFiscale"
+            optionLabel="label" placeholder="Option fiscale" />
+          <label for="optionFiscale">Option fiscale</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-dropdown inputId="tmi" [options]="tranhesTMI" [(ngModel)]="selectedTMI"
+            optionLabel="label" placeholder="Votre TMI" />
+          <label for="tmi">TMI (si barème progressif)</label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <h3 class="mt-4">Projet immobilier</h3>
+
+    <div class="flex flex-wrap gap-4">
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="prixBien" [(ngModel)]="prixBien" mode="currency" currency="EUR"
+            pTooltip="Prix d'achat du bien" tooltipPosition="top" />
+          <label for="prixBien">Prix du bien</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="fraisNotairePourcent" [(ngModel)]="fraisNotairePourcent" suffix=" %"
+            pTooltip="Frais de notaire (7-8% ancien, 2-3% neuf)" tooltipPosition="top" />
+          <label for="fraisNotairePourcent">Frais de notaire</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="loyerMensuel" [(ngModel)]="loyerMensuel" mode="currency" currency="EUR"
+            pTooltip="Loyer mensuel attendu" tooltipPosition="top" />
+          <label for="loyerMensuel">Loyer mensuel</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="chargesMensuelles" [(ngModel)]="chargesMensuelles" mode="currency" currency="EUR"
+            pTooltip="Charges, taxe foncière, assurance..." tooltipPosition="top" />
+          <label for="chargesMensuelles">Charges mensuelles</label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <h3 class="mt-4">Financement</h3>
+
+    <div class="flex flex-wrap gap-4">
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="tauxCredit" [(ngModel)]="tauxCredit" suffix=" %"
+            pTooltip="Taux d'intérêt annuel" tooltipPosition="top" />
+          <label for="tauxCredit">Taux du crédit</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="dureeCredit" [(ngModel)]="dureeCredit" suffix=" ans"
+            pTooltip="Durée de l'emprunt" tooltipPosition="top" />
+          <label for="dureeCredit">Durée du crédit</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="appreciationAnnuelle" [(ngModel)]="appreciationAnnuelle" suffix=" %"
+            pTooltip="Appréciation annuelle estimée du bien" tooltipPosition="top" />
+          <label for="appreciationAnnuelle">Appréciation/an</label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <button pButton type="button" label="Analyser l'arbitrage" class="p-button-success"
+        (click)="calculer()" [disabled]="!capitalAV || !montantRetrait || !prixBien || !selectedTMI || !optionFiscale"></button>
+    </div>
+  </div>
+
+  <br>
+
+  <div *ngIf="resultats" class="resultats-container">
+    <h2>Résultats de l'arbitrage</h2>
+
+    <!-- VERDICT -->
+    <div class="verdict-box" [class.immo]="resultats.comparaison.meilleureOption === 'immo'" [class.av]="resultats.comparaison.meilleureOption === 'av'">
+      <div class="verdict-icon">
+        <span *ngIf="resultats.comparaison.meilleureOption === 'immo'">&#127968;</span>
+        <span *ngIf="resultats.comparaison.meilleureOption === 'av'">&#128176;</span>
+      </div>
+      <div class="verdict-text">
+        <h3 *ngIf="resultats.comparaison.meilleureOption === 'immo'">L'investissement immobilier est recommandé</h3>
+        <h3 *ngIf="resultats.comparaison.meilleureOption === 'av'">Conserver l'assurance-vie est préférable</h3>
+        <p>{{ resultats.comparaison.recommandation }}</p>
+      </div>
+    </div>
+
+    <div class="resultats-grid">
+      <!-- FISCALITÉ DU RETRAIT -->
+      <div class="resultat-card">
+        <h4>Fiscalité du retrait AV</h4>
+        <ul>
+          <li><strong>Montant retiré :</strong> {{ montantRetrait | number:'1.0-0' }} EUR</li>
+          <li><strong>Part de plus-value :</strong> {{ (montantRetrait * plusValueAV / capitalAV) | number:'1.0-0' }} EUR</li>
+          <li *ngIf="resultats.fiscaliteRetrait.abattement > 0" class="avantage">
+            <strong>Abattement (8 ans+) :</strong> -{{ resultats.fiscaliteRetrait.abattement | number:'1.0-0' }} EUR
+          </li>
+          <li><strong>Base imposable :</strong> {{ resultats.fiscaliteRetrait.baseImposable | number:'1.0-0' }} EUR</li>
+          <li class="impot"><strong>Impôt ({{ optionFiscale?.value === 'pfu' ? 'PFU 12,8%' : 'TMI' }}) :</strong> -{{ resultats.fiscaliteRetrait.impot | number:'1.0-0' }} EUR</li>
+          <li class="impot"><strong>Prélèvements sociaux (17,2%) :</strong> -{{ resultats.fiscaliteRetrait.prelevementsSociaux | number:'1.0-0' }} EUR</li>
+          <li class="total"><strong>Montant net disponible :</strong> {{ resultats.fiscaliteRetrait.montantNet | number:'1.0-0' }} EUR</li>
+        </ul>
+      </div>
+
+      <!-- INVESTISSEMENT IMMOBILIER -->
+      <div class="resultat-card">
+        <h4>Projet immobilier</h4>
+        <ul>
+          <li><strong>Prix du bien :</strong> {{ resultats.immobilier.prixAcquisition | number:'1.0-0' }} EUR</li>
+          <li><strong>Frais de notaire :</strong> {{ resultats.immobilier.fraisNotaire | number:'1.0-0' }} EUR</li>
+          <li><strong>Apport (retrait net) :</strong> {{ resultats.immobilier.apport | number:'1.0-0' }} EUR</li>
+          <li><strong>Emprunt nécessaire :</strong> {{ resultats.immobilier.emprunt | number:'1.0-0' }} EUR</li>
+          <li><strong>Mensualité crédit :</strong> {{ resultats.immobilier.mensualite | number:'1.0-0' }} EUR/mois</li>
+          <li><strong>Rendement brut :</strong> {{ resultats.immobilier.rendementBrut | number:'1.1-1' }}%</li>
+          <li><strong>Rendement net :</strong> {{ resultats.immobilier.rendementNet | number:'1.1-1' }}%</li>
+        </ul>
+      </div>
+
+      <!-- CASHFLOW IMMOBILIER -->
+      <div class="resultat-card">
+        <h4>Cashflow mensuel</h4>
+        <div class="cashflow-detail">
+          <div class="cashflow-ligne">
+            <span>Loyer mensuel</span>
+            <span class="positif">+{{ loyerMensuel | number:'1.0-0' }} EUR</span>
+          </div>
+          <div class="cashflow-ligne">
+            <span>Charges</span>
+            <span class="negatif">-{{ chargesMensuelles | number:'1.0-0' }} EUR</span>
+          </div>
+          <div class="cashflow-ligne">
+            <span>Mensualité crédit</span>
+            <span class="negatif">-{{ resultats.immobilier.mensualite | number:'1.0-0' }} EUR</span>
+          </div>
+          <div class="cashflow-ligne total" [class.positif]="resultats.immobilier.cashflowMensuel >= 0" [class.negatif]="resultats.immobilier.cashflowMensuel < 0">
+            <span>Cashflow</span>
+            <span>{{ resultats.immobilier.cashflowMensuel >= 0 ? '+' : '' }}{{ resultats.immobilier.cashflowMensuel | number:'1.0-0' }} EUR/mois</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECTION 10 ANS -->
+      <div class="resultat-card">
+        <h4>Projection sur 10 ans</h4>
+        <ul>
+          <li *ngIf="resultats.comparaison.meilleureOption === 'av'">
+            <strong>Capital AV conservé :</strong> {{ resultats.projectionAV.capitalFinal10ans | number:'1.0-0' }} EUR
+          </li>
+          <li><strong>Gain si AV conservée :</strong> {{ resultats.comparaison.gainAV10ans | number:'1.0-0' }} EUR</li>
+          <li><strong>Patrimoine immo net :</strong> {{ resultats.immobilier.capitalFinal10ans | number:'1.0-0' }} EUR</li>
+          <li><strong>Gain total immo :</strong> {{ resultats.comparaison.gainImmo10ans | number:'1.0-0' }} EUR</li>
+          <li class="total" [class.positif]="resultats.comparaison.differenceGain > 0" [class.negatif]="resultats.comparaison.differenceGain < 0">
+            <strong>Différence :</strong> {{ resultats.comparaison.differenceGain > 0 ? '+' : '' }}{{ resultats.comparaison.differenceGain | number:'1.0-0' }} EUR
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- COMPARATIF VISUEL -->
+    <div class="comparatif-visuel">
+      <h3>Comparatif sur 10 ans</h3>
+      <div class="barres-container">
+        <div class="barre-item">
+          <div class="barre-label">Assurance-vie (si conservée)</div>
+          <div class="barre-wrapper">
+            <div class="barre av" [style.width.%]="100"></div>
+          </div>
+          <div class="barre-valeur">{{ resultats.comparaison.gainAV10ans | number:'1.0-0' }} EUR</div>
+        </div>
+        <div class="barre-item">
+          <div class="barre-label">Investissement immobilier</div>
+          <div class="barre-wrapper">
+            <div class="barre immo" [style.width.%]="resultats.comparaison.gainAV10ans > 0 ? (resultats.comparaison.gainImmo10ans / resultats.comparaison.gainAV10ans) * 100 : 100"></div>
+          </div>
+          <div class="barre-valeur">{{ resultats.comparaison.gainImmo10ans | number:'1.0-0' }} EUR</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h4>L'effet de levier expliqué</h4>
+      <p>Avec un apport de <strong>{{ resultats.immobilier.apport | number:'1.0-0' }} EUR</strong>, vous contrôlez un bien de <strong>{{ resultats.immobilier.prixAcquisition | number:'1.0-0' }} EUR</strong>.</p>
+      <p>C'est un levier de <strong>{{ (resultats.immobilier.prixAcquisition / resultats.immobilier.apport) | number:'1.1-1' }}x</strong> : chaque euro d'apport travaille {{ (resultats.immobilier.prixAcquisition / resultats.immobilier.apport) | number:'1.1-1' }} fois plus.</p>
+      <p *ngIf="resultats.immobilier.cashflowMensuel >= 0">Avec un cashflow positif, le locataire rembourse votre crédit : vous vous enrichissez sans effort d'épargne supplémentaire.</p>
+    </div>
+  </div>
+
+  <br><br>
+  <div class="separator"></div>
+  <br>
+
+  <h2>Comprendre l'arbitrage AV / Immobilier</h2>
+
+  <h3>La fiscalité des rachats d'assurance-vie</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Ancienneté</th>
+        <th>Abattement</th>
+        <th>Imposition des gains</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Moins de 8 ans</td>
+        <td>Aucun</td>
+        <td>PFU 30% ou barème IR + 17,2% PS</td>
+      </tr>
+      <tr>
+        <td>Plus de 8 ans</td>
+        <td>4 600€ (9 200€ couple)</td>
+        <td>7,5% jusqu'à 150k€ versés + 17,2% PS<br>ou barème IR + 17,2% PS</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Quand l'arbitrage est-il pertinent ?</h3>
+  <div class="criteres-grid">
+    <div class="critere-card favorable">
+      <h4>Favorable à l'arbitrage</h4>
+      <ul>
+        <li>Contrat de plus de 8 ans (fiscalité optimisée)</li>
+        <li>Projet immobilier à fort rendement (> 6% brut)</li>
+        <li>Taux de crédit bas</li>
+        <li>Cashflow positif ou neutre</li>
+        <li>Objectif de constitution de patrimoine long terme</li>
+      </ul>
+    </div>
+    <div class="critere-card defavorable">
+      <h4>Défavorable à l'arbitrage</h4>
+      <ul>
+        <li>Contrat récent (moins de 8 ans)</li>
+        <li>Rendement immobilier faible</li>
+        <li>Taux de crédit élevé</li>
+        <li>Cashflow très négatif</li>
+        <li>Besoin de liquidité à court terme</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Les avantages de chaque placement</h3>
+  <div class="avantages-grid">
+    <div class="avantage-card av">
+      <h4>Assurance-vie</h4>
+      <ul>
+        <li>Liquidité (rachat à tout moment)</li>
+        <li>Fiscalité successorale avantageuse</li>
+        <li>Diversification facile (UC, fonds euros)</li>
+        <li>Pas de gestion locative</li>
+        <li>Capital garanti sur fonds euros</li>
+      </ul>
+    </div>
+    <div class="avantage-card immo">
+      <h4>Immobilier locatif</h4>
+      <ul>
+        <li>Effet de levier du crédit</li>
+        <li>Revenus réguliers (loyers)</li>
+        <li>Protection contre l'inflation</li>
+        <li>Actif tangible et décorrelé</li>
+        <li>Possibilité d'optimisation fiscale</li>
+      </ul>
+    </div>
+  </div>
+
+  <br><br>
+  <app-faq-section
+    [title]="'FAQ – Arbitrage Assurance-Vie / Immobilier'"
+    [faqItems]="faqItems"
+    [ariaLabel]="'Foire aux questions'">
+  </app-faq-section>
+</main>

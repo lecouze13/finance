@@ -1,0 +1,244 @@
+<main>
+  <h1>Simulateur Passoire Thermique : Rénover ou Vendre ?</h1>
+  <p>Votre bien est classé F ou G ? Découvrez si la rénovation énergétique est rentable, estimez les aides MaPrimeRénov' et comparez avec une vente en l'état.</p>
+  <br>
+  <div class="separator"></div>
+  <br>
+
+  <div class="alerte-box" *ngIf="!resultats">
+    <strong>Calendrier d'interdiction de location :</strong>
+    <ul>
+      <li><span class="dpe dpe-g">G</span> Interdit depuis le 1er janvier 2025</li>
+      <li><span class="dpe dpe-f">F</span> Interdit à partir du 1er janvier 2028</li>
+      <li><span class="dpe dpe-e">E</span> Interdit à partir du 1er janvier 2034</li>
+    </ul>
+  </div>
+
+  <div class="card p-fluid">
+    <h3>Informations sur votre bien</h3>
+
+    <div class="flex flex-wrap gap-4">
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="valeurBien" [(ngModel)]="valeurBien" mode="currency" currency="EUR"
+            pTooltip="Valeur estimée du bien" tooltipPosition="top" />
+          <label for="valeurBien">Valeur du bien</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="surface" [(ngModel)]="surface" suffix=" m²"
+            pTooltip="Surface habitable en m²" tooltipPosition="top" />
+          <label for="surface">Surface habitable</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="loyerActuel" [(ngModel)]="loyerActuel" mode="currency" currency="EUR"
+            pTooltip="Loyer mensuel actuel ou estimé" tooltipPosition="top" />
+          <label for="loyerActuel">Loyer mensuel actuel</label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <h3 class="mt-4">Diagnostic de Performance Énergétique</h3>
+
+    <div class="flex flex-wrap gap-4">
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-dropdown inputId="dpeActuel" [options]="classesDPE" [(ngModel)]="selectedDPEActuel"
+            optionLabel="label" placeholder="Classe actuelle" (onChange)="estimerCoutTravaux()" />
+          <label for="dpeActuel">DPE actuel</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-dropdown inputId="dpeCible" [options]="classesCibles" [(ngModel)]="selectedDPECible"
+            optionLabel="label" placeholder="Classe visée" (onChange)="estimerCoutTravaux()" />
+          <label for="dpeCible">DPE cible après travaux</label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <h3 class="mt-4">Travaux et financement</h3>
+
+    <div class="flex flex-wrap gap-4">
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-inputNumber inputId="coutTravaux" [(ngModel)]="coutTravaux" mode="currency" currency="EUR"
+            pTooltip="Coût estimé des travaux (auto-calculé ou personnalisé)" tooltipPosition="top" />
+          <label for="coutTravaux">Coût des travaux</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="flex-auto">
+        <p-floatLabel>
+          <p-dropdown inputId="profil" [options]="profilsRevenus" [(ngModel)]="selectedProfil"
+            optionLabel="label" placeholder="Votre profil de revenus" />
+          <label for="profil">Profil MaPrimeRénov'</label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <button pButton type="button" label="Calculer la rentabilité" class="p-button-success"
+        (click)="calculer()" [disabled]="!valeurBien || !surface || !loyerActuel || !selectedDPEActuel || !selectedDPECible || !coutTravaux || !selectedProfil"></button>
+    </div>
+  </div>
+
+  <br>
+
+  <div *ngIf="resultats" class="resultats-container">
+    <h2>Analyse de rentabilité</h2>
+
+    <div class="verdict-box" [class.rentable]="resultats.rentable" [class.non-rentable]="!resultats.rentable">
+      <div class="verdict-icon">
+        <span *ngIf="resultats.rentable">&#10003;</span>
+        <span *ngIf="!resultats.rentable">&#9888;</span>
+      </div>
+      <div class="verdict-text">
+        <h3 *ngIf="resultats.rentable">La rénovation est rentable !</h3>
+        <h3 *ngIf="!resultats.rentable">La vente pourrait être préférable</h3>
+        <p>
+          Passage de <span class="dpe" [class]="'dpe-' + resultats.dpeActuel.toLowerCase()">{{ resultats.dpeActuel }}</span>
+          vers <span class="dpe" [class]="'dpe-' + resultats.dpeCible.toLowerCase()">{{ resultats.dpeCible }}</span>
+          - Retour sur investissement en <strong>{{ resultats.roiAnnees | number:'1.1-1' }} ans</strong>
+        </p>
+      </div>
+    </div>
+
+    <div class="resultats-grid">
+      <div class="resultat-card">
+        <h4>Coût de la rénovation</h4>
+        <ul>
+          <li><strong>Coût brut des travaux :</strong> {{ resultats.coutTravaux | number:'1.0-0' }} EUR</li>
+          <li class="aide"><strong>Aides MaPrimeRénov' ({{ resultats.tauxAidePourcent }}%) :</strong> -{{ resultats.aides | number:'1.0-0' }} EUR</li>
+          <li class="total"><strong>Reste à charge :</strong> {{ resultats.resteACharge | number:'1.0-0' }} EUR</li>
+        </ul>
+      </div>
+
+      <div class="resultat-card">
+        <h4>Impact sur les loyers</h4>
+        <ul>
+          <li><strong>Loyer actuel :</strong> {{ resultats.loyerActuel | number:'1.0-0' }} EUR/mois</li>
+          <li><strong>Nouveau loyer possible :</strong> {{ resultats.nouveauLoyer | number:'1.0-0' }} EUR/mois</li>
+          <li class="gain"><strong>Gain mensuel :</strong> +{{ resultats.gainLoyerMensuel | number:'1.0-0' }} EUR (+{{ resultats.augmentationPourcent | number:'1.0-0' }}%)</li>
+          <li><strong>Gain annuel :</strong> {{ resultats.gainLoyerAnnuel | number:'1.0-0' }} EUR/an</li>
+        </ul>
+      </div>
+
+      <div class="resultat-card">
+        <h4>Impact sur la valeur du bien</h4>
+        <ul>
+          <li><strong>Valeur actuelle (décotée) :</strong> {{ resultats.valeurAvantReno | number:'1.0-0' }} EUR</li>
+          <li><strong>Valeur après rénovation :</strong> {{ resultats.valeurApresReno | number:'1.0-0' }} EUR</li>
+          <li class="gain"><strong>Plus-value potentielle :</strong> +{{ resultats.plusValuePotentielle | number:'1.0-0' }} EUR</li>
+        </ul>
+      </div>
+
+      <div class="resultat-card">
+        <h4>Autres indicateurs</h4>
+        <ul>
+          <li><strong>Économie d'énergie annuelle :</strong> ~{{ resultats.economieEnergie | number:'1.0-0' }} EUR</li>
+          <li><strong>Retour sur investissement :</strong> {{ resultats.roiAnnees | number:'1.1-1' }} ans</li>
+          <li><strong>Interdiction de location :</strong> {{ resultats.interdiction }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="recommandation-box">
+      <h3>Notre analyse</h3>
+      <div *ngIf="resultats.rentable">
+        <p><strong>La rénovation est recommandée.</strong> Voici pourquoi :</p>
+        <ul>
+          <li>Les aides couvrent {{ resultats.tauxAidePourcent }}% du coût des travaux</li>
+          <li>Le loyer peut augmenter de {{ resultats.augmentationPourcent | number:'1.0-0' }}%</li>
+          <li>Vous récupérez votre investissement en {{ resultats.roiAnnees | number:'1.1-1' }} ans</li>
+          <li>Vous évitez l'interdiction de louer prévue en {{ resultats.interdiction }}</li>
+          <li>La valeur du bien augmente de {{ resultats.plusValuePotentielle | number:'1.0-0' }} EUR</li>
+        </ul>
+      </div>
+      <div *ngIf="!resultats.rentable">
+        <p><strong>La vente pourrait être plus intéressante.</strong> À considérer :</p>
+        <ul>
+          <li>Le retour sur investissement est long ({{ resultats.roiAnnees | number:'1.1-1' }} ans)</li>
+          <li>Le reste à charge est élevé : {{ resultats.resteACharge | number:'1.0-0' }} EUR</li>
+          <li>Vendre maintenant évite les travaux et les tracas</li>
+          <li>Vous pourriez réinvestir dans un bien déjà aux normes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <br><br>
+  <div class="separator"></div>
+  <br>
+
+  <h2>Comprendre les passoires thermiques et la rénovation énergétique</h2>
+
+  <h3>Le calendrier d'interdiction</h3>
+  <p>La loi Climat et Résilience impose un calendrier strict pour les propriétaires de logements énergivores :</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Classe DPE</th>
+        <th>Date d'interdiction</th>
+        <th>Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="dpe dpe-g">G</span></td>
+        <td>1er janvier 2025</td>
+        <td>Déjà interdit à la location</td>
+      </tr>
+      <tr>
+        <td><span class="dpe dpe-f">F</span></td>
+        <td>1er janvier 2028</td>
+        <td>Plus que 3 ans pour agir</td>
+      </tr>
+      <tr>
+        <td><span class="dpe dpe-e">E</span></td>
+        <td>1er janvier 2034</td>
+        <td>Anticiper dès maintenant</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Les aides à la rénovation énergétique</h3>
+
+  <h4>MaPrimeRénov'</h4>
+  <p>L'aide principale de l'État, calculée selon vos revenus :</p>
+  <ul>
+    <li><strong>Bleu (très modestes)</strong> : jusqu'à 90% de prise en charge</li>
+    <li><strong>Jaune (modestes)</strong> : jusqu'à 75% de prise en charge</li>
+    <li><strong>Violet (intermédiaires)</strong> : jusqu'à 60% de prise en charge</li>
+    <li><strong>Rose (supérieurs)</strong> : jusqu'à 40% de prise en charge</li>
+  </ul>
+
+  <h4>Autres aides cumulables</h4>
+  <ul>
+    <li>CEE (Certificats d'Économies d'Énergie)</li>
+    <li>Éco-PTZ (prêt à taux zéro pour les travaux)</li>
+    <li>TVA à 5,5% sur les travaux</li>
+    <li>Aides locales (communes, départements, régions)</li>
+  </ul>
+
+  <h3>Les travaux prioritaires</h3>
+  <ol>
+    <li><strong>Isolation</strong> : toiture, murs, planchers (le plus impactant)</li>
+    <li><strong>Fenêtres</strong> : double ou triple vitrage</li>
+    <li><strong>Chauffage</strong> : pompe à chaleur, chaudière performante</li>
+    <li><strong>Ventilation</strong> : VMC double flux</li>
+  </ol>
+
+  <br><br>
+  <app-faq-section
+    [title]="'FAQ – Passoires thermiques et rénovation'"
+    [faqItems]="faqItems"
+    [ariaLabel]="'Foire aux questions'">
+  </app-faq-section>
+</main>
