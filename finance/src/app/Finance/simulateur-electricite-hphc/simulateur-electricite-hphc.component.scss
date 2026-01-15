@@ -1,0 +1,403 @@
+// Styles spécifiques au simulateur Électricité HP/HC
+// Les styles communs sont importés via styles.scss (_simulator-common.scss)
+
+.verdict-box {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+
+  &.hphc {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    border: 2px solid #10b981;
+
+    .verdict-icon {
+      color: #10b981;
+    }
+
+    h3 {
+      color: #059669;
+    }
+  }
+
+  &.base {
+    background: linear-gradient(135deg, #eef4ff 0%, #dbeafe 100%);
+    border: 2px solid #3b82f6;
+
+    .verdict-icon {
+      color: #3b82f6;
+    }
+
+    h3 {
+      color: #1e40af;
+    }
+  }
+
+  .verdict-icon {
+    font-size: 3rem;
+  }
+
+  .verdict-text {
+    h3 {
+      margin: 0 0 0.5rem 0;
+    }
+
+    p {
+      margin: 0;
+      color: #64748b;
+
+      strong {
+        color: #059669;
+        font-size: 1.25rem;
+      }
+    }
+  }
+}
+
+.comparaison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.option-card {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+
+  &.best {
+    border-color: #10b981;
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+  }
+
+  .option-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h4 {
+      margin: 0;
+      color: #1e40af;
+    }
+
+    .badge {
+      background: #10b981;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+  }
+
+  .option-prix {
+    text-align: center;
+    margin-bottom: 1rem;
+
+    .montant {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .periode {
+      color: #64748b;
+    }
+  }
+
+  .option-detail {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 0.9rem;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &.total {
+        background-color: #dbeafe;
+        padding: 0.6rem;
+        border-radius: 4px;
+        margin-top: 0.5rem;
+        font-weight: 600;
+      }
+
+      .hc-prix {
+        color: #059669;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .option-info {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed #e2e8f0;
+    font-size: 0.85rem;
+    color: #64748b;
+    text-align: center;
+  }
+}
+
+.slider-group {
+  grid-column: 1 / -1;
+
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 0.5rem;
+  }
+}
+
+.form-hint {
+  display: block;
+  color: #64748b;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.seuil-box {
+  background: #f8fafc;
+  border-left: 4px solid #8b5cf6;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+
+  h4 {
+    margin-top: 0;
+    color: #6d28d9;
+  }
+
+  .seuil-content {
+    .seuil-barre {
+      position: relative;
+      height: 24px;
+      background: linear-gradient(90deg, #ef4444 0%, #f59e0b 30%, #10b981 60%, #10b981 100%);
+      border-radius: 12px;
+      margin: 1rem 0;
+    }
+
+    .seuil-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 12px 0 0 12px;
+    }
+
+    .seuil-marker {
+      position: absolute;
+      top: -4px;
+      width: 4px;
+      height: 32px;
+      background: #1e293b;
+      border-radius: 2px;
+      transform: translateX(-50%);
+
+      &::after {
+        content: 'Vous';
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.75rem;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+    }
+
+    .seuil-info {
+      p {
+        margin: 0;
+        line-height: 1.6;
+
+        &.rentable {
+          color: #059669;
+        }
+
+        &.non-rentable {
+          color: #dc2626;
+        }
+      }
+    }
+  }
+}
+
+.mensuel-box {
+  background: #f8fafc;
+  border-left: 4px solid #3b82f6;
+  padding: 1.5rem;
+  border-radius: 8px;
+
+  h4 {
+    margin-top: 0;
+    color: #1e40af;
+  }
+
+  .mensuel-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .mensuel-item {
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+
+    .label {
+      display: block;
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 0.5rem;
+    }
+
+    .montant {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    &.economie {
+      &.positif {
+        background: #ecfdf5;
+
+        .montant {
+          color: #059669;
+        }
+      }
+
+      &.negatif {
+        background: #fef2f2;
+
+        .montant {
+          color: #dc2626;
+        }
+      }
+    }
+  }
+}
+
+.info-panel {
+  .tips-list {
+    margin: 0;
+    padding-left: 1.25rem;
+
+    li {
+      margin-bottom: 0.5rem;
+      color: #475569;
+      line-height: 1.5;
+
+      strong {
+        color: #1e40af;
+      }
+    }
+  }
+}
+
+.info-section {
+  margin-top: 3rem;
+
+  h2 {
+    color: #1e40af;
+    margin-bottom: 1.5rem;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .info-card {
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 8px;
+
+    &.base {
+      border-left: 4px solid #3b82f6;
+
+      h3 {
+        color: #1e40af;
+      }
+    }
+
+    &.hphc {
+      border-left: 4px solid #10b981;
+
+      h3 {
+        color: #047857;
+      }
+    }
+
+    &.tempo {
+      border-left: 4px solid #f59e0b;
+
+      h3 {
+        color: #b45309;
+      }
+    }
+
+    h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+
+    p {
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.25rem;
+
+      li {
+        margin-bottom: 0.25rem;
+        color: #475569;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .verdict-box {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .option-card .option-prix .montant {
+    font-size: 1.5rem;
+  }
+}

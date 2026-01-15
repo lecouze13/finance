@@ -1,0 +1,300 @@
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Simulateur de Crédit Relais</h1>
+    <p class="subtitle">Calculez votre financement pour acheter avant de vendre</p>
+  </div>
+
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Votre Bien à Vendre" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Valeur estimée du bien</label>
+            <p-inputNumber
+              [(ngModel)]="valeurBienVendre"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Capital restant dû</label>
+            <p-inputNumber
+              [(ngModel)]="capitalRestantDu"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Estimation basse</label>
+            <p-inputNumber
+              [(ngModel)]="estimationBasse"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Estimation haute</label>
+            <p-inputNumber
+              [(ngModel)]="estimationHaute"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Votre Nouveau Bien" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Prix du nouveau bien</label>
+            <p-inputNumber
+              [(ngModel)]="prixNouveauBien"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Frais de notaire</label>
+            <p-inputNumber
+              [(ngModel)]="fraisNotaire"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="1"
+              [maxFractionDigits]="1"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Apport personnel</label>
+            <p-inputNumber
+              [(ngModel)]="apportPersonnel"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Conditions du Crédit Relais" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Quotité de financement</label>
+            <p-dropdown
+              [options]="quotiteOptions"
+              [(ngModel)]="quotiteFinancement"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label>Durée du relais</label>
+            <p-dropdown
+              [options]="dureeRelaisOptions"
+              [(ngModel)]="dureeRelais"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label>Taux du crédit relais</label>
+            <p-inputNumber
+              [(ngModel)]="tauxRelais"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="2"
+              [maxFractionDigits]="2"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Taux crédit complémentaire</label>
+            <p-inputNumber
+              [(ngModel)]="tauxComplementaire"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="2"
+              [maxFractionDigits]="2"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+
+    <div class="results-section">
+      <p-panel header="Votre Plan de Financement" [styleClass]="risqueNegatif ? 'results-panel warning' : 'results-panel success'">
+        <div class="resultat-principal" [class.warning]="risqueNegatif">
+          <div class="montant-principal">
+            <span class="label">Montant du crédit relais</span>
+            <span class="montant">{{ formatCurrency(montantRelais) }}</span>
+          </div>
+          <div class="montant-secondaire">
+            Basé sur {{ quotiteFinancement }}% de la valeur estimée
+          </div>
+        </div>
+
+        <div class="resultats-grid">
+          <div class="resultat-card">
+            <h4>Crédit Relais</h4>
+            <ul>
+              <li>
+                <span>Montant avancé</span>
+                <span>{{ formatCurrency(montantRelais) }}</span>
+              </li>
+              <li>
+                <span>Mensualité (intérêts)</span>
+                <span>{{ formatCurrency(mensualiteRelais) }}</span>
+              </li>
+              <li>
+                <span>Durée</span>
+                <span>{{ dureeRelais }} mois</span>
+              </li>
+              <li class="total">
+                <span>Coût total intérêts</span>
+                <span>{{ formatCurrency(interetsRelais) }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="resultat-card">
+            <h4>Crédit Complémentaire</h4>
+            <ul>
+              <li>
+                <span>Montant emprunté</span>
+                <span>{{ formatCurrency(montantComplementaire) }}</span>
+              </li>
+              <li>
+                <span>Mensualité</span>
+                <span>{{ formatCurrency(mensualiteComplementaire) }}</span>
+              </li>
+              <li>
+                <span>Durée</span>
+                <span>{{ dureeComplementaire }} ans</span>
+              </li>
+              <li class="total">
+                <span>Taux</span>
+                <span>{{ tauxComplementaire }}%</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="charge-mensuelle">
+          <h4>Charge mensuelle pendant la période relais</h4>
+          <div class="charge-detail">
+            <div class="charge-ligne">
+              <span>Intérêts crédit relais</span>
+              <span>{{ formatCurrency(mensualiteRelais) }}</span>
+            </div>
+            <div class="charge-ligne">
+              <span>Mensualité crédit complémentaire</span>
+              <span>{{ formatCurrency(mensualiteComplementaire) }}</span>
+            </div>
+            <div class="charge-ligne total">
+              <span>Total mensuel</span>
+              <span>{{ formatCurrency(mensualiteRelais + mensualiteComplementaire) }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="scenarios-box">
+          <h4>Scénarios de vente</h4>
+          <div class="scenarios-grid">
+            <div class="scenario optimiste">
+              <span class="scenario-label">Vente au prix haut</span>
+              <span class="scenario-prix">{{ formatCurrency(scenarioOptimiste.prixVente) }}</span>
+              <span class="scenario-tresorerie positif">Trésorerie: {{ formatCurrency(scenarioOptimiste.tresorerie) }}</span>
+            </div>
+            <div class="scenario pessimiste" [class.danger]="risqueNegatif">
+              <span class="scenario-label">Vente au prix bas</span>
+              <span class="scenario-prix">{{ formatCurrency(scenarioPessimiste.prixVente) }}</span>
+              <span class="scenario-tresorerie" [class.negatif]="scenarioPessimiste.tresorerie < 0">
+                Trésorerie: {{ formatCurrency(scenarioPessimiste.tresorerie) }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="alerte-box" *ngIf="risqueNegatif">
+          <strong>Attention :</strong> En cas de vente au prix bas, vous pourriez avoir une trésorerie négative.
+          Envisagez de réduire la quotité de financement ou d'augmenter votre apport personnel.
+        </div>
+
+        <div class="cout-total-box">
+          <h4>Coût total de l'opération</h4>
+          <ul>
+            <li>
+              <span>Intérêts crédit relais</span>
+              <span>{{ formatCurrency(interetsRelais) }}</span>
+            </li>
+            <li>
+              <span>Frais de notaire</span>
+              <span>{{ formatCurrency(prixNouveauBien * fraisNotaire / 100) }}</span>
+            </li>
+            <li>
+              <span>Frais de dossier</span>
+              <span>{{ formatCurrency(fraisDossier) }}</span>
+            </li>
+            <li class="total">
+              <span>Total des frais</span>
+              <span>{{ formatCurrency(coutTotalOperation) }}</span>
+            </li>
+          </ul>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <section class="info-section">
+    <h2>Comment fonctionne le crédit relais ?</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>1. Estimation du bien</h3>
+        <p>La banque fait estimer votre bien actuel par un expert. Elle avancera généralement 60 à 80% de cette valeur.</p>
+      </div>
+      <div class="info-card">
+        <h3>2. Financement transitoire</h3>
+        <p>Le crédit relais vous permet d'acheter le nouveau bien. Vous payez uniquement les intérêts en attendant la vente.</p>
+      </div>
+      <div class="info-card">
+        <h3>3. Vente et remboursement</h3>
+        <p>Dès la vente de votre ancien bien, vous remboursez le crédit relais. Le crédit complémentaire continue normalement.</p>
+      </div>
+    </div>
+  </section>
+
+  <app-faq-section
+    [faqItems]="faqItems"
+    pageTitle="Simulateur de Crédit Relais">
+  </app-faq-section>
+</div>

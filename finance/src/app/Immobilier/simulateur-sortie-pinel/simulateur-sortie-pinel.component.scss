@@ -1,9 +1,9 @@
-.mt-4 {
-  margin-top: 1.5rem;
-}
+// Styles spécifiques au simulateur Sortie Pinel
+// Les styles communs sont importés via styles.scss (_simulator-common.scss)
 
-.resultats-container {
-  margin-top: 2rem;
+.resultats-pinel {
+  display: grid;
+  gap: 1.5rem;
 }
 
 .options-grid {
@@ -12,14 +12,14 @@
   gap: 1.5rem;
   margin: 1.5rem 0;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 992px) {
     grid-template-columns: 1fr;
   }
 }
 
 .option-card {
-  background: #f8f9fa;
-  border: 2px solid #dce1e7;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
   border-radius: 12px;
   padding: 1.5rem;
   transition: all 0.3s ease;
@@ -40,8 +40,7 @@
 
     h3 {
       margin: 0;
-      color: #1c2e4a;
-      font-size: 1.1rem;
+      color: #1e40af;
     }
   }
 
@@ -60,30 +59,30 @@
     margin: 0;
 
     li {
-      padding: 0.5rem 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #e2e8f0;
 
       &:last-child {
         border-bottom: none;
-      }
-
-      &.highlight {
-        background: rgba(59, 130, 246, 0.1);
-        margin: 0.5rem -1rem;
-        padding: 0.75rem 1rem;
-        border-radius: 6px;
-        font-weight: 600;
       }
     }
   }
 }
 
+.highlight {
+  background-color: #dbeafe;
+  padding: 0.6rem !important;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+}
+
 .conclusion-box {
-  background: linear-gradient(135deg, #eef4ff 0%, #dbeafe 100%);
-  border-left: 4px solid #3b82f6;
+  background: #f8fafc;
   padding: 1.5rem;
   border-radius: 8px;
+  border-left: 4px solid #3b82f6;
   margin-top: 1.5rem;
 
   h3 {
@@ -92,9 +91,17 @@
   }
 
   p {
-    margin-bottom: 0;
+    margin: 0.5rem 0;
+    color: #475569;
     line-height: 1.6;
   }
+}
+
+.note {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 1rem;
+  font-style: italic;
 }
 
 table {
@@ -102,10 +109,11 @@ table {
   border-collapse: collapse;
   margin: 1rem 0;
 
-  th, td {
+  th,
+  td {
     padding: 0.75rem;
     text-align: left;
-    border: 1px solid #dce1e7;
+    border: 1px solid #e2e8f0;
   }
 
   th {
@@ -115,5 +123,11 @@ table {
 
   tr:nth-child(even) {
     background: #f8fafc;
+  }
+}
+
+@media (max-width: 767px) {
+  .option-card {
+    padding: 1rem;
   }
 }

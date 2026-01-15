@@ -1,0 +1,215 @@
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Simulateur Heures Pleines / Heures Creuses</h1>
+    <p class="subtitle">Comparez les options tarifaires électricité et trouvez la plus économique</p>
+  </div>
+
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Votre Consommation Électrique" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Consommation annuelle</label>
+            <p-inputNumber
+              [(ngModel)]="consommationAnnuelle"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="50000"
+              suffix=" kWh/an">
+            </p-inputNumber>
+            <small class="form-hint">Moyenne française : 4 700 kWh (sans chauffage) / 8 500 kWh (avec chauffage électrique)</small>
+          </div>
+
+          <div class="form-group">
+            <label>Puissance souscrite</label>
+            <p-dropdown
+              [options]="puissanceOptions"
+              [(ngModel)]="puissanceSouscrite"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+
+          <div class="form-group slider-group">
+            <label>Pourcentage de consommation en heures creuses : <strong>{{ pourcentageHC }}%</strong></label>
+            <p-slider
+              [(ngModel)]="pourcentageHC"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="100"
+              [step]="5">
+            </p-slider>
+            <div class="slider-labels">
+              <span>0% (tout en HP)</span>
+              <span>100% (tout en HC)</span>
+            </div>
+            <small class="form-hint">Avec chauffe-eau + lave-linge en HC : environ 40-50%</small>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Conseils pour optimiser vos heures creuses" styleClass="custom-panel info-panel">
+        <ul class="tips-list">
+          <li><strong>Chauffe-eau :</strong> Programmez-le en mode Auto (contacteur jour/nuit)</li>
+          <li><strong>Lave-linge / Lave-vaisselle :</strong> Utilisez le départ différé</li>
+          <li><strong>Véhicule électrique :</strong> Rechargez la nuit (énorme impact !)</li>
+          <li><strong>Sèche-linge :</strong> Lancez-le en soirée après 22h</li>
+          <li><strong>Four / Plaques :</strong> Difficile à décaler, reste en heures pleines</li>
+        </ul>
+      </p-panel>
+    </div>
+
+    <div class="results-section">
+      <p-panel header="Comparatif des Options" [styleClass]="economie > 0 ? 'results-panel success' : 'results-panel'">
+
+        <div class="verdict-box" [class.hphc]="economie > 0" [class.base]="economie <= 0">
+          <div class="verdict-icon">{{ economie > 0 ? '⚡' : '💡' }}</div>
+          <div class="verdict-text">
+            <h3>Option {{ meilleurOption }} recommandée</h3>
+            <p *ngIf="economie > 0">Économie de <strong>{{ formatCurrency(economie) }}/an</strong> avec l'option HP/HC</p>
+            <p *ngIf="economie <= 0">Économie de <strong>{{ formatCurrency(-economie) }}/an</strong> avec l'option Base</p>
+          </div>
+        </div>
+
+        <div class="comparaison-grid">
+          <div class="option-card" [class.best]="economie <= 0">
+            <div class="option-header">
+              <h4>Option Base</h4>
+              <span class="badge" *ngIf="economie <= 0">Meilleur choix</span>
+            </div>
+            <div class="option-prix">
+              <span class="montant">{{ formatCurrency(coutBase) }}</span>
+              <span class="periode">/an</span>
+            </div>
+            <ul class="option-detail">
+              <li>
+                <span>Abonnement annuel</span>
+                <span>{{ formatCurrency(detailBase.abonnement) }}</span>
+              </li>
+              <li>
+                <span>Consommation ({{ formatNumber(consommationAnnuelle) }} kWh)</span>
+                <span>{{ formatCurrency(detailBase.consommation) }}</span>
+              </li>
+              <li class="total">
+                <span>Total annuel TTC</span>
+                <span>{{ formatCurrency(detailBase.total) }}</span>
+              </li>
+            </ul>
+            <div class="option-info">
+              Prix unique : 0.2516 €/kWh
+            </div>
+          </div>
+
+          <div class="option-card" [class.best]="economie > 0">
+            <div class="option-header">
+              <h4>Option HP/HC</h4>
+              <span class="badge" *ngIf="economie > 0">Meilleur choix</span>
+            </div>
+            <div class="option-prix">
+              <span class="montant">{{ formatCurrency(coutHPHC) }}</span>
+              <span class="periode">/an</span>
+            </div>
+            <ul class="option-detail">
+              <li>
+                <span>Abonnement annuel</span>
+                <span>{{ formatCurrency(detailHPHC.abonnement) }}</span>
+              </li>
+              <li>
+                <span>Heures Pleines ({{ formatNumber(detailHPHC.consoHP) }} kWh)</span>
+                <span>{{ formatCurrency(detailHPHC.coutHP) }}</span>
+              </li>
+              <li>
+                <span>Heures Creuses ({{ formatNumber(detailHPHC.consoHC) }} kWh)</span>
+                <span class="hc-prix">{{ formatCurrency(detailHPHC.coutHC) }}</span>
+              </li>
+              <li class="total">
+                <span>Total annuel TTC</span>
+                <span>{{ formatCurrency(detailHPHC.total) }}</span>
+              </li>
+            </ul>
+            <div class="option-info">
+              HP : 0.2700 €/kWh | HC : 0.2068 €/kWh
+            </div>
+          </div>
+        </div>
+
+        <div class="seuil-box">
+          <h4>Seuil de rentabilité HP/HC</h4>
+          <div class="seuil-content">
+            <div class="seuil-barre">
+              <div class="seuil-fill" [style.width.%]="seuilRentabilite"></div>
+              <div class="seuil-marker" [style.left.%]="pourcentageHC"></div>
+            </div>
+            <div class="seuil-info">
+              <p *ngIf="pourcentageHC >= seuilRentabilite" class="rentable">
+                Avec <strong>{{ pourcentageHC }}%</strong> de consommation en HC, vous dépassez le seuil de rentabilité de <strong>{{ seuilRentabilite }}%</strong>.
+              </p>
+              <p *ngIf="pourcentageHC < seuilRentabilite" class="non-rentable">
+                Pour rentabiliser l'option HP/HC, vous devez atteindre au moins <strong>{{ seuilRentabilite }}%</strong> de consommation en heures creuses (actuellement {{ pourcentageHC }}%).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mensuel-box">
+          <h4>Impact sur votre facture mensuelle</h4>
+          <div class="mensuel-grid">
+            <div class="mensuel-item">
+              <span class="label">Option Base</span>
+              <span class="montant">{{ formatCurrency(coutBase / 12) }}/mois</span>
+            </div>
+            <div class="mensuel-item">
+              <span class="label">Option HP/HC</span>
+              <span class="montant">{{ formatCurrency(coutHPHC / 12) }}/mois</span>
+            </div>
+            <div class="mensuel-item economie" [class.positif]="economie > 0" [class.negatif]="economie <= 0">
+              <span class="label">{{ economie > 0 ? 'Économie mensuelle' : 'Surcoût mensuel' }}</span>
+              <span class="montant">{{ formatCurrency(Math.abs(economie) / 12) }}/mois</span>
+            </div>
+          </div>
+        </div>
+
+      </p-panel>
+    </div>
+  </div>
+
+  <section class="info-section">
+    <h2>Comprendre les options tarifaires EDF</h2>
+    <div class="info-grid">
+      <div class="info-card base">
+        <h3>Option Base</h3>
+        <p>Un seul prix du kWh, 24h/24. Simple et adapté aux petites consommations ou si vous ne pouvez pas décaler vos usages.</p>
+        <ul>
+          <li>Abonnement moins cher</li>
+          <li>Prix unique du kWh</li>
+          <li>Pas de contrainte horaire</li>
+        </ul>
+      </div>
+      <div class="info-card hphc">
+        <h3>Option Heures Pleines / Heures Creuses</h3>
+        <p>Deux tarifs : un réduit la nuit (8h) et un plus élevé le jour (16h). Idéal avec un chauffe-eau électrique.</p>
+        <ul>
+          <li>Économies si &gt;30% en HC</li>
+          <li>Chauffe-eau programmable</li>
+          <li>Adapté aux gros consommateurs</li>
+        </ul>
+      </div>
+      <div class="info-card tempo">
+        <h3>Option Tempo (pour aller plus loin)</h3>
+        <p>6 tarifs selon le jour (bleu, blanc, rouge) et l'heure. Très économique si vous pouvez moduler votre consommation.</p>
+        <ul>
+          <li>22 jours rouges très chers</li>
+          <li>Nécessite chauffage d'appoint</li>
+          <li>Jusqu'à 30% d'économies</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <app-faq-section
+    [faqItems]="faqItems"
+    pageTitle="Simulateur Heures Pleines / Heures Creuses">
+  </app-faq-section>
+</div>

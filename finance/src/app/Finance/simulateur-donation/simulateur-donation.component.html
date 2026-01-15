@@ -1,0 +1,224 @@
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Simulateur de Droits de Donation</h1>
+    <p class="subtitle">Calculez les droits à payer pour transmettre votre patrimoine de votre vivant</p>
+  </div>
+
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="La Donation" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Montant de la donation</label>
+            <p-inputNumber
+              [(ngModel)]="montantDonation"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Lien de parenté avec le bénéficiaire</label>
+            <p-dropdown
+              [options]="lienParenteOptions"
+              [(ngModel)]="lienParente"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label>Type de donation</label>
+            <p-dropdown
+              [options]="typeDonationOptions"
+              [(ngModel)]="typeDonation"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label>Âge du donateur</label>
+            <p-inputNumber
+              [(ngModel)]="ageDonateur"
+              (ngModelChange)="calculer()"
+              [min]="18"
+              [max]="120"
+              suffix=" ans">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Historique des Donations" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label>Donations antérieures au même bénéficiaire (15 dernières années)</label>
+            <p-inputNumber
+              [(ngModel)]="donationsAnterieures"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+            <small class="form-hint">Les abattements se reconstituent tous les 15 ans</small>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <p-checkbox
+              [(ngModel)]="handicapDonataire"
+              (ngModelChange)="calculer()"
+              [binary]="true"
+              inputId="handicap">
+            </p-checkbox>
+            <label for="handicap">Le bénéficiaire est en situation de handicap (+159 325€ d'abattement)</label>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+
+    <div class="results-section">
+      <p-panel header="Droits de Donation" [styleClass]="droitsApresReduction === 0 ? 'results-panel success' : 'results-panel'">
+        <div class="resultat-principal" [class.exonere]="droitsApresReduction === 0">
+          <div class="montant-principal">
+            <span class="label">Droits de donation à payer</span>
+            <span class="montant">{{ formatCurrency(droitsApresReduction) }}</span>
+          </div>
+          <div class="montant-secondaire" *ngIf="droitsApresReduction === 0">
+            Donation exonérée grâce aux abattements
+          </div>
+          <div class="montant-secondaire" *ngIf="droitsApresReduction > 0">
+            Taux effectif : {{ tauxEffectif }}%
+          </div>
+        </div>
+
+        <div class="resultats-grid">
+          <div class="resultat-card">
+            <h4>Abattements</h4>
+            <ul>
+              <li>
+                <span>Abattement {{ getLienLabel() }}</span>
+                <span>{{ formatCurrency(abattements[lienParente] || 0) }}</span>
+              </li>
+              <li *ngIf="handicapDonataire">
+                <span>Abattement handicap</span>
+                <span>{{ formatCurrency(159325) }}</span>
+              </li>
+              <li class="total">
+                <span>Abattement total</span>
+                <span>{{ formatCurrency(abattement) }}</span>
+              </li>
+              <li *ngIf="donationsAnterieures > 0" class="utilise">
+                <span>Déjà utilisé</span>
+                <span>- {{ formatCurrency(abattementUtilise) }}</span>
+              </li>
+              <li class="disponible">
+                <span>Abattement disponible</span>
+                <span>{{ formatCurrency(abattementRestant) }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="resultat-card">
+            <h4>Calcul des Droits</h4>
+            <ul>
+              <li>
+                <span>Montant de la donation</span>
+                <span>{{ formatCurrency(montantDonation) }}</span>
+              </li>
+              <li>
+                <span>Abattement appliqué</span>
+                <span class="positif">- {{ formatCurrency(Math.min(montantDonation, abattementRestant)) }}</span>
+              </li>
+              <li class="total">
+                <span>Montant taxable</span>
+                <span>{{ formatCurrency(montantTaxable) }}</span>
+              </li>
+              <li>
+                <span>Droits calculés</span>
+                <span>{{ formatCurrency(droitsDonation) }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="info-box" *ngIf="typeDonation === 'familial' && ageDonateur < 80">
+          <h4>Don familial de sommes d'argent</h4>
+          <p>En plus de l'abattement classique, vous pouvez bénéficier d'une exonération supplémentaire de <strong>31 865€</strong> pour les dons en numéraire si :</p>
+          <ul>
+            <li>Le donateur a moins de 80 ans (✓ vous avez {{ ageDonateur }} ans)</li>
+            <li>Le bénéficiaire est majeur</li>
+            <li>Le don est fait à un enfant, petit-enfant, arrière-petit-enfant (ou neveu/nièce à défaut)</li>
+          </ul>
+        </div>
+
+        <div class="conseil-box">
+          <h4>Optimisation de la transmission</h4>
+          <div class="conseil-content">
+            <div class="conseil-item">
+              <strong>Prochaine donation possible sans droits :</strong>
+              <span *ngIf="abattementRestant > 0">{{ formatCurrency(abattementRestant) }} (maintenant)</span>
+              <span *ngIf="abattementRestant === 0">{{ formatCurrency(abattement) }} dans 15 ans</span>
+            </div>
+            <div class="conseil-item" *ngIf="lienParente === 'enfant' || lienParente === 'petit-enfant'">
+              <strong>Avec don familial cumulé :</strong>
+              <span>{{ formatCurrency(abattementRestant + 31865) }} exonérés</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bareme-box">
+          <h4>Barème applicable ({{ getLienLabel() }})</h4>
+          <table *ngIf="lienParente === 'enfant' || lienParente === 'petit-enfant' || lienParente === 'arriere-petit-enfant' || lienParente === 'conjoint'">
+            <thead>
+              <tr>
+                <th>Tranche</th>
+                <th>Taux</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Jusqu'à 8 072€</td><td>5%</td></tr>
+              <tr><td>8 072€ à 12 109€</td><td>10%</td></tr>
+              <tr><td>12 109€ à 15 932€</td><td>15%</td></tr>
+              <tr><td>15 932€ à 552 324€</td><td>20%</td></tr>
+              <tr><td>552 324€ à 902 838€</td><td>30%</td></tr>
+              <tr><td>902 838€ à 1 805 677€</td><td>40%</td></tr>
+              <tr><td>Au-delà de 1 805 677€</td><td>45%</td></tr>
+            </tbody>
+          </table>
+          <table *ngIf="lienParente === 'frere-soeur'">
+            <thead>
+              <tr>
+                <th>Tranche</th>
+                <th>Taux</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Jusqu'à 24 430€</td><td>35%</td></tr>
+              <tr><td>Au-delà</td><td>45%</td></tr>
+            </tbody>
+          </table>
+          <p *ngIf="lienParente === 'neveu-niece' || lienParente === 'autre-parent'" class="taux-unique">
+            Taux unique de <strong>55%</strong> après abattement
+          </p>
+          <p *ngIf="lienParente === 'tiers'" class="taux-unique">
+            Taux unique de <strong>60%</strong> (aucun abattement)
+          </p>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <app-faq-section
+    [faqItems]="faqItems"
+    pageTitle="Simulateur de Droits de Donation">
+  </app-faq-section>
+</div>

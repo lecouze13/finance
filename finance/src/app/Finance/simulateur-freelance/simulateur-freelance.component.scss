@@ -1,0 +1,228 @@
+// Styles spécifiques au simulateur Freelance
+// Les styles communs sont importés via styles.scss (_simulator-common.scss)
+
+.verdict-box {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border: 2px solid #10b981;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+
+  .verdict-icon {
+    font-size: 3rem;
+  }
+
+  .verdict-text {
+    h3 {
+      margin: 0 0 0.5rem 0;
+      color: #059669;
+    }
+
+    p {
+      margin: 0;
+      color: #64748b;
+
+      strong {
+        color: #059669;
+        font-size: 1.25rem;
+      }
+    }
+  }
+}
+
+.comparaison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.statut-card {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+
+  &.best {
+    border-color: #10b981;
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+  }
+
+  .statut-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h4 {
+      margin: 0;
+      color: #1e40af;
+    }
+
+    .badge {
+      background: #10b981;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+  }
+
+  .statut-net {
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+
+    .label {
+      display: block;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    .montant {
+      display: block;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #059669;
+    }
+
+    .mensuel {
+      display: block;
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+  }
+
+  .statut-detail {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 0.9rem;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .negatif {
+        color: #dc2626;
+      }
+    }
+  }
+
+  .statut-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.85rem;
+
+    .pro {
+      color: #059669;
+    }
+
+    .con {
+      color: #dc2626;
+    }
+  }
+}
+
+.tableau-comparatif {
+  margin-top: 1.5rem;
+
+  h4 {
+    color: #1e40af;
+    margin-bottom: 1rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: 0.75rem;
+      text-align: left;
+      border: 1px solid #e2e8f0;
+    }
+
+    th {
+      background: #f1f5f9;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .best-row {
+      background: #ecfdf5 !important;
+
+      td {
+        color: #047857;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.form-hint {
+  display: block;
+  color: #64748b;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.info-box {
+  background: #fef3c7;
+  border-left: 4px solid #f59e0b;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+
+  h4 {
+    margin-top: 0;
+    color: #92400e;
+  }
+
+  p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 767px) {
+  .verdict-box {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .statut-card .statut-net .montant {
+    font-size: 1.5rem;
+  }
+
+  .tableau-comparatif {
+    overflow-x: auto;
+
+    table {
+      min-width: 500px;
+    }
+  }
+}

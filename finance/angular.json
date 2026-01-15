@@ -235,7 +235,12 @@
               "/simulateur-rachat-soulte",
               "/simulateur-passoire-thermique",
               "/simulateur-holding-vs-direct",
-              "/simulateur-arbitrage-av-immo"
+              "/simulateur-arbitrage-av-immo",
+              "/simulateur-credit-relais",
+              "/simulateur-donation",
+              "/simulateur-charges-locatives",
+              "/simulateur-freelance",
+              "/simulateur-electricite-hphc"
             ]
           },
           "configurations": {

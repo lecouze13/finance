@@ -53,6 +53,11 @@ import { SimulateurRachatSoulteComponent } from './Immobilier/simulateur-rachat-
 import { SimulateurPassoireThermiquComponent } from './Immobilier/simulateur-passoire-thermique/simulateur-passoire-thermique.component';
 import { SimulateurHoldingVsDirectComponent } from './Immobilier/simulateur-holding-vs-direct/simulateur-holding-vs-direct.component';
 import { SimulateurArbitrageAvImmoComponent } from './Immobilier/simulateur-arbitrage-av-immo/simulateur-arbitrage-av-immo.component';
+import { SimulateurCreditRelaisComponent } from './Finance/simulateur-credit-relais/simulateur-credit-relais.component';
+import { SimulateurDonationComponent } from './Finance/simulateur-donation/simulateur-donation.component';
+import { SimulateurChargesLocativesComponent } from './Immobilier/simulateur-charges-locatives/simulateur-charges-locatives.component';
+import { SimulateurFreelanceComponent } from './Finance/simulateur-freelance/simulateur-freelance.component';
+import { SimulateurElectriciteHphcComponent } from './Finance/simulateur-electricite-hphc/simulateur-electricite-hphc.component';
 
 export const routes: Routes = [
   { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -471,6 +476,26 @@ export const routes: Routes = [
   {
     path: AppRoutes.SIMULATEUR_ARBITRAGE_AV_IMMO,
     component: SimulateurArbitrageAvImmoComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_CREDIT_RELAIS,
+    component: SimulateurCreditRelaisComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_DONATION,
+    component: SimulateurDonationComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_CHARGES_LOCATIVES,
+    component: SimulateurChargesLocativesComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_FREELANCE,
+    component: SimulateurFreelanceComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_ELECTRICITE_HPHC,
+    component: SimulateurElectriciteHphcComponent,
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

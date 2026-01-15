@@ -1,0 +1,242 @@
+// Styles spécifiques au simulateur Donation
+// Les styles communs sont importés via styles.scss (_simulator-common.scss)
+
+.resultat-principal {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 1.5rem;
+
+  &.exonere {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  }
+}
+
+.montant-principal {
+  .label {
+    display: block;
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+  }
+
+  .montant {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+}
+
+.montant-secondaire {
+  margin-top: 0.5rem;
+  opacity: 0.85;
+}
+
+.resultats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.resultat-card {
+  background: #f8fafc;
+  border-left: 4px solid #3b82f6;
+  padding: 1.5rem;
+  border-radius: 8px;
+
+  h4 {
+    margin-top: 0;
+    color: #1e40af;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #e2e8f0;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &.total {
+        background-color: #dbeafe;
+        padding: 0.6rem;
+        border-radius: 4px;
+        margin: 0.5rem 0;
+        font-weight: 600;
+      }
+
+      &.utilise {
+        color: #dc2626;
+      }
+
+      &.disponible {
+        color: #059669;
+        font-weight: 500;
+      }
+
+      .positif {
+        color: #059669;
+      }
+    }
+  }
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  label {
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+}
+
+.form-hint {
+  display: block;
+  color: #64748b;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.info-box {
+  background: #ecfdf5;
+  border-left: 4px solid #10b981;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+
+  h4 {
+    margin-top: 0;
+    color: #047857;
+  }
+
+  p {
+    margin: 0.5rem 0;
+    color: #475569;
+    line-height: 1.6;
+  }
+
+  ul {
+    margin: 0.5rem 0 0 0;
+    padding-left: 1.5rem;
+
+    li {
+      margin-bottom: 0.25rem;
+      color: #475569;
+    }
+  }
+}
+
+.conseil-box {
+  background: #f8fafc;
+  border-left: 4px solid #8b5cf6;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+
+  h4 {
+    margin-top: 0;
+    color: #6d28d9;
+  }
+
+  .conseil-content {
+    .conseil-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #e2e8f0;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      strong {
+        color: #475569;
+      }
+
+      span {
+        color: #059669;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.bareme-box {
+  background: #f8fafc;
+  border-left: 4px solid #f59e0b;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+
+  h4 {
+    margin-top: 0;
+    color: #b45309;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+
+    th,
+    td {
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      border: 1px solid #e2e8f0;
+    }
+
+    th {
+      background: #fef3c7;
+      font-weight: 600;
+      color: #92400e;
+    }
+
+    tr:nth-child(even) {
+      background: #fffbeb;
+    }
+  }
+
+  .taux-unique {
+    margin: 1rem 0 0 0;
+    padding: 1rem;
+    background: #fef3c7;
+    border-radius: 6px;
+    text-align: center;
+    color: #92400e;
+  }
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 767px) {
+  .montant-principal .montant {
+    font-size: 1.8rem;
+  }
+
+  .resultat-principal {
+    padding: 1.5rem;
+  }
+
+  .conseil-content .conseil-item {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}

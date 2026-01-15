@@ -1,9 +1,13 @@
-.mt-4 {
-  margin-top: 1.5rem;
+// Styles spécifiques au simulateur Passoire Thermique
+// Les styles communs sont importés via styles.scss (_simulator-common.scss)
+
+.resultats-dpe {
+  display: grid;
+  gap: 1.5rem;
 }
 
 .alerte-box {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  background: #fef3c7;
   border-left: 4px solid #f59e0b;
   padding: 1rem 1.5rem;
   border-radius: 8px;
@@ -19,6 +23,7 @@
 
     li {
       margin-bottom: 0.5rem;
+      color: #475569;
     }
   }
 }
@@ -61,8 +66,36 @@
   }
 }
 
-.resultats-container {
-  margin-top: 2rem;
+.resultat-principal {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+
+  &.non-rentable {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  }
+}
+
+.montant-principal {
+  .label {
+    display: block;
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+  }
+
+  .montant {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+}
+
+.montant-secondaire {
+  margin-top: 0.5rem;
+  opacity: 0.85;
 }
 
 .verdict-box {
@@ -76,36 +109,36 @@
   &.rentable {
     background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
     border: 2px solid #10b981;
+
+    .verdict-icon {
+      color: #10b981;
+    }
+
+    h3 {
+      color: #059669;
+    }
   }
 
   &.non-rentable {
     background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
     border: 2px solid #ef4444;
+
+    .verdict-icon {
+      color: #ef4444;
+    }
+
+    h3 {
+      color: #dc2626;
+    }
   }
 
   .verdict-icon {
     font-size: 3rem;
-
-    .rentable & {
-      color: #10b981;
-    }
-
-    .non-rentable & {
-      color: #ef4444;
-    }
   }
 
   .verdict-text {
     h3 {
       margin: 0 0 0.5rem 0;
-
-      .rentable & {
-        color: #059669;
-      }
-
-      .non-rentable & {
-        color: #dc2626;
-      }
     }
 
     p {
@@ -127,16 +160,14 @@
 }
 
 .resultat-card {
-  background: #f8f9fa;
-  border: 1px solid #dce1e7;
-  border-radius: 12px;
+  background: #f8fafc;
+  border-left: 4px solid #3b82f6;
   padding: 1.5rem;
+  border-radius: 8px;
 
   h4 {
-    margin: 0 0 1rem 0;
-    color: #1c2e4a;
-    border-bottom: 2px solid #3b82f6;
-    padding-bottom: 0.5rem;
+    margin-top: 0;
+    color: #1e40af;
   }
 
   ul {
@@ -145,8 +176,10 @@
     margin: 0;
 
     li {
-      padding: 0.5rem 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #e2e8f0;
 
       &:last-child {
         border-bottom: none;
@@ -157,12 +190,11 @@
       }
 
       &.total {
-        background: rgba(59, 130, 246, 0.1);
-        margin: 0.5rem -1rem;
-        padding: 0.75rem 1rem;
-        border-radius: 6px;
+        background-color: #dbeafe;
+        padding: 0.6rem;
+        border-radius: 4px;
+        margin: 0.5rem 0;
         font-weight: 600;
-        color: #1e40af;
       }
 
       &.gain {
@@ -173,8 +205,15 @@
   }
 }
 
+.highlight {
+  background-color: #dbeafe;
+  padding: 0.6rem !important;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+}
+
 .recommandation-box {
-  background: linear-gradient(135deg, #eef4ff 0%, #dbeafe 100%);
+  background: #f8fafc;
   border-left: 4px solid #3b82f6;
   padding: 1.5rem;
   border-radius: 8px;
@@ -191,8 +230,16 @@
 
     li {
       margin-bottom: 0.5rem;
+      color: #475569;
     }
   }
+}
+
+.note {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 1rem;
+  font-style: italic;
 }
 
 table {
@@ -200,10 +247,11 @@ table {
   border-collapse: collapse;
   margin: 1rem 0;
 
-  th, td {
+  th,
+  td {
     padding: 0.75rem;
     text-align: left;
-    border: 1px solid #dce1e7;
+    border: 1px solid #e2e8f0;
   }
 
   th {
@@ -221,5 +269,21 @@ ol {
 
   li {
     margin-bottom: 0.5rem;
+    color: #475569;
+  }
+}
+
+@media (max-width: 767px) {
+  .montant-principal .montant {
+    font-size: 1.8rem;
+  }
+
+  .resultat-principal {
+    padding: 1.5rem;
+  }
+
+  .verdict-box {
+    flex-direction: column;
+    text-align: center;
   }
 }

@@ -1,0 +1,238 @@
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Simulateur de Charges Locatives</h1>
+    <p class="subtitle">Calculez la répartition des charges entre propriétaire et locataire</p>
+  </div>
+
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Type de Location" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Type de location</label>
+            <p-dropdown
+              [options]="typeLocationOptions"
+              [(ngModel)]="typeLocation"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label>Type de logement</label>
+            <p-dropdown
+              [options]="typeLogementOptions"
+              [(ngModel)]="typeLogement"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label>Provision mensuelle actuelle</label>
+            <p-inputNumber
+              [(ngModel)]="provisionCharges"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Détail des Charges Annuelles" styleClass="custom-panel">
+        <div class="charges-list">
+          <div class="charge-item" *ngFor="let charge of charges; let i = index">
+            <div class="charge-nom">
+              <input type="text" [(ngModel)]="charge.nom" (ngModelChange)="calculer()" class="charge-name-input">
+              <button class="btn-delete" (click)="supprimerCharge(i)">
+                <i class="pi pi-times"></i>
+              </button>
+            </div>
+            <div class="charge-details">
+              <div class="charge-field">
+                <label>Montant annuel</label>
+                <p-inputNumber
+                  [(ngModel)]="charge.montant"
+                  (ngModelChange)="calculer()"
+                  mode="currency"
+                  currency="EUR"
+                  locale="fr-FR"
+                  [min]="0">
+                </p-inputNumber>
+              </div>
+              <div class="charge-field">
+                <label>Part locataire</label>
+                <p-inputNumber
+                  [(ngModel)]="charge.partLocataire"
+                  (ngModelChange)="calculer()"
+                  [min]="0"
+                  [max]="100"
+                  suffix=" %">
+                </p-inputNumber>
+              </div>
+              <div class="charge-repartition">
+                <span class="locataire">Locataire: {{ formatCurrency(charge.montant * charge.partLocataire / 100) }}</span>
+                <span class="proprietaire">Propriétaire: {{ formatCurrency(charge.montant * (100 - charge.partLocataire) / 100) }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-add" (click)="ajouterCharge()">
+          <i class="pi pi-plus"></i> Ajouter une charge
+        </button>
+      </p-panel>
+    </div>
+
+    <div class="results-section">
+      <p-panel header="Répartition des Charges" styleClass="results-panel">
+        <div class="resultat-principal">
+          <div class="repartition-visuelle">
+            <div class="barre-repartition">
+              <div class="part-locataire" [style.width.%]="(totalRecuperables / totalCharges) * 100">
+                {{ formatCurrency(totalRecuperables) }}
+              </div>
+              <div class="part-proprietaire" [style.width.%]="(totalNonRecuperables / totalCharges) * 100">
+                {{ formatCurrency(totalNonRecuperables) }}
+              </div>
+            </div>
+            <div class="legende">
+              <span class="legende-locataire">Locataire (récupérable)</span>
+              <span class="legende-proprietaire">Propriétaire (non récupérable)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="resultats-grid">
+          <div class="resultat-card locataire">
+            <h4>Charges Locataire</h4>
+            <ul>
+              <li>
+                <span>Total annuel récupérable</span>
+                <span>{{ formatCurrency(totalRecuperables) }}</span>
+              </li>
+              <li class="total">
+                <span>Provision mensuelle conseillée</span>
+                <span>{{ formatCurrency(provisionMensuelle) }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="resultat-card proprietaire">
+            <h4>Charges Propriétaire</h4>
+            <ul>
+              <li>
+                <span>Total annuel non récupérable</span>
+                <span>{{ formatCurrency(totalNonRecuperables) }}</span>
+              </li>
+              <li class="total">
+                <span>Soit par mois</span>
+                <span>{{ formatCurrency(totalNonRecuperables / 12) }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="regularisation-box" [class.positive]="regularisationEstimee >= 0" [class.negative]="regularisationEstimee < 0">
+          <h4>Estimation de la Régularisation</h4>
+          <div class="regularisation-content">
+            <div class="regularisation-ligne">
+              <span>Provisions perçues ({{ provisionCharges }}€ × 12)</span>
+              <span>{{ formatCurrency(provisionCharges * 12) }}</span>
+            </div>
+            <div class="regularisation-ligne">
+              <span>Charges réelles récupérables</span>
+              <span>{{ formatCurrency(totalRecuperables) }}</span>
+            </div>
+            <div class="regularisation-ligne total">
+              <span>{{ regularisationEstimee >= 0 ? 'À percevoir du locataire' : 'À rembourser au locataire' }}</span>
+              <span [class.positif]="regularisationEstimee >= 0" [class.negatif]="regularisationEstimee < 0">
+                {{ formatCurrency(Math.abs(regularisationEstimee)) }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-par-categorie">
+          <h4>Détail par Catégorie</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Charge</th>
+                <th>Montant</th>
+                <th>Part locataire</th>
+                <th>Récupérable</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let charge of charges">
+                <td>{{ charge.nom }}</td>
+                <td>{{ formatCurrency(charge.montant) }}</td>
+                <td>{{ charge.partLocataire }}%</td>
+                <td [class.recuperable]="charge.partLocataire > 0" [class.non-recuperable]="charge.partLocataire === 0">
+                  {{ formatCurrency(charge.montant * charge.partLocataire / 100) }}
+                </td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>TOTAL</strong></td>
+                <td><strong>{{ formatCurrency(totalCharges) }}</strong></td>
+                <td></td>
+                <td><strong>{{ formatCurrency(totalRecuperables) }}</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-box" *ngIf="typeLocation === 'meuble'">
+          <h4>Option Forfait (Location meublée)</h4>
+          <p>En location meublée, vous pouvez opter pour un <strong>forfait de charges</strong> non régularisable au lieu d'une provision.</p>
+          <p>Le forfait conseillé serait de <strong>{{ formatCurrency(provisionMensuelle) }}/mois</strong> basé sur vos charges réelles.</p>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <section class="info-section">
+    <h2>Principales charges récupérables</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>100% récupérable</h3>
+        <ul>
+          <li>Entretien parties communes</li>
+          <li>Eau froide/chaude</li>
+          <li>Chauffage collectif</li>
+          <li>Ascenseur (entretien)</li>
+          <li>TEOM (ordures)</li>
+          <li>Espaces verts</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Partiellement récupérable</h3>
+        <ul>
+          <li>Gardiennage : 75% ou 40%</li>
+          <li>Selon prestations effectuées</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Non récupérable</h3>
+        <ul>
+          <li>Ravalement façade</li>
+          <li>Honoraires syndic</li>
+          <li>Assurance immeuble</li>
+          <li>Grosses réparations</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <app-faq-section
+    [faqItems]="faqItems"
+    pageTitle="Simulateur de Charges Locatives">
+  </app-faq-section>
+</div>

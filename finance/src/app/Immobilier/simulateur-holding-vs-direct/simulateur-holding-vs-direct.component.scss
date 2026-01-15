@@ -1,9 +1,9 @@
-.mt-4 {
-  margin-top: 1.5rem;
-}
+// Styles spécifiques au simulateur Holding vs Nom Propre
+// Les styles communs sont importés via styles.scss (_simulator-common.scss)
 
-.resultats-container {
-  margin-top: 2rem;
+.resultats-holding {
+  display: grid;
+  gap: 1.5rem;
 }
 
 .comparaison-grid {
@@ -12,14 +12,14 @@
   gap: 1.5rem;
   margin: 1.5rem 0;
 
-  @media (max-width: 968px) {
+  @media (max-width: 992px) {
     grid-template-columns: 1fr;
   }
 }
 
 .option-card {
-  background: #f8f9fa;
-  border: 2px solid #dce1e7;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
   border-radius: 12px;
   padding: 1.5rem;
   transition: all 0.3s ease;
@@ -40,7 +40,7 @@
 
     h3 {
       margin: 0;
-      color: #1c2e4a;
+      color: #1e40af;
     }
   }
 
@@ -56,26 +56,25 @@
   .option-detail {
     display: flex;
     justify-content: space-between;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #e2e8f0;
 
     &:last-of-type {
       border-bottom: none;
     }
 
     &.highlight {
-      background: rgba(59, 130, 246, 0.1);
-      margin: 0.5rem -1rem;
-      padding: 0.75rem 1rem;
-      border-radius: 6px;
-      font-weight: 600;
+      background-color: #dbeafe;
+      padding: 0.6rem;
+      border-radius: 4px;
+      margin: 0.5rem 0;
     }
 
     &.total {
-      background: rgba(16, 185, 129, 0.15);
-      margin: 0.5rem -1rem;
-      padding: 0.75rem 1rem;
-      border-radius: 6px;
+      background-color: rgba(16, 185, 129, 0.15);
+      padding: 0.6rem;
+      border-radius: 4px;
+      margin: 0.5rem 0;
       font-weight: 700;
       color: #059669;
     }
@@ -93,7 +92,7 @@
   .dividendes-section {
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 2px dashed #dce1e7;
+    border-top: 2px dashed #e2e8f0;
   }
 
   .capitalisation {
@@ -108,7 +107,7 @@
   .taux-effectif {
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid #dce1e7;
+    border-top: 1px solid #e2e8f0;
     text-align: center;
     color: #64748b;
     font-size: 0.9rem;
@@ -116,33 +115,33 @@
 }
 
 .synthese-box {
-  background: #f8f9fa;
-  border: 2px solid #dce1e7;
-  border-radius: 12px;
+  background: #f8fafc;
+  border-left: 4px solid #3b82f6;
   padding: 1.5rem;
+  border-radius: 8px;
   margin: 1.5rem 0;
 
   &.holding-mieux {
-    border-color: #3b82f6;
+    border-left-color: #3b82f6;
     background: linear-gradient(135deg, #eef4ff 0%, #dbeafe 100%);
   }
 
   &.np-mieux {
-    border-color: #f59e0b;
+    border-left-color: #f59e0b;
     background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
   }
 
   h3 {
-    margin: 0 0 1rem 0;
-    color: #1c2e4a;
+    margin-top: 0;
+    color: #1e40af;
   }
 
   .synthese-content {
     .synthese-item {
       display: flex;
       justify-content: space-between;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #e2e8f0;
 
       &:last-child {
         border-bottom: none;
@@ -167,6 +166,52 @@
   }
 }
 
+.panel-colonnes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.colonne {
+  flex: 1;
+  min-width: 250px;
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #3b82f6;
+
+  &.holding {
+    border-left-color: #3b82f6;
+
+    h4 {
+      color: #1e40af;
+    }
+  }
+
+  &.nom-propre {
+    border-left-color: #f59e0b;
+
+    h4 {
+      color: #b45309;
+    }
+  }
+
+  h4 {
+    margin-top: 0;
+  }
+
+  ul {
+    padding-left: 1.2rem;
+    margin: 0;
+
+    li {
+      margin-bottom: 0.5rem;
+      color: #475569;
+    }
+  }
+}
+
 .avantages-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -179,22 +224,30 @@
 }
 
 .avantages-card {
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 1.5rem;
+  border-left: 4px solid;
 
   &.holding {
-    background: linear-gradient(135deg, #eef4ff 0%, #dbeafe 100%);
-    border: 1px solid #3b82f6;
+    background: #f8fafc;
+    border-left-color: #3b82f6;
+
+    h4 {
+      color: #1e40af;
+    }
   }
 
   &.nom-propre {
-    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-    border: 1px solid #f59e0b;
+    background: #f8fafc;
+    border-left-color: #f59e0b;
+
+    h4 {
+      color: #b45309;
+    }
   }
 
   h4 {
-    margin: 0 0 1rem 0;
-    color: #1c2e4a;
+    margin-top: 0;
   }
 
   ul {
@@ -203,6 +256,7 @@
 
     li {
       margin-bottom: 0.5rem;
+      color: #475569;
 
       &:last-child {
         margin-bottom: 0;
@@ -219,7 +273,7 @@
   margin-top: 1.5rem;
 
   h4 {
-    margin: 0 0 1rem 0;
+    margin-top: 0;
     color: #dc2626;
   }
 
@@ -229,6 +283,7 @@
 
     li {
       margin-bottom: 0.5rem;
+      color: #475569;
 
       &:last-child {
         margin-bottom: 0;
@@ -238,8 +293,8 @@
 }
 
 .schema-box {
-  background: #f8f9fa;
-  border: 1px solid #dce1e7;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
   padding: 2rem;
   text-align: center;
@@ -287,9 +342,16 @@
     padding: 0.25rem 0;
 
     &::before {
-      content: '↓ ';
+      content: "↓ ";
     }
   }
+}
+
+.note {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 1rem;
+  font-style: italic;
 }
 
 table {
@@ -297,10 +359,11 @@ table {
   border-collapse: collapse;
   margin: 1rem 0;
 
-  th, td {
+  th,
+  td {
     padding: 0.75rem;
     text-align: left;
-    border: 1px solid #dce1e7;
+    border: 1px solid #e2e8f0;
   }
 
   th {
@@ -325,22 +388,30 @@ table {
 }
 
 .conseil-card {
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 1.5rem;
+  border-left: 4px solid;
 
   &.np {
-    background: #fffbeb;
-    border: 1px solid #f59e0b;
+    background: #f8fafc;
+    border-left-color: #f59e0b;
+
+    h4 {
+      color: #b45309;
+    }
   }
 
   &.holding {
-    background: #eef4ff;
-    border: 1px solid #3b82f6;
+    background: #f8fafc;
+    border-left-color: #3b82f6;
+
+    h4 {
+      color: #1e40af;
+    }
   }
 
   h4 {
-    margin: 0 0 1rem 0;
-    color: #1c2e4a;
+    margin-top: 0;
   }
 
   ul {
@@ -349,10 +420,17 @@ table {
 
     li {
       margin-bottom: 0.5rem;
+      color: #475569;
 
       &:last-child {
         margin-bottom: 0;
       }
     }
+  }
+}
+
+@media (max-width: 767px) {
+  .option-card {
+    padding: 1rem;
   }
 }

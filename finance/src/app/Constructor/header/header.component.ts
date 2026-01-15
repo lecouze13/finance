@@ -153,6 +153,14 @@ export class HeaderComponent implements OnInit {
                 label: 'Arbitrage AV vs Immo',
                 route: AppRoutes.SIMULATEUR_ARBITRAGE_AV_IMMO,
               },
+              {
+                label: 'Crédit relais',
+                route: AppRoutes.SIMULATEUR_CREDIT_RELAIS,
+              },
+              {
+                label: 'Charges locatives',
+                route: AppRoutes.SIMULATEUR_CHARGES_LOCATIVES,
+              },
             ].sort((a, b) => a.label.localeCompare(b.label)),
           },
           {
@@ -251,6 +259,18 @@ export class HeaderComponent implements OnInit {
               {
                 label: 'SCPI (rentabilité)',
                 route: AppRoutes.SIMULATEUR_SCPI,
+              },
+              {
+                label: 'Donation (transmission)',
+                route: AppRoutes.SIMULATEUR_DONATION,
+              },
+              {
+                label: 'Statut Freelance',
+                route: AppRoutes.SIMULATEUR_FREELANCE,
+              },
+              {
+                label: 'Électricité HP/HC',
+                route: AppRoutes.SIMULATEUR_ELECTRICITE_HPHC,
               },
             ].sort((a, b) => a.label.localeCompare(b.label)),
 

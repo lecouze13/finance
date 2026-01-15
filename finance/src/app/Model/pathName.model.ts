@@ -57,4 +57,9 @@ export const AppRoutes = {
   SIMULATEUR_PASSOIRE_THERMIQUE: 'simulateur-passoire-thermique',
   SIMULATEUR_HOLDING_VS_DIRECT: 'simulateur-holding-vs-direct',
   SIMULATEUR_ARBITRAGE_AV_IMMO: 'simulateur-arbitrage-av-immo',
+  SIMULATEUR_CREDIT_RELAIS: 'simulateur-credit-relais',
+  SIMULATEUR_DONATION: 'simulateur-donation',
+  SIMULATEUR_CHARGES_LOCATIVES: 'simulateur-charges-locatives',
+  SIMULATEUR_FREELANCE: 'simulateur-freelance',
+  SIMULATEUR_ELECTRICITE_HPHC: 'simulateur-electricite-hphc',
 };

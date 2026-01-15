@@ -1,0 +1,254 @@
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Simulateur Statut Freelance</h1>
+    <p class="subtitle">Comparez Micro-entreprise, SASU, EURL et Portage salarial</p>
+  </div>
+
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Votre Activité" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Chiffre d'affaires annuel prévu</label>
+            <p-inputNumber
+              [(ngModel)]="chiffreAffaires"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label>Frais professionnels estimés</label>
+            <p-inputNumber
+              [(ngModel)]="tauxCharges"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="50"
+              suffix=" %">
+            </p-inputNumber>
+            <small class="form-hint">Matériel, logiciels, déplacements, etc.</small>
+          </div>
+
+          <div class="form-group">
+            <label>Situation familiale</label>
+            <p-dropdown
+              [options]="situationOptions"
+              [(ngModel)]="situationFamiliale"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label>Commission portage salarial</label>
+            <p-inputNumber
+              [(ngModel)]="portageCommission"
+              (ngModelChange)="calculer()"
+              [min]="3"
+              [max]="15"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+
+    <div class="results-section">
+      <p-panel header="Comparatif des Statuts" styleClass="results-panel">
+        <div class="verdict-box">
+          <div class="verdict-icon">🏆</div>
+          <div class="verdict-text">
+            <h3>{{ getMeilleurStatut() }}</h3>
+            <p>Meilleur revenu net : <strong>{{ formatCurrency(getMeilleurNet()) }}</strong> / an</p>
+          </div>
+        </div>
+
+        <div class="comparaison-grid">
+          <!-- Micro-entreprise -->
+          <div class="statut-card" [class.best]="microNet === getMeilleurNet()">
+            <div class="statut-header">
+              <h4>Micro-entreprise</h4>
+              <span class="badge" *ngIf="microNet === getMeilleurNet()">Meilleur</span>
+            </div>
+            <div class="statut-net">
+              <span class="label">Revenu net</span>
+              <span class="montant">{{ formatCurrency(microNet) }}</span>
+              <span class="mensuel">{{ formatCurrency(microNet / 12) }}/mois</span>
+            </div>
+            <ul class="statut-detail">
+              <li>
+                <span>CA</span>
+                <span>{{ formatCurrency(microCA) }}</span>
+              </li>
+              <li>
+                <span>Cotisations (21.2%)</span>
+                <span class="negatif">- {{ formatCurrency(microCotisations) }}</span>
+              </li>
+              <li>
+                <span>Impôt sur le revenu</span>
+                <span class="negatif">- {{ formatCurrency(microImpot) }}</span>
+              </li>
+            </ul>
+            <div class="statut-info">
+              <span class="pro">+ Simple, pas de comptabilité</span>
+              <span class="con">- Plafond 77 700€</span>
+            </div>
+          </div>
+
+          <!-- SASU -->
+          <div class="statut-card" [class.best]="sasuNet === getMeilleurNet()">
+            <div class="statut-header">
+              <h4>SASU à l'IS</h4>
+              <span class="badge" *ngIf="sasuNet === getMeilleurNet()">Meilleur</span>
+            </div>
+            <div class="statut-net">
+              <span class="label">Revenu net</span>
+              <span class="montant">{{ formatCurrency(sasuNet) }}</span>
+              <span class="mensuel">{{ formatCurrency(sasuNet / 12) }}/mois</span>
+            </div>
+            <ul class="statut-detail">
+              <li>
+                <span>CA - Charges</span>
+                <span>{{ formatCurrency(sasuCA - sasuCharges) }}</span>
+              </li>
+              <li>
+                <span>Salaire + cotisations</span>
+                <span class="negatif">- {{ formatCurrency(sasuRemuneration + sasuCotisations) }}</span>
+              </li>
+              <li>
+                <span>IS (15-25%)</span>
+                <span class="negatif">- {{ formatCurrency(sasuIS) }}</span>
+              </li>
+              <li>
+                <span>Flat tax dividendes</span>
+                <span class="negatif">- {{ formatCurrency(sasuFlatTax) }}</span>
+              </li>
+            </ul>
+            <div class="statut-info">
+              <span class="pro">+ Optimisation fiscale</span>
+              <span class="con">- Comptabilité obligatoire</span>
+            </div>
+          </div>
+
+          <!-- Portage -->
+          <div class="statut-card" [class.best]="portageNet === getMeilleurNet()">
+            <div class="statut-header">
+              <h4>Portage salarial</h4>
+              <span class="badge" *ngIf="portageNet === getMeilleurNet()">Meilleur</span>
+            </div>
+            <div class="statut-net">
+              <span class="label">Revenu net</span>
+              <span class="montant">{{ formatCurrency(portageNet) }}</span>
+              <span class="mensuel">{{ formatCurrency(portageNet / 12) }}/mois</span>
+            </div>
+            <ul class="statut-detail">
+              <li>
+                <span>CA</span>
+                <span>{{ formatCurrency(portageCA) }}</span>
+              </li>
+              <li>
+                <span>Commission ({{ portageCommission }}%)</span>
+                <span class="negatif">- {{ formatCurrency(portageCommissionMontant) }}</span>
+              </li>
+              <li>
+                <span>Cotisations salariales</span>
+                <span class="negatif">- {{ formatCurrency(portageCotisations) }}</span>
+              </li>
+            </ul>
+            <div class="statut-info">
+              <span class="pro">+ Chômage, simplicité</span>
+              <span class="con">- Commission élevée</span>
+            </div>
+          </div>
+
+          <!-- EURL IR -->
+          <div class="statut-card" [class.best]="eurlNet === getMeilleurNet()">
+            <div class="statut-header">
+              <h4>EURL à l'IR (TNS)</h4>
+              <span class="badge" *ngIf="eurlNet === getMeilleurNet()">Meilleur</span>
+            </div>
+            <div class="statut-net">
+              <span class="label">Revenu net</span>
+              <span class="montant">{{ formatCurrency(eurlNet) }}</span>
+              <span class="mensuel">{{ formatCurrency(eurlNet / 12) }}/mois</span>
+            </div>
+            <ul class="statut-detail">
+              <li>
+                <span>Bénéfice</span>
+                <span>{{ formatCurrency(eurlBenefice) }}</span>
+              </li>
+              <li>
+                <span>Cotisations TNS (~45%)</span>
+                <span class="negatif">- {{ formatCurrency(eurlCotisations) }}</span>
+              </li>
+              <li>
+                <span>Impôt sur le revenu</span>
+                <span class="negatif">- {{ formatCurrency(eurlImpot) }}</span>
+              </li>
+            </ul>
+            <div class="statut-info">
+              <span class="pro">+ Charges déductibles</span>
+              <span class="con">- Cotisations élevées</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tableau-comparatif">
+          <h4>Tableau récapitulatif</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Statut</th>
+                <th>Revenu net</th>
+                <th>Taux de prélèvement</th>
+                <th>Protection sociale</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr [class.best-row]="microNet === getMeilleurNet()">
+                <td>Micro-entreprise</td>
+                <td>{{ formatCurrency(microNet) }}</td>
+                <td>{{ ((chiffreAffaires - microNet) / chiffreAffaires * 100).toFixed(1) }}%</td>
+                <td>Basique (RSI)</td>
+              </tr>
+              <tr [class.best-row]="sasuNet === getMeilleurNet()">
+                <td>SASU à l'IS</td>
+                <td>{{ formatCurrency(sasuNet) }}</td>
+                <td>{{ ((chiffreAffaires - sasuNet) / chiffreAffaires * 100).toFixed(1) }}%</td>
+                <td>Assimilé salarié</td>
+              </tr>
+              <tr [class.best-row]="portageNet === getMeilleurNet()">
+                <td>Portage salarial</td>
+                <td>{{ formatCurrency(portageNet) }}</td>
+                <td>{{ ((chiffreAffaires - portageNet) / chiffreAffaires * 100).toFixed(1) }}%</td>
+                <td>Salarié (chômage)</td>
+              </tr>
+              <tr [class.best-row]="eurlNet === getMeilleurNet()">
+                <td>EURL à l'IR</td>
+                <td>{{ formatCurrency(eurlNet) }}</td>
+                <td>{{ ((chiffreAffaires - eurlNet) / chiffreAffaires * 100).toFixed(1) }}%</td>
+                <td>TNS</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-box" *ngIf="chiffreAffaires > 77700">
+          <h4>Attention : Plafond micro-entreprise dépassé</h4>
+          <p>Avec {{ formatCurrency(chiffreAffaires) }} de CA, vous dépassez le seuil de la micro-entreprise (77 700€).
+          Vous devez opter pour un autre statut ou basculer automatiquement au régime réel.</p>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <app-faq-section
+    [faqItems]="faqItems"
+    pageTitle="Simulateur Statut Freelance">
+  </app-faq-section>
+</div>

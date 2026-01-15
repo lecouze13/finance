@@ -1,9 +1,37 @@
-.mt-4 {
-  margin-top: 1.5rem;
+// Styles spécifiques au simulateur Rachat de Soulte
+// Les styles communs sont importés via styles.scss (_simulator-common.scss)
+
+.resultats-soulte {
+  display: grid;
+  gap: 1.5rem;
 }
 
-.resultats-container {
-  margin-top: 2rem;
+.resultat-principal {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.montant-principal {
+  .label {
+    display: block;
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+  }
+
+  .montant {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+}
+
+.montant-secondaire {
+  margin-top: 0.5rem;
+  opacity: 0.85;
 }
 
 .resultats-grid {
@@ -18,39 +46,37 @@
 }
 
 .resultat-card {
-  background: #f8f9fa;
-  border: 1px solid #dce1e7;
-  border-radius: 12px;
+  background: #f8fafc;
+  border-left: 4px solid #3b82f6;
   padding: 1.5rem;
+  border-radius: 8px;
 
   &.principal {
     grid-column: 1 / -1;
-    background: linear-gradient(135deg, #eef4ff 0%, #dbeafe 100%);
-    border-color: #3b82f6;
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    border-left: none;
+    color: white;
     text-align: center;
 
     h3 {
       margin: 0 0 0.5rem 0;
-      color: #1e40af;
+      color: white;
     }
 
     .montant-principal {
       font-size: 2.5rem;
       font-weight: 700;
-      color: #1e40af;
     }
 
     .sous-texte {
-      color: #64748b;
+      opacity: 0.9;
       margin: 0.5rem 0 0 0;
     }
   }
 
   h4 {
-    margin: 0 0 1rem 0;
-    color: #1c2e4a;
-    border-bottom: 2px solid #3b82f6;
-    padding-bottom: 0.5rem;
+    margin-top: 0;
+    color: #1e40af;
   }
 
   ul {
@@ -59,23 +85,31 @@
     margin: 0;
 
     li {
-      padding: 0.5rem 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #e2e8f0;
 
       &:last-child {
         border-bottom: none;
       }
 
       &.total {
-        background: rgba(16, 185, 129, 0.1);
-        margin: 0.5rem -1rem;
-        padding: 0.75rem 1rem;
-        border-radius: 6px;
+        background-color: #dbeafe;
+        padding: 0.6rem;
+        border-radius: 4px;
+        margin: 0.5rem 0;
         font-weight: 600;
-        color: #059669;
       }
     }
   }
+}
+
+.highlight {
+  background-color: #dbeafe;
+  padding: 0.6rem !important;
+  border-radius: 4px;
+  margin: 0.5rem 0;
 }
 
 .table-responsive {
@@ -87,10 +121,11 @@ table {
   border-collapse: collapse;
   margin: 1rem 0;
 
-  th, td {
+  th,
+  td {
     padding: 0.75rem;
     text-align: left;
-    border: 1px solid #dce1e7;
+    border: 1px solid #e2e8f0;
   }
 
   th {
@@ -116,10 +151,32 @@ table {
   font-family: monospace;
 }
 
+.note {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
 ol {
   padding-left: 1.5rem;
 
   li {
     margin-bottom: 0.5rem;
+    color: #475569;
+  }
+}
+
+@media (max-width: 767px) {
+  .montant-principal .montant {
+    font-size: 1.8rem;
+  }
+
+  .resultat-principal {
+    padding: 1.5rem;
+  }
+
+  .resultat-card.principal .montant-principal {
+    font-size: 1.8rem;
   }
 }
