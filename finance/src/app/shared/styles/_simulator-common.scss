@@ -2,6 +2,104 @@
 // STYLES COMMUNS POUR TOUS LES SIMULATEURS
 // ============================================
 
+// ============================================
+// Structure des nouveaux simulateurs (simulator-*)
+// ============================================
+.simulator-page {
+  min-height: 100vh;
+  padding-bottom: 2rem;
+}
+
+.simulator-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.simulator-header {
+  text-align: center;
+  padding: 2rem 0;
+  margin-bottom: 1.5rem;
+
+  h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: #1e293b;
+    font-size: 1.75rem;
+    margin: 0 0 0.75rem 0;
+
+    i {
+      color: #3b82f6;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 1.35rem;
+      flex-wrap: wrap;
+    }
+  }
+
+  .subtitle {
+    color: #64748b;
+    font-size: 1.05rem;
+    margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.simulator-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.input-panel {
+  .p-panel-header {
+    background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%) !important;
+    color: white !important;
+    border-radius: 12px 12px 0 0 !important;
+  }
+
+  .p-panel-content {
+    padding: 1.5rem !important;
+    background: white !important;
+    border-radius: 0 0 12px 12px !important;
+  }
+}
+
+.results-section {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #1e293b;
+    margin: 0 0 1.5rem 0;
+    font-size: 1.25rem;
+
+    i {
+      color: #3b82f6;
+    }
+  }
+
+  h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #1e40af;
+    margin: 1.5rem 0 1rem 0;
+    font-size: 1.1rem;
+  }
+}
+
 // Variables de couleurs
 $primary-dark: #1e3a5f;
 $primary: #1976d2;

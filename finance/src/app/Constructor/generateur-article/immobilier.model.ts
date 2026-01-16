@@ -569,6 +569,119 @@ export const immobilier: {
   `
   },
 
+  'droits-travaux': {
+    titre: 'Droits de travaux : permis de construire, déclaration préalable et autorisations',
+    categorie: 'immobilier',
+    keywords: 'permis de construire, déclaration préalable de travaux, autorisation urbanisme, travaux maison, PLU, extension maison, rénovation autorisation',
+    description: `Avant de réaliser des travaux, il est essentiel de connaître les autorisations nécessaires : permis de construire, déclaration préalable ou simple déclaration. Guide complet des démarches.`,
+    contenu: `
+  <h2>Pourquoi des autorisations de travaux ?</h2>
+  <p>Les <strong>autorisations d'urbanisme</strong> permettent à la commune de vérifier que votre projet respecte les règles d'urbanisme locales (PLU, PLUi) et nationales. Selon l'ampleur des travaux, différentes procédures s'appliquent.</p>
+
+  <h2>Les 3 niveaux d'autorisation</h2>
+  <h3>1. Travaux sans autorisation</h3>
+  <p>Certains travaux de faible importance ne nécessitent aucune formalité :</p>
+  <ul>
+    <li>Construction de moins de 5 m² de surface de plancher</li>
+    <li>Mur de clôture de moins de 2 mètres de haut (hors secteur protégé)</li>
+    <li>Terrasse de plain-pied</li>
+    <li>Travaux d'entretien ou de réparation ordinaire</li>
+    <li>Piscine de moins de 10 m² non couverte</li>
+  </ul>
+
+  <h3>2. Déclaration préalable de travaux (DP)</h3>
+  <p>Procédure simplifiée pour les travaux de faible envergure :</p>
+  <ul>
+    <li>Construction créant entre 5 et 20 m² de surface de plancher (40 m² en zone urbaine avec PLU)</li>
+    <li>Modification de l'aspect extérieur (façade, toiture, fenêtres, volets)</li>
+    <li>Changement de destination sans modification de structure</li>
+    <li>Piscine de 10 à 100 m² non couverte ou couverte de moins de 1,80 m</li>
+    <li>Clôture dans certains secteurs protégés</li>
+    <li>Division de terrain (lotissement)</li>
+  </ul>
+  <p><strong>Délai d'instruction</strong> : 1 mois (2 mois en secteur protégé)</p>
+
+  <h3>3. Permis de construire (PC)</h3>
+  <p>Obligatoire pour les projets importants :</p>
+  <ul>
+    <li>Construction nouvelle de plus de 20 m² (ou 40 m² en zone urbaine)</li>
+    <li>Extension portant la surface totale au-delà de 150 m² (recours architecte obligatoire)</li>
+    <li>Changement de destination avec modification de structure ou façade</li>
+    <li>Travaux sur un immeuble inscrit aux monuments historiques</li>
+  </ul>
+  <p><strong>Délai d'instruction</strong> : 2 mois pour une maison individuelle, 3 mois pour les autres constructions</p>
+
+  <h2>Cas particuliers</h2>
+  <h3>Le recours à un architecte</h3>
+  <p>Obligatoire si :</p>
+  <ul>
+    <li>Surface de plancher totale après travaux > 150 m² pour les particuliers</li>
+    <li>Toujours obligatoire pour les personnes morales (SCI, sociétés)</li>
+  </ul>
+
+  <h3>Zones protégées</h3>
+  <p>Dans certains secteurs, les règles sont renforcées :</p>
+  <ul>
+    <li><strong>Abords de monuments historiques</strong> (périmètre de 500 m)</li>
+    <li><strong>Sites patrimoniaux remarquables</strong></li>
+    <li><strong>Sites classés ou inscrits</strong></li>
+    <li><strong>Réserves naturelles</strong></li>
+  </ul>
+  <p>Dans ces zones, l'avis de l'Architecte des Bâtiments de France (ABF) est requis.</p>
+
+  <h2>Comment déposer une demande ?</h2>
+  <h3>Constitution du dossier</h3>
+  <ul>
+    <li><strong>Formulaire CERFA</strong> : 13703 (DP) ou 13406 (PC maison)</li>
+    <li><strong>Plan de situation</strong> du terrain</li>
+    <li><strong>Plan de masse</strong> des constructions</li>
+    <li><strong>Plan de coupe</strong> du terrain et de la construction</li>
+    <li><strong>Notice descriptive</strong> du projet</li>
+    <li><strong>Plan des façades et toitures</strong></li>
+    <li><strong>Document graphique</strong> d'insertion dans l'environnement</li>
+    <li><strong>Photographies</strong> du terrain et de ses abords</li>
+  </ul>
+
+  <h3>Dépôt et instruction</h3>
+  <ol>
+    <li>Déposer le dossier en mairie (ou en ligne via le portail démarches-simplifiées)</li>
+    <li>Recevoir le récépissé avec numéro d'enregistrement</li>
+    <li>Attendre l'instruction (possibilité de demande de pièces complémentaires)</li>
+    <li>Recevoir l'arrêté d'autorisation ou de refus</li>
+  </ol>
+
+  <h2>Affichage et recours des tiers</h2>
+  <p>Après obtention de l'autorisation :</p>
+  <ul>
+    <li><strong>Affichage obligatoire</strong> sur le terrain pendant toute la durée des travaux</li>
+    <li><strong>Délai de recours des tiers</strong> : 2 mois à compter de l'affichage</li>
+    <li><strong>Délai de retrait administratif</strong> : 3 mois</li>
+  </ul>
+  <p>Il est conseillé d'attendre la fin du délai de recours avant de commencer les travaux.</p>
+
+  <h2>Validité et péremption</h2>
+  <ul>
+    <li><strong>Durée de validité</strong> : 3 ans à compter de la délivrance</li>
+    <li><strong>Prorogation possible</strong> : 2 fois 1 an sur demande</li>
+    <li><strong>Péremption</strong> : si les travaux ne commencent pas dans les 3 ans ou sont interrompus plus d'1 an</li>
+  </ul>
+
+  <h2>Sanctions en cas d'infraction</h2>
+  <p>Réaliser des travaux sans autorisation constitue une infraction :</p>
+  <ul>
+    <li><strong>Amende</strong> : de 1 200 € à 6 000 € par m² de surface construite illégalement</li>
+    <li><strong>Démolition</strong> : le tribunal peut ordonner la mise en conformité ou la démolition</li>
+    <li><strong>Prescription</strong> : 6 ans pour l'action pénale, mais pas de prescription pour la mise en conformité civile</li>
+  </ul>
+
+  <h2>Déclaration d'achèvement des travaux (DAACT)</h2>
+  <p>À la fin des travaux, vous devez déposer en mairie une <strong>Déclaration Attestant l'Achèvement et la Conformité des Travaux</strong> (formulaire CERFA 13408). La mairie dispose de 3 mois pour contester la conformité.</p>
+
+  <h2>Conclusion</h2>
+  <p>Avant tout projet de construction ou de rénovation, renseignez-vous auprès de votre mairie pour connaître les règles applicables à votre terrain (PLU, servitudes, secteur protégé). Le respect des autorisations d'urbanisme est essentiel pour sécuriser votre projet et éviter des sanctions coûteuses.</p>
+  `
+  },
+
   'viager-immobilier': {
     titre: 'Le viager immobilier : guide complet acheteur et vendeur',
     categorie: 'immobilier',
