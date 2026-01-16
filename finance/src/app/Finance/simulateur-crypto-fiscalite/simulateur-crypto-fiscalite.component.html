@@ -1,0 +1,234 @@
+<div class="simulator-page">
+  <div class="simulator-container">
+    <header class="simulator-header">
+      <h1><i class="pi pi-bitcoin"></i> Simulateur Fiscalité Crypto</h1>
+      <p class="subtitle">Calculez l'impôt sur vos plus-values Bitcoin, Ethereum et cryptomonnaies</p>
+    </header>
+
+    <div class="simulator-content">
+      <!-- Formulaire -->
+      <p-panel header="Votre opération" class="input-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="prixAchat">Prix d'achat total</label>
+            <p-inputNumber
+              id="prixAchat"
+              [(ngModel)]="prixAchat"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+            ></p-inputNumber>
+            <small class="form-hint">Montant investi initialement</small>
+          </div>
+
+          <div class="form-group">
+            <label for="prixVente">Prix de vente total</label>
+            <p-inputNumber
+              id="prixVente"
+              [(ngModel)]="prixVente"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+            ></p-inputNumber>
+            <small class="form-hint">Montant reçu en euros</small>
+          </div>
+
+          <div class="form-group">
+            <label for="fraisAchat">Frais d'achat</label>
+            <p-inputNumber
+              id="fraisAchat"
+              [(ngModel)]="fraisAchat"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+            ></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="fraisVente">Frais de vente</label>
+            <p-inputNumber
+              id="fraisVente"
+              [(ngModel)]="fraisVente"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+            ></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="autresPV">Autres plus-values crypto (année)</label>
+            <p-inputNumber
+              id="autresPV"
+              [(ngModel)]="autresPlusValues"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+            ></p-inputNumber>
+            <small class="form-hint">Autres PV crypto déjà réalisées cette année</small>
+          </div>
+
+          <div class="form-group">
+            <label for="revenu">Revenu fiscal de référence</label>
+            <p-inputNumber
+              id="revenu"
+              [(ngModel)]="revenuFiscalReference"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+            ></p-inputNumber>
+            <small class="form-hint">Pour comparer avec le barème IR</small>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Résultats -->
+      <div class="results-section" *ngIf="plusValueNette > 0">
+        <h2><i class="pi pi-calculator"></i> Calcul de l'imposition</h2>
+
+        <!-- Plus-value -->
+        <div class="pv-summary">
+          <div class="pv-item">
+            <span class="label">Plus-value brute</span>
+            <span class="value">{{ formatCurrency(plusValueBrute) }}</span>
+          </div>
+          <div class="pv-item">
+            <span class="label">Frais déductibles</span>
+            <span class="value negative">-{{ formatCurrency(fraisAchat + fraisVente) }}</span>
+          </div>
+          <div class="pv-item total">
+            <span class="label">Plus-value imposable</span>
+            <span class="value">{{ formatCurrency(plusValueNette) }}</span>
+          </div>
+        </div>
+
+        <!-- Comparaison options -->
+        <div class="options-comparison">
+          <h3><i class="pi pi-check-square"></i> Choisissez votre option fiscale</h3>
+
+          <div class="options-grid">
+            <!-- Flat Tax -->
+            <div class="option-card" [class.recommended]="getMeilleurOption() === 'Flat Tax'">
+              <div class="option-header">
+                <h4>Flat Tax (PFU)</h4>
+                <span class="badge" *ngIf="getMeilleurOption() === 'Flat Tax'">Recommandé</span>
+              </div>
+              <div class="option-body">
+                <div class="tax-breakdown">
+                  <div class="tax-line">
+                    <span>Impôt sur le revenu (12,8%)</span>
+                    <span>{{ formatCurrency(totalPlusValuesAnnee * 0.128) }}</span>
+                  </div>
+                  <div class="tax-line">
+                    <span>Prélèvements sociaux (17,2%)</span>
+                    <span>{{ formatCurrency(prelevementsSociaux) }}</span>
+                  </div>
+                  <div class="tax-line total">
+                    <span>Total (30%)</span>
+                    <span>{{ formatCurrency(impotFlatTax) }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="option-footer">
+                <p>Option par défaut, simple et prévisible</p>
+              </div>
+            </div>
+
+            <!-- Barème IR -->
+            <div class="option-card" [class.recommended]="getMeilleurOption() === 'Barème IR'">
+              <div class="option-header">
+                <h4>Barème progressif IR</h4>
+                <span class="badge" *ngIf="getMeilleurOption() === 'Barème IR'">Recommandé</span>
+              </div>
+              <div class="option-body">
+                <div class="tax-breakdown">
+                  <div class="tax-line">
+                    <span>Impôt sur le revenu</span>
+                    <span>{{ formatCurrency(impotBareme - prelevementsSociaux) }}</span>
+                  </div>
+                  <div class="tax-line">
+                    <span>Prélèvements sociaux (17,2%)</span>
+                    <span>{{ formatCurrency(prelevementsSociaux) }}</span>
+                  </div>
+                  <div class="tax-line total">
+                    <span>Total</span>
+                    <span>{{ formatCurrency(impotBareme) }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="option-footer">
+                <p>Intéressant si faibles revenus ou pertes à imputer</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Économie -->
+          <div class="savings-box" *ngIf="getEconomie() > 0">
+            <i class="pi pi-check-circle"></i>
+            <p>En choisissant <strong>{{ getMeilleurOption() }}</strong>, vous économisez <strong>{{ formatCurrency(getEconomie()) }}</strong></p>
+          </div>
+        </div>
+
+        <!-- Résumé final -->
+        <div class="final-summary">
+          <div class="summary-card">
+            <div class="summary-row">
+              <span>Prix de vente</span>
+              <span>{{ formatCurrency(prixVente) }}</span>
+            </div>
+            <div class="summary-row">
+              <span>Frais de vente</span>
+              <span class="negative">-{{ formatCurrency(fraisVente) }}</span>
+            </div>
+            <div class="summary-row">
+              <span>Impôt ({{ getMeilleurOption() }})</span>
+              <span class="negative">-{{ formatCurrency(getMeilleurOption() === 'Flat Tax' ? impotFlatTax : impotBareme) }}</span>
+            </div>
+            <div class="summary-row total">
+              <span>Net après impôt</span>
+              <span class="highlight">{{ formatCurrency(netApresImpot) }}</span>
+            </div>
+            <div class="summary-row">
+              <span>Taux d'imposition effectif</span>
+              <span>{{ formatPercent(tauxImposition) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cas de moins-value -->
+      <div class="results-section" *ngIf="plusValueNette <= 0">
+        <div class="loss-box">
+          <i class="pi pi-info-circle"></i>
+          <div class="loss-content">
+            <h3>Moins-value de {{ formatCurrency(Math.abs(plusValueNette)) }}</h3>
+            <p>Vous n'avez pas d'impôt à payer sur cette opération.</p>
+            <p>Cette moins-value est imputable sur vos autres plus-values crypto de l'année.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Avertissement activité habituelle -->
+      <div class="warning-box">
+        <i class="pi pi-exclamation-triangle"></i>
+        <div class="warning-content">
+          <h4>Attention au régime BNC</h4>
+          <p>Si vous effectuez des opérations régulières (trading actif, effet de levier), l'administration peut requalifier vos revenus en BNC. Dans ce cas, l'imposition peut atteindre 45% + cotisations sociales.</p>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <app-faq-section [faqItems]="faqItems"></app-faq-section>
+    </div>
+  </div>
+</div>

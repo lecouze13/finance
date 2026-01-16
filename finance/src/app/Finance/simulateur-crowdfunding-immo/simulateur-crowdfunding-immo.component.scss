@@ -1,0 +1,279 @@
+// Styles spécifiques au simulateur Crowdfunding Immobilier
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.result-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.25rem;
+  text-align: center;
+
+  .label {
+    display: block;
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  .detail {
+    display: block;
+    color: #94a3b8;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  &.tax {
+    background: #fef2f2;
+    border-color: #fecaca;
+    .value { color: #dc2626; }
+  }
+
+  &.net {
+    background: #ecfdf5;
+    border-color: #10b981;
+    .value { color: #059669; }
+  }
+}
+
+.capital-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  background: #1e293b;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+
+  .capital-item {
+    text-align: center;
+
+    .label {
+      display: block;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .value {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    &.highlight .value {
+      color: #4ade80;
+      font-size: 2rem;
+    }
+  }
+
+  .capital-arrow i {
+    font-size: 1.5rem;
+    color: #4ade80;
+  }
+}
+
+.risk-section {
+  margin-bottom: 2rem;
+
+  h3 {
+    color: #b45309;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.risk-indicator {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+
+  &.low {
+    border-left: 4px solid #10b981;
+    .risk-label { color: #059669; }
+    .risk-fill { background: #10b981; }
+  }
+
+  &.medium {
+    border-left: 4px solid #f59e0b;
+    .risk-label { color: #b45309; }
+    .risk-fill { background: #f59e0b; }
+  }
+
+  &.high {
+    border-left: 4px solid #ef4444;
+    .risk-label { color: #dc2626; }
+    .risk-fill { background: #ef4444; }
+  }
+
+  .risk-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+
+    .risk-label { font-weight: 600; }
+    .risk-projects { color: #64748b; font-size: 0.9rem; }
+  }
+
+  .risk-bar {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+
+    .risk-fill {
+      height: 100%;
+      transition: width 0.3s ease;
+    }
+  }
+}
+
+.risk-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.risk-card {
+  background: #fef3c7;
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+
+  .label {
+    display: block;
+    color: #92400e;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .value {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+
+    &.positive { color: #059669; }
+    &.negative { color: #dc2626; }
+  }
+
+  .detail {
+    display: block;
+    color: #a16207;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+  }
+}
+
+.comparison-box {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+
+  h4 {
+    margin-top: 0;
+    color: #1e40af;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+
+  th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  th {
+    background: #f1f5f9;
+    color: #475569;
+    font-weight: 600;
+  }
+
+  tr.highlight {
+    background: #dbeafe;
+    font-weight: 500;
+  }
+
+  tbody tr:hover:not(.highlight) {
+    background: #f8fafc;
+  }
+}
+
+.info-panel {
+  background: #f8fafc;
+  border-left: 4px solid #3b82f6;
+  padding: 1.5rem;
+  border-radius: 8px;
+
+  h4 {
+    margin-top: 0;
+    color: #1e40af;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .tips-list {
+    margin: 0;
+    padding-left: 1.25rem;
+
+    li {
+      margin-bottom: 0.5rem;
+      color: #475569;
+      line-height: 1.5;
+      strong { color: #1e40af; }
+    }
+  }
+}
+
+.form-hint {
+  display: block;
+  color: #64748b;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 767px) {
+  .capital-box {
+    flex-direction: column;
+    gap: 1rem;
+
+    .capital-arrow i {
+      transform: rotate(90deg);
+    }
+  }
+}

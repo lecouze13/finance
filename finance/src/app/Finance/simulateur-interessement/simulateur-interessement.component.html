@@ -1,0 +1,158 @@
+<div class="simulator-page">
+  <div class="simulator-container">
+    <header class="simulator-header">
+      <h1><i class="pi pi-chart-line"></i> Simulateur Participation / Intéressement</h1>
+      <p class="subtitle">Comparez versement immédiat, PEE et PER Collectif</p>
+    </header>
+
+    <div class="simulator-content">
+      <!-- Formulaire -->
+      <p-panel header="Votre épargne salariale" class="input-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="montant">Montant brut</label>
+            <p-inputNumber
+              id="montant"
+              [(ngModel)]="montantBrut"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+            ></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="type">Type d'épargne</label>
+            <p-dropdown
+              id="type"
+              [options]="typeOptions"
+              [(ngModel)]="typeEpargne"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+            ></p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label for="versement">Choix de versement</label>
+            <p-dropdown
+              id="versement"
+              [options]="versementOptions"
+              [(ngModel)]="choixVersement"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+            ></p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label for="remuneration">Rémunération annuelle</label>
+            <p-inputNumber
+              id="remuneration"
+              [(ngModel)]="remunerationAnnuelle"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+            ></p-inputNumber>
+            <small class="form-hint">Pour estimer votre TMI</small>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Résultats -->
+      <div class="results-section">
+        <h2><i class="pi pi-calculator"></i> Calcul de votre épargne</h2>
+
+        <!-- Comparaison des 3 options -->
+        <div class="options-grid">
+          <!-- Versement immédiat -->
+          <div class="option-card" [class.selected]="choixVersement === 'immediat'">
+            <div class="card-header">
+              <h4><i class="pi pi-wallet"></i> Versement immédiat</h4>
+            </div>
+            <div class="card-body">
+              <div class="amount-main">{{ formatCurrency(montantBrut - csgCrds - calculerImpot(montantBrut - csgCrds)) }}</div>
+              <div class="amount-label">Net perçu</div>
+              <ul class="deductions">
+                <li><span>CSG-CRDS</span><span>-{{ formatCurrency(csgCrds) }}</span></li>
+                <li><span>Impôt sur le revenu</span><span>-{{ formatCurrency(calculerImpot(montantBrut - csgCrds)) }}</span></li>
+              </ul>
+            </div>
+            <div class="card-footer">
+              <span class="tag disponible">Disponible immédiatement</span>
+            </div>
+          </div>
+
+          <!-- PEE -->
+          <div class="option-card recommended" [class.selected]="choixVersement === 'pee'">
+            <div class="card-header">
+              <h4><i class="pi pi-lock"></i> PEE</h4>
+              <span class="badge">Recommandé</span>
+            </div>
+            <div class="card-body">
+              <div class="amount-main">{{ formatCurrency(gainTotalPEE) }}</div>
+              <div class="amount-label">Total avec abondement</div>
+              <ul class="deductions">
+                <li><span>CSG-CRDS</span><span>-{{ formatCurrency(csgCrds) }}</span></li>
+                <li><span>Impôt sur le revenu</span><span class="exonere">Exonéré</span></li>
+                <li class="bonus"><span>Abondement estimé</span><span>+{{ formatCurrency(abondementEstime) }}</span></li>
+              </ul>
+            </div>
+            <div class="card-footer">
+              <span class="tag bloque">Bloqué 5 ans</span>
+            </div>
+          </div>
+
+          <!-- PER Collectif -->
+          <div class="option-card" [class.selected]="choixVersement === 'perco'">
+            <div class="card-header">
+              <h4><i class="pi pi-clock"></i> PER Collectif</h4>
+            </div>
+            <div class="card-body">
+              <div class="amount-main">{{ formatCurrency(montantNetPEE + abondementEstime) }}</div>
+              <div class="amount-label">Total avec abondement</div>
+              <ul class="deductions">
+                <li><span>CSG-CRDS</span><span>-{{ formatCurrency(csgCrds) }}</span></li>
+                <li><span>Impôt sur le revenu</span><span class="exonere">Exonéré</span></li>
+                <li class="bonus"><span>Abondement estimé</span><span>+{{ formatCurrency(abondementEstime) }}</span></li>
+              </ul>
+            </div>
+            <div class="card-footer">
+              <span class="tag retraite">Bloqué jusqu'à la retraite</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Économie PEE -->
+        <div class="savings-box" *ngIf="getEconomiePEE() > 0">
+          <i class="pi pi-trending-up"></i>
+          <div class="savings-content">
+            <h4>Avantage du PEE</h4>
+            <p>En plaçant sur le PEE plutôt qu'en versement immédiat, vous gagnez <strong>{{ formatCurrency(getEconomiePEE()) }}</strong></p>
+            <ul>
+              <li>Économie d'impôt : {{ formatCurrency(calculerImpot(montantBrut - csgCrds)) }}</li>
+              <li>Abondement : {{ formatCurrency(abondementEstime) }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Info panel -->
+        <div class="info-panel">
+          <h4><i class="pi pi-info-circle"></i> Conseils</h4>
+          <ul class="tips-list">
+            <li><strong>Privilégiez le PEE</strong> si vous n'avez pas besoin immédiatement des fonds.</li>
+            <li><strong>L'abondement</strong> varie selon les entreprises (0 à 300%). Consultez votre accord.</li>
+            <li><strong>Le PER Collectif</strong> est intéressant si vous êtes fortement imposé et proche de la retraite.</li>
+            <li><strong>Cas de déblocage anticipé</strong> : mariage, naissance, achat RP, création d'entreprise...</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <app-faq-section [faqItems]="faqItems"></app-faq-section>
+    </div>
+  </div>
+</div>

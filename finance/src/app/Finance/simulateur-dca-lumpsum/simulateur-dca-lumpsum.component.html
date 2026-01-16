@@ -1,0 +1,188 @@
+<div class="simulator-page">
+  <div class="simulator-container">
+    <header class="simulator-header">
+      <h1><i class="pi pi-chart-line"></i> Simulateur DCA vs Lump Sum</h1>
+      <p class="subtitle">Comparez investissement progressif (DCA) et investissement en une fois (Lump Sum)</p>
+    </header>
+
+    <div class="simulator-content">
+      <!-- Formulaire -->
+      <p-panel header="Paramètres d'investissement" class="input-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="montant">Montant total à investir</label>
+            <p-inputNumber
+              id="montant"
+              [(ngModel)]="montantTotal"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="1000"
+              [max]="10000000"
+            ></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="duree">Durée d'investissement (DCA)</label>
+            <p-dropdown
+              id="duree"
+              [options]="dureeOptions"
+              [(ngModel)]="dureeInvestissement"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+            ></p-dropdown>
+            <small class="form-hint">Période sur laquelle étaler le DCA</small>
+          </div>
+
+          <div class="form-group">
+            <label for="rendement">Rendement annuel espéré</label>
+            <p-inputNumber
+              id="rendement"
+              [(ngModel)]="rendementAnnuel"
+              (ngModelChange)="calculer()"
+              suffix=" %"
+              [min]="0"
+              [max]="30"
+              [minFractionDigits]="1"
+            ></p-inputNumber>
+            <small class="form-hint">Historiquement 7-10% pour les actions</small>
+          </div>
+
+          <div class="form-group">
+            <label for="volatilite">Volatilité du marché</label>
+            <p-inputNumber
+              id="volatilite"
+              [(ngModel)]="volatilite"
+              (ngModelChange)="calculer()"
+              suffix=" %"
+              [min]="5"
+              [max]="40"
+            ></p-inputNumber>
+            <small class="form-hint">~15% pour les actions, ~5% pour les obligations</small>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Résultats -->
+      <div class="results-section">
+        <h2><i class="pi pi-chart-bar"></i> Comparaison des stratégies</h2>
+
+        <!-- Verdict -->
+        <div class="verdict-box" [class.lumpsum]="meilleurStrategie === 'Lump Sum'" [class.dca]="meilleurStrategie === 'DCA'">
+          <i class="verdict-icon" [class.pi-trending-up]="meilleurStrategie === 'Lump Sum'" [class.pi-sync]="meilleurStrategie === 'DCA'" class="pi"></i>
+          <div class="verdict-text">
+            <h3>{{ meilleurStrategie }} plus performant</h3>
+            <p>Différence de <strong>{{ formatCurrency(differenceCapital) }}</strong> en faveur du {{ meilleurStrategie }}</p>
+            <p class="proba">Probabilité historique Lump Sum > DCA : <strong>{{ probabiliteSupLumpSum }}%</strong></p>
+          </div>
+        </div>
+
+        <!-- Comparaison côte à côte -->
+        <div class="comparison-grid">
+          <!-- Lump Sum -->
+          <div class="strategy-card" [class.winner]="meilleurStrategie === 'Lump Sum'">
+            <div class="card-header">
+              <h4><i class="pi pi-bolt"></i> Lump Sum</h4>
+              <span class="badge" *ngIf="meilleurStrategie === 'Lump Sum'">Meilleur</span>
+            </div>
+            <div class="card-body">
+              <div class="stat-main">
+                <span class="label">Capital final</span>
+                <span class="value">{{ formatCurrency(capitalFinalLumpSum) }}</span>
+              </div>
+              <div class="stat-detail">
+                <span>Investi</span>
+                <span>{{ formatCurrency(montantTotal) }}</span>
+              </div>
+              <div class="stat-detail gain">
+                <span>Plus-value</span>
+                <span class="positive">+{{ formatCurrency(gainLumpSum) }}</span>
+              </div>
+              <div class="stat-detail">
+                <span>Rendement total</span>
+                <span>{{ formatPercent(gainLumpSum / montantTotal * 100) }}</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <p>Tout investi immédiatement</p>
+            </div>
+          </div>
+
+          <!-- DCA -->
+          <div class="strategy-card" [class.winner]="meilleurStrategie === 'DCA'">
+            <div class="card-header">
+              <h4><i class="pi pi-sync"></i> DCA</h4>
+              <span class="badge" *ngIf="meilleurStrategie === 'DCA'">Meilleur</span>
+            </div>
+            <div class="card-body">
+              <div class="stat-main">
+                <span class="label">Capital final</span>
+                <span class="value">{{ formatCurrency(capitalFinalDCA) }}</span>
+              </div>
+              <div class="stat-detail">
+                <span>Investi</span>
+                <span>{{ formatCurrency(montantTotal) }}</span>
+              </div>
+              <div class="stat-detail gain">
+                <span>Plus-value</span>
+                <span class="positive">+{{ formatCurrency(gainDCA) }}</span>
+              </div>
+              <div class="stat-detail">
+                <span>Mensualité</span>
+                <span>{{ formatCurrency(montantTotal / (dureeInvestissement * 12)) }}</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <p>Investissement étalé sur {{ dureeInvestissement }} an(s)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tableau évolution -->
+        <div class="evolution-section">
+          <h3><i class="pi pi-table"></i> Évolution année par année</h3>
+          <div class="table-container">
+            <table class="evolution-table">
+              <thead>
+                <tr>
+                  <th>Année</th>
+                  <th>Investi (DCA)</th>
+                  <th>Capital DCA</th>
+                  <th>Capital Lump Sum</th>
+                  <th>Écart</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of tableauEvolution">
+                  <td>{{ row.annee }}</td>
+                  <td>{{ formatCurrency(row.investiDCA) }}</td>
+                  <td>{{ formatCurrency(row.capitalDCA) }}</td>
+                  <td>{{ formatCurrency(row.capitalLumpSum) }}</td>
+                  <td [class.positive]="row.capitalLumpSum > row.capitalDCA" [class.negative]="row.capitalLumpSum < row.capitalDCA">
+                    {{ row.capitalLumpSum > row.capitalDCA ? '+' : '' }}{{ formatCurrency(row.capitalLumpSum - row.capitalDCA) }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Info panel -->
+        <div class="info-panel">
+          <h4><i class="pi pi-info-circle"></i> Points clés à retenir</h4>
+          <ul class="tips-list">
+            <li><strong>Statistiquement</strong>, le Lump Sum surperforme le DCA environ 2/3 du temps sur les données historiques.</li>
+            <li><strong>Psychologiquement</strong>, le DCA est plus facile à supporter car il évite d'investir tout au mauvais moment.</li>
+            <li><strong>En pratique</strong>, la plupart des investisseurs font du DCA naturellement (épargne mensuelle du salaire).</li>
+            <li><strong>Recommandation</strong> : si vous avez une somme importante (héritage, vente), investissez au moins 50% en Lump Sum, le reste en DCA sur 6-12 mois.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <app-faq-section [faqItems]="faqItems"></app-faq-section>
+    </div>
+  </div>
+</div>

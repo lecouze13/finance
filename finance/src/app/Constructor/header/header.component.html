@@ -1,8 +1,36 @@
 <div class="cardHeader">
-    
-    <p-menubar [model]="items">
-         <!-- <img src="../../../assets/image.webp" class="img-logo"> -->
 
+    <p-menubar [model]="items">
+        <!-- Search Bar -->
+        <ng-template pTemplate="start">
+            <div class="search-container">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input
+                        type="text"
+                        pInputText
+                        [(ngModel)]="searchQuery"
+                        (input)="onSearchInput()"
+                        (blur)="onSearchBlur()"
+                        placeholder="Rechercher..."
+                        class="search-input"
+                    />
+                </span>
+                <div class="search-results" *ngIf="showSearchResults && searchResults.length > 0">
+                    <div
+                        class="search-result-item"
+                        *ngFor="let result of searchResults"
+                        (mousedown)="selectSearchItem(result)"
+                    >
+                        <i [class]="getTypeIcon(result.type)"></i>
+                        <div class="result-content">
+                            <span class="result-label">{{ result.label }}</span>
+                            <span class="result-type">{{ getTypeLabel(result.type) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
 
         <ng-template pTemplate="item" let-item>
             <ng-container *ngIf="item.route; else urlRef">

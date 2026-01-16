@@ -240,7 +240,16 @@
               "/simulateur-donation",
               "/simulateur-charges-locatives",
               "/simulateur-freelance",
-              "/simulateur-electricite-hphc"
+              "/simulateur-electricite-hphc",
+              "/simulateur-dca-lumpsum",
+              "/simulateur-crypto-fiscalite",
+              "/simulateur-crowdfunding-immo",
+              "/simulateur-leasing-voiture",
+              "/simulateur-rachat-trimestres",
+              "/simulateur-ppv",
+              "/simulateur-interessement",
+              "/simulateur-colocation",
+              "/simulateur-renovation-energetique"
             ]
           },
           "configurations": {

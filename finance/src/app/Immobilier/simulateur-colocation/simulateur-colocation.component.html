@@ -1,0 +1,229 @@
+<div class="simulator-page">
+  <div class="simulator-container">
+    <header class="simulator-header">
+      <h1><i class="pi pi-users"></i> Simulateur Colocation vs Location Classique</h1>
+      <p class="subtitle">Comparez la rentabilité des deux stratégies locatives</p>
+    </header>
+
+    <div class="simulator-content">
+      <!-- Formulaire Bien -->
+      <p-panel header="Le bien immobilier" class="input-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="prix">Prix d'achat</label>
+            <p-inputNumber
+              id="prix"
+              [(ngModel)]="prixAchat"
+              (ngModelChange)="calculerFraisNotaire(); calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+            ></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="surface">Surface (m²)</label>
+            <p-inputNumber
+              id="surface"
+              [(ngModel)]="surface"
+              (ngModelChange)="calculer()"
+              suffix=" m²"
+              [min]="20"
+            ></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="chambres">Nombre de chambres</label>
+            <p-inputNumber
+              id="chambres"
+              [(ngModel)]="nombreChambres"
+              (ngModelChange)="calculer()"
+              [min]="2"
+              [max]="10"
+            ></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="travaux">Travaux</label>
+            <p-inputNumber
+              id="travaux"
+              [(ngModel)]="travaux"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+            ></p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Loyers -->
+      <p-panel header="Les loyers" class="input-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="loyerClassique">Loyer location classique</label>
+            <p-inputNumber
+              id="loyerClassique"
+              [(ngModel)]="loyerClassique"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+            ></p-inputNumber>
+            <small class="form-hint">Loyer mensuel HC si location classique</small>
+          </div>
+
+          <div class="form-group">
+            <label for="loyerChambre">Loyer par chambre (colocation)</label>
+            <p-inputNumber
+              id="loyerChambre"
+              [(ngModel)]="loyerParChambre"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+            ></p-inputNumber>
+            <small class="form-hint">Total : {{ formatCurrency(loyerParChambre * nombreChambres) }}/mois</small>
+          </div>
+
+          <div class="form-group">
+            <label for="vacance">Vacance locative colocation</label>
+            <p-inputNumber
+              id="vacance"
+              [(ngModel)]="tauxVacanceColoc"
+              (ngModelChange)="calculer()"
+              suffix=" %"
+              [min]="0"
+              [max]="30"
+            ></p-inputNumber>
+            <small class="form-hint">Turnover plus élevé en colocation</small>
+          </div>
+
+          <div class="form-group">
+            <label for="chargesSup">Charges supplémentaires coloc</label>
+            <p-inputNumber
+              id="chargesSup"
+              [(ngModel)]="chargesSupplementaires"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+            ></p-inputNumber>
+            <small class="form-hint">Électricité, internet, ménage...</small>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Résultats -->
+      <div class="results-section">
+        <h2><i class="pi pi-chart-bar"></i> Comparaison des rentabilités</h2>
+
+        <!-- Verdict -->
+        <div class="verdict-box" [class.coloc]="meilleurOption === 'Colocation'" [class.classique]="meilleurOption !== 'Colocation'">
+          <i class="verdict-icon pi" [class.pi-users]="meilleurOption === 'Colocation'" [class.pi-home]="meilleurOption !== 'Colocation'"></i>
+          <div class="verdict-text">
+            <h3>{{ meilleurOption }} plus rentable</h3>
+            <p *ngIf="gainColocation > 0">Gain annuel de <strong>{{ formatCurrency(gainColocation) }}</strong> avec la colocation</p>
+            <p *ngIf="gainColocation <= 0">La location classique rapporte <strong>{{ formatCurrency(-gainColocation) }}</strong> de plus par an</p>
+          </div>
+        </div>
+
+        <!-- Comparaison côte à côte -->
+        <div class="comparison-grid">
+          <!-- Location classique -->
+          <div class="option-card" [class.winner]="meilleurOption !== 'Colocation'">
+            <div class="card-header">
+              <h4><i class="pi pi-home"></i> Location Classique</h4>
+              <span class="badge" *ngIf="meilleurOption !== 'Colocation'">Meilleur</span>
+            </div>
+            <div class="card-body">
+              <div class="stat-row">
+                <span>Loyers annuels</span>
+                <span>{{ formatCurrency(loyerAnnuelClassique) }}</span>
+              </div>
+              <div class="stat-row">
+                <span>Charges annuelles</span>
+                <span class="negative">-{{ formatCurrency(chargesClassique) }}</span>
+              </div>
+              <div class="stat-row highlight">
+                <span>Cash-flow annuel</span>
+                <span>{{ formatCurrency(cashflowClassique) }}</span>
+              </div>
+              <div class="stat-row rendement">
+                <span>Rendement net</span>
+                <span>{{ formatPercent(rendementClassique) }}</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <p>Gestion simple, locataire stable</p>
+            </div>
+          </div>
+
+          <!-- Colocation -->
+          <div class="option-card" [class.winner]="meilleurOption === 'Colocation'">
+            <div class="card-header">
+              <h4><i class="pi pi-users"></i> Colocation</h4>
+              <span class="badge" *ngIf="meilleurOption === 'Colocation'">Meilleur</span>
+            </div>
+            <div class="card-body">
+              <div class="stat-row">
+                <span>Loyers annuels</span>
+                <span>{{ formatCurrency(loyerAnnuelColoc) }}</span>
+              </div>
+              <div class="stat-row">
+                <span>Charges annuelles</span>
+                <span class="negative">-{{ formatCurrency(chargesColoc) }}</span>
+              </div>
+              <div class="stat-row highlight">
+                <span>Cash-flow annuel</span>
+                <span>{{ formatCurrency(cashflowColoc) }}</span>
+              </div>
+              <div class="stat-row rendement">
+                <span>Rendement net</span>
+                <span>{{ formatPercent(rendementColoc) }}</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <p>Plus de gestion, plus de revenus</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats supplémentaires -->
+        <div class="stats-box">
+          <div class="stat-item">
+            <span class="label">Prix par chambre</span>
+            <span class="value">{{ formatCurrency(getPrixParChambre()) }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="label">Différence de loyer</span>
+            <span class="value">+{{ formatPercent((loyerAnnuelColoc / loyerAnnuelClassique - 1) * 100) }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="label">Cash-flow mensuel coloc</span>
+            <span class="value">{{ formatCurrency(cashflowColoc / 12) }}/mois</span>
+          </div>
+        </div>
+
+        <!-- Info panel -->
+        <div class="info-panel">
+          <h4><i class="pi pi-info-circle"></i> Points d'attention colocation</h4>
+          <ul class="tips-list">
+            <li><strong>Gestion</strong> : Plus de turnover, états des lieux fréquents, gestion des conflits.</li>
+            <li><strong>Équipement</strong> : Prévoir meubles, électroménager, wifi inclus dans les charges.</li>
+            <li><strong>Réglementation</strong> : Vérifiez les règles locales (encadrement des loyers, surface minimum par chambre).</li>
+            <li><strong>Assurance</strong> : Exigez une assurance par colocataire + GLI adaptée.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <app-faq-section [faqItems]="faqItems"></app-faq-section>
+    </div>
+  </div>
+</div>

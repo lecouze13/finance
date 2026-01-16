@@ -1,0 +1,169 @@
+// Styles spécifiques au simulateur Rachat de Trimestres
+
+.verdict-box {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+
+  &.rentable {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    border: 2px solid #10b981;
+    .verdict-icon { color: #10b981; }
+    h3 { color: #059669; }
+  }
+
+  &.non-rentable {
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+    border: 2px solid #ef4444;
+    .verdict-icon { color: #ef4444; }
+    h3 { color: #dc2626; }
+  }
+
+  .verdict-icon { font-size: 3rem; }
+  .verdict-text {
+    h3 { margin: 0 0 0.5rem 0; }
+    p { margin: 0.25rem 0; color: #64748b; }
+    strong { color: #1e293b; }
+  }
+}
+
+.cost-section, .gain-section {
+  margin-bottom: 2rem;
+
+  h3 {
+    color: #1e40af;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.cost-grid, .gain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cost-card, .gain-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.25rem;
+  text-align: center;
+
+  .label {
+    display: block;
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  .detail {
+    display: block;
+    color: #94a3b8;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+  }
+
+  &.economy {
+    background: #ecfdf5;
+    border-color: #10b981;
+    .value { color: #059669; }
+  }
+
+  &.net {
+    background: #dbeafe;
+    border-color: #3b82f6;
+    .value { color: #1e40af; }
+  }
+
+  &.total {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    border-color: #10b981;
+    .value { color: #059669; font-size: 1.75rem; }
+  }
+}
+
+.summary-box {
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    color: #94a3b8;
+    border-bottom: 1px solid #334155;
+
+    &:last-child { border-bottom: none; }
+
+    &.total {
+      margin-top: 0.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid #475569;
+      font-weight: 600;
+      span:first-child { color: white; }
+    }
+
+    .positive { color: #4ade80; }
+    .negative { color: #f87171; }
+  }
+}
+
+.info-panel {
+  background: #f8fafc;
+  border-left: 4px solid #f59e0b;
+  padding: 1.5rem;
+  border-radius: 8px;
+
+  h4 {
+    margin-top: 0;
+    color: #b45309;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .tips-list {
+    margin: 0;
+    padding-left: 1.25rem;
+
+    li {
+      margin-bottom: 0.5rem;
+      color: #475569;
+      line-height: 1.5;
+      strong { color: #1e40af; }
+    }
+  }
+}
+
+.form-hint {
+  display: block;
+  color: #64748b;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 767px) {
+  .verdict-box {
+    flex-direction: column;
+    text-align: center;
+  }
+}

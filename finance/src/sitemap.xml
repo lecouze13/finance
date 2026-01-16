@@ -379,6 +379,69 @@
   <priority>0.8</priority>
 </url>
 
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-dca-lumpsum/</loc>
+  <lastmod>2026-01-16</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-crypto-fiscalite/</loc>
+  <lastmod>2026-01-16</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-crowdfunding-immo/</loc>
+  <lastmod>2026-01-16</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-leasing-voiture/</loc>
+  <lastmod>2026-01-16</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-rachat-trimestres/</loc>
+  <lastmod>2026-01-16</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-ppv/</loc>
+  <lastmod>2026-01-16</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-interessement/</loc>
+  <lastmod>2026-01-16</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-colocation/</loc>
+  <lastmod>2026-01-16</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-renovation-energetique/</loc>
+  <lastmod>2026-01-16</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.8</priority>
+</url>
+
 <!-- ========== SIMULATEURS LIVRETS (0.7) ========== -->
 <url>
   <loc>https://calculateurfinance.fr/simulateur-livret/livret-a/</loc>

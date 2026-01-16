@@ -62,4 +62,13 @@ export const AppRoutes = {
   SIMULATEUR_CHARGES_LOCATIVES: 'simulateur-charges-locatives',
   SIMULATEUR_FREELANCE: 'simulateur-freelance',
   SIMULATEUR_ELECTRICITE_HPHC: 'simulateur-electricite-hphc',
+  SIMULATEUR_DCA_LUMPSUM: 'simulateur-dca-lumpsum',
+  SIMULATEUR_CRYPTO_FISCALITE: 'simulateur-crypto-fiscalite',
+  SIMULATEUR_CROWDFUNDING_IMMO: 'simulateur-crowdfunding-immo',
+  SIMULATEUR_LEASING_VOITURE: 'simulateur-leasing-voiture',
+  SIMULATEUR_RACHAT_TRIMESTRES: 'simulateur-rachat-trimestres',
+  SIMULATEUR_PPV: 'simulateur-ppv',
+  SIMULATEUR_INTERESSEMENT: 'simulateur-interessement',
+  SIMULATEUR_COLOCATION: 'simulateur-colocation',
+  SIMULATEUR_RENOVATION_ENERGETIQUE: 'simulateur-renovation-energetique',
 };

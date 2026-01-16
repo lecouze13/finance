@@ -1,0 +1,237 @@
+<div class="simulator-page">
+  <div class="simulator-container">
+    <header class="simulator-header">
+      <h1><i class="pi pi-car"></i> Simulateur Leasing vs Achat Voiture</h1>
+      <p class="subtitle">Comparez LOA, LLD, crédit auto et achat comptant</p>
+    </header>
+
+    <div class="simulator-content">
+      <!-- Formulaire -->
+      <p-panel header="Paramètres du véhicule" class="input-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="prix">Prix du véhicule neuf</label>
+            <p-inputNumber
+              id="prix"
+              [(ngModel)]="prixVehicule"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="5000"
+            ></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="apport">Apport / Premier loyer majoré</label>
+            <p-inputNumber
+              id="apport"
+              [(ngModel)]="apport"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+            ></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="duree">Durée du contrat</label>
+            <p-dropdown
+              id="duree"
+              [options]="dureeOptions"
+              [(ngModel)]="dureeContrat"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+            ></p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label for="km">Kilométrage annuel</label>
+            <p-inputNumber
+              id="km"
+              [(ngModel)]="kilometrageAnnuel"
+              (ngModelChange)="calculer()"
+              suffix=" km/an"
+              [min]="5000"
+              [max]="50000"
+            ></p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Options de financement" class="input-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="loyerLOA">Loyer mensuel LOA</label>
+            <p-inputNumber
+              id="loyerLOA"
+              [(ngModel)]="loyerLOA"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="100"
+            ></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="optionAchat">Option d'achat LOA</label>
+            <p-inputNumber
+              id="optionAchat"
+              [(ngModel)]="optionAchatLOA"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+            ></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="loyerLLD">Loyer mensuel LLD</label>
+            <p-inputNumber
+              id="loyerLLD"
+              [(ngModel)]="loyerLLD"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="100"
+            ></p-inputNumber>
+            <small class="form-hint">Inclut souvent entretien + assurance</small>
+          </div>
+
+          <div class="form-group">
+            <label for="tauxCredit">Taux crédit auto</label>
+            <p-inputNumber
+              id="tauxCredit"
+              [(ngModel)]="tauxCredit"
+              (ngModelChange)="calculer()"
+              suffix=" %"
+              [min]="0"
+              [max]="15"
+              [minFractionDigits]="2"
+            ></p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Résultats -->
+      <div class="results-section">
+        <h2><i class="pi pi-chart-bar"></i> Comparaison des options</h2>
+
+        <!-- Verdict -->
+        <div class="verdict-box">
+          <i class="pi pi-check-circle verdict-icon"></i>
+          <div class="verdict-text">
+            <h3>{{ meilleurOption }} est l'option la plus économique</h3>
+            <p>Sur {{ dureeContrat }} mois, avec une valeur résiduelle estimée de {{ formatCurrency(valeurResiduelle) }}</p>
+          </div>
+        </div>
+
+        <!-- Cartes comparatives -->
+        <div class="options-grid">
+          <!-- LOA -->
+          <div class="option-card" [class.best]="meilleurOption === 'LOA'">
+            <div class="card-header">
+              <h4>LOA</h4>
+              <span class="badge" *ngIf="meilleurOption === 'LOA'">Meilleur</span>
+            </div>
+            <div class="card-body">
+              <div class="cost-main">{{ formatCurrency(coutTotalLOA) }}</div>
+              <div class="cost-label">Coût total</div>
+              <ul class="cost-details">
+                <li><span>Apport</span><span>{{ formatCurrency(apport) }}</span></li>
+                <li><span>{{ dureeContrat }} loyers</span><span>{{ formatCurrency(loyerLOA * dureeContrat) }}</span></li>
+                <li><span>Option d'achat</span><span>{{ formatCurrency(optionAchatLOA) }}</span></li>
+                <li class="monthly"><span>Coût mensuel moyen</span><span>{{ formatCurrency(getCoutMensuelMoyen(coutTotalLOA)) }}/mois</span></li>
+              </ul>
+            </div>
+            <div class="card-footer">
+              <p>Propriétaire en fin de contrat</p>
+            </div>
+          </div>
+
+          <!-- LLD -->
+          <div class="option-card" [class.best]="meilleurOption === 'LLD'">
+            <div class="card-header">
+              <h4>LLD</h4>
+              <span class="badge" *ngIf="meilleurOption === 'LLD'">Meilleur</span>
+            </div>
+            <div class="card-body">
+              <div class="cost-main">{{ formatCurrency(coutTotalLLD) }}</div>
+              <div class="cost-label">Coût total</div>
+              <ul class="cost-details">
+                <li><span>Apport</span><span>{{ formatCurrency(apport) }}</span></li>
+                <li><span>{{ dureeContrat }} loyers</span><span>{{ formatCurrency(loyerLLD * dureeContrat) }}</span></li>
+                <li><span>Option d'achat</span><span>Aucune</span></li>
+                <li class="monthly"><span>Coût mensuel moyen</span><span>{{ formatCurrency(getCoutMensuelMoyen(coutTotalLLD)) }}/mois</span></li>
+              </ul>
+            </div>
+            <div class="card-footer">
+              <p>Restitution du véhicule</p>
+            </div>
+          </div>
+
+          <!-- Crédit -->
+          <div class="option-card" [class.best]="meilleurOption === 'Crédit'">
+            <div class="card-header">
+              <h4>Crédit Auto</h4>
+              <span class="badge" *ngIf="meilleurOption === 'Crédit'">Meilleur</span>
+            </div>
+            <div class="card-body">
+              <div class="cost-main">{{ formatCurrency(coutTotalCredit) }}</div>
+              <div class="cost-label">Coût net (après revente)</div>
+              <ul class="cost-details">
+                <li><span>Apport</span><span>{{ formatCurrency(apport) }}</span></li>
+                <li><span>Mensualité</span><span>{{ formatCurrency(mensualiteCredit) }}/mois</span></li>
+                <li><span>Valeur résiduelle</span><span class="positive">-{{ formatCurrency(valeurResiduelle) }}</span></li>
+                <li class="monthly"><span>Coût mensuel moyen</span><span>{{ formatCurrency(getCoutMensuelMoyen(coutTotalCredit)) }}/mois</span></li>
+              </ul>
+            </div>
+            <div class="card-footer">
+              <p>Propriétaire dès le départ</p>
+            </div>
+          </div>
+
+          <!-- Comptant -->
+          <div class="option-card" [class.best]="meilleurOption === 'Comptant'">
+            <div class="card-header">
+              <h4>Achat Comptant</h4>
+              <span class="badge" *ngIf="meilleurOption === 'Comptant'">Meilleur</span>
+            </div>
+            <div class="card-body">
+              <div class="cost-main">{{ formatCurrency(coutTotalComptant) }}</div>
+              <div class="cost-label">Coût net (après revente)</div>
+              <ul class="cost-details">
+                <li><span>Prix véhicule</span><span>{{ formatCurrency(prixVehicule) }}</span></li>
+                <li><span>Coût d'opportunité</span><span>{{ formatCurrency(prixVehicule * 0.03 * dureeContrat / 12) }}</span></li>
+                <li><span>Valeur résiduelle</span><span class="positive">-{{ formatCurrency(valeurResiduelle) }}</span></li>
+                <li class="monthly"><span>Coût mensuel moyen</span><span>{{ formatCurrency(getCoutMensuelMoyen(coutTotalComptant)) }}/mois</span></li>
+              </ul>
+            </div>
+            <div class="card-footer">
+              <p>Pas de frais de financement</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info panel -->
+        <div class="info-panel">
+          <h4><i class="pi pi-info-circle"></i> Points importants</h4>
+          <ul class="tips-list">
+            <li><strong>LOA</strong> : Flexible, mensualités plus faibles, mais coût total souvent élevé si vous levez l'option.</li>
+            <li><strong>LLD</strong> : Tout compris (entretien, assurance), idéal si vous changez souvent de véhicule.</li>
+            <li><strong>Crédit</strong> : Vous êtes propriétaire, généralement le moins cher sur le long terme.</li>
+            <li><strong>Comptant</strong> : Pas d'intérêts, mais immobilise votre épargne.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <app-faq-section [faqItems]="faqItems"></app-faq-section>
+    </div>
+  </div>
+</div>

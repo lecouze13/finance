@@ -1,0 +1,204 @@
+<div class="simulator-page">
+  <div class="simulator-container">
+    <header class="simulator-header">
+      <h1><i class="pi pi-building"></i> Simulateur Crowdfunding Immobilier</h1>
+      <p class="subtitle">Calculez la rentabilité et les risques de vos investissements</p>
+    </header>
+
+    <div class="simulator-content">
+      <!-- Formulaire -->
+      <p-panel header="Votre investissement" class="input-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="montant">Montant investi</label>
+            <p-inputNumber
+              id="montant"
+              [(ngModel)]="montantInvesti"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="100"
+            ></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="taux">Taux de rendement annuel</label>
+            <p-inputNumber
+              id="taux"
+              [(ngModel)]="tauxRendement"
+              (ngModelChange)="calculer()"
+              suffix=" %"
+              [min]="1"
+              [max]="15"
+              [minFractionDigits]="1"
+            ></p-inputNumber>
+            <small class="form-hint">Généralement entre 8% et 12%</small>
+          </div>
+
+          <div class="form-group">
+            <label for="duree">Durée du projet</label>
+            <p-dropdown
+              id="duree"
+              [options]="dureeOptions"
+              [(ngModel)]="dureeMois"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+            ></p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label for="projets">Nombre de projets</label>
+            <p-inputNumber
+              id="projets"
+              [(ngModel)]="nombreProjets"
+              (ngModelChange)="calculer()"
+              [min]="1"
+              [max]="50"
+            ></p-inputNumber>
+            <small class="form-hint">Pour diversification du risque</small>
+          </div>
+
+          <div class="form-group">
+            <label for="defaut">Taux de défaut estimé</label>
+            <p-inputNumber
+              id="defaut"
+              [(ngModel)]="tauxDefaut"
+              (ngModelChange)="calculer()"
+              suffix=" %"
+              [min]="0"
+              [max]="20"
+            ></p-inputNumber>
+            <small class="form-hint">Moyenne du marché : 3-5%</small>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Résultats -->
+      <div class="results-section">
+        <h2><i class="pi pi-chart-bar"></i> Analyse de rentabilité</h2>
+
+        <!-- Rendement -->
+        <div class="results-grid">
+          <div class="result-card">
+            <span class="label">Intérêts bruts</span>
+            <span class="value">{{ formatCurrency(interetsBruts) }}</span>
+            <span class="detail">sur {{ dureeMois }} mois</span>
+          </div>
+          <div class="result-card tax">
+            <span class="label">Flat Tax (30%)</span>
+            <span class="value">-{{ formatCurrency(flatTax) }}</span>
+            <span class="detail">12,8% IR + 17,2% PS</span>
+          </div>
+          <div class="result-card net">
+            <span class="label">Intérêts nets</span>
+            <span class="value">{{ formatCurrency(interetsNets) }}</span>
+            <span class="detail">{{ formatPercent(rendementNet) }} net annualisé</span>
+          </div>
+        </div>
+
+        <!-- Capital final -->
+        <div class="capital-box">
+          <div class="capital-item">
+            <span class="label">Capital investi</span>
+            <span class="value">{{ formatCurrency(montantInvesti) }}</span>
+          </div>
+          <div class="capital-arrow">
+            <i class="pi pi-arrow-right"></i>
+          </div>
+          <div class="capital-item highlight">
+            <span class="label">Capital final</span>
+            <span class="value">{{ formatCurrency(capitalFinal) }}</span>
+          </div>
+        </div>
+
+        <!-- Risque -->
+        <div class="risk-section">
+          <h3><i class="pi pi-exclamation-triangle"></i> Analyse du risque</h3>
+
+          <div class="risk-indicator" [ngClass]="getRisqueClass()">
+            <div class="risk-header">
+              <span class="risk-label">{{ getRisqueLabel() }}</span>
+              <span class="risk-projects">{{ nombreProjets }} projet(s)</span>
+            </div>
+            <div class="risk-bar">
+              <div class="risk-fill" [style.width.%]="Math.min(100, nombreProjets * 5)"></div>
+            </div>
+          </div>
+
+          <div class="risk-details">
+            <div class="risk-card">
+              <span class="label">Perte estimée (défauts)</span>
+              <span class="value negative">{{ formatCurrency(perteEstimee) }}</span>
+              <span class="detail">{{ tauxDefaut }}% de défaut, 30% récupéré</span>
+            </div>
+            <div class="risk-card">
+              <span class="label">Rendement ajusté du risque</span>
+              <span class="value" [class.positive]="rendementAjusteRisque > 0" [class.negative]="rendementAjusteRisque <= 0">
+                {{ formatPercent(rendementAjusteRisque) }}
+              </span>
+              <span class="detail">Rendement net - risque de perte</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparaison -->
+        <div class="comparison-box">
+          <h4><i class="pi pi-sync"></i> Comparaison avec d'autres placements</h4>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Placement</th>
+                <th>Rendement</th>
+                <th>Risque</th>
+                <th>Liquidité</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight">
+                <td>Crowdfunding immo</td>
+                <td>8-12%</td>
+                <td>Moyen/Élevé</td>
+                <td>Nulle</td>
+              </tr>
+              <tr>
+                <td>SCPI</td>
+                <td>4-6%</td>
+                <td>Faible</td>
+                <td>Faible</td>
+              </tr>
+              <tr>
+                <td>Immobilier locatif</td>
+                <td>3-6%</td>
+                <td>Faible</td>
+                <td>Faible</td>
+              </tr>
+              <tr>
+                <td>Livret A</td>
+                <td>2,4%</td>
+                <td>Nul</td>
+                <td>Totale</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Info panel -->
+        <div class="info-panel">
+          <h4><i class="pi pi-info-circle"></i> Conseils pour investir</h4>
+          <ul class="tips-list">
+            <li><strong>Diversifiez</strong> : investissez dans au moins 10-20 projets différents.</li>
+            <li><strong>Limitez l'exposition</strong> : max 10% de votre patrimoine en crowdfunding.</li>
+            <li><strong>Vérifiez les garanties</strong> : hypothèque, caution personnelle, GAPD.</li>
+            <li><strong>Analysez le promoteur</strong> : expérience, projets réalisés, taux de retard.</li>
+            <li><strong>Acceptez l'illiquidité</strong> : votre argent est bloqué pendant toute la durée.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <app-faq-section [faqItems]="faqItems"></app-faq-section>
+    </div>
+  </div>
+</div>

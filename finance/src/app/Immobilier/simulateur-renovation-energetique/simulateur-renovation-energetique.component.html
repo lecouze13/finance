@@ -1,0 +1,178 @@
+<div class="simulator-page">
+  <div class="simulator-container">
+    <header class="simulator-header">
+      <h1><i class="pi pi-bolt"></i> Simulateur Rénovation Énergétique</h1>
+      <p class="subtitle">Calculez le coût, les aides et la rentabilité de vos travaux</p>
+    </header>
+
+    <div class="simulator-content">
+      <!-- Situation -->
+      <p-panel header="Votre logement" class="input-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="dpe">DPE actuel</label>
+            <p-dropdown
+              id="dpe"
+              [options]="dpeOptions"
+              [(ngModel)]="dpeActuel"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+            ></p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label for="surface">Surface (m²)</label>
+            <p-inputNumber
+              id="surface"
+              [(ngModel)]="surface"
+              (ngModelChange)="calculer()"
+              suffix=" m²"
+              [min]="20"
+              [max]="500"
+            ></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="type">Type de logement</label>
+            <p-dropdown
+              id="type"
+              [options]="typeOptions"
+              [(ngModel)]="typeLogement"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+            ></p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label for="revenu">Catégorie de revenus</label>
+            <p-dropdown
+              id="revenu"
+              [options]="revenuOptions"
+              [(ngModel)]="revenuFiscal"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+            ></p-dropdown>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Sélection des travaux -->
+      <p-panel header="Sélectionnez vos travaux" class="input-panel">
+        <div class="travaux-grid">
+          <div
+            class="travaux-card"
+            *ngFor="let t of travaux; let i = index"
+            [class.selected]="t.selected"
+            (click)="toggleTravaux(i)"
+          >
+            <div class="travaux-check">
+              <i class="pi" [class.pi-check-circle]="t.selected" [class.pi-circle]="!t.selected"></i>
+            </div>
+            <div class="travaux-info">
+              <h5>{{ t.nom }}</h5>
+              <div class="travaux-details">
+                <span class="cout">{{ formatCurrency(t.cout) }}</span>
+                <span class="economie">-{{ formatCurrency(t.economieAnnuelle) }}/an</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Résultats -->
+      <div class="results-section">
+        <h2><i class="pi pi-chart-bar"></i> Analyse de rentabilité</h2>
+
+        <!-- DPE avant/après -->
+        <div class="dpe-comparison">
+          <div class="dpe-item">
+            <span class="label">DPE Actuel</span>
+            <span class="dpe-badge" [ngClass]="getDPEClass(dpeActuel)">{{ dpeActuel }}</span>
+          </div>
+          <div class="dpe-arrow">
+            <i class="pi pi-arrow-right"></i>
+          </div>
+          <div class="dpe-item">
+            <span class="label">DPE Estimé</span>
+            <span class="dpe-badge" [ngClass]="getDPEClass(nouveauDPE)">{{ nouveauDPE }}</span>
+          </div>
+        </div>
+
+        <!-- Synthèse financière -->
+        <div class="finance-grid">
+          <div class="finance-card">
+            <span class="label">Coût total travaux</span>
+            <span class="value">{{ formatCurrency(coutTotalTravaux) }}</span>
+          </div>
+          <div class="finance-card aides">
+            <span class="label">Aides estimées</span>
+            <span class="value">-{{ formatCurrency(aidesTotal) }}</span>
+            <span class="detail">MaPrimeRénov' + CEE</span>
+          </div>
+          <div class="finance-card reste">
+            <span class="label">Reste à charge</span>
+            <span class="value">{{ formatCurrency(resteACharge) }}</span>
+          </div>
+        </div>
+
+        <!-- Rentabilité -->
+        <div class="rentabilite-section">
+          <h3><i class="pi pi-trending-up"></i> Rentabilité de l'investissement</h3>
+
+          <div class="rentabilite-grid">
+            <div class="rentabilite-card">
+              <span class="label">Économie annuelle</span>
+              <span class="value positive">{{ formatCurrency(economieAnnuelle) }}</span>
+              <span class="detail">sur votre facture énergie</span>
+            </div>
+            <div class="rentabilite-card">
+              <span class="label">Retour sur investissement</span>
+              <span class="value">{{ retourInvestissement }} ans</span>
+              <span class="detail">temps d'amortissement</span>
+            </div>
+            <div class="rentabilite-card highlight">
+              <span class="label">Gain net sur 20 ans</span>
+              <span class="value" [class.positive]="gainSur20Ans > 0" [class.negative]="gainSur20Ans < 0">
+                {{ formatCurrency(gainSur20Ans) }}
+              </span>
+              <span class="detail">avec inflation énergie 3%/an</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plus-value -->
+        <div class="plusvalue-box" *ngIf="plusValueEstimee > 0">
+          <i class="pi pi-home"></i>
+          <div class="plusvalue-content">
+            <h4>Plus-value estimée</h4>
+            <p>L'amélioration du DPE pourrait augmenter la valeur de votre bien de <strong>{{ formatCurrency(plusValueEstimee) }}</strong></p>
+          </div>
+        </div>
+
+        <!-- Détail des aides -->
+        <div class="info-panel">
+          <h4><i class="pi pi-info-circle"></i> Aides disponibles</h4>
+          <ul class="tips-list">
+            <li><strong>MaPrimeRénov'</strong> : aide principale selon revenus et travaux (jusqu'à 90% du coût).</li>
+            <li><strong>CEE</strong> : primes énergie cumulables, versées par les fournisseurs d'énergie.</li>
+            <li><strong>Éco-PTZ</strong> : prêt à taux zéro jusqu'à 50 000€ sur 20 ans.</li>
+            <li><strong>TVA 5,5%</strong> : sur les travaux d'amélioration énergétique (au lieu de 10%).</li>
+            <li><strong>Aides locales</strong> : régions, départements, communes proposent parfois des aides complémentaires.</li>
+          </ul>
+        </div>
+
+        <!-- Avertissement -->
+        <div class="warning-box">
+          <i class="pi pi-exclamation-triangle"></i>
+          <p>Ces estimations sont indicatives. Pour obtenir le montant exact des aides, réalisez une simulation sur <strong>france-renov.gouv.fr</strong> et demandez un audit énergétique.</p>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <app-faq-section [faqItems]="faqItems"></app-faq-section>
+    </div>
+  </div>
+</div>

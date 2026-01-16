@@ -1,0 +1,148 @@
+<div class="simulator-page">
+  <div class="simulator-container">
+    <header class="simulator-header">
+      <h1><i class="pi pi-gift"></i> Simulateur Prime de Partage de la Valeur</h1>
+      <p class="subtitle">Calculez le montant net de votre PPV (ex-Prime Macron)</p>
+    </header>
+
+    <div class="simulator-content">
+      <!-- Formulaire -->
+      <p-panel header="Votre situation" class="input-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="montant">Montant brut de la PPV</label>
+            <p-inputNumber
+              id="montant"
+              [(ngModel)]="montantBrut"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              [max]="10000"
+            ></p-inputNumber>
+            <small class="form-hint">Plafond exonéré : 3 000€ (ou 6 000€)</small>
+          </div>
+
+          <div class="form-group">
+            <label for="remuneration">Rémunération annuelle brute</label>
+            <p-inputNumber
+              id="remuneration"
+              [(ngModel)]="remunerationAnnuelle"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+            ></p-inputNumber>
+            <small class="form-hint">Exonération IR si &lt; 3 SMIC (~64 000€)</small>
+          </div>
+
+          <div class="form-group">
+            <label for="effectif">Effectif de l'entreprise</label>
+            <p-dropdown
+              id="effectif"
+              [options]="effectifOptions"
+              [(ngModel)]="effectifEntreprise"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+            ></p-dropdown>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Résultats -->
+      <div class="results-section">
+        <h2><i class="pi pi-calculator"></i> Calcul de votre prime nette</h2>
+
+        <!-- Statut exonération -->
+        <div class="status-box" [class.exonere]="isExonereIR()" [class.impose]="!isExonereIR()">
+          <i class="pi" [class.pi-check-circle]="isExonereIR()" [class.pi-info-circle]="!isExonereIR()"></i>
+          <div class="status-text">
+            <h3 *ngIf="isExonereIR()">Prime exonérée d'impôt sur le revenu</h3>
+            <h3 *ngIf="!isExonereIR()">Prime soumise à l'impôt sur le revenu</h3>
+            <p *ngIf="isExonereIR()">Entreprise &lt; 50 salariés et rémunération &lt; 3 SMIC</p>
+            <p *ngIf="!isExonereIR()">Conditions d'exonération non remplies</p>
+          </div>
+        </div>
+
+        <!-- Décomposition -->
+        <div class="breakdown-section">
+          <div class="breakdown-card">
+            <div class="breakdown-header">
+              <span>Prime brute</span>
+              <span class="amount">{{ formatCurrency(montantBrut) }}</span>
+            </div>
+
+            <div class="breakdown-line deduction">
+              <span>CSG-CRDS ({{ tauxCSGCRDS }}%)</span>
+              <span>-{{ formatCurrency(csgCrds) }}</span>
+            </div>
+
+            <div class="breakdown-line deduction" *ngIf="impotRevenu > 0">
+              <span>Impôt sur le revenu</span>
+              <span>-{{ formatCurrency(impotRevenu) }}</span>
+            </div>
+
+            <div class="breakdown-line exoneration" *ngIf="isExonereIR() && montantBrut <= 3000">
+              <span>Exonération IR</span>
+              <span class="positive">Oui</span>
+            </div>
+
+            <div class="breakdown-footer">
+              <span>Prime nette</span>
+              <span class="amount highlight">{{ formatCurrency(montantNet) }}</span>
+            </div>
+
+            <div class="breakdown-rate">
+              <span>Taux de prélèvement effectif</span>
+              <span>{{ formatPercent(tauxCharges) }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparaison avec PEE -->
+        <div class="comparison-section">
+          <h3><i class="pi pi-sync"></i> Alternative : versement sur PEE</h3>
+          <div class="comparison-grid">
+            <div class="comparison-card">
+              <h4>Versement immédiat</h4>
+              <div class="card-value">{{ formatCurrency(montantNet) }}</div>
+              <p>Disponible immédiatement</p>
+            </div>
+            <div class="comparison-card highlight">
+              <h4>Versement sur PEE</h4>
+              <div class="card-value">{{ formatCurrency(montantNetPEE) }}</div>
+              <p>Bloqué 5 ans, exonéré d'IR sur les plus-values</p>
+            </div>
+          </div>
+          <p class="comparison-note" *ngIf="montantNetPEE > montantNet">
+            <i class="pi pi-info-circle"></i>
+            Gain potentiel de <strong>{{ formatCurrency(montantNetPEE - montantNet) }}</strong> en passant par le PEE
+          </p>
+        </div>
+
+        <!-- Économie réalisée -->
+        <div class="savings-box" *ngIf="economieImpot > 0">
+          <i class="pi pi-check-circle"></i>
+          <p>Grâce à l'exonération, vous économisez <strong>{{ formatCurrency(economieImpot) }}</strong> d'impôt sur le revenu</p>
+        </div>
+
+        <!-- Info panel -->
+        <div class="info-panel">
+          <h4><i class="pi pi-info-circle"></i> À savoir</h4>
+          <ul class="tips-list">
+            <li>La CSG-CRDS (9,7%) est <strong>toujours due</strong>, même en cas d'exonération d'IR.</li>
+            <li>Le plafond de 6 000€ s'applique si l'entreprise a un accord d'intéressement ou de participation.</li>
+            <li>La PPV versée sur un PEE est bloquée 5 ans mais les plus-values sont totalement exonérées.</li>
+            <li>L'exonération d'IR prend fin le 31 décembre 2026 (sauf prolongation).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <app-faq-section [faqItems]="faqItems"></app-faq-section>
+    </div>
+  </div>
+</div>

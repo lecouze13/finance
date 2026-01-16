@@ -1,0 +1,168 @@
+// Styles spécifiques au simulateur Leasing vs Achat Voiture
+
+.verdict-box {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border: 2px solid #10b981;
+
+  .verdict-icon {
+    font-size: 3rem;
+    color: #10b981;
+  }
+
+  .verdict-text {
+    h3 { margin: 0 0 0.5rem 0; color: #059669; }
+    p { margin: 0; color: #64748b; }
+  }
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.option-card {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  &.best {
+    border-color: #10b981;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+
+    h4 { margin: 0; color: #1e40af; font-size: 1rem; }
+
+    .badge {
+      background: #10b981;
+      color: white;
+      padding: 0.2rem 0.5rem;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+  }
+
+  .card-body {
+    padding: 1rem;
+    text-align: center;
+
+    .cost-main {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .cost-label {
+      color: #64748b;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .cost-details {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+
+      li {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.4rem 0;
+        font-size: 0.85rem;
+        border-bottom: 1px solid #f1f5f9;
+
+        &:last-child { border-bottom: none; }
+
+        &.monthly {
+          background: #dbeafe;
+          margin: 0.5rem -0.5rem -0.5rem;
+          padding: 0.5rem;
+          border-radius: 0 0 4px 4px;
+          font-weight: 600;
+        }
+
+        .positive { color: #059669; }
+      }
+    }
+  }
+
+  .card-footer {
+    padding: 0.5rem 1rem;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+
+    p { margin: 0; color: #64748b; font-size: 0.75rem; }
+  }
+}
+
+.info-panel {
+  background: #f8fafc;
+  border-left: 4px solid #3b82f6;
+  padding: 1.5rem;
+  border-radius: 8px;
+
+  h4 {
+    margin-top: 0;
+    color: #1e40af;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .tips-list {
+    margin: 0;
+    padding-left: 1.25rem;
+
+    li {
+      margin-bottom: 0.5rem;
+      color: #475569;
+      line-height: 1.5;
+
+      strong { color: #1e40af; }
+    }
+  }
+}
+
+.form-hint {
+  display: block;
+  color: #64748b;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 767px) {
+  .verdict-box {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .option-card .card-body .cost-main {
+    font-size: 1.25rem;
+  }
+}

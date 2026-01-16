@@ -1,0 +1,181 @@
+<div class="simulator-page">
+  <div class="simulator-container">
+    <header class="simulator-header">
+      <h1><i class="pi pi-calendar"></i> Simulateur Rachat de Trimestres</h1>
+      <p class="subtitle">Calculez le coût et la rentabilité du rachat de trimestres retraite</p>
+    </header>
+
+    <div class="simulator-content">
+      <!-- Formulaire -->
+      <p-panel header="Votre situation" class="input-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="age">Votre âge actuel</label>
+            <p-inputNumber
+              id="age"
+              [(ngModel)]="age"
+              (ngModelChange)="calculer()"
+              suffix=" ans"
+              [min]="25"
+              [max]="62"
+            ></p-inputNumber>
+            <small class="form-hint">Le coût augmente avec l'âge</small>
+          </div>
+
+          <div class="form-group">
+            <label for="revenu">Revenu annuel brut</label>
+            <p-inputNumber
+              id="revenu"
+              [(ngModel)]="revenuAnnuel"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+            ></p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="manquants">Trimestres manquants</label>
+            <p-inputNumber
+              id="manquants"
+              [(ngModel)]="trimestresManquants"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="40"
+            ></p-inputNumber>
+            <small class="form-hint">Pour le taux plein (consultez votre relevé)</small>
+          </div>
+
+          <div class="form-group">
+            <label for="racheter">Trimestres à racheter</label>
+            <p-inputNumber
+              id="racheter"
+              [(ngModel)]="trimestresARacheter"
+              (ngModelChange)="calculer()"
+              [min]="1"
+              [max]="12"
+            ></p-inputNumber>
+            <small class="form-hint">Maximum 12 trimestres rachetables</small>
+          </div>
+
+          <div class="form-group">
+            <label for="typeRachat">Type de rachat</label>
+            <p-dropdown
+              id="typeRachat"
+              [options]="typeRachatOptions"
+              [(ngModel)]="typeRachat"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+            ></p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label for="esperance">Années de retraite estimées</label>
+            <p-inputNumber
+              id="esperance"
+              [(ngModel)]="esperanceVieRetraite"
+              (ngModelChange)="calculer()"
+              suffix=" ans"
+              [min]="5"
+              [max]="40"
+            ></p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Résultats -->
+      <div class="results-section">
+        <h2><i class="pi pi-calculator"></i> Analyse du rachat</h2>
+
+        <!-- Verdict -->
+        <div class="verdict-box" [class.rentable]="estRentable" [class.non-rentable]="!estRentable">
+          <i class="verdict-icon pi" [class.pi-check-circle]="estRentable" [class.pi-times-circle]="!estRentable"></i>
+          <div class="verdict-text">
+            <h3 *ngIf="estRentable">Rachat rentable !</h3>
+            <h3 *ngIf="!estRentable">Rachat peu rentable</h3>
+            <p>ROI de <strong>{{ retourInvestissement }}x</strong> sur {{ esperanceVieRetraite }} ans de retraite</p>
+            <p>Amortissement en <strong>{{ getAnneesAmortissement() }} ans</strong></p>
+          </div>
+        </div>
+
+        <!-- Coût du rachat -->
+        <div class="cost-section">
+          <h3><i class="pi pi-money-bill"></i> Coût du rachat</h3>
+          <div class="cost-grid">
+            <div class="cost-card">
+              <span class="label">Coût brut</span>
+              <span class="value">{{ formatCurrency(coutRachat) }}</span>
+              <span class="detail">{{ trimestresARacheter }} trimestres</span>
+            </div>
+            <div class="cost-card economy">
+              <span class="label">Économie d'impôt</span>
+              <span class="value">-{{ formatCurrency(economieImpot) }}</span>
+              <span class="detail">Déduction fiscale</span>
+            </div>
+            <div class="cost-card net">
+              <span class="label">Coût net</span>
+              <span class="value">{{ formatCurrency(coutNetRachat) }}</span>
+              <span class="detail">Après avantage fiscal</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gain de pension -->
+        <div class="gain-section">
+          <h3><i class="pi pi-trending-up"></i> Gain de pension estimé</h3>
+          <div class="gain-grid">
+            <div class="gain-card">
+              <span class="label">Gain mensuel</span>
+              <span class="value">+{{ formatCurrency(gainPensionMensuel) }}</span>
+              <span class="detail">par mois de retraite</span>
+            </div>
+            <div class="gain-card">
+              <span class="label">Gain annuel</span>
+              <span class="value">+{{ formatCurrency(gainPensionAnnuel) }}</span>
+              <span class="detail">par an</span>
+            </div>
+            <div class="gain-card total">
+              <span class="label">Gain total</span>
+              <span class="value">{{ formatCurrency(gainTotal) }}</span>
+              <span class="detail">sur {{ esperanceVieRetraite }} ans</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Synthèse -->
+        <div class="summary-box">
+          <div class="summary-row">
+            <span>Investissement (coût net)</span>
+            <span class="negative">{{ formatCurrency(coutNetRachat) }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Gains cumulés sur la retraite</span>
+            <span class="positive">{{ formatCurrency(gainTotal) }}</span>
+          </div>
+          <div class="summary-row total">
+            <span>Bénéfice net</span>
+            <span [class.positive]="gainTotal - coutNetRachat > 0" [class.negative]="gainTotal - coutNetRachat < 0">
+              {{ formatCurrency(gainTotal - coutNetRachat) }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Info panel -->
+        <div class="info-panel">
+          <h4><i class="pi pi-info-circle"></i> Points importants</h4>
+          <ul class="tips-list">
+            <li>Ce simulateur donne une <strong>estimation</strong>. Demandez un devis officiel sur lassuranceretraite.fr</li>
+            <li>Le rachat est plus rentable si vous partez tôt à la retraite (évite plusieurs années de décote).</li>
+            <li>L'économie d'impôt peut être étalée sur plusieurs années si vous échelonnez le paiement.</li>
+            <li>En cas de décès prématuré, les sommes versées sont perdues (pas de réversion sur le rachat).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <app-faq-section [faqItems]="faqItems"></app-faq-section>
+    </div>
+  </div>
+</div>

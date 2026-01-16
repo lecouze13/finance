@@ -58,6 +58,15 @@ import { SimulateurDonationComponent } from './Finance/simulateur-donation/simul
 import { SimulateurChargesLocativesComponent } from './Immobilier/simulateur-charges-locatives/simulateur-charges-locatives.component';
 import { SimulateurFreelanceComponent } from './Finance/simulateur-freelance/simulateur-freelance.component';
 import { SimulateurElectriciteHphcComponent } from './Finance/simulateur-electricite-hphc/simulateur-electricite-hphc.component';
+import { SimulateurDcaLumpsumComponent } from './Finance/simulateur-dca-lumpsum/simulateur-dca-lumpsum.component';
+import { SimulateurCryptoFiscaliteComponent } from './Finance/simulateur-crypto-fiscalite/simulateur-crypto-fiscalite.component';
+import { SimulateurCrowdfundingImmoComponent } from './Finance/simulateur-crowdfunding-immo/simulateur-crowdfunding-immo.component';
+import { SimulateurLeasingVoitureComponent } from './Finance/simulateur-leasing-voiture/simulateur-leasing-voiture.component';
+import { SimulateurRachatTrimestresComponent } from './Finance/simulateur-rachat-trimestres/simulateur-rachat-trimestres.component';
+import { SimulateurPpvComponent } from './Finance/simulateur-ppv/simulateur-ppv.component';
+import { SimulateurInteressementComponent } from './Finance/simulateur-interessement/simulateur-interessement.component';
+import { SimulateurColocationComponent } from './Immobilier/simulateur-colocation/simulateur-colocation.component';
+import { SimulateurRenovationEnergetiqueComponent } from './Immobilier/simulateur-renovation-energetique/simulateur-renovation-energetique.component';
 
 export const routes: Routes = [
   { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -496,6 +505,42 @@ export const routes: Routes = [
   {
     path: AppRoutes.SIMULATEUR_ELECTRICITE_HPHC,
     component: SimulateurElectriciteHphcComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_DCA_LUMPSUM,
+    component: SimulateurDcaLumpsumComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_CRYPTO_FISCALITE,
+    component: SimulateurCryptoFiscaliteComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_CROWDFUNDING_IMMO,
+    component: SimulateurCrowdfundingImmoComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_LEASING_VOITURE,
+    component: SimulateurLeasingVoitureComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_RACHAT_TRIMESTRES,
+    component: SimulateurRachatTrimestresComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_PPV,
+    component: SimulateurPpvComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_INTERESSEMENT,
+    component: SimulateurInteressementComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_COLOCATION,
+    component: SimulateurColocationComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_RENOVATION_ENERGETIQUE,
+    component: SimulateurRenovationEnergetiqueComponent,
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

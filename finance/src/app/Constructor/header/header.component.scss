@@ -134,3 +134,123 @@ ol, ul {
   z-index: 999; /* juste en dessous du menu */
   pointer-events: auto;
 }
+
+// Search bar styles
+.search-container {
+  position: relative;
+  margin-right: 1rem;
+
+  .p-input-icon-left {
+    display: flex;
+    align-items: center;
+
+    i {
+      position: absolute;
+      left: 0.75rem;
+      color: #64748b;
+      z-index: 1;
+    }
+  }
+
+  .search-input {
+    width: 280px;
+    padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    background: #f8fafc;
+
+    &:focus {
+      outline: none;
+      border-color: #3b82f6;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    &::placeholder {
+      color: #94a3b8;
+    }
+  }
+
+  .search-results {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    min-width: 320px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    z-index: 1002;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .search-result-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    border-bottom: 1px solid #f1f5f9;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: #f1f5f9;
+    }
+
+    i {
+      font-size: 1rem;
+      color: #3b82f6;
+      width: 20px;
+      text-align: center;
+    }
+
+    .result-content {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .result-label {
+      color: #1e293b;
+      font-size: 0.9rem;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .result-type {
+      color: #94a3b8;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .search-container {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+    width: 100%;
+
+    .search-input {
+      width: 100%;
+    }
+
+    .search-results {
+      min-width: 100%;
+      left: 0;
+      right: 0;
+    }
+  }
+}

@@ -1,0 +1,283 @@
+// Styles spécifiques au simulateur Rénovation Énergétique
+
+.travaux-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.travaux-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #94a3b8;
+  }
+
+  &.selected {
+    border-color: #10b981;
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+
+    .travaux-check i { color: #10b981; }
+  }
+
+  .travaux-check i {
+    font-size: 1.25rem;
+    color: #cbd5e1;
+  }
+
+  .travaux-info {
+    flex: 1;
+
+    h5 {
+      margin: 0 0 0.25rem 0;
+      font-size: 0.9rem;
+      color: #1e293b;
+    }
+
+    .travaux-details {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.8rem;
+
+      .cout { color: #64748b; }
+      .economie { color: #059669; font-weight: 500; }
+    }
+  }
+}
+
+.dpe-comparison {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+
+  .dpe-item {
+    text-align: center;
+
+    .label {
+      display: block;
+      color: #64748b;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .dpe-arrow {
+    i {
+      font-size: 1.5rem;
+      color: #10b981;
+    }
+  }
+}
+
+.dpe-badge {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  border-radius: 8px;
+
+  &.dpe-a { background: #319834; }
+  &.dpe-b { background: #33cc31; }
+  &.dpe-c { background: #cbfc33; color: #1e293b; }
+  &.dpe-d { background: #fbfe06; color: #1e293b; }
+  &.dpe-e { background: #fbcc05; color: #1e293b; }
+  &.dpe-f { background: #f78223; }
+  &.dpe-g { background: #ea2227; }
+}
+
+.finance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.finance-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.25rem;
+  text-align: center;
+
+  .label {
+    display: block;
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  .detail {
+    display: block;
+    color: #94a3b8;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  &.aides {
+    background: #ecfdf5;
+    border-color: #10b981;
+    .value { color: #059669; }
+  }
+
+  &.reste {
+    background: #dbeafe;
+    border-color: #3b82f6;
+    .value { color: #1e40af; }
+  }
+}
+
+.rentabilite-section {
+  margin-bottom: 2rem;
+
+  h3 {
+    color: #1e40af;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.rentabilite-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rentabilite-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.25rem;
+  text-align: center;
+
+  .label {
+    display: block;
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+
+    &.positive { color: #059669; }
+    &.negative { color: #dc2626; }
+  }
+
+  .detail {
+    display: block;
+    color: #94a3b8;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  &.highlight {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    border-color: #10b981;
+  }
+}
+
+.plusvalue-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, #eef4ff 0%, #dbeafe 100%);
+  border: 2px solid #3b82f6;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+
+  i { font-size: 2rem; color: #3b82f6; }
+
+  .plusvalue-content {
+    h4 { margin: 0 0 0.25rem 0; color: #1e40af; }
+    p { margin: 0; color: #475569; }
+    strong { color: #1e293b; }
+  }
+}
+
+.info-panel {
+  background: #f8fafc;
+  border-left: 4px solid #10b981;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+
+  h4 {
+    margin-top: 0;
+    color: #059669;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .tips-list {
+    margin: 0;
+    padding-left: 1.25rem;
+
+    li {
+      margin-bottom: 0.5rem;
+      color: #475569;
+      line-height: 1.5;
+      strong { color: #1e40af; }
+    }
+  }
+}
+
+.warning-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #fef3c7;
+  border-left: 4px solid #f59e0b;
+  border-radius: 0 8px 8px 0;
+
+  i { color: #d97706; font-size: 1.25rem; }
+  p { margin: 0; color: #78350f; font-size: 0.9rem; }
+  strong { color: #92400e; }
+}

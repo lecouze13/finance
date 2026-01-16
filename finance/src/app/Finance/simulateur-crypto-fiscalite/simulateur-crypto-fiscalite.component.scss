@@ -1,0 +1,209 @@
+// Styles spécifiques au simulateur Crypto Fiscalité
+
+.pv-summary {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+
+  .pv-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e2e8f0;
+
+    &:last-child { border-bottom: none; }
+
+    &.total {
+      background: #dbeafe;
+      margin: 0.5rem -1rem -0.5rem;
+      padding: 1rem;
+      border-radius: 0 0 8px 8px;
+
+      .label { font-weight: 600; color: #1e40af; }
+      .value { font-weight: 700; font-size: 1.25rem; color: #1e293b; }
+    }
+
+    .label { color: #64748b; }
+    .value { font-weight: 600; color: #1e293b; }
+    .negative { color: #dc2626; }
+  }
+}
+
+.options-comparison {
+  margin-bottom: 2rem;
+
+  h3 {
+    color: #1e40af;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.option-card {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+
+  &.recommended {
+    border-color: #10b981;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+  }
+
+  .option-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+
+    h4 { margin: 0; color: #1e40af; }
+
+    .badge {
+      background: #10b981;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+  }
+
+  .option-body {
+    padding: 1.25rem;
+  }
+
+  .tax-breakdown {
+    .tax-line {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #f1f5f9;
+
+      &:last-child { border-bottom: none; }
+
+      &.total {
+        background: #dbeafe;
+        margin: 0.5rem -0.5rem -0.5rem;
+        padding: 0.75rem;
+        border-radius: 0 0 4px 4px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .option-footer {
+    padding: 0.75rem 1.25rem;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+
+    p { margin: 0; color: #64748b; font-size: 0.85rem; }
+  }
+}
+
+.savings-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border: 2px solid #10b981;
+  border-radius: 8px;
+
+  i { font-size: 1.5rem; color: #10b981; }
+  p { margin: 0; color: #065f46; }
+  strong { color: #047857; }
+}
+
+.final-summary {
+  margin-top: 2rem;
+
+  .summary-card {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 1.5rem;
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      color: #94a3b8;
+      border-bottom: 1px solid #334155;
+
+      &:last-child { border-bottom: none; }
+
+      &.total {
+        margin-top: 0.5rem;
+        padding-top: 1rem;
+        border-top: 2px solid #475569;
+        border-bottom: none;
+
+        span:first-child { color: white; font-weight: 600; }
+      }
+
+      .negative { color: #f87171; }
+      .highlight {
+        color: #4ade80;
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+.loss-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 2px solid #f59e0b;
+  border-radius: 12px;
+
+  i { font-size: 2rem; color: #d97706; }
+
+  .loss-content {
+    h3 { margin: 0 0 0.5rem 0; color: #92400e; }
+    p { margin: 0.25rem 0; color: #78350f; }
+  }
+}
+
+.warning-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: #fef2f2;
+  border-left: 4px solid #ef4444;
+  border-radius: 0 8px 8px 0;
+  margin-top: 2rem;
+
+  i { font-size: 1.25rem; color: #dc2626; margin-top: 2px; }
+
+  .warning-content {
+    h4 { margin: 0 0 0.5rem 0; color: #b91c1c; }
+    p { margin: 0; color: #7f1d1d; font-size: 0.9rem; line-height: 1.5; }
+  }
+}
+
+.form-hint {
+  display: block;
+  color: #64748b;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
