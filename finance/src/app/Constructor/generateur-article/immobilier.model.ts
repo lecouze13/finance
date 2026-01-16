@@ -569,6 +569,202 @@ export const immobilier: {
   `
   },
 
+  'renovation-appartement': {
+    titre: 'Rénovation d\'appartement : guide complet des travaux et budget',
+    categorie: 'immobilier',
+    keywords: 'rénovation appartement, travaux appartement, budget rénovation, rénovation complète, devis travaux, copropriété travaux, autorisation travaux appartement',
+    description: `La rénovation d'un appartement nécessite une bonne planification : budget, autorisations, copropriété, artisans. Guide complet pour réussir vos travaux.`,
+    contenu: `
+  <h2>Pourquoi rénover un appartement ?</h2>
+  <p>La <strong>rénovation d'appartement</strong> peut répondre à plusieurs objectifs : améliorer le confort de vie, valoriser un bien avant revente, optimiser le rendement locatif ou mettre aux normes un logement ancien. C'est aussi une opportunité d'acheter moins cher et de créer de la valeur.</p>
+
+  <h2>Les différents types de rénovation</h2>
+  <h3>Rafraîchissement (50-200 €/m²)</h3>
+  <p>Travaux légers sans modification de structure :</p>
+  <ul>
+    <li>Peinture des murs et plafonds</li>
+    <li>Remplacement des revêtements de sol</li>
+    <li>Changement des luminaires et interrupteurs</li>
+    <li>Rénovation des placards</li>
+  </ul>
+
+  <h3>Rénovation partielle (200-500 €/m²)</h3>
+  <p>Travaux ciblés sur certaines pièces :</p>
+  <ul>
+    <li>Rénovation de la cuisine (5 000 à 20 000 €)</li>
+    <li>Rénovation de la salle de bain (4 000 à 15 000 €)</li>
+    <li>Mise aux normes électriques</li>
+    <li>Remplacement des fenêtres</li>
+    <li>Installation d'un nouveau chauffage</li>
+  </ul>
+
+  <h3>Rénovation complète (500-1 200 €/m²)</h3>
+  <p>Remise à neuf intégrale :</p>
+  <ul>
+    <li>Électricité et plomberie refaites entièrement</li>
+    <li>Isolation thermique et phonique</li>
+    <li>Nouvelle cuisine et salle de bain</li>
+    <li>Tous les revêtements (sols, murs, plafonds)</li>
+    <li>Menuiseries intérieures et extérieures</li>
+  </ul>
+
+  <h3>Rénovation lourde (1 200-2 000+ €/m²)</h3>
+  <p>Travaux avec modification de structure :</p>
+  <ul>
+    <li>Abattement de murs porteurs (avec renfort IPN)</li>
+    <li>Création ou suppression de pièces</li>
+    <li>Modification des réseaux collectifs</li>
+    <li>Surélévation ou extension</li>
+  </ul>
+
+  <h2>Budget détaillé par poste</h2>
+  <h3>Gros œuvre et structure</h3>
+  <ul>
+    <li><strong>Ouverture mur porteur</strong> : 2 500 à 6 000 € (étude structure incluse)</li>
+    <li><strong>Création cloison</strong> : 40 à 80 €/m²</li>
+    <li><strong>Démolition cloison</strong> : 20 à 40 €/m²</li>
+    <li><strong>Ragréage sol</strong> : 15 à 35 €/m²</li>
+  </ul>
+
+  <h3>Électricité</h3>
+  <ul>
+    <li><strong>Mise en conformité</strong> : 80 à 120 €/m²</li>
+    <li><strong>Rénovation complète</strong> : 120 à 200 €/m²</li>
+    <li><strong>Tableau électrique</strong> : 800 à 2 000 €</li>
+  </ul>
+
+  <h3>Plomberie</h3>
+  <ul>
+    <li><strong>Rénovation complète</strong> : 100 à 150 €/m²</li>
+    <li><strong>Déplacement point d'eau</strong> : 500 à 1 500 €</li>
+    <li><strong>Chauffe-eau</strong> : 500 à 2 500 € (pose incluse)</li>
+  </ul>
+
+  <h3>Revêtements</h3>
+  <ul>
+    <li><strong>Peinture</strong> : 20 à 40 €/m² (murs et plafonds)</li>
+    <li><strong>Parquet</strong> : 40 à 150 €/m² posé</li>
+    <li><strong>Carrelage</strong> : 50 à 120 €/m² posé</li>
+    <li><strong>Faïence salle de bain</strong> : 60 à 150 €/m²</li>
+  </ul>
+
+  <h3>Cuisine et salle de bain</h3>
+  <ul>
+    <li><strong>Cuisine équipée entrée de gamme</strong> : 3 000 à 6 000 €</li>
+    <li><strong>Cuisine moyenne gamme</strong> : 8 000 à 15 000 €</li>
+    <li><strong>Cuisine haut de gamme</strong> : 15 000 à 30 000+ €</li>
+    <li><strong>Salle de bain complète</strong> : 5 000 à 15 000 €</li>
+  </ul>
+
+  <h2>Spécificités en copropriété</h2>
+  <h3>Travaux sans autorisation</h3>
+  <p>Vous pouvez réaliser librement :</p>
+  <ul>
+    <li>Peinture, papier peint, revêtements intérieurs</li>
+    <li>Changement de sanitaires (sans déplacement)</li>
+    <li>Remplacement de cuisine</li>
+    <li>Travaux d'électricité dans votre lot</li>
+  </ul>
+
+  <h3>Travaux nécessitant accord du syndic</h3>
+  <p>Information préalable requise :</p>
+  <ul>
+    <li>Modification des cloisons intérieures</li>
+    <li>Changement du revêtement de sol (isolation phonique)</li>
+    <li>Travaux affectant les parties communes (colonne)</li>
+  </ul>
+
+  <h3>Travaux nécessitant vote en AG</h3>
+  <p>Autorisation de l'assemblée générale obligatoire :</p>
+  <ul>
+    <li>Modification de façade (fenêtres, volets, climatisation)</li>
+    <li>Création d'ouverture sur parties communes</li>
+    <li>Changement de destination du lot</li>
+    <li>Installation sur parties communes (antenne, VMC)</li>
+  </ul>
+
+  <h2>Règles d'isolation phonique</h2>
+  <p>Le règlement de copropriété impose souvent des normes acoustiques :</p>
+  <ul>
+    <li><strong>Sous-couche obligatoire</strong> sous parquet ou carrelage</li>
+    <li><strong>Attestation acoustique</strong> parfois demandée</li>
+    <li><strong>Horaires de travaux</strong> : généralement 8h-20h en semaine</li>
+    <li><strong>Déclaration préalable</strong> au syndic recommandée</li>
+  </ul>
+
+  <h2>Planification des travaux</h2>
+  <h3>Ordre logique d'intervention</h3>
+  <ol>
+    <li><strong>Démolition</strong> : cloisons, revêtements à supprimer</li>
+    <li><strong>Gros œuvre</strong> : ouvertures, structure, maçonnerie</li>
+    <li><strong>Plomberie</strong> : réseaux d'eau et évacuations</li>
+    <li><strong>Électricité</strong> : passage des gaines et câbles</li>
+    <li><strong>Isolation</strong> : murs, plafonds, sols</li>
+    <li><strong>Plâtrerie</strong> : cloisons, faux plafonds, enduits</li>
+    <li><strong>Menuiseries</strong> : portes, fenêtres, placards</li>
+    <li><strong>Carrelage</strong> : sols et murs des pièces d'eau</li>
+    <li><strong>Peinture</strong> : sous-couche et finitions</li>
+    <li><strong>Parquet</strong> : pose du revêtement de sol</li>
+    <li><strong>Second œuvre</strong> : sanitaires, cuisine, finitions</li>
+  </ol>
+
+  <h3>Durée moyenne des travaux</h3>
+  <ul>
+    <li><strong>Studio/T1</strong> : 4 à 8 semaines</li>
+    <li><strong>T2/T3</strong> : 8 à 12 semaines</li>
+    <li><strong>T4 et plus</strong> : 12 à 16 semaines</li>
+    <li><strong>Rénovation lourde</strong> : ajouter 4 à 8 semaines</li>
+  </ul>
+
+  <h2>Choisir ses artisans</h2>
+  <h3>Solutions possibles</h3>
+  <ul>
+    <li><strong>Entreprise générale</strong> : un seul interlocuteur, mais plus cher (15-25% de marge)</li>
+    <li><strong>Architecte d'intérieur</strong> : coordination + design, honoraires 8-15% du budget</li>
+    <li><strong>Corps de métier séparés</strong> : économies mais coordination à gérer</li>
+    <li><strong>Courtier en travaux</strong> : mise en relation et suivi, gratuit ou commission</li>
+  </ul>
+
+  <h3>Vérifications essentielles</h3>
+  <ul>
+    <li><strong>Assurance décennale</strong> valide (attestation à demander)</li>
+    <li><strong>Immatriculation</strong> au registre du commerce ou des métiers</li>
+    <li><strong>Références</strong> et photos de chantiers similaires</li>
+    <li><strong>Devis détaillé</strong> avec fournitures et main d'œuvre séparées</li>
+    <li><strong>Avis clients</strong> sur Google, réseaux ou bouche à oreille</li>
+  </ul>
+
+  <h2>Aides et financements</h2>
+  <h3>Aides pour la rénovation énergétique</h3>
+  <ul>
+    <li><strong>MaPrimeRénov'</strong> : jusqu'à 20 000 € selon revenus et travaux</li>
+    <li><strong>CEE (Certificats d'Économie d'Énergie)</strong> : primes des fournisseurs</li>
+    <li><strong>Éco-PTZ</strong> : prêt sans intérêts jusqu'à 50 000 €</li>
+    <li><strong>TVA réduite 5,5%</strong> : sur travaux d'amélioration énergétique</li>
+  </ul>
+
+  <h3>TVA applicable</h3>
+  <ul>
+    <li><strong>5,5%</strong> : travaux d'amélioration énergétique (isolation, chauffage)</li>
+    <li><strong>10%</strong> : travaux d'amélioration, transformation, aménagement (logement > 2 ans)</li>
+    <li><strong>20%</strong> : travaux neufs ou logement de moins de 2 ans</li>
+  </ul>
+
+  <h2>Valorisation après rénovation</h2>
+  <p>Une rénovation bien menée peut significativement augmenter la valeur du bien :</p>
+  <ul>
+    <li><strong>Rafraîchissement</strong> : +5 à 10% de valeur</li>
+    <li><strong>Rénovation complète</strong> : +15 à 25% de valeur</li>
+    <li><strong>Optimisation de surface</strong> : jusqu'à +30% si gain de pièce</li>
+    <li><strong>Amélioration DPE</strong> : +5 à 15% selon le gain de classe</li>
+  </ul>
+
+  <h2>Conclusion</h2>
+  <p>La rénovation d'appartement est un projet qui demande une préparation minutieuse. Établissez un budget réaliste avec 10-15% de marge pour imprévus, choisissez des artisans qualifiés et respectez les règles de copropriété. Un projet bien mené peut créer une forte plus-value, que ce soit pour y vivre ou pour un investissement locatif.</p>
+  <p>Utilisez notre <a href="/simulateur-renovation-energetique">simulateur de rénovation énergétique</a> pour estimer les aides auxquelles vous avez droit.</p>
+  `
+  },
+
   'droits-travaux': {
     titre: 'Droits de travaux : permis de construire, déclaration préalable et autorisations',
     categorie: 'immobilier',
