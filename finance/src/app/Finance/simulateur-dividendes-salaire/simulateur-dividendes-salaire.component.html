@@ -1,0 +1,280 @@
+<div class="simulator-page">
+  <div class="simulator-container">
+    <header class="simulator-header">
+      <h1><i class="pi pi-wallet"></i> Simulateur Dividendes vs Salaire</h1>
+      <p class="subtitle">Optimisez votre rémunération de dirigeant : trouvez le mix idéal entre salaire et dividendes</p>
+    </header>
+
+    <div class="simulator-content">
+      <!-- Formulaire -->
+      <p-panel header="Paramètres de votre société" class="input-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="resultat">Résultat distribuable annuel</label>
+            <p-inputNumber
+              id="resultat"
+              [(ngModel)]="resultatDistribuable"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="10000"
+              [max]="1000000"
+            ></p-inputNumber>
+            <small class="form-hint">Montant disponible pour rémunération + dividendes</small>
+          </div>
+
+          <div class="form-group">
+            <label for="statut">Statut juridique</label>
+            <p-dropdown
+              id="statut"
+              [options]="statutOptions"
+              [(ngModel)]="statut"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+            ></p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label for="capital">Capital social</label>
+            <p-inputNumber
+              id="capital"
+              [(ngModel)]="capitalSocial"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="1"
+              [max]="1000000"
+            ></p-inputNumber>
+            <small class="form-hint">Important pour le seuil des 10% en EURL</small>
+          </div>
+
+          <div class="form-group">
+            <label for="situation">Situation familiale (pour IR)</label>
+            <p-dropdown
+              id="situation"
+              [options]="situationsOptions"
+              [(ngModel)]="situationFamiliale"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+            ></p-dropdown>
+          </div>
+        </div>
+
+        <!-- Slider mix salaire/dividendes -->
+        <div class="mix-slider-section">
+          <label>Répartition Salaire / Dividendes</label>
+          <div class="slider-container">
+            <span class="slider-label left">100% Dividendes</span>
+            <p-slider
+              [(ngModel)]="partSalaire"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="100"
+              [step]="5"
+              styleClass="custom-slider"
+            ></p-slider>
+            <span class="slider-label right">100% Salaire</span>
+          </div>
+          <div class="mix-value">
+            <span class="salaire-part">{{ partSalaire }}% Salaire</span>
+            <span class="dividendes-part">{{ 100 - partSalaire }}% Dividendes</span>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Résultats -->
+      <div class="results-section">
+        <h2><i class="pi pi-chart-bar"></i> Comparaison des stratégies</h2>
+
+        <!-- Verdict optimal -->
+        <div class="optimal-box" *ngIf="scenarioOptimal">
+          <div class="optimal-icon">
+            <i class="pi pi-star-fill"></i>
+          </div>
+          <div class="optimal-content">
+            <h3>Stratégie optimale : {{ scenarioOptimal.nom }}</h3>
+            <p>Net après impôts : <strong>{{ formatCurrency(scenarioOptimal.netApresIR) }}</strong></p>
+            <p class="optimal-detail">Taux de prélèvements global : {{ formatPercent(scenarioOptimal.tauxChargesGlobal) }}</p>
+          </div>
+        </div>
+
+        <!-- Comparaison côte à côte -->
+        <div class="strategies-grid">
+          <!-- 100% Salaire -->
+          <div class="strategy-card" *ngIf="strategie100Salaire" [class.optimal]="scenarioOptimal?.nom === '100% Salaire'">
+            <div class="card-header salaire">
+              <h4><i class="pi pi-briefcase"></i> 100% Salaire</h4>
+              <span class="badge" *ngIf="scenarioOptimal?.nom === '100% Salaire'">Optimal</span>
+            </div>
+            <div class="card-body">
+              <div class="stat-row">
+                <span>Salaire net</span>
+                <span class="value">{{ formatCurrency(strategie100Salaire.salaireNet) }}</span>
+              </div>
+              <div class="stat-row muted">
+                <span>Charges sociales</span>
+                <span>-{{ formatCurrency(strategie100Salaire.chargesSociales) }}</span>
+              </div>
+              <div class="stat-row">
+                <span>Dividendes nets</span>
+                <span class="value">{{ formatCurrency(strategie100Salaire.dividendesNets) }}</span>
+              </div>
+              <div class="stat-row separator">
+                <span>Total net</span>
+                <span class="value bold">{{ formatCurrency(strategie100Salaire.totalNet) }}</span>
+              </div>
+              <div class="stat-row muted">
+                <span>IR estimé</span>
+                <span>-{{ formatCurrency(strategie100Salaire.irEstime) }}</span>
+              </div>
+              <div class="stat-row highlight">
+                <span>Net après IR</span>
+                <span class="value final">{{ formatCurrency(strategie100Salaire.netApresIR) }}</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="taux">Taux prélèvements : {{ formatPercent(strategie100Salaire.tauxChargesGlobal) }}</span>
+            </div>
+          </div>
+
+          <!-- Mix personnalisé -->
+          <div class="strategy-card featured" *ngIf="strategieMixte" [class.optimal]="scenarioOptimal?.nom === strategieMixte.nom">
+            <div class="card-header mixte">
+              <h4><i class="pi pi-sliders-h"></i> {{ strategieMixte.nom }}</h4>
+              <span class="badge" *ngIf="scenarioOptimal?.nom === strategieMixte.nom">Optimal</span>
+            </div>
+            <div class="card-body">
+              <div class="stat-row">
+                <span>Salaire net</span>
+                <span class="value">{{ formatCurrency(strategieMixte.salaireNet) }}</span>
+              </div>
+              <div class="stat-row muted">
+                <span>Charges sociales</span>
+                <span>-{{ formatCurrency(strategieMixte.chargesSociales) }}</span>
+              </div>
+              <div class="stat-row">
+                <span>Dividendes nets</span>
+                <span class="value">{{ formatCurrency(strategieMixte.dividendesNets) }}</span>
+              </div>
+              <div class="stat-row muted">
+                <span>Fiscalité dividendes</span>
+                <span>-{{ formatCurrency(strategieMixte.fiscaliteDividendes) }}</span>
+              </div>
+              <div class="stat-row separator">
+                <span>Total net</span>
+                <span class="value bold">{{ formatCurrency(strategieMixte.totalNet) }}</span>
+              </div>
+              <div class="stat-row muted">
+                <span>IR estimé</span>
+                <span>-{{ formatCurrency(strategieMixte.irEstime) }}</span>
+              </div>
+              <div class="stat-row highlight">
+                <span>Net après IR</span>
+                <span class="value final">{{ formatCurrency(strategieMixte.netApresIR) }}</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="taux">Taux prélèvements : {{ formatPercent(strategieMixte.tauxChargesGlobal) }}</span>
+            </div>
+          </div>
+
+          <!-- 100% Dividendes -->
+          <div class="strategy-card" *ngIf="strategie100Dividendes" [class.optimal]="scenarioOptimal?.nom === '100% Dividendes'">
+            <div class="card-header dividendes">
+              <h4><i class="pi pi-money-bill"></i> 100% Dividendes</h4>
+              <span class="badge" *ngIf="scenarioOptimal?.nom === '100% Dividendes'">Optimal</span>
+            </div>
+            <div class="card-body">
+              <div class="stat-row">
+                <span>Salaire net</span>
+                <span class="value">{{ formatCurrency(strategie100Dividendes.salaireNet) }}</span>
+              </div>
+              <div class="stat-row">
+                <span>Dividendes bruts</span>
+                <span class="value">{{ formatCurrency(strategie100Dividendes.dividendesBruts) }}</span>
+              </div>
+              <div class="stat-row muted">
+                <span>Fiscalité (IS + PFU)</span>
+                <span>-{{ formatCurrency(strategie100Dividendes.fiscaliteDividendes) }}</span>
+              </div>
+              <div class="stat-row">
+                <span>Dividendes nets</span>
+                <span class="value">{{ formatCurrency(strategie100Dividendes.dividendesNets) }}</span>
+              </div>
+              <div class="stat-row separator">
+                <span>Total net</span>
+                <span class="value bold">{{ formatCurrency(strategie100Dividendes.totalNet) }}</span>
+              </div>
+              <div class="stat-row highlight">
+                <span>Net après IR</span>
+                <span class="value final">{{ formatCurrency(strategie100Dividendes.netApresIR) }}</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="taux">Taux prélèvements : {{ formatPercent(strategie100Dividendes.tauxChargesGlobal) }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tableau complet des scénarios -->
+        <div class="scenarios-table-section">
+          <h3><i class="pi pi-table"></i> Analyse par tranche de répartition</h3>
+          <div class="table-container">
+            <table class="scenarios-table">
+              <thead>
+                <tr>
+                  <th>Répartition</th>
+                  <th>Salaire net</th>
+                  <th>Dividendes nets</th>
+                  <th>Total net</th>
+                  <th>IR</th>
+                  <th>Net final</th>
+                  <th>Taux charges</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let scenario of scenarios" [class.optimal-row]="scenario.nom === scenarioOptimal?.nom">
+                  <td>
+                    <span class="scenario-name">{{ scenario.nom }}</span>
+                    <i class="pi pi-star-fill optimal-star" *ngIf="scenario.nom === scenarioOptimal?.nom"></i>
+                  </td>
+                  <td>{{ formatCurrency(scenario.salaireNet) }}</td>
+                  <td>{{ formatCurrency(scenario.dividendesNets) }}</td>
+                  <td>{{ formatCurrency(scenario.totalNet) }}</td>
+                  <td class="muted">-{{ formatCurrency(scenario.irEstime) }}</td>
+                  <td class="bold">{{ formatCurrency(scenario.netApresIR) }}</td>
+                  <td [class.good]="scenario.tauxChargesGlobal < 40" [class.medium]="scenario.tauxChargesGlobal >= 40 && scenario.tauxChargesGlobal < 50" [class.bad]="scenario.tauxChargesGlobal >= 50">
+                    {{ formatPercent(scenario.tauxChargesGlobal) }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Points d'attention -->
+        <div class="info-panel" *ngIf="statut === 'eurl'">
+          <h4><i class="pi pi-exclamation-triangle"></i> Attention EURL</h4>
+          <p>En EURL, les dividendes dépassant 10% du capital social ({{ formatCurrency(capitalSocial * 0.10) }}) sont soumis aux cotisations sociales TNS (~45%), ce qui les rend beaucoup moins avantageux. Privilégiez le salaire ou augmentez votre capital social.</p>
+        </div>
+
+        <div class="info-panel">
+          <h4><i class="pi pi-info-circle"></i> À prendre en compte</h4>
+          <ul class="tips-list">
+            <li><strong>Protection sociale</strong> : Sans salaire, pas de cotisations retraite ni couverture maladie. Attention au 100% dividendes.</li>
+            <li><strong>Validation trimestres</strong> : Pour valider 4 trimestres/an, il faut un salaire minimum de ~1 690€/mois en 2025.</li>
+            <li><strong>Option barème IR</strong> : Si votre TMI &lt; 12,8%, optez pour le barème progressif plutôt que le PFU (abattement 40%).</li>
+            <li><strong>Épargne salariale</strong> : PEE et PERCO permettent de vous verser jusqu'à 3 fois le PASS sans charges sociales.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <app-faq-section [faqItems]="faqItems"></app-faq-section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,414 @@
+@import '../../shared/styles/simulator-common';
+
+.mix-slider-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+
+  > label {
+    display: block;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1rem;
+  }
+
+  .slider-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    .slider-label {
+      font-size: 0.85rem;
+      color: #64748b;
+      white-space: nowrap;
+
+      &.left {
+        color: #8b5cf6;
+      }
+      &.right {
+        color: #3b82f6;
+      }
+    }
+
+    ::ng-deep .p-slider {
+      flex: 1;
+
+      .p-slider-range {
+        background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+      }
+
+      .p-slider-handle {
+        border-color: #3b82f6;
+        background: white;
+
+        &:hover {
+          border-color: #1d4ed8;
+        }
+      }
+    }
+  }
+
+  .mix-value {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+
+    span {
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+    }
+
+    .salaire-part {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .dividendes-part {
+      background: #ede9fe;
+      color: #7c3aed;
+    }
+  }
+}
+
+.optimal-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 2px solid #f59e0b;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+
+  .optimal-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    i {
+      color: white;
+      font-size: 1.5rem;
+    }
+  }
+
+  .optimal-content {
+    h3 {
+      margin: 0 0 0.25rem 0;
+      color: #92400e;
+      font-size: 1.1rem;
+    }
+
+    p {
+      margin: 0;
+      color: #78350f;
+
+      strong {
+        font-size: 1.25rem;
+        color: #92400e;
+      }
+    }
+
+    .optimal-detail {
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+  }
+}
+
+.strategies-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.strategy-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 2px solid #e2e8f0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  &.featured {
+    border-color: #3b82f6;
+    transform: scale(1.02);
+
+    @media (max-width: 1024px) {
+      transform: none;
+    }
+  }
+
+  &.optimal {
+    border-color: #f59e0b;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
+  }
+
+  .card-header {
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h4 {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      color: white;
+    }
+
+    &.salaire {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    }
+
+    &.mixte {
+      background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    }
+
+    &.dividendes {
+      background: linear-gradient(135deg, #10b981, #059669);
+    }
+
+    .badge {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+  }
+
+  .card-body {
+    padding: 1.25rem;
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #f1f5f9;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      span {
+        color: #475569;
+        font-size: 0.9rem;
+      }
+
+      .value {
+        font-weight: 600;
+        color: #1e293b;
+
+        &.bold {
+          font-size: 1rem;
+        }
+
+        &.final {
+          font-size: 1.15rem;
+          color: #059669;
+        }
+      }
+
+      &.muted {
+        span {
+          color: #94a3b8;
+          font-size: 0.85rem;
+        }
+      }
+
+      &.separator {
+        margin-top: 0.5rem;
+        padding-top: 0.75rem;
+        border-top: 2px solid #e2e8f0;
+      }
+
+      &.highlight {
+        background: #f0fdf4;
+        margin: 0.5rem -1.25rem -1.25rem -1.25rem;
+        padding: 0.875rem 1.25rem;
+        border-radius: 0 0 10px 10px;
+      }
+    }
+  }
+
+  .card-footer {
+    padding: 0.75rem 1.25rem;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+
+    .taux {
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+  }
+}
+
+.scenarios-table-section {
+  margin-top: 2rem;
+
+  h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #1e293b;
+    margin-bottom: 1rem;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .scenarios-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      background: #f8fafc;
+      font-weight: 600;
+      color: #475569;
+      position: sticky;
+      top: 0;
+    }
+
+    td {
+      color: #334155;
+
+      &.muted {
+        color: #94a3b8;
+      }
+
+      &.bold {
+        font-weight: 600;
+        color: #059669;
+      }
+
+      &.good {
+        color: #059669;
+        font-weight: 500;
+      }
+
+      &.medium {
+        color: #d97706;
+        font-weight: 500;
+      }
+
+      &.bad {
+        color: #dc2626;
+        font-weight: 500;
+      }
+    }
+
+    .optimal-row {
+      background: #fef9c3;
+
+      td {
+        font-weight: 500;
+      }
+
+      .scenario-name {
+        color: #92400e;
+      }
+
+      .optimal-star {
+        color: #f59e0b;
+        margin-left: 0.5rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    tr:hover:not(.optimal-row) {
+      background: #f8fafc;
+    }
+  }
+}
+
+.info-panel {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.5rem;
+  border-left: 4px solid #3b82f6;
+
+  &:has(.pi-exclamation-triangle) {
+    background: #fef3c7;
+    border-left-color: #f59e0b;
+
+    h4 {
+      color: #92400e;
+
+      i {
+        color: #f59e0b;
+      }
+    }
+
+    p {
+      color: #78350f;
+    }
+  }
+
+  h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #1e293b;
+    margin: 0 0 0.75rem 0;
+    font-size: 1rem;
+
+    i {
+      color: #3b82f6;
+    }
+  }
+
+  p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.6;
+  }
+
+  .tips-list {
+    margin: 0;
+    padding-left: 1.25rem;
+
+    li {
+      color: #475569;
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      strong {
+        color: #1e293b;
+      }
+    }
+  }
+}

@@ -225,8 +225,7 @@ $bg-green-light: #e8f5e9;
 // Section Résultats (sticky)
 // ============================================
 .results-section {
-  position: sticky;
-  top: 2rem;
+
   height: fit-content;
 
   @media (max-width: 968px) {
