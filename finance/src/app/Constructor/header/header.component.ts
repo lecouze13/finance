@@ -27,6 +27,10 @@ export class HeaderComponent implements OnInit {
   allSearchItems: SearchItem[] = [];
   showSearchResults: boolean = false;
 
+  // Mobile menu & dropdowns
+  mobileMenuOpen: boolean = false;
+  activeDropdown: string = '';
+
   constructor(private router: Router) {}
 
   ngOnInit() {
@@ -508,5 +512,18 @@ export class HeaderComponent implements OnInit {
       case 'livret': return 'Livret';
       default: return '';
     }
+  }
+
+  toggleDropdown(dropdown: string): void {
+    if (this.activeDropdown === dropdown) {
+      this.activeDropdown = '';
+    } else {
+      this.activeDropdown = dropdown;
+    }
+  }
+
+  closeMenu(): void {
+    this.mobileMenuOpen = false;
+    this.activeDropdown = '';
   }
 }

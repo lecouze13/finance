@@ -1,62 +1,268 @@
-<div class="cardHeader">
+<header class="main-header">
+  <!-- Top bar avec logo et recherche -->
+  <div class="header-top">
+    <div class="header-container">
+      <a routerLink="/" class="logo">
+        <img src="../../../assets/favicon.ico" alt="CalculateurFinance Logo" class="img-logo" />
+        <span>CalculateurFinance</span>
+      </a>
 
-    <p-menubar [model]="items">
-        <!-- Search Bar -->
-        <ng-template pTemplate="start">
-            <div class="search-container">
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input
-                        type="text"
-                        pInputText
-                        [(ngModel)]="searchQuery"
-                        (input)="onSearchInput()"
-                        (blur)="onSearchBlur()"
-                        placeholder="Rechercher..."
-                        class="search-input"
-                    />
-                </span>
-                <div class="search-results" *ngIf="showSearchResults && searchResults.length > 0">
-                    <div
-                        class="search-result-item"
-                        *ngFor="let result of searchResults"
-                        (mousedown)="selectSearchItem(result)"
-                    >
-                        <i [class]="getTypeIcon(result.type)"></i>
-                        <div class="result-content">
-                            <span class="result-label">{{ result.label }}</span>
-                            <span class="result-type">{{ getTypeLabel(result.type) }}</span>
-                        </div>
-                    </div>
-                </div>
+      <div class="search-container">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="searchQuery"
+            (input)="onSearchInput()"
+            (blur)="onSearchBlur()"
+            placeholder="Rechercher un simulateur..."
+            class="search-input"
+          />
+        </span>
+        <div class="search-results" *ngIf="showSearchResults && searchResults.length > 0">
+          <div
+            class="search-result-item"
+            *ngFor="let result of searchResults"
+            (mousedown)="selectSearchItem(result)"
+          >
+            <i [class]="getTypeIcon(result.type)"></i>
+            <div class="result-content">
+              <span class="result-label">{{ result.label }}</span>
+              <span class="result-type">{{ getTypeLabel(result.type) }}</span>
             </div>
-        </ng-template>
+          </div>
+        </div>
+      </div>
 
-        <ng-template pTemplate="item" let-item>
-            <ng-container *ngIf="item.route; else urlRef">
-                <a [routerLink]="item.route" class="p-menuitem-link">
-                    <span [class]="item.icon"></span>
-                    <span class="ml-2" style="color: black;">{{ item.label }}</span>
-                </a>
-            </ng-container>
-            <ng-template #urlRef>
-                <a *ngIf="item.url; else noLink" [href]="item.url" class="p-menuitem-link">
-                    <span class="ml-2"  style="color: black; padding-left: 0%;">{{ item.label }}</span>
-                </a>
-            </ng-template>
-            <ng-template #noLink>
-                <div class="p-menuitem-link">
-                    <span [class]="item.icon"></span>
-                    <span class="ml-2" >{{ item.label }}</span>
-                    <span *ngIf="item.items" class="pi pi-fw pi-angle-down ml-2"></span>
-                </div>
-            </ng-template>
-        </ng-template>
-    </p-menubar>
-</div>
-<div *ngIf="afficherCalculatrice" class="overlay-calculatrice">
-    <div class="calculatrice-wrapper">
-      <button class="fermer-btn" (click)="afficherCalculatrice = false">✕</button>
-      <app-calculatrice></app-calculatrice>
+      <div class="header-actions">
+        <a routerLink="/catalogue" class="catalogue-btn">
+          <i class="pi pi-th-large"></i>
+          <span>Catalogue</span>
+        </a>
+        <button class="calc-btn" (click)="afficherCalculatrice = !afficherCalculatrice">
+          <i class="pi pi-calculator"></i>
+        </button>
+        <button class="mobile-menu-btn" (click)="mobileMenuOpen = !mobileMenuOpen">
+          <i [class]="mobileMenuOpen ? 'pi pi-times' : 'pi pi-bars'"></i>
+        </button>
+      </div>
     </div>
   </div>
+
+  <!-- Navigation principale -->
+  <nav class="main-nav" [class.mobile-open]="mobileMenuOpen">
+    <div class="nav-container">
+      <!-- Immobilier -->
+      <div class="nav-dropdown">
+        <button class="nav-link" (click)="toggleDropdown('immo')">
+          <i class="pi pi-home"></i>
+          <span>Immobilier</span>
+          <i class="pi pi-chevron-down arrow"></i>
+        </button>
+        <div class="dropdown-menu" [class.open]="activeDropdown === 'immo'">
+          <div class="dropdown-grid">
+            <div class="dropdown-section">
+              <h4>Simulateurs populaires</h4>
+              <a routerLink="/simulateur-credit-immobilier" (click)="closeMenu()">
+                <i class="pi pi-home"></i> Crédit immobilier
+              </a>
+              <a routerLink="/simulateur-capacite-emprunt" (click)="closeMenu()">
+                <i class="pi pi-calculator"></i> Capacité d'emprunt
+              </a>
+              <a routerLink="/calcul-frais-de-notaire" (click)="closeMenu()">
+                <i class="pi pi-file"></i> Frais de notaire
+              </a>
+              <a routerLink="/rendement-locatif" (click)="closeMenu()">
+                <i class="pi pi-percentage"></i> Rendement locatif
+              </a>
+              <a routerLink="/simulateur-ptz" (click)="closeMenu()">
+                <i class="pi pi-gift"></i> PTZ (Prêt à Taux Zéro)
+              </a>
+            </div>
+            <div class="dropdown-section">
+              <h4>Investissement</h4>
+              <a routerLink="/lmnp-lmp-regime-fiscal" (click)="closeMenu()">
+                <i class="pi pi-building"></i> LMNP / LMP
+              </a>
+              <a routerLink="/comparateur-sci-impot" (click)="closeMenu()">
+                <i class="pi pi-briefcase"></i> SCI IR vs IS
+              </a>
+              <a routerLink="/cashflow-immobilier" (click)="closeMenu()">
+                <i class="pi pi-chart-line"></i> Cash flow
+              </a>
+              <a routerLink="/achat-vs-location" (click)="closeMenu()">
+                <i class="pi pi-sync"></i> Achat vs Location
+              </a>
+              <a routerLink="/simulateur-plus-value-immobiliere" (click)="closeMenu()">
+                <i class="pi pi-arrow-up"></i> Plus-value immobilière
+              </a>
+            </div>
+            <div class="dropdown-section">
+              <h4>Autres outils</h4>
+              <a routerLink="/simulateur-passoire-thermique" (click)="closeMenu()">
+                <i class="pi pi-bolt"></i> Passoire thermique (DPE)
+              </a>
+              <a routerLink="/simulateur-viager" (click)="closeMenu()">
+                <i class="pi pi-users"></i> Viager
+              </a>
+              <a routerLink="/simulateur-credit-relais" (click)="closeMenu()">
+                <i class="pi pi-link"></i> Crédit relais
+              </a>
+              <a routerLink="/catalogue" class="see-all" (click)="closeMenu()">
+                Voir tous les simulateurs <i class="pi pi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Finance -->
+      <div class="nav-dropdown">
+        <button class="nav-link" (click)="toggleDropdown('finance')">
+          <i class="pi pi-wallet"></i>
+          <span>Finance</span>
+          <i class="pi pi-chevron-down arrow"></i>
+        </button>
+        <div class="dropdown-menu" [class.open]="activeDropdown === 'finance'">
+          <div class="dropdown-grid">
+            <div class="dropdown-section">
+              <h4>Impôts & Revenus</h4>
+              <a routerLink="/simulateur-impot-revenue" (click)="closeMenu()">
+                <i class="pi pi-file"></i> Impôt sur le revenu
+              </a>
+              <a routerLink="/simulateur-brut-net" (click)="closeMenu()">
+                <i class="pi pi-sync"></i> Brut / Net
+              </a>
+              <a routerLink="/simulateur-droits-succession" (click)="closeMenu()">
+                <i class="pi pi-users"></i> Droits de succession
+              </a>
+              <a routerLink="/simulateur-donation" (click)="closeMenu()">
+                <i class="pi pi-gift"></i> Donation
+              </a>
+              <a routerLink="/simulateur-impot-fortune-immobiliere" (click)="closeMenu()">
+                <i class="pi pi-euro"></i> IFI
+              </a>
+            </div>
+            <div class="dropdown-section">
+              <h4>Épargne & Retraite</h4>
+              <a routerLink="/interet-compose" (click)="closeMenu()">
+                <i class="pi pi-chart-line"></i> Intérêts composés
+              </a>
+              <a routerLink="/simulateur-per" (click)="closeMenu()">
+                <i class="pi pi-briefcase"></i> PER (Plan Épargne Retraite)
+              </a>
+              <a routerLink="/simulateur-independance-financiere" (click)="closeMenu()">
+                <i class="pi pi-flag"></i> Indépendance financière
+              </a>
+              <a routerLink="/simulateur-retraite" (click)="closeMenu()">
+                <i class="pi pi-sun"></i> Retraite
+              </a>
+              <a routerLink="/simulateur-pea-assurance-vie" (click)="closeMenu()">
+                <i class="pi pi-chart-pie"></i> PEA vs Assurance-vie
+              </a>
+            </div>
+            <div class="dropdown-section">
+              <h4>Entreprise</h4>
+              <a routerLink="/simulateur-sasu-eurl" (click)="closeMenu()">
+                <i class="pi pi-building"></i> SASU vs EURL
+              </a>
+              <a routerLink="/simulateur-dividendes-salaire" (click)="closeMenu()">
+                <i class="pi pi-wallet"></i> Dividendes vs Salaire
+              </a>
+              <a routerLink="/simulateur-micro-entrepreneur" (click)="closeMenu()">
+                <i class="pi pi-id-card"></i> Micro-entrepreneur
+              </a>
+              <a routerLink="/catalogue" class="see-all" (click)="closeMenu()">
+                Voir tous les simulateurs <i class="pi pi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Livrets -->
+      <div class="nav-dropdown">
+        <button class="nav-link" (click)="toggleDropdown('livrets')">
+          <i class="pi pi-money-bill"></i>
+          <span>Livrets</span>
+          <i class="pi pi-chevron-down arrow"></i>
+        </button>
+        <div class="dropdown-menu dropdown-small" [class.open]="activeDropdown === 'livrets'">
+          <a routerLink="/simulateur-livret/livret-a" (click)="closeMenu()">
+            <i class="pi pi-wallet"></i> Livret A
+          </a>
+          <a routerLink="/simulateur-livret/lep" (click)="closeMenu()">
+            <i class="pi pi-star"></i> LEP (Livret Épargne Populaire)
+          </a>
+          <a routerLink="/simulateur-livret/ldds" (click)="closeMenu()">
+            <i class="pi pi-leaf"></i> LDDS
+          </a>
+          <a routerLink="/simulateur-livret/pel" (click)="closeMenu()">
+            <i class="pi pi-home"></i> PEL
+          </a>
+          <a routerLink="/simulateur-eligibilite-lep" (click)="closeMenu()">
+            <i class="pi pi-check-circle"></i> Éligibilité LEP
+          </a>
+          <a routerLink="/simulateur-apl" (click)="closeMenu()">
+            <i class="pi pi-home"></i> APL
+          </a>
+        </div>
+      </div>
+
+      <!-- Articles -->
+      <div class="nav-dropdown">
+        <button class="nav-link" (click)="toggleDropdown('articles')">
+          <i class="pi pi-book"></i>
+          <span>Guides</span>
+          <i class="pi pi-chevron-down arrow"></i>
+        </button>
+        <div class="dropdown-menu" [class.open]="activeDropdown === 'articles'">
+          <div class="dropdown-grid dropdown-grid-2">
+            <div class="dropdown-section">
+              <h4>Immobilier</h4>
+              <a routerLink="/article/investissement-locatif" (click)="closeMenu()">Investissement locatif</a>
+              <a routerLink="/article/lmnp-guide" (click)="closeMenu()">Guide LMNP</a>
+              <a routerLink="/article/sci-immobiliere" (click)="closeMenu()">SCI immobilière</a>
+              <a routerLink="/article/frais-notaire" (click)="closeMenu()">Frais de notaire</a>
+              <a routerLink="/article/guide-scpi" (click)="closeMenu()">Guide SCPI</a>
+            </div>
+            <div class="dropdown-section">
+              <h4>Épargne & Finance</h4>
+              <a routerLink="/article/pea" (click)="closeMenu()">PEA</a>
+              <a routerLink="/article/assurance-vie" (click)="closeMenu()">Assurance-vie</a>
+              <a routerLink="/article/per" (click)="closeMenu()">PER</a>
+              <a routerLink="/article/etf" (click)="closeMenu()">ETF</a>
+              <a routerLink="/article/livret-a" (click)="closeMenu()">Livret A</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Crédits (lien direct) -->
+      <a routerLink="/simulateur-credit-consommation" class="nav-link direct" (click)="closeMenu()">
+        <i class="pi pi-credit-card"></i>
+        <span>Crédit conso</span>
+      </a>
+
+      <!-- SCPI (lien direct) -->
+      <a routerLink="/simulateur-scpi" class="nav-link direct" (click)="closeMenu()">
+        <i class="pi pi-building"></i>
+        <span>SCPI</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- Overlay mobile -->
+<div class="menu-overlay" *ngIf="mobileMenuOpen" (click)="closeMenu()"></div>
+
+<!-- Calculatrice -->
+<div *ngIf="afficherCalculatrice" class="overlay-calculatrice">
+  <div class="calculatrice-wrapper">
+    <button class="fermer-btn" (click)="afficherCalculatrice = false">
+      <i class="pi pi-times"></i>
+    </button>
+    <app-calculatrice></app-calculatrice>
+  </div>
+</div>

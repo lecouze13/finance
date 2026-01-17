@@ -62,7 +62,7 @@ h3 {
     box-shadow: 0 2px 6px rgba(44, 62, 80, 0.1);
     padding: 1.5rem;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 h4,
@@ -371,6 +371,8 @@ a.router-link:focus {
     padding: 2rem;
     border-radius: 10px;
     border: 1px solid #d4dce5;
+    margin-top: 20px;
+
 }
 
 .faq-section h2 {
@@ -397,6 +399,7 @@ a {
 button.p-button-success {
     background-color: #10b981;
     border-color: #10b981;
+    color: #ffffff;
 }
 
 button.p-button-success:hover {
@@ -490,4 +493,14 @@ form.card.p-fluid.flex.flex-wrap.gap-4.ng-untouched.ng-pristine.ng-valid.ng-subm
         position: relative;
         z-index: 1;
     }
+}
+
+.cost-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+span#pn_id_98_header {
+    color: white;
 }
