@@ -442,6 +442,20 @@
   <priority>0.8</priority>
 </url>
 
+<url>
+  <loc>https://calculateurfinance.fr/simulateur-dividendes-salaire/</loc>
+  <lastmod>2026-01-17</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/catalogue/</loc>
+  <lastmod>2026-01-17</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
+</url>
+
 <!-- ========== SIMULATEURS LIVRETS (0.7) ========== -->
 <url>
   <loc>https://calculateurfinance.fr/simulateur-livret/livret-a/</loc>
@@ -926,6 +940,83 @@
 <url>
   <loc>https://calculateurfinance.fr/article/renovation-appartement/</loc>
   <lastmod>2026-01-16</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/passoire-thermique-guide/</loc>
+  <lastmod>2026-01-17</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/sci-vs-nom-propre/</loc>
+  <lastmod>2026-01-17</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/demembrement-propriete/</loc>
+  <lastmod>2026-01-17</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/location-meublee-vs-nue/</loc>
+  <lastmod>2026-01-17</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/neuf-vs-ancien/</loc>
+  <lastmod>2026-01-17</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/guide-scpi/</loc>
+  <lastmod>2026-01-17</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/private-equity/</loc>
+  <lastmod>2026-01-17</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/crowdfunding-immobilier/</loc>
+  <lastmod>2026-01-17</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/regle-4-pourcent/</loc>
+  <lastmod>2026-01-17</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/optimisation-fiscale/</loc>
+  <lastmod>2026-01-17</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://calculateurfinance.fr/article/transmission-patrimoine/</loc>
+  <lastmod>2026-01-17</lastmod>
   <changefreq>yearly</changefreq>
   <priority>0.5</priority>
 </url>

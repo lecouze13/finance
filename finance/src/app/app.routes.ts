@@ -67,6 +67,8 @@ import { SimulateurPpvComponent } from './Finance/simulateur-ppv/simulateur-ppv.
 import { SimulateurInteressementComponent } from './Finance/simulateur-interessement/simulateur-interessement.component';
 import { SimulateurColocationComponent } from './Immobilier/simulateur-colocation/simulateur-colocation.component';
 import { SimulateurRenovationEnergetiqueComponent } from './Immobilier/simulateur-renovation-energetique/simulateur-renovation-energetique.component';
+import { SimulateurDividendesSalaireComponent } from './Finance/simulateur-dividendes-salaire/simulateur-dividendes-salaire.component';
+import { CatalogueComponent } from './Constructor/catalogue/catalogue.component';
 
 export const routes: Routes = [
   { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -453,6 +455,58 @@ export const routes: Routes = [
     path: 'article/viager-immobilier',
     component: ContenuPageComponent,
   },
+  {
+    path: 'article/droits-travaux',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/renovation-appartement',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/passoire-thermique-guide',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/sci-vs-nom-propre',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/demembrement-propriete',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/location-meublee-vs-nue',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/neuf-vs-ancien',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/guide-scpi',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/private-equity',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/crowdfunding-immobilier',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/regle-4-pourcent',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/optimisation-fiscale',
+    component: ContenuPageComponent,
+  },
+  {
+    path: 'article/transmission-patrimoine',
+    component: ContenuPageComponent,
+  },
 
   { path: 'simulateur-livret/lep', component: SimulateurLivretComponent },
   { path: 'simulateur-livret/livret-a', component: SimulateurLivretComponent },
@@ -541,6 +595,14 @@ export const routes: Routes = [
   {
     path: AppRoutes.SIMULATEUR_RENOVATION_ENERGETIQUE,
     component: SimulateurRenovationEnergetiqueComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_DIVIDENDES_SALAIRE,
+    loadComponent: () => import('./Finance/simulateur-dividendes-salaire/simulateur-dividendes-salaire.component').then(m => m.SimulateurDividendesSalaireComponent),
+  },
+  {
+    path: AppRoutes.CATALOGUE,
+    component: CatalogueComponent,
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

@@ -1,0 +1,162 @@
+<div class="catalogue-page">
+  <div class="catalogue-container">
+    <!-- Header -->
+    <header class="catalogue-header">
+      <h1><i class="pi pi-th-large"></i> Catalogue complet</h1>
+      <p class="subtitle">Tous nos simulateurs et articles pour gérer vos finances</p>
+
+      <!-- Stats -->
+      <div class="stats-bar">
+        <div class="stat-item">
+          <i class="pi pi-calculator"></i>
+          <span class="stat-value">{{ stats.simulateurs }}</span>
+          <span class="stat-label">Simulateurs</span>
+        </div>
+        <div class="stat-item">
+          <i class="pi pi-book"></i>
+          <span class="stat-value">{{ stats.articles }}</span>
+          <span class="stat-label">Articles</span>
+        </div>
+        <div class="stat-item">
+          <i class="pi pi-wallet"></i>
+          <span class="stat-value">{{ stats.livrets }}</span>
+          <span class="stat-label">Livrets</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Filtres -->
+    <div class="filters-section">
+      <div class="filters-grid">
+        <!-- Recherche -->
+        <div class="filter-group search-group">
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              type="text"
+              pInputText
+              [(ngModel)]="searchQuery"
+              (input)="applyFilters()"
+              placeholder="Rechercher un simulateur ou article..."
+              class="search-input"
+            />
+          </span>
+        </div>
+
+        <!-- Type -->
+        <div class="filter-group">
+          <p-dropdown
+            [options]="typeOptions"
+            [(ngModel)]="selectedType"
+            (onChange)="applyFilters()"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Type"
+            styleClass="filter-dropdown"
+          ></p-dropdown>
+        </div>
+
+        <!-- Catégorie -->
+        <div class="filter-group">
+          <p-dropdown
+            [options]="categoryOptions"
+            [(ngModel)]="selectedCategory"
+            (onChange)="applyFilters()"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Catégorie"
+            styleClass="filter-dropdown"
+          ></p-dropdown>
+        </div>
+
+        <!-- Tags -->
+        <div class="filter-group">
+          <p-multiSelect
+            [options]="tagOptions"
+            [(ngModel)]="selectedTags"
+            (onChange)="applyFilters()"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Tags"
+            [maxSelectedLabels]="2"
+            styleClass="filter-multiselect"
+          ></p-multiSelect>
+        </div>
+
+        <!-- Clear -->
+        <div class="filter-group">
+          <p-button
+            icon="pi pi-times"
+            label="Effacer"
+            [outlined]="true"
+            severity="secondary"
+            (click)="clearFilters()"
+          ></p-button>
+        </div>
+      </div>
+
+      <!-- Résultats count -->
+      <div class="results-info">
+        <span *ngIf="filteredItems.length === allItems.length">
+          {{ allItems.length }} éléments
+        </span>
+        <span *ngIf="filteredItems.length !== allItems.length">
+          {{ filteredItems.length }} résultat(s) sur {{ allItems.length }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Grille des items -->
+    <div class="items-grid">
+      <a
+        *ngFor="let item of filteredItems"
+        [routerLink]="item.route"
+        class="item-card"
+      >
+        <div class="card-header">
+          <div class="card-icon" [ngClass]="item.type">
+            <i [class]="'pi ' + item.icon"></i>
+          </div>
+          <p-tag
+            [value]="getTypeLabel(item.type)"
+            [severity]="getTypeColor(item.type)"
+          ></p-tag>
+        </div>
+
+        <div class="card-body">
+          <h3>{{ item.title }}</h3>
+          <p class="description">{{ item.description }}</p>
+
+          <div class="card-meta">
+            <span class="category">
+              <i class="pi pi-folder"></i>
+              {{ item.category }}
+            </span>
+          </div>
+
+          <div class="tags" *ngIf="item.tags.length > 0">
+            <span class="tag" *ngFor="let tag of item.tags.slice(0, 3)">{{ tag }}</span>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <span class="view-link">
+            Voir <i class="pi pi-arrow-right"></i>
+          </span>
+        </div>
+      </a>
+    </div>
+
+    <!-- No results -->
+    <div class="no-results" *ngIf="filteredItems.length === 0">
+      <i class="pi pi-search"></i>
+      <h3>Aucun résultat trouvé</h3>
+      <p>Essayez de modifier vos filtres ou votre recherche</p>
+      <p-button
+        label="Réinitialiser les filtres"
+        (click)="clearFilters()"
+        [outlined]="true"
+      ></p-button>
+    </div>
+  </div>
+</div>

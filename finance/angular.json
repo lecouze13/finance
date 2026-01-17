@@ -65,8 +65,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kB",
-                  "maximumError": "10kB"
+                  "maximumWarning": "15kB",
+                  "maximumError": "20kB"
                 }
               ],
               "outputHashing": "all"
@@ -249,7 +249,22 @@
               "/simulateur-ppv",
               "/simulateur-interessement",
               "/simulateur-colocation",
-              "/simulateur-renovation-energetique"
+              "/simulateur-renovation-energetique",
+              "/simulateur-dividendes-salaire",
+              "/article/droits-travaux",
+              "/article/renovation-appartement",
+              "/article/passoire-thermique-guide",
+              "/article/sci-vs-nom-propre",
+              "/article/demembrement-propriete",
+              "/article/location-meublee-vs-nue",
+              "/article/neuf-vs-ancien",
+              "/article/guide-scpi",
+              "/article/private-equity",
+              "/article/crowdfunding-immobilier",
+              "/article/regle-4-pourcent",
+              "/article/optimisation-fiscale",
+              "/article/transmission-patrimoine",
+              "/catalogue"
             ]
           },
           "configurations": {

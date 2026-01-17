@@ -5,7 +5,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
 import { PanelModule } from 'primeng/panel';
 import { SliderModule } from 'primeng/slider';
-import { SeoService } from '../../shared/seo.service';
+import { SeoService } from '../../Constructor/service/seo.service';
 import { FaqSectionComponent, FaqItem } from '../../shared/faq-section/faq-section.component';
 
 interface Scenario {

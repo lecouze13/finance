@@ -71,4 +71,6 @@ export const AppRoutes = {
   SIMULATEUR_INTERESSEMENT: 'simulateur-interessement',
   SIMULATEUR_COLOCATION: 'simulateur-colocation',
   SIMULATEUR_RENOVATION_ENERGETIQUE: 'simulateur-renovation-energetique',
+  SIMULATEUR_DIVIDENDES_SALAIRE: 'simulateur-dividendes-salaire',
+  CATALOGUE: 'catalogue',
 };

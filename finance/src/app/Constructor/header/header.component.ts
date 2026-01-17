@@ -69,7 +69,11 @@ export class HeaderComponent implements OnInit {
         label: 'Home',
         route: './',
       },
-
+      {
+        label: 'Catalogue',
+        icon: 'pi pi-th-large',
+        route: '/catalogue',
+      },
       {
         label: 'Calculateur & Simulateur',
         icon: 'pi pi-home',
@@ -434,6 +438,7 @@ export class HeaderComponent implements OnInit {
       { label: 'Participation / Intéressement', route: '/simulateur-interessement', type: 'simulateur', keywords: 'interessement participation pee perco epargne salariale' },
       { label: 'Colocation', route: '/simulateur-colocation', type: 'simulateur', keywords: 'colocation location chambre rendement' },
       { label: 'Rénovation énergétique', route: '/simulateur-renovation-energetique', type: 'simulateur', keywords: 'renovation energetique dpe maprimerénov aide' },
+      { label: 'Dividendes vs Salaire', route: '/simulateur-dividendes-salaire', type: 'simulateur', keywords: 'dividendes salaire sasu eurl dirigeant remuneration' },
     ];
 
     // Add livret simulators
