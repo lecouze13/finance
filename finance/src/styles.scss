@@ -2,6 +2,11 @@
 // Import des styles communs pour simulateurs
 // ============================================
 @import 'app/shared/styles/simulator-common';
+@font-face {
+  font-family: 'Inter';
+  src: url('Inter-roman.woff2') format('woff2');
+  font-display: swap;
+}
 
 body {
     background-color: white;
@@ -503,4 +508,29 @@ form.card.p-fluid.flex.flex-wrap.gap-4.ng-untouched.ng-pristine.ng-valid.ng-subm
 
 span#pn_id_98_header {
     color: white;
+}
+.toc {
+  position: sticky;
+  top: 100px;
+  max-width: 280px;
+}
+
+.p-panelmenu {
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.p-panelmenu .p-menuitem-link {
+  transition: all .2s ease;
+}
+
+.p-panelmenu .p-menuitem-link:hover {
+  background: rgba(59,130,246,.08);
+}
+
+.active-toc > .p-menuitem-link {
+  font-weight: 600;
+  color: #2563eb;
+  background: rgba(59,130,246,.12);
+  border-left: 4px solid #2563eb;
 }
