@@ -17,7 +17,8 @@
       "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\loren\\\\Desktop\\\\Dev appli web 2\\\\finance\" -Recurse -Name)",
       "Bash(Select-String -Pattern \"angular.json|package.json|server.ts|main.server.ts\")",
       "Bash(npm uninstall:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(ls:*)"
     ]
   }
 }

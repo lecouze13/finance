@@ -1,6 +1,13 @@
-<div *ngIf="pageData; else notFound">
-  <h1>{{ pageData.titre }}</h1>
-  <div class="article-content" [innerHTML]="pageData.contenu"></div>
+<div *ngIf="pageData; else notFound" class="article-page">
+  <div class="article-layout">
+    <aside class="article-sidebar">
+      <app-sommaire [autoGenerate]="true" [title]="'Sommaire'"></app-sommaire>
+    </aside>
+    <article class="article-main">
+      <h1>{{ pageData.titre }}</h1>
+      <div class="article-content" [innerHTML]="pageData.contenu"></div>
+    </article>
+  </div>
 </div>
 
 <ng-template #notFound>

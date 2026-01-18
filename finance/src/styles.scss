@@ -2,11 +2,9 @@
 // Import des styles communs pour simulateurs
 // ============================================
 @import 'app/shared/styles/simulator-common';
-@font-face {
-  font-family: 'Inter';
-  src: url('Inter-roman.woff2') format('woff2');
-  font-display: swap;
-}
+
+// Police Inter via Google Fonts (chargée dans index.html)
+// Fallback sur system fonts si non chargée
 
 body {
     background-color: white;
@@ -533,4 +531,45 @@ span#pn_id_98_header {
   color: #2563eb;
   background: rgba(59,130,246,.12);
   border-left: 4px solid #2563eb;
+}
+
+// ============================================
+// Layout principal avec sidebar sommaire
+// ============================================
+.page-layout {
+  display: flex;
+  min-height: calc(100vh - 200px);
+}
+
+.sidebar-left {
+  width: 280px;
+  flex-shrink: 0;
+  padding: 1rem;
+  background: #f8fafc;
+  border-right: 1px solid #e2e8f0;
+
+  app-sommaire {
+    position: sticky;
+    top: 80px;
+  }
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+// Responsive - masquer sidebar sur mobile/tablette
+@media (max-width: 1199px) {
+  .page-layout {
+    flex-direction: column;
+  }
+
+  .sidebar-left {
+    display: none;
+  }
+
+  .main-content {
+    width: 100%;
+  }
 }

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from "@angular/core";
 import { AnalyticsService } from "./shared/services/analytics.service";
-
+ 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

@@ -38,6 +38,7 @@ import { SimulateurPrimeActiviteComponent } from './Finance/simulateur-prime-act
 import { MenubarModule } from 'primeng/menubar';
 import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
+import { PanelMenuModule } from 'primeng/panelmenu';
 
 import { TabViewModule } from 'primeng/tabview';
 import { CommonModule } from '@angular/common';
@@ -91,6 +92,8 @@ import { SimulateurPouvoirAchatComponent } from './Finance/simulateur-pouvoir-ac
 import { SimulateurCreditConsoComponent } from './Finance/simulateur-credit-conso/simulateur-credit-conso.component';
 import { SimulateurScpiComponent } from './Finance/simulateur-scpi/simulateur-scpi.component';
 import { ExportButtonsComponent } from './shared/components/export-buttons/export-buttons.component';
+import { SommaireComponent } from './shared/sommaire/sommaire.component';
+import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 
 @NgModule({
     declarations: [
@@ -100,7 +103,6 @@ import { ExportButtonsComponent } from './shared/components/export-buttons/expor
         RendementComponent,
         InvestissementComponent,
         CashflowComponent,
-        MainComponent,
         TauxEmpruntComponent,
         TriImmoComponent,
         ComparateurAchatLocationComponent,
@@ -171,8 +173,11 @@ import { ExportButtonsComponent } from './shared/components/export-buttons/expor
         FaqSectionComponent,
         ExportButtonsComponent,
         ScenarioComparisonComponent,
-        InfoTooltipComponent
-
+        InfoTooltipComponent,
+        PanelMenuModule,
+        MainComponent,
+        SommaireComponent,
+        BreadcrumbComponent
     ],
     providers: [
     provideClientHydration(),

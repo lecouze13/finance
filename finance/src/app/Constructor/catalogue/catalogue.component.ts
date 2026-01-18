@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -65,7 +65,10 @@ export class CatalogueComponent implements OnInit {
     total: 0
   };
 
-  constructor(private seoService: SeoService) {}
+  constructor(
+    private seoService: SeoService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.seoService.updateMetaData({
@@ -76,7 +79,15 @@ export class CatalogueComponent implements OnInit {
 
     this.loadItems();
     this.buildFilters();
-    this.applyFilters();
+
+    // Lire les query params pour appliquer le filtre type
+    this.route.queryParams.subscribe(params => {
+      if (params['type']) {
+        this.selectedType = params['type'];
+      }
+      this.applyFilters();
+    });
+
     this.calculateStats();
   }
 

@@ -1,0 +1,26 @@
+<aside class="sommaire" [class.collapsed]="isCollapsed" *ngIf="items.length > 0">
+  <div class="sommaire-header" (click)="toggleCollapse()">
+    <span class="sommaire-title">
+      <i class="pi pi-list"></i>
+      {{ title }}
+    </span>
+    <i class="pi" [ngClass]="isCollapsed ? 'pi-chevron-down' : 'pi-chevron-up'"></i>
+  </div>
+
+  <nav class="sommaire-nav" [class.hidden]="isCollapsed">
+    <ul class="sommaire-list">
+      <li *ngFor="let item of items"
+          class="sommaire-item"
+          [class.active]="activeId === item.id"
+          (click)="scrollTo(item.id)">
+        <i *ngIf="item.icon" [class]="item.icon"></i>
+        <span>{{ item.label }}</span>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Indicateur de progression -->
+  <div class="progress-indicator">
+    <div class="progress-bar" [style.width.%]="getProgressPercent()"></div>
+  </div>
+</aside>

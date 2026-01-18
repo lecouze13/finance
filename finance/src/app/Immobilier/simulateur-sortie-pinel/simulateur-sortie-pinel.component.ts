@@ -5,14 +5,14 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-import { FloatLabelModule } from 'primeng/floatlabel';
+import { PanelModule } from 'primeng/panel';
 import { SeoService } from '../../Constructor/service/seo.service';
 import { FaqSectionComponent, FaqItem } from '../../shared/faq-section/faq-section.component';
 
 @Component({
   selector: 'app-simulateur-sortie-pinel',
   standalone: true,
-  imports: [CommonModule, FormsModule, InputNumberModule, DropdownModule, ButtonModule, TooltipModule, FloatLabelModule, FaqSectionComponent],
+  imports: [CommonModule, FormsModule, InputNumberModule, DropdownModule, ButtonModule, TooltipModule, PanelModule, FaqSectionComponent],
   templateUrl: './simulateur-sortie-pinel.component.html',
   styleUrls: ['./simulateur-sortie-pinel.component.scss']
 })
@@ -178,4 +178,5 @@ export class SimulateurSortiePinelComponent implements OnInit {
       }
     };
   }
+  
 }

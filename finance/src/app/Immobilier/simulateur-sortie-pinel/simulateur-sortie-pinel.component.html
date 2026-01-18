@@ -1,258 +1,414 @@
-<main>
-  <h1>Simulateur Sortie Pinel : Vendre, LMNP ou Location Nue ?</h1>
-  <p>Votre engagement Pinel arrive à son terme ? Découvrez quelle option est la plus rentable pour vous : revendre et réinvestir, passer en location meublée (LMNP), ou continuer en location nue classique.</p>
-  <br>
-  <div class="separator"></div>
-  <br>
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Simulateur Sortie Pinel : Vendre, LMNP ou Location Nue ?</h1>
+    <p class="subtitle">Comparez les 3 options à la fin de votre engagement Pinel et trouvez la plus rentable</p>
+  </div>
 
-  <div class="card p-fluid">
-    <h3>Informations sur votre bien Pinel</h3>
+  <div class="intro-text">
+    <p>
+      La fin de l'engagement Pinel est une étape clé pour tout investisseur immobilier.
+      À l'issue des 6, 9 ou 12 années de location à loyer plafonné, la réduction d'impôt cesse
+      et le bien entre dans une nouvelle phase de rentabilité.
+    </p>
+  </div>
 
-    <div class="flex flex-wrap gap-4">
-      <div class="flex-auto">
-        <p-floatLabel>
-          <p-inputNumber inputId="prixAchat" [(ngModel)]="prixAchat" mode="currency" currency="EUR"
-            pTooltip="Prix d'achat initial du bien" tooltipPosition="top" />
+  <div class="form-section-top">
+    <p-panel header="Informations sur votre bien Pinel" styleClass="custom-panel">
+      <div class="form-grid-4">
+        <div class="form-group">
           <label for="prixAchat">Prix d'achat initial</label>
-        </p-floatLabel>
-      </div>
+          <p-inputNumber
+            id="prixAchat"
+            [(ngModel)]="prixAchat"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0">
+          </p-inputNumber>
+        </div>
 
-      <div class="flex-auto">
-        <p-floatLabel>
-          <p-inputNumber inputId="valeurActuelle" [(ngModel)]="valeurActuelle" mode="currency" currency="EUR"
-            pTooltip="Valeur estimée actuelle du bien" tooltipPosition="top" />
+        <div class="form-group">
           <label for="valeurActuelle">Valeur actuelle estimée</label>
-        </p-floatLabel>
-      </div>
+          <p-inputNumber
+            id="valeurActuelle"
+            [(ngModel)]="valeurActuelle"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0">
+          </p-inputNumber>
+        </div>
 
-      <div class="flex-auto">
-        <p-floatLabel>
-          <p-dropdown inputId="duree" [options]="dureeEngagement" [(ngModel)]="selectedDuree"
-            placeholder="Durée engagement" />
+        <div class="form-group">
           <label for="duree">Durée d'engagement Pinel</label>
-        </p-floatLabel>
+          <p-dropdown
+            id="duree"
+            [options]="dureeEngagement"
+            [(ngModel)]="selectedDuree"
+            styleClass="w-full">
+          </p-dropdown>
+        </div>
+
+        <div class="form-group">
+          <label for="tmi">Votre TMI (Tranche Marginale)</label>
+          <p-dropdown
+            id="tmi"
+            [options]="tmi"
+            [(ngModel)]="selectedTMI"
+            styleClass="w-full">
+          </p-dropdown>
+        </div>
       </div>
+    </p-panel>
 
-      <div class="flex-auto">
-        <p-floatLabel>
-          <p-dropdown inputId="tmi" [options]="tmi" [(ngModel)]="selectedTMI"
-            placeholder="Tranche marginale" />
-          <label for="tmi">Votre TMI</label>
-        </p-floatLabel>
-      </div>
-    </div>
-
-    <h3 class="mt-4">Revenus locatifs</h3>
-
-    <div class="flex flex-wrap gap-4">
-      <div class="flex-auto">
-        <p-floatLabel>
-          <p-inputNumber inputId="loyerPinel" [(ngModel)]="loyerMensuelPinel" mode="currency" currency="EUR"
-            pTooltip="Loyer mensuel actuel (plafonné Pinel)" tooltipPosition="top" />
+    <p-panel header="Revenus locatifs" styleClass="custom-panel">
+      <div class="form-grid-4">
+        <div class="form-group">
           <label for="loyerPinel">Loyer mensuel Pinel actuel</label>
-        </p-floatLabel>
-      </div>
+          <p-inputNumber
+            id="loyerPinel"
+            [(ngModel)]="loyerMensuelPinel"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0">
+          </p-inputNumber>
+        </div>
 
-      <div class="flex-auto">
-        <p-floatLabel>
-          <p-inputNumber inputId="loyerMarche" [(ngModel)]="loyerMarcheEstime" mode="currency" currency="EUR"
-            pTooltip="Loyer mensuel estimé au prix du marché" tooltipPosition="top" />
-          <label for="loyerMarche">Loyer marché estimé</label>
-        </p-floatLabel>
-      </div>
+        <div class="form-group">
+          <label for="loyerMarche">Loyer marché estimé (hors Pinel)</label>
+          <p-inputNumber
+            id="loyerMarche"
+            [(ngModel)]="loyerMarcheEstime"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0">
+          </p-inputNumber>
+        </div>
 
-      <div class="flex-auto">
-        <p-floatLabel>
-          <p-inputNumber inputId="charges" [(ngModel)]="chargesAnnuelles" mode="currency" currency="EUR"
-            pTooltip="Charges de copropriété, assurance PNO, etc." tooltipPosition="top" />
+        <div class="form-group">
           <label for="charges">Charges annuelles</label>
-        </p-floatLabel>
-      </div>
+          <p-inputNumber
+            id="charges"
+            [(ngModel)]="chargesAnnuelles"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0">
+          </p-inputNumber>
+        </div>
 
-      <div class="flex-auto">
-        <p-floatLabel>
-          <p-inputNumber inputId="taxeFonciere" [(ngModel)]="taxeFonciere" mode="currency" currency="EUR"
-            pTooltip="Taxe foncière annuelle" tooltipPosition="top" />
+        <div class="form-group">
           <label for="taxeFonciere">Taxe foncière</label>
-        </p-floatLabel>
+          <p-inputNumber
+            id="taxeFonciere"
+            [(ngModel)]="taxeFonciere"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0">
+          </p-inputNumber>
+        </div>
       </div>
-    </div>
+    </p-panel>
 
-    <h3 class="mt-4">Crédit immobilier (optionnel)</h3>
-
-    <div class="flex flex-wrap gap-4">
-      <div class="flex-auto">
-        <p-floatLabel>
-          <p-inputNumber inputId="capitalRestant" [(ngModel)]="capitalRestantDu" mode="currency" currency="EUR"
-            pTooltip="Capital restant dû sur le crédit" tooltipPosition="top" />
+    <p-panel header="Crédit immobilier (optionnel)" styleClass="custom-panel">
+      <div class="form-grid-3">
+        <div class="form-group">
           <label for="capitalRestant">Capital restant dû</label>
-        </p-floatLabel>
-      </div>
+          <p-inputNumber
+            id="capitalRestant"
+            [(ngModel)]="capitalRestantDu"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0">
+          </p-inputNumber>
+        </div>
 
-      <div class="flex-auto">
-        <p-floatLabel>
-          <p-inputNumber inputId="mensualite" [(ngModel)]="mensualiteCredit" mode="currency" currency="EUR"
-            pTooltip="Mensualité de crédit" tooltipPosition="top" />
+        <div class="form-group">
           <label for="mensualite">Mensualité crédit</label>
-        </p-floatLabel>
-      </div>
+          <p-inputNumber
+            id="mensualite"
+            [(ngModel)]="mensualiteCredit"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0">
+          </p-inputNumber>
+        </div>
 
-      <div class="flex-auto">
-        <p-floatLabel>
-          <p-inputNumber inputId="fraisVente" [(ngModel)]="fraisVente" mode="currency" currency="EUR"
-            pTooltip="Frais d'agence, diagnostics... (7% par défaut)" tooltipPosition="top" />
+        <div class="form-group">
           <label for="fraisVente">Frais de vente estimés</label>
-        </p-floatLabel>
+          <p-inputNumber
+            id="fraisVente"
+            [(ngModel)]="fraisVente"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0">
+          </p-inputNumber>
+        </div>
       </div>
-    </div>
+    </p-panel>
 
-    <div class="mt-4">
-      <button pButton type="button" label="Comparer les options" class="p-button-success"
-        (click)="calculer()" [disabled]="!prixAchat || !valeurActuelle || !loyerMensuelPinel || !loyerMarcheEstime || selectedTMI === null"></button>
+    <div class="action-bar">
+      <button pButton type="button" label="Comparer les 3 options" icon="pi pi-calculator" class="p-button-success p-button-lg" (click)="calculer()"
+        [disabled]="!prixAchat || !valeurActuelle || !loyerMensuelPinel || !loyerMarcheEstime || selectedTMI === null">
+      </button>
     </div>
   </div>
 
-  <br>
-
-  <div *ngIf="resultats" class="resultats-container">
-    <h2>Comparaison des 3 options</h2>
+  <!-- Résultats -->
+  <div *ngIf="resultats" class="results-section">
+    <h2>Comparaison des 3 options après la fin du Pinel</h2>
 
     <div class="options-grid">
       <!-- Option 1: Vendre -->
-      <div class="option-card" [class.best-option]="meilleurOption === 'vente'">
-        <div class="option-header">
-          <h3>Option 1 : Vendre et réinvestir</h3>
-          <span *ngIf="meilleurOption === 'vente'" class="badge-best">Meilleure option</span>
+      <div class="option-card vente" [class.best-option]="meilleurOption === 'vente'">
+        <div class="card-header">
+          <h3><i class="pi pi-tag"></i> Vendre le bien</h3>
+          <span class="badge-best" *ngIf="meilleurOption === 'vente'">Meilleure option</span>
         </div>
-        <ul>
-          <li><strong>Net de vente :</strong> {{ resultats.vente.netVente | number:'1.0-0' }} EUR</li>
-          <li><strong>Plus-value brute :</strong> {{ resultats.vente.plusValue | number:'1.0-0' }} EUR</li>
-          <li><strong>Impôt sur plus-value :</strong> {{ resultats.vente.impotPlusValue | number:'1.0-0' }} EUR</li>
-          <li><strong>Net après fiscalité :</strong> {{ resultats.vente.netApresFiscalite | number:'1.0-0' }} EUR</li>
-          <li class="highlight"><strong>Rendement si réinvesti (4%) :</strong> {{ resultats.vente.rendementReinvest | number:'1.0-0' }} EUR/an</li>
-        </ul>
+        <div class="card-content">
+          <div class="section-title">Calcul de la vente</div>
+          <div class="detail-row">
+            <span>Valeur actuelle</span>
+            <span>{{ resultats.vente.netVente + (capitalRestantDu || 0) + (fraisVente || resultats.vente.netVente * 0.07) | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+          <div class="detail-row">
+            <span>Capital restant dû</span>
+            <span class="negative">- {{ capitalRestantDu || 0 | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+          <div class="detail-row">
+            <span>Frais de vente (~7%)</span>
+            <span class="negative">- {{ fraisVente || (valeurActuelle || 0) * 0.07 | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+          <div class="detail-row highlight">
+            <span>Net de vente</span>
+            <span>{{ resultats.vente.netVente | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+
+          <div class="section-title">Plus-value immobilière</div>
+          <div class="detail-row">
+            <span>Plus-value brute</span>
+            <span>{{ resultats.vente.plusValue | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+          <div class="detail-row">
+            <span>Impôt sur plus-value (36,2%)</span>
+            <span class="negative">- {{ resultats.vente.impotPlusValue | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+          <div class="detail-row highlight">
+            <span>Net après fiscalité</span>
+            <span>{{ resultats.vente.netApresFiscalite | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+
+          <div class="total-row">
+            <span>Rendement si réinvesti à 4%</span>
+            <span>{{ resultats.vente.rendementReinvest | currency:'EUR':'symbol':'1.0-0':'fr' }}/an</span>
+          </div>
+        </div>
       </div>
 
-      <!-- Option 2: Location nue -->
-      <div class="option-card" [class.best-option]="meilleurOption === 'locationNue'">
-        <div class="option-header">
-          <h3>Option 2 : Location nue classique</h3>
-          <span *ngIf="meilleurOption === 'locationNue'" class="badge-best">Meilleure option</span>
+      <!-- Option 2: Location Nue -->
+      <div class="option-card location-nue" [class.best-option]="meilleurOption === 'locationNue'">
+        <div class="card-header">
+          <h3><i class="pi pi-home"></i> Location nue classique</h3>
+          <span class="badge-best" *ngIf="meilleurOption === 'locationNue'">Meilleure option</span>
         </div>
-        <ul>
-          <li><strong>Loyer annuel marché :</strong> {{ resultats.locationNue.loyerAnnuel | number:'1.0-0' }} EUR</li>
-          <li><strong>Revenu foncier brut :</strong> {{ resultats.locationNue.revenuFoncierBrut | number:'1.0-0' }} EUR</li>
-          <li><strong>Impôts (IR + PS) :</strong> {{ resultats.locationNue.impots | number:'1.0-0' }} EUR</li>
-          <li class="highlight"><strong>Revenu net après impôt :</strong> {{ resultats.locationNue.revenuNet | number:'1.0-0' }} EUR/an</li>
-          <li><strong>Cashflow (après crédit) :</strong> {{ resultats.locationNue.cashflow | number:'1.0-0' }} EUR/an</li>
-          <li><strong>Rendement net :</strong> {{ resultats.locationNue.rendement | number:'1.2-2' }} %</li>
-        </ul>
+        <div class="card-content">
+          <div class="section-title">Revenus fonciers</div>
+          <div class="detail-row">
+            <span>Loyer annuel marché</span>
+            <span>{{ resultats.locationNue.loyerAnnuel | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+          <div class="detail-row">
+            <span>Charges + Taxe foncière</span>
+            <span class="negative">- {{ (chargesAnnuelles || 0) + (taxeFonciere || 0) | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+          <div class="detail-row highlight">
+            <span>Revenu foncier brut</span>
+            <span>{{ resultats.locationNue.revenuFoncierBrut | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+
+          <div class="section-title">Fiscalité (TMI + PS 17,2%)</div>
+          <div class="detail-row">
+            <span>Impôts sur revenus fonciers</span>
+            <span class="negative">- {{ resultats.locationNue.impots | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+          <div class="detail-row highlight">
+            <span>Revenu net après impôts</span>
+            <span>{{ resultats.locationNue.revenuNet | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+
+          <div class="section-title">Cashflow</div>
+          <div class="detail-row">
+            <span>Mensualités crédit</span>
+            <span class="negative">- {{ (mensualiteCredit || 0) * 12 | currency:'EUR':'symbol':'1.0-0':'fr' }}/an</span>
+          </div>
+
+          <div class="total-row">
+            <span>Cashflow annuel</span>
+            <span>{{ resultats.locationNue.cashflow | currency:'EUR':'symbol':'1.0-0':'fr' }}/an</span>
+          </div>
+          <div class="rendement-row">
+            <span>Rendement net : {{ resultats.locationNue.rendement | number:'1.1-1':'fr' }}%</span>
+          </div>
+        </div>
       </div>
 
       <!-- Option 3: LMNP -->
-      <div class="option-card" [class.best-option]="meilleurOption === 'lmnp'">
-        <div class="option-header">
-          <h3>Option 3 : Passage en LMNP</h3>
-          <span *ngIf="meilleurOption === 'lmnp'" class="badge-best">Meilleure option</span>
+      <div class="option-card lmnp" [class.best-option]="meilleurOption === 'lmnp'">
+        <div class="card-header">
+          <h3><i class="pi pi-building"></i> Passage en LMNP</h3>
+          <span class="badge-best" *ngIf="meilleurOption === 'lmnp'">Meilleure option</span>
         </div>
-        <ul>
-          <li><strong>Loyer meublé estimé :</strong> {{ resultats.lmnp.loyerMeuble | number:'1.0-0' }} EUR/an</li>
-          <li><strong>Amortissement annuel :</strong> {{ resultats.lmnp.amortissement | number:'1.0-0' }} EUR</li>
-          <li><strong>Résultat BIC imposable :</strong> {{ resultats.lmnp.resultatBIC | number:'1.0-0' }} EUR</li>
-          <li><strong>Impôts (IR + PS) :</strong> {{ resultats.lmnp.impots | number:'1.0-0' }} EUR</li>
-          <li class="highlight"><strong>Revenu net après impôt :</strong> {{ resultats.lmnp.revenuNet | number:'1.0-0' }} EUR/an</li>
-          <li><strong>Cashflow (après crédit) :</strong> {{ resultats.lmnp.cashflow | number:'1.0-0' }} EUR/an</li>
-          <li><strong>Rendement net :</strong> {{ resultats.lmnp.rendement | number:'1.2-2' }} %</li>
-        </ul>
+        <div class="card-content">
+          <div class="section-title">Revenus meublé (+15%)</div>
+          <div class="detail-row">
+            <span>Loyer meublé annuel</span>
+            <span>{{ resultats.lmnp.loyerMeuble | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+          <div class="detail-row">
+            <span>Charges + Taxe foncière</span>
+            <span class="negative">- {{ ((chargesAnnuelles || 0) * 1.1) + (taxeFonciere || 0) | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+
+          <div class="section-title">Avantage amortissement</div>
+          <div class="detail-row">
+            <span>Amortissement déductible</span>
+            <span class="positive">- {{ resultats.lmnp.amortissement | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+          <div class="detail-row highlight">
+            <span>Résultat BIC imposable</span>
+            <span>{{ resultats.lmnp.resultatBIC | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+
+          <div class="section-title">Fiscalité BIC</div>
+          <div class="detail-row">
+            <span>Impôts (TMI + PS)</span>
+            <span class="negative">- {{ resultats.lmnp.impots | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+          <div class="detail-row highlight">
+            <span>Revenu net après impôts</span>
+            <span>{{ resultats.lmnp.revenuNet | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          </div>
+
+          <div class="total-row">
+            <span>Cashflow annuel</span>
+            <span>{{ resultats.lmnp.cashflow | currency:'EUR':'symbol':'1.0-0':'fr' }}/an</span>
+          </div>
+          <div class="rendement-row">
+            <span>Rendement net : {{ resultats.lmnp.rendement | number:'1.1-1':'fr' }}%</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="conclusion-box">
-      <h3>Notre recommandation</h3>
-      <p *ngIf="meilleurOption === 'vente'">
-        Dans votre situation, <strong>vendre et réinvestir</strong> semble être l'option la plus rentable.
-        Le capital libéré peut être réinvesti dans un placement à meilleur rendement.
-      </p>
-      <p *ngIf="meilleurOption === 'lmnp'">
-        Le <strong>passage en LMNP</strong> apparaît comme la meilleure option. L'amortissement comptable et les loyers
-        plus élevés du meublé compensent largement la perte de l'avantage Pinel.
-      </p>
-      <p *ngIf="meilleurOption === 'locationNue'">
-        Continuer en <strong>location nue classique</strong> reste intéressant dans votre cas, notamment si vous souhaitez
-        éviter la gestion plus lourde du meublé.
-      </p>
+    <!-- Verdict -->
+    <div class="verdict-section">
+      <div class="verdict" [ngClass]="meilleurOption">
+        <div class="verdict-icon">
+          <i class="pi pi-trophy"></i>
+        </div>
+        <div class="verdict-content">
+          <span class="verdict-label">Option recommandée</span>
+          <span class="verdict-value">
+            <ng-container [ngSwitch]="meilleurOption">
+              <span *ngSwitchCase="'vente'">Vendre et réinvestir</span>
+              <span *ngSwitchCase="'locationNue'">Continuer en location nue</span>
+              <span *ngSwitchCase="'lmnp'">Passer en LMNP</span>
+            </ng-container>
+          </span>
+          <span class="verdict-detail">
+            <ng-container [ngSwitch]="meilleurOption">
+              <span *ngSwitchCase="'vente'">
+                Avec un rendement estimé de {{ resultats.vente.rendementReinvest | currency:'EUR':'symbol':'1.0-0':'fr' }}/an si réinvesti à 4%
+              </span>
+              <span *ngSwitchCase="'locationNue'">
+                Rendement net de {{ resultats.locationNue.rendement | number:'1.1-1':'fr' }}% avec un cashflow de {{ resultats.locationNue.cashflow | currency:'EUR':'symbol':'1.0-0':'fr' }}/an
+              </span>
+              <span *ngSwitchCase="'lmnp'">
+                Rendement net de {{ resultats.lmnp.rendement | number:'1.1-1':'fr' }}% grâce à l'amortissement fiscal LMNP
+              </span>
+            </ng-container>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conseils -->
+    <div class="tips-grid">
+      <div class="tip-card warning">
+        <i class="pi pi-exclamation-triangle"></i>
+        <h4>Vente anticipée</h4>
+        <p>Si vous vendez avant la fin de l'engagement, vous devrez rembourser les réductions d'impôt Pinel obtenues.</p>
+      </div>
+      <div class="tip-card info">
+        <i class="pi pi-info-circle"></i>
+        <h4>LMNP après Pinel</h4>
+        <p>Le passage en LMNP permet de bénéficier de l'amortissement comptable et réduit fortement l'imposition.</p>
+      </div>
+      <div class="tip-card success">
+        <i class="pi pi-check-circle"></i>
+        <h4>Loyer déplafonné</h4>
+        <p>Après le Pinel, vous pouvez augmenter le loyer au prix du marché, ce qui améliore la rentabilité.</p>
+      </div>
     </div>
   </div>
 
-  <br><br>
-  <div class="separator"></div>
-  <br>
+  <!-- Section explicative -->
+  <section class="info-section">
+    <h2>Comprendre la sortie du dispositif Pinel</h2>
 
-  <h2>Comprendre la sortie du dispositif Pinel</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3><i class="pi pi-calendar"></i> Calendrier Pinel</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Durée</th>
+              <th>Réduction totale</th>
+              <th>Options après</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>6 ans</td>
+              <td>12%</td>
+              <td>Vente, location nue ou LMNP</td>
+            </tr>
+            <tr>
+              <td>9 ans</td>
+              <td>18%</td>
+              <td>Vente, location nue ou LMNP</td>
+            </tr>
+            <tr>
+              <td>12 ans</td>
+              <td>21%</td>
+              <td>Vente, location nue ou LMNP</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-  <p>Le dispositif Pinel permet de bénéficier d'une réduction d'impôt en échange d'un engagement de location à loyer plafonné pendant 6, 9 ou 12 ans. À la fin de cet engagement, plusieurs questions se posent aux investisseurs.</p>
+      <div class="info-card">
+        <h3><i class="pi pi-exclamation-circle"></i> Erreurs à éviter</h3>
+        <ul class="check-list error">
+          <li>Vendre avant la fin de l'engagement fiscal</li>
+          <li>Passer en LMNP sans anticiper la fiscalité à la revente</li>
+          <li>Ignorer l'impact du crédit restant sur le cashflow</li>
+          <li>Sous-estimer la fiscalité des revenus fonciers</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-  <h3>Les 3 options à la fin du Pinel</h3>
-
-  <h4>1. Vendre le bien</h4>
-  <p>La vente permet de récupérer le capital et éventuellement une plus-value. Points à considérer :</p>
-  <ul>
-    <li>Plus-value immobilière taxée à 36,2% (19% IR + 17,2% PS)</li>
-    <li>Abattements progressifs après 6 ans de détention</li>
-    <li>Frais de vente (agence, diagnostics) à déduire</li>
-    <li>Possibilité de réinvestir dans un placement plus rentable</li>
-  </ul>
-
-  <h4>2. Continuer en location nue</h4>
-  <p>Vous conservez le bien mais perdez l'avantage fiscal Pinel :</p>
-  <ul>
-    <li>Loyers imposés comme revenus fonciers (TMI + 17,2% PS)</li>
-    <li>Possibilité d'augmenter le loyer au prix du marché</li>
-    <li>Déduction des charges réelles possible</li>
-    <li>Gestion plus simple que le meublé</li>
-  </ul>
-
-  <h4>3. Passer en LMNP (Location Meublée)</h4>
-  <p>L'option souvent la plus avantageuse fiscalement :</p>
-  <ul>
-    <li>Amortissement du bien et des meubles</li>
-    <li>Loyers généralement 10-20% plus élevés</li>
-    <li>Résultat fiscal souvent proche de zéro grâce aux amortissements</li>
-    <li>Nécessite un investissement initial pour le mobilier</li>
-  </ul>
-
-  <h3>Calendrier de fin de la réduction Pinel</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Durée d'engagement</th>
-        <th>Réduction totale (ancien taux)</th>
-        <th>Ce qui se passe ensuite</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>6 ans</td>
-        <td>12% du prix</td>
-        <td>Choix libre : vendre, louer nu ou LMNP</td>
-      </tr>
-      <tr>
-        <td>9 ans</td>
-        <td>18% du prix</td>
-        <td>Choix libre : vendre, louer nu ou LMNP</td>
-      </tr>
-      <tr>
-        <td>12 ans</td>
-        <td>21% du prix</td>
-        <td>Choix libre : vendre, louer nu ou LMNP</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <br><br>
+  <!-- FAQ -->
   <app-faq-section
     [title]="'FAQ – Questions sur la sortie du Pinel'"
     [faqItems]="faqItems"
-    [ariaLabel]="'Foire aux questions'">
+    [ariaLabel]="'Foire aux questions sortie Pinel'">
   </app-faq-section>
-</main>
+</div>

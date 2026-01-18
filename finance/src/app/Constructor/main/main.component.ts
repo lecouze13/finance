@@ -1,10 +1,13 @@
 import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { SeoService } from '../service/seo.service';
-import { FaqItem } from '../../shared/faq-section/faq-section.component';
+import { FaqItem, FaqSectionComponent } from '../../shared/faq-section/faq-section.component';
 
 @Component({
   selector: 'app-main',
+  standalone: true,
+  imports: [RouterModule, FaqSectionComponent],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
