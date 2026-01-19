@@ -137,7 +137,7 @@ $color-text-light: #475569;
 
   &.mobile {
     border-left-color: $color-finance;
-    h3 { color: $color-finance; }
+    h3 { color: $color-finance-dark; } // Meilleur contraste WCAG AA
   }
 
   &.confidentialite {
