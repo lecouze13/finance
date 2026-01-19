@@ -18,7 +18,8 @@
       "Bash(Select-String -Pattern \"angular.json|package.json|server.ts|main.server.ts\")",
       "Bash(npm uninstall:*)",
       "Bash(dir:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(identify:*)"
     ]
   }
 }

@@ -19,6 +19,19 @@
     }
   </style>
 
+  <!-- Autoriser le collage dans tous les inputs (accessibilité) -->
+  <script>
+    // Permettre le collage dans les champs PrimeNG InputNumber
+    document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('paste', function(e) {
+        // Ne pas bloquer le collage sur les inputs
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) {
+          return true;
+        }
+      }, true);
+    });
+  </script>
+
   <!-- Différer le chargement des scripts tiers pour améliorer TBT/LCP -->
   <script>
     // Charger les scripts tiers après le chargement de la page
