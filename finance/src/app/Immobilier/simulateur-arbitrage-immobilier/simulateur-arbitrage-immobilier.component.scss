@@ -1,0 +1,214 @@
+// Styles spécifiques au simulateur Arbitrage Immobilier
+
+.best-scenario {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+
+  &.vente {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  }
+  &.conservation {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+  }
+  &.refinancement {
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  }
+
+  .best-label {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .best-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: white;
+    font-size: 1.75rem;
+    font-weight: 700;
+
+    i { font-size: 2rem; }
+  }
+}
+
+.equity-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+
+  .equity-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+  }
+
+  .equity-value {
+    color: #1e3a5f;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+}
+
+// Section comparaison
+.comparison-section {
+  margin-top: 2rem;
+}
+
+.scenarios-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.scenario-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s ease;
+
+  &.best {
+    border-color: #28a745;
+    box-shadow: 0 4px 20px rgba(40, 167, 69, 0.2);
+
+    &::before {
+      content: 'Recommandé';
+      position: absolute;
+      top: 10px;
+      right: -30px;
+      background: #28a745;
+      color: white;
+      padding: 0.25rem 2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transform: rotate(45deg);
+    }
+  }
+
+  position: relative;
+}
+
+.scenario-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  color: white;
+
+  i { font-size: 1.5rem; }
+
+  h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  &.vente {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  }
+  &.conservation {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+  }
+  &.refinancement {
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  }
+}
+
+.scenario-metrics {
+  padding: 1.25rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+
+  &.highlight {
+    background: #f8f9fa;
+    margin: 0.5rem -1.25rem;
+    padding: 0.75rem 1.25rem;
+
+    .metric-value {
+      font-size: 1.25rem;
+      color: #1e3a5f;
+    }
+  }
+
+  .metric-label {
+    color: #6c757d;
+    font-size: 0.85rem;
+  }
+
+  .metric-value {
+    font-weight: 600;
+    color: #1e3a5f;
+
+    &.positive { color: #28a745; }
+    &.negative { color: #dc3545; }
+  }
+}
+
+.scenario-pros-cons {
+  padding: 1.25rem;
+
+  h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    i { font-size: 1rem; }
+  }
+
+  .pros h4 {
+    color: #28a745;
+  }
+
+  .cons h4 {
+    color: #dc3545;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.25rem;
+
+    li {
+      font-size: 0.85rem;
+      color: #6c757d;
+      margin-bottom: 0.35rem;
+      line-height: 1.4;
+    }
+  }
+
+  .pros { margin-bottom: 1rem; }
+}
+
+// Override panel
+:host ::ng-deep {
+  .results-panel .p-panel-header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+  }
+}
+
+.positive { color: #28a745; }
+.negative { color: #dc3545; }
+
+@media (max-width: 768px) {
+  .scenario-card.best::before {
+    display: none;
+  }
+}

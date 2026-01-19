@@ -1,0 +1,319 @@
+<app-breadcrumb></app-breadcrumb>
+
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Simulateur Stratégie Multi-Biens Immobilier</h1>
+    <p class="subtitle">Planifiez votre trajectoire de 1 à 10+ biens grâce à l'effet boule de neige des cash-flows</p>
+  </div>
+
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Votre Situation Actuelle" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="revenus">Revenus nets mensuels</label>
+            <p-inputNumber
+              id="revenus"
+              [(ngModel)]="revenusMensuels"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              placeholder="Vos revenus nets">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="apport">Apport initial disponible</label>
+            <p-inputNumber
+              id="apport"
+              [(ngModel)]="apportInitial"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              placeholder="Épargne disponible">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="epargne">Épargne mensuelle</label>
+            <p-inputNumber
+              id="epargne"
+              [(ngModel)]="epargnesMensuelles"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              placeholder="Capacité d'épargne">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="endettement">Taux d'endettement max</label>
+            <p-inputNumber
+              id="endettement"
+              [(ngModel)]="tauxEndettementMax"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [min]="20"
+              [max]="40"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Caractéristiques du Bien Type" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="prixBien">Prix d'achat moyen</label>
+            <p-inputNumber
+              id="prixBien"
+              [(ngModel)]="prixBienMoyen"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="50000"
+              placeholder="Prix du bien">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="apportBien">Apport par bien</label>
+            <p-inputNumber
+              id="apportBien"
+              [(ngModel)]="apportParBien"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              placeholder="Apport nécessaire">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="loyer">Loyer mensuel</label>
+            <p-inputNumber
+              id="loyer"
+              [(ngModel)]="loyerMensuel"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              placeholder="Loyer attendu">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="charges">Charges mensuelles</label>
+            <p-inputNumber
+              id="charges"
+              [(ngModel)]="chargesMensuelles"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              placeholder="TF, copro, gestion...">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="tauxCredit">Taux du crédit</label>
+            <p-inputNumber
+              id="tauxCredit"
+              [(ngModel)]="tauxCredit"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="2"
+              [maxFractionDigits]="2"
+              [min]="0"
+              [max]="10"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="dureeCredit">Durée du crédit</label>
+            <p-dropdown
+              id="dureeCredit"
+              [options]="dureeOptions"
+              [(ngModel)]="dureeCredit"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label for="plusValue">Plus-value annuelle</label>
+            <p-inputNumber
+              id="plusValue"
+              [(ngModel)]="plusValueAnnuelle"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="1"
+              [maxFractionDigits]="1"
+              [min]="0"
+              [max]="10"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Objectifs" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="objectif">Nombre de biens visé</label>
+            <p-dropdown
+              id="objectif"
+              [options]="objectifOptions"
+              [(ngModel)]="objectifBiens"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+
+          <div class="form-group">
+            <label for="horizon">Horizon de simulation</label>
+            <p-dropdown
+              id="horizon"
+              [options]="horizonOptions"
+              [(ngModel)]="horizonSimulation"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+
+    <div class="results-section">
+      <p-panel header="Votre Trajectoire d'Investissement" styleClass="results-panel">
+        <div class="result-highlight" *ngIf="anneesObjectif > 0">
+          <span class="result-label">Objectif {{ objectifBiens }} biens atteint en</span>
+          <span class="result-value primary">{{ anneesObjectif }} ans</span>
+        </div>
+
+        <div class="result-highlight warning" *ngIf="anneesObjectif === 0">
+          <span class="result-label">Objectif {{ objectifBiens }} biens</span>
+          <span class="result-value">Non atteint sur {{ horizonSimulation }} ans</span>
+        </div>
+
+        <div class="result-highlight">
+          <span class="result-label">Patrimoine net à {{ horizonSimulation }} ans</span>
+          <span class="result-value success">{{ formatCurrency(patrimoineNetFinal) }}</span>
+        </div>
+
+        <div class="results-details">
+          <div class="detail-row">
+            <span class="detail-label">Cash-flow annuel final</span>
+            <span class="detail-value" [ngClass]="{'positive': cashflowFinal > 0, 'negative': cashflowFinal < 0}">
+              {{ formatCurrency(cashflowFinal) }}/an
+            </span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Cash-flow mensuel final</span>
+            <span class="detail-value" [ngClass]="{'positive': cashflowFinal > 0, 'negative': cashflowFinal < 0}">
+              {{ formatCurrency(cashflowFinal / 12) }}/mois
+            </span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Revenus locatifs bruts</span>
+            <span class="detail-value">{{ formatCurrency(revenusPassifsFinal) }}/an</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Nombre de biens acquis</span>
+            <span class="detail-value">{{ biens.length }} bien{{ biens.length > 1 ? 's' : '' }}</span>
+          </div>
+        </div>
+
+        <div class="info-box success" *ngIf="cashflowFinal >= 24000">
+          <i class="pi pi-check-circle"></i>
+          <span>Objectif rentier atteint ! Vos revenus passifs dépassent 2 000€/mois.</span>
+        </div>
+
+        <div class="info-box" *ngIf="cashflowFinal < 0">
+          <i class="pi pi-exclamation-triangle"></i>
+          <span>Cash-flow négatif : vos charges dépassent vos revenus locatifs. Augmentez les loyers ou réduisez le prix d'achat.</span>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <!-- Chronologie des acquisitions -->
+  <div class="timeline-section" *ngIf="biens.length > 0">
+    <p-panel header="Chronologie de vos Acquisitions" styleClass="custom-panel">
+      <div class="timeline">
+        <div class="timeline-item" *ngFor="let bien of biens">
+          <div class="timeline-marker">{{ bien.numero }}</div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span class="timeline-year">Année {{ bien.annee }}</span>
+              <span class="timeline-title">Bien n°{{ bien.numero }}</span>
+            </div>
+            <div class="timeline-details">
+              <span>Achat : {{ formatCurrency(bien.prixAchat) }}</span>
+              <span>Loyer : {{ formatCurrency(bien.loyer) }}/mois</span>
+              <span [ngClass]="{'positive': bien.cashflowMensuel > 0, 'negative': bien.cashflowMensuel < 0}">
+                Cash-flow : {{ formatCurrency(bien.cashflowMensuel) }}/mois
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-panel>
+  </div>
+
+  <!-- Tableau de projection -->
+  <div class="projection-section">
+    <p-panel header="Projection Année par Année" styleClass="custom-panel">
+      <p-table [value]="simulation" [paginator]="true" [rows]="10" styleClass="p-datatable-sm">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Année</th>
+            <th>Nb Biens</th>
+            <th>Revenus</th>
+            <th>Charges</th>
+            <th>Cash-flow</th>
+            <th>Patrimoine Net</th>
+            <th>Capacité</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+          <tr [ngClass]="{'highlight-row': row.nouveauBienPossible}">
+            <td>{{ row.annee }}</td>
+            <td>
+              <span class="biens-badge">{{ row.nombreBiens }}</span>
+            </td>
+            <td>{{ formatCurrency(row.revenus) }}</td>
+            <td>{{ formatCurrency(row.charges) }}</td>
+            <td [ngClass]="{'positive': row.cashflowTotal > 0, 'negative': row.cashflowTotal < 0}">
+              {{ formatCurrency(row.cashflowTotal) }}
+            </td>
+            <td class="patrimoine">{{ formatCurrency(row.patrimoineNet) }}</td>
+            <td>{{ formatCurrency(row.capaciteEmprunt) }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-panel>
+  </div>
+
+  <app-faq-section
+    [faqItems]="faqItems"
+    pageTitle="Simulateur Stratégie Multi-Biens Immobilier">
+  </app-faq-section>
+</div>

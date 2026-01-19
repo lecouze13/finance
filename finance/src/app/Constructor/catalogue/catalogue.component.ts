@@ -120,6 +120,9 @@ export class CatalogueComponent implements OnInit {
       { id: 'apport', title: 'Apport vs Emprunt', description: 'Optimisez votre stratégie d\'apport vs effet de levier', route: '/simulateur-apport-vs-emprunt', type: 'simulateur', category: 'Immobilier', tags: ['crédit', 'investissement'], icon: 'pi-wallet' },
       { id: 'airbnb', title: 'Airbnb vs Location', description: 'Comparez location courte durée vs longue durée', route: '/airbnb-vs-location', type: 'simulateur', category: 'Immobilier', tags: ['location', 'comparatif'], icon: 'pi-calendar' },
       { id: 'budget', title: 'Budget immobilier', description: 'Estimez le budget total de votre projet immobilier', route: '/budget-immobilier', type: 'simulateur', category: 'Immobilier', tags: ['achat', 'budget'], icon: 'pi-money-bill' },
+      { id: 'multi-biens', title: 'Stratégie Multi-Biens', description: 'Planifiez votre trajectoire de 1 à 10+ biens avec l\'effet boule de neige', route: '/simulateur-strategie-multi-biens', type: 'simulateur', category: 'Immobilier', tags: ['investissement', 'stratégie', 'rentier'], icon: 'pi-chart-line' },
+      { id: 'arbitrage-immo', title: 'Arbitrage Vendre/Conserver/Refinancer', description: 'Comparez les scénarios pour optimiser votre patrimoine immobilier', route: '/simulateur-arbitrage-immobilier', type: 'simulateur', category: 'Immobilier', tags: ['arbitrage', 'stratégie', 'patrimoine'], icon: 'pi-sliders-h' },
+      { id: 'stress-test', title: 'Stress Test Immobilier', description: 'Testez la résistance de votre patrimoine face aux imprévus', route: '/simulateur-stress-test-immobilier', type: 'simulateur', category: 'Immobilier', tags: ['risque', 'résilience', 'trésorerie'], icon: 'pi-exclamation-triangle' },
     ];
 
     // Simulateurs financiers

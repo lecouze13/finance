@@ -69,6 +69,9 @@ import { SimulateurColocationComponent } from './Immobilier/simulateur-colocatio
 import { SimulateurRenovationEnergetiqueComponent } from './Immobilier/simulateur-renovation-energetique/simulateur-renovation-energetique.component';
 import { SimulateurDividendesSalaireComponent } from './Finance/simulateur-dividendes-salaire/simulateur-dividendes-salaire.component';
 import { CatalogueComponent } from './Constructor/catalogue/catalogue.component';
+import { SimulateurStrategieMultiBiensComponent } from './Immobilier/simulateur-strategie-multi-biens/simulateur-strategie-multi-biens.component';
+import { SimulateurArbitrageImmobilierComponent } from './Immobilier/simulateur-arbitrage-immobilier/simulateur-arbitrage-immobilier.component';
+import { SimulateurStressTestComponent } from './Immobilier/simulateur-stress-test/simulateur-stress-test.component';
 
 export const routes: Routes = [
   { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -603,6 +606,18 @@ export const routes: Routes = [
   {
     path: AppRoutes.CATALOGUE,
     component: CatalogueComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_STRATEGIE_MULTI_BIENS,
+    component: SimulateurStrategieMultiBiensComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_ARBITRAGE_IMMOBILIER,
+    component: SimulateurArbitrageImmobilierComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_STRESS_TEST_IMMO,
+    component: SimulateurStressTestComponent,
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

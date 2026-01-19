@@ -1,0 +1,276 @@
+// Styles spécifiques au simulateur Stress Test Immobilier
+
+// Score de résilience
+.score-container {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+
+  &.excellent {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    .score-circle { border-color: #28a745; }
+    .score-value { color: #28a745; }
+  }
+
+  &.bon {
+    background: linear-gradient(135deg, #cce5ff 0%, #b8daff 100%);
+    .score-circle { border-color: #007bff; }
+    .score-value { color: #007bff; }
+  }
+
+  &.moyen {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+    .score-circle { border-color: #ffc107; }
+    .score-value { color: #856404; }
+  }
+
+  &.faible {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+    .score-circle { border-color: #dc3545; }
+    .score-value { color: #dc3545; }
+  }
+}
+
+.score-circle {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 6px solid;
+  background: white;
+  margin-bottom: 1rem;
+
+  .score-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .score-max {
+    font-size: 1rem;
+    color: #6c757d;
+  }
+}
+
+.score-label {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e3a5f;
+}
+
+// Métriques clés
+.key-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.metric-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  text-align: center;
+
+  .metric-label {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+  }
+
+  .metric-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+
+    &.positive { color: #28a745; }
+    &.negative { color: #dc3545; }
+    &.warning { color: #ffc107; }
+  }
+}
+
+// Recommandations
+.recommendations {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.recommendation {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #fff3cd;
+  border-radius: 8px;
+  border-left: 4px solid #ffc107;
+
+  i {
+    color: #856404;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  span {
+    color: #856404;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+}
+
+// Sliders
+.slider-group {
+  label {
+    margin-bottom: 0.75rem;
+  }
+
+  :host ::ng-deep .p-slider {
+    width: 100%;
+  }
+}
+
+// Section scénarios
+.scenarios-section {
+  margin-top: 2rem;
+}
+
+.scenarios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.scenario-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s ease;
+
+  &.faible { border-left: 4px solid #28a745; }
+  &.modere { border-left: 4px solid #ffc107; }
+  &.eleve { border-left: 4px solid #fd7e14; }
+  &.critique { border-left: 4px solid #dc3545; }
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.scenario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+
+  h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e3a5f;
+  }
+}
+
+.niveau-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  &.faible {
+    background: #d4edda;
+    color: #155724;
+  }
+  &.modere {
+    background: #fff3cd;
+    color: #856404;
+  }
+  &.eleve {
+    background: #ffe5d0;
+    color: #c45000;
+  }
+  &.critique {
+    background: #f8d7da;
+    color: #721c24;
+  }
+}
+
+.scenario-description {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin: 0 0 1rem;
+}
+
+.scenario-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.scenario-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .label {
+    font-size: 0.85rem;
+    color: #6c757d;
+  }
+
+  .value {
+    font-weight: 600;
+    font-size: 0.9rem;
+
+    &.positive { color: #28a745; }
+    &.negative { color: #dc3545; }
+  }
+}
+
+.scenario-progress {
+  margin-top: 0.5rem;
+
+  :host ::ng-deep {
+    .p-progressbar {
+      height: 8px;
+      border-radius: 4px;
+      background: #e9ecef;
+    }
+
+    .progress-faible .p-progressbar-value {
+      background: #28a745;
+    }
+    .progress-modere .p-progressbar-value {
+      background: #ffc107;
+    }
+    .progress-eleve .p-progressbar-value {
+      background: #fd7e14;
+    }
+    .progress-critique .p-progressbar-value {
+      background: #dc3545;
+    }
+  }
+}
+
+// Override panels
+:host ::ng-deep {
+  .results-panel .p-panel-header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+  }
+
+  .stress-panel .p-panel-header {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  }
+}
+
+.positive { color: #28a745; }
+.negative { color: #dc3545; }

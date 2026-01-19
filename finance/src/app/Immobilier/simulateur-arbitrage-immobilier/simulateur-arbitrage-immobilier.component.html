@@ -1,0 +1,392 @@
+<app-breadcrumb></app-breadcrumb>
+
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Simulateur Arbitrage Immobilier</h1>
+    <p class="subtitle">Comparez les scénarios : Vendre, Conserver ou Refinancer votre bien</p>
+  </div>
+
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Votre Bien Actuel" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="valeur">Valeur actuelle estimée</label>
+            <p-inputNumber
+              id="valeur"
+              [(ngModel)]="valeurActuelle"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="prixAchat">Prix d'achat initial</label>
+            <p-inputNumber
+              id="prixAchat"
+              [(ngModel)]="prixAchat"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="capital">Capital restant dû</label>
+            <p-inputNumber
+              id="capital"
+              [(ngModel)]="capitalRestant"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="annees">Années de détention</label>
+            <p-inputNumber
+              id="annees"
+              [(ngModel)]="anneeDetention"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="30"
+              suffix=" ans">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="loyer">Loyer mensuel</label>
+            <p-inputNumber
+              id="loyer"
+              [(ngModel)]="loyerMensuel"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="charges">Charges mensuelles</label>
+            <p-inputNumber
+              id="charges"
+              [(ngModel)]="chargesMensuelles"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="mensualite">Mensualité crédit</label>
+            <p-inputNumber
+              id="mensualite"
+              [(ngModel)]="mensualiteCredit"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="dureeRestante">Durée restante du crédit</label>
+            <p-inputNumber
+              id="dureeRestante"
+              [(ngModel)]="dureeRestante"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="30"
+              suffix=" ans">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Hypothèses de Projection" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="plusValue">Plus-value annuelle estimée</label>
+            <p-inputNumber
+              id="plusValue"
+              [(ngModel)]="plusValueAnnuelle"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="1"
+              [min]="-5"
+              [max]="10"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="augLoyer">Augmentation loyer annuelle</label>
+            <p-inputNumber
+              id="augLoyer"
+              [(ngModel)]="augmentationLoyer"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="1"
+              [min]="0"
+              [max]="5"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="reinvest">Rendement réinvestissement</label>
+            <p-inputNumber
+              id="reinvest"
+              [(ngModel)]="reinvestissementTaux"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="1"
+              [min]="0"
+              [max]="15"
+              suffix=" %"
+              pTooltip="Rendement attendu si vous vendez et réinvestissez ailleurs">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="fraisVente">Frais de vente estimés</label>
+            <p-inputNumber
+              id="fraisVente"
+              [(ngModel)]="fraisVente"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="1"
+              [min]="0"
+              [max]="10"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Options de Refinancement" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="montantRefin">Montant à extraire</label>
+            <p-inputNumber
+              id="montantRefin"
+              [(ngModel)]="montantRefinance"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="nouveauTaux">Nouveau taux crédit</label>
+            <p-inputNumber
+              id="nouveauTaux"
+              [(ngModel)]="nouveauTaux"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="2"
+              [min]="0"
+              [max]="10"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="nouvelleDuree">Nouvelle durée crédit</label>
+            <p-inputNumber
+              id="nouvelleDuree"
+              [(ngModel)]="nouvelleDuree"
+              (ngModelChange)="calculer()"
+              [min]="5"
+              [max]="25"
+              suffix=" ans">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="fraisRefin">Frais de refinancement</label>
+            <p-inputNumber
+              id="fraisRefin"
+              [(ngModel)]="fraisRefinancement"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+
+    <div class="results-section">
+      <p-panel header="Recommandation" styleClass="results-panel">
+        <div class="best-scenario" [ngClass]="meilleurScenario">
+          <div class="best-label">Meilleur scénario à 10 ans</div>
+          <div class="best-value">
+            <i class="pi" [ngClass]="{
+              'pi-tag': meilleurScenario === 'vente',
+              'pi-home': meilleurScenario === 'conservation',
+              'pi-refresh': meilleurScenario === 'refinancement'
+            }"></i>
+            <span>{{ meilleurScenario === 'vente' ? 'Vendre' : meilleurScenario === 'conservation' ? 'Conserver' : 'Refinancer' }}</span>
+          </div>
+        </div>
+
+        <div class="equity-info">
+          <span class="equity-label">Équité actuelle dans le bien</span>
+          <span class="equity-value">{{ formatCurrency(valeurActuelle - capitalRestant) }}</span>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <!-- Comparaison des scénarios -->
+  <div class="comparison-section">
+    <p-panel header="Comparaison des 3 Scénarios" styleClass="custom-panel">
+      <div class="scenarios-grid">
+        <!-- Scénario Vente -->
+        <div class="scenario-card" [ngClass]="{'best': meilleurScenario === 'vente'}" *ngIf="scenarioVente">
+          <div class="scenario-header vente">
+            <i class="pi pi-tag"></i>
+            <h3>Vendre</h3>
+          </div>
+          <div class="scenario-metrics">
+            <div class="metric">
+              <span class="metric-label">Patrimoine à 5 ans</span>
+              <span class="metric-value">{{ formatCurrency(scenarioVente.patrimoineAn5) }}</span>
+            </div>
+            <div class="metric highlight">
+              <span class="metric-label">Patrimoine à 10 ans</span>
+              <span class="metric-value">{{ formatCurrency(scenarioVente.patrimoineAn10) }}</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Cash-flow cumulé 10 ans</span>
+              <span class="metric-value">{{ formatCurrency(scenarioVente.cashflowCumule10) }}</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Rendement annualisé</span>
+              <span class="metric-value">{{ scenarioVente.rendementAnnuel | number:'1.1-1' }}%</span>
+            </div>
+          </div>
+          <div class="scenario-pros-cons">
+            <div class="pros">
+              <h4><i class="pi pi-check-circle"></i> Avantages</h4>
+              <ul>
+                <li *ngFor="let avantage of scenarioVente.avantages">{{ avantage }}</li>
+              </ul>
+            </div>
+            <div class="cons">
+              <h4><i class="pi pi-times-circle"></i> Inconvénients</h4>
+              <ul>
+                <li *ngFor="let inconvenient of scenarioVente.inconvenients">{{ inconvenient }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scénario Conservation -->
+        <div class="scenario-card" [ngClass]="{'best': meilleurScenario === 'conservation'}" *ngIf="scenarioConservation">
+          <div class="scenario-header conservation">
+            <i class="pi pi-home"></i>
+            <h3>Conserver</h3>
+          </div>
+          <div class="scenario-metrics">
+            <div class="metric">
+              <span class="metric-label">Patrimoine à 5 ans</span>
+              <span class="metric-value">{{ formatCurrency(scenarioConservation.patrimoineAn5) }}</span>
+            </div>
+            <div class="metric highlight">
+              <span class="metric-label">Patrimoine à 10 ans</span>
+              <span class="metric-value">{{ formatCurrency(scenarioConservation.patrimoineAn10) }}</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Cash-flow cumulé 10 ans</span>
+              <span class="metric-value" [ngClass]="{'positive': scenarioConservation.cashflowCumule10 > 0, 'negative': scenarioConservation.cashflowCumule10 < 0}">
+                {{ formatCurrency(scenarioConservation.cashflowCumule10) }}
+              </span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Rendement annualisé</span>
+              <span class="metric-value">{{ scenarioConservation.rendementAnnuel | number:'1.1-1' }}%</span>
+            </div>
+          </div>
+          <div class="scenario-pros-cons">
+            <div class="pros">
+              <h4><i class="pi pi-check-circle"></i> Avantages</h4>
+              <ul>
+                <li *ngFor="let avantage of scenarioConservation.avantages">{{ avantage }}</li>
+              </ul>
+            </div>
+            <div class="cons">
+              <h4><i class="pi pi-times-circle"></i> Inconvénients</h4>
+              <ul>
+                <li *ngFor="let inconvenient of scenarioConservation.inconvenients">{{ inconvenient }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scénario Refinancement -->
+        <div class="scenario-card" [ngClass]="{'best': meilleurScenario === 'refinancement'}" *ngIf="scenarioRefinancement">
+          <div class="scenario-header refinancement">
+            <i class="pi pi-refresh"></i>
+            <h3>Refinancer</h3>
+          </div>
+          <div class="scenario-metrics">
+            <div class="metric">
+              <span class="metric-label">Patrimoine à 5 ans</span>
+              <span class="metric-value">{{ formatCurrency(scenarioRefinancement.patrimoineAn5) }}</span>
+            </div>
+            <div class="metric highlight">
+              <span class="metric-label">Patrimoine à 10 ans</span>
+              <span class="metric-value">{{ formatCurrency(scenarioRefinancement.patrimoineAn10) }}</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Cash-flow cumulé 10 ans</span>
+              <span class="metric-value" [ngClass]="{'positive': scenarioRefinancement.cashflowCumule10 > 0, 'negative': scenarioRefinancement.cashflowCumule10 < 0}">
+                {{ formatCurrency(scenarioRefinancement.cashflowCumule10) }}
+              </span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Rendement annualisé</span>
+              <span class="metric-value">{{ scenarioRefinancement.rendementAnnuel | number:'1.1-1' }}%</span>
+            </div>
+          </div>
+          <div class="scenario-pros-cons">
+            <div class="pros">
+              <h4><i class="pi pi-check-circle"></i> Avantages</h4>
+              <ul>
+                <li *ngFor="let avantage of scenarioRefinancement.avantages">{{ avantage }}</li>
+              </ul>
+            </div>
+            <div class="cons">
+              <h4><i class="pi pi-times-circle"></i> Inconvénients</h4>
+              <ul>
+                <li *ngFor="let inconvenient of scenarioRefinancement.inconvenients">{{ inconvenient }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-panel>
+  </div>
+
+  <app-faq-section
+    [faqItems]="faqItems"
+    pageTitle="Simulateur Arbitrage Immobilier">
+  </app-faq-section>
+</div>

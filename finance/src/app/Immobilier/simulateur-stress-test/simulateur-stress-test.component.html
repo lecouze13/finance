@@ -1,0 +1,270 @@
+<app-breadcrumb></app-breadcrumb>
+
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Simulateur Stress Test Immobilier</h1>
+    <p class="subtitle">Testez la résistance de votre patrimoine face aux imprévus : vacance, impayés, hausse des taux</p>
+  </div>
+
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Votre Patrimoine Actuel" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nbBiens">Nombre de biens</label>
+            <p-inputNumber
+              id="nbBiens"
+              [(ngModel)]="nombreBiens"
+              (ngModelChange)="calculer()"
+              [min]="1"
+              [max]="50">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="loyers">Loyers mensuels totaux</label>
+            <p-inputNumber
+              id="loyers"
+              [(ngModel)]="loyerTotal"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="chargesImmo">Charges immobilières totales</label>
+            <p-inputNumber
+              id="chargesImmo"
+              [(ngModel)]="chargesTotal"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              pTooltip="TF, copro, assurance PNO, gestion...">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="mensualites">Mensualités de crédits</label>
+            <p-inputNumber
+              id="mensualites"
+              [(ngModel)]="mensualitesCredits"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="tresorerie">Trésorerie disponible</label>
+            <p-inputNumber
+              id="tresorerie"
+              [(ngModel)]="tresorerieDisponible"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              pTooltip="Épargne de précaution pour l'immobilier">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Vos Revenus Personnels (hors immo)" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="salaires">Revenus nets mensuels</label>
+            <p-inputNumber
+              id="salaires"
+              [(ngModel)]="revenusSalaires"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="chargesPerso">Charges personnelles</label>
+            <p-inputNumber
+              id="chargesPerso"
+              [(ngModel)]="chargesPersonnelles"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              pTooltip="Loyer/crédit RP, factures, alimentation...">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Paramètres de Stress" styleClass="custom-panel stress-panel">
+        <div class="form-grid">
+          <div class="form-group slider-group">
+            <label for="vacance">Vacance locative : {{ vacanceLocative }}%</label>
+            <p-slider
+              id="vacance"
+              [(ngModel)]="vacanceLocative"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="50"
+              [step]="5">
+            </p-slider>
+          </div>
+
+          <div class="form-group slider-group">
+            <label for="baisse">Baisse des loyers : {{ baisseLoyers }}%</label>
+            <p-slider
+              id="baisse"
+              [(ngModel)]="baisseLoyers"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="30"
+              [step]="5">
+            </p-slider>
+          </div>
+
+          <div class="form-group slider-group">
+            <label for="taux">Hausse des taux : +{{ hausseTaux }} pts</label>
+            <p-slider
+              id="taux"
+              [(ngModel)]="hausseTaux"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="5"
+              [step]="0.5">
+            </p-slider>
+          </div>
+
+          <div class="form-group">
+            <label for="travaux">Travaux urgents</label>
+            <p-inputNumber
+              id="travaux"
+              [(ngModel)]="travauxUrgents"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="impayes">Mois d'impayés</label>
+            <p-inputNumber
+              id="impayes"
+              [(ngModel)]="impayes"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="24"
+              suffix=" mois">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+
+    <div class="results-section">
+      <p-panel header="Score de Résilience" styleClass="results-panel">
+        <div class="score-container" [ngClass]="getScoreClass()">
+          <div class="score-circle">
+            <span class="score-value">{{ scoreResilience }}</span>
+            <span class="score-max">/100</span>
+          </div>
+          <div class="score-label">{{ getScoreLabel() }}</div>
+        </div>
+
+        <div class="key-metrics">
+          <div class="metric-card">
+            <span class="metric-label">Cash-flow normal</span>
+            <span class="metric-value" [ngClass]="{'positive': cashflowNormal >= 0, 'negative': cashflowNormal < 0}">
+              {{ formatCurrency(cashflowNormal) }}/mois
+            </span>
+          </div>
+
+          <div class="metric-card">
+            <span class="metric-label">Cash-flow stressé</span>
+            <span class="metric-value" [ngClass]="{'positive': cashflowStresse >= 0, 'negative': cashflowStresse < 0}">
+              {{ formatCurrency(cashflowStresse) }}/mois
+            </span>
+          </div>
+
+          <div class="metric-card">
+            <span class="metric-label">Réserve de trésorerie</span>
+            <span class="metric-value" [ngClass]="{
+              'positive': moisDeReserve >= 6,
+              'warning': moisDeReserve >= 3 && moisDeReserve < 6,
+              'negative': moisDeReserve < 3
+            }">
+              {{ moisDeReserve | number:'1.1-1' }} mois
+            </span>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Recommandations" styleClass="custom-panel" *ngIf="recommandations.length > 0">
+        <div class="recommendations">
+          <div class="recommendation" *ngFor="let reco of recommandations">
+            <i class="pi pi-lightbulb"></i>
+            <span>{{ reco }}</span>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <!-- Tableau des scénarios -->
+  <div class="scenarios-section">
+    <p-panel header="Analyse des Scénarios de Stress" styleClass="custom-panel">
+      <div class="scenarios-grid">
+        <div class="scenario-card" *ngFor="let scenario of scenarios" [ngClass]="scenario.niveau">
+          <div class="scenario-header">
+            <h3>{{ scenario.nom }}</h3>
+            <span class="niveau-badge" [ngClass]="scenario.niveau">{{ getNiveauLabel(scenario.niveau) }}</span>
+          </div>
+          <p class="scenario-description">{{ scenario.description }}</p>
+          <div class="scenario-metrics">
+            <div class="scenario-metric">
+              <span class="label">Impact annuel</span>
+              <span class="value negative">-{{ formatCurrency(scenario.impact) }}</span>
+            </div>
+            <div class="scenario-metric">
+              <span class="label">Cash-flow mensuel</span>
+              <span class="value" [ngClass]="{'positive': scenario.cashflowMensuel >= 0, 'negative': scenario.cashflowMensuel < 0}">
+                {{ formatCurrency(scenario.cashflowMensuel) }}
+              </span>
+            </div>
+            <div class="scenario-metric">
+              <span class="label">Autonomie</span>
+              <span class="value">
+                {{ scenario.moisTenable >= 99 ? '∞' : (scenario.moisTenable | number:'1.0-0') + ' mois' }}
+              </span>
+            </div>
+          </div>
+          <div class="scenario-progress">
+            <p-progressBar
+              [value]="scenario.niveau === 'faible' ? 100 : scenario.niveau === 'modere' ? 75 : scenario.niveau === 'eleve' ? 40 : 15"
+              [showValue]="false"
+              [styleClass]="'progress-' + scenario.niveau">
+            </p-progressBar>
+          </div>
+        </div>
+      </div>
+    </p-panel>
+  </div>
+
+  <app-faq-section
+    [faqItems]="faqItems"
+    pageTitle="Simulateur Stress Test Immobilier">
+  </app-faq-section>
+</div>

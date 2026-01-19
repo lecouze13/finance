@@ -72,5 +72,13 @@ export const AppRoutes = {
   SIMULATEUR_COLOCATION: 'simulateur-colocation',
   SIMULATEUR_RENOVATION_ENERGETIQUE: 'simulateur-renovation-energetique',
   SIMULATEUR_DIVIDENDES_SALAIRE: 'simulateur-dividendes-salaire',
+  SIMULATEUR_STRATEGIE_MULTI_BIENS: 'simulateur-strategie-multi-biens',
+  SIMULATEUR_ARBITRAGE_IMMOBILIER: 'simulateur-arbitrage-immobilier',
+  SIMULATEUR_FISCALITE_GLOBALE: 'simulateur-fiscalite-globale',
+  SIMULATEUR_STRESS_TEST_IMMO: 'simulateur-stress-test-immobilier',
+  SIMULATEUR_REGIME_OPTIMAL: 'simulateur-regime-fiscal-optimal',
+  SIMULATEUR_CAPACITE_DYNAMIQUE: 'simulateur-capacite-endettement-dynamique',
+  SIMULATEUR_TIMING_VENTE: 'simulateur-timing-vente-optimal',
+  SIMULATEUR_FIRE_IMMOBILIER: 'simulateur-fire-immobilier',
   CATALOGUE: 'catalogue',
 };
