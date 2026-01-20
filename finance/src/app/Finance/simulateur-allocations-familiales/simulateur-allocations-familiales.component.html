@@ -1,0 +1,144 @@
+<app-breadcrumb></app-breadcrumb>
+
+<div class="simulator-container">
+  <div class="simulator-header">
+    <h1>Simulateur Allocations Familiales 2026</h1>
+    <p class="subtitle">Calculez le montant de vos allocations selon vos revenus et le nombre d'enfants</p>
+  </div>
+
+  <div class="simulator-content">
+    <p-panel header="Votre situation" class="input-panel">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="situation">Situation familiale</label>
+          <p-dropdown
+            id="situation"
+            [options]="situationOptions"
+            [(ngModel)]="enCouple"
+            (onChange)="calculer()"
+            [style]="{'width':'100%'}">
+          </p-dropdown>
+        </div>
+
+        <div class="form-group">
+          <label for="enfants">Nombre d'enfants</label>
+          <p-dropdown
+            id="enfants"
+            [options]="enfantsOptions"
+            [(ngModel)]="nombreEnfants"
+            (onChange)="calculer()"
+            [style]="{'width':'100%'}">
+          </p-dropdown>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="revenus">Revenus annuels nets du foyer (N-2)</label>
+          <p-inputNumber
+            id="revenus"
+            [(ngModel)]="revenuAnnuel"
+            (onInput)="calculer()"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0"
+            [style]="{'width':'100%'}"
+            pTooltip="Revenu net imposable de l'année N-2">
+          </p-inputNumber>
+        </div>
+      </div>
+
+      <div class="ages-section" *ngIf="nombreEnfants >= 2">
+        <h3>Âge des enfants (pour majoration +14 ans)</h3>
+        <div class="ages-grid">
+          <div class="age-input" *ngFor="let i of getAgesArray(); let idx = index">
+            <label>Enfant {{ i }}</label>
+            <p-inputNumber
+              [ngModel]="getEnfantAge(idx)"
+              (ngModelChange)="setEnfantAge(idx, $event)"
+              [min]="0"
+              [max]="20"
+              suffix=" ans"
+              [style]="{'width':'100%'}">
+            </p-inputNumber>
+          </div>
+        </div>
+      </div>
+    </p-panel>
+
+    <p-panel header="Résultat" class="results-panel">
+      <div class="result-main">
+        <div class="result-label">Allocations familiales mensuelles</div>
+        <div class="result-value">{{ allocationTotale | number:'1.2-2':'fr-FR' }} €</div>
+        <div class="result-annual">soit {{ allocationAnnuelle | number:'1.0-0':'fr-FR' }} €/an</div>
+      </div>
+
+      <div class="result-details">
+        <div class="detail-row">
+          <span class="detail-label">Allocation de base</span>
+          <span class="detail-value">{{ allocationBase | number:'1.2-2':'fr-FR' }} €</span>
+        </div>
+        <div class="detail-row" *ngIf="majorationAge > 0">
+          <span class="detail-label">Majoration +14 ans</span>
+          <span class="detail-value positive">+{{ majorationAge | number:'1.2-2':'fr-FR' }} €</span>
+        </div>
+        <div class="detail-row highlight">
+          <span class="detail-label">{{ tauxApplique }}</span>
+          <span class="detail-value info">{{ plafondApplique }}</span>
+        </div>
+      </div>
+
+      <div class="info-box" *ngIf="nombreEnfants === 2">
+        <i class="pi pi-info-circle"></i>
+        <span>Pour une famille de 2 enfants, l'aîné ne bénéficie pas de la majoration +14 ans.</span>
+      </div>
+    </p-panel>
+  </div>
+
+  <div class="bareme-section">
+    <h2>Barème des allocations familiales 2026</h2>
+    <div class="bareme-table-container">
+      <table class="bareme-table">
+        <thead>
+          <tr>
+            <th>Nombre d'enfants</th>
+            <th>Taux plein</th>
+            <th>Taux moyen (50%)</th>
+            <th>Taux réduit (25%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2 enfants</td>
+            <td>148,52 €</td>
+            <td>74,26 €</td>
+            <td>37,13 €</td>
+          </tr>
+          <tr>
+            <td>3 enfants</td>
+            <td>338,81 €</td>
+            <td>169,41 €</td>
+            <td>84,70 €</td>
+          </tr>
+          <tr>
+            <td>4 enfants</td>
+            <td>529,10 €</td>
+            <td>264,55 €</td>
+            <td>132,28 €</td>
+          </tr>
+          <tr>
+            <td>Par enfant en +</td>
+            <td>+190,29 €</td>
+            <td>+95,15 €</td>
+            <td>+47,57 €</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="bareme-note">Majoration pour enfant de 14 ans et plus : +74,26 € (sauf aîné si 2 enfants)</p>
+  </div>
+
+  <app-faq-section
+    [title]="'Questions fréquentes sur les allocations familiales'"
+    [faqItems]="faqItems">
+  </app-faq-section>
+</div>

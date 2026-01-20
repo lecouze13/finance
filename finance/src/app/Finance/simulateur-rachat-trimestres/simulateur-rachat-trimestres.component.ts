@@ -44,7 +44,7 @@ export class SimulateurRachatTrimestresComponent implements OnInit {
   retourInvestissement: number = 0;
   estRentable: boolean = false;
 
-  // Barème 2025 (simplifié)
+  // Barème 2026 (simplifié)
   baremeTauxSeul: { [key: number]: number } = {
     30: 1055, 35: 1302, 40: 1607, 45: 1983, 50: 2448, 55: 3022, 60: 3731
   };
@@ -97,7 +97,7 @@ export class SimulateurRachatTrimestresComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateMetaData({
-      title: 'Simulateur Rachat de Trimestres Retraite 2025 | Calculez la rentabilité',
+      title: 'Simulateur Rachat de Trimestres Retraite 2026 | Calculez la rentabilité',
       description: 'Calculez gratuitement le coût et la rentabilité du rachat de trimestres pour votre retraite. Économie d\'impôt et gain de pension estimés.',
       url: 'https://calculateurfinance.fr/simulateur-rachat-trimestres'
     });
@@ -112,7 +112,7 @@ export class SimulateurRachatTrimestresComponent implements OnInit {
       : this.baremeComplet[ageArrondi] || 5000;
 
     // Ajustement selon le revenu (le barème réel dépend du revenu)
-    const facteurRevenu = Math.min(2, Math.max(0.5, this.revenuAnnuel / 41136)); // PASS 2025
+    const facteurRevenu = Math.min(2, Math.max(0.5, this.revenuAnnuel / 41136)); // PASS 2026
     this.coutRachat = coutParTrimestre * this.trimestresARacheter * facteurRevenu;
 
     // Économie d'impôt (TMI estimée)

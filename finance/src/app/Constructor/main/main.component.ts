@@ -28,7 +28,7 @@ export class MainComponent implements OnInit {
     },
     {
       question: "Les résultats des simulateurs sont-ils fiables ?",
-      answer: "Nos simulateurs utilisent les barèmes officiels 2025-2026 et sont régulièrement mis à jour selon les dernières lois fiscales. Les résultats sont indicatifs et permettent d'obtenir une estimation réaliste, mais nous recommandons de consulter un professionnel pour des décisions importantes."
+      answer: "Nos simulateurs utilisent les barèmes officiels 2026-2026 et sont régulièrement mis à jour selon les dernières lois fiscales. Les résultats sont indicatifs et permettent d'obtenir une estimation réaliste, mais nous recommandons de consulter un professionnel pour des décisions importantes."
     },
     {
       question: "Comment calculer la rentabilité d'un investissement locatif ?",

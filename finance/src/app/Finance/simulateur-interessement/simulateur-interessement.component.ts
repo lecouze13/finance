@@ -42,7 +42,7 @@ export class SimulateurInteressementComponent implements OnInit {
 
   // Constantes
   tauxCSGCRDS = 9.7;
-  plafondParticipation = 34776; // 75% du PASS 2025
+  plafondParticipation = 34776; // 75% du PASS 2026
 
   typeOptions = [
     { label: 'Participation', value: 'participation' },
@@ -66,7 +66,7 @@ export class SimulateurInteressementComponent implements OnInit {
     },
     {
       question: "Qu'est-ce que l'abondement ?",
-      answer: "L'abondement est un complément versé par l'employeur sur votre PEE/PERCO, plafonné à 300% de vos versements et 8% du PASS (environ 3 700€ en 2025). C'est de l'argent gratuit, soumis uniquement à la CSG-CRDS."
+      answer: "L'abondement est un complément versé par l'employeur sur votre PEE/PERCO, plafonné à 300% de vos versements et 8% du PASS (environ 3 700€ en 2026). C'est de l'argent gratuit, soumis uniquement à la CSG-CRDS."
     },
     {
       question: "Quand puis-je débloquer mon PEE ?",
@@ -94,7 +94,7 @@ export class SimulateurInteressementComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateMetaData({
-      title: 'Simulateur Participation et Intéressement 2025 | PEE, PERCO, versement',
+      title: 'Simulateur Participation et Intéressement 2026 | PEE, PERCO, versement',
       description: 'Calculez gratuitement le montant net de votre participation ou intéressement. Comparez versement immédiat vs PEE vs PER Collectif.',
       url: 'https://calculateurfinance.fr/simulateur-interessement'
     });

@@ -72,7 +72,7 @@ export class SimulateurFreelanceComponent implements OnInit {
     { label: 'Marié + 3 enfants (4 parts)', value: '4' }
   ];
 
-  // Barème IR 2025
+  // Barème IR 2026
   bareme = [
     { limite: 11294, taux: 0 },
     { limite: 28797, taux: 11 },
@@ -100,7 +100,7 @@ export class SimulateurFreelanceComponent implements OnInit {
     },
     {
       question: "Quels sont les plafonds de la micro-entreprise ?",
-      answer: "Pour les prestations de services, le plafond est de 77 700€ de CA annuel (2025). Au-delà, vous basculez automatiquement au régime réel. Un dépassement ponctuel est toléré sur 2 ans. Pour les activités mixtes, les seuils sont calculés séparément."
+      answer: "Pour les prestations de services, le plafond est de 77 700€ de CA annuel (2026). Au-delà, vous basculez automatiquement au régime réel. Un dépassement ponctuel est toléré sur 2 ans. Pour les activités mixtes, les seuils sont calculés séparément."
     },
     {
       question: "Comment optimiser sa rémunération en SASU ?",
@@ -128,7 +128,7 @@ export class SimulateurFreelanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateMetaData({
-      title: 'Simulateur Freelance 2025 | Comparez Micro, SASU, EURL, Portage',
+      title: 'Simulateur Freelance 2026 | Comparez Micro, SASU, EURL, Portage',
       description: 'Comparez gratuitement les statuts freelance : micro-entreprise, SASU, EURL, portage salarial. Calculez votre revenu net selon chaque option.',
       url: 'https://calculateurfinance.fr/simulateur-freelance'
     });

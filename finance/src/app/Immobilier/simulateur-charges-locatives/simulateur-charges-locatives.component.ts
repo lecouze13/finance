@@ -126,7 +126,7 @@ export class SimulateurChargesLocativesComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateMetaData({
-      title: 'Simulateur Charges Locatives 2025 | Répartition Propriétaire / Locataire',
+      title: 'Simulateur Charges Locatives 2026 | Répartition Propriétaire / Locataire',
       description: 'Calculez la répartition des charges entre propriétaire et locataire. Identifiez les charges récupérables et optimisez votre provision mensuelle.',
       url: 'https://calculateurfinance.fr/simulateur-charges-locatives'
     });

@@ -45,7 +45,7 @@ export class SimulateurPpvComponent implements OnInit {
     { label: '50 salariés et plus', value: 'plus_50' }
   ];
 
-  // Plafonds 2025
+  // Plafonds 2026
   plafondExoneration = 3000; // ou 6000 si accord d'intéressement
   plafondExonerationMajore = 6000;
   tauxCSGCRDS = 9.7; // %
@@ -57,7 +57,7 @@ export class SimulateurPpvComponent implements OnInit {
     },
     {
       question: "Quelles sont les conditions d'exonération d'impôt ?",
-      answer: "L'exonération d'impôt sur le revenu s'applique uniquement si : l'entreprise a moins de 50 salariés ET la rémunération du salarié est inférieure à 3 SMIC annuels (environ 64 000€ en 2025). Au-delà, la prime est soumise à l'IR."
+      answer: "L'exonération d'impôt sur le revenu s'applique uniquement si : l'entreprise a moins de 50 salariés ET la rémunération du salarié est inférieure à 3 SMIC annuels (environ 64 000€ en 2026). Au-delà, la prime est soumise à l'IR."
     },
     {
       question: "La PPV est-elle soumise aux charges sociales ?",
@@ -89,7 +89,7 @@ export class SimulateurPpvComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateMetaData({
-      title: 'Simulateur Prime de Partage de la Valeur (PPV) 2025 | Calcul net',
+      title: 'Simulateur Prime de Partage de la Valeur (PPV) 2026 | Calcul net',
       description: 'Calculez gratuitement le montant net de votre Prime de Partage de la Valeur (ex-Prime Macron). Exonérations, CSG-CRDS et impôt sur le revenu.',
       url: 'https://calculateurfinance.fr/simulateur-ppv'
     });

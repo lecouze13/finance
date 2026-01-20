@@ -100,14 +100,14 @@ export class SimulateurRachatCreditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Simulateur Rachat de Crédit 2025 | Calculez vos Économies');
+    this.title.setTitle('Simulateur Rachat de Crédit 2026 | Calculez vos Économies');
     this.meta.updateTag({
       name: 'description',
       content: 'Simulez gratuitement votre rachat de crédit. Calculez les économies potentielles en regroupant vos crédits immobilier, auto et consommation à un meilleur taux.'
     });
     this.meta.updateTag({
       name: 'keywords',
-      content: 'rachat crédit, regroupement crédits, simulation rachat, renégociation prêt, économies crédit, taux rachat 2025'
+      content: 'rachat crédit, regroupement crédits, simulation rachat, renégociation prêt, économies crédit, taux rachat 2026'
     });
     this.calculer();
   }

@@ -83,7 +83,7 @@ export class TriImmoComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.updateMetaData({
-      title: 'Simulateur TRI Immobilier 2025 | Calculez votre Rentabilité Interne',
+      title: 'Simulateur TRI Immobilier 2026 | Calculez votre Rentabilité Interne',
       description: 'Calculez le TRI (Taux de Rentabilité Interne) de votre investissement immobilier. Intégrez loyers, charges, plus-value et obtenez le rendement réel de votre projet.',
       keywords: 'TRI immobilier, taux rentabilité interne, simulateur TRI, rendement investissement locatif, calcul rentabilité immobilier, VAN, plus-value immobilière',
       url: 'https://calculateurfinance.fr/tri-immobilier/',

@@ -121,7 +121,7 @@ export class IntererComposerComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.updateMetaData({
-      title: 'Simulateur Intérêts Composés 2025 | Calculez votre Capital Futur',
+      title: 'Simulateur Intérêts Composés 2026 | Calculez votre Capital Futur',
       description: "Simulez la puissance des intérêts composés. Calculez la croissance de votre épargne avec versements réguliers. Visualisez l'effet boule de neige sur votre capital.",
       keywords: 'intérêt composé, simulateur épargne, calculateur investissement, effet boule de neige, capital futur, versements réguliers, rendement composé',
       url: 'https://calculateurfinance.fr/interet-compose/',

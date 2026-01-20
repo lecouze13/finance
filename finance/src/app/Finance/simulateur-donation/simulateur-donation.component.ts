@@ -66,7 +66,7 @@ export class SimulateurDonationComponent implements OnInit {
     { label: 'Don familial (somme d\'argent)', value: 'familial' }
   ];
 
-  // Barèmes des abattements (2025)
+  // Barèmes des abattements (2026)
   abattements: { [key: string]: number } = {
     'enfant': 100000,
     'petit-enfant': 31865,
@@ -142,7 +142,7 @@ export class SimulateurDonationComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateMetaData({
-      title: 'Simulateur Donation 2025 | Calculez les Droits de Donation',
+      title: 'Simulateur Donation 2026 | Calculez les Droits de Donation',
       description: 'Simulez gratuitement vos droits de donation. Calculez les abattements, le montant taxable et les droits à payer selon le lien de parenté.',
       url: 'https://calculateurfinance.fr/simulateur-donation'
     });

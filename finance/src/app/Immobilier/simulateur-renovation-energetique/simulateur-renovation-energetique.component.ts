@@ -115,7 +115,7 @@ export class SimulateurRenovationEnergetiqueComponent implements OnInit {
     },
     {
       question: "L'investissement est-il rentable pour un propriétaire bailleur ?",
-      answer: "Oui, car : le loyer peut augmenter (+5-10% pour un bon DPE), la vacance locative diminue, vous anticipez les interdictions de location (G en 2025, F en 2028, E en 2034), et la plus-value à la revente augmente."
+      answer: "Oui, car : le loyer peut augmenter (+5-10% pour un bon DPE), la vacance locative diminue, vous anticipez les interdictions de location (G en 2026, F en 2028, E en 2034), et la plus-value à la revente augmente."
     },
     {
       question: "Comment choisir un artisan RGE ?",
@@ -127,7 +127,7 @@ export class SimulateurRenovationEnergetiqueComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateMetaData({
-      title: 'Simulateur Rénovation Énergétique 2025 | ROI et aides MaPrimeRénov\'',
+      title: 'Simulateur Rénovation Énergétique 2026 | ROI et aides MaPrimeRénov\'',
       description: 'Calculez gratuitement le coût, les aides et la rentabilité de vos travaux de rénovation énergétique. Isolation, pompe à chaleur, DPE.',
       url: 'https://calculateurfinance.fr/simulateur-renovation-energetique'
     });

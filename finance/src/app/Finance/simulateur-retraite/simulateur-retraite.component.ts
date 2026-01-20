@@ -40,7 +40,7 @@ this.form = this.fb.group({
   ngOnInit(): void {
 
     this.seo.updateMetaData({
-      title: 'Simulateur Retraite 2025 : âge, pension et projections',
+      title: 'Simulateur Retraite 2026 : âge, pension et projections',
       description: 'Estimez votre âge de départ à la retraite et le montant de votre pension avec notre simulateur complet. Intègre carrière, statut et revenus.',
       keywords: 'simulateur retraite, calcul retraite, âge de départ à la retraite, pension, épargne retraite, planning retraite, revenus retraite, projection retraite',
 
@@ -89,7 +89,7 @@ this.form = this.fb.group({
             "name": "Comment valider un trimestre de retraite ?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "En 2025, il faut percevoir au moins 1 690 € brut sur l’année pour valider un trimestre dans le régime général."
+              "text": "En 2026, il faut percevoir au moins 1 690 € brut sur l’année pour valider un trimestre dans le régime général."
             }
           },
           {

@@ -104,14 +104,14 @@ export class SimulateurPeaAssuranceVieComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Comparateur PEA vs Assurance-vie 2025 | Simulateur Fiscalité');
+    this.title.setTitle('Comparateur PEA vs Assurance-vie 2026 | Simulateur Fiscalité');
     this.meta.updateTag({
       name: 'description',
       content: 'Comparez PEA et Assurance-vie : fiscalité, rendement net, plafonds. Simulez vos gains après impôts et choisissez le meilleur placement pour votre épargne.'
     });
     this.meta.updateTag({
       name: 'keywords',
-      content: 'PEA vs assurance vie, comparateur placement, fiscalité PEA, fiscalité assurance vie, meilleur placement 2025, épargne actions, simulation placement'
+      content: 'PEA vs assurance vie, comparateur placement, fiscalité PEA, fiscalité assurance vie, meilleur placement 2026, épargne actions, simulation placement'
     });
     this.calculer();
   }

@@ -16,7 +16,7 @@ export const livrets: {
       <p>Les dépôts et retraits sont libres, à condition de respecter un solde minimum de 10 €.</p>
       <h2>Caractéristiques</h2>
       <ul>
-        <li><strong>Taux :</strong> 1.7 % net (au 1er aout 2025)</li>
+        <li><strong>Taux :</strong> 1.7 % net (au 1er aout 2026)</li>
         <li><strong>Plafond :</strong> 22 950 €</li>
         <li><strong>Fiscalité :</strong> Exonération totale d’impôt sur le revenu et de prélèvements sociaux</li>
         <li><strong>Liquidité :</strong> Disponible à tout moment</li>
@@ -128,10 +128,10 @@ export const livrets: {
     <h2>Introduction</h2>
       <p>Le Livret d’Épargne Populaire est destiné aux contribuables modestes. Il offre un taux d’intérêt supérieur à celui du Livret A pour protéger l’épargne contre l’inflation.</p>
       <h2>Conditions d’éligibilité</h2>
-      <p>Le revenu fiscal de référence ne doit pas dépasser un certain seuil, révisé chaque année. Pour 2025, ce seuil est de 22 419 € pour une personne seule.</p>
+      <p>Le revenu fiscal de référence ne doit pas dépasser un certain seuil, révisé chaque année. Pour 2026, ce seuil est de 22 419 € pour une personne seule.</p>
       <h2>Caractéristiques</h2>
       <ul>
-        <li><strong>Taux :</strong> 2.7 % (en 2025)</li>
+        <li><strong>Taux :</strong> 2.7 % (en 2026)</li>
         <li><strong>Plafond :</strong> 10 000 €</li>
         <li><strong>Fiscalité :</strong> Intérêts exonérés d’impôt et de prélèvements sociaux</li>
         <li><strong>Ouverture :</strong> sur justificatif de revenu</li>
@@ -160,7 +160,7 @@ export const livrets: {
 
     <h2>Caractéristiques</h2>
     <ul>
-      <li><strong>Taux d’intérêt :</strong> 1.7 % (en 2025)</li>
+      <li><strong>Taux d’intérêt :</strong> 1.7 % (en 2026)</li>
       <li><strong>Plafond de versement :</strong> 22 950 € (hors intérêts capitalisés)</li>
       <li><strong>Fiscalité :</strong> Intérêts exonérés d'impôt sur le revenu et de prélèvements sociaux</li>
       <li><strong>Conditions :</strong> Réservé aux clients du Crédit Mutuel</li>
@@ -184,7 +184,7 @@ export const livrets: {
     <ul>
       <li><strong>Âge :</strong> de 12 à 25 ans</li>
       <li><strong>Plafond :</strong> 1 600 €</li>
-      <li><strong>Taux :</strong> librement fixé par les banques mais supérieur ou égal à celui du Livret A (souvent entre 1.7 % et 2.4% en 2025)</li>
+      <li><strong>Taux :</strong> librement fixé par les banques mais supérieur ou égal à celui du Livret A (souvent entre 1.7 % et 2.4% en 2026)</li>
       <li><strong>Fiscalité :</strong> intérêts exonérés d’impôt sur le revenu et de prélèvements sociaux</li>
       <li><strong>Disponibilité :</strong> retraits autorisés à partir de 16 ans (avec accord parental avant)</li>
     </ul>
@@ -223,18 +223,18 @@ export const livrets: {
     <p>Ce livret est proposé par certaines banques et établissements financiers. Pour l’ouvrir, il suffit de se rendre en agence ou sur le site de la banque et de fournir une pièce d’identité ainsi qu’un justificatif de domicile.</p>
   `
 },
-'reforme-taux-aout-2025': {
-  titre: 'Réforme des taux des livrets d’épargne – 1ᵉʳ août 2025',
-  description: 'Découvrez les nouveaux taux 2025 des livrets réglementés (Livret A, LDDS, LEP, PEL, CEL…) après la réforme du 1er août : baisses, formules de calcul, impacts pour les épargnants.',
+'reforme-taux-aout-2026': {
+  titre: 'Réforme des taux des livrets d’épargne – 1ᵉʳ août 2026',
+  description: 'Découvrez les nouveaux taux 2026 des livrets réglementés (Livret A, LDDS, LEP, PEL, CEL…) après la réforme du 1er août : baisses, formules de calcul, impacts pour les épargnants.',
   categorie: 'epargne',
-  keywords: 'réforme taux livret 2025, livret A août 2025, nouveau taux LDDS, baisse taux LEP, taux PEL 2025, CEL, taux livret jeune, livret réglementé, placement sécurisé',
+  keywords: 'réforme taux livret 2026, livret A août 2026, nouveau taux LDDS, baisse taux LEP, taux PEL 2026, CEL, taux livret jeune, livret réglementé, placement sécurisé',
 
   contenu: `
-  <p>À partir du <strong>1er août 2025</strong>, plusieurs livrets d’épargne réglementés voient leurs taux ajustés, conformément aux formules semestrielles fixées par la Banque de France et le ministère de l’Économie.</p>
+  <p>À partir du <strong>1er août 2026</strong>, plusieurs livrets d’épargne réglementés voient leurs taux ajustés, conformément aux formules semestrielles fixées par la Banque de France et le ministère de l’Économie.</p>
 
   <h2>📉 Livret A & LDDS</h2>
   <p>
-    <strong>Taux avant le 1er août 2025 :</strong> 2,40 %<br>
+    <strong>Taux avant le 1er août 2026 :</strong> 2,40 %<br>
     <strong>Nouveau taux :</strong> 1,70 %<br>
     Le gouvernement applique strictement la formule liée à l’inflation (0,88 %) et au taux €STR.
   </p>
@@ -261,7 +261,7 @@ export const livrets: {
 
   <h2>📋 Tableau synthèse</h2>
   <table border="1" cellpadding="4">
-    <thead><tr><th>Livret</th><th>Avant 1ᵉʳ août</th><th>Après 1ᵉʳ août 2025</th></tr></thead>
+    <thead><tr><th>Livret</th><th>Avant 1ᵉʳ août</th><th>Après 1ᵉʳ août 2026</th></tr></thead>
     <tbody>
       <tr><td>Livret A</td><td>2,40 %</td><td>1,70 %</td></tr>
       <tr><td>LDDS</td><td>2,40 %</td><td>1,70 %</td></tr>
@@ -285,7 +285,7 @@ export const livrets: {
   <p>Les livrets restent au‑dessus de l’inflation, assurant un rendement réel positif. Cependant, l’équivalent annuel à plein plafond baisse : ex. pour le Livret A, la différence sur 22 950 € est notable.</p>
 
   <h2>🎯 Conclusion</h2>
-  <p>La réforme du 1ᵉʳ août 2025 adapte les taux des livrets réglementés à un contexte économique plus calme. Le Livret A et le LDDS passent à 1,70 %, le LEP reste avantageux à 2,70 %. Le CEL et le PEL évoluent selon leurs règles spécifiques. Ces produits conservent leur sécurité, leur liquidité et leur fiscalité favorable.</p>
+  <p>La réforme du 1ᵉʳ août 2026 adapte les taux des livrets réglementés à un contexte économique plus calme. Le Livret A et le LDDS passent à 1,70 %, le LEP reste avantageux à 2,70 %. Le CEL et le PEL évoluent selon leurs règles spécifiques. Ces produits conservent leur sécurité, leur liquidité et leur fiscalité favorable.</p>
   `
 }
 

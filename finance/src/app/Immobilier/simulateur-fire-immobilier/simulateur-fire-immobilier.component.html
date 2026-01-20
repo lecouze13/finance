@@ -1,0 +1,345 @@
+<app-breadcrumb></app-breadcrumb>
+
+<div class="simulateur-container">
+  <div class="header-section">
+    <h1>Simulateur FIRE Immobilier</h1>
+    <p class="subtitle">Calculez votre chemin vers l'indépendance financière grâce aux revenus locatifs</p>
+  </div>
+
+  <div class="content-grid">
+    <div class="form-section">
+      <p-panel header="Votre Objectif de Vie" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="age">Âge actuel</label>
+            <p-inputNumber
+              id="age"
+              [(ngModel)]="ageActuel"
+              (ngModelChange)="calculer()"
+              [min]="18"
+              [max]="70"
+              suffix=" ans">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="depenses">Dépenses mensuelles cibles</label>
+            <p-inputNumber
+              id="depenses"
+              [(ngModel)]="depensesMensuelles"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0"
+              pTooltip="Vos dépenses mensuelles une fois FIRE">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group slider-group">
+            <label for="marge">Marge de sécurité : {{ margeSecurite }}%</label>
+            <p-slider
+              id="marge"
+              [(ngModel)]="margeSecurite"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="50"
+              [step]="5">
+            </p-slider>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Patrimoine Immobilier Actuel" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nbBiens">Nombre de biens actuels</label>
+            <p-inputNumber
+              id="nbBiens"
+              [(ngModel)]="nombreBiensActuel"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="50">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="loyerMoyen">Loyer moyen par bien</label>
+            <p-inputNumber
+              id="loyerMoyen"
+              [(ngModel)]="loyerMoyenParBien"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="chargesMoyennes">Charges moyennes par bien</label>
+            <p-inputNumber
+              id="chargesMoyennes"
+              [(ngModel)]="chargesMoyennesParBien"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="mensualite">Mensualité moyenne crédit</label>
+            <p-inputNumber
+              id="mensualite"
+              [(ngModel)]="mensualiteMoyenneParBien"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="valeur">Valeur moyenne par bien</label>
+            <p-inputNumber
+              id="valeur"
+              [(ngModel)]="valeurMoyenneParBien"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="capital">Capital restant moyen</label>
+            <p-inputNumber
+              id="capital"
+              [(ngModel)]="capitalRestantMoyenParBien"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="dureeRestante">Durée restante moyenne</label>
+            <p-inputNumber
+              id="dureeRestante"
+              [(ngModel)]="dureeRestanteMoyenne"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="25"
+              suffix=" ans">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-panel>
+
+      <p-panel header="Stratégie d'Acquisition Future" styleClass="custom-panel">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="achatAn">Achats par an</label>
+            <p-inputNumber
+              id="achatAn"
+              [(ngModel)]="achatParAn"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="5"
+              suffix=" bien(s)">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="apport">Apport par bien</label>
+            <p-inputNumber
+              id="apport"
+              [(ngModel)]="apportParBien"
+              (ngModelChange)="calculer()"
+              mode="currency"
+              currency="EUR"
+              locale="fr-FR"
+              [min]="0">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="taux">Taux de crédit</label>
+            <p-inputNumber
+              id="taux"
+              [(ngModel)]="tauxCredit"
+              (ngModelChange)="calculer()"
+              mode="decimal"
+              [minFractionDigits]="2"
+              [min]="0"
+              [max]="10"
+              suffix=" %">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group">
+            <label for="duree">Durée du crédit</label>
+            <p-inputNumber
+              id="duree"
+              [(ngModel)]="dureeCredit"
+              (ngModelChange)="calculer()"
+              [min]="10"
+              [max]="25"
+              suffix=" ans">
+            </p-inputNumber>
+          </div>
+
+          <div class="form-group slider-group">
+            <label for="augLoyers">Augmentation loyers/an : {{ augmentationLoyers }}%</label>
+            <p-slider
+              id="augLoyers"
+              [(ngModel)]="augmentationLoyers"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="5"
+              [step]="0.5">
+            </p-slider>
+          </div>
+
+          <div class="form-group slider-group">
+            <label for="plusValue">Plus-value annuelle : {{ plusValueAnnuelle }}%</label>
+            <p-slider
+              id="plusValue"
+              [(ngModel)]="plusValueAnnuelle"
+              (ngModelChange)="calculer()"
+              [min]="0"
+              [max]="5"
+              [step]="0.5">
+            </p-slider>
+          </div>
+
+          <div class="form-group">
+            <label for="horizon">Horizon de projection</label>
+            <p-dropdown
+              id="horizon"
+              [options]="horizonOptions"
+              [(ngModel)]="horizonProjection"
+              (ngModelChange)="calculer()"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+
+    <div class="results-section">
+      <p-panel header="Votre Objectif FIRE" styleClass="results-panel">
+        <div class="fire-objective">
+          <span class="objective-label">Revenus annuels nécessaires</span>
+          <span class="objective-value">{{ formatCurrency(objectifRevenusAnnuels) }}/an</span>
+          <span class="objective-detail">({{ formatCurrency(objectifRevenusAnnuels / 12) }}/mois avec marge)</span>
+        </div>
+
+        <div class="fire-result" *ngIf="anneeFire > 0" [ngClass]="'success'">
+          <div class="fire-icon">
+            <i class="pi pi-flag"></i>
+          </div>
+          <div class="fire-content">
+            <span class="fire-title">FIRE atteint !</span>
+            <span class="fire-detail">En {{ anneeFire }} ans, à {{ ageFire }} ans</span>
+          </div>
+        </div>
+
+        <div class="fire-result" *ngIf="anneeFire === 0" [ngClass]="'pending'">
+          <div class="fire-icon">
+            <i class="pi pi-clock"></i>
+          </div>
+          <div class="fire-content">
+            <span class="fire-title">Objectif non atteint</span>
+            <span class="fire-detail">Sur l'horizon de {{ horizonProjection }} ans</span>
+          </div>
+        </div>
+
+        <div class="fire-stats" *ngIf="anneeFire > 0">
+          <div class="stat">
+            <span class="stat-label">Nombre de biens</span>
+            <span class="stat-value">{{ nombreBiensFire }}</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Cash-flow mensuel</span>
+            <span class="stat-value">{{ formatCurrency(cashflowMensuelFire) }}</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Patrimoine net</span>
+            <span class="stat-value">{{ formatCurrency(patrimoineNetFire) }}</span>
+          </div>
+        </div>
+      </p-panel>
+
+      <!-- Jauge de progression -->
+      <p-panel header="Progression vers FIRE" styleClass="custom-panel" *ngIf="projections.length > 0">
+        <div class="progress-section">
+          <div class="progress-current">
+            <span class="progress-label">Taux de couverture actuel</span>
+            <div class="progress-bar-container">
+              <div class="progress-bar" [style.width.%]="Math.min(projections[0].tauxCouverture, 100)" [ngClass]="getCouvertureClass(projections[0].tauxCouverture)">
+              </div>
+              <span class="progress-value">{{ projections[0].tauxCouverture | number:'1.0-0' }}%</span>
+            </div>
+          </div>
+          <div class="progress-target">
+            <span class="target-text">100% = FIRE</span>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <!-- Tableau de projection -->
+  <div class="projection-section">
+    <p-panel header="Projection Année par Année vers FIRE" styleClass="custom-panel">
+      <p-table [value]="projections" [paginator]="true" [rows]="10" styleClass="p-datatable-sm">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Année</th>
+            <th>Âge</th>
+            <th>Biens</th>
+            <th>Revenus bruts</th>
+            <th>Charges + Crédits</th>
+            <th>Cash-flow net</th>
+            <th>Couverture</th>
+            <th>Patrimoine net</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+          <tr [ngClass]="{'fire-row': row.fireAtteint}">
+            <td>{{ row.annee }}</td>
+            <td>{{ row.age }} ans</td>
+            <td>
+              <span class="biens-badge">{{ row.nombreBiens }}</span>
+            </td>
+            <td>{{ formatCurrency(row.revenusBruts) }}</td>
+            <td>{{ formatCurrency(row.chargesTotal) }}</td>
+            <td [ngClass]="{'positive': row.cashflowNet >= 0, 'negative': row.cashflowNet < 0}">
+              {{ formatCurrency(row.cashflowNet) }}
+            </td>
+            <td>
+              <span class="couverture-badge" [ngClass]="getCouvertureClass(row.tauxCouverture)">
+                {{ row.tauxCouverture | number:'1.0-0' }}%
+              </span>
+            </td>
+            <td class="patrimoine">{{ formatCurrency(row.patrimoineNet) }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-panel>
+  </div>
+
+  <app-faq-section
+    [faqItems]="faqItems"
+    pageTitle="Simulateur FIRE Immobilier">
+  </app-faq-section>
+</div>

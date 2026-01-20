@@ -90,7 +90,7 @@ export class SimulateurRemboursementAnticipeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Simulateur Remboursement Anticipé 2025 | Calculez vos Économies');
+    this.title.setTitle('Simulateur Remboursement Anticipé 2026 | Calculez vos Économies');
     this.meta.updateTag({
       name: 'description',
       content: 'Calculez l\'économie réalisée en remboursant votre crédit par anticipation. Comparez réduction de durée ou de mensualité. Simulation avec frais IRA inclus.'

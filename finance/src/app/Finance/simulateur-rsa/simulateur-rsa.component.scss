@@ -1,0 +1,92 @@
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+
+  label {
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+}
+
+.result-annual {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-top: 0.25rem;
+}
+
+.not-eligible-message {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #fff3cd;
+  border-radius: 8px;
+  color: #856404;
+  font-weight: 500;
+
+  i {
+    font-size: 1.25rem;
+  }
+}
+
+:host ::ng-deep .not-eligible .p-panel-header {
+  background: linear-gradient(135deg, #ffc107 0%, #ffca28 100%) !important;
+}
+
+.bareme-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+
+  h2 {
+    font-size: 1.25rem;
+    color: #1e3a5f;
+    margin-bottom: 1rem;
+  }
+}
+
+.bareme-table-container {
+  overflow-x: auto;
+}
+
+.bareme-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+
+  th, td {
+    padding: 0.75rem;
+    text-align: center;
+    border: 1px solid #dee2e6;
+  }
+
+  th {
+    background: #1e3a5f;
+    color: white;
+    font-weight: 600;
+  }
+
+  td {
+    background: white;
+  }
+
+  td:first-child {
+    font-weight: 500;
+    text-align: left;
+  }
+
+  tr:hover td {
+    background: #e3f2fd;
+  }
+}
+
+.bareme-note {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #6c757d;
+  text-align: center;
+  font-style: italic;
+}

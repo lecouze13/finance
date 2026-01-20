@@ -18,7 +18,7 @@ export interface ResultatIR {
 })
 export class CalculFiscalService {
 
-  // Barème IR 2026 (revenus 2025)
+  // Barème IR 2026 (revenus 2026)
   private tranchesIR2026: TrancheIR[] = [
     { plafond: 11497, taux: 0 },
     { plafond: 29315, taux: 0.11 },

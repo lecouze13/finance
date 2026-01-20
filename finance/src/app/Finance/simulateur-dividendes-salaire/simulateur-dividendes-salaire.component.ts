@@ -114,7 +114,7 @@ export class SimulateurDividendesSalaireComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateMetaData({
-      title: 'Simulateur Dividendes vs Salaire 2025 | Optimiser sa rémunération de dirigeant',
+      title: 'Simulateur Dividendes vs Salaire 2026 | Optimiser sa rémunération de dirigeant',
       description: 'Calculez le mix optimal entre salaire et dividendes pour votre société (SASU, EURL, SAS). Comparez les charges, la fiscalité et maximisez votre revenu net.',
       url: '/simulateur-dividendes-salaire'
     });
@@ -251,7 +251,7 @@ export class SimulateurDividendesSalaireComponent implements OnInit {
     if (revenuImposable <= 0) return 0;
     const quotient = revenuImposable / parts;
 
-    // Barème 2025
+    // Barème 2026
     let impot = 0;
     if (quotient <= 11294) {
       impot = 0;

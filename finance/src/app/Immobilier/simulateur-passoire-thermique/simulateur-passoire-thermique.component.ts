@@ -25,7 +25,7 @@ export class SimulateurPassoireThermiquComponent implements OnInit {
     },
     {
       question: 'Quand les passoires thermiques seront-elles interdites à la location ?',
-      answer: 'Le calendrier est : G interdit depuis 2025, F interdit en 2028, E interdit en 2034. Les logements concernés ne pourront plus être loués.'
+      answer: 'Le calendrier est : G interdit depuis 2026, F interdit en 2028, E interdit en 2034. Les logements concernés ne pourront plus être loués.'
     },
     {
       question: 'Qu\'est-ce que MaPrimeRénov\' ?',
@@ -83,7 +83,7 @@ export class SimulateurPassoireThermiquComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.updateMetaData({
-      title: 'Simulateur Passoire Thermique 2025 | Rénover ou Vendre ?',
+      title: 'Simulateur Passoire Thermique 2026 | Rénover ou Vendre ?',
       description: 'Calculez la rentabilité d\'une rénovation énergétique de votre passoire thermique (DPE F ou G). Aides MaPrimeRénov\', ROI et comparaison vente vs rénovation.',
       url: 'https://calculateurfinance.fr/simulateur-passoire-thermique',
       keywords: 'passoire thermique, DPE F G, rénovation énergétique, MaPrimeRénov, interdiction location, calendrier DPE, rentabilité rénovation'
@@ -141,7 +141,7 @@ export class SimulateurPassoireThermiquComponent implements OnInit {
 
     // Calendrier d'interdiction
     const calendrier = {
-      'G': '2025 (déjà interdit)',
+      'G': '2026 (déjà interdit)',
       'F': '2028',
       'E': '2034',
       'D': 'Non concerné'

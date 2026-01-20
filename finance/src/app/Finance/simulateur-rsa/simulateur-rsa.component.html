@@ -1,0 +1,167 @@
+<app-breadcrumb></app-breadcrumb>
+
+<div class="simulator-container">
+  <div class="simulator-header">
+    <h1>Simulateur RSA 2026</h1>
+    <p class="subtitle">Calculez le montant de votre Revenu de Solidarité Active</p>
+  </div>
+
+  <div class="simulator-content">
+    <p-panel header="Votre situation" class="input-panel">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="situation">Situation familiale</label>
+          <p-dropdown
+            id="situation"
+            [options]="situationOptions"
+            [(ngModel)]="situationFamiliale"
+            (onChange)="calculer()"
+            [style]="{'width':'100%'}">
+          </p-dropdown>
+        </div>
+
+        <div class="form-group">
+          <label for="enfants">Nombre d'enfants à charge</label>
+          <p-dropdown
+            id="enfants"
+            [options]="enfantsOptions"
+            [(ngModel)]="nombreEnfants"
+            (onChange)="calculer()"
+            [style]="{'width':'100%'}">
+          </p-dropdown>
+        </div>
+
+        <div class="form-group checkbox-group" *ngIf="situationFamiliale === 'seul'">
+          <p-checkbox
+            [(ngModel)]="parentIsole"
+            [binary]="true"
+            (onChange)="calculer()"
+            inputId="parentIsole">
+          </p-checkbox>
+          <label for="parentIsole">Parent isolé (célibataire, veuf, séparé)</label>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <p-checkbox
+            [(ngModel)]="allocationLogement"
+            [binary]="true"
+            (onChange)="calculer()"
+            inputId="logement">
+          </p-checkbox>
+          <label for="logement">Je perçois une aide au logement (APL, ALF, ALS)</label>
+        </div>
+      </div>
+    </p-panel>
+
+    <p-panel header="Vos ressources mensuelles" class="input-panel">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="salaires">Salaires nets (tous les membres du foyer)</label>
+          <p-inputNumber
+            id="salaires"
+            [(ngModel)]="salaires"
+            (onInput)="calculer()"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0"
+            [style]="{'width':'100%'}">
+          </p-inputNumber>
+        </div>
+
+        <div class="form-group">
+          <label for="autres">Autres revenus (pensions, allocations...)</label>
+          <p-inputNumber
+            id="autres"
+            [(ngModel)]="autresRevenus"
+            (onInput)="calculer()"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0"
+            [style]="{'width':'100%'}"
+            pTooltip="Hors allocations familiales et APL">
+          </p-inputNumber>
+        </div>
+      </div>
+    </p-panel>
+
+    <p-panel header="Résultat" class="results-panel" [ngClass]="{'not-eligible': !eligible}">
+      <div class="result-main" *ngIf="eligible">
+        <div class="result-label">RSA mensuel estimé</div>
+        <div class="result-value">{{ rsaMensuel | number:'1.2-2':'fr-FR' }} €</div>
+        <div class="result-annual">soit {{ rsaAnnuel | number:'1.0-0':'fr-FR' }} €/an</div>
+      </div>
+
+      <div class="not-eligible-message" *ngIf="!eligible">
+        <i class="pi pi-info-circle"></i>
+        <span>{{ messageEligibilite }}</span>
+      </div>
+
+      <div class="result-details">
+        <div class="detail-row">
+          <span class="detail-label">Montant forfaitaire</span>
+          <span class="detail-value">{{ montantForfaitaire | number:'1.2-2':'fr-FR' }} €</span>
+        </div>
+        <div class="detail-row" *ngIf="bonusSortie > 0">
+          <span class="detail-label">Bonus activité (61% des salaires)</span>
+          <span class="detail-value positive">+{{ bonusSortie | number:'1.2-2':'fr-FR' }} €</span>
+        </div>
+        <div class="detail-row" *ngIf="forfaitLogement > 0">
+          <span class="detail-label">Forfait logement déduit</span>
+          <span class="detail-value negative">-{{ forfaitLogement | number:'1.2-2':'fr-FR' }} €</span>
+        </div>
+        <div class="detail-row" *ngIf="salaires + autresRevenus > 0">
+          <span class="detail-label">Ressources déduites</span>
+          <span class="detail-value negative">-{{ salaires + autresRevenus | number:'1.2-2':'fr-FR' }} €</span>
+        </div>
+      </div>
+    </p-panel>
+  </div>
+
+  <div class="bareme-section">
+    <h2>Barème RSA 2026 (montants forfaitaires mensuels)</h2>
+    <div class="bareme-table-container">
+      <table class="bareme-table">
+        <thead>
+          <tr>
+            <th>Situation</th>
+            <th>Sans enfant</th>
+            <th>1 enfant</th>
+            <th>2 enfants</th>
+            <th>Par enfant +</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Personne seule</td>
+            <td>635,71 €</td>
+            <td>953,57 €</td>
+            <td>1 144,28 €</td>
+            <td>+254,28 €</td>
+          </tr>
+          <tr>
+            <td>Couple</td>
+            <td>953,57 €</td>
+            <td>1 144,28 €</td>
+            <td>1 335,00 €</td>
+            <td>+254,28 €</td>
+          </tr>
+          <tr>
+            <td>Parent isolé*</td>
+            <td>817,35 €</td>
+            <td>1 089,80 €</td>
+            <td>1 362,25 €</td>
+            <td>+272,45 €</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="bareme-note">* Majoration parent isolé : accordée aux personnes seules avec enfant(s) à charge ou enceinte</p>
+  </div>
+
+  <app-faq-section
+    [title]="'Questions fréquentes sur le RSA'"
+    [faqItems]="faqItems">
+  </app-faq-section>
+</div>

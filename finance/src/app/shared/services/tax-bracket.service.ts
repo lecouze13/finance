@@ -19,7 +19,7 @@ export class TaxBracketService {
   constructor() { }
 
   /**
-   * Barème de l'impôt sur le revenu 2026 (revenus 2025)
+   * Barème de l'impôt sur le revenu 2026 (revenus 2026)
    */
   private baremeIR2026: TrancheFiscale[] = [
     { min: 0, max: 11294, taux: 0 },

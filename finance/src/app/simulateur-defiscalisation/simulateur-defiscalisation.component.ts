@@ -48,7 +48,7 @@ export class SimulateurDefiscalisationComponent implements OnInit {
     },
     {
       question: 'Peut-on l’utiliser pour d’autres années fiscales ?',
-      answer: 'Le simulateur est basé sur les règles fiscales 2025. Pour d’autres années, les taux et plafonds peuvent varier.'
+      answer: 'Le simulateur est basé sur les règles fiscales 2026. Pour d’autres années, les taux et plafonds peuvent varier.'
     },
     {
       question: 'Dois-je déclarer mes investissements à l’administration fiscale ?',
@@ -75,8 +75,8 @@ export class SimulateurDefiscalisationComponent implements OnInit {
   }
   ngOnInit(): void {
     this.seo.updateMetaData({
-      title: 'Simulateur Défiscalisation 2025 | CalculateurFinance.fr',
-      description: 'Estimez vos économies d’impôts avec notre simulateur de défiscalisation 2025. Comparez les dispositifs fiscaux comme Pinel, Denormandie, LMNP et autres, et optimisez votre fiscalité.',
+      title: 'Simulateur Défiscalisation 2026 | CalculateurFinance.fr',
+      description: 'Estimez vos économies d’impôts avec notre simulateur de défiscalisation 2026. Comparez les dispositifs fiscaux comme Pinel, Denormandie, LMNP et autres, et optimisez votre fiscalité.',
       url: 'https://calculateurfinance.fr/simulateur-defiscalisation/',
       keywords: 'simulateur défiscalisation, calcul économie impôt, réduction fiscale, investissement locatif, loi Pinel, loi Denormandie, LMNP, avantage fiscal, optimisation impôt, économie d impôt'
     });

@@ -123,6 +123,7 @@ export class CatalogueComponent implements OnInit {
       { id: 'multi-biens', title: 'Stratégie Multi-Biens', description: 'Planifiez votre trajectoire de 1 à 10+ biens avec l\'effet boule de neige', route: '/simulateur-strategie-multi-biens', type: 'simulateur', category: 'Immobilier', tags: ['investissement', 'stratégie', 'rentier'], icon: 'pi-chart-line' },
       { id: 'arbitrage-immo', title: 'Arbitrage Vendre/Conserver/Refinancer', description: 'Comparez les scénarios pour optimiser votre patrimoine immobilier', route: '/simulateur-arbitrage-immobilier', type: 'simulateur', category: 'Immobilier', tags: ['arbitrage', 'stratégie', 'patrimoine'], icon: 'pi-sliders-h' },
       { id: 'stress-test', title: 'Stress Test Immobilier', description: 'Testez la résistance de votre patrimoine face aux imprévus', route: '/simulateur-stress-test-immobilier', type: 'simulateur', category: 'Immobilier', tags: ['risque', 'résilience', 'trésorerie'], icon: 'pi-exclamation-triangle' },
+      { id: 'fire-immo', title: 'FIRE Immobilier', description: 'Calculez votre chemin vers l\'indépendance financière par les loyers', route: '/simulateur-fire-immobilier', type: 'simulateur', category: 'Immobilier', tags: ['FIRE', 'rentier', 'indépendance'], icon: 'pi-flag' },
     ];
 
     // Simulateurs financiers

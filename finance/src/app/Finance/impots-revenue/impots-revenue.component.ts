@@ -19,12 +19,12 @@ export class ImpotsRevenueComponent implements OnInit {
   decote: number = 0;
   faqItems: FaqItem[] = [
     {
-      question: 'Quel est le barème de l’impôt sur le revenu en 2025 ?',
-      answer: 'Le barème 2025 est progressif : 0% jusqu\'à 11 497 €, 11% de 11 498 à 29 315 €, 30% jusqu\'à 83 823 €, 41% jusqu\'à 180 294 €, et 45% au-delà.'
+      question: 'Quel est le barème de l’impôt sur le revenu en 2026 ?',
+      answer: 'Le barème 2026 est progressif : 0% jusqu\'à 11 497 €, 11% de 11 498 à 29 315 €, 30% jusqu\'à 83 823 €, 41% jusqu\'à 180 294 €, et 45% au-delà.'
     },
     {
       question: 'Qu’est-ce que la décote pour revenus modestes ?',
-      answer: 'La décote est une réduction automatique de l’impôt pour les foyers modestes. En 2025, elle s’applique si l’impôt brut est inférieur à 1 964 € (célibataire) ou 3 248 € (couple). La formule est : 889 € - 45,25% de l’impôt brut pour une personne seule, ou 1 470 € - 45,25% pour un couple.'
+      answer: 'La décote est une réduction automatique de l’impôt pour les foyers modestes. En 2026, elle s’applique si l’impôt brut est inférieur à 1 964 € (célibataire) ou 3 248 € (couple). La formule est : 889 € - 45,25% de l’impôt brut pour une personne seule, ou 1 470 € - 45,25% pour un couple.'
     },
     {
       question: 'Quelle est la différence entre impôt brut et impôt net ?',
@@ -65,10 +65,10 @@ private renderer: Renderer2, private seo: SeoService) { }
 
   ngOnInit(): void {
     this.seo.updateMetaData({
-      title: 'Simulateur impôt sur le revenu 2025 | CalculateurFinance.fr',
-      description: 'Estimez rapidement votre impôt sur le revenu 2025 selon vos revenus et votre situation familiale. Simulateur simple, rapide et gratuit.',
+      title: 'Simulateur impôt sur le revenu 2026 | CalculateurFinance.fr',
+      description: 'Estimez rapidement votre impôt sur le revenu 2026 selon vos revenus et votre situation familiale. Simulateur simple, rapide et gratuit.',
       url: 'https://calculateurfinance.fr/simulateur-impot-revenue/',
-          keywords: 'simulateur impôt sur le revenu, calcul impôt 2025, tranche d’imposition, barème fiscal, déclaration de revenus, fiscalité en France, quotient familial, réduction d’impôt, décote, taux marginal d’imposition'
+          keywords: 'simulateur impôt sur le revenu, calcul impôt 2026, tranche d’imposition, barème fiscal, déclaration de revenus, fiscalité en France, quotient familial, réduction d’impôt, décote, taux marginal d’imposition'
 
     });
   if (isPlatformBrowser(this.platformId)) {

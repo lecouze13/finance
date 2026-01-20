@@ -37,7 +37,7 @@ export class SimulateurImportLocationNueComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.updateMetaData({
-      title: 'Simulateur impôt location nue 2025 | CalculateurFinance.fr',
+      title: 'Simulateur impôt location nue 2026 | CalculateurFinance.fr',
       description:
         'Calculez rapidement l’impôt à payer sur vos revenus fonciers en location nue, selon le régime micro-foncier ou réel. Simulation simple et précise.',
       url: 'https://calculateurfinance.fr/simulateur-location-nue-regime/',

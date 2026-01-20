@@ -80,10 +80,18 @@ export class CashflowComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.updateMetaData({
-      title: 'Simulateur Cashflow Immobilier 2025 | Calculez votre Flux de Trésorerie',
+      title: 'Simulateur Cashflow Immobilier 2026 | Calculez votre Flux de Trésorerie',
       description: 'Calculez le cashflow de votre investissement locatif. Loyers, crédit, charges, provisions : obtenez votre flux de trésorerie mensuel réel.',
       keywords: 'cashflow immobilier, simulateur cashflow, flux trésorerie locatif, rentabilité immobilière, autofinancement, effort épargne',
+      url: 'https://calculateurfinance.fr/cashflow-immobilier/'
+    });
+
+    this.seo.addSoftwareApplicationSchema({
+      name: 'Simulateur Cashflow Immobilier',
+      description: 'Calculez le cashflow mensuel de votre investissement locatif avec crédit et charges.',
       url: 'https://calculateurfinance.fr/cashflow-immobilier/',
+      applicationCategory: 'FinanceApplication',
+      featureList: ['Calcul cashflow mensuel', 'Effort épargne', 'Autofinancement', 'Simulation crédit'],
     });
 
     this.calculer();

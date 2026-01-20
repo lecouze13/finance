@@ -100,7 +100,7 @@ export class SimulateurDcaLumpsumComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateMetaData({
-      title: 'Simulateur DCA vs Lump Sum 2025 | Comparez les stratégies d\'investissement',
+      title: 'Simulateur DCA vs Lump Sum 2026 | Comparez les stratégies d\'investissement',
       description: 'Comparez gratuitement les stratégies DCA (investissement progressif) et Lump Sum (en une fois). Calculez quelle méthode est la plus rentable selon vos paramètres.',
       url: 'https://calculateurfinance.fr/simulateur-dca-lumpsum'
     });

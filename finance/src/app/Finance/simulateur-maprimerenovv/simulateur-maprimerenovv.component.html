@@ -1,0 +1,244 @@
+<app-breadcrumb></app-breadcrumb>
+
+<div class="simulator-container">
+  <div class="simulator-header">
+    <h1>Simulateur MaPrimeRénov' 2026</h1>
+    <p class="subtitle">Estimez le montant de votre aide pour vos travaux de rénovation énergétique</p>
+  </div>
+
+  <div class="simulator-content">
+    <p-panel header="Votre situation" class="input-panel">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="region">Région</label>
+          <p-dropdown
+            id="region"
+            [options]="regionOptions"
+            [(ngModel)]="ileDeFrance"
+            (onChange)="calculer()"
+            [style]="{'width':'100%'}">
+          </p-dropdown>
+        </div>
+
+        <div class="form-group">
+          <label for="personnes">Nombre de personnes dans le foyer</label>
+          <p-dropdown
+            id="personnes"
+            [options]="personnesOptions"
+            [(ngModel)]="personnesFoyer"
+            (onChange)="calculer()"
+            [style]="{'width':'100%'}">
+          </p-dropdown>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="revenus">Revenu fiscal de référence (année N-1)</label>
+          <p-inputNumber
+            id="revenus"
+            [(ngModel)]="revenuFiscal"
+            (onInput)="calculer()"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0"
+            [style]="{'width':'100%'}"
+            pTooltip="Revenu fiscal de référence indiqué sur votre avis d'imposition">
+          </p-inputNumber>
+        </div>
+      </div>
+    </p-panel>
+
+    <p-panel header="Vos travaux" class="input-panel">
+      <div class="form-grid">
+        <div class="form-group full-width">
+          <label for="travaux">Type de travaux</label>
+          <p-dropdown
+            id="travaux"
+            [options]="travauxOptions"
+            [(ngModel)]="travauxSelectionne"
+            (onChange)="calculer()"
+            [style]="{'width':'100%'}"
+            [filter]="true"
+            filterPlaceholder="Rechercher...">
+          </p-dropdown>
+        </div>
+
+        <div class="form-group full-width" *ngIf="estAuM2">
+          <label for="surface">Surface à isoler / nombre de fenêtres</label>
+          <p-inputNumber
+            id="surface"
+            [(ngModel)]="surface"
+            (onInput)="calculer()"
+            [min]="1"
+            [max]="500"
+            suffix=" m² / unités"
+            [style]="{'width':'100%'}">
+          </p-inputNumber>
+        </div>
+      </div>
+    </p-panel>
+
+    <p-panel header="Résultat" class="results-panel" [ngClass]="getProfilClass()">
+      <div class="profil-badge" [ngClass]="profil">
+        {{ profilCouleur }}
+      </div>
+
+      <div class="result-main">
+        <div class="result-label">MaPrimeRénov' estimée</div>
+        <div class="result-value" [ngClass]="{'zero': montantAide === 0}">
+          {{ montantAide | number:'1.0-0':'fr-FR' }} €
+        </div>
+        <div class="result-travaux">pour {{ getTravauxNom() }}</div>
+      </div>
+
+      <div class="result-details" *ngIf="montantAide === 0 && profil === 'rose'">
+        <div class="info-box warning">
+          <i class="pi pi-info-circle"></i>
+          <span>Les ménages aux revenus supérieurs (profil Rose) ne sont pas éligibles à MaPrimeRénov' pour les gestes individuels. Vous pouvez bénéficier de MaPrimeRénov' Parcours accompagné pour une rénovation globale.</span>
+        </div>
+      </div>
+
+      <div class="result-details" *ngIf="estAuM2 && montantAide > 0">
+        <div class="detail-row">
+          <span class="detail-label">Montant par m² / unité</span>
+          <span class="detail-value">{{ montantAide / surface | number:'1.0-0':'fr-FR' }} €</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Surface / quantité</span>
+          <span class="detail-value">{{ surface }} m² / unités</span>
+        </div>
+      </div>
+
+      <div class="info-box" *ngIf="montantAide > 0">
+        <i class="pi pi-lightbulb"></i>
+        <span>Cette aide est cumulable avec les CEE (Certificats d'Économies d'Énergie) et l'éco-PTZ.</span>
+      </div>
+    </p-panel>
+  </div>
+
+  <div class="bareme-section">
+    <h2>Plafonds de ressources MaPrimeRénov' 2026</h2>
+    <div class="bareme-table-container">
+      <table class="bareme-table">
+        <thead>
+          <tr>
+            <th>Nombre de personnes</th>
+            <th class="bleu-header">Bleu (très modeste)</th>
+            <th class="jaune-header">Jaune (modeste)</th>
+            <th class="violet-header">Violet (intermédiaire)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1 personne</td>
+            <td>{{ ileDeFrance ? '23 541' : '17 009' }} €</td>
+            <td>{{ ileDeFrance ? '28 657' : '21 805' }} €</td>
+            <td>{{ ileDeFrance ? '40 018' : '30 549' }} €</td>
+          </tr>
+          <tr>
+            <td>2 personnes</td>
+            <td>{{ ileDeFrance ? '34 551' : '24 875' }} €</td>
+            <td>{{ ileDeFrance ? '42 058' : '31 889' }} €</td>
+            <td>{{ ileDeFrance ? '58 827' : '44 907' }} €</td>
+          </tr>
+          <tr>
+            <td>3 personnes</td>
+            <td>{{ ileDeFrance ? '41 493' : '29 917' }} €</td>
+            <td>{{ ileDeFrance ? '50 513' : '38 349' }} €</td>
+            <td>{{ ileDeFrance ? '70 382' : '53 728' }} €</td>
+          </tr>
+          <tr>
+            <td>4 personnes</td>
+            <td>{{ ileDeFrance ? '48 447' : '34 948' }} €</td>
+            <td>{{ ileDeFrance ? '58 981' : '44 802' }} €</td>
+            <td>{{ ileDeFrance ? '82 839' : '63 379' }} €</td>
+          </tr>
+          <tr>
+            <td>5 personnes</td>
+            <td>{{ ileDeFrance ? '55 417' : '39 993' }} €</td>
+            <td>{{ ileDeFrance ? '67 483' : '51 264' }} €</td>
+            <td>{{ ileDeFrance ? '94 294' : '72 143' }} €</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="bareme-note">Les ménages au-delà des plafonds Violet sont classés en catégorie Rose et ne sont éligibles qu'à MaPrimeRénov' Parcours accompagné</p>
+  </div>
+
+  <div class="aides-section">
+    <h2>Montants MaPrimeRénov' par type de travaux</h2>
+    <div class="bareme-table-container">
+      <table class="bareme-table aides-table">
+        <thead>
+          <tr>
+            <th>Type de travaux</th>
+            <th class="bleu-header">Bleu</th>
+            <th class="jaune-header">Jaune</th>
+            <th class="violet-header">Violet</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pompe à chaleur air/eau</td>
+            <td>5 000 €</td>
+            <td>4 000 €</td>
+            <td>3 000 €</td>
+          </tr>
+          <tr>
+            <td>Pompe à chaleur géothermique</td>
+            <td>11 000 €</td>
+            <td>9 000 €</td>
+            <td>6 000 €</td>
+          </tr>
+          <tr>
+            <td>Chaudière à granulés</td>
+            <td>10 000 €</td>
+            <td>8 000 €</td>
+            <td>4 000 €</td>
+          </tr>
+          <tr>
+            <td>Poêle à granulés</td>
+            <td>2 500 €</td>
+            <td>2 000 €</td>
+            <td>1 500 €</td>
+          </tr>
+          <tr>
+            <td>Chauffe-eau solaire</td>
+            <td>4 000 €</td>
+            <td>3 000 €</td>
+            <td>2 000 €</td>
+          </tr>
+          <tr>
+            <td>VMC double flux</td>
+            <td>2 500 €</td>
+            <td>2 000 €</td>
+            <td>1 500 €</td>
+          </tr>
+          <tr>
+            <td>Isolation murs extérieur</td>
+            <td>75 €/m²</td>
+            <td>60 €/m²</td>
+            <td>40 €/m²</td>
+          </tr>
+          <tr>
+            <td>Isolation toiture/combles</td>
+            <td>25 €/m²</td>
+            <td>20 €/m²</td>
+            <td>15 €/m²</td>
+          </tr>
+          <tr>
+            <td>Fenêtres</td>
+            <td>100 €/u</td>
+            <td>80 €/u</td>
+            <td>40 €/u</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <app-faq-section
+    [title]="'Questions fréquentes sur MaPrimeRénov\''"
+    [faqItems]="faqItems">
+  </app-faq-section>
+</div>

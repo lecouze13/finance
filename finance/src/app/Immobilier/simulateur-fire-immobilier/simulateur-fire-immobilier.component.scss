@@ -1,0 +1,265 @@
+// Styles spécifiques au simulateur FIRE Immobilier
+
+.fire-objective {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+
+  .objective-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+  }
+
+  .objective-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1e3a5f;
+  }
+
+  .objective-detail {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+  }
+}
+
+.fire-result {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+
+  &.success {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border: 2px solid #28a745;
+
+    .fire-icon {
+      background: #28a745;
+    }
+
+    .fire-title {
+      color: #155724;
+    }
+  }
+
+  &.pending {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+    border: 2px solid #ffc107;
+
+    .fire-icon {
+      background: #ffc107;
+    }
+
+    .fire-title {
+      color: #856404;
+    }
+  }
+
+  .fire-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    i {
+      color: white;
+      font-size: 1.5rem;
+    }
+  }
+
+  .fire-content {
+    display: flex;
+    flex-direction: column;
+
+    .fire-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .fire-detail {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+  }
+}
+
+.fire-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    text-align: center;
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: #6c757d;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1e3a5f;
+    }
+  }
+}
+
+// Progress section
+.progress-section {
+  padding: 1rem 0;
+}
+
+.progress-current {
+  margin-bottom: 0.5rem;
+
+  .progress-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.progress-bar-container {
+  position: relative;
+  height: 30px;
+  background: #e9ecef;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 15px;
+  transition: width 0.5s ease;
+
+  &.debut { background: linear-gradient(90deg, #dc3545 0%, #fd7e14 100%); }
+  &.moyen { background: linear-gradient(90deg, #ffc107 0%, #28a745 100%); }
+  &.proche { background: linear-gradient(90deg, #28a745 0%, #20c997 100%); }
+  &.fire { background: linear-gradient(90deg, #28a745 0%, #17a2b8 100%); }
+}
+
+.progress-value {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 700;
+  color: #1e3a5f;
+  font-size: 0.9rem;
+}
+
+.progress-target {
+  text-align: right;
+  margin-top: 0.25rem;
+
+  .target-text {
+    font-size: 0.8rem;
+    color: #28a745;
+    font-weight: 600;
+  }
+}
+
+// Slider group
+.slider-group {
+  label {
+    margin-bottom: 0.75rem;
+  }
+}
+
+// Projection section
+.projection-section {
+  margin-top: 2rem;
+}
+
+:host ::ng-deep {
+  .p-datatable {
+    .p-datatable-thead > tr > th {
+      background: #f8f9fa;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.75rem;
+    }
+
+    .p-datatable-tbody > tr > td {
+      padding: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .fire-row {
+      background-color: #d4edda !important;
+
+      &:hover {
+        background-color: #c3e6cb !important;
+      }
+    }
+  }
+
+  .results-panel .p-panel-header {
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+  }
+}
+
+.biens-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  color: white;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.couverture-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  &.debut {
+    background: #f8d7da;
+    color: #721c24;
+  }
+  &.moyen {
+    background: #fff3cd;
+    color: #856404;
+  }
+  &.proche {
+    background: #cce5ff;
+    color: #004085;
+  }
+  &.fire {
+    background: #d4edda;
+    color: #155724;
+  }
+}
+
+.positive { color: #28a745; }
+.negative { color: #dc3545; }
+.patrimoine { color: #1e3a5f; font-weight: 600; }

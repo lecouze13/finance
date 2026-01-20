@@ -56,10 +56,18 @@ export class RendementComponent implements OnInit {
 private renderer: Renderer2, private seo: SeoService) { }
   ngOnInit(): void {
     this.seo.updateMetaData({
-      title: 'Simulateur Rendement Immobilier 2025 | Rendement Brut, Net et Net-Net',
+      title: 'Simulateur Rendement Immobilier 2026 | Rendement Brut, Net et Net-Net',
       description: 'Calculez le rendement brut, net et net-net de votre investissement immobilier grâce à notre simulateur simple et précis.',
       url: 'https://calculateurfinance.fr/rendement-locatif/',
       keywords: 'rendement brut, rendement net, rendement net net, calcul rendement locatif, rentabilité immobilière, investissement immobilier, frais charges locatives, revenus locatifs, simulation rendement immobilier',
+   });
+
+    this.seo.addSoftwareApplicationSchema({
+      name: 'Simulateur Rendement Immobilier',
+      description: 'Calculez le rendement brut, net et net-net de votre investissement locatif.',
+      url: 'https://calculateurfinance.fr/rendement-locatif/',
+      applicationCategory: 'FinanceApplication',
+      featureList: ['Rendement brut', 'Rendement net', 'Rendement net-net', 'Charges déductibles'],
 
     });
   if (isPlatformBrowser(this.platformId)) {

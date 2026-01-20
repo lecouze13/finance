@@ -10,14 +10,14 @@ export const pages: {
   ...immobilier,
 
   'pea-vs-assurance-vie': {
-    titre: 'PEA ou Assurance Vie : Que choisir en 2025 ?',
+    titre: 'PEA ou Assurance Vie : Que choisir en 2026 ?',
     description:
-      "Découvrez les différences clés entre le PEA et l'assurance vie en 2025 : fiscalité, rendement, liquidité et objectifs d'investissement.",
+      "Découvrez les différences clés entre le PEA et l'assurance vie en 2026 : fiscalité, rendement, liquidité et objectifs d'investissement.",
     keywords: 'PEA ou assurance vie, comparaison PEA assurance vie, meilleur placement long terme, fiscalité assurance vie, fiscalité PEA, PEA vs assurance vie',
 
     contenu: `                                                                                                                                                      
     <h2>Introduction</h2>
-    <p>Le <strong>PEA (Plan d'Épargne en Actions)</strong> et l'<strong>assurance vie</strong> sont deux piliers de l’épargne en France. En 2025, ces deux enveloppes fiscales conservent un attrait important, mais ne répondent pas aux mêmes objectifs. Comparons-les pour vous aider à faire le bon choix selon votre profil.</p>
+    <p>Le <strong>PEA (Plan d'Épargne en Actions)</strong> et l'<strong>assurance vie</strong> sont deux piliers de l’épargne en France. En 2026, ces deux enveloppes fiscales conservent un attrait important, mais ne répondent pas aux mêmes objectifs. Comparons-les pour vous aider à faire le bon choix selon votre profil.</p>
 
     <h2>1. Objectifs et fonctionnement</h2>
     <h3>PEA : investir en actions européennes</h3>

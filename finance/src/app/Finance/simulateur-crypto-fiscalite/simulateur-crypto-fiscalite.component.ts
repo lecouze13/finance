@@ -48,7 +48,7 @@ export class SimulateurCryptoFiscaliteComponent implements OnInit {
   netApresImpot: number = 0;
   tauxImposition: number = 0;
 
-  // Barème IR 2025
+  // Barème IR 2026
   tranchesIR = [
     { min: 0, max: 11294, taux: 0 },
     { min: 11294, max: 28797, taux: 11 },
@@ -98,7 +98,7 @@ export class SimulateurCryptoFiscaliteComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateMetaData({
-      title: 'Simulateur Fiscalité Crypto 2025 | Calculez vos impôts sur Bitcoin et cryptomonnaies',
+      title: 'Simulateur Fiscalité Crypto 2026 | Calculez vos impôts sur Bitcoin et cryptomonnaies',
       description: 'Calculez gratuitement l\'impôt sur vos plus-values crypto (Bitcoin, Ethereum...). Flat tax 30% ou barème IR ? Comparez les options fiscales.',
       url: 'https://calculateurfinance.fr/simulateur-crypto-fiscalite'
     });

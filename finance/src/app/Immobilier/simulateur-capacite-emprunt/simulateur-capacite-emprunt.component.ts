@@ -89,7 +89,7 @@ export class SimulateurCapaciteEmpruntComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Simulateur Capacité d\'Emprunt Immobilier 2025 | Calculez votre Budget');
+    this.title.setTitle('Simulateur Capacité d\'Emprunt Immobilier 2026 | Calculez votre Budget');
     this.meta.updateTag({
       name: 'description',
       content: 'Calculez gratuitement votre capacité d\'emprunt immobilier. Estimez le montant maximum que vous pouvez emprunter selon vos revenus, charges et le taux d\'endettement de 35%.'

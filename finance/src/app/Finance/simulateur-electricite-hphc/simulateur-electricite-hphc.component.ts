@@ -35,7 +35,7 @@ export class SimulateurElectriciteHphcComponent implements OnInit {
   pourcentageHC: number = 40; // % de conso en heures creuses
   puissanceSouscrite: number = 6; // kVA
 
-  // Tarifs EDF Tarif Bleu 2025 (prix TTC)
+  // Tarifs EDF Tarif Bleu 2026 (prix TTC)
   tarifsBase: { [key: number]: { abonnement: number; kwh: number } } = {
     3: { abonnement: 115.56, kwh: 0.2516 },
     6: { abonnement: 151.20, kwh: 0.2516 },
@@ -129,7 +129,7 @@ export class SimulateurElectriciteHphcComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateMetaData({
-      title: 'Simulateur Heures Pleines / Heures Creuses 2025 | Comparez les options EDF',
+      title: 'Simulateur Heures Pleines / Heures Creuses 2026 | Comparez les options EDF',
       description: 'Comparez gratuitement les options tarifaires électricité Base vs Heures Pleines/Heures Creuses. Calculez quelle option est la plus économique pour votre foyer.',
       url: 'https://calculateurfinance.fr/simulateur-electricite-hphc'
     });

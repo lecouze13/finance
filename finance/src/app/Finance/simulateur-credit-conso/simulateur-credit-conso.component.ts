@@ -109,7 +109,7 @@ export class SimulateurCreditConsoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Simulateur Crédit Consommation 2025 | Calculez votre Mensualité');
+    this.title.setTitle('Simulateur Crédit Consommation 2026 | Calculez votre Mensualité');
     this.meta.updateTag({
       name: 'description',
       content: 'Simulez votre crédit à la consommation : mensualité, coût total, TAEG. Comparez crédit auto, travaux, personnel. Tableau d\'amortissement inclus.'

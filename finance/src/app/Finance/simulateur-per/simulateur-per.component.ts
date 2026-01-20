@@ -90,14 +90,14 @@ export class SimulateurPerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Simulateur PER 2025 | Plan Épargne Retraite - Calculez votre Économie d\'Impôt');
+    this.title.setTitle('Simulateur PER 2026 | Plan Épargne Retraite - Calculez votre Économie d\'Impôt');
     this.meta.updateTag({
       name: 'description',
       content: 'Simulez votre Plan Épargne Retraite (PER). Calculez l\'économie d\'impôt, le capital accumulé et comparez sortie en capital ou rente. Optimisez votre épargne retraite.'
     });
     this.meta.updateTag({
       name: 'keywords',
-      content: 'PER, plan épargne retraite, simulation PER, économie impôt PER, déduction fiscale retraite, sortie capital rente, plafond PER 2025'
+      content: 'PER, plan épargne retraite, simulation PER, économie impôt PER, déduction fiscale retraite, sortie capital rente, plafond PER 2026'
     });
     this.calculer();
   }

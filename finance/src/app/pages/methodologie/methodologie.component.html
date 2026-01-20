@@ -1,0 +1,240 @@
+<div class="legal-page">
+  <div class="legal-container">
+    <h1>Méthodologie des Calculs</h1>
+    <p class="last-update">Dernière mise à jour : {{ lastUpdate }}</p>
+
+    <div class="intro-box">
+      <p>
+        Transparence et rigueur sont au cœur de notre démarche. Cette page détaille les formules,
+        hypothèses et sources utilisées dans nos simulateurs financiers et immobiliers.
+      </p>
+    </div>
+
+    <section>
+      <h2>1. Principes généraux</h2>
+      <p>
+        Tous nos simulateurs respectent les principes suivants :
+      </p>
+      <ul>
+        <li><strong>Calculs locaux :</strong> Toutes les simulations sont effectuées dans votre navigateur. Aucune donnée n'est envoyée à nos serveurs.</li>
+        <li><strong>Formules standards :</strong> Nous utilisons des formules financières reconnues et documentées.</li>
+        <li><strong>Barèmes officiels :</strong> Les barèmes fiscaux et sociaux proviennent de sources officielles (impots.gouv.fr, CAF, URSSAF).</li>
+        <li><strong>Hypothèses explicites :</strong> Chaque simulateur indique clairement les hypothèses utilisées.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. Sources des données</h2>
+
+      <div class="source-card">
+        <h3><i class="pi pi-building"></i> Fiscalité</h3>
+        <ul>
+          <li><a href="https://www.impots.gouv.fr" target="_blank" rel="noopener noreferrer">impots.gouv.fr</a> - Barèmes IR, IFI, plus-values</li>
+          <li><a href="https://bofip.impots.gouv.fr" target="_blank" rel="noopener noreferrer">BOFiP</a> - Bulletin Officiel des Finances Publiques</li>
+          <li><a href="https://www.legifrance.gouv.fr" target="_blank" rel="noopener noreferrer">Légifrance</a> - Code Général des Impôts</li>
+        </ul>
+      </div>
+
+      <div class="source-card">
+        <h3><i class="pi pi-users"></i> Aides sociales</h3>
+        <ul>
+          <li><a href="https://www.caf.fr" target="_blank" rel="noopener noreferrer">CAF</a> - Allocations familiales, APL, RSA</li>
+          <li><a href="https://www.service-public.fr" target="_blank" rel="noopener noreferrer">Service Public</a> - Informations administratives</li>
+          <li><a href="https://www.urssaf.fr" target="_blank" rel="noopener noreferrer">URSSAF</a> - Cotisations sociales</li>
+        </ul>
+      </div>
+
+      <div class="source-card">
+        <h3><i class="pi pi-home"></i> Immobilier</h3>
+        <ul>
+          <li><a href="https://www.notaires.fr" target="_blank" rel="noopener noreferrer">Notaires de France</a> - Frais de notaire</li>
+          <li><a href="https://www.anil.org" target="_blank" rel="noopener noreferrer">ANIL</a> - Prêt à taux zéro</li>
+          <li><a href="https://www.banque-france.fr" target="_blank" rel="noopener noreferrer">Banque de France</a> - Taux d'usure</li>
+        </ul>
+      </div>
+
+      <div class="source-card">
+        <h3><i class="pi pi-chart-line"></i> Épargne et Investissement</h3>
+        <ul>
+          <li><a href="https://www.banque-france.fr" target="_blank" rel="noopener noreferrer">Banque de France</a> - Taux des livrets réglementés</li>
+          <li><a href="https://www.amf-france.org" target="_blank" rel="noopener noreferrer">AMF</a> - Réglementation des placements</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Formules de calcul principales</h2>
+
+      <div class="formula-card">
+        <h3>Intérêts composés</h3>
+        <div class="formula">
+          <code>Capital final = Capital initial × (1 + taux)^n</code>
+        </div>
+        <p>
+          Avec versements réguliers : nous utilisons la formule des annuités constantes.
+          Le taux est converti en taux périodique selon la fréquence de capitalisation.
+        </p>
+      </div>
+
+      <div class="formula-card">
+        <h3>Mensualité de crédit</h3>
+        <div class="formula">
+          <code>M = C × [t × (1+t)^n] / [(1+t)^n - 1]</code>
+        </div>
+        <p>
+          Où M = mensualité, C = capital emprunté, t = taux mensuel, n = nombre de mensualités.
+          Cette formule suppose des mensualités constantes (crédit amortissable classique).
+        </p>
+      </div>
+
+      <div class="formula-card">
+        <h3>Rendement locatif brut</h3>
+        <div class="formula">
+          <code>Rendement brut = (Loyer annuel / Prix d'achat) × 100</code>
+        </div>
+        <p>
+          Le rendement net intègre les charges, la taxe foncière, les frais de gestion
+          et la vacance locative estimée.
+        </p>
+      </div>
+
+      <div class="formula-card">
+        <h3>TRI (Taux de Rendement Interne)</h3>
+        <div class="formula">
+          <code>NPV = Σ [Flux / (1+TRI)^t] = 0</code>
+        </div>
+        <p>
+          Le TRI est calculé par itération (méthode de Newton-Raphson) jusqu'à trouver
+          le taux qui annule la valeur actuelle nette des flux.
+        </p>
+      </div>
+
+      <div class="formula-card">
+        <h3>Impôt sur le revenu</h3>
+        <div class="formula">
+          <code>IR = Σ (Tranche × Taux marginal) × Nombre de parts</code>
+        </div>
+        <p>
+          Nous appliquons le barème progressif par tranches avec le mécanisme du quotient
+          familial et ses plafonnements.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Hypothèses et simplifications</h2>
+
+      <div class="assumption-list">
+        <div class="assumption">
+          <i class="pi pi-info-circle"></i>
+          <div>
+            <strong>Fiscalité simplifiée</strong>
+            <p>Les simulateurs ne prennent pas en compte toutes les niches fiscales, déductions spécifiques ou situations particulières (handicap, dons, etc.).</p>
+          </div>
+        </div>
+
+        <div class="assumption">
+          <i class="pi pi-info-circle"></i>
+          <div>
+            <strong>Taux constants</strong>
+            <p>Sauf indication contraire, les taux d'intérêt et d'inflation sont supposés constants sur la durée de la simulation.</p>
+          </div>
+        </div>
+
+        <div class="assumption">
+          <i class="pi pi-info-circle"></i>
+          <div>
+            <strong>Barèmes figés</strong>
+            <p>Les barèmes fiscaux et sociaux utilisés sont ceux en vigueur au moment de la mise à jour. Ils peuvent évoluer avec les lois de finances.</p>
+          </div>
+        </div>
+
+        <div class="assumption">
+          <i class="pi pi-info-circle"></i>
+          <div>
+            <strong>Situation moyenne</strong>
+            <p>Les calculs sont basés sur des situations types. Votre situation personnelle peut différer significativement.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>5. Limites et mises en garde</h2>
+      <div class="warning-box">
+        <i class="pi pi-exclamation-triangle"></i>
+        <div>
+          <p>
+            <strong>Les résultats des simulateurs sont fournis à titre indicatif uniquement.</strong>
+          </p>
+          <p>
+            Ils ne constituent pas un conseil financier, fiscal ou juridique. Pour toute décision
+            importante, consultez un professionnel qualifié qui prendra en compte l'ensemble de
+            votre situation personnelle.
+          </p>
+        </div>
+      </div>
+      <p>
+        Les principales limitations incluent :
+      </p>
+      <ul>
+        <li>L'absence de prise en compte de certains cas particuliers</li>
+        <li>Les arrondis dans les calculs (2 décimales généralement)</li>
+        <li>L'évolution possible des réglementations après la date de mise à jour</li>
+        <li>Les variations régionales ou locales non intégrées</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>6. Mises à jour</h2>
+      <p>
+        Nous nous efforçons de maintenir nos simulateurs à jour avec les derniers barèmes officiels.
+        Les mises à jour sont généralement effectuées :
+      </p>
+      <ul>
+        <li>En janvier : nouveaux barèmes fiscaux (loi de finances)</li>
+        <li>En avril : nouveaux barèmes CAF et aides sociales</li>
+        <li>Au fil de l'eau : corrections et améliorations signalées</li>
+      </ul>
+      <p>
+        Si vous constatez une erreur ou une information obsolète, merci de nous la signaler à
+        <a href="mailto:calculateurfinance@proton.me">calculateurfinance&#64;proton.me</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2>7. Questions fréquentes</h2>
+
+      <div class="faq-item">
+        <h4>Pourquoi mes résultats diffèrent de ceux d'un autre site ?</h4>
+        <p>
+          Chaque site peut utiliser des hypothèses différentes, des barèmes à des dates différentes,
+          ou prendre en compte plus ou moins de paramètres. Vérifiez toujours les hypothèses utilisées.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Comment signaler une erreur de calcul ?</h4>
+        <p>
+          Contactez-nous à <a href="mailto:calculateurfinance@proton.me">calculateurfinance&#64;proton.me</a>
+          en précisant le simulateur concerné, les valeurs utilisées et le résultat attendu vs obtenu.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Puis-je utiliser vos résultats pour des démarches officielles ?</h4>
+        <p>
+          Nos simulateurs sont destinés à l'information et à la planification personnelle.
+          Pour des démarches officielles, utilisez toujours les simulateurs des organismes concernés
+          (impots.gouv.fr, CAF, etc.).
+        </p>
+      </div>
+    </section>
+
+    <div class="back-link">
+      <a routerLink="/">
+        <i class="pi pi-arrow-left"></i> Retour à l'accueil
+      </a>
+    </div>
+  </div>
+</div>

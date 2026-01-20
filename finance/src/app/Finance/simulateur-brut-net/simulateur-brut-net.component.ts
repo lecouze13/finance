@@ -41,7 +41,7 @@ export class SimulateurBrutNetComponent implements OnInit {
     },
     {
       question: 'Comment est calculé le SMIC net ?',
-      answer: 'Le SMIC net est obtenu après déduction des charges du SMIC brut (≈1794 € brut en 2025).'
+      answer: 'Le SMIC net est obtenu après déduction des charges du SMIC brut (≈1794 € brut en 2026).'
     },
     {
       question: 'Un temps partiel influence-t-il le net ?',
@@ -58,10 +58,18 @@ private renderer: Renderer2, private seo: SeoService) { }
   ngOnInit() {
 
     this.seo.updateMetaData({
-      title: 'Simulateur Brut-Net 2025 | CalculateurFinance.fr',
-      description: 'Calculez rapidement la conversion entre salaire brut et net avec notre simulateur simple et gratuit. Adapté aux dernières règles fiscales 2025.',
+      title: 'Simulateur Brut-Net 2026 | CalculateurFinance.fr',
+      description: 'Calculez rapidement la conversion entre salaire brut et net avec notre simulateur simple et gratuit. Adapté aux dernières règles fiscales 2026.',
       url: 'https://calculateurfinance.fr/simulateur-brut-net/',
           keywords: 'simulateur brut net, calcul salaire net, conversion brut en net, salaire après impôts, charges sociales, salaire en France, simulateur de paie, net imposable, salaire net mensuel',
+    });
+
+    this.seo.addSoftwareApplicationSchema({
+      name: 'Simulateur Brut-Net 2026',
+      description: 'Calculateur gratuit pour convertir votre salaire brut en net selon votre statut.',
+      url: 'https://calculateurfinance.fr/simulateur-brut-net/',
+      applicationCategory: 'FinanceApplication',
+      featureList: ['Conversion brut vers net', 'Calcul des charges sociales', 'Tous les statuts', 'Barèmes 2026'],
 
     });
   if (isPlatformBrowser(this.platformId)) {
@@ -144,7 +152,7 @@ private renderer: Renderer2, private seo: SeoService) { }
 
     this.resultat = true;
 
-    // Vérification SMIC (montant 1794 € mensuel en 2025)
+    // Vérification SMIC (montant 1794 € mensuel en 2026)
     const smicMensuel = 1794;
     this.estSmic = this.salaireBrutMensuel! >= smicMensuel * temps && this.salaireBrutMensuel! <= smicMensuel * temps * 1.05;
   }

@@ -131,7 +131,7 @@ export class SimulateurScpiComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Simulateur SCPI 2025 | Calculez votre Rentabilité Nette');
+    this.title.setTitle('Simulateur SCPI 2026 | Calculez votre Rentabilité Nette');
     this.meta.updateTag({
       name: 'description',
       content: 'Simulez votre investissement SCPI : rendement net après impôts, projection sur 10-20 ans, comparaison comptant vs crédit. Calculez vos revenus locatifs.'

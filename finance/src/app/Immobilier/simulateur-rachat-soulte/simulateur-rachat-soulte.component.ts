@@ -64,7 +64,7 @@ export class SimulateurRachatSoulteComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.updateMetaData({
-      title: 'Simulateur Rachat de Soulte 2025 | Calcul Héritage & Indivision',
+      title: 'Simulateur Rachat de Soulte 2026 | Calcul Héritage & Indivision',
       description: 'Calculez le montant de la soulte à verser pour racheter les parts d\'un bien en indivision ou succession. Frais de notaire et financement inclus.',
       url: 'https://calculateurfinance.fr/simulateur-rachat-soulte',
       keywords: 'rachat de soulte, calcul soulte, succession immobilier, indivision, partage héritage, frais notaire soulte, financer rachat soulte'

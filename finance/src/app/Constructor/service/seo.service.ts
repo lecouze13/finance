@@ -15,7 +15,7 @@ export class SeoService {
     url: string;
     image?: string;
     robots?: string;
-    keywords?: string;  // Ajouté ici
+    keywords?: string;
 }): void {
   this.title.setTitle(options.title);
 
@@ -57,7 +57,6 @@ setCanonicalUrl(url: string) {
     this.document.querySelector(`link[rel='canonical']`) || this.document.createElement('link');
   link.setAttribute('rel', 'canonical');
 
-  // Nettoyer l'URL et ajouter un slash final s'il n'existe pas déjà
   const cleanUrl = url.endsWith('/') ? url : url + '/';
 
   link.setAttribute('href', cleanUrl);
@@ -65,6 +64,118 @@ setCanonicalUrl(url: string) {
   if (!link.parentNode) {
     this.document.head.appendChild(link);
   }
+}
+
+/**
+ * Ajoute les données structurées SoftwareApplication pour les simulateurs
+ * Schema.org type: SoftwareApplication (WebApplication)
+ * Avantage SEO: Rich snippets dans les résultats de recherche
+ */
+addSoftwareApplicationSchema(options: {
+  name: string;
+  description: string;
+  url: string;
+  applicationCategory?: string;
+  operatingSystem?: string;
+  offers?: {
+    price: string;
+    priceCurrency: string;
+  };
+  aggregateRating?: {
+    ratingValue: number;
+    ratingCount: number;
+  };
+  featureList?: string[];
+}): void {
+  const existingScript = this.document.querySelector('script[data-schema="software-application"]');
+  if (existingScript) {
+    existingScript.remove();
+  }
+
+  const schema: any = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    'name': options.name,
+    'description': options.description,
+    'url': options.url,
+    'applicationCategory': options.applicationCategory || 'FinanceApplication',
+    'operatingSystem': options.operatingSystem || 'Web',
+    'browserRequirements': 'Requires JavaScript. Requires HTML5.',
+    'softwareVersion': '1.0',
+    'author': {
+      '@type': 'Organization',
+      'name': 'CalculateurFinance',
+      'url': 'https://calculateurfinance.fr'
+    },
+    'provider': {
+      '@type': 'Organization',
+      'name': 'CalculateurFinance',
+      'url': 'https://calculateurfinance.fr'
+    },
+    'offers': {
+      '@type': 'Offer',
+      'price': options.offers?.price || '0',
+      'priceCurrency': options.offers?.priceCurrency || 'EUR'
+    },
+    'inLanguage': 'fr-FR',
+    'isAccessibleForFree': true,
+    'screenshot': 'https://calculateurfinance.fr/assets/logo.png'
+  };
+
+  if (options.featureList && options.featureList.length > 0) {
+    schema.featureList = options.featureList.join(', ');
+  }
+
+  if (options.aggregateRating) {
+    schema.aggregateRating = {
+      '@type': 'AggregateRating',
+      'ratingValue': options.aggregateRating.ratingValue,
+      'ratingCount': options.aggregateRating.ratingCount,
+      'bestRating': 5,
+      'worstRating': 1
+    };
+  }
+
+  const script = this.document.createElement('script');
+  script.type = 'application/ld+json';
+  script.setAttribute('data-schema', 'software-application');
+  script.text = JSON.stringify(schema);
+  this.document.head.appendChild(script);
+}
+
+/**
+ * Ajoute les données structurées HowTo pour les simulateurs
+ */
+addHowToSchema(options: {
+  name: string;
+  description: string;
+  steps: { name: string; text: string }[];
+  totalTime?: string;
+}): void {
+  const existingScript = this.document.querySelector('script[data-schema="how-to"]');
+  if (existingScript) {
+    existingScript.remove();
+  }
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    'name': options.name,
+    'description': options.description,
+    'totalTime': options.totalTime || 'PT2M',
+    'step': options.steps.map((step, index) => ({
+      '@type': 'HowToStep',
+      'position': index + 1,
+      'name': step.name,
+      'text': step.text
+    }))
+  };
+
+  const script = this.document.createElement('script');
+  script.type = 'application/ld+json';
+  script.setAttribute('data-schema', 'how-to');
+  script.text = JSON.stringify(schema);
+  this.document.head.appendChild(script);
 }
 
 }

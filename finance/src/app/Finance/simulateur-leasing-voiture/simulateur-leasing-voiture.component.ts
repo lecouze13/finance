@@ -101,7 +101,7 @@ export class SimulateurLeasingVoitureComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateMetaData({
-      title: 'Simulateur Leasing vs Achat Voiture 2025 | LOA, LLD, Crédit ou Comptant',
+      title: 'Simulateur Leasing vs Achat Voiture 2026 | LOA, LLD, Crédit ou Comptant',
       description: 'Comparez gratuitement les options de financement auto : LOA, LLD, crédit ou achat comptant. Trouvez la formule la plus économique.',
       url: 'https://calculateurfinance.fr/simulateur-leasing-voiture'
     });

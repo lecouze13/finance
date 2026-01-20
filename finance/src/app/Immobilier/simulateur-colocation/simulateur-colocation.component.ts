@@ -98,7 +98,7 @@ export class SimulateurColocationComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateMetaData({
-      title: 'Simulateur Colocation vs Location Classique 2025 | Rentabilité comparée',
+      title: 'Simulateur Colocation vs Location Classique 2026 | Rentabilité comparée',
       description: 'Comparez gratuitement la rentabilité d\'une colocation vs location classique. Calculez le gain réel avec charges et vacance locative.',
       url: 'https://calculateurfinance.fr/simulateur-colocation'
     });

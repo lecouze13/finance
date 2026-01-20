@@ -14,7 +14,7 @@ export class SimulateurPouvoirAchatComponent implements OnInit {
   // Entrées
   montantInitial: number = 1000;
   anneeDebut: number = 2015;
-  anneeFin: number = 2025;
+  anneeFin: number = 2026;
   tauxInflationCustom: number = 2;
   modeCalcul: string = 'historique'; // 'historique' ou 'custom'
   salaireMensuel: number = 2500;
@@ -36,7 +36,7 @@ export class SimulateurPouvoirAchatComponent implements OnInit {
   inflationHistorique: { [key: number]: number } = {
     2010: 1.5, 2011: 2.1, 2012: 2.0, 2013: 0.9, 2014: 0.5,
     2015: 0.0, 2016: 0.2, 2017: 1.0, 2018: 1.8, 2019: 1.1,
-    2020: 0.5, 2021: 1.6, 2022: 5.2, 2023: 4.9, 2024: 2.3, 2025: 1.8
+    2020: 0.5, 2021: 1.6, 2022: 5.2, 2023: 4.9, 2024: 2.3, 2026: 1.8
   };
 
   modeOptions = [
@@ -70,8 +70,8 @@ export class SimulateurPouvoirAchatComponent implements OnInit {
       answer: "L'inflation sous-jacente exclut les prix volatils (énergie, alimentation) pour mieux refléter la tendance de fond. Elle est généralement plus stable que l'inflation globale et sert de référence pour les décisions de politique monétaire."
     },
     {
-      question: "Les 100€ de 2015 valent-ils autant que les 100€ de 2025 ?",
-      answer: "Non. Avec l'inflation cumulée entre 2015 et 2025, 100€ de 2015 équivalent à environ 85€ de pouvoir d'achat en 2025. Autrement dit, il faut environ 118€ en 2025 pour acheter ce qu'on achetait avec 100€ en 2015."
+      question: "Les 100€ de 2015 valent-ils autant que les 100€ de 2026 ?",
+      answer: "Non. Avec l'inflation cumulée entre 2015 et 2026, 100€ de 2015 équivalent à environ 85€ de pouvoir d'achat en 2026. Autrement dit, il faut environ 118€ en 2026 pour acheter ce qu'on achetait avec 100€ en 2015."
     },
     {
       question: "Comment calculer le taux d'inflation réel de mon panier ?",
@@ -94,14 +94,14 @@ export class SimulateurPouvoirAchatComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Simulateur Pouvoir d\'Achat et Inflation 2025 | Impact sur votre Épargne');
+    this.title.setTitle('Simulateur Pouvoir d\'Achat et Inflation 2026 | Impact sur votre Épargne');
     this.meta.updateTag({
       name: 'description',
       content: 'Calculez l\'impact de l\'inflation sur votre pouvoir d\'achat. Comparez la valeur de l\'argent entre deux dates et visualisez l\'érosion de votre épargne.'
     });
     this.meta.updateTag({
       name: 'keywords',
-      content: 'pouvoir achat, inflation France, calculateur inflation, érosion épargne, valeur argent, inflation 2025, perte pouvoir achat'
+      content: 'pouvoir achat, inflation France, calculateur inflation, érosion épargne, valeur argent, inflation 2026, perte pouvoir achat'
     });
     this.calculer();
   }

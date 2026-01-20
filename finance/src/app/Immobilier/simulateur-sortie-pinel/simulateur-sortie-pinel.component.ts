@@ -77,7 +77,7 @@ export class SimulateurSortiePinelComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.updateMetaData({
-      title: 'Simulateur Sortie Pinel 2025 | Vendre, LMNP ou Location Nue ?',
+      title: 'Simulateur Sortie Pinel 2026 | Vendre, LMNP ou Location Nue ?',
       description: 'Calculez quelle option est la plus rentable à la fin de votre engagement Pinel : revendre, passer en LMNP ou continuer en location nue.',
       url: 'https://calculateurfinance.fr/simulateur-sortie-pinel',
       keywords: 'sortie Pinel, fin engagement Pinel, Pinel vers LMNP, revendre Pinel, fiscalité fin Pinel, que faire après Pinel'

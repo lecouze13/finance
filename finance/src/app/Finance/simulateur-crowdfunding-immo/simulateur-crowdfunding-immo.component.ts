@@ -91,7 +91,7 @@ export class SimulateurCrowdfundingImmoComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateMetaData({
-      title: 'Simulateur Crowdfunding Immobilier 2025 | Rentabilité et risques',
+      title: 'Simulateur Crowdfunding Immobilier 2026 | Rentabilité et risques',
       description: 'Calculez gratuitement la rentabilité de vos investissements en crowdfunding immobilier. Intérêts, fiscalité, risque de défaut.',
       url: 'https://calculateurfinance.fr/simulateur-crowdfunding-immo'
     });

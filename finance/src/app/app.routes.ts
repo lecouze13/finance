@@ -72,6 +72,14 @@ import { CatalogueComponent } from './Constructor/catalogue/catalogue.component'
 import { SimulateurStrategieMultiBiensComponent } from './Immobilier/simulateur-strategie-multi-biens/simulateur-strategie-multi-biens.component';
 import { SimulateurArbitrageImmobilierComponent } from './Immobilier/simulateur-arbitrage-immobilier/simulateur-arbitrage-immobilier.component';
 import { SimulateurStressTestComponent } from './Immobilier/simulateur-stress-test/simulateur-stress-test.component';
+import { SimulateurFireImmobilierComponent } from './Immobilier/simulateur-fire-immobilier/simulateur-fire-immobilier.component';
+import { SimulateurAllocationsFamilialesComponent } from './Finance/simulateur-allocations-familiales/simulateur-allocations-familiales.component';
+import { AProposComponent } from './a-propos/a-propos.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { MentionsLegalesComponent } from './pages/mentions-legales/mentions-legales.component';
+import { PolitiqueConfidentialiteComponent } from './pages/politique-confidentialite/politique-confidentialite.component';
+import { CookiesComponent } from './pages/cookies/cookies.component';
+import { MethodologieComponent } from './pages/methodologie/methodologie.component';
 
 export const routes: Routes = [
   { path: AppRoutes.RENDEMENT, component: RendementComponent },
@@ -81,6 +89,8 @@ export const routes: Routes = [
   { path: AppRoutes.EMPRUNT, component: TauxEmpruntComponent },
   { path: AppRoutes.TRI, component: TriImmoComponent },
   { path: AppRoutes.HOME, component: MainComponent },
+  { path: AppRoutes.APROPOS, component: AProposComponent },
+
   {
     path: AppRoutes.ACHAT_VS_LOCATION,
     component: ComparateurAchatLocationComponent,
@@ -414,7 +424,7 @@ export const routes: Routes = [
     component: ContenuPageComponent,
   },
   {
-    path: 'article/reforme-taux-aout-2025',
+    path: 'article/reforme-taux-aout-2026',
     component: ContenuPageComponent,
   },
   // Articles Immobilier
@@ -618,6 +628,34 @@ export const routes: Routes = [
   {
     path: AppRoutes.SIMULATEUR_STRESS_TEST_IMMO,
     component: SimulateurStressTestComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_FIRE_IMMOBILIER,
+    component: SimulateurFireImmobilierComponent,
+  },
+  {
+    path: AppRoutes.SIMULATEUR_ALLOCATIONS_FAMILIALES,
+    component: SimulateurAllocationsFamilialesComponent,
+  },
+  {
+    path: AppRoutes.CONTACT,
+    component: ContactComponent,
+  },
+  {
+    path: AppRoutes.MENTIONS_LEGALES,
+    component: MentionsLegalesComponent,
+  },
+  {
+    path: AppRoutes.POLITIQUE_CONFIDENTIALITE,
+    component: PolitiqueConfidentialiteComponent,
+  },
+  {
+    path: AppRoutes.COOKIES,
+    component: CookiesComponent,
+  },
+  {
+    path: AppRoutes.METHODOLOGIE,
+    component: MethodologieComponent,
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

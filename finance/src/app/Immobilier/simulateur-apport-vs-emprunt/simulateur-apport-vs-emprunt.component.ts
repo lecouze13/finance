@@ -20,7 +20,7 @@ export class SimulateurApportVsEmpruntComponent {
   chartOptions: any;
   ngOnInit() {
     this.seo.updateMetaData({
-      title: 'Comparateur achat vs emprunt 2025 | CalculateurFinance.fr',
+      title: 'Comparateur achat vs emprunt 2026 | CalculateurFinance.fr',
       description:
         "Comparez facilement la retabilité entre faire un apport ou non lors d' un crédit immobilier",
       url: 'https://calculateurfinance.fr/simulateur-apport-vs-emprunt/',
@@ -100,7 +100,7 @@ export class SimulateurApportVsEmpruntComponent {
           },
           {
             '@type': 'Question',
-            name: 'Peut-on emprunter sans apport en 2025 ?',
+            name: 'Peut-on emprunter sans apport en 2026 ?',
             acceptedAnswer: {
               '@type': 'Answer',
               text: 'Oui, c’est possible mais plus difficile. Les banques exigent souvent un apport pour couvrir au moins les frais de notaire. Un bon dossier peut compenser cette exigence.',

@@ -1,0 +1,264 @@
+<app-breadcrumb></app-breadcrumb>
+
+<div class="simulator-container">
+  <div class="simulator-header">
+    <h1>Frais Réels ou Abattement 10% ?</h1>
+    <p class="subtitle">Comparez les deux options pour optimiser votre déclaration de revenus 2026</p>
+  </div>
+
+  <div class="simulator-content">
+    <p-panel header="Votre situation" class="input-panel">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="salaireNet">Salaire annuel net imposable</label>
+          <p-inputNumber
+            id="salaireNet"
+            [(ngModel)]="salaireAnnuelNet"
+            (onInput)="calculer()"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0"
+            [style]="{'width':'100%'}"
+            pTooltip="Revenus nets imposables figurant sur votre fiche de paie">
+          </p-inputNumber>
+        </div>
+
+        <div class="form-group">
+          <label for="jours">Jours travaillés par an</label>
+          <p-inputNumber
+            id="jours"
+            [(ngModel)]="joursTravailles"
+            (onInput)="calculer()"
+            [min]="1"
+            [max]="365"
+            suffix=" jours"
+            [style]="{'width':'100%'}">
+          </p-inputNumber>
+        </div>
+      </div>
+    </p-panel>
+
+    <p-panel header="Frais kilométriques" class="input-panel">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="distance">Distance domicile-travail (aller simple)</label>
+          <p-inputNumber
+            id="distance"
+            [(ngModel)]="distanceDomicileTravail"
+            (onInput)="calculer()"
+            [min]="0"
+            [max]="100"
+            suffix=" km"
+            [style]="{'width':'100%'}"
+            pTooltip="Distance limitée à 40 km (sauf justification)">
+          </p-inputNumber>
+        </div>
+
+        <div class="form-group">
+          <label for="puissance">Puissance fiscale du véhicule</label>
+          <p-dropdown
+            id="puissance"
+            [options]="puissanceOptions"
+            [(ngModel)]="puissanceFiscale"
+            (onChange)="calculer()"
+            [style]="{'width':'100%'}">
+          </p-dropdown>
+        </div>
+
+        <div class="form-group full-width km-result" *ngIf="fraisKm > 0">
+          <div class="km-info">
+            <span class="km-label">Frais kilométriques calculés :</span>
+            <span class="km-value">{{ fraisKm | number:'1.0-0':'fr-FR' }} €/an</span>
+          </div>
+          <div class="km-detail">
+            {{ distanceDomicileTravail > 40 ? '40' : distanceDomicileTravail }} km x 2 x {{ joursTravailles }} jours = {{ (distanceDomicileTravail > 40 ? 40 : distanceDomicileTravail) * 2 * joursTravailles | number:'1.0-0':'fr-FR' }} km/an
+          </div>
+        </div>
+      </div>
+    </p-panel>
+
+    <p-panel header="Autres frais déductibles" class="input-panel">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="repas">Frais de repas (annuels)</label>
+          <p-inputNumber
+            id="repas"
+            [(ngModel)]="fraisRepas"
+            (onInput)="calculer()"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0"
+            [style]="{'width':'100%'}"
+            pTooltip="Part excédant 5,35€ par repas">
+          </p-inputNumber>
+        </div>
+
+        <div class="form-group">
+          <label for="teletravail">Frais de télétravail (annuels)</label>
+          <p-inputNumber
+            id="teletravail"
+            [(ngModel)]="fraisTeletravail"
+            (onInput)="calculer()"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0"
+            [style]="{'width':'100%'}"
+            pTooltip="2,70€/jour plafonné à 59,40€/mois">
+          </p-inputNumber>
+        </div>
+
+        <div class="form-group">
+          <label for="formation">Frais de formation</label>
+          <p-inputNumber
+            id="formation"
+            [(ngModel)]="fraisFormation"
+            (onInput)="calculer()"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0"
+            [style]="{'width':'100%'}">
+          </p-inputNumber>
+        </div>
+
+        <div class="form-group">
+          <label for="autres">Autres frais justifiés</label>
+          <p-inputNumber
+            id="autres"
+            [(ngModel)]="autresFrais"
+            (onInput)="calculer()"
+            mode="currency"
+            currency="EUR"
+            locale="fr-FR"
+            [min]="0"
+            [style]="{'width':'100%'}"
+            pTooltip="Documentation, cotisations syndicales, etc.">
+          </p-inputNumber>
+        </div>
+      </div>
+    </p-panel>
+
+    <p-panel header="Comparaison" class="results-panel" [ngClass]="getRecommandationClass()">
+      <div class="comparison-grid">
+        <div class="comparison-card" [ngClass]="{'recommended': optionRecommandee === 'abattement'}">
+          <div class="card-header">
+            <h3>Abattement 10%</h3>
+            <span class="badge" *ngIf="optionRecommandee === 'abattement'">Recommandé</span>
+          </div>
+          <div class="card-value">{{ abattement10 | number:'1.0-0':'fr-FR' }} €</div>
+          <div class="card-detail">Déduction forfaitaire automatique</div>
+        </div>
+
+        <div class="comparison-vs">VS</div>
+
+        <div class="comparison-card" [ngClass]="{'recommended': optionRecommandee === 'frais_reels'}">
+          <div class="card-header">
+            <h3>Frais Réels</h3>
+            <span class="badge" *ngIf="optionRecommandee === 'frais_reels'">Recommandé</span>
+          </div>
+          <div class="card-value">{{ totalFraisReels | number:'1.0-0':'fr-FR' }} €</div>
+          <div class="card-detail">Total de vos frais justifiés</div>
+        </div>
+      </div>
+
+      <div class="result-summary" *ngIf="optionRecommandee === 'frais_reels'">
+        <div class="summary-row positive">
+          <span class="summary-label">Avantage frais réels</span>
+          <span class="summary-value">+{{ differenceAnnuelle | number:'1.0-0':'fr-FR' }} €</span>
+        </div>
+        <div class="summary-row highlight">
+          <span class="summary-label">Économie d'impôt estimée (TMI 30%)</span>
+          <span class="summary-value">{{ economieImpot | number:'1.0-0':'fr-FR' }} €</span>
+        </div>
+      </div>
+
+      <div class="result-summary" *ngIf="optionRecommandee === 'abattement'">
+        <div class="info-box">
+          <i class="pi pi-info-circle"></i>
+          <span>L'abattement forfaitaire de 10% est plus avantageux. Vos frais réels ({{ totalFraisReels | number:'1.0-0':'fr-FR' }} €) sont inférieurs à l'abattement ({{ abattement10 | number:'1.0-0':'fr-FR' }} €).</span>
+        </div>
+      </div>
+
+      <div class="frais-detail" *ngIf="totalFraisReels > 0">
+        <h4>Détail de vos frais réels</h4>
+        <div class="detail-row" *ngIf="fraisKm > 0">
+          <span class="detail-label">Frais kilométriques</span>
+          <span class="detail-value">{{ fraisKm | number:'1.0-0':'fr-FR' }} €</span>
+        </div>
+        <div class="detail-row" *ngIf="fraisRepas > 0">
+          <span class="detail-label">Frais de repas</span>
+          <span class="detail-value">{{ fraisRepas | number:'1.0-0':'fr-FR' }} €</span>
+        </div>
+        <div class="detail-row" *ngIf="fraisTeletravail > 0">
+          <span class="detail-label">Frais de télétravail</span>
+          <span class="detail-value">{{ fraisTeletravail | number:'1.0-0':'fr-FR' }} €</span>
+        </div>
+        <div class="detail-row" *ngIf="fraisFormation > 0">
+          <span class="detail-label">Frais de formation</span>
+          <span class="detail-value">{{ fraisFormation | number:'1.0-0':'fr-FR' }} €</span>
+        </div>
+        <div class="detail-row" *ngIf="autresFrais > 0">
+          <span class="detail-label">Autres frais</span>
+          <span class="detail-value">{{ autresFrais | number:'1.0-0':'fr-FR' }} €</span>
+        </div>
+      </div>
+    </p-panel>
+  </div>
+
+  <div class="bareme-section">
+    <h2>Barème kilométrique 2026 (voitures)</h2>
+    <div class="bareme-table-container">
+      <table class="bareme-table">
+        <thead>
+          <tr>
+            <th>Puissance fiscale</th>
+            <th>Jusqu'à 5 000 km</th>
+            <th>De 5 001 à 20 000 km</th>
+            <th>Au-delà de 20 000 km</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3 CV et moins</td>
+            <td>d x 0,529</td>
+            <td>(d x 0,316) + 1 065</td>
+            <td>d x 0,370</td>
+          </tr>
+          <tr>
+            <td>4 CV</td>
+            <td>d x 0,606</td>
+            <td>(d x 0,340) + 1 330</td>
+            <td>d x 0,407</td>
+          </tr>
+          <tr>
+            <td>5 CV</td>
+            <td>d x 0,636</td>
+            <td>(d x 0,357) + 1 395</td>
+            <td>d x 0,427</td>
+          </tr>
+          <tr>
+            <td>6 CV</td>
+            <td>d x 0,665</td>
+            <td>(d x 0,374) + 1 457</td>
+            <td>d x 0,447</td>
+          </tr>
+          <tr>
+            <td>7 CV et plus</td>
+            <td>d x 0,697</td>
+            <td>(d x 0,394) + 1 515</td>
+            <td>d x 0,470</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="bareme-note">d = distance parcourue en km. Majoration de 20% pour les véhicules électriques.</p>
+  </div>
+
+  <app-faq-section
+    [title]="'Questions fréquentes sur les frais réels'"
+    [faqItems]="faqItems">
+  </app-faq-section>
+</div>

@@ -33,8 +33,8 @@ private renderer: Renderer2, private seo: SeoService) {}
 
   ngOnInit(): void {
     this.seo.updateMetaData({
-      title: 'Simulateur IFI 2025 : Impôt sur la Fortune Immobilière',
-      description: 'Calculez votre IFI selon le barème progressif 2025 avec ventilation par tranche. Simulateur précis et rapide.',
+      title: 'Simulateur IFI 2026 : Impôt sur la Fortune Immobilière',
+      description: 'Calculez votre IFI selon le barème progressif 2026 avec ventilation par tranche. Simulateur précis et rapide.',
       url: 'https://calculateurfinance.fr/simulateur-impot-fortune-immobiliere/',
       keywords: 'simulateur IFI, impôt sur la fortune immobilière, calcul IFI, patrimoine immobilier, fiscalité IFI, déclaration IFI, estimation impôt fortune, patrimoine taxable',
 
@@ -63,7 +63,7 @@ private renderer: Renderer2, private seo: SeoService) {}
         },
         {
           "@type": "Question",
-          "name": "Quel est le barème de l’IFI en 2025 ?",
+          "name": "Quel est le barème de l’IFI en 2026 ?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "L’IFI est calculé selon un barème progressif de 0,5 % à 1,5 % selon la tranche de patrimoine immobilier net taxable."

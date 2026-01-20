@@ -66,7 +66,7 @@ private renderer: Renderer2,private seo: SeoService) {}
 
   ngOnInit(): void {
       this.seo.updateMetaData({
-      title: 'Simulateur plus-value immobilière 2025 | CalculateurFinance.fr',
+      title: 'Simulateur plus-value immobilière 2026 | CalculateurFinance.fr',
       description: 'Calculez facilement votre plus-value immobilière en fonction du prix d’achat, du prix de vente, et des abattements légaux. Outil gratuit et simple.',
       keywords: 'simulateur plus-value immobilière, plus-value résidence principale, plus-value résidence secondaire, calcul plus-value, fiscalité immobilière, imposition plus-value, exonération plus-value, vente bien immobilier, calcul impôt plus-value, immobilier',
 

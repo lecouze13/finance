@@ -86,12 +86,19 @@ export class CalculNotaireComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.updateMetaData({
-      title: 'Simulateur Frais de Notaire 2025 | Calcul Précis Neuf et Ancien',
+      title: 'Simulateur Frais de Notaire 2026 | Calcul Précis Neuf et Ancien',
       description: 'Calculez précisément vos frais de notaire pour un achat immobilier. Détail des droits de mutation, émoluments, débours. Ancien, neuf ou terrain.',
       keywords: 'frais de notaire, simulateur notaire, calcul frais acquisition, droits de mutation, émoluments notaire, achat immobilier, VEFA, terrain',
       url: 'https://calculateurfinance.fr/calcul-frais-de-notaire/',
     });
 
+   this.seo.addSoftwareApplicationSchema({
+      name: 'Simulateur Frais de Notaire',
+      description: 'Calculez les frais de notaire pour votre achat immobilier (ancien, neuf, VEFA, terrain).',
+      url: 'https://calculateurfinance.fr/calcul-frais-de-notaire/',
+      applicationCategory: 'FinanceApplication',
+      featureList: ['Frais notaire ancien', 'Frais notaire neuf', 'VEFA', 'Droits de mutation'],
+    });
     this.calculer();
   }
 
@@ -109,7 +116,7 @@ export class CalculNotaireComponent implements OnInit {
     // Calcul des droits de mutation
     this.droitsMutation = Math.round(this.prixBien * tauxDroitsMutation);
 
-    // Calcul des émoluments du notaire (barème 2025)
+    // Calcul des émoluments du notaire (barème 2026)
     this.emolumentsNotaire = this.calculerEmoluments(this.prixBien);
 
     // Contribution de sécurité immobilière (0,10%)
@@ -132,7 +139,7 @@ export class CalculNotaireComponent implements OnInit {
   }
 
   calculerEmoluments(prix: number): number {
-    // Barème des émoluments 2025 (TTC avec TVA à 20%)
+    // Barème des émoluments 2026 (TTC avec TVA à 20%)
     let emoluments = 0;
 
     if (prix <= 6500) {

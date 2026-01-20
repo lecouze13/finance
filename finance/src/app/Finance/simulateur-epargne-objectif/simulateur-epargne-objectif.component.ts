@@ -41,7 +41,7 @@ export class SimulateurEpargneObjectifComponent implements OnInit {
     },
     {
       question: "Quel taux de rendement utiliser pour ma simulation ?",
-      answer: "Le taux dépend du support d'épargne : Livret A (3% en 2025), LDDS (3%), fonds euros (2-3%), PEA actions (6-8% historique long terme), assurance-vie UC (4-6%). Soyez prudent : utilisez un taux réaliste, net de frais et d'inflation pour un objectif à long terme."
+      answer: "Le taux dépend du support d'épargne : Livret A (3% en 2026), LDDS (3%), fonds euros (2-3%), PEA actions (6-8% historique long terme), assurance-vie UC (4-6%). Soyez prudent : utilisez un taux réaliste, net de frais et d'inflation pour un objectif à long terme."
     },
     {
       question: "Vaut-il mieux épargner plus ou plus longtemps ?",
@@ -84,7 +84,7 @@ export class SimulateurEpargneObjectifComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Simulateur Épargne Objectif 2025 | Calculez votre Épargne Mensuelle');
+    this.title.setTitle('Simulateur Épargne Objectif 2026 | Calculez votre Épargne Mensuelle');
     this.meta.updateTag({
       name: 'description',
       content: 'Calculez l\'épargne mensuelle nécessaire pour atteindre votre objectif financier. Simulez avec les intérêts composés et visualisez votre progression année par année.'

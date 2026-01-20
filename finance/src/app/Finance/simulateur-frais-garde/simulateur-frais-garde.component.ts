@@ -87,7 +87,7 @@ export class SimulateurFraisGardeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Simulateur Frais de Garde 2025 | Crédit d\'Impôt et CMG');
+    this.title.setTitle('Simulateur Frais de Garde 2026 | Crédit d\'Impôt et CMG');
     this.meta.updateTag({
       name: 'description',
       content: 'Calculez le coût réel de la garde de vos enfants après crédit d\'impôt et CMG. Comparez crèche, assistante maternelle et garde à domicile. Simulation gratuite.'

@@ -105,7 +105,7 @@ export class SimulateurSasuEurlComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Comparateur SASU vs EURL 2025 | Simulateur Charges et Revenus');
+    this.title.setTitle('Comparateur SASU vs EURL 2026 | Simulateur Charges et Revenus');
     this.meta.updateTag({
       name: 'description',
       content: 'Comparez SASU et EURL : charges sociales, fiscalité des dividendes, revenus nets. Simulez le meilleur statut juridique pour votre activité. Calcul gratuit et détaillé.'

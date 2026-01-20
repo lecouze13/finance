@@ -119,7 +119,7 @@ export class SimulateurCreditRelaisComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateMetaData({
-      title: 'Simulateur Crédit Relais 2025 | Calculez votre Prêt Pont',
+      title: 'Simulateur Crédit Relais 2026 | Calculez votre Prêt Pont',
       description: 'Simulez gratuitement votre crédit relais immobilier. Calculez le montant, les intérêts et les mensualités pour acheter avant de vendre votre bien actuel.',
       url: 'https://calculateurfinance.fr/simulateur-credit-relais'
     });

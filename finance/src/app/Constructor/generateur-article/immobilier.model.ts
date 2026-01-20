@@ -2,7 +2,7 @@ export const immobilier: {
   [key: string]: { titre: string; contenu: string; description: string, categorie: string, keywords: string };
 } = {
   'investissement-locatif': {
-    titre: 'Guide complet de l\'investissement locatif en 2025',
+    titre: 'Guide complet de l\'investissement locatif en 2026',
     categorie: 'immobilier',
     keywords: 'investissement locatif, rendement locatif, acheter pour louer, rentabilité immobilière, investir dans l\'immobilier, revenus fonciers',
     description: `L'investissement locatif est une stratégie patrimoniale permettant de générer des revenus passifs tout en construisant un patrimoine. Découvrez comment réussir votre projet.`,
@@ -501,7 +501,7 @@ export const immobilier: {
   },
 
   'defiscalisation-immobiliere': {
-    titre: 'Défiscalisation immobilière : tous les dispositifs en 2025',
+    titre: 'Défiscalisation immobilière : tous les dispositifs en 2026',
     categorie: 'immobilier',
     keywords: 'défiscalisation immobilière, réduction impôts, Pinel, Denormandie, Malraux, investir défiscalisant, avantage fiscal',
     description: `La défiscalisation immobilière permet de réduire ses impôts en investissant. Découvrez tous les dispositifs disponibles et leurs conditions.`,
@@ -969,7 +969,7 @@ export const immobilier: {
   <p>La loi Climat et Résilience impose un calendrier progressif d'interdiction de mise en location :</p>
   <ul>
     <li><strong>1er janvier 2023</strong> : interdiction des logements > 450 kWh/m²/an (G+)</li>
-    <li><strong>1er janvier 2025</strong> : interdiction des logements classés G</li>
+    <li><strong>1er janvier 2026</strong> : interdiction des logements classés G</li>
     <li><strong>1er janvier 2028</strong> : interdiction des logements classés F</li>
     <li><strong>1er janvier 2034</strong> : interdiction des logements classés E</li>
   </ul>

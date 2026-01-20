@@ -1,5 +1,6 @@
 export const AppRoutes = {
   HOME: '',
+  APROPOS:"a-propos",
   RENDEMENT: 'rendement-locatif',
   BUDGET: 'budget-immobilier',
   INVESTISSEMENT: 'investissement-locatif',
@@ -80,5 +81,14 @@ export const AppRoutes = {
   SIMULATEUR_CAPACITE_DYNAMIQUE: 'simulateur-capacite-endettement-dynamique',
   SIMULATEUR_TIMING_VENTE: 'simulateur-timing-vente-optimal',
   SIMULATEUR_FIRE_IMMOBILIER: 'simulateur-fire-immobilier',
+  SIMULATEUR_ALLOCATIONS_FAMILIALES: 'simulateur-allocations-familiales',
+  SIMULATEUR_RSA: 'simulateur-rsa',
+  SIMULATEUR_MAPRIMERENOVV: 'simulateur-maprimerenovv',
+  SIMULATEUR_FRAIS_REELS: 'simulateur-frais-reels-abattement',
   CATALOGUE: 'catalogue',
+  CONTACT: 'contact',
+  MENTIONS_LEGALES: 'mentions-legales',
+  POLITIQUE_CONFIDENTIALITE: 'politique-de-confidentialite',
+  COOKIES: 'cookies',
+  METHODOLOGIE: 'methodologie',
 };
