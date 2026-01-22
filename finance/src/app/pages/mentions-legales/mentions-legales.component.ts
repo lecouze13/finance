@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { SeoService } from '../../Constructor/service/seo.service';
 
 @Component({
   selector: 'app-mentions-legales',
@@ -13,20 +13,14 @@ import { RouterModule } from '@angular/router';
 export class MentionsLegalesComponent implements OnInit {
   lastUpdate: string = '19 janvier 2026';
 
-  constructor(
-    private meta: Meta,
-    private title: Title
-  ) {}
+  constructor(private seoService: SeoService) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Mentions Légales | CalculateurFinance');
-    this.meta.updateTag({
-      name: 'description',
-      content: 'Mentions légales du site CalculateurFinance.fr : éditeur, hébergeur, propriété intellectuelle et conditions d\'utilisation des simulateurs financiers.'
-    });
-    this.meta.updateTag({
-      name: 'robots',
-      content: 'noindex, follow'
+    this.seoService.updateMetaData({
+      title: 'Mentions Légales | CalculateurFinance',
+      description: 'Mentions légales du site CalculateurFinance.fr : éditeur, hébergeur, propriété intellectuelle et conditions d\'utilisation des simulateurs financiers.',
+      url: 'https://calculateurfinance.fr/mentions-legales/',
+      robots: 'noindex, follow'
     });
   }
 }

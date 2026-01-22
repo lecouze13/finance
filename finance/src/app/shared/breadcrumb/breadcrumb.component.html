@@ -1,4 +1,4 @@
-<nav class="breadcrumb" aria-label="Fil d'Ariane">
+<nav class="breadcrumb" aria-label="Fil d'Ariane" *ngIf="items?.length">
   <ol class="breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">
     <li *ngFor="let item of items; let i = index; let last = last"
         class="breadcrumb-item"

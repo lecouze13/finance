@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { SeoService } from '../../Constructor/service/seo.service';
 
 @Component({
   selector: 'app-cookies',
@@ -13,20 +13,14 @@ import { RouterModule } from '@angular/router';
 export class CookiesComponent implements OnInit {
   lastUpdate: string = '19 janvier 2026';
 
-  constructor(
-    private meta: Meta,
-    private title: Title
-  ) {}
+  constructor(private seoService: SeoService) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Politique de Cookies | CalculateurFinance');
-    this.meta.updateTag({
-      name: 'description',
-      content: 'Politique de cookies de CalculateurFinance : types de cookies utilisés, finalités, durée de conservation et comment les gérer.'
-    });
-    this.meta.updateTag({
-      name: 'robots',
-      content: 'noindex, follow'
+    this.seoService.updateMetaData({
+      title: 'Politique de Cookies | CalculateurFinance',
+      description: 'Politique de cookies de CalculateurFinance : types de cookies utilisés, finalités, durée de conservation et comment les gérer.',
+      url: 'https://calculateurfinance.fr/cookies/',
+      robots: 'noindex, follow'
     });
   }
 }

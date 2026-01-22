@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { Meta, Title } from '@angular/platform-browser';
+import { SeoService } from '../Constructor/service/seo.service';
 
 @Component({
   selector: 'app-a-propos',
@@ -14,16 +14,14 @@ export class AProposComponent implements OnInit {
   simulateursCount: number = 50;
   articlesCount: number = 40;
 
-  constructor(
-    private meta: Meta,
-    private title: Title
-  ) {}
+  constructor(private seoService: SeoService) {}
 
   ngOnInit(): void {
-    this.title.setTitle('À Propos | CalculateurFinance - Simulateurs Financiers Gratuits');
-    this.meta.updateTag({
-      name: 'description',
-      content: 'Découvrez CalculateurFinance : simulateurs financiers et immobiliers 100% gratuits, indépendants et sans inscription. Notre mission, notre méthodologie et nos valeurs.'
+    this.seoService.updateMetaData({
+      title: 'À Propos | CalculateurFinance - Simulateurs Financiers Gratuits',
+      description: 'Découvrez CalculateurFinance : plus de 60 simulateurs financiers et immobiliers 100% gratuits, indépendants et sans inscription. Notre mission, notre méthodologie et nos valeurs.',
+      url: 'https://calculateurfinance.fr/a-propos/',
+      keywords: 'à propos, calculateur finance, simulateurs gratuits, méthodologie, mission, valeurs'
     });
   }
 }

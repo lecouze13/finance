@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, PLATFORM_ID, Inject } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, OnDestroy, PLATFORM_ID, Inject, Renderer2 } from '@angular/core';
+import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 
@@ -21,6 +21,8 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
   items: BreadcrumbItem[] = [];
   private routerSub?: Subscription;
   private isBrowser: boolean;
+  private scriptElement: HTMLScriptElement | null = null;
+  private baseUrl = 'https://calculateurfinance.fr';
 
   // Types pour le catalogue
   private typeMapping: { [key: string]: string } = {
@@ -114,7 +116,9 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    @Inject(PLATFORM_ID) platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
@@ -127,6 +131,37 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
       .subscribe((event: any) => {
         this.generateBreadcrumb(event.urlAfterRedirects || event.url);
       });
+  }
+
+  /**
+   * Génère le JSON-LD BreadcrumbList pour un meilleur SEO
+   * Google préfère JSON-LD au microdata
+   */
+  private injectBreadcrumbJsonLd(): void {
+    // Supprimer l'ancien script s'il existe
+    const existingScript = this.document.querySelector('script[data-schema="breadcrumb"]');
+    if (existingScript) {
+      existingScript.remove();
+    }
+
+    if (this.items.length === 0) return;
+
+    const breadcrumbSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      'itemListElement': this.items.map((item, index) => ({
+        '@type': 'ListItem',
+        'position': index + 1,
+        'name': item.label,
+        'item': item.url ? `${this.baseUrl}${item.url}` : undefined
+      })).filter(item => item.name)
+    };
+
+    this.scriptElement = this.renderer.createElement('script');
+    this.scriptElement!.type = 'application/ld+json';
+    this.scriptElement!.setAttribute('data-schema', 'breadcrumb');
+    this.scriptElement!.text = JSON.stringify(breadcrumbSchema);
+    this.renderer.appendChild(this.document.head, this.scriptElement);
   }
 
   private generateBreadcrumb(url: string): void {
@@ -170,6 +205,9 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
     this.items.push({
       label: pageName
     });
+
+    // Injecter le JSON-LD pour le SEO
+    this.injectBreadcrumbJsonLd();
   }
 
   private detectType(segments: string[]): string | null {
@@ -232,5 +270,9 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.routerSub?.unsubscribe();
+    // Nettoyer le script JSON-LD
+    if (this.scriptElement && isPlatformBrowser(this.platformId)) {
+      this.scriptElement.remove();
+    }
   }
 }

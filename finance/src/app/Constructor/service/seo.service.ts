@@ -178,4 +178,120 @@ addHowToSchema(options: {
   this.document.head.appendChild(script);
 }
 
+/**
+ * Ajoute les données structurées Article pour les pages de contenu/blog
+ * Schema.org type: Article
+ * Avantage SEO: Rich snippets pour les articles dans Google
+ */
+addArticleSchema(options: {
+  headline: string;
+  description: string;
+  url: string;
+  image?: string;
+  datePublished?: string;
+  dateModified?: string;
+  author?: string;
+  keywords?: string[];
+}): void {
+  const existingScript = this.document.querySelector('script[data-schema="article"]');
+  if (existingScript) {
+    existingScript.remove();
+  }
+
+  const schema: any = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    'headline': options.headline,
+    'description': options.description,
+    'url': options.url,
+    'image': options.image || 'https://calculateurfinance.fr/assets/logo.png',
+    'datePublished': options.datePublished || new Date().toISOString(),
+    'dateModified': options.dateModified || new Date().toISOString(),
+    'author': {
+      '@type': 'Organization',
+      'name': options.author || 'CalculateurFinance',
+      'url': 'https://calculateurfinance.fr'
+    },
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'CalculateurFinance',
+      'url': 'https://calculateurfinance.fr',
+      'logo': {
+        '@type': 'ImageObject',
+        'url': 'https://calculateurfinance.fr/assets/logo.png'
+      }
+    },
+    'mainEntityOfPage': {
+      '@type': 'WebPage',
+      '@id': options.url
+    },
+    'inLanguage': 'fr-FR'
+  };
+
+  if (options.keywords && options.keywords.length > 0) {
+    schema.keywords = options.keywords.join(', ');
+  }
+
+  const script = this.document.createElement('script');
+  script.type = 'application/ld+json';
+  script.setAttribute('data-schema', 'article');
+  script.text = JSON.stringify(schema);
+  this.document.head.appendChild(script);
+}
+
+/**
+ * Ajoute les données structurées FinancialProduct pour les simulateurs de produits financiers
+ * Utile pour les livrets, crédits, etc.
+ */
+addFinancialProductSchema(options: {
+  name: string;
+  description: string;
+  url: string;
+  category: string;
+  interestRate?: string;
+  provider?: string;
+}): void {
+  const existingScript = this.document.querySelector('script[data-schema="financial-product"]');
+  if (existingScript) {
+    existingScript.remove();
+  }
+
+  const schema: any = {
+    '@context': 'https://schema.org',
+    '@type': 'FinancialProduct',
+    'name': options.name,
+    'description': options.description,
+    'url': options.url,
+    'category': options.category,
+    'provider': {
+      '@type': 'Organization',
+      'name': options.provider || 'CalculateurFinance',
+      'url': 'https://calculateurfinance.fr'
+    }
+  };
+
+  if (options.interestRate) {
+    schema.annualPercentageRate = options.interestRate;
+  }
+
+  const script = this.document.createElement('script');
+  script.type = 'application/ld+json';
+  script.setAttribute('data-schema', 'financial-product');
+  script.text = JSON.stringify(schema);
+  this.document.head.appendChild(script);
+}
+
+/**
+ * Supprime tous les schemas dynamiques (utile lors de la navigation)
+ */
+clearDynamicSchemas(): void {
+  const schemas = ['software-application', 'how-to', 'article', 'financial-product', 'faq'];
+  schemas.forEach(schema => {
+    const script = this.document.querySelector(`script[data-schema="${schema}"]`);
+    if (script) {
+      script.remove();
+    }
+  });
+}
+
 }

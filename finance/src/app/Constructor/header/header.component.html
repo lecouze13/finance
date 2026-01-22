@@ -1,23 +1,24 @@
-<header class="main-header">
+<header class="main-header" role="banner">
   <!-- Top bar avec logo et recherche -->
   <div class="header-top">
     <div class="header-container">
-      <a routerLink="/" class="logo">
-        <img src="../../../assets/favicon.ico" alt="CalculateurFinance Logo" class="img-logo" width="30" height="30" loading="eager" fetchpriority="high" />
+      <a routerLink="/" class="logo" title="CalculateurFinance - Accueil">
+        <img src="../../../assets/favicon.ico" alt="CalculateurFinance - Simulateurs financiers gratuits" class="img-logo" width="30" height="30" loading="eager" fetchpriority="high" />
         <span>CalculateurFinance</span>
       </a>
 
-      <div class="search-container">
+      <div class="search-container" role="search">
         <span class="p-input-icon-left">
-          <i class="pi pi-search"></i>
+          <i class="pi pi-search" aria-hidden="true"></i>
           <input
-            type="text"
+            type="search"
             pInputText
             [(ngModel)]="searchQuery"
             (input)="onSearchInput()"
             (blur)="onSearchBlur()"
             placeholder="Rechercher un simulateur..."
             class="search-input"
+            aria-label="Rechercher un simulateur ou un article"
           />
         </span>
         <div class="search-results" *ngIf="showSearchResults && searchResults.length > 0">
@@ -44,6 +45,10 @@
           <i class="pi pi-calculator" aria-hidden="true"></i>
           <span class="visually-hidden">Calculatrice</span>
         </button>
+        <button class="theme-toggle-btn" (click)="toggleDarkMode()" [attr.aria-label]="isDarkMode ? 'Activer le mode clair' : 'Activer le mode sombre'" [title]="isDarkMode ? 'Mode clair' : 'Mode sombre'">
+          <i [class]="isDarkMode ? 'pi pi-sun' : 'pi pi-moon'" aria-hidden="true"></i>
+          <span class="visually-hidden">{{ isDarkMode ? 'Mode clair' : 'Mode sombre' }}</span>
+        </button>
         <button class="mobile-menu-btn" (click)="mobileMenuOpen = !mobileMenuOpen" [attr.aria-label]="mobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'" [attr.aria-expanded]="mobileMenuOpen">
           <i [class]="mobileMenuOpen ? 'pi pi-times' : 'pi pi-bars'" aria-hidden="true"></i>
           <span class="visually-hidden">Menu</span>
@@ -53,14 +58,26 @@
   </div>
 
   <!-- Navigation principale -->
-  <nav class="main-nav" [class.mobile-open]="mobileMenuOpen">
+  <!-- Actions rapides mobile -->
+  <div class="mobile-quick-actions">
+    <a routerLink="/catalogue" class="mobile-action-btn catalogue" (click)="closeMenu()" title="Voir tous les simulateurs et articles">
+      <i class="pi pi-th-large" aria-hidden="true"></i>
+      <span>Catalogue complet</span>
+    </a>
+    <button class="mobile-action-btn calculator" (click)="afficherCalculatrice = true; closeMenu()" aria-label="Ouvrir la calculatrice">
+      <i class="pi pi-calculator" aria-hidden="true"></i>
+      <span>Calculatrice</span>
+    </button>
+  </div>
+
+  <nav class="main-nav" [class.mobile-open]="mobileMenuOpen" aria-label="Navigation principale">
     <div class="nav-container">
       <!-- Immobilier -->
       <div class="nav-dropdown">
-        <button class="nav-link" (click)="toggleDropdown('immo')">
-          <i class="pi pi-home"></i>
+        <button class="nav-link" (click)="toggleDropdown('immo')" aria-expanded="false" aria-haspopup="true">
+          <i class="pi pi-home" aria-hidden="true"></i>
           <span>Immobilier</span>
-          <i class="pi pi-chevron-down arrow"></i>
+          <i class="pi pi-chevron-down arrow" aria-hidden="true"></i>
         </button>
         <div class="dropdown-menu" [class.open]="activeDropdown === 'immo'">
           <div class="dropdown-grid">
@@ -121,10 +138,10 @@
 
       <!-- Finance -->
       <div class="nav-dropdown">
-        <button class="nav-link" (click)="toggleDropdown('finance')">
-          <i class="pi pi-wallet"></i>
+        <button class="nav-link" (click)="toggleDropdown('finance')" aria-expanded="false" aria-haspopup="true">
+          <i class="pi pi-wallet" aria-hidden="true"></i>
           <span>Finance</span>
-          <i class="pi pi-chevron-down arrow"></i>
+          <i class="pi pi-chevron-down arrow" aria-hidden="true"></i>
         </button>
         <div class="dropdown-menu" [class.open]="activeDropdown === 'finance'">
           <div class="dropdown-grid">
@@ -185,10 +202,10 @@
 
       <!-- Livrets -->
       <div class="nav-dropdown">
-        <button class="nav-link" (click)="toggleDropdown('livrets')">
-          <i class="pi pi-money-bill"></i>
+        <button class="nav-link" (click)="toggleDropdown('livrets')" aria-expanded="false" aria-haspopup="true">
+          <i class="pi pi-money-bill" aria-hidden="true"></i>
           <span>Livrets</span>
-          <i class="pi pi-chevron-down arrow"></i>
+          <i class="pi pi-chevron-down arrow" aria-hidden="true"></i>
         </button>
         <div class="dropdown-menu dropdown-small" [class.open]="activeDropdown === 'livrets'">
           <a routerLink="/simulateur-livret/livret-a" (click)="closeMenu()">
@@ -214,10 +231,10 @@
 
       <!-- Articles -->
       <div class="nav-dropdown">
-        <button class="nav-link" (click)="toggleDropdown('articles')">
-          <i class="pi pi-book"></i>
+        <button class="nav-link" (click)="toggleDropdown('articles')" aria-expanded="false" aria-haspopup="true">
+          <i class="pi pi-book" aria-hidden="true"></i>
           <span>Guides</span>
-          <i class="pi pi-chevron-down arrow"></i>
+          <i class="pi pi-chevron-down arrow" aria-hidden="true"></i>
         </button>
         <div class="dropdown-menu" [class.open]="activeDropdown === 'articles'">
           <div class="dropdown-grid dropdown-grid-2">
@@ -242,14 +259,14 @@
       </div>
 
       <!-- Crédits (lien direct) -->
-      <a routerLink="/simulateur-credit-consommation" class="nav-link direct" (click)="closeMenu()">
-        <i class="pi pi-credit-card"></i>
+      <a routerLink="/simulateur-credit-consommation" class="nav-link direct" (click)="closeMenu()" title="Simulateur de crédit à la consommation">
+        <i class="pi pi-credit-card" aria-hidden="true"></i>
         <span>Crédit conso</span>
       </a>
 
       <!-- SCPI (lien direct) -->
-      <a routerLink="/simulateur-scpi" class="nav-link direct" (click)="closeMenu()">
-        <i class="pi pi-building"></i>
+      <a routerLink="/simulateur-scpi" class="nav-link direct" (click)="closeMenu()" title="Simulateur SCPI - Investissement pierre papier">
+        <i class="pi pi-building" aria-hidden="true"></i>
         <span>SCPI</span>
       </a>
     </div>

@@ -34,7 +34,7 @@ $color-text-light: #475569;
     font-size: 1.15rem;
     max-width: 750px;
     margin: 0 auto;
-    color: $color-text;
+    color: var(--text-secondary)
   }
 }
 

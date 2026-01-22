@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { SeoService } from '../../Constructor/service/seo.service';
 
 @Component({
   selector: 'app-politique-confidentialite',
@@ -13,20 +13,14 @@ import { RouterModule } from '@angular/router';
 export class PolitiqueConfidentialiteComponent implements OnInit {
   lastUpdate: string = '19 janvier 2026';
 
-  constructor(
-    private meta: Meta,
-    private title: Title
-  ) {}
+  constructor(private seoService: SeoService) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Politique de Confidentialité | CalculateurFinance');
-    this.meta.updateTag({
-      name: 'description',
-      content: 'Politique de confidentialité RGPD de CalculateurFinance : collecte de données, cookies, droits des utilisateurs et protection des données personnelles.'
-    });
-    this.meta.updateTag({
-      name: 'robots',
-      content: 'noindex, follow'
+    this.seoService.updateMetaData({
+      title: 'Politique de Confidentialité | CalculateurFinance',
+      description: 'Politique de confidentialité RGPD de CalculateurFinance : collecte de données, cookies, droits des utilisateurs et protection des données personnelles.',
+      url: 'https://calculateurfinance.fr/politique-de-confidentialite/',
+      robots: 'noindex, follow'
     });
   }
 }

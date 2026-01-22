@@ -613,3 +613,262 @@ span#pn_id_98_header {
     width: 100%;
   }
 }
+
+// ============================================
+// DARK MODE - Variables et styles
+// ============================================
+:root {
+  // Light mode (défaut)
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9f9fb;
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+  --bg-hover: #f1f5f9;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --accent-primary: #3b82f6;
+  --accent-success: #10b981;
+  --accent-warning: #f59e0b;
+  --accent-danger: #ef4444;
+}
+
+html.dark-mode {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: #1e293b;
+  --bg-input: #334155;
+  --bg-hover: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --accent-primary: #60a5fa;
+  --accent-success: #34d399;
+  --accent-warning: #fbbf24;
+  --accent-danger: #f87171;
+
+  body {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+
+  main {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+  }
+
+  .card {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+    box-shadow: 0 2px 6px var(--shadow-color);
+  }
+
+  // PrimeNG inputs
+  .p-inputtext,
+  .p-inputnumber-input,
+  .p-dropdown,
+  .p-multiselect,
+  .p-textarea {
+    background-color: var(--bg-input) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+  }
+
+  .p-inputtext:enabled:focus,
+  .p-inputnumber-input:enabled:focus {
+    border-color: var(--accent-primary) !important;
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2) !important;
+  }
+
+  // PrimeNG dropdown panel
+  .p-dropdown-panel,
+  .p-multiselect-panel {
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+  }
+
+  .p-dropdown-item,
+  .p-multiselect-item {
+    color: var(--text-primary) !important;
+
+    &:hover {
+      background-color: var(--bg-hover) !important;
+    }
+  }
+
+  .p-dropdown-item.p-highlight,
+  .p-multiselect-item.p-highlight {
+    background-color: var(--accent-primary) !important;
+    color: white !important;
+  }
+
+  // Labels
+  .p-float-label label {
+    color: var(--text-muted) !important;
+  }
+
+  // Panels
+  .p-panel {
+    .p-panel-header {
+      background-color: var(--bg-card) !important;
+      border-color: var(--border-color) !important;
+      color: var(--text-primary) !important;
+    }
+
+    .p-panel-content {
+      background-color: var(--bg-card) !important;
+      border-color: var(--border-color) !important;
+      color: var(--text-primary) !important;
+    }
+  }
+
+  // Résultats
+  .resultats {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-left-color: var(--accent-primary);
+    color: var(--text-primary);
+  }
+
+  .info-smic {
+    background-color: rgba(251, 191, 36, 0.15);
+    border-left-color: var(--accent-warning);
+    color: var(--accent-warning);
+  }
+
+  // FAQ
+  .faq-section {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+
+    h2 {
+      color: var(--text-primary);
+    }
+
+    dt {
+      color: var(--text-primary);
+    }
+
+    dd {
+      color: var(--text-secondary);
+    }
+  }
+
+  // Liens
+  a {
+    color: var(--accent-primary);
+  }
+
+  // Séparateur
+  .separator {
+    background: linear-gradient(to right, var(--accent-primary), var(--accent-success));
+  }
+
+  // Tables
+  table {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+
+    th {
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      border-color: var(--border-color);
+    }
+
+    td {
+      border-color: var(--border-color);
+    }
+
+    tr:hover {
+      background-color: var(--bg-hover);
+    }
+  }
+
+  // PrimeNG Table
+  .p-datatable {
+    .p-datatable-header,
+    .p-datatable-thead > tr > th {
+      background-color: var(--bg-secondary) !important;
+      color: var(--text-primary) !important;
+      border-color: var(--border-color) !important;
+    }
+
+    .p-datatable-tbody > tr {
+      background-color: var(--bg-card) !important;
+      color: var(--text-primary) !important;
+
+      &:hover {
+        background-color: var(--bg-hover) !important;
+      }
+
+      > td {
+        border-color: var(--border-color) !important;
+      }
+    }
+  }
+
+  // Buttons
+  .p-button {
+    &.p-button-secondary {
+      background-color: var(--bg-input) !important;
+      border-color: var(--border-color) !important;
+      color: var(--text-primary) !important;
+    }
+  }
+
+  // Accordions
+  .p-accordion {
+    .p-accordion-header {
+      .p-accordion-header-link {
+        background-color: var(--bg-card) !important;
+        border-color: var(--border-color) !important;
+        color: var(--text-primary) !important;
+      }
+    }
+
+    .p-accordion-content {
+      background-color: var(--bg-card) !important;
+      border-color: var(--border-color) !important;
+      color: var(--text-primary) !important;
+    }
+  }
+
+  // Sidebar
+  .sidebar-left {
+    background: var(--bg-secondary);
+    border-right-color: var(--border-color);
+  }
+
+  // Chart backgrounds
+  .p-chart {
+    canvas {
+      filter: brightness(0.9);
+    }
+  }
+
+  // Scrollbar dark
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+
+    &:hover {
+      background: var(--text-muted);
+    }
+  }
+}

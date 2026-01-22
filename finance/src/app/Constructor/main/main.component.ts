@@ -85,7 +85,7 @@ export class MainComponent implements OnInit {
     // SEO enrichi pour la page d'accueil
     this.seo.updateMetaData({
       title: "Calculateurs et Simulateurs Financiers Gratuits 2026 | Immobilier, Impôts, Épargne",
-      description: "Plus de 30 simulateurs financiers gratuits : rendement locatif, impôt sur le revenu, frais de notaire, LEP, LMNP, crédit immobilier, budget, retraite, FIRE. Outils fiables et à jour pour optimiser vos investissements en 2026.",
+      description: "Plus de 60 simulateurs financiers gratuits : rendement locatif, impôt sur le revenu, frais de notaire, LEP, LMNP, crédit immobilier, budget, retraite, FIRE. Outils fiables et à jour pour optimiser vos investissements en 2026.",
       url: "https://calculateurfinance.fr/",
       keywords: "simulateur financier, calculateur immobilier, rendement locatif, impôt revenu 2026, frais notaire, LMNP, LEP, crédit immobilier, budget personnel, retraite, FIRE, SCI, plus-value immobilière, défiscalisation, micro-entrepreneur, dividendes, intérêts composés, brut net, cashflow, TRI, comparateur investissement",
       image: "https://calculateurfinance.fr/assets/logo.png"

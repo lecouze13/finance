@@ -2,6 +2,8 @@ import {
   Component,
   Inject,
   Input,
+  OnDestroy,
+  OnInit,
   PLATFORM_ID,
   Renderer2,
 } from '@angular/core';
@@ -17,7 +19,7 @@ import { livrets } from '../livrets.model';
   templateUrl: './simulateur-livret.component.html',
   standalone: false
 })
-export class SimulateurLivretComponent {
+export class SimulateurLivretComponent implements OnInit, OnDestroy {
   @Input() title: string | undefined;
   @Input() taux: number | undefined;
   @Input() text: any | undefined;
@@ -25,6 +27,7 @@ export class SimulateurLivretComponent {
   capitalFinal: number | null = null;
   interets: number | null = null;
   form!: FormGroup;
+
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       const fullPath = this.route.routeConfig?.path ?? '';
@@ -41,24 +44,52 @@ export class SimulateurLivretComponent {
       this.taux = livret.taux;
       this.text = livrets[type]['contenu'];
 
-      const description = `Calculez les intérêts générés avec le ${this.title?.replace(
-        'Simulateur ',
-        ''
-      )} grâce à notre outil simple et rapide.`;
+      const livretName = this.title?.replace('Simulateur ', '') ?? type.toUpperCase();
+      const description = `Calculez les intérêts générés avec le ${livretName} grâce à notre simulateur gratuit. Taux actuel : ${this.taux}%. Outil simple et rapide.`;
       const keywords = `simulateur ${type}, ${type} taux, calcul intérêts ${type}, livret épargne ${type}, simulation ${type}, rendement ${type}`;
+      const url = `https://calculateurfinance.fr/simulateur-livret/${type}/`;
 
       this.seo.updateMetaData({
-        title: this.title,
+        title: `${this.title} | Taux ${this.taux}% - CalculateurFinance`,
         description,
-        url: `https://calculateurfinance.fr/simulateur-livret/${type}`,
+        url,
         keywords,
       });
+
+      // Schema FinancialProduct pour les rich snippets Google
+      this.seo.addFinancialProductSchema({
+        name: livretName,
+        description: `Simulateur de ${livretName} - Calculez vos intérêts avec un taux de ${this.taux}%`,
+        url,
+        category: 'Savings Account',
+        interestRate: `${this.taux}%`,
+        provider: 'CalculateurFinance'
+      });
+
+      // Schema WebApplication pour le simulateur
+      this.seo.addSoftwareApplicationSchema({
+        name: this.title ?? `Simulateur ${type.toUpperCase()}`,
+        description,
+        url,
+        applicationCategory: 'FinanceApplication',
+        featureList: [
+          'Calcul des intérêts composés',
+          'Taux actualisé',
+          'Simulation gratuite',
+          'Résultats instantanés'
+        ]
+      });
+
       this.form = this.fb.group({
         capital: [null, [Validators.required, Validators.min(0)]],
         duree: [null, [Validators.required, Validators.min(1)]],
         taux: [{ value: this.taux, disabled: true }, [Validators.required]],
       });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.seo.clearDynamicSchemas();
   }
   constructor(
     private fb: FormBuilder,

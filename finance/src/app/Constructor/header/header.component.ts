@@ -4,6 +4,7 @@ import { MenuItem } from 'primeng/api';
 import { AppRoutes } from '../../Model/pathName.model';
 import { pages } from '../generateur-article/article.model';
 import { livretsSimu } from '../generateur-article/simulateur-livret/livret.page';
+import { ThemeService } from '../../shared/services/theme.service';
 
 export interface SearchItem {
   label: string;
@@ -31,7 +32,14 @@ export class HeaderComponent implements OnInit {
   mobileMenuOpen: boolean = false;
   activeDropdown: string = '';
 
-  constructor(private router: Router) {}
+  // Dark mode
+  isDarkMode: boolean = false;
+
+  constructor(private router: Router, public themeService: ThemeService) {
+    this.themeService.darkMode$.subscribe(isDark => {
+      this.isDarkMode = isDark;
+    });
+  }
 
   ngOnInit() {
     const allEntries = Object.entries(pages);
@@ -525,5 +533,9 @@ export class HeaderComponent implements OnInit {
   closeMenu(): void {
     this.mobileMenuOpen = false;
     this.activeDropdown = '';
+  }
+
+  toggleDarkMode(): void {
+    this.themeService.toggleDarkMode();
   }
 }

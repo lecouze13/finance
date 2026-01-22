@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { SeoService } from '../../Constructor/service/seo.service';
 
 @Component({
   selector: 'app-methodologie',
@@ -13,16 +13,14 @@ import { RouterModule } from '@angular/router';
 export class MethodologieComponent implements OnInit {
   lastUpdate: string = '19 janvier 2026';
 
-  constructor(
-    private meta: Meta,
-    private title: Title
-  ) {}
+  constructor(private seoService: SeoService) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Méthodologie des Calculs | CalculateurFinance');
-    this.meta.updateTag({
-      name: 'description',
-      content: 'Découvrez la méthodologie et les sources utilisées pour les simulateurs de CalculateurFinance : formules de calcul, hypothèses et limites.'
+    this.seoService.updateMetaData({
+      title: 'Méthodologie des Calculs | CalculateurFinance',
+      description: 'Découvrez la méthodologie et les sources officielles utilisées pour les simulateurs de CalculateurFinance : formules de calcul, hypothèses, limites et barèmes fiscaux.',
+      url: 'https://calculateurfinance.fr/methodologie/',
+      keywords: 'méthodologie, calculs financiers, formules, barèmes fiscaux, hypothèses, sources officielles'
     });
   }
 }

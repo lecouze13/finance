@@ -19,7 +19,8 @@
       "Bash(npm uninstall:*)",
       "Bash(dir:*)",
       "Bash(ls:*)",
-      "Bash(identify:*)"
+      "Bash(identify:*)",
+      "Bash(grep:*)"
     ]
   }
 }
