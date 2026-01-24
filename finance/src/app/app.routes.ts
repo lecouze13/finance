@@ -37,7 +37,7 @@ import { SimulateurPtzComponent } from './Immobilier/simulateur-ptz/simulateur-p
 import { SimulateurSuccessionComponent } from './Finance/simulateur-succession/simulateur-succession.component';
 import { SimulateurCoutEnfantComponent } from './Finance/simulateur-cout-enfant/simulateur-cout-enfant.component';
 import { SimulateurViagerComponent } from './Immobilier/simulateur-viager/simulateur-viager.component';
-import { SimulateurCapaciteEmpruntComponent } from './Immobilier/simulateur-capacite-emprunt/simulateur-capacite-emprunt.component';
+// SimulateurCapaciteEmpruntComponent - lazy loaded
 import { SimulateurRachatCreditComponent } from './Finance/simulateur-rachat-credit/simulateur-rachat-credit.component';
 import { SimulateurPerComponent } from './Finance/simulateur-per/simulateur-per.component';
 import { SimulateurFraisGardeComponent } from './Finance/simulateur-frais-garde/simulateur-frais-garde.component';
@@ -188,7 +188,7 @@ export const routes: Routes = [
   },
   {
     path: AppRoutes.SIMULATEUR_CAPACITE_EMPRUNT,
-    component: SimulateurCapaciteEmpruntComponent,
+    loadComponent: () => import('./Immobilier/simulateur-capacite-emprunt/simulateur-capacite-emprunt.component').then(m => m.SimulateurCapaciteEmpruntComponent),
   },
   {
     path: AppRoutes.SIMULATEUR_RACHAT_CREDIT,

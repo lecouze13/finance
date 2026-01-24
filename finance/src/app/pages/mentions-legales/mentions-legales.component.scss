@@ -178,3 +178,92 @@
     }
   }
 }
+
+// ====================================
+// MODE SOMBRE
+// ====================================
+:host-context(html.dark-mode) {
+  .legal-page {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #1a1f2e 100%);
+  }
+
+  .legal-container {
+    background: var(--bg-card);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+    h1 {
+      color: #e2e8f0;
+    }
+
+    .last-update {
+      color: var(--text-secondary);
+    }
+
+    h2 {
+      color: #e2e8f0;
+      border-bottom-color: var(--border-color);
+    }
+
+    p {
+      color: var(--text-secondary);
+    }
+
+    ul {
+      color: var(--text-secondary);
+    }
+
+    a {
+      color: #60a5fa;
+
+      &:hover {
+        color: #93c5fd;
+      }
+    }
+  }
+
+  .info-box {
+    background: rgba(33, 150, 243, 0.15);
+    border-left-color: #60a5fa;
+
+    p strong {
+      color: #e2e8f0;
+    }
+  }
+
+  .warning-box {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.15) 0%, rgba(255, 193, 7, 0.1) 100%);
+    border-left-color: #ffc107;
+
+    i {
+      color: #ffc107;
+    }
+
+    p {
+      color: #ffc107;
+
+      strong {
+        color: #ffca28;
+      }
+    }
+  }
+
+  .contact-email {
+    i {
+      color: #60a5fa;
+    }
+  }
+
+  .back-link {
+    border-top-color: var(--border-color);
+
+    a {
+      color: #e2e8f0;
+      background: var(--bg-secondary);
+
+      &:hover {
+        background: #3b82f6;
+        color: white;
+      }
+    }
+  }
+}

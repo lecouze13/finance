@@ -16,8 +16,9 @@
         <span itemprop="name">{{ item.label }}</span>
       </a>
 
-      <span *ngIf="last" class="breadcrumb-current" itemprop="item">
+      <span *ngIf="last" class="breadcrumb-current">
         <span itemprop="name">{{ item.label }}</span>
+        <link itemprop="item" [attr.href]="currentPageUrl" />
       </span>
 
       <meta itemprop="position" [content]="i + 1" />

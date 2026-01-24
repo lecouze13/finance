@@ -525,3 +525,168 @@
     }
   }
 }
+
+// ====================================
+// MODE SOMBRE
+// ====================================
+:host-context(html.dark-mode) {
+  .article-page {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #1a1f2e 100%);
+  }
+
+  .article-main h1 {
+    background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .article-content {
+    color: #cbd5e1;
+
+    h1 {
+      color: #e2e8f0;
+      background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    h2 {
+      color: #e2e8f0;
+
+      &::before {
+        background: linear-gradient(135deg, #60a5fa, #a78bfa);
+      }
+    }
+
+    h3 {
+      color: #60a5fa;
+
+      &::before {
+        color: #a78bfa;
+      }
+    }
+
+    h4 {
+      color: #94a3b8;
+    }
+
+    strong {
+      color: #e2e8f0;
+      background: linear-gradient(120deg, rgba(59, 130, 246, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+    }
+
+    em {
+      color: #94a3b8;
+    }
+
+    a {
+      color: #60a5fa;
+
+      &:hover {
+        color: #93c5fd;
+        border-bottom-color: #60a5fa;
+      }
+    }
+
+    // Listes
+    ul li::before {
+      background: linear-gradient(135deg, #60a5fa, #a78bfa);
+    }
+
+    ol li::before {
+      background: linear-gradient(135deg, #60a5fa, #a78bfa);
+    }
+
+    // Citations
+    blockquote {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+      color: #94a3b8;
+
+      &::before {
+        color: #60a5fa;
+      }
+    }
+
+    // Tableaux
+    table {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+
+      tbody tr {
+        background: var(--bg-card);
+
+        &:nth-child(even) {
+          background: rgba(255, 255, 255, 0.03);
+        }
+
+        &:hover {
+          background: rgba(59, 130, 246, 0.1);
+        }
+
+        td {
+          border-bottom-color: var(--border-color);
+        }
+      }
+    }
+
+    // Encarts d'info
+    .info-box {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%);
+      border-color: #3b82f6;
+    }
+
+    .tip-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%);
+      border-color: #10b981;
+    }
+
+    .warning-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.1) 100%);
+      border-color: #f59e0b;
+    }
+
+    // Code
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      color: #a78bfa;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+
+    // Séparateur
+    hr {
+      background: linear-gradient(90deg, transparent, #60a5fa, #a78bfa, transparent);
+    }
+  }
+
+  // Carte de résumé
+  .article-summary {
+    background: var(--bg-card);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    border-color: var(--border-color);
+
+    .summary-header {
+      color: #60a5fa;
+    }
+
+    .summary-list .summary-item {
+      color: #94a3b8;
+
+      i {
+        color: #4ade80;
+      }
+    }
+  }
+
+  // Boutons CTA
+  .article-cta {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+
+    &:hover {
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+    }
+  }
+}

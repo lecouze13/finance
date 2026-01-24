@@ -317,3 +317,141 @@
     }
   }
 }
+
+// ====================================
+// MODE SOMBRE
+// ====================================
+:host-context(html.dark-mode) {
+  .legal-page {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #1a1f2e 100%);
+  }
+
+  .legal-container {
+    background: var(--bg-card);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+    h1, h2 {
+      color: #e2e8f0;
+    }
+
+    h2, h3 {
+      border-bottom-color: var(--border-color);
+    }
+
+    h3 {
+      color: #94a3b8;
+    }
+
+    .last-update {
+      color: var(--text-secondary);
+    }
+
+    p, ul {
+      color: var(--text-secondary);
+    }
+
+    ul li strong {
+      color: #e2e8f0;
+    }
+
+    a {
+      color: #60a5fa;
+
+      &:hover {
+        color: #93c5fd;
+      }
+    }
+  }
+
+  .intro-box {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.2) 0%, rgba(33, 150, 243, 0.1) 100%);
+    border-left-color: #60a5fa;
+
+    p {
+      color: #60a5fa;
+    }
+  }
+
+  .cookie-category {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+
+    .category-header h3 {
+      color: #e2e8f0;
+    }
+  }
+
+  .badge {
+    &.required {
+      background: rgba(40, 167, 69, 0.2);
+      color: #4ade80;
+    }
+
+    &.optional {
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+    }
+  }
+
+  .cookies-table {
+    th, td {
+      border-bottom-color: var(--border-color);
+    }
+
+    th {
+      background: var(--bg-secondary);
+      color: #e2e8f0;
+    }
+
+    td {
+      background: var(--bg-card);
+      color: var(--text-secondary);
+    }
+  }
+
+  .browser-list a {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: #60a5fa;
+
+    &:hover {
+      background: rgba(33, 150, 243, 0.15);
+      border-color: #60a5fa;
+    }
+  }
+
+  .warning-box {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.15) 0%, rgba(255, 193, 7, 0.1) 100%);
+    border-left-color: #ffc107;
+
+    i {
+      color: #ffc107;
+    }
+
+    p {
+      color: #ffc107;
+
+      strong {
+        color: #ffca28;
+      }
+    }
+  }
+
+  .contact-email i {
+    color: #60a5fa;
+  }
+
+  .back-link {
+    border-top-color: var(--border-color);
+
+    a {
+      color: #e2e8f0;
+      background: var(--bg-secondary);
+
+      &:hover {
+        background: #3b82f6;
+        color: white;
+      }
+    }
+  }
+}

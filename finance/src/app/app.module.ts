@@ -80,7 +80,7 @@ import { SimulateurPtzComponent } from './Immobilier/simulateur-ptz/simulateur-p
 import { SimulateurSuccessionComponent } from './Finance/simulateur-succession/simulateur-succession.component';
 import { SimulateurCoutEnfantComponent } from './Finance/simulateur-cout-enfant/simulateur-cout-enfant.component';
 import { SimulateurViagerComponent } from './Immobilier/simulateur-viager/simulateur-viager.component';
-import { SimulateurCapaciteEmpruntComponent } from './Immobilier/simulateur-capacite-emprunt/simulateur-capacite-emprunt.component';
+// SimulateurCapaciteEmpruntComponent - now standalone, lazy loaded
 import { SimulateurRachatCreditComponent } from './Finance/simulateur-rachat-credit/simulateur-rachat-credit.component';
 import { SimulateurPerComponent } from './Finance/simulateur-per/simulateur-per.component';
 import { SimulateurFraisGardeComponent } from './Finance/simulateur-frais-garde/simulateur-frais-garde.component';
@@ -94,6 +94,10 @@ import { SimulateurScpiComponent } from './Finance/simulateur-scpi/simulateur-sc
 import { ExportButtonsComponent } from './shared/components/export-buttons/export-buttons.component';
 import { SommaireComponent } from './shared/sommaire/sommaire.component';
 import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
+import { UpdateBlockComponent } from './shared/components/update-block/update-block.component';
+import { AuthorBioComponent } from './shared/components/author-bio/author-bio.component';
+import { SimilarArticlesComponent } from './shared/components/similar-articles/similar-articles.component';
+import { ShareButtonComponent } from './shared/components/share-button/share-button.component';
 
 @NgModule({
     declarations: [
@@ -135,7 +139,6 @@ import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
         SimulateurSuccessionComponent,
         SimulateurCoutEnfantComponent,
         SimulateurViagerComponent,
-        SimulateurCapaciteEmpruntComponent,
         SimulateurRachatCreditComponent,
         SimulateurPerComponent,
         SimulateurFraisGardeComponent,
@@ -177,7 +180,11 @@ import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
         PanelMenuModule,
         MainComponent,
         SommaireComponent,
-        BreadcrumbComponent
+        BreadcrumbComponent,
+        UpdateBlockComponent,
+        AuthorBioComponent,
+        SimilarArticlesComponent,
+        ShareButtonComponent
     ],
     providers: [
     provideClientHydration(),

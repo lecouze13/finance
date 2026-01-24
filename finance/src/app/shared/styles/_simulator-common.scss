@@ -860,3 +860,445 @@ $bg-green-light: #e8f5e9;
 .mb-1 { margin-bottom: 0.5rem !important; }
 .mb-2 { margin-bottom: 1rem !important; }
 .mb-3 { margin-bottom: 1.5rem !important; }
+
+// ============================================
+// MODE SOMBRE
+// ============================================
+html.dark-mode {
+  // Header simulateur
+  .simulator-header {
+    h1 {
+      color: #e2e8f0;
+
+      i {
+        color: #60a5fa;
+      }
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+    }
+  }
+
+  // Panel input
+  .input-panel {
+    .p-panel-content {
+      background: var(--bg-card) !important;
+    }
+  }
+
+  // Section résultats
+  .results-section {
+    background: var(--bg-card);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+
+    h2 {
+      color: #e2e8f0;
+
+      i {
+        color: #60a5fa;
+      }
+    }
+
+    h3 {
+      color: #60a5fa;
+    }
+  }
+
+  // Header section
+  .header-section {
+    h1 {
+      color: #e2e8f0;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+    }
+  }
+
+  // Formulaires
+  .form-group {
+    label {
+      color: var(--text-secondary);
+    }
+  }
+
+  // Résultat principal
+  .main-result {
+    background: linear-gradient(135deg, rgba(25, 118, 210, 0.2) 0%, rgba(66, 165, 250, 0.15) 100%);
+
+    &.success,
+    &.positive {
+      background: linear-gradient(135deg, rgba(46, 125, 50, 0.2) 0%, rgba(76, 175, 80, 0.15) 100%);
+
+      .result-icon {
+        background: rgba(46, 125, 50, 0.25);
+      }
+
+      .result-value {
+        color: #4ade80;
+      }
+    }
+
+    &.warning {
+      background: linear-gradient(135deg, rgba(230, 81, 0, 0.2) 0%, rgba(255, 152, 0, 0.15) 100%);
+
+      .result-icon {
+        background: rgba(230, 81, 0, 0.25);
+      }
+
+      .result-value {
+        color: #ffb74d;
+      }
+    }
+
+    .result-icon {
+      background: rgba(25, 118, 210, 0.25);
+
+      i {
+        color: #60a5fa;
+      }
+    }
+
+    .result-value {
+      color: #60a5fa;
+    }
+
+    .result-label {
+      color: var(--text-secondary);
+    }
+  }
+
+  // Grille de stats
+  .stats-grid {
+    .stat-card {
+      background: var(--bg-secondary);
+
+      .stat-value {
+        color: #e2e8f0;
+
+        &.highlight {
+          color: #ffb74d;
+        }
+
+        &.positive {
+          color: #4ade80;
+        }
+
+        &.negative {
+          color: #f87171;
+        }
+      }
+
+      .stat-label {
+        color: var(--text-secondary);
+      }
+    }
+  }
+
+  // Lignes de résultats
+  .results-details {
+    .result-row {
+      border-bottom-color: var(--border-color);
+
+      &.highlight {
+        background: var(--bg-secondary);
+      }
+
+      &.total {
+        background: #1e3a5f;
+
+        .label, .value {
+          color: white;
+        }
+      }
+
+      .label {
+        color: var(--text-secondary);
+      }
+
+      .value {
+        color: #e2e8f0;
+
+        &.positive {
+          color: #4ade80;
+        }
+
+        &.negative {
+          color: #f87171;
+        }
+      }
+    }
+  }
+
+  // Box d'aide / Information
+  .help-box,
+  .info-box {
+    background: rgba(25, 118, 210, 0.15);
+    border-left-color: #42a5f5;
+
+    h4 {
+      color: #60a5fa;
+    }
+
+    p {
+      color: var(--text-secondary);
+    }
+
+    &.warning {
+      background: rgba(230, 81, 0, 0.15);
+      border-left-color: #ffb74d;
+
+      h4 {
+        color: #ffb74d;
+      }
+    }
+
+    &.success {
+      background: rgba(46, 125, 50, 0.15);
+      border-left-color: #4ade80;
+
+      h4 {
+        color: #4ade80;
+      }
+    }
+  }
+
+  // Sélecteur de mode
+  .mode-option {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+
+    &:hover {
+      border-color: #60a5fa;
+    }
+
+    &.active {
+      border-color: #60a5fa;
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+
+      i {
+        color: #60a5fa;
+      }
+    }
+
+    i {
+      color: var(--text-secondary);
+    }
+
+    span {
+      color: var(--text-primary);
+    }
+  }
+
+  // Tableaux
+  .data-table,
+  .projection-table,
+  .amortissement-table {
+    th, td {
+      border-bottom-color: var(--border-color);
+    }
+
+    th {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    td {
+      color: var(--text-primary);
+    }
+
+    .positive {
+      color: #4ade80;
+    }
+
+    .negative {
+      color: #f87171;
+    }
+  }
+
+  // Barres de progression
+  .progress-bar {
+    background: var(--border-color);
+  }
+
+  .progress-legend {
+    color: var(--text-secondary);
+  }
+
+  // Grilles de bilan
+  .bilan-card {
+    background: var(--bg-secondary);
+
+    i {
+      color: #60a5fa;
+    }
+
+    .bilan-value {
+      color: #e2e8f0;
+
+      &.positive {
+        color: #4ade80;
+      }
+
+      &.negative {
+        color: #f87171;
+      }
+    }
+
+    .bilan-label {
+      color: var(--text-secondary);
+    }
+
+    &.highlight {
+      background: rgba(25, 118, 210, 0.15);
+      border-color: #42a5f5;
+    }
+  }
+
+  // Sections spécifiques
+  .revenus-section,
+  .fiscalite-detail,
+  .credit-section {
+    border-top-color: var(--border-color);
+
+    h4 {
+      color: var(--text-primary);
+    }
+  }
+
+  .revenus-grid {
+    .revenu-card {
+      background: var(--bg-card);
+      border-color: var(--border-color);
+
+      .revenu-value {
+        color: #e2e8f0;
+      }
+
+      .revenu-label {
+        color: var(--text-secondary);
+      }
+
+      &.highlight {
+        background: rgba(46, 125, 50, 0.15);
+        border-color: #4ade80;
+
+        .revenu-value {
+          color: #4ade80;
+        }
+      }
+    }
+  }
+
+  // Rangées fiscales / crédit
+  .fiscal-row,
+  .credit-row {
+    border-bottom-color: var(--border-color);
+    color: var(--text-primary);
+
+    &.total {
+      background: var(--bg-secondary);
+    }
+
+    .negative {
+      color: #f87171;
+    }
+
+    .positive {
+      color: #4ade80;
+    }
+  }
+
+  // Valeurs calculées
+  .calculated-value {
+    background: var(--bg-secondary);
+    color: #e2e8f0;
+    border-color: var(--border-color);
+  }
+
+  // Informations fiscales
+  .fiscal-info {
+    p {
+      background: rgba(230, 81, 0, 0.15);
+      color: #ffb74d;
+    }
+  }
+
+  // Grilles de comparaison
+  .comparison-grid {
+    .comparison-column,
+    .comparison-card,
+    .option-card,
+    .strategy-card,
+    .status-card,
+    .product-card {
+      background: var(--bg-card);
+      border-color: var(--border-color);
+
+      h3, h4 {
+        color: #e2e8f0;
+      }
+
+      .card-header {
+        background: rgba(255, 255, 255, 0.03);
+        border-bottom-color: var(--border-color);
+      }
+
+      .card-value {
+        color: #e2e8f0;
+      }
+
+      .card-label {
+        color: var(--text-secondary);
+      }
+
+      &.winner,
+      &.recommended {
+        border-color: #4ade80;
+        background: rgba(46, 125, 50, 0.1);
+      }
+
+      &.before {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: #f87171;
+      }
+
+      &.after {
+        background: rgba(34, 197, 94, 0.1);
+        border-color: #4ade80;
+      }
+    }
+
+    .comparison-item {
+      border-bottom-color: var(--border-color);
+
+      .item-label {
+        color: var(--text-secondary);
+      }
+
+      .item-value {
+        color: #e2e8f0;
+
+        &.positive {
+          color: #4ade80;
+        }
+
+        &.negative {
+          color: #f87171;
+        }
+      }
+    }
+  }
+
+  // Utilitaires couleurs en mode sombre
+  .text-positive { color: #4ade80 !important; }
+  .text-negative { color: #f87171 !important; }
+  .text-warning { color: #ffb74d !important; }
+  .text-muted { color: var(--text-secondary) !important; }
+
+  .bg-light { background-color: var(--bg-secondary) !important; }
+  .bg-success { background-color: rgba(46, 125, 50, 0.15) !important; }
+  .bg-info { background-color: rgba(25, 118, 210, 0.15) !important; }
+}

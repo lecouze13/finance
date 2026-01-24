@@ -172,3 +172,54 @@
     min-width: auto;
   }
 }
+
+// ====================================
+// MODE SOMBRE
+// ====================================
+:host-context(html.dark-mode) {
+  .sommaire {
+    background: var(--bg-card);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .sommaire-nav {
+    &::-webkit-scrollbar-track {
+      background: var(--bg-secondary);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #475569;
+    }
+  }
+
+  .sommaire-item {
+    color: var(--text-secondary);
+
+    &:hover {
+      background: var(--bg-secondary);
+      color: #e2e8f0;
+    }
+
+    &.active {
+      background: linear-gradient(90deg, rgba(37, 99, 235, 0.15) 0%, transparent 100%);
+      color: #60a5fa;
+      border-left-color: #60a5fa;
+
+      i {
+        color: #60a5fa;
+      }
+    }
+
+    i {
+      color: #64748b;
+    }
+  }
+
+  .progress-indicator {
+    background: var(--border-color);
+
+    .progress-bar {
+      background: linear-gradient(90deg, #60a5fa 0%, #3b82f6 100%);
+    }
+  }
+}

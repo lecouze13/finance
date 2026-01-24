@@ -534,12 +534,10 @@ $bg-light: #f8fafc;
 // ============================================
 :host-context(html.dark-mode) {
   .main-header {
-    background: #1e293b;
+    background: var(--bg-card);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
-.breadcrumb {
-   background: #1e293b;
-}
+
   .header-top {
     border-bottom-color: #334155;
   }

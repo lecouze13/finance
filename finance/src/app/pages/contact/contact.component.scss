@@ -217,3 +217,107 @@
     }
   }
 }
+
+// ====================================
+// MODE SOMBRE
+// ====================================
+:host-context(html.dark-mode) {
+  .legal-page {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #1a1f2e 100%);
+  }
+
+  .legal-container {
+    background: var(--bg-card);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+    h1, h2 {
+      color: #e2e8f0;
+    }
+
+    h2 {
+      border-bottom-color: var(--border-color);
+    }
+  }
+
+  .contact-intro p {
+    color: var(--text-secondary);
+  }
+
+  .contact-info {
+    .email-box {
+      background: linear-gradient(135deg, rgba(33, 150, 243, 0.2) 0%, rgba(33, 150, 243, 0.1) 100%);
+      border-color: #42a5f5;
+
+      i {
+        color: #60a5fa;
+      }
+
+      .email-content {
+        .email-label {
+          color: #60a5fa;
+        }
+
+        .email-address {
+          color: #e2e8f0;
+
+          &:hover {
+            color: #60a5fa;
+          }
+        }
+      }
+    }
+
+    .response-time {
+      color: var(--text-secondary);
+    }
+  }
+
+  .contact-topics {
+    .topic-card {
+      background: var(--bg-secondary);
+      border-color: var(--border-color);
+
+      &:hover {
+        border-color: #60a5fa;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+      }
+
+      h3 {
+        color: #e2e8f0;
+      }
+
+      p {
+        color: var(--text-secondary);
+      }
+    }
+  }
+
+  .contact-note {
+    .note-box {
+      background: linear-gradient(135deg, rgba(255, 193, 7, 0.15) 0%, rgba(255, 193, 7, 0.1) 100%);
+      border-left-color: #ffc107;
+
+      i {
+        color: #ffc107;
+      }
+
+      p {
+        color: #ffc107;
+
+        strong {
+          color: #ffca28;
+        }
+      }
+    }
+  }
+
+  .back-link a {
+    color: #e2e8f0;
+    background: var(--bg-secondary);
+
+    &:hover {
+      background: #3b82f6;
+      color: white;
+    }
+  }
+}

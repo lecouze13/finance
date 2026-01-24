@@ -305,3 +305,116 @@
     color: #64748b;
   }
 }
+
+// ====================================
+// MODE SOMBRE
+// ====================================
+:host-context(html.dark-mode) {
+  .catalogue-page {
+    background: var(--bg-primary);
+  }
+
+  .catalogue-header {
+    h1 {
+      color: #e2e8f0;
+
+      i {
+        color: #60a5fa;
+      }
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+    }
+  }
+
+  .stats-bar {
+    .stat-item {
+      background: var(--bg-card);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+      i {
+        color: #60a5fa;
+      }
+
+      .stat-value {
+        color: #e2e8f0;
+      }
+
+      .stat-label {
+        color: var(--text-secondary);
+      }
+    }
+  }
+
+  .filters-section {
+    background: var(--bg-card);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .results-info {
+    border-top-color: var(--border-color);
+    color: var(--text-secondary);
+  }
+
+  .item-card {
+    background: var(--bg-card);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-color: var(--border-color);
+
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      border-color: #60a5fa;
+    }
+
+    .card-header {
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom-color: var(--border-color);
+    }
+
+    .card-body {
+      h3 {
+        color: #e2e8f0;
+      }
+
+      .description {
+        color: var(--text-secondary);
+      }
+
+      .card-meta .category {
+        color: var(--text-secondary);
+      }
+
+      .tags .tag {
+        background: rgba(255, 255, 255, 0.08);
+        color: #94a3b8;
+      }
+    }
+
+    .card-footer {
+      border-top-color: var(--border-color);
+      background: rgba(255, 255, 255, 0.02);
+
+      .view-link {
+        color: var(--text-secondary);
+      }
+    }
+  }
+
+  .no-results {
+    background: var(--bg-card);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+    i {
+      color: #475569;
+    }
+
+    h3 {
+      color: #e2e8f0;
+    }
+
+    p {
+      color: var(--text-secondary);
+    }
+  }
+}

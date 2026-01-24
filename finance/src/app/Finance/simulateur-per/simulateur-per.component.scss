@@ -137,3 +137,91 @@
     background: linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%);
   }
 }
+
+// ====================================
+// MODE SOMBRE
+// ====================================
+:host-context(html.dark-mode) {
+  .plafond-info {
+    background: rgba(25, 118, 210, 0.15);
+    border-left-color: #42a5f5;
+
+    i {
+      color: #42a5f5;
+    }
+
+    strong {
+      color: #64b5f6;
+    }
+
+    small {
+      color: var(--text-secondary);
+    }
+
+    .warning {
+      color: #ffb74d;
+    }
+  }
+
+  .result-highlight {
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(255, 255, 255, 0.05) 100%);
+
+    .result-label {
+      color: var(--text-secondary);
+    }
+
+    .result-value {
+      &.primary {
+        color: #e2e8f0;
+      }
+
+      &.success {
+        color: #4ade80;
+      }
+    }
+  }
+
+  .detail-row {
+    border-bottom-color: var(--border-color);
+
+    .detail-label {
+      color: var(--text-secondary);
+    }
+
+    .detail-value {
+      color: #e2e8f0;
+
+      &.positive {
+        color: #4ade80;
+      }
+    }
+  }
+
+  .sortie-comparison {
+    border-top-color: var(--border-color);
+
+    h4 {
+      color: #e2e8f0;
+    }
+  }
+
+  .sortie-option {
+    background: var(--bg-card);
+
+    .sortie-title {
+      color: #e2e8f0;
+    }
+
+    .sortie-impot {
+      color: #f87171;
+    }
+
+    .sortie-gain {
+      color: #e2e8f0;
+
+      &.positive {
+        color: #4ade80;
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, PLATFORM_ID, Inject, Renderer2 } from '@angular/core';
 import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { filter, Subscription } from 'rxjs';
 
 export interface BreadcrumbItem {
@@ -19,6 +20,8 @@ export interface BreadcrumbItem {
 })
 export class BreadcrumbComponent implements OnInit, OnDestroy {
   items: BreadcrumbItem[] = [];
+  currentPageUrl: SafeResourceUrl = ''; // URL complète de la page courante pour le microdata
+  private currentPageUrlRaw: string = ''; // Version non sanitisée pour JSON-LD
   private routerSub?: Subscription;
   private isBrowser: boolean;
   private scriptElement: HTMLScriptElement | null = null;
@@ -116,6 +119,7 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
+    private sanitizer: DomSanitizer,
     @Inject(PLATFORM_ID) private platformId: Object,
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2
@@ -137,7 +141,7 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
    * Génère le JSON-LD BreadcrumbList pour un meilleur SEO
    * Google préfère JSON-LD au microdata
    */
-  private injectBreadcrumbJsonLd(): void {
+  private injectBreadcrumbJsonLd(currentUrl: string): void {
     // Supprimer l'ancien script s'il existe
     const existingScript = this.document.querySelector('script[data-schema="breadcrumb"]');
     if (existingScript) {
@@ -146,15 +150,25 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
 
     if (this.items.length === 0) return;
 
+    // Construire l'URL courante complète
+    const cleanCurrentUrl = currentUrl.split('?')[0].split('#')[0];
+    const fullCurrentUrl = `${this.baseUrl}${cleanCurrentUrl.endsWith('/') ? cleanCurrentUrl : cleanCurrentUrl + '/'}`;
+
     const breadcrumbSchema = {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
-      'itemListElement': this.items.map((item, index) => ({
-        '@type': 'ListItem',
-        'position': index + 1,
-        'name': item.label,
-        'item': item.url ? `${this.baseUrl}${item.url}` : undefined
-      })).filter(item => item.name)
+      'itemListElement': this.items.map((item, index) => {
+        const isLast = index === this.items.length - 1;
+        // Pour le dernier élément, utiliser l'URL courante
+        const itemUrl = isLast ? fullCurrentUrl : (item.url ? `${this.baseUrl}${item.url}` : undefined);
+
+        return {
+          '@type': 'ListItem',
+          'position': index + 1,
+          'name': item.label,
+          'item': itemUrl
+        };
+      }).filter(item => item.name && item.item)
     };
 
     this.scriptElement = this.renderer.createElement('script');
@@ -169,8 +183,15 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
 
     // Ignorer la page d'accueil
     if (url === '/' || url === '') {
+      this.currentPageUrl = '';
+      this.currentPageUrlRaw = '';
       return;
     }
+
+    // Parser l'URL et construire l'URL complète pour le microdata
+    const cleanUrl = url.split('?')[0].split('#')[0];
+    this.currentPageUrlRaw = `${this.baseUrl}${cleanUrl.endsWith('/') ? cleanUrl : cleanUrl + '/'}`;
+    this.currentPageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.currentPageUrlRaw);
 
     // Ajouter l'accueil
     this.items.push({
@@ -179,8 +200,6 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
       icon: 'pi pi-home'
     });
 
-    // Parser l'URL
-    const cleanUrl = url.split('?')[0].split('#')[0];
     const segments = cleanUrl.split('/').filter(s => s);
 
     if (segments.length === 0) return;
@@ -207,7 +226,7 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
     });
 
     // Injecter le JSON-LD pour le SEO
-    this.injectBreadcrumbJsonLd();
+    this.injectBreadcrumbJsonLd(url);
   }
 
   private detectType(segments: string[]): string | null {

@@ -87,7 +87,7 @@ export class SimulateurAplComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.updateMetaData({
-      title: 'Simulateur APL 2026 - Calculez vos Aides au Logement | CalculateurFinance.fr',
+      title: 'Simulateur APL 2026 - Calculez vos Aides au Logement',
       description: 'Estimez le montant de votre APL (Aide Personnalisée au Logement) en fonction de vos ressources, loyer et situation familiale. Simulateur gratuit et à jour 2026.',
       url: 'https://calculateurfinance.fr/simulateur-apl/',
       keywords: 'simulateur APL, aide logement, CAF, allocation logement, APL 2026, aide au loyer'

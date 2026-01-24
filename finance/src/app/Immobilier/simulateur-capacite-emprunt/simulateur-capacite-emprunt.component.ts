@@ -1,15 +1,48 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
-import { FaqItem } from '../../shared/faq-section/faq-section.component';
+import { ActivatedRoute } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+// PrimeNG modules
+import { PanelModule } from 'primeng/panel';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
+
+// Shared components
+import { FaqItem, FaqSectionComponent } from '../../shared/faq-section/faq-section.component';
+import { SimilarArticle, SimilarArticlesComponent } from '../../shared/components/similar-articles/similar-articles.component';
+import { SommaireItem, SommaireComponent } from '../../shared/sommaire/sommaire.component';
+import { ShareButtonComponent } from '../../shared/components/share-button/share-button.component';
+import { UpdateBlockComponent } from '../../shared/components/update-block/update-block.component';
+import { AuthorBioComponent } from '../../shared/components/author-bio/author-bio.component';
+
+// Services
+import { ExportService, ExportData } from '../../shared/services/export.service';
+import { UrlStateService, UrlStateConfig } from '../../shared/services/url-state.service';
 
 @Component({
   selector: 'app-simulateur-capacite-emprunt',
   templateUrl: './simulateur-capacite-emprunt.component.html',
   styleUrls: ['./simulateur-capacite-emprunt.component.scss'],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    PanelModule,
+    InputNumberModule,
+    DropdownModule,
+    FaqSectionComponent,
+    SimilarArticlesComponent,
+    SommaireComponent,
+    ShareButtonComponent,
+    UpdateBlockComponent,
+    AuthorBioComponent
+  ]
 })
 export class SimulateurCapaciteEmpruntComponent implements OnInit {
+  @ViewChild('shareButton') shareButton!: ShareButtonComponent;
+
   // Entrées
   revenus: number = 3500;
   revenusConjoint: number = 0;
@@ -32,11 +65,51 @@ export class SimulateurCapaciteEmpruntComponent implements OnInit {
   tauxEndettementActuel: number = 0;
   resteAVivre: number = 0;
 
+  // Config URL state
+  private urlStateConfig: UrlStateConfig = {
+    revenus: { type: 'number', default: 3500 },
+    revenusConjoint: { type: 'number', default: 0 },
+    autresRevenus: { type: 'number', default: 0 },
+    chargesMensuelles: { type: 'number', default: 500 },
+    creditEnCours: { type: 'number', default: 0 },
+    apportPersonnel: { type: 'number', default: 20000 },
+    dureeEmprunt: { type: 'number', default: 20 },
+    tauxInteret: { type: 'number', default: 3.5 },
+    tauxAssurance: { type: 'number', default: 0.36 },
+    tauxEndettementMax: { type: 'number', default: 35 }
+  };
+
   dureeOptions = [
     { label: '10 ans', value: 10 },
     { label: '15 ans', value: 15 },
     { label: '20 ans', value: 20 },
     { label: '25 ans', value: 25 }
+  ];
+
+  // Sommaire items
+  sommaireItems: SommaireItem[] = [
+    { id: 'simulateur', label: 'Simulateur', icon: 'pi pi-calculator' },
+    { id: 'resultats', label: 'Résultats', icon: 'pi pi-chart-bar' },
+    { id: 'faq', label: 'FAQ', icon: 'pi pi-question-circle' },
+    { id: 'articles', label: 'Articles similaires', icon: 'pi pi-book' }
+  ];
+
+  // Articles similaires
+  similarArticles: SimilarArticle[] = [
+    {
+      title: 'Simulateur de Prêt Immobilier',
+      description: 'Calculez vos mensualités et le coût total de votre crédit immobilier avec notre simulateur détaillé.',
+      url: '/simulateur-pret-immobilier',
+      icon: 'pi pi-home',
+      category: 'Immobilier'
+    },
+    {
+      title: 'Calculateur de Frais de Notaire',
+      description: 'Estimez précisément les frais de notaire pour votre achat immobilier : droits de mutation, émoluments et débours.',
+      url: '/simulateur-frais-notaire',
+      icon: 'pi pi-file',
+      category: 'Immobilier'
+    }
   ];
 
   faqItems: FaqItem[] = [
@@ -85,11 +158,14 @@ export class SimulateurCapaciteEmpruntComponent implements OnInit {
   constructor(
     private meta: Meta,
     private title: Title,
+    private route: ActivatedRoute,
+    private exportService: ExportService,
+    private urlStateService: UrlStateService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Simulateur Capacité d\'Emprunt Immobilier 2026 | Calculez votre Budget');
+    this.title.setTitle('Simulateur Capacité d\'Emprunt Immobilier 2025 | Calculez votre Budget');
     this.meta.updateTag({
       name: 'description',
       content: 'Calculez gratuitement votre capacité d\'emprunt immobilier. Estimez le montant maximum que vous pouvez emprunter selon vos revenus, charges et le taux d\'endettement de 35%.'
@@ -98,7 +174,41 @@ export class SimulateurCapaciteEmpruntComponent implements OnInit {
       name: 'keywords',
       content: 'capacité emprunt, simulation prêt immobilier, combien emprunter, taux endettement 35%, calculateur crédit immobilier, budget achat immobilier'
     });
+
+    // Charger les paramètres depuis l'URL
+    this.loadStateFromUrl();
+
     this.calculer();
+  }
+
+  private loadStateFromUrl(): void {
+    const urlState = this.urlStateService.getStateFromUrl<any>(this.route, this.urlStateConfig);
+
+    if (urlState['revenus'] !== undefined) this.revenus = urlState['revenus'];
+    if (urlState['revenusConjoint'] !== undefined) this.revenusConjoint = urlState['revenusConjoint'];
+    if (urlState['autresRevenus'] !== undefined) this.autresRevenus = urlState['autresRevenus'];
+    if (urlState['chargesMensuelles'] !== undefined) this.chargesMensuelles = urlState['chargesMensuelles'];
+    if (urlState['creditEnCours'] !== undefined) this.creditEnCours = urlState['creditEnCours'];
+    if (urlState['apportPersonnel'] !== undefined) this.apportPersonnel = urlState['apportPersonnel'];
+    if (urlState['dureeEmprunt'] !== undefined) this.dureeEmprunt = urlState['dureeEmprunt'];
+    if (urlState['tauxInteret'] !== undefined) this.tauxInteret = urlState['tauxInteret'];
+    if (urlState['tauxAssurance'] !== undefined) this.tauxAssurance = urlState['tauxAssurance'];
+    if (urlState['tauxEndettementMax'] !== undefined) this.tauxEndettementMax = urlState['tauxEndettementMax'];
+  }
+
+  private getCurrentState(): Record<string, any> {
+    return {
+      revenus: this.revenus,
+      revenusConjoint: this.revenusConjoint,
+      autresRevenus: this.autresRevenus,
+      chargesMensuelles: this.chargesMensuelles,
+      creditEnCours: this.creditEnCours,
+      apportPersonnel: this.apportPersonnel,
+      dureeEmprunt: this.dureeEmprunt,
+      tauxInteret: this.tauxInteret,
+      tauxAssurance: this.tauxAssurance,
+      tauxEndettementMax: this.tauxEndettementMax
+    };
   }
 
   calculer(): void {
@@ -145,6 +255,117 @@ export class SimulateurCapaciteEmpruntComponent implements OnInit {
     this.mensualiteMax = Math.round(this.mensualiteMax);
     this.mensualiteDisponible = Math.round(this.mensualiteDisponible);
     this.resteAVivre = Math.round(this.resteAVivre);
+  }
+
+  async partager(): Promise<void> {
+    const success = await this.urlStateService.copyShareUrl(
+      this.getCurrentState(),
+      this.urlStateConfig
+    );
+
+    if (success && this.shareButton) {
+      this.shareButton.showCopiedFeedback();
+    }
+  }
+
+  exporterPDF(): void {
+    const exportData: ExportData = {
+      title: 'Simulation Capacité d\'Emprunt Immobilier',
+      subtitle: 'Estimation personnalisée de votre capacité d\'emprunt',
+      date: new Date(),
+      sections: [
+        {
+          title: 'Vos revenus',
+          rows: [
+            { label: 'Revenus nets mensuels', value: this.revenus, type: 'currency' },
+            { label: 'Revenus co-emprunteur', value: this.revenusConjoint, type: 'currency' },
+            { label: 'Autres revenus', value: this.autresRevenus, type: 'currency' },
+            { label: 'Total revenus', value: this.revenusTotaux, type: 'currency', highlight: true }
+          ]
+        },
+        {
+          title: 'Vos charges',
+          rows: [
+            { label: 'Charges mensuelles', value: this.chargesMensuelles, type: 'currency' },
+            { label: 'Crédits en cours', value: this.creditEnCours, type: 'currency' }
+          ]
+        },
+        {
+          title: 'Paramètres du prêt',
+          rows: [
+            { label: 'Apport personnel', value: this.apportPersonnel, type: 'currency' },
+            { label: 'Durée du prêt', value: `${this.dureeEmprunt} ans`, type: 'text' },
+            { label: 'Taux d\'intérêt', value: this.tauxInteret, type: 'percent' },
+            { label: 'Taux d\'assurance', value: this.tauxAssurance, type: 'percent' },
+            { label: 'Taux d\'endettement max', value: this.tauxEndettementMax, type: 'percent' }
+          ]
+        },
+        {
+          title: 'Résultats',
+          rows: [
+            { label: 'Capacité d\'emprunt', value: this.capaciteEmprunt, type: 'currency', highlight: true },
+            { label: 'Budget total (avec apport)', value: this.budgetTotal, type: 'currency', highlight: true },
+            { label: 'Mensualité maximale', value: this.mensualiteMax, type: 'currency' },
+            { label: 'Mensualité disponible', value: this.mensualiteDisponible, type: 'currency' },
+            { label: 'Coût total du crédit', value: this.coutTotalCredit, type: 'currency' },
+            { label: 'Taux d\'endettement actuel', value: this.tauxEndettementActuel, type: 'percent' },
+            { label: 'Reste à vivre estimé', value: this.resteAVivre, type: 'currency' }
+          ]
+        }
+      ]
+    };
+
+    this.exportService.exportToPDF(exportData, 'capacite-emprunt');
+  }
+
+  exporterCSV(): void {
+    const exportData: ExportData = {
+      title: 'Simulation Capacité d\'Emprunt Immobilier',
+      subtitle: 'Estimation personnalisée',
+      date: new Date(),
+      sections: [
+        {
+          title: 'Revenus',
+          rows: [
+            { label: 'Revenus nets mensuels', value: this.revenus, type: 'currency' },
+            { label: 'Revenus co-emprunteur', value: this.revenusConjoint, type: 'currency' },
+            { label: 'Autres revenus', value: this.autresRevenus, type: 'currency' },
+            { label: 'Total revenus', value: this.revenusTotaux, type: 'currency' }
+          ]
+        },
+        {
+          title: 'Charges',
+          rows: [
+            { label: 'Charges mensuelles', value: this.chargesMensuelles, type: 'currency' },
+            { label: 'Crédits en cours', value: this.creditEnCours, type: 'currency' }
+          ]
+        },
+        {
+          title: 'Paramètres',
+          rows: [
+            { label: 'Apport personnel', value: this.apportPersonnel, type: 'currency' },
+            { label: 'Durée (années)', value: this.dureeEmprunt, type: 'number' },
+            { label: 'Taux intérêt (%)', value: this.tauxInteret, type: 'number' },
+            { label: 'Taux assurance (%)', value: this.tauxAssurance, type: 'number' },
+            { label: 'Taux endettement max (%)', value: this.tauxEndettementMax, type: 'number' }
+          ]
+        },
+        {
+          title: 'Résultats',
+          rows: [
+            { label: 'Capacité d\'emprunt', value: this.capaciteEmprunt, type: 'currency' },
+            { label: 'Budget total', value: this.budgetTotal, type: 'currency' },
+            { label: 'Mensualité max', value: this.mensualiteMax, type: 'currency' },
+            { label: 'Mensualité disponible', value: this.mensualiteDisponible, type: 'currency' },
+            { label: 'Coût total crédit', value: this.coutTotalCredit, type: 'currency' },
+            { label: 'Endettement actuel (%)', value: this.tauxEndettementActuel, type: 'number' },
+            { label: 'Reste à vivre', value: this.resteAVivre, type: 'currency' }
+          ]
+        }
+      ]
+    };
+
+    this.exportService.exportToCSV(exportData, 'capacite-emprunt');
   }
 
   formatCurrency(value: number): string {
