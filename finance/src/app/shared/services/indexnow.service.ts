@@ -20,8 +20,8 @@ export interface IndexNowResponse {
 export class IndexNowService {
   private readonly config: IndexNowConfig = {
     host: 'calculateurfinance.fr',
-    key: 'c8f4e2a1b9d6f3e0a7c5b8d9e1f2a3b4', // Clé unique pour le site
-    keyLocation: 'https://calculateurfinance.fr/c8f4e2a1b9d6f3e0a7c5b8d9e1f2a3b4.txt'
+    key: '5eff9d59fe364d1f8cbed1faa0f26fe2', // Clé unique pour le site
+    keyLocation: 'https://calculateurfinance.fr/5eff9d59fe364d1f8cbed1faa0f26fe2.txt'
   };
 
   private readonly indexNowEndpoints = [
