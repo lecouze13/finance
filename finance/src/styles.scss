@@ -526,16 +526,6 @@ form.card.p-fluid.flex.flex-wrap.gap-4.ng-untouched.ng-pristine.ng-valid.ng-subm
         z-index: 1;
     }
 
-    /* Inputs et éléments interactifs sous le menu */
-    input,
-    .p-inputtext,
-    .p-inputnumber,
-    .p-dropdown,
-    .p-button,
-    .p-panel {
-        position: relative;
-        z-index: 1;
-    }
 }
 
 .cost-item {

@@ -41,7 +41,7 @@
   }
 
   .subtitle {
-    color: #64748b;
+    color: #475569; // Amélioré pour contraste WCAG AA (était #64748b)
     font-size: 1.05rem;
     margin: 0;
 
@@ -109,7 +109,7 @@ $success-light: #2e7d32;
 $warning: #e65100;
 $danger: #c62828;
 $text-dark: #495057;
-$text-muted: #6c757d;
+$text-muted: #5c636a; // Amélioré pour contraste WCAG AA (était #6c757d)
 $border-color: #e9ecef;
 $bg-light: #f8f9fa;
 $bg-blue-light: #e3f2fd;
